@@ -480,7 +480,7 @@ public abstract class XPathTestBase extends TestCase
                 varName  = eachVar.getName();
                 varValue = eachVar.getValue();
 
-                varContext.setVariableValue( "",
+                varContext.setVariableValue( null,
                                              varName,
                                              varValue );
             }

@@ -82,34 +82,40 @@ public class ContextSupport
             return context.translateNamespacePrefixToUri( prefix );
         }
 
-        return "";
+        return null;
     }
 
-    public Object getVariableValue(String prefix,
-                                   String localName)
+    public Object getVariableValue( String namespaceURI,
+                                    String prefix,
+                                    String localName )
+        throws UnresolvableException
     {
         VariableContext context = getVariableContext();
 
         if ( context != null )
         {
-            return context.getVariableValue( prefix,
-                                             localName );
+            return context.getVariableValue( namespaceURI, prefix, localName );
         }
-
-        return null;
+        else
+        {
+            throw new UnresolvableException( "No variable context installed" );
+        }
     }
 
-    public Function getFunction(String prefix,
-                                String localName)
+    public Function getFunction( String namespaceURI,
+                                 String prefix,
+                                 String localName )
+        throws UnresolvableException
     {
         FunctionContext context = getFunctionContext();
 
         if ( context != null )
         {
-            return context.getFunction( prefix,
-                                        localName );
+            return context.getFunction( namespaceURI, prefix, localName );
         }
-
-        return null;
+        else
+        {
+            throw new UnresolvableException( "No function context installed" );
+        }
     }
 }

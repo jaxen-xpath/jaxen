@@ -55,6 +55,6 @@ public class SimpleNamespaceContext implements NamespaceContext
             return (String) this.namespaces.get( prefix );
         }
 
-        return "";
+        return null;
     }
 }

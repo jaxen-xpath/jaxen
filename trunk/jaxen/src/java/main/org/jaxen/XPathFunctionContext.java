@@ -22,117 +22,120 @@ public class XPathFunctionContext extends SimpleFunctionContext
 
     public XPathFunctionContext()
     {
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "boolean",
                           new BooleanFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "ceiling",
                           new CeilingFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "concat",
                           new ConcatFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "contains",
                           new ContainsFunction() );
         
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "count",
                           new CountFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "document",
                           new DocumentFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "false",
                           new FalseFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "floor",
                           new FloorFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "id",
                           new IdFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "last",
                           new LastFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "local-name",
                           new LocalNameFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "name",
                           new NameFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "namespace-uri",
                           new NamespaceUriFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "normalize-space",
                           new NormalizeSpaceFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "not",
                           new NotFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "number",
                           new NumberFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "position",
                           new PositionFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "round",
                           new RoundFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "starts-with",
                           new StartsWithFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "string",
                           new StringFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "string-length",
                           new StringLengthFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "substring-after",
                           new SubstringAfterFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "substring-before",
                           new SubstringBeforeFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "substring",
                           new SubstringFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "sum",
                           new SumFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "true",
                           new TrueFunction() );
         
 
         // register extension functions
-        registerFunction( "",
+        // extension functions should go into a namespace, but which one?
+        // for now, keep them in default namespace to not to break any code
+
+        registerFunction( null,  // namespace URI
                           "matrix-concat",
                           new MatrixConcatFunction() );
 
-        registerFunction( "",
+        registerFunction( null,  // namespace URI
                           "evaluate",
                           new EvaluateFunction() );
         

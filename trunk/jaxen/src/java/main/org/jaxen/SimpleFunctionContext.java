@@ -13,17 +13,34 @@ public class SimpleFunctionContext implements FunctionContext
         this.functions = new HashMap();
     }
 
-    public void registerFunction(String prefix,
-                                 String localName,
-                                 Function function)
+    public void registerFunction( String namespaceURI,
+                                  String localName,
+                                  Function function )
     {
-        this.functions.put( prefix + ":" + localName,
+        if ("".equals(namespaceURI)) {
+            Thread.dumpStack();
+            throw new IllegalArgumentException();
+        }
+        this.functions.put( new QualifiedName(namespaceURI, localName),
                             function );
     }
 
-    public Function getFunction(String prefix,
-                                String localName)
+    public Function getFunction( String namespaceURI,
+                                 String prefix,
+                                 String localName )
+        throws UnresolvableException
     {
-        return (Function) this.functions.get( prefix + ":" + localName );
+        if ("".equals(namespaceURI)) {
+            Thread.dumpStack();
+            throw new IllegalArgumentException();
+        }
+            
+        Object key = new QualifiedName( namespaceURI, localName );
+
+        if ( this.functions.containsKey(key) )
+            return (Function) this.functions.get( key );
+        else
+            throw new UnresolvableException( "Function " +
+                                             prefix + ":" + localName );
     }
 }

@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.UnresolvableException;
 
 class DefaultVariableReferenceExpr extends DefaultExpr implements VariableReferenceExpr
 {
@@ -51,8 +52,13 @@ class DefaultVariableReferenceExpr extends DefaultExpr implements VariableRefere
     }
 
     public Object evaluate(Context context)
+        throws UnresolvableException
     {
-        return context.getVariableValue( getPrefix(),
+        String namespaceURI =
+            context.translateNamespacePrefixToUri( getPrefix() );
+
+        return context.getVariableValue( namespaceURI,
+                                         getPrefix(),
                                          getVariableName() );
     }
 }
