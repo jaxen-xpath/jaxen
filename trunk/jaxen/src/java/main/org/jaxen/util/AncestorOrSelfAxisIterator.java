@@ -63,6 +63,7 @@ package org.jaxen.util;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Stack;
 
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
@@ -70,36 +71,35 @@ import org.jaxen.JaxenRuntimeException;
 
 public class AncestorOrSelfAxisIterator implements Iterator
 {
-    private Object contextNode;
-    private Navigator navigator;
+    private Stack ancestors = new Stack();
 
     public AncestorOrSelfAxisIterator(Object contextNode,
-                                      Navigator navigator)
+                                      Navigator navigator) 
     {
-        this.contextNode = contextNode;
-        this.navigator = navigator;
+        
+        try {
+            while (contextNode != null) { 
+               ancestors.push(contextNode);
+               contextNode = navigator.getParentNode(contextNode);
+            }
+        }
+        catch (UnsupportedAxisException ex) {
+            throw new JaxenRuntimeException(ex);
+        }
+        
     }
 
     public boolean hasNext()
     {
-        return contextNode != null;
+        return ! ancestors.isEmpty();
     }
 
     public Object next()
     {
-        try
-        {
             if (hasNext()) {
-                Object result = contextNode;
-                contextNode = navigator.getParentNode(contextNode);
-                return result;
+                return ancestors.pop();
             }
             throw new NoSuchElementException();
-        }
-        catch (UnsupportedAxisException e)
-        {
-            throw new JaxenRuntimeException(e);
-        }
     }
 
     public void remove()
