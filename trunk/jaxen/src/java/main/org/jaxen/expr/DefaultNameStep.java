@@ -86,8 +86,12 @@ class DefaultNameStep extends DefaultStep
         }
         else
         {
-            //String myUri = contextSupport.translateNamespacePrefixToUri( getPrefix() );
-            String myUri = nav.translateNamespacePrefixToUri( getPrefix(), node );
+            String myPrefix = getPrefix();            
+            String myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
+            if ( myUri == null ) 
+            {
+                myUri = contextSupport.translateNamespacePrefixToUri( myPrefix );
+            }
 
             if ( matchesNamespaceURIs( myUri, nodeUri ) )
             {
