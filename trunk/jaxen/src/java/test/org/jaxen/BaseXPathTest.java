@@ -62,6 +62,13 @@
 
 package org.jaxen;
 
+import java.util.ArrayList;
+
+import nu.xom.Document;
+import nu.xom.Element;
+
+import org.jaxen.xom.XOMXPath;
+
 import junit.framework.TestCase;
 
 /**
@@ -89,6 +96,17 @@ public class BaseXPathTest extends TestCase {
         
         Number numberValue = xpath.numberValueOf(xpath);
         assertEquals(3, numberValue.doubleValue(), 0.00001);
+        
+    }
+    
+    
+    public void testValueOfEmptyListIsEmptyString() throws JaxenException {
+        
+        BaseXPath xpath = new XOMXPath("/element");
+        Document doc = new Document(new Element("root"));
+        
+        String stringValue = xpath.stringValueOf(doc);
+        assertEquals("", stringValue);
         
     }
 
