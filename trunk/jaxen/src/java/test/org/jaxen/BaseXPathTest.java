@@ -271,7 +271,7 @@ public class BaseXPathTest extends TestCase {
     }    
     
     // test for Jaxen-83
-    public void testPrincipleNodeTypeOfSelfAxisIsElement() throws JaxenException {
+    public void testPrincipalNodeTypeOfSelfAxisIsElement() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("child/@*[self::test]");
         org.w3c.dom.Element a = doc.createElementNS("", "child");
