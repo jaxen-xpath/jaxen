@@ -14,6 +14,7 @@ import org.jaxen.FunctionCallException;
  * <p><b>4.1</b> <code><i>node-set</i> id(<i>object</i>)</code> 
  *  
  * @author Erwin Bolwidt (ejb @ klomp.org)
+ * @author J\u00e9r\u00f4me N\u00e8gre (jerome.negre @ e-xmlmedia.fr)
  */
 public class IdFunction implements Function
 {
@@ -41,14 +42,11 @@ public class IdFunction implements Function
             Iterator iter = ((List)arg).iterator();
             while (iter.hasNext()) {
                 String id = StringFunction.evaluate(iter.next(), nav);
-                Object node = nav.getElementById(contextNode, id);
-                if (node != null) {
-                    nodes.add(node);
-                }
+                nodes.addAll( evaluate( contextNodes, id, nav ) );
             }
         } else {
             String ids = StringFunction.evaluate(arg, nav);
-            StringTokenizer tok = new StringTokenizer(ids);
+            StringTokenizer tok = new StringTokenizer(ids, " \t\n\r");
             while (tok.hasMoreTokens()) {
                 String id = tok.nextToken();
                 Object node = nav.getElementById(contextNode, id);
