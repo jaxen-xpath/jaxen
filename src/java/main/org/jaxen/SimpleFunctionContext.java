@@ -113,12 +113,12 @@ public class SimpleFunctionContext implements FunctionContext
      *  to indicate that it exists without a namespace.
      *  </p>
      *
-     *  @param namespaceURI The namespace URI of the function to
+     *  @param namespaceURI the namespace URI of the function to
      *         be registered with this context.
-     *  @param localName The non-prefixed local portion of the
-     *         function to be registered with this context.
-     *  @param function A {@link Function} implementation object
-     *         to be used when evaluating the function.
+     *  @param localName the non-prefixed local portion of the
+     *         function to be registered with this context
+     *  @param function a {@link Function} implementation object
+     *         to be used when evaluating the function
      */
     public void registerFunction(String namespaceURI,
                                  String localName,
