@@ -10,6 +10,7 @@
 package org.jaxen.pattern;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -153,6 +154,10 @@ public class LocationPathPattern extends Pattern {
                 {
                     return false;
                 }
+                if ( navigator.isDocument( ancestor ) )
+                {
+                    return false;
+                }
                 ancestor = navigator.getParentNode( ancestor );
             }
         }
@@ -160,14 +165,19 @@ public class LocationPathPattern extends Pattern {
         if (filters != null) 
         {
             // XXXX: filters aren't positional, so should we clone context?
+            boolean answer = true;
             for (Iterator iter = filters.iterator(); iter.hasNext(); ) 
             {
                 FilterExpr filter = (FilterExpr) iter.next();
                 if ( ! filter.asBoolean( context ) )
                 {
-                    return false;
+                    answer = false;
+                    break;
                 }
             }
+            // restore context
+            context.setNodeSet( Collections.singletonList( node ) );
+            return answer;
         }
         return true;
     }
