@@ -320,7 +320,7 @@ Token identifierOrOperatorName()
         // SLASH, DOUBLE_SLASH, and COLON tokens for the test
         // if an NCName is an operator or not.
         //
-        // Accoring to section 3.7, "/foo" should be considered
+        // According to section 3.7, "/foo" should be considered
         // as a SLASH following by an OperatorName being 'foo'.
         // Which is just simply, clearly, wrong, in my mind.
         //
@@ -1000,8 +1000,6 @@ boolean hasMoreChars()
 
 boolean isIdentifierChar(char c)
 {
-
-
     return Verifier.isXMLNCNameCharacter( c );
 }
 
@@ -1009,4 +1007,5 @@ boolean isIdentifierStartChar(char c)
 {
     return Verifier.isXMLNCNameStartCharacter( c );
 }
+
 }
