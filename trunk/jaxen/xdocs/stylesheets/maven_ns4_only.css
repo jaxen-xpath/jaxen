@@ -1,0 +1,38 @@
+body {
+ background: #fff;
+ color: #000;
+ }
+
+a:active, a:hover, #leftcol a:active, #leftcol a:hover {
+ color: #f30;
+ }
+
+#leftcol a:link, #leftcol a:visited {
+ color: blue;
+ }
+
+.a td { 
+ background: #ddd;
+ color: #000;
+ }
+
+.b td { 
+ background: #efefef;
+ color: #000;
+ }
+
+body .app th {
+ background-color: #bbb;
+ color: #fff;
+ }
+
+#navcolumn div strong {
+ background: #fff;
+ color: #555;
+ }
+
+#banner, #banner td { 
+ background: white;
+ color: #fff;
+ }
+
