@@ -154,7 +154,7 @@ public class PatternParser
         }
         else if ( step instanceof DefaultTextNodeStep )
         {
-            path.setNodeTest( NodeTypeTest.TEXT_TEST );
+            path.setNodeTest( TextNodeTest.SINGLETON );
         }
         else if ( step instanceof DefaultCommentNodeStep )
         {
