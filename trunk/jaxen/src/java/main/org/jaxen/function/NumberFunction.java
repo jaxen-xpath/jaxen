@@ -125,7 +125,6 @@ public class NumberFunction implements Function
       }
     else if ( obj instanceof List || obj instanceof Iterator )
       {
-      String strValue = StringFunction.evaluate( obj, nav );
       return evaluate( StringFunction.evaluate( obj, nav ), nav );
       }
     else if ( nav.isElement( obj ) || nav.isAttribute( obj ) )
