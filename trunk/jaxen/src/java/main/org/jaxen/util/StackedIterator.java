@@ -101,7 +101,7 @@ public abstract class StackedIterator implements Iterator
 
     private Iterator currentIterator()
     {
-        if ( iteratorStack.size() > 0 )
+        while ( iteratorStack.size() > 0 )
         {
             Iterator curIter = (Iterator) iteratorStack.getFirst();
 
@@ -111,8 +111,6 @@ public abstract class StackedIterator implements Iterator
             }
 
             iteratorStack.removeFirst();
-
-            return currentIterator();
         }
 
         return null;

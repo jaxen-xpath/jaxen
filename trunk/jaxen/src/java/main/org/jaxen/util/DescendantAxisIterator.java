@@ -25,7 +25,9 @@ public class DescendantAxisIterator extends StackedIterator
     {
         try
         {
-            return getNavigator().getChildAxisIterator( contextNode );
+            Iterator iter = getNavigator().getChildAxisIterator( contextNode );
+
+            return iter;
         }
         catch (UnsupportedAxisException e)
         {
