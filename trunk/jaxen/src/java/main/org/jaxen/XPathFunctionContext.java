@@ -164,6 +164,10 @@ public class XPathFunctionContext extends SimpleFunctionContext
                           new IdFunction() );
 
         registerFunction( null,  // namespace URI
+                          "lang",
+                          new LangFunction() );
+
+        registerFunction( null,  // namespace URI
                           "last",
                           new LastFunction() );
 
