@@ -64,15 +64,17 @@ package org.jaxen.jdom;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jaxen.JaxenException;
 import org.jaxen.XPath;
-import org.jaxen.saxpath.SAXPathException;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.Text;
 import org.jdom.input.SAXBuilder;
@@ -87,169 +89,115 @@ public class XPathTest extends TestCase
         super( name );
     }
 
-    public void setUp()
+    public void testConstruction() throws JaxenException
     {
-
+        new JDOMXPath( "/foo/bar/baz" );
     }
 
-    public void tearDown()
+    public void testSelection() throws JaxenException, JDOMException, IOException
     {
+        XPath xpath = new JDOMXPath( "/foo/bar/baz" );
 
-    }
+        SAXBuilder builder = new SAXBuilder();
 
-    public void testConstruction()
-    {
-        try
-        {
-            new JDOMXPath( "/foo/bar/baz" );
-        }
-        catch (SAXPathException e)
-        {
-            fail( e.getMessage() );
-        }
-    }
+        Document doc = builder.build( BASIC_XML );
 
-    public void testSelection()
-    {
-        try
-        {
-            XPath xpath = new JDOMXPath( "/foo/bar/baz" );
+        List results = xpath.selectNodes( doc );
 
-            SAXBuilder builder = new SAXBuilder();
+        assertEquals( 3,
+                      results.size() );
 
-            Document doc = builder.build( BASIC_XML );
+        Iterator iter = results.iterator();
 
-            List results = xpath.selectNodes( doc );
+        assertEquals( "baz",
+                      ((Element)iter.next()).getName() );
 
-            assertEquals( 3,
-                          results.size() );
+        assertEquals( "baz",
+                      ((Element)iter.next()).getName() );
 
-            Iterator iter = results.iterator();
+        assertEquals( "baz",
+                      ((Element)iter.next()).getName() );
 
-            assertEquals( "baz",
-                          ((Element)iter.next()).getName() );
-
-            assertEquals( "baz",
-                          ((Element)iter.next()).getName() );
-
-            assertEquals( "baz",
-                          ((Element)iter.next()).getName() );
-
-            assertTrue( ! iter.hasNext() );
-
-        }
-        catch (Exception e)
-        {
-            fail( e.getMessage() );
-        }
+        assertTrue( ! iter.hasNext() );
     }
     
     
-    public void testGetDocumentNode()
+    public void testGetDocumentNode() throws JaxenException, JDOMException, IOException
     {
-        try
-        {
-            XPath xpath = new JDOMXPath( "/" );
+        XPath xpath = new JDOMXPath( "/" );
 
-            SAXBuilder builder = new SAXBuilder();
+        SAXBuilder builder = new SAXBuilder();
 
-            Document doc = builder.build( BASIC_XML );
+        Document doc = builder.build( BASIC_XML );
 
-            Element root = doc.getRootElement();
-            List results = xpath.selectNodes( root );
+        Element root = doc.getRootElement();
+        List results = xpath.selectNodes( root );
 
-            assertEquals( 1,
-                          results.size() );
+        assertEquals( 1,
+                      results.size() );
 
-            Iterator iter = results.iterator();
+        Iterator iter = results.iterator();
 
-            assertEquals( doc, iter.next());
+        assertEquals( doc, iter.next());
 
-        }
-        catch (Exception e)
-        {
-            fail( e.getMessage() );
-        }
     }
     
-    public void testJaxen53Text()
+    public void testJaxen53Text() throws JaxenException, JDOMException, IOException
     {
-        try
-        {
-            XPath xpath = new JDOMXPath( "//data/text() " );
+        XPath xpath = new JDOMXPath( "//data/text() " );
 
-            SAXBuilder builder = new SAXBuilder();
+        SAXBuilder builder = new SAXBuilder();
 
-            Document doc = builder.build( new StringReader("<root>\n<data>1</data>\n</root>") );
+        Document doc = builder.build( new StringReader("<root>\n<data>1</data>\n</root>") );
 
-            List results = xpath.selectNodes( doc );
+        List results = xpath.selectNodes( doc );
 
-            assertEquals( 1,
-                          results.size() );
+        assertEquals( 1,
+                      results.size() );
 
-            Iterator iter = results.iterator();
+        Iterator iter = results.iterator();
 
-            Text result = (Text) iter.next();
-            assertEquals( "1", result.getValue());
+        Text result = (Text) iter.next();
+        assertEquals( "1", result.getValue());
 
-        }
-        catch (Exception e)
-        {
-            fail( e.getMessage() );
-        }
     }
     
-    public void testJaxen20AttributeNamespaceNodes()
+    public void testJaxen20AttributeNamespaceNodes() throws JaxenException
     {
-        try
-        {
-            Namespace ns1 = Namespace.getNamespace("p1", "www.acme1.org");
-            Namespace ns2 = Namespace.getNamespace("p2", "www.acme2.org");
-            Element element = new Element("test", ns1);
-            Attribute attribute = new Attribute("foo", "bar", ns2);
-            element.setAttribute(attribute); 
-            Document doc = new Document(element);
-            
-            XPath xpath = new JDOMXPath( "//namespace::node()" );
+        Namespace ns1 = Namespace.getNamespace("p1", "www.acme1.org");
+        Namespace ns2 = Namespace.getNamespace("p2", "www.acme2.org");
+        Element element = new Element("test", ns1);
+        Attribute attribute = new Attribute("foo", "bar", ns2);
+        element.setAttribute(attribute); 
+        Document doc = new Document(element);
+        
+        XPath xpath = new JDOMXPath( "//namespace::node()" );
 
-            List results = xpath.selectNodes( doc );
+        List results = xpath.selectNodes( doc );
 
-            assertEquals( 3,
-                          results.size() );
+        assertEquals( 3,
+                      results.size() );
 
-        }
-        catch (Exception e)
-        {
-            fail( e.getMessage() );
-        }
     }
     
-    public void testNamespaceNodesAreInherited()
+    public void testNamespaceNodesAreInherited() throws JaxenException
     {
-        try
-        {
-            Namespace ns0 = Namespace.getNamespace("p0", "www.acme0.org");
-            Namespace ns1 = Namespace.getNamespace("p1", "www.acme1.org");
-            Namespace ns2 = Namespace.getNamespace("p2", "www.acme2.org");
-            Element element = new Element("test", ns1);
-            Attribute attribute = new Attribute("foo", "bar", ns2);
-            element.setAttribute(attribute);
-            Element root = new Element("root", ns0);
-            root.addContent(element);
-            Document doc = new Document(root);
-            
-            XPath xpath = new JDOMXPath( "/*/*/namespace::node()" );
+        Namespace ns0 = Namespace.getNamespace("p0", "www.acme0.org");
+        Namespace ns1 = Namespace.getNamespace("p1", "www.acme1.org");
+        Namespace ns2 = Namespace.getNamespace("p2", "www.acme2.org");
+        Element element = new Element("test", ns1);
+        Attribute attribute = new Attribute("foo", "bar", ns2);
+        element.setAttribute(attribute);
+        Element root = new Element("root", ns0);
+        root.addContent(element);
+        Document doc = new Document(root);
+        
+        XPath xpath = new JDOMXPath( "/*/*/namespace::node()" );
 
-            List results = xpath.selectNodes( doc );
+        List results = xpath.selectNodes( doc );
 
-            assertEquals( 4,
-                          results.size() );
+        assertEquals( 4, results.size() );
 
-        }
-        catch (Exception e)
-        {
-            fail( e.getMessage() );
-        }
     }
     
 }
