@@ -70,6 +70,7 @@ import java.util.Map;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 import org.jaxen.XPath;
+import org.jaxen.Navigator;
 import org.jaxen.util.SingleObjectIterator;
 import org.jdom.Attribute;
 import org.jdom.CDATA;
@@ -103,7 +104,7 @@ public class DocumentNavigator extends DefaultNavigator
         private static DocumentNavigator instance = new DocumentNavigator();
     }
 
-    public static DocumentNavigator getInstance()
+    public static Navigator getInstance()
     {
         return Singleton.instance;
     }

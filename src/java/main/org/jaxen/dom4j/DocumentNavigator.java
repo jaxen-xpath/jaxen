@@ -83,6 +83,7 @@ import org.dom4j.io.SAXReader;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 import org.jaxen.XPath;
+import org.jaxen.Navigator;
 import org.jaxen.util.SingleObjectIterator;
 
 /** Interface for navigating around the EXML object model.
@@ -111,7 +112,7 @@ public class DocumentNavigator extends DefaultNavigator
 
     /** Retrieve the singleton instance of this <code>DocumentNavigator</code>.
      */
-    public static DocumentNavigator getInstance()
+    public static Navigator getInstance()
     {
         return Singleton.instance;
     }
