@@ -63,10 +63,8 @@
 
 package org.jaxen.util;
 
-import java.util.Iterator;
 
 import org.jaxen.Navigator;
-import org.jaxen.UnsupportedAxisException;
 
 public class AncestorAxisIterator extends AncestorOrSelfAxisIterator
 {
