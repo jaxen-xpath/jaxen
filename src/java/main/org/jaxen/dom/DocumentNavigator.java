@@ -121,13 +121,13 @@ public class DocumentNavigator extends DefaultNavigator
      * Constant: empty iterator.
      */
     private final static Iterator EMPTY_ITERATOR =
-	new HashMap().values().iterator();
+    new HashMap().values().iterator();
 
     /**
      * Constant: singleton navigator.
      */
     private final static DocumentNavigator SINGLETON =
-	new DocumentNavigator();
+    new DocumentNavigator();
 
 
     
@@ -809,7 +809,7 @@ public class DocumentNavigator extends DefaultNavigator
      * strategy.</p>
      */
     abstract class NodeIterator
-	implements Iterator
+    implements Iterator
     {
 
 

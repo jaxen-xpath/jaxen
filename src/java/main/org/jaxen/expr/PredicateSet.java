@@ -288,54 +288,54 @@ public class PredicateSet implements Serializable
         Iterator predIter = predicates.iterator();
 
 
-		// initial list to filter
+        // initial list to filter
         List nodes2Filter = contextNodeSet;
-		// apply all predicates
+        // apply all predicates
 
         while(predIter.hasNext()) {
-			nodes2Filter =
-				applyPredicate((Predicate)predIter.next(), nodes2Filter, support);
+            nodes2Filter =
+                applyPredicate((Predicate)predIter.next(), nodes2Filter, support);
         }
         return nodes2Filter;
     }
-	
-	public List applyPredicate(Predicate predicate, List nodes2Filter, ContextSupport support)
+    
+    public List applyPredicate(Predicate predicate, List nodes2Filter, ContextSupport support)
             throws JaxenException {
-		List filteredNodes = new ArrayList();
+        List filteredNodes = new ArrayList();
         final int nodes2FilerSize = nodes2Filter.size();
         // Set up a dummy context with a list to hold each node
         Context predContext = new Context(support);
         List tempList = new ArrayList(1);
         predContext.setNodeSet(tempList);
 
-		// loop through the current nodes to filter and add to the
-		// filtered nodes list if the predicate succeeds 
+        // loop through the current nodes to filter and add to the
+        // filtered nodes list if the predicate succeeds 
         for (int i = 0; i < nodes2FilerSize; ++i) {
-        	Object contextNode = nodes2Filter.get(i);
-        	tempList.clear();
-        	tempList.add(contextNode);
-        	predContext.setPosition(i + 1);
-        	predContext.setSize(nodes2FilerSize);
+            Object contextNode = nodes2Filter.get(i);
+            tempList.clear();
+            tempList.add(contextNode);
+            predContext.setPosition(i + 1);
+            predContext.setSize(nodes2FilerSize);
 
-        	Object predResult = predicate.evaluate(predContext);
+            Object predResult = predicate.evaluate(predContext);
 
-        	if (predResult instanceof Number) {
-            	int proximity = ((Number) predResult).intValue();
+            if (predResult instanceof Number) {
+                int proximity = ((Number) predResult).intValue();
 
-            	if (proximity == (i + 1)) {
-                	filteredNodes.add(contextNode);
-            	}
-        	}
-        	else {
-            	Boolean includes =
-                	BooleanFunction.evaluate(predResult,
-                                         	predContext.getNavigator());
+                if (proximity == (i + 1)) {
+                    filteredNodes.add(contextNode);
+                }
+            }
+            else {
+                Boolean includes =
+                    BooleanFunction.evaluate(predResult,
+                                            predContext.getNavigator());
 
-            	if (includes.booleanValue()) {
-                	filteredNodes.add(contextNode);
-            	}
-        	}
-    	}
- 		return filteredNodes;
-	}
+                if (includes.booleanValue()) {
+                    filteredNodes.add(contextNode);
+                }
+            }
+        }
+        return filteredNodes;
+    }
 }

@@ -201,8 +201,8 @@ class DefaultNumberExpr extends DefaultExpr implements NumberExpr
     }
 
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
-    }	
+    }   
 }
 

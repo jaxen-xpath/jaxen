@@ -197,10 +197,10 @@ class DefaultLiteralExpr extends DefaultExpr implements LiteralExpr
         return getLiteral();
 
     }
-	
+    
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
-    }	
+    }   
 }
 

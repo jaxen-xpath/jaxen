@@ -200,7 +200,7 @@ public class XPath2XMLVisitor implements Visitor {
     //---------------------------------------------------------------
     protected void printLn(String str){
         StringBuffer buffer = new StringBuffer();
-	    for (int i = 0; i < tabIndex; i++) {
+        for (int i = 0; i < tabIndex; i++) {
             buffer.append("\t");
         }
         buffer.append(str);

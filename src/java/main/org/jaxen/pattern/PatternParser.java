@@ -283,7 +283,7 @@ public class PatternParser
             LocationPathPattern answer = new LocationPathPattern();
 
             answer.addFilter( new DefaultFilterExpr( expr,
-								new PredicateSet()) );
+                                new PredicateSet()) );
 
             return answer;
 

@@ -291,9 +291,9 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr
         }
         return results;
     }
-	
-	public void accept(Visitor visitor)
-	{
+    
+    public void accept(Visitor visitor)
+    {
         visitor.visit(this);
     }
 }

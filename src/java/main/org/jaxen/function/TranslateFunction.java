@@ -88,7 +88,7 @@ public class TranslateFunction implements Function
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
-	if (args.size() == 3)
+    if (args.size() == 3)
         {
             return evaluate( args.get(0),
                              args.get(1),
@@ -107,43 +107,43 @@ public class TranslateFunction implements Function
         String inStr = StringFunction.evaluate( strArg, nav );
         String fromStr = StringFunction.evaluate( fromArg, nav );
         String toStr = StringFunction.evaluate( toArg, nav );
-	
-	// Initialize the mapping in a HashMap
-	Map charMap = new HashMap();
-	int fromLen = fromStr.length();
-	int toLen = toStr.length();
-	for ( int i = 0; i < fromLen; ++i ) {
-	    String cFrom = fromStr.substring( i, i+1 ).intern();
-	    if ( charMap.containsKey( cFrom ) ) {
-		// We've seen the character before, ignore
-		continue;
-	    }
-	    if ( i < toLen ) {
-		Character cTo = new Character( toStr.charAt( i ) );
-		// Will change
-		charMap.put( cFrom, cTo );
-	    } else {
-		// Will delete
-		charMap.put( cFrom, null );
-	    }
-	}
+    
+    // Initialize the mapping in a HashMap
+    Map charMap = new HashMap();
+    int fromLen = fromStr.length();
+    int toLen = toStr.length();
+    for ( int i = 0; i < fromLen; ++i ) {
+        String cFrom = fromStr.substring( i, i+1 ).intern();
+        if ( charMap.containsKey( cFrom ) ) {
+        // We've seen the character before, ignore
+        continue;
+        }
+        if ( i < toLen ) {
+        Character cTo = new Character( toStr.charAt( i ) );
+        // Will change
+        charMap.put( cFrom, cTo );
+        } else {
+        // Will delete
+        charMap.put( cFrom, null );
+        }
+    }
 
-	// Process the input string thru the map
-	StringBuffer outStr = new StringBuffer( inStr.length() );
-	int inLen = inStr.length();
-	for ( int i = 0; i < inLen; ++i ) {
-	    String cIn = inStr.substring( i, i+1 );
-	    if ( charMap.containsKey( cIn ) ) {
-		Character cTo = (Character) charMap.get( cIn );
-		if ( cTo != null ) {
-		    outStr.append( cTo.charValue() );
-		}
-	    } else {
-		outStr.append( cIn );
-	    }
-	}
+    // Process the input string thru the map
+    StringBuffer outStr = new StringBuffer( inStr.length() );
+    int inLen = inStr.length();
+    for ( int i = 0; i < inLen; ++i ) {
+        String cIn = inStr.substring( i, i+1 );
+        if ( charMap.containsKey( cIn ) ) {
+        Character cTo = (Character) charMap.get( cIn );
+        if ( cTo != null ) {
+            outStr.append( cTo.charValue() );
+        }
+        } else {
+        outStr.append( cIn );
+        }
+    }
 
-	return new String( outStr );
+    return new String( outStr );
     }
 }
 

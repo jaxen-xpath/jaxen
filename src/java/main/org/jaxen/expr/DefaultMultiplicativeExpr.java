@@ -129,7 +129,7 @@ package org.jaxen.expr;
 
 
 abstract class DefaultMultiplicativeExpr extends DefaultArithExpr 
-	implements MultiplicativeExpr
+    implements MultiplicativeExpr
 {
 
     public DefaultMultiplicativeExpr(Expr lhs,

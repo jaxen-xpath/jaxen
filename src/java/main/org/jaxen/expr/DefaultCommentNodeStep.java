@@ -187,7 +187,7 @@ public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeSt
     }
 
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
     }
 

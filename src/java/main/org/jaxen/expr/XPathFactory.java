@@ -255,6 +255,6 @@ public interface XPathFactory extends Operator
 
 
     Predicate createPredicate(Expr predicateExpr) throws JaxenException;
-	PredicateSet	createPredicateSet() throws JaxenException;
+    PredicateSet    createPredicateSet() throws JaxenException;
 }
 
