@@ -24,7 +24,7 @@
 
  * are met:
 
- * 
+ *
 
  * 1. Redistributions of source code must retain the above copyright
 
@@ -34,9 +34,9 @@
 
  * 2. Redistributions in binary form must reproduce the above copyright
 
- *    notice, this list of conditions, and the disclaimer that follows 
+ *    notice, this list of conditions, and the disclaimer that follows
 
- *    these conditions in the documentation and/or other materials 
+ *    these conditions in the documentation and/or other materials
 
  *    provided with the distribution.
 
@@ -48,7 +48,7 @@
 
  *    written permission, please contact license@jaxen.org.
 
- * 
+ *
 
  * 4. Products derived from this software may not be called "Jaxen", nor
 
@@ -56,11 +56,11 @@
 
  *    from the Jaxen Project Management (pm@jaxen.org).
 
- * 
+ *
 
- * In addition, we request (but do not require) that you include in the 
+ * In addition, we request (but do not require) that you include in the
 
- * end-user documentation provided with the redistribution and/or in the 
+ * end-user documentation provided with the redistribution and/or in the
 
  * software itself an acknowledgement equivalent to the following:
 
@@ -68,7 +68,7 @@
 
  *      Jaxen Project (http://www.jaxen.org/)."
 
- * Alternatively, the acknowledgment may be graphical using the logos 
+ * Alternatively, the acknowledgment may be graphical using the logos
 
  * available at http://www.jaxen.org/
 
@@ -102,17 +102,17 @@
 
  * ====================================================================
 
- * This software consists of voluntary contributions made by many 
+ * This software consists of voluntary contributions made by many
 
- * individuals on behalf of the Jaxen Project and was originally 
+ * individuals on behalf of the Jaxen Project and was originally
 
- * created by bob mcwhirter <bob@werken.com> and 
+ * created by bob mcwhirter <bob@werken.com> and
 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * James Strachan <jstrachan@apache.org>.  For more information on the
 
  * Jaxen Project, please see <http://www.jaxen.org/>.
 
- * 
+ *
 
  * $Id$
 
@@ -304,9 +304,9 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
 
     }
 
-    
 
-    public boolean isAbsolute() 
+
+    public boolean isAbsolute()
 
     {
 
@@ -318,6 +318,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
     {
         List     contextNodeSet  = new ArrayList();
         Map      unique          = new IdentityHashMap();
+
         contextNodeSet.addAll( context.getNodeSet() );
 
         Object   eachContextNode = null;
@@ -325,7 +326,6 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
         Iterator stepIter        = getSteps().iterator();
 
         Step     eachStep        = null;
-        List     newNodeSet      = new ArrayList();
         int      contextSize     = 0;
 
 
@@ -335,6 +335,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             contextSize = contextNodeSet.size();
 
             List interimSet = new ArrayList();
+            List newNodeSet = new ArrayList();
 
             INNER:
 
@@ -366,12 +367,12 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                         }
                     }
                 }
-
+           		newNodeSet.addAll(eachStep.getPredicateSet().evaluatePredicates(
+                                    interimSet,context.getContextSupport() ));
+                interimSet.clear();
             }
-
-       		contextNodeSet = eachStep.getPredicateSet().evaluatePredicates(
-                                    interimSet,context.getContextSupport() );
             unique.clear();
+            contextNodeSet = newNodeSet;
         }
         return contextNodeSet;
     }
