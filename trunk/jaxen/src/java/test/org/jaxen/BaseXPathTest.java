@@ -69,12 +69,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import nu.xom.Document;
-import nu.xom.Element;
-
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.NamespaceNode;
-import org.jaxen.xom.XOMXPath;
 import org.w3c.dom.Attr;
 
 import junit.framework.TestCase;
@@ -119,9 +115,9 @@ public class BaseXPathTest extends TestCase {
     
     public void testEvaluateString() throws JaxenException {
         
-        BaseXPath xpath = new XOMXPath("string(/*)");
+        BaseXPath xpath = new DOMXPath("string(/*)");
         
-        Document doc = new Document(new Element("root"));
+        doc.appendChild(doc.createElement("root"));
         String stringValue = (String) xpath.evaluate(doc);
         assertEquals("", stringValue);
         
@@ -130,9 +126,9 @@ public class BaseXPathTest extends TestCase {
     
     public void testEvaluateWithMultiNodeAnswer() throws JaxenException {
         
-        BaseXPath xpath = new XOMXPath("(/descendant-or-self::node())");
+        BaseXPath xpath = new DOMXPath("(/descendant-or-self::node())");
         
-        Document doc = new Document(new Element("root"));
+        doc.appendChild(doc.createElement("root"));
         List result = (List) xpath.evaluate(doc);
         assertEquals(2, result.size());
         
@@ -141,8 +137,8 @@ public class BaseXPathTest extends TestCase {
     
     public void testValueOfEmptyListIsEmptyString() throws JaxenException {
         
-        BaseXPath xpath = new XOMXPath("/element");
-        Document doc = new Document(new Element("root"));
+        BaseXPath xpath = new DOMXPath("/element");
+        doc.appendChild(doc.createElement("root"));
         
         String stringValue = xpath.stringValueOf(doc);
         assertEquals("", stringValue);
