@@ -116,7 +116,7 @@ public class XPathReaderFactory
 
         if ( className == null
              ||
-             "".equals( className ) )
+             className.length() == 0 )
         {
             if ( USE_DEFAULT )
             {

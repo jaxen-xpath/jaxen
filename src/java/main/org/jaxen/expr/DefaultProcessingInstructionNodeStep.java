@@ -191,7 +191,7 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
 
 
 
-            if ( name == null || "".equals( name ) )
+            if ( name == null || name.length() == 0 )
 
             {
 
