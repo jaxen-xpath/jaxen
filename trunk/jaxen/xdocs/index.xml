@@ -33,8 +33,8 @@
     </section>
 
     <section name="Getting Started">
-      <p>You can download the current $VERSION$ release 
-        or a nightly build via the <a href="download.html">download page</a>.</p>
+      <p>You can download the current 1.0-FCS release 
+        or a nightly build via the <a href="releases.html">releases page</a>.</p>
 
       <p>You could try browsing the
         <a href="faq.html">FAQ</a> or the online 
