@@ -17,7 +17,7 @@ my @lib_classpath;
 $true  = 1;
 $false = 0;
 
-if ( $^O =~ /win32/i ) 
+if ( $^O =~ /win32/i || $^O =~/cygwin/ ) 
 {
    $delim = ";";
 }
@@ -94,7 +94,14 @@ sub dumpBuildInfo()
 
 sub execAnt()
 {
-	system "$java_home/bin/java -cp $classpath org.apache.tools.ant.Main @ARGV";
+        if ( $^O =~/cygwin/ ) 
+        {
+	  system "$java_home/bin/java -cp '$classpath' org.apache.tools.ant.Main @ARGV";
+	}
+	else
+	{
+	  system "$java_home/bin/java -cp $classpath org.apache.tools.ant.Main @ARGV";
+	}
 }
 
 sub setupJava()
