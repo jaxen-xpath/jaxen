@@ -34,8 +34,8 @@ XPath xpath = new JDOMXPath( "//foo" );
         </p>
         <p>Added new extension functions kindly provided by Mark Wilson. They are as follows...
           <ul>
-            <li>upper-case() - converts the argument to an upper case string</li>
-            <li>lower-case() - converts the argument to a lower case string</li>
+            <li>upper-case() - converts the first argument to an upper case string using either the default Locale or the Locale specified by the second parameter</li>
+            <li>lower-case() - converts the first argument to a lower case string using either the default Locale or the Locale specified by the second parameter</li>
             <li>ends-with() - evaluates true if the first string ends with the postfix</li>
           </ul>
         </p>
@@ -59,16 +59,21 @@ XPath xpath = new JDOMXPath( "//foo" );
 
     <section title="To Do List">
       <ul>
-        <li>While already Jaxen is pretty 
-        <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>
-        but we are sure it could use some more tuning.
-        </li>
         <li>Implement a GenericXPath which could use reflection on the nodes passed into it to
           choose the Navigator to use. So the same GenericXPath instance could be used
           to evaluate XPaths on any object. This feature would be particularly useful
           in <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> 
           since it would allow web developers to mix and match any
           all XML models.
+        </li>
+        <li>Any Locale sepecific functions, such as <code>upper-case()</code> 
+          and <code>lowercase-case()</code> could well follow the example of
+          <a href="http://www.w3.org/TR/xquery-operators/#func-upper-case">XSLT 2.0</a>
+          by using the <a href="http://www.unicode.org/unicode/reports/tr21/">Unicode case mappings</a>
+        </li>
+        <li>While already Jaxen is pretty 
+        <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>
+        but we are sure it could use some more tuning.
         </li>
         <li>selectSingleNode() and possibly the *ValueOf() methods should be return-fast
           as a performance improvement.
@@ -83,7 +88,9 @@ XPath xpath = new JDOMXPath( "//foo" );
 
     <section title="Known problems">    
       <ul>
-        <li><b>id()</b> function not implemented for most models.</li>
+        <li>The <code>translate()</code> XPath function needs implementing. Any volunteers?
+        </li>
+        <li><code>id()</code> function not implemented for most models.</li>
       </ul>
     </section>
 
@@ -99,8 +106,8 @@ XPath xpath = new JDOMXPath( "//foo" );
         <li>Mark A. Belonga</li>
         <li>Christian Nentwich</li>
         <li>Alexander Day Chaffee (<a href="http://www.purpletech.com">Purple Technology</a>)</li>
-        <li>Elliotte Rusty Harold(<a href="http://www.cafeconleche.org">Cafe con Leche</a>)</li>
-        <li>Mark Wilson {<a href="http://www.wilsoncom.de">WilsonCon</a>)</li>
+        <li>Elliotte Rusty Harold (<a href="http://www.cafeconleche.org">Cafe con Leche</a>)</li>
+        <li>Mark Wilson (<a href="http://www.wilsoncom.de">WilsonCon</a>)</li>
       </ul>
     </section>
   </body>
