@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <name>jaxen</name>
   <id>jaxen</id>
-  <currentVersion>1.1-beta-1-dev</currentVersion>
+  <currentVersion>1.1-beta-2-dev</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -119,6 +119,13 @@
       <email>proyal@pace2020.com</email>
     </developer>
 
+    <developer>
+      <name>Scott Sanders</name>
+      <id>ssanders</id>
+      <email>scott@dotnot.org</email>
+      <organization>dotnot</organization>
+    </developer>
+
   </developers>
 
   <contributors>
@@ -134,11 +141,6 @@
   <!-- Need to mark these as compile-time/run-time -->
 
   <dependencies>
-
-    <dependency>
-      <id>saxpath</id>
-      <version>1.0-FCS</version>
-    </dependency>
 
     <dependency>
       <id>dom4j+core</id>
