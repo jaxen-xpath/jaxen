@@ -141,9 +141,8 @@ public abstract class Pattern {
     }
 
     
-    /** @return the type of node the pattern matches
-      * which by default should return ANY_NODE if it can
-      * match any kind of node.
+    /** @return the type of node the pattern matches;
+      * ANY_NODE unless overridden
       */
     public short getMatchType() 
     {
@@ -158,7 +157,7 @@ public abstract class Pattern {
       * force approach of evaluating every pattern for a given Node.
       *
       * @return the name of the element or attribute this pattern matches
-      * or null if this pattern matches any or more than one name.
+      * or null if this pattern matches any or more than one name
       */
     public String getMatchesNodeName() 
     {
