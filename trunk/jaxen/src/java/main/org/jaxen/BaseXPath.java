@@ -101,6 +101,9 @@ import java.util.List;
  */
 public class BaseXPath implements XPath, Serializable
 {
+    /** Original expression text. */
+    private String exprText;
+
     /** the parsed form of the xpath expression */
     private XPathExpr xpath;
     
@@ -141,6 +144,8 @@ public class BaseXPath implements XPath, Serializable
         {
             throw new JaxenException( e );
         }
+
+        this.exprText = xpathExpr;
     }
 
     /** Construct given an XPath expression string.
@@ -561,20 +566,13 @@ public class BaseXPath implements XPath, Serializable
         return xpath.getRootExpr();
     }
     
-    /** Return the normalized string of this XPath expression.
-     *
-     *  <p>
-     *  During parsing, the XPath expression is normalized,
-     *  removing abbreviations and other convenience notation.
-     *  This method returns the fully normalized representation
-     *  of the original expression.
-     *  </p>
+    /** Return the original expression text.
      *
      *  @return The normalized XPath expression string.
      */
     public String toString()
     {
-        return this.xpath.getText();
+        return this.exprText;
     }
 
     /** Returns the string version of this xpath.
