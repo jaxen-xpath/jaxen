@@ -1,10 +1,17 @@
 package org.jaxen.javabean;
 
 import junit.framework.TestCase;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 public class DocumentNavigatorTest
     extends TestCase
 {
+
+    protected void setUp() throws Exception
+    {
+        System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                            "" );
+    }
 
     public void testNothing()
         throws Exception
