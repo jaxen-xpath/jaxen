@@ -12,6 +12,28 @@
     </context>
   </document>
 
+  <document url="xml/id.xml">
+    <context select="/">
+      <!-- attributes have a parent: their element -->
+      <test select="/foo/@id/parent::foo" count="1"/>
+    </context>
+    <!-- attributes can also be used as context nodes -->
+    <context select="/foo/@id">
+      <test select="parent::foo" count="1"/>
+    </context>
+  </document>
+
+  <document url="xml/testNamespaces.xml">
+    <context select="/">
+      <!-- namespace nodes have their element as their parent -->
+      <test select="/Template/namespace::xml/parent::Template" count="1"/>
+    </context>
+    <!-- namespace nodes can also be used as context nodes -->
+    <context select="/Template/namespace::xml">
+      <test select="parent::Template" count="1"/>
+    </context>
+  </document>
+      
   <document url="xml/pi.xml">
     <context select="/">
       <test select="//processing-instruction()" count="3"/>
@@ -44,18 +66,13 @@
       <valueOf select="-3 &gt;= *">true</valueOf>
       <valueOf select="-4 &gt;= *">false</valueOf>
     </context>
+    <!-- This context should work, but needs a fixed version of saxpath to parse the right-hand side
+         of the greater-than expression.
     <context select="/numbers/set[2]">
       <valueOf select="1 &gt; nr/@value">false</valueOf>
       <valueOf select="55 &gt; nr/@value">false</valueOf>
       <valueOf select="55 &gt;= nr/@value">true</valueOf>
       <valueOf select="1000000 &gt; nr/@value">true</valueOf>
-    </context>
-    <!--
-    <context select="/numbers">
-      <valueOf select="set[1] > set[2]/nr/@value">false</valueOf>
-      <valueOf select="set[1] >= set[2]/nr/@value">true</valueOf>
-      <valueOf select="set[2]/nr/@value &lt; set[1]">false</valueOf>
-      <valueOf select="set[2]/nr/@value &lt;= set[1]">true</valueOf>
     </context>
     -->
   </document>
@@ -253,7 +270,7 @@
   </document>
 
 
-  <!-- test mumber functions -->
+  <!-- test number functions -->
 
   <!-- test Axes -->
 
@@ -310,17 +327,25 @@
   <document url="xml/namespaces.xml">
     <context select="/" 
              xmlns:foo="fooNamespace"
+             xmlns:voo="fooNamespace"
              xmlns:bar="barNamespace"
              xmlns:alias="fooNamespace">
       <test select="/*" count="1"/>
       <test select="/foo:a" count="1"/>
       <test select="/foo:a/b" count="1"/>
-      <test select="/foo:a/b/c" count="1"/>
-      <test select="/foo:a/bar:f" count="1"/>
+      <test select="/voo:a/b/c" count="1"/>
+      <test select="/voo:a/bar:f" count="1"/>
       <test select="/*[namespace-uri()='fooNamespace' and local-name()='a']" count="1"/>
       <test select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']" count="1"/>
       <test select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']/*[local-name()='y' and namespace-uri()='fooNamespace']" count="1"/>
     </context>
+
+    <!-- the prefix here and in the document have no relation; it's their
+         namespace-uri binding that counts -->
+    <context select="/" xmlns:foo="http://somethingElse/">
+      <test select="/foo:a/b/c" count="0"/>
+    </context>
+
     <context select="/"
              xmlns:foo="fooNamespace"
              xmlns:bar="barNamespace"
@@ -377,8 +402,10 @@
               <!-- must count the default xml: prefix as well -->
       <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
       <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
+
               <!-- every element has separate copies -->
       <test select="//namespace::*" count="25" debug="off"/>
+
     </context>
     <context select="/Template/Application1">
               <!-- must count the default xml: prefix as well -->
@@ -387,7 +414,12 @@
       <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
       <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
       <test select="//namespace::*" count="25" debug="off"/>
-    </context>
+      <test select="//namespace::xplt" count="8" debug="off"/>
+      <!-- the name test literally matches the prefix as given in the 
+           document, and does not use the uri -->
+      <test xmlns:somethingelse="www.xxxx.com"
+        select="//namespace::somethingelse" count="0" debug="off"/>
+   </context>
   </document>
 
  </tests>
