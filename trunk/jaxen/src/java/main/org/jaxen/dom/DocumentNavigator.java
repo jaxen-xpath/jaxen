@@ -174,7 +174,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get a (single-member) iterator over this node's parent.
      *
-     * @param contextNode the context node for the parent axis.
+     * @param contextNode the context node for the parent axis
      * @return a possibly-empty iterator (not null)
      */
     public Iterator getParentAxisIterator (Object contextNode)
@@ -209,7 +209,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all following siblings.
      *
-     * @param contextNode the context node for the sibling iterator.
+     * @param contextNode the context node for the sibling iterator
      * @return a possibly-empty iterator (not null)
      */
     public Iterator getFollowingSiblingAxisIterator (Object contextNode)
@@ -229,7 +229,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all preceding siblings.
      *
-     * @param contextNode the context node for the preceding sibling axis.
+     * @param contextNode the context node for the preceding sibling axis
      * @return a possibly-empty iterator (not null)
      */
     public Iterator getPrecedingSiblingAxisIterator (Object contextNode)
@@ -249,7 +249,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all following nodes, depth-first.
      *
-     * @param contextNode the context node for the following axis.
+     * @param contextNode the context node for the following axis
      * @return a possibly-empty iterator (not null)
      */
     public Iterator getFollowingAxisIterator (Object contextNode)
@@ -287,7 +287,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all preceding nodes, depth-first.
      *
-     * @param contextNode the context node for the preceding axis.
+     * @param contextNode the context node for the preceding axis
      * @return a possibly-empty iterator (not null)
      */
     public Iterator getPrecedingAxisIterator (Object contextNode)
@@ -351,17 +351,17 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getNamespaceAxisIterator (Object contextNode)
     {
-        // Only elements have Namespace nodes
+        // Only elements have namespace nodes
         if (isElement(contextNode)) {
 
             HashMap nsMap = new HashMap();
 
             // Start at the current node at walk
-            // up to the root, noting what Namespace
+            // up to the root, noting what namespace
             // declarations are in force.
 
             // TODO: deal with empty URI for
-            // cancelling Namespace scope
+            // canceling Namespace scope
             for (Node n = (Node)contextNode;
                  n != null;
                  n = n.getParentNode()) {
@@ -448,8 +448,7 @@ public class DocumentNavigator extends DefaultNavigator
     public String getElementName (Object object)
     {
         String name = ((Node)object).getLocalName();
-        if (name == null)
-            name = ((Node)object).getNodeName();
+        if (name == null) name = ((Node)object).getNodeName();
         return name;
     }
 
