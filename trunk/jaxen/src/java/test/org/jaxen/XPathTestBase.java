@@ -7,6 +7,8 @@ import junit.framework.TestCase;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.Attribute;
+import org.dom4j.Namespace;
 import org.dom4j.io.SAXReader;
 
 import java.util.List;
@@ -17,6 +19,11 @@ import java.util.Stack;
 
 public abstract class XPathTestBase extends TestCase
 {
+    protected static String    NS_URI       = "http://jaxen.org/test-harness/ns";
+
+    protected static Namespace NS_NAMESPACE = new Namespace( "ns",
+                                                             NS_URI );
+
     protected static String TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean            verbose         = true;
@@ -108,6 +115,8 @@ public abstract class XPathTestBase extends TestCase
     protected void testContext(Object testDoc,
                                Element contextElem) throws Exception
     {
+        setupNamespaceContext( contextElem );
+
         String xpathStr = contextElem.attributeValue( "select" );
 
         log( "Initial Context :: " + xpathStr );
@@ -426,5 +435,32 @@ public abstract class XPathTestBase extends TestCase
 
         return str.substring(0, 80) + "...";
     }
-        
+
+    private void setupNamespaceContext(Element contextElem)
+    {
+        SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
+
+        List namespaces = contextElem.additionalNamespaces();
+        Iterator nsIter = namespaces.iterator();
+
+        String prefix = null;;
+        String uri    = null;
+
+        Namespace eachNs = null;
+
+        while ( nsIter.hasNext() )
+        {
+            eachNs = (Namespace) nsIter.next();
+
+            prefix = eachNs.getPrefix();
+            uri    = eachNs.getURI();
+
+            nsContext.addNamespacePrefixTranslation( prefix,
+                                                     uri );
+
+            System.err.println( " ---> " + prefix + " == " + uri );
+        }
+
+        getContextSupport().setNamespaceContext( nsContext );
+    }
 }
