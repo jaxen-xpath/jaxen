@@ -111,8 +111,8 @@ public class LowerFunction extends LocaleFunctionSupport
      * Converts the given string value to lower case using an optional Locale
      * 
      * @param strArg the value which gets converted to a String
-     * @param locale the Locale to use for the conversion or null if the
-     *          default should be used
+     * @param locale the Locale to use for the conversion or null
+     *        English should be used
      * @param nav the Navigator to use
      */
     public static String evaluate(Object strArg,
@@ -122,13 +122,10 @@ public class LowerFunction extends LocaleFunctionSupport
 
         String str   = StringFunction.evaluate( strArg,
                                                 nav );
-        if (locale != null)
-        {
-            return str.toLowerCase(locale);
-        }
-        else 
-        {
-            return  str.toLowerCase();
-        }
+        // it might be possible to use the xml:lang attribute to
+        // pick a default locale
+        if (locale == null) locale = Locale.ENGLISH;
+        return str.toLowerCase(locale);
+        
     }
 }

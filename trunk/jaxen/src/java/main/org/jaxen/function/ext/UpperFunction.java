@@ -110,8 +110,8 @@ public class UpperFunction extends LocaleFunctionSupport
      * Converts the given string value to upper case using an optional Locale
      * 
      * @param strArg the value which gets converted to a String
-     * @param locale the Locale to use for the conversion or null if the
-     *          default should be used
+     * @param locale the Locale to use for the conversion or null if
+     *        English should be used
      * @param nav the Navigator to use
      */
     public static String evaluate(Object strArg,
@@ -121,15 +121,9 @@ public class UpperFunction extends LocaleFunctionSupport
 
         String str   = StringFunction.evaluate( strArg,
                                                 nav );
-        if (locale != null)
-        {
-            // System.out.println( "Using Locale: " + locale );
-            
-            return str.toUpperCase(locale);
-        }
-        else 
-        {
-            return  str.toUpperCase();
-        }
+        // it might be possible to use the xml:lang attribute to
+        // pick a default locale
+        if (locale == null) locale = Locale.ENGLISH;
+        return str.toUpperCase(locale);
     }
 }
