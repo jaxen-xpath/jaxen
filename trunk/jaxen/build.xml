@@ -1,0 +1,283 @@
+<project default="all" basedir=".">
+
+  <!-- =================================================================== -->
+  <!-- Initialization target                                               -->
+  <!-- =================================================================== -->
+
+  <target name="init">
+
+    <tstamp/>
+
+    <property name="copyright.owner" value="bob mcwhirter &amp; James Strachan"/>
+    <property name="subpackage.name" value="jaxen"/>
+    <property name="name"            value="org.jaxen"/>
+
+    <property name="version" value="0.9.1"/>
+    <property name="quality" value="beta"/>
+    <property name="year"    value="2001"/>
+
+    <echo message="----------- ${name} ${version} ${quality} [ Copyright ${year}. All Rights Reserved. ] ------------"/>
+
+    <property name="build.compiler" value="classic"/>
+    <property name="debug"          value="on"/>
+    <property name="optimize"       value="on"/>
+    <property name="deprecation"    value="on"/>
+    <property name="packages"       value="com.*,org.*"/>
+
+    <property name="src.dir"   value="./src"/>
+    <property name="lib.dir"   value="./lib"/>
+    <property name="build.dir" value="./build"/>
+    <property name="build.doc" value="${build.dir}/doc"/>
+    <property name="build.javadoc" value="${build.doc}/apidocs"/>
+    <property name="dist.dir" value="./dist"/>
+
+    <property name="java.src.dir" value="${src.dir}/java"/>
+    <property name="html.src.dir" value="${src.dir}/html"/>
+    <property name="doc.dir" value="${src.dir}/doc"/>
+
+    <property name="test.java.src.dir"     value="${java.src.dir}/test"/>
+    <property name="main.java.src.dir"     value="${java.src.dir}/main"/>
+    <property name="examples.java.src.dir" value="${java.src.dir}/examples"/>
+
+    <property name="web.htdocs" value="../htdocs"/>
+    <property name="web.dist" value="${web.htdocs}/dist"/>
+
+    <property name="javadoc.flavor"  value="API"/>
+
+    <filter token="dynamic.year"    value="${year}"/>
+    <filter token="dynamic.version" value="${version}"/>
+    <filter token="dynamic.date"    value="${TODAY}"/>
+
+    <filter token="log" value="true"/>
+    <filter token="verbose" value="true"/>
+
+<!--
+-->
+
+  </target>
+
+  <target name="all" depends="jar,doc,javadoc"/>
+
+  <!-- =================================================================== -->
+  <!-- Help on usage                                                       -->
+  <!-- =================================================================== -->
+  <target name="usage">
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="${name} build file"/>
+    <echo message="-------------------------------------------------------------"/>
+    <echo message=""/>
+    <echo message=" available targets are:"/>
+    <echo message=""/>
+    <echo message="   package   --> generates the ${name}.jar file (default)"/>
+    <echo message="   compile   --> compiles the contributed source code"/>
+    <echo message="   samples   --> compiles the contributed samples"/>
+    <echo message="   javadoc   --> generates the API documentation (java 1.2 only)"/>
+    <echo message="   doc       --> generates the documentation website (requires Xalan)"/>
+    <echo message="   test      --> compile and run all tests"/>
+    <echo message="   src-dist  --> build the source distribution"/>
+    <echo message="   full-dist --> build the full distribute"/>
+    <echo message="   all-dist  --> build all distributions"/>
+    <echo message="   website   --> builds the website (on SourceForge site)"/>
+    <echo message="   clean     --> restores the distribution to its clean state"/>
+    <echo message=""/>
+    <echo message=" See the comments inside the build.xml file for more details."/>
+    <echo message="-------------------------------------------------------------"/>
+    <echo message=""/>
+    <echo message=""/>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Prepares the build directory                                        -->
+  <!-- =================================================================== -->
+  <target name="prepare" depends="init">
+    <mkdir dir="${build.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the source code                                            -->
+  <!-- =================================================================== -->
+  <target name="prepare-src" depends="prepare">
+
+    <!-- create directories -->
+
+    <mkdir dir="${build.dir}/${main.java.src.dir}"/>
+    <mkdir dir="${build.dir}/${test.java.src.dir}"/>
+    <mkdir dir="${build.dir}/${html.src.dir}"/>
+    <mkdir dir="${build.dir}/classes"/>
+    <mkdir dir="${build.dir}/classes/main"/>
+    <mkdir dir="${build.dir}/classes/test"/>
+    <mkdir dir="${build.doc}"/>
+    <!-- copy src files -->
+
+    <copy todir="${build.dir}/${src.dir}">
+        <fileset dir="${src.dir}"/>
+    </copy>
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles                                                            -->
+  <!-- =================================================================== -->
+
+  <target name="compile" depends="prepare-src">
+    <javac srcdir="${build.dir}/${main.java.src.dir}"
+           destdir="${build.dir}/classes/main"
+           debug="${debug}"
+           deprecation="${deprecation}"
+           optimize="${optimize}">
+
+      <patternset id="all.files">
+        <include name="**"/>
+      </patternset>
+
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar jarfile="${build.dir}/${name}.jar"
+         basedir="${build.dir}/classes/main">
+        <patternset refid="all.files"/>
+    </jar>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the JUnit tests                                            -->
+  <!-- =================================================================== -->
+
+  <target name="compile-test" depends="compile">
+    <javac srcdir="${build.dir}/${test.java.src.dir}"
+           destdir="${build.dir}/classes/test"
+           debug="${debug}"
+           optimize="${optimize}">
+      <classpath>
+        <pathelement location="${build.dir}/classes/main" />
+        <pathelement path="${java.class.path}" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="test">
+    <antcall target="internal.test">
+      <param name="test.packages" value="**"/>
+    </antcall>
+  </target>
+
+  <target name="test.jaxen.util">
+    <antcall target="internal.test">
+      <param name="test.packages" value="org/jaxen/util"/>
+    </antcall>
+  </target>
+
+  <target name="internal.test" depends="compile-test">
+    <mkdir dir="${build.dir}/test-results"/>
+    <junit printsummary="yes" haltonfailure="yes">
+<!--
+    <junit printsummary="yes" haltonfailure="no">
+-->
+
+      <sysproperty key="org.saxpath.driver" value="com.werken.saxpath.XPathReader"/>
+
+      <formatter type="plain"/>
+      <classpath>
+        <pathelement location="${build.dir}/classes/main" />
+        <pathelement location="${build.dir}/classes/test" />
+        <pathelement path="${java.class.path}" />
+      </classpath>
+      <batchtest fork="yes" todir="${build.dir}/test-results">
+        <fileset dir="${build.dir}/classes/test">
+          <include name="${test.packages}/*Test.class"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Creates the API documentation                                       -->
+  <!-- =================================================================== -->
+
+  <target name="javadoc.all" depends="init">
+    <antcall target="javadoc">
+        <param name="javadoc.private" value="true"/>
+        <param name="javadoc.flavor"  value="Complete API"/>
+    </antcall>
+  </target>
+
+  <target name="javadoc" depends="prepare-src">
+
+    <mkdir dir="${build.javadoc}"/>
+
+    <javadoc packagenames="${packages}"
+             sourcepath="${build.dir}/${main.java.src.dir}"
+             destdir="${build.javadoc}"
+             author="true"
+             version="true"
+             stylesheetfile="${src.dir}/doc/style/javadoc.css"
+             private="${javadoc.private}"
+             use="true"
+             splitindex="true"
+             noindex="false"
+             windowtitle="SAXPath and Jaxen ${javadoc.flavor}"
+             doctitle="SAXPath and Jaxen ${javadoc.flavor}"
+             bottom="Copyright &#169; ${year} ${copyright.owner}.  All Rights Reserved.">
+
+        <group title="SAXPath: Simple API for XPath Parsing" packages="org.saxpath*"/>
+        <group title="Jaxen: Java XPath Engine"              packages="org.jaxen*"/>
+	<group title="Jaxen Navigators"                      packages="org.jaxen.jdom*:org.jaxen.dom4j*"/>
+        <group title="werken digital SAXPath"                packages="com.werken*"/>
+
+    </javadoc>
+<!--
+             link="http://java.sun.com/products/jdk/1.3/docs/api"
+-->
+  </target>
+
+  <!-- Build the documentation -->
+  <target name="doc" depends="prepare">
+    <mkdir    dir="${build.doc}"/>
+    <style    basedir="${doc.dir}" destdir="${build.doc}" style="style/style.xsl"
+              includes="**/*.xml" excludes="style/**,project.xml"/>
+    <copy todir="${build.doc}" overwrite="yes">
+      <fileset dir="${doc.dir}" includes="*.css"/>
+    </copy>
+    <replace file="${build.doc}/index.html" token="$$VERSION$$" value="${version}"/>
+    <replace file="${build.doc}/download.html" token="$$VERSION$$" value="${version}"/>
+  </target>
+
+
+
+  <!-- =================================================================== -->
+  <!-- Pbuilds the website                                                 -->
+  <!-- =================================================================== -->
+  <target name="website" depends="doc,javadoc">
+    <mkdir dir="${web.htdocs}"/>
+    <mkdir dir="${web.dist}"/>
+    <copy todir="${web.htdocs}" overwrite="yes">
+      <fileset dir="${build.doc}" includes="**/*.html, **/*.css"/>
+    </copy>
+<!--
+    <copy todir="${web.dist}" overwrite="yes">
+      <fileset dir="${dist.root}" includes="*.jar, *.zip, *.gz"/>
+    </copy>
+-->
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Clean targets                                                       -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <target name="distclean" depends="clean">
+    <delete dir="${dist.root}"/>
+    <delete>
+      <fileset defaultexcludes="no" dir="." includes="**/*~" />
+    </delete>
+  </target>
+
+</project>
+
+<!-- End of file -->

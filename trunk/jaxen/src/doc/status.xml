@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document url="http://saxpath.org/status.xml">
+  <body>
+    <title>Status</title>
+    
+    <section title="Change History">
+      <section title="Changes in CVS since last release">
+        <p>
+          Initial version
+        </p>
+       </section>
+    </section>
+
+    <section title="To Do List">
+    </section>
+
+    <section title="Known problems">    
+    </section>
+
+    <section title="Contributors">    
+      <p>The following people have contributed to the SAXPath project. 
+      Many thanks to you all!</p>
+      <ul>
+        <li>Bob McWhirter</li>
+        <li>James Strachan</li>
+      </ul>
+    </section>
+  </body>
+</document>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+
+<chapter>
+	<title>
+		A Gentle Introduction
+	</title>
+
+	<para>
+	Before SAXPath, there were many different 
+	XPath parsers in the community.  Most of
+	the implementations that accomplished the
+	syntactic parsing of an XPath expression
+	were tightly coupled with the engines that
+	actually used the XPath expressions.  The
+	need for a separation between the parsing
+	and usage of XPath expressions was great.
+	Just as the parsing of XML has been abstracted
+	by the SAX package by David Megginson,
+	SAXPath attempts to likewise abstract the
+	parsing of an XPath expression from the
+	usage of the results.
+	</para>
+
+	<para>
+	SAXPath, in many regards, mirrors the SAX package. 
+	It is an event-based, callback-driven API for alerting
+	external packages of the syntax of a particular XPath 
+	expression.  SAXPath defines a common interface for
+	objects which can generate SAXPath events, and another
+	interface for objects which can consume SAXPath events.
+	Additionally, an interface for objects which can
+	read and parse textual XPath expressions is provided.
+	The loose coupling provided by these interfaces,
+	between produces and consumers of XPath syntax
+	events allows for a single XPath parser to be 
+	a part of many different, disparate systems.	
+	</para>
+
+	<para>
+	Additionally, the SAXPath distribution is packaged
+	with a default XPathReader implementation, to
+	give users a starting point.  Another package,
+	known as JAXPath, can remove the user even
+	further from the XPath parsing technologies,
+	completely isolating his application from the
+	means to construct in-memory representations
+	of XPath expressions.  Please see the JAXPath
+	documentation for more information.
+	</para>
+
+	<para>
+	While SAXPath aims to be a Simple API for XPath Parsing,
+	it <emphasis>is</emphasis> still a parsing technology,
+	and requires knowledge of how parsers work to be used
+	effectively.  Understanding the W3C XPath specification,
+	along with the general form of recursive-descent parsers
+	will aide in the usage of SAXPath.  Though, the idea is
+	that only a few implementors will truly need to understand
+	and use SAXPath, but that many projects can use the
+	results of a SAXPath parse.
+	</para>	
+
+</chapter>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+[
+
+	<!ENTITY gentle-intro	SYSTEM "gentle-intro.xml">
+
+]>
+
+<book status="devel">
+
+	<bookinfo>
+
+		<title>
+			SAXPath API
+		</title>
+
+		<subtitle>
+			Event-based XPath Parsing
+		</subtitle>
+
+		<authorgroup>
+			<author>
+				<firstname>Bob</firstname>
+				<surname>McWhirter</surname>
+			</author>
+			<author>
+				<firstname>James</firstname>
+				<surname>Strachan</surname>
+			</author>
+		</authorgroup>
+
+	</bookinfo>
+
+	&gentle-intro;
+
+</book>
