@@ -8,8 +8,8 @@ import java.util.Collections;
 
 public abstract class BaseXPath extends JaXPath
 {
-    /** Configurable variable context used to evaluate XPath variables */
-    private VariableContext variableContext;
+    /** the support information and function, namespace and variable contexts */
+    private ContextSupport support;
     
     public BaseXPath(String xpathExpr) throws SAXPathException
     {
@@ -36,6 +36,42 @@ public abstract class BaseXPath extends JaXPath
         return jaNumberValueOf( (Context) getContext( context ) );
     }
 
+
+    // Properties
+    
+    public void setNamespaceContext(NamespaceContext namespaceContext)
+    {
+        getContextSupport().setNamespaceContext(namespaceContext);
+    }
+
+    public void setFunctionContext(FunctionContext functionContext)
+    {
+        getContextSupport().setFunctionContext(functionContext);
+    }
+
+    public void setVariableContext(VariableContext variableContext)
+    {
+        getContextSupport().setVariableContext(variableContext);
+    }
+
+    public NamespaceContext getNamespaceContext()
+    {
+        return getContextSupport().getNamespaceContext();
+    }
+
+    public FunctionContext getFunctionContext()
+    {
+        return getContextSupport().getFunctionContext();
+    }
+
+    public VariableContext getVariableContext()
+    {
+        return getContextSupport().getVariableContext();
+    }
+    
+    
+    // Implementation methods
+    
     protected Context getContext(Object context)
     {
         if ( context instanceof Context )
@@ -59,27 +95,38 @@ public abstract class BaseXPath extends JaXPath
 
     protected ContextSupport getContextSupport()
     {
-        ContextSupport support = new ContextSupport( new SimpleNamespaceContext(),
-                                                     XPathFunctionContext.getInstance(),
-                                                     getVariableContext(),
-                                                     getNavigator() );
+        if ( support == null )
+        {
+            support = new ContextSupport( 
+                createNamespaceContext(),
+                createFunctionContext(),
+                createVariableContext(),
+                getNavigator() 
+            );
+        }
 
         return support;
     }
 
     protected abstract Navigator getNavigator();
     
-    public VariableContext getVariableContext()
+    
+
+    // Factory methods for default contexts
+    
+    protected FunctionContext createFunctionContext()
     {
-        if ( variableContext == null ) 
-        {
-            variableContext = new SimpleVariableContext();
-        }
-        return variableContext;
+        return XPathFunctionContext.getInstance();
     }
     
-    public void setVariableContext(VariableContext variableContext)
+    protected NamespaceContext createNamespaceContext()
     {
-        this.variableContext = variableContext;
+        return new SimpleNamespaceContext();
     }
+    
+    protected VariableContext createVariableContext()
+    {
+        return new SimpleVariableContext();
+    }
+    
 }
