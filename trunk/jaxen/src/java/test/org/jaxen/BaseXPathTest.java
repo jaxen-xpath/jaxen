@@ -62,14 +62,20 @@
 
 package org.jaxen;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Namespace;
+import nu.xom.Nodes;
+import nu.xom.canonical.Canonicalizer;
 
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.NamespaceNode;
@@ -484,7 +490,33 @@ public class BaseXPathTest extends TestCase {
         assertTrue(result.contains(a3));
         assertTrue(result.contains(a4));
         
-    }    
+    }   
+    
+    public void testXMLNamespaceAttributeOrderOnAncestorAxis() 
+      throws IOException, JaxenException {
+     
+        org.w3c.dom.Element superroot = doc.createElement("superroot");
+        doc.appendChild(superroot);
+        org.w3c.dom.Element root = doc.createElement("root");
+        superroot.appendChild(root);
+        
+        org.w3c.dom.Attr p0 = doc.createAttributeNS(Namespace.XML_NAMESPACE, "xml:id");
+        p0.setValue("p0");
+        superroot.setAttributeNodeNS(p0);
+        org.w3c.dom.Attr p1 = doc.createAttributeNS(Namespace.XML_NAMESPACE, "xml:id");
+        p1.setValue("p1");
+        root.setAttributeNodeNS(p1);
+        
+        org.w3c.dom.Element child = doc.createElement("child312");
+        root.appendChild(child);
+        
+        BaseXPath xpath = new DOMXPath("ancestor::*/@xml:*");
+        List result = xpath.selectNodes(child);
+        assertEquals(2, result.size());
+        assertEquals(p0, result.get(0));
+        assertEquals(p1, result.get(1));
+        
+    }
     
     public void testDescendantAxisWithAttributesAndChildren() throws JaxenException {
         
@@ -525,6 +557,33 @@ public class BaseXPathTest extends TestCase {
         assertEquals(a3, result.get(5));   
         assertEquals(x4, result.get(6));   
         assertEquals(a4, result.get(7));
+        
+    }    
+    
+    public void testAncestorAxisWithAttributes() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ancestor::*/@*");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        a.appendChild(b);
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        b.appendChild(x3);
+        
+        Attr a1 = doc.createAttribute("name");
+        a1.setNodeValue("1");
+        a.setAttributeNode(a1);
+        Attr a2 = doc.createAttribute("name");
+        a2.setNodeValue("2");
+        b.setAttributeNode(a2);
+        Attr a3 = doc.createAttribute("name");
+        x3.setNodeValue("3");
+        x3.setAttributeNode(a3);
+        
+        List result = xpath.selectNodes(x3);
+        assertEquals(2, result.size());
+        assertEquals(a2, result.get(0));   
+        assertEquals(a1, result.get(1)); 
         
     }    
     
@@ -721,7 +780,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x3, result.get(4));   
         assertEquals(x4, result.get(5));
         
-    }    
+    }   
     
     
 }
