@@ -140,6 +140,12 @@
       <url>http://dotnot.org/blog</url>
     </developer>
 
+    <developer>
+      <name>Brian Ewins</name>
+      <id>bewins</id>
+      <email>brian.ewins@gmail.com</email>
+    </developer>
+
   </developers>
 
   <contributors>
