@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,39 +59,75 @@
  * $Id$
  */
 
-
 package org.jaxen.function;
 
-import junit.framework.Test;
+import java.io.IOException;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.jaxen.FunctionCallException;
+import org.jaxen.XPath;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
- * <p>
- *   Suite for Jaxen's function tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
  *
  */
-public class FunctionTests extends TestCase {
+public class SumTest extends TestCase {
 
+    private Document doc;
     
-    public FunctionTests(String name) {
-        super(name);   
+    public void setUp() throws ParserConfigurationException, SAXException, IOException
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.parse( "xml/basic.xml" );
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(CountTest.class));
-        result.addTest(new TestSuite(LocalNameTest.class));
-        result.addTest(new TestSuite(SumTest.class));
-        return result;
-        
+
+    public SumTest(String name) {
+        super(name);
     }
 
-    
+    public void testSumOfNumber()
+    {
+        try
+        {
+            XPath xpath = new DOMXPath( "sum(3)" );
+            xpath.selectNodes( doc );
+            fail("sum of non-node-set");
+       }
+       catch (FunctionCallException e) 
+        {
+           assertEquals("The argument to the sum function must be a node-set", e.getMessage());
+        }
+       catch (Exception e)
+        {
+            e.printStackTrace();
+            fail( e.getMessage() );
+        }
+    }    
+
+    public void testSumNoArguments()
+    {
+        try
+        {
+            XPath xpath = new DOMXPath( "sum()" );
+            xpath.selectNodes( doc );
+            fail("sum of nothing");
+       }
+       catch (Exception e)
+        {
+            assertEquals("sum() requires one argument.", e.getMessage());
+        }
+    }    
+
 }
