@@ -38,7 +38,7 @@ import java.util.List;
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
-public class BaseXPath implements XPath
+public class BaseXPath implements XPath, Serializable
 {
     /** the parsed form of the xpath expression */
     private XPathExpr xpath;
