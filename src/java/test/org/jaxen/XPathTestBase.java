@@ -64,28 +64,34 @@ package org.jaxen;
 
 import junit.framework.TestCase;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.io.SAXReader;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jaxen.function.StringFunction;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public abstract class XPathTestBase extends TestCase
 {
-    protected static String    VAR_URI   = "http://jaxen.org/test-harness/var";
-    protected static String    TESTS_XML = "xml/test/tests.xml";
+    protected static String VAR_URI   = "http://jaxen.org/test-harness/var";
+    protected static String TESTS_XML = "xml/test/tests.xml";
 
-    protected static boolean            verbose         = true;
+    protected static boolean verbose = true;
 
-    private          SAXReader          xmlReader       = new SAXReader();
-    private          ContextSupport     contextSupport;
+    private DocumentBuilder builder;
+    private ContextSupport  contextSupport;
 
     private Stack executionContext = new Stack();
 
@@ -94,16 +100,15 @@ public abstract class XPathTestBase extends TestCase
         super( name );
     }
 
-    public void setUp()
+    public void setUp() throws ParserConfigurationException
     {
         this.contextSupport = null;
         System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
                             "" );
-    }
-
-    public void tearDown()
-    {
-
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        builder = factory.newDocumentBuilder();
+        
     }
 
     public void log(String text)
@@ -127,25 +132,20 @@ public abstract class XPathTestBase extends TestCase
     {
         log( "Loading test file: " + TESTS_XML );
         
-        Document doc = xmlReader.read( TESTS_XML );
+        File f = new File( TESTS_XML);
+        Document doc = builder.parse( f );
 
-        Element root = doc.getRootElement();
-
-        Iterator iter = root.elementIterator( "document" );
-
-        Element eachDocElem = null;
-
-        while ( iter.hasNext() )
+        NodeList documents = doc.getElementsByTagName("document");
+        for (int i = 0; i < documents.getLength(); i++)
         {
-            eachDocElem = (Element) iter.next();
-
+            Element eachDocElem = (Element) documents.item(i);
             testDocument( eachDocElem );
         }
     }
 
     protected void testDocument(Element docElem) throws Exception
     {
-        String url = docElem.attributeValue( "url" );
+        String url = docElem.getAttribute( "url" );
 
         Object testDoc = getDocument( url );
 
@@ -154,12 +154,11 @@ public abstract class XPathTestBase extends TestCase
 
         this.executionContext.push( url );
 
-        Iterator iter    = docElem.elementIterator( "context" );
-        Element  context = null;
+        NodeList contexts = docElem.getElementsByTagName( "context" );
 
-        while ( iter.hasNext() )
+        for (int i = 0; i < contexts.getLength(); i++)
         {
-            context = (Element) iter.next();
+            Element context = (Element) contexts.item(i);
 
             testContext( testDoc,
                          context );
@@ -176,7 +175,7 @@ public abstract class XPathTestBase extends TestCase
         setupNamespaceContext( contextElem );
         setupVariableContext( contextElem );
 
-        String xpathStr = contextElem.attributeValue( "select" );
+        String xpathStr = contextElem.getAttribute( "select" );
 
         log( "Initial Context :: " + xpathStr );
 
@@ -192,87 +191,66 @@ public abstract class XPathTestBase extends TestCase
         while ( iter.hasNext() )
         {
             contextNode = iter.next();
-
-            runTests( testDoc,
-                      contextElem,
-                      contextNode );
+            runTests( contextElem, contextNode );
         }
 
         this.executionContext.pop();
     }
 
-    protected void runTests(Object testDoc,
-                            Element contextElem,
+    protected void runTests(Element contextElem,
                             Object context) throws Exception
     {
-        Iterator iter = contextElem.elementIterator( "test" );
+        NodeList countTests = contextElem.getElementsByTagName( "test" );
 
-        Element test = null;
-
-        while ( iter.hasNext() )
+        for (int i = 0; i < countTests.getLength(); i++)
         {
-            test = (Element) iter.next();
-
-            runTest( testDoc,
-                     context,
-                     test );
+            Element test = (Element) countTests.item(i);
+            runTest( context, test );
         }
 
-        iter = contextElem.elementIterator( "valueOf" );
+        NodeList valueOfs = contextElem.getChildNodes();
 
-        Element valueOf = null;
-
-        while ( iter.hasNext() )
-        {
-            valueOf = (Element) iter.next();
-
-            testValueOf( testDoc,
-                         context,
-                         valueOf );
+        for (int i = 0; i < valueOfs.getLength(); i++)
+        { 
+            Node node = valueOfs.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element valueOf = (Element) valueOfs.item(i);
+                if (valueOf.getNodeName().equals("valueOf")) {
+                    testValueOf( context, valueOf );
+                }
+            }
         }
     }
 
-    protected void runTest(Object testDoc,
-                           Object context,
+    protected void runTest(Object context,
                            Element test) throws Exception
     {
-        String xpathStr = test.attributeValue( "select" );
-
-        String debugStr  = test.attributeValue( "debug" );
-
+        String xpathStr = test.getAttribute( "select" );
+        String debugStr  = test.getAttribute( "debug" );
         boolean debug = verbose;
 
-        if ( debugStr != null )
+        if ( ! "".equals(debugStr) )
         {
-            if ( "true".equals( debugStr )
-                 ||
-                 "on".equals( debugStr ) )
+            if ( "true".equals( debugStr ) || "on".equals( debugStr ) )
             {
                 debug = true;
             }
         }
 
-        log( debug,
-             "  Select :: " + xpathStr );
+        log( debug, "  Select :: " + xpathStr );
 
         this.executionContext.push( xpathStr );
 
-        String count = test.attributeValue( "count" );
-		String exception = test.attributeValue( "exception" );
+        String count = test.getAttribute( "count" );
+        String exception = test.getAttribute( "exception" );
 
-        try
+        try 
         {
-
-        BaseXPath xpath = new BaseXPath( xpathStr );
-
-        if ( count != null )
-        {
-            int expectedSize = Integer.parseInt( count );
-
-            try
+            BaseXPath xpath = new BaseXPath( xpathStr );
+            List results = xpath.selectNodes( getContext( context ) );
+            if ( ! "".equals(count) )
             {
-                List results = xpath.selectNodes( getContext( context ) );
-
+                int expectedSize = Integer.parseInt( count );
                 log ( debug,
                       "    Expected Size :: " + expectedSize );
                 log ( debug,
@@ -300,118 +278,41 @@ public abstract class XPathTestBase extends TestCase
                 if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
                     fail("An exception was expected.");
                 }
-            }
-            catch (UnsupportedAxisException e)
-            {
-                log ( debug,
-                      "      ## SKIPPED -- Unsupported Axis" );
-            }
-            catch (JaxenException e) {
-            	// If an exception attribute was switched on, this is the desired behaviour..
 
-            	if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
-            		log (debug, "    Caught expected exception "+e.getMessage());
-            	} else
-            		throw e;
             }
+            
+            // XXX Now test any valueOf children of the test element
+            NodeList valueOfs = test.getElementsByTagName("valueOf");
+            for (int i = 0; i < valueOfs.getLength(); i++) {
+                Element valueOf = (Element) valueOfs.item(i);
+                testValueOf( results.get(0), valueOf);
+            }
+            
         }
-
-        Iterator valueOfIter = test.elementIterator( "valueOf" );
-
-        while ( valueOfIter.hasNext() )
+        catch (UnsupportedAxisException e)
         {
-
-            //Element valueOf = test.element( "valueOf" );
-            Element valueOf = (Element) valueOfIter.next();
-
-            if ( valueOf != null )
-            {
-                debugStr = valueOf.attributeValue( "debug" );
-
-                if ( debugStr != null )
-                {
-                    if ( "true".equals( debugStr )
-                         ||
-                         "on".equals( debugStr ) )
-                    {
-                        debug = true;
-                    }
-                }
-
-                try
-                {
-                    Object newContext = xpath.selectSingleNode( getContext( context ) );
-
-                    log ( debug,
-                          "    New Context :: " + abbreviate( newContext ) );
-
-
-                    String valueOfXPathStr = valueOf.attributeValue( "select" );
-
-                    log( debug,
-                         "  Select :: " + valueOfXPathStr );
-
-                    this.executionContext.push( valueOfXPathStr );
-
-                    BaseXPath valueOfXPath = new BaseXPath( valueOfXPathStr );
-
-                    Object node = valueOfXPath.selectSingleNode( getContext( newContext ) );
-
-                    String expected = valueOf.getText();
-                    String result =   StringFunction.evaluate( node,
-                                                               getNavigator() );
-
-                    log ( debug,
-                          "    Expected :: " + expected );
-
-                    log ( debug,
-                          "    Result   :: " + result );
-
-                    if ( ! expected.equals( result ) )
-                    {
-                        log ( debug,
-                              "      ## FAILED" );
-                    }
-
-                    assertEquals( this.executionContext.toString(),
-                                  expected,
-                                  result );
-
-                    this.executionContext.pop();
-                }
-                catch (UnsupportedAxisException e)
-                {
-                    log ( debug,
-                          "      ## SKIPPED -- Unsupported Axis" );
-
-                }
-
-            }
-        }
+            log ( debug,
+                  "      ## SKIPPED -- Unsupported Axis" );
         }
         catch (JaxenException e) {
-            // If an exception attribute was switched on, this is the desired behaviour..
-
-            if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
+            // If an exception attribute was switched on, this is the desired behavior.
+            if (exception.equals("on") || exception.equals("true")) {
                 log (debug, "    Caught expected exception "+e.getMessage());
-            } else
-                throw e;
+            } 
+            else throw e;
         }
 
         this.executionContext.pop();
     }
 
-    protected void testValueOf(Object testDoc,
-                               Object context,
+    protected void testValueOf(Object context,
                                Element valueOf) throws Exception
     {
-        String xpathStr = valueOf.attributeValue( "select" );
-
-        String debugStr  = valueOf.attributeValue( "debug" );
-
+        String xpathStr = valueOf.getAttribute( "select" );
+        String debugStr = valueOf.getAttribute( "debug" );
         boolean debug = verbose;
 
-        if ( debugStr != null )
+        if ( ! "".equals(debugStr) )
         {
             if ( "true".equals( debugStr )
                  ||
@@ -429,7 +330,7 @@ public abstract class XPathTestBase extends TestCase
         {
             Object node = xpath.evaluate( getContext( context ) );
             
-            String expected = valueOf.getText();
+            String expected = getFullText(valueOf);
             String result = StringFunction.evaluate( node,
                                                      getNavigator() );
             
@@ -467,9 +368,7 @@ public abstract class XPathTestBase extends TestCase
         Context context = new Context( getContextSupport() );
 
         List list = new ArrayList( 1 );
-
         list.add( contextNode );
-
         context.setNodeSet( list );
 
         return context;
@@ -492,54 +391,24 @@ public abstract class XPathTestBase extends TestCase
 
     public abstract Object getDocument(String url) throws Exception;
 
-    private String abbreviate(Object obj)
-    {
-        if ( obj == null )
-        {
-            return "null";
-        }
-
-        String str = obj.toString();
-
-        int nl = str.indexOf( "\n" );
-
-        if ( nl >= 0
-             &&
-             nl < 80 )
-        {
-            return str.substring( 0, nl );
-        }
-
-        if ( str.length() < 80 )
-        {
-            return str;
-        }
-
-        return str.substring(0, 80) + "...";
-    }
-
     private void setupNamespaceContext(Element contextElem)
     {
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
 
-        List namespaces = contextElem.additionalNamespaces();
-        Iterator nsIter = namespaces.iterator();
+        NamedNodeMap attributes = contextElem.getAttributes();
 
-        String prefix = null;;
-        String uri    = null;
-
-        Namespace eachNs = null;
-
-        while ( nsIter.hasNext() )
+        for (int i = 0; i < attributes.getLength(); i++ )
         {
-            eachNs = (Namespace) nsIter.next();
+            Attr attr = (Attr) attributes.item(i);
+            if ("http://www.w3.org/2000/xmlns/".equals(attr.getNamespaceURI())) {
 
-            prefix = eachNs.getPrefix();
-            uri    = eachNs.getURI();
-
-            nsContext.addNamespace( prefix, uri );
-
-            System.out.println( " ---> " + prefix + " == " + uri );
+                String prefix = attr.getLocalName();
+                String uri    = attr.getNodeValue();
+    
+                nsContext.addNamespace( prefix, uri );
+    
+                System.out.println( " ---> " + prefix + " == " + uri );
+            }
         }
 
         getContextSupport().setNamespaceContext( nsContext );
@@ -549,20 +418,16 @@ public abstract class XPathTestBase extends TestCase
     {
         SimpleVariableContext varContext = new SimpleVariableContext();
 
-        Iterator  varIter = contextElem.attributeIterator();
-        Attribute eachVar = null;
-
-        String varName  = null;
-        String varValue = null;
-
-        while ( varIter.hasNext() )
+        NamedNodeMap varIter = contextElem.getAttributes();
+        
+        for (int i = 0; i < varIter.getLength(); i++ )
         {
-            eachVar = (Attribute) varIter.next();
+            Attr eachVar = (Attr) varIter.item(i);
 
-            if ( eachVar.getNamespace().getURI().equals( VAR_URI ) )
+            if (  VAR_URI.equals(eachVar.getNamespaceURI()) )
             {
-                varName  = eachVar.getName();
-                varValue = eachVar.getValue();
+                String varName  = eachVar.getLocalName();
+                String varValue = eachVar.getNodeValue();
 
                 varContext.setVariableValue( null,
                                              varName,
@@ -572,4 +437,27 @@ public abstract class XPathTestBase extends TestCase
 
         getContextSupport().setVariableContext( varContext );
     }
+    
+    private static String getFullText(Node node) {
+        StringBuffer result = new StringBuffer(12);
+        NodeList children = node.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+          Node child = children.item(i);
+          int type = child.getNodeType();
+          if (type == Node.TEXT_NODE) {
+            result.append(child.getNodeValue());
+          }
+          else if (type == Node.CDATA_SECTION_NODE) {
+            result.append(child.getNodeValue());
+          }
+          else if (type == Node.ELEMENT_NODE) {
+            result.append(getFullText(child));
+          }
+          else if (type == Node.ENTITY_REFERENCE_NODE) {
+            result.append(getFullText(child));
+          }
+        }
+        return result.toString();
+    }
+    
 }
