@@ -104,7 +104,7 @@ public class JaxenHandler implements XPathHandler
     /** Set the Jaxen <code>XPathFactory</code> to use
      *  during the parse to construct the XPath expression tree.
      *
-     *  @param xpathFactory The factory to use during the parse.
+     *  @param xpathFactory the factory to use during the parse
      */
     public void setXPathFactory(XPathFactory xpathFactory)
     {
@@ -114,7 +114,7 @@ public class JaxenHandler implements XPathHandler
     /** Retrieve the Jaxen <code>XPathFactory</code> used
      *  during the parse to construct the XPath expression tree.
      *
-     *  @return The <code>XPathFactory</code> used during the parse.
+     *  @return the <code>XPathFactory</code> used during the parse.
      */
     public XPathFactory getXPathFactory()
     {
@@ -128,7 +128,7 @@ public class JaxenHandler implements XPathHandler
      *  successfully returned.
      *  </p>
      *
-     *  @return The XPath expression tree.
+     *  @return the XPath expression tree
      */
     public XPathExpr getXPathExpr()
     {
@@ -143,13 +143,13 @@ public class JaxenHandler implements XPathHandler
      *  successfully returned.
      *  </p>
      *
-     *  @return The XPath expression tree.
+     *  @return the XPath expression tree
      */
     public XPathExpr getXPathExpr(boolean shouldSimplify)
     {
         if ( shouldSimplify && ! this.simplified )
         {
-            //System.err.println("simplifyin....");
+            //System.err.println("simplifying....");
             this.xpath.simplify();
             this.simplified = true;
         }
@@ -191,7 +191,7 @@ public class JaxenHandler implements XPathHandler
         // FilterExpr and a LocationPath (of some flavor).
         //
         // If the current stack-frame has one item, it's simply
-        // a FilterExpr, and more than like boils down to a
+        // a FilterExpr, and more than likely boils down to a
         // primary expr of some flavor.  But that's for another
         // method...
 
@@ -566,11 +566,9 @@ public class JaxenHandler implements XPathHandler
 
     public void endUnionExpr(boolean create) throws JaxenException
     {
-        //System.err.println("endUnionExpr()");
 
         if ( create )
         {
-            //System.err.println("makeUnionExpr");
 
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
