@@ -87,6 +87,11 @@ public class TrueFunction implements Function
         throw new FunctionCallException( "true() requires no arguments." );
     }
 
+    /**
+     * Returns true.
+     * 
+     * @return Boolean.TRUE
+     */
     public static Boolean evaluate()
     {
         return Boolean.TRUE;
