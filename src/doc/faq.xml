@@ -1,46 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<document url="http://saxpath.org/faq.xml">
+<document url="http://jaxen.org/faq.xml">
   <body>
     <title>Frequently Asked Questions</title>
     
-    <section title="What is SAXPath?">
+    <section title="What is Jaxen?">
       <p>
-      The <i>SAXPath</i> project is a Simple API for XPath. 
-      SAXPath is analogous to SAX in that the API abstracts away the details of 
-      parsing and provides a simple event based callback interface. 
+      The <i>Jaxen</i> project is a Java XPath Engine.
+      Jaxen is a universal object model walker, capable of evaluating
+      XPath expressions across multiple models.  Currently supported
+      are <a href="http://dom4j.org">dom4j</a> and <a href="http://jdom.org">JDOM</a>.
       </p>
     </section>
 
-    <section title="What is the SAXPath license?">
+    <section title="What is the Jaxen license?">
       <p>We use an Apache-style open source license which is one of the least
-        restrictive licenses around, you can use <i>SAXPath</i> to create new products
+        restrictive licenses around, you can use <i>Jaxen</i> to create new products
         without them having to be open source.
       </p>
     </section>
 
-    <section title="Why is SAXPath useful?">
+    <section title="Why is Jaxen useful?">
       <p>
         After implementing an XPath engine for both <a href="http://dom4j.org">dom4j</a> and
         <a href="http://jdom.org">JDOM</a>, and attempting to keep them both in sync, it was
-        decided that factoring out the commonality would be a Good Thing.  Thus, SAXPath
-        provides a single point for XPath expression parsing, regardless of the target
+        decided that factoring out the commonality would be a Good Thing.  Thus, Jaxen
+        provides a single point for XPath expression evaluation, regardless of the target
         object model, whether its <b>dom4j</b>, <b>JDOM</b>, <b>DOM</b>, <b>JavaBeans</b>,
         or whatnot.
-      </p>
-    </section>
-
-    <section title="Is there an implementation?">
-      <p>
-        The API is open to many implementation, but also included in the
-        distribution, currently, is the 
-        <a href="http://code.werken.com/">werken digital</a> implementation.
-      </p>
-    </section> 
-
-    <section title="What can I do with SAXPath?">
-      <p>
-        Probably the most useful thing to do with SAXPath is to use it
-        in conjunction with Jaxen (will link soon to the jaxen.org site).
       </p>
     </section>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<document url="http://saxpath.org/download.xml">
+<document url="http://jaxen.org/download.xml">
   <body>
-    <title>Download SAXPath</title>
+    <title>Download Jaxen</title>
     
     <section title="Download the current release">
       <p>The current release is version $VERSION$.</p>
@@ -11,10 +11,10 @@
       </p>
       <ul>
           <li>
-            <a href="http://prdownloads.sourceforge.net/saxpath/org.saxpath-$VERSION$.zip">org.saxpath-$VERSION$.zip</a> for Windows platforms (ZIP)
+            <a href="http://prdownloads.sourceforge.net/jaxen/org.jaxen-$VERSION$.zip">org.jaxen-$VERSION$.zip</a> for Windows platforms (ZIP)
           </li>
           <li>
-            <a href="http://prdownloads.sourceforge.net/saxpath/org.saxpath-$VERSION$.tar.gz">org.saxpath-$VERSION$.tar.gz</a> for all other platforms (Tarball)
+            <a href="http://prdownloads.sourceforge.net/jaxen/org.jaxen-$VERSION$.tar.gz">org.jaxen-$VERSION$.tar.gz</a> for all other platforms (Tarball)
           </li>
       </ul>
     </section>
@@ -22,10 +22,10 @@
 <!--
     <section title="Download a daily build">
       <ul>
-        <li><a href="../../dist/saxpath-daily.zip">saxpath-daily.zip</a> 
+        <li><a href="../../dist/jaxen-daily.zip">jaxen-daily.zip</a> 
             for Windows platforms (ZIP)
         </li>
-        <li><a href="../../dist/saxpath-daily.tar.gz">saxpath-daily.tar.gz</a>
+        <li><a href="../../dist/jaxen-daily.tar.gz">jaxen-daily.tar.gz</a>
             for all other platforms (Tarball)
         </li>
       </ul>
@@ -36,7 +36,7 @@
       
       <p>
         You can browse the current CVS repository 
-        <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/saxpath/">here</a>
+        <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jaxen/">here</a>
       </p>
 
       <p>To learn more about CVS go <a href="http://www.cvshome.org/">here</a>.
@@ -49,9 +49,9 @@
         When prompted for a password for anonymous, simply press the Enter key. 
         </p>
         <pre>
-cvs -d:pserver:anonymous@cvs.saxpath.org:/cvsroot/saxpath login 
+cvs -d:pserver:anonymous@cvs.jaxen.org:/cvsroot/jaxen login 
 
-cvs -d:pserver:anonymous@cvs.saxpath.org:/cvsroot/saxpath co saxpath
+cvs -d:pserver:anonymous@cvs.jaxen.org:/cvsroot/jaxen co jaxen
         </pre>
         <p>Updates from within the module's directory do not need the -d parameter.
         </p>
@@ -68,7 +68,7 @@ cvs -d:pserver:anonymous@cvs.saxpath.org:/cvsroot/saxpath co saxpath
         <pre>
 export CVS_RSH=ssh 
  
-cvs -d:ext:developername@cvs.saxpath.org:/cvsroot/saxpath co saxpath
+cvs -d:ext:developername@cvs.jaxen.org:/cvsroot/jaxen co jaxen
         </pre>
       </section>
 
