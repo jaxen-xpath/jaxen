@@ -45,10 +45,10 @@
       <valueOf select="-4 &gt;= *">false</valueOf>
     </context>
     <context select="/numbers/set[2]">
-      <valueOf select="1 > nr/@value">false</valueOf>
-      <valueOf select="55 > nr/@value">false</valueOf>
-      <valueOf select="55 >= nr/@value">true</valueOf>
-      <valueOf select="1000000 > nr/@value">true</valueOf>
+      <valueOf select="1 &gt; nr/@value">false</valueOf>
+      <valueOf select="55 &gt; nr/@value">false</valueOf>
+      <valueOf select="55 &gt;= nr/@value">true</valueOf>
+      <valueOf select="1000000 &gt; nr/@value">true</valueOf>
     </context>
     <!--
     <context select="/numbers">
