@@ -87,7 +87,7 @@ public class EndsWithFunction implements Function
                              context.getNavigator() );
         }
 
-        throw new FunctionCallException( "ends-with() requires two arugments." );
+        throw new FunctionCallException( "ends-with() requires two arguments." );
     }
 
     public static Boolean evaluate(Object strArg,
