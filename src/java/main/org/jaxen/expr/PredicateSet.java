@@ -24,7 +24,7 @@
 
  * are met:
 
- * 
+ *
 
  * 1. Redistributions of source code must retain the above copyright
 
@@ -34,9 +34,9 @@
 
  * 2. Redistributions in binary form must reproduce the above copyright
 
- *    notice, this list of conditions, and the disclaimer that follows 
+ *    notice, this list of conditions, and the disclaimer that follows
 
- *    these conditions in the documentation and/or other materials 
+ *    these conditions in the documentation and/or other materials
 
  *    provided with the distribution.
 
@@ -48,7 +48,7 @@
 
  *    written permission, please contact license@jaxen.org.
 
- * 
+ *
 
  * 4. Products derived from this software may not be called "Jaxen", nor
 
@@ -56,11 +56,11 @@
 
  *    from the Jaxen Project Management (pm@jaxen.org).
 
- * 
+ *
 
- * In addition, we request (but do not require) that you include in the 
+ * In addition, we request (but do not require) that you include in the
 
- * end-user documentation provided with the redistribution and/or in the 
+ * end-user documentation provided with the redistribution and/or in the
 
  * software itself an acknowledgement equivalent to the following:
 
@@ -68,7 +68,7 @@
 
  *      Jaxen Project (http://www.jaxen.org/)."
 
- * Alternatively, the acknowledgment may be graphical using the logos 
+ * Alternatively, the acknowledgment may be graphical using the logos
 
  * available at http://www.jaxen.org/
 
@@ -102,17 +102,17 @@
 
  * ====================================================================
 
- * This software consists of voluntary contributions made by many 
+ * This software consists of voluntary contributions made by many
 
- * individuals on behalf of the Jaxen Project and was originally 
+ * individuals on behalf of the Jaxen Project and was originally
 
- * created by bob mcwhirter <bob@werken.com> and 
+ * created by bob mcwhirter <bob@werken.com> and
 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * James Strachan <jstrachan@apache.org>.  For more information on the
 
  * Jaxen Project, please see <http://www.jaxen.org/>.
 
- * 
+ *
 
  * $Id$
 
@@ -257,9 +257,9 @@ public class PredicateSet implements Serializable
 
     // XXXX: Note - this could be *MUCH* more efficient
 
-    // currently this creates many redundant collections and should halt 
+    // currently this creates many redundant collections and should halt
 
-    // evaluation on the first matching item.            
+    // evaluation on the first matching item.
 
     protected boolean evaluateAsBoolean(List contextNodeSet,
 
@@ -269,13 +269,13 @@ public class PredicateSet implements Serializable
 
         List result = evaluatePredicates( contextNodeSet, support );
 
-        
+
 
         return ! result.isEmpty();
 
     }
 
-    
+
 
    protected List evaluatePredicates(List contextNodeSet, ContextSupport support)
             throws JaxenException {
@@ -298,7 +298,7 @@ public class PredicateSet implements Serializable
         }
         return nodes2Filter;
     }
-    
+
     public List applyPredicate(Predicate predicate, List nodes2Filter, ContextSupport support)
             throws JaxenException {
         List filteredNodes = new ArrayList();
@@ -309,11 +309,12 @@ public class PredicateSet implements Serializable
         predContext.setNodeSet(tempList);
 
         // loop through the current nodes to filter and add to the
-        // filtered nodes list if the predicate succeeds 
+        // filtered nodes list if the predicate succeeds
         for (int i = 0; i < nodes2FilerSize; ++i) {
             Object contextNode = nodes2Filter.get(i);
             tempList.clear();
             tempList.add(contextNode);
+            predContext.setNodeSet(tempList);
             predContext.setPosition(i + 1);
             predContext.setSize(nodes2FilerSize);
 
