@@ -5,8 +5,8 @@
   <!-- =================================================================== -->
   <target name="init">
     <tstamp/>
-    <property name="Name" value="saxpath"/>
-    <property name="name" value="saxpath"/>
+    <property name="Name" value="jaxen"/>
+    <property name="name" value="jaxen"/>
     <property name="version" value="0.1"/>
     <property name="current.version" value="0.1"/>
     <property name="year" value="2001"/>
@@ -25,7 +25,7 @@
     <property name="lib.dir" value="./lib"/>
     <property name="packages" value="org.*"/>
 
-    <property name="api.packages" value="org.saxpath,org.saxpath.conformance,org.saxpath.helpers,com.werken.saxpath" />
+    <property name="api.packages" value="org.jaxen*"/>
 
     <property name="build.dir" value="./build"/>
     <property name="build.src" value="./build/src"/>
@@ -63,13 +63,13 @@
   <target name="usage">
     <echo message=""/>
     <echo message=""/>
-    <echo message="SAXPath Build file"/>
+    <echo message="Jaxen Build file"/>
     <echo message="-------------------------------------------------------------"/>
     <echo message=""/>
     <echo message=" available targets are:"/>
     <echo message=""/>
     <echo message="   all      --> cleans then builds everything (default)"/>
-    <echo message="   package  --> generates the saxpath.jar file"/>
+    <echo message="   package  --> generates the jaxen.jar file"/>
     <echo message="   compile  --> compiles the source code"/>
     <echo message="   doc      --> generates the website documentation"/>
     <echo message="   api      --> generates the API documentation"/>
@@ -221,7 +221,7 @@
              noindex="false"
              windowtitle="${Name} Full JavaDoc"
              doctitle="${Name}"
-             bottom="Copyright &#169; ${year} MetaStuff Ltd. All Rights Reserved. Hosted by &lt;p&gt; &lt;img src='http://sourceforge.net/sflogo.php?group_id=16035' width='88' height='31' border='0' alt='SourceForge Logo' /&gt;"
+             bottom="Copyright &#169; ${year} bob mcwhirter &amp; James Strachan. All Rights Reserved. Hosted by &lt;p&gt; &lt;img src='http://sourceforge.net/sflogo.php?group_id=16035' width='88' height='31' border='0' alt='SourceForge Logo' /&gt;"
              stylesheetfile="${doc.dir}/style/javadoc.css">
     </javadoc>
   </target>
