@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class DefaultXPath implements XPath
         setRootExpr( getRootExpr().simplify() );
     }
 
-    public List asList(Context context)
+    public List asList(Context context) throws JaxenException
     {
         return DefaultExpr.convertToList( getRootExpr().evaluate( context ) );
     }

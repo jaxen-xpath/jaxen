@@ -5,6 +5,7 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class DefaultAbsoluteLocationPath extends DefaultLocationPath
         return "/" + super.getText();
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         ContextSupport support = context.getContextSupport();
         Navigator      nav     = support.getNavigator();

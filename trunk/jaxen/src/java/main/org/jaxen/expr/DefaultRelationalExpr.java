@@ -4,6 +4,7 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 import org.jaxen.Navigator;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
         return "[(DefaultRelationalExpr): " + getLHS() + ", " + getRHS() + "]";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Object lhsValue = getLHS().evaluate( context );
         Object rhsValue = getRHS().evaluate( context );

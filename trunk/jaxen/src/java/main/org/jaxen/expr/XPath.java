@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ public interface XPath
     String getText();
     void simplify();
 
-    List asList(Context context);
+    List asList(Context context) throws JaxenException;
 
 }

@@ -4,8 +4,8 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
 
-//class DefaultPredicate extends DefaultExpr implements Predicate
 class DefaultPredicate implements Predicate
 {
     private Expr expr;
@@ -40,18 +40,8 @@ class DefaultPredicate implements Predicate
         setExpr( getExpr().simplify() );
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         return getExpr().evaluate( context );
-    }
-
-    public boolean matches(Object node,
-                           int position,
-                           int contextSize,
-                           ContextSupport support)
-    {
-        System.err.println("Predicate.matches(" + node + ")");
-
-        return true;
     }
 }

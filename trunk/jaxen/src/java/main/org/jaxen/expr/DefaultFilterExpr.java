@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -63,7 +64,7 @@ class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
         return this;
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Object results = getExpr().evaluate( context );
         

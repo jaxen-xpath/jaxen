@@ -4,6 +4,7 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import org.jaxen.dom4j.XPath;
+import org.jaxen.JaxenException;
 
 import org.saxpath.SAXPathException;
 import org.saxpath.XPathSyntaxException;
@@ -56,6 +57,10 @@ public class Dom4jDemo
         catch (XPathSyntaxException e)
         {
             System.err.println( e.getMultilineMessage() );
+        }
+        catch (JaxenException e)
+        {
+            e.printStackTrace();
         }
         catch (SAXPathException e)
         {

@@ -7,6 +7,8 @@ import org.jaxen.Context;
 import java.util.List;
 import java.util.Iterator;
 
+import org.jaxen.JaxenException;
+
 public interface Expr
 {
     String getText();
@@ -23,5 +25,5 @@ public interface Expr
     Number   asNumber(Context context);
     */
 
-    Object   evaluate(Context context);
+    Object   evaluate(Context context) throws JaxenException;
 }

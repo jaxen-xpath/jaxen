@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import org.jaxen.function.BooleanFunction;
 
@@ -25,7 +26,7 @@ class DefaultOrExpr extends DefaultLogicalExpr
         return "[(DefaultOrExpr): " + getLHS() + ", " + getRHS() + "]";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ) );
 
