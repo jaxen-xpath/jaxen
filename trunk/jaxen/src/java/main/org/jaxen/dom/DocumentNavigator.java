@@ -14,6 +14,7 @@ import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 
 import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -889,6 +890,33 @@ public class DocumentNavigator extends DefaultNavigator
         private NamedNodeMap map;
         private int pos;
 
+    }
+
+    /**
+     *  Returns the element whose ID is given by elementId.
+     *  If no such element exists, returns null.
+     *  Attributes with the name "ID" are not of type ID unless so defined.
+     *  Atribute types are only known if when the parser understands DTD's or
+     *  schemas that declare attributes of type ID. When JAXP is used, you
+     *  must call <code>setValidating(true)</code> on the
+     *  DocumentBuilderFactory.
+     *
+     *  @param contextNode   a node from the document in which to look for the
+     *                       id
+     *  @param elementId   id to look for
+     *
+     *  @return   element whose ID is given by elementId, or null if no such
+     *            element exists in the document or if the implementation
+     *            does not know about attribute types
+     *  @see   javax.xml.parsers.DocumentBuilderFactory
+     */
+    public Object getElementById(Object object, String elementId)
+    {
+        Document doc = (Document)getDocumentNode(object);
+        if (doc != null)
+            return doc.getElementById(elementId);
+        else
+            return null;
     }
 
 }    

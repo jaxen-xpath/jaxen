@@ -200,6 +200,23 @@ public interface Navigator
     String getTextStringValue(Object txt);
     
     String translateNamespacePrefixToUri(String prefix, Object element);
-    
+
+    /**
+     *  Returns the element whose ID is given by elementId.
+     *  If no such element exists, returns null.
+     *  Attributes with the name "ID" are not of type ID unless so defined.
+     *  Implementations that do not know whether attributes are of type ID or
+     *  not are expected to return null.
+     *
+     *  @param contextNode   a node from the document in which to look for the
+     *                       id
+     *  @param elementId   id to look for
+     *
+     *  @return   element whose ID is given by elementId, or null if no such
+     *            element exists in the document or if the implementation
+     *            does not know about attribute types
+     */
+    Object getElementById(Object contextNode, String elementId);
+
     short getNodeType(Object node);
 }

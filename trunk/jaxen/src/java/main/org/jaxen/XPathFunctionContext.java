@@ -50,6 +50,10 @@ public class XPathFunctionContext extends SimpleFunctionContext
                           new FloorFunction() );
 
         registerFunction( "",
+                          "id",
+                          new IdFunction() );
+
+        registerFunction( "",
                           "last",
                           new LastFunction() );
 
