@@ -177,11 +177,6 @@
     </dependency>
 
     <dependency>
-      <id>junit</id>
-      <version>3.8.1</version>
-    </dependency>
-
-    <dependency>
       <id>xom</id>
       <version>1.0d21</version>
     </dependency>
