@@ -246,43 +246,24 @@ public class DefaultNameStep extends DefaultStep implements NameStep
     }
 
 
-
     public String getText()
-
     {
-
         if ( ( getPrefix() != null )
-
              &&
-
              ( ! getPrefix().equals("") ) )
-
         {
-
             return getAxisName() + "::" + getPrefix() + ":" + getLocalName() + super.getText();
-
         }
 
-
-
         return getAxisName() 
-
             + "::" + getLocalName()
-
             + super.getText();
-
     }
-
-
 
     public String toString()
-
     {
-
         return "[(DefaultNameStep): " + getPrefix() + ":" + getLocalName() + "[" + super.toString() + "]]";
-
     }
-
 
     public boolean matches(Object node,
                            ContextSupport contextSupport)
@@ -344,7 +325,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep
         // To fail-fast, we check the equality of
         // local-names first.  Shorter strings compare
         // quicker.
-        if ( getLocalName().equals( nodeName ) || matchesAnyName)
+        if ( matchesAnyName || nodeName.equals( getLocalName() ))
         {
             return matchesNamespaceURIs( myUri, nodeUri );
         }
@@ -357,41 +338,22 @@ public class DefaultNameStep extends DefaultStep implements NameStep
     }
 
     /** @return true if the two namespace URIs are equal
-
      *   Note that we may wish to consider null being equal to ""
-
      */
-
     protected boolean matchesNamespaceURIs( String u1, String u2 ) {
-
         //System.out.println( "Comparing URI: " + u1 + " against URI: " + u2 );
-
-        
-
         if ( u1 == u2 ) {
-
             return true;
-
         }
-
         if ( u1 == null ) 
-
         {
-
             u1 = "";
-
         }
-
         if ( u2 == null ) 
-
         {
-
             u2 = "";
-
         }
-
         return u1.equals( u2 );
-
     }
 
     public void accept(Visitor visitor)
