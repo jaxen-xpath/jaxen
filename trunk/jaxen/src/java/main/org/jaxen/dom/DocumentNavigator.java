@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2004 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -401,7 +401,7 @@ public class DocumentNavigator extends DefaultNavigator
             // An empty default Namespace cancels
             // any previous default.
             NamespaceNode defaultNS = (NamespaceNode)nsMap.get("");
-            if (defaultNS != null && defaultNS.getNodeValue().equals(""))
+            if (defaultNS != null && defaultNS.getNodeValue().length() == 0)
                 nsMap.remove("");
             return nsMap.values().iterator();
         } else {

@@ -96,6 +96,8 @@ public class AllJaxenTestSuite extends TestCase {
         suite.addTest(new TestSuite(org.jaxen.dom4j.XPathTest.class));
         suite.addTest(new TestSuite(org.jaxen.jdom.DocumentNavigatorTest.class));
         suite.addTest(new TestSuite(org.jaxen.jdom.XPathTest.class));
+        suite.addTest(new TestSuite(org.jaxen.xom.DocumentNavigatorTest.class));
+        suite.addTest(new TestSuite(org.jaxen.xom.XPathTest.class));
         suite.addTest(new TestSuite(PatternHandlerTest.class));
         suite.addTest(new TestSuite(PriorityTest.class));
         suite.addTest(new TestSuite(XPathLexerTest.class));
