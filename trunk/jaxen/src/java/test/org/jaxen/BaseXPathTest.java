@@ -86,9 +86,18 @@ import junit.framework.TestCase;
  */
 public class BaseXPathTest extends TestCase {
 
+    private org.w3c.dom.Document doc;
 
     public BaseXPathTest(String name) {
         super(name);
+    }
+    
+    protected void setUp() throws ParserConfigurationException {
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        doc = factory.newDocumentBuilder().newDocument();
+        
     }
     
     public void testSelectSingleNodeForContext() throws JaxenException {
@@ -139,9 +148,6 @@ public class BaseXPathTest extends TestCase {
     public void testAllNodesQuery() throws JaxenException, ParserConfigurationException {
         
         BaseXPath xpath = new DOMXPath("//. | /");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        org.w3c.dom.Document doc = factory.newDocumentBuilder().newDocument();
         org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
         
@@ -151,12 +157,9 @@ public class BaseXPathTest extends TestCase {
     }
 
     
-    public void testAncestorAxis() throws JaxenException, ParserConfigurationException {
+    public void testAncestorAxis() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ancestor::*");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        org.w3c.dom.Document doc = factory.newDocumentBuilder().newDocument();
         org.w3c.dom.Element root = doc.createElementNS("", "Test");
         org.w3c.dom.Element parent = doc.createElementNS("", "Test");
         doc.appendChild(root);
@@ -173,12 +176,9 @@ public class BaseXPathTest extends TestCase {
     
     
     // test case for JAXEN-55
-    public void testDescendantAxis() throws JaxenException, ParserConfigurationException {
+    public void testDescendantOrSelfAxis() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("//x");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        org.w3c.dom.Document doc = factory.newDocumentBuilder().newDocument();
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
         doc.appendChild(a);
@@ -206,12 +206,40 @@ public class BaseXPathTest extends TestCase {
     }    
     
     
-    public void testDuplicateNodes() throws JaxenException, ParserConfigurationException {
+    // test case for JAXEN-55
+    public void testDescendantAxis() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/descendant::x");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        x1.appendChild(doc.createTextNode("1"));
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        x2.appendChild(doc.createTextNode("2"));
+        x3.appendChild(doc.createTextNode("3"));
+        x4.appendChild(doc.createTextNode("4"));
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(4, result.size());
+        assertEquals(x1, result.get(0));   
+        assertEquals(x2, result.get(1));   
+        assertEquals(x3, result.get(2));   
+        assertEquals(x4, result.get(3));
+        
+    }    
+    
+    
+    public void testDuplicateNodes() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("//x | //*");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        org.w3c.dom.Document doc = factory.newDocumentBuilder().newDocument();
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
         doc.appendChild(a);
@@ -231,6 +259,60 @@ public class BaseXPathTest extends TestCase {
         
         List result = xpath.selectNodes(doc);
         assertEquals(6, result.size());
+        
+    }    
+       
+    public void testUnionOfNodesWithNonNodes() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("count(//*) | //x ");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        x1.appendChild(doc.createTextNode("1"));
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        x2.appendChild(doc.createTextNode("2"));
+        x3.appendChild(doc.createTextNode("3"));
+        x4.appendChild(doc.createTextNode("4"));
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed union with non-node-set");
+        }
+        catch (JaxenException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+    
+    public void testUnionOfEmptyNodeSetWithNonNodes() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("//y | count(//*)");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        x1.appendChild(doc.createTextNode("1"));
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        b.appendChild(x2);
+        x2.appendChild(doc.createTextNode("2"));
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed union with non-node-set");
+        }
+        catch (JaxenException ex) {
+            assertNotNull(ex.getMessage());
+        }
         
     }    
     
