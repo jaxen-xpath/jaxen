@@ -66,9 +66,12 @@ import junit.framework.TestCase;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import java.util.Iterator;
 import java.util.List;
 
+import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.saxpath.SAXPathException;
 import org.w3c.dom.Document;
@@ -94,6 +97,23 @@ public class XPathTest extends TestCase
         {
             fail( e.getMessage() );
         }
+    }
+    
+    public void testNamespaceDeclarationsAreNotAttributes() 
+      throws ParserConfigurationException, JaxenException {
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.example.org/");
+        
+        DOMXPath xpath = new DOMXPath( "count(/*/@*)" );
+        
+        Number value = xpath.numberValueOf(doc);
+        assertEquals(0, value.intValue());
+        
     }
 
     public void testSelection()
