@@ -85,10 +85,9 @@ public interface Function
 {
     /** Call this function.
      *
-     *  @param context The context at the point in the
-     *         expression when the function is called.
-     *  @param args List of arguments provided during
-     *         the call of the function.
+     *  @param context the context at the point in the
+     *         expression when the function is called
+     *  @param args arguments provided to the function
      */
     Object call(Context context,
                 List args) throws FunctionCallException;
