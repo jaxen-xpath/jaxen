@@ -159,20 +159,20 @@
 
   <document url="xml/testNamespaces.xml">
     <context select="/">
-      <test select="namespace::*" count="0"/>
-      <test select="/namespace::*" count="0"/>
-      <test select="/Template/Application1/namespace::*" count="2"/>
-      <test select="/Template/Application2/namespace::*" count="2"/>
-      <test select="/Template/Application2/namespace::*" count="2"/>
-      <test select="//namespace::*" count="4"/>
+      <test select="namespace::*" count="0" debug="off"/>
+      <test select="/namespace::*" count="0" debug="on"/>
+      <test select="/Template/Application1/namespace::*" count="2" debug="on"/>
+      <test select="/Template/Application2/namespace::*" count="2" debug="on"/>
+      <test select="/Template/Application2/namespace::*" count="2" debug="on"/>
+      <test select="//namespace::*" count="4" debug="on"/>
     </context>
     <context select="/Template/Application1">
-      <test select="namespace::*" count="2"/>
-      <test select="/namespace::*" count="0"/>
-      <test select="/Template/Application1/namespace::*" count="2"/>
-      <test select="/Template/Application2/namespace::*" count="2"/>
-      <test select="/Template/Application2/namespace::*" count="2"/>
-      <test select="//namespace::*" count="4"/>
+      <test select="namespace::*" count="2" debug="on"/>
+      <test select="/namespace::*" count="0" debug="on"/>
+      <test select="/Template/Application1/namespace::*" count="2" debug="on"/>
+      <test select="/Template/Application2/namespace::*" count="2" debug="on"/>
+      <test select="/Template/Application2/namespace::*" count="2" debug="on"/>
+      <test select="//namespace::*" count="4" debug="on"/>
     </context>
   </document>
 

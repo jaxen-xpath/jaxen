@@ -2,7 +2,7 @@
 
 package org.jaxen.expr;
 
-class DefaultRelativeLocationPath extends DefaultLocationPath 
+public class DefaultRelativeLocationPath extends DefaultLocationPath 
 {
     public DefaultRelativeLocationPath()
     {
