@@ -17,10 +17,6 @@ public class SimpleFunctionContext implements FunctionContext
                                   String localName,
                                   Function function )
     {
-        if ("".equals(namespaceURI)) {
-            Thread.dumpStack();
-            throw new IllegalArgumentException();
-        }
         this.functions.put( new QualifiedName(namespaceURI, localName),
                             function );
     }
@@ -30,11 +26,6 @@ public class SimpleFunctionContext implements FunctionContext
                                  String localName )
         throws UnresolvableException
     {
-        if ("".equals(namespaceURI)) {
-            Thread.dumpStack();
-            throw new IllegalArgumentException();
-        }
-            
         Object key = new QualifiedName( namespaceURI, localName );
 
         if ( this.functions.containsKey(key) )
