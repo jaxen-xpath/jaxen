@@ -34,8 +34,8 @@ XPath xpath = new JDOMXPath( "//foo" );
         </p>
         <p>Added new extension functions kindly provided by Mark Wilson. They are as follows...
           <ul>
-            <li>upper-case() - converts the first argument to an upper case string using either the default Locale or the Locale specified by the second parameter</li>
-            <li>lower-case() - converts the first argument to a lower case string using either the default Locale or the Locale specified by the second parameter</li>
+            <li>upper-case() - converts the first argument to an upper case string using either the default Locale or the Locale specified by the second parameter, either via a name like 'CHINA' or a variable reference to a Locale instance</li>
+            <li>lower-case() - converts the first argument to a lower case string using either the default Locale or the Locale specified by the second parameter, either via a name like 'CHINA' or a variable reference to a Locale instance</li>
             <li>ends-with() - evaluates true if the first string ends with the postfix</li>
           </ul>
         </p>

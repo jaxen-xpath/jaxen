@@ -26,12 +26,13 @@ import java.util.Locale;
  * @author mark wilson (markw@wilsoncom.de)
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
-public class LowerFunction implements Function
+public class LowerFunction extends LocaleFunctionSupport
 {
 
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
+        Navigator navigator = context.getNavigator();
         int size = args.size();
         if (size > 0)
         {
@@ -39,9 +40,9 @@ public class LowerFunction implements Function
             Locale locale = null;
             if (size > 1)
             {  
-                locale = getLocale( args.get(1) );
+                locale = getLocale( args.get(1), navigator );
             }
-            return evaluate( text, locale, context.getNavigator() );
+            return evaluate( text, locale, navigator );
         }
         throw new FunctionCallException( "lower-case() requires at least one argument." );
     }
@@ -69,27 +70,5 @@ public class LowerFunction implements Function
         {
             return  str.toLowerCase();
         }
-    }
-    
-    /** Converts the given argument to a Locale or return null */
-    protected Locale getLocale(Object value) 
-    {
-        if (value instanceof Locale)
-        {
-            return (Locale) value;
-        }
-        if (value instanceof List)
-        {
-            List list = (List) value;
-            if ( ! list.isEmpty() ) 
-            {
-                return getLocale( list.get(0) );
-            }
-        }
-        // #### could maybe detect String values
-        // #### and look for 'FRENCH' or 'FRANCE' etc
-        // #### using reflection to find static Locale
-        // #### constants?
-        return null;
     }
 }
