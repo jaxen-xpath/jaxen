@@ -203,10 +203,16 @@ public class SubstringFunction implements Function
         // negative start is treated as 0
         if ( start < 0){
             start = 0;
-        }else if (start + len > strlen){
+        }else if (start > strlen){
             return "";
         }
 
-        return str.substring(start, start + len);
+        // if the length is longer than the rest of the string just
+        // take the rest of the string
+        int end = start + len;
+        if (end > strlen){
+            end = strlen;
+        }
+        return str.substring(start, end);
     }
 }
