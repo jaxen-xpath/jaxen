@@ -502,18 +502,11 @@
       <valueOf select="translate( 'abcd', 'abcd', 'abcdb' )">abcd</valueOf>
     </context>
 
-    <!-- test the substring() function using the example in
-    http://www.w3.org/TR/xpath#function-substring
-    some of these test differ from the results in the spec as they seem to 
-    be inconsistent. In the latest version e.g. negative indices are treated
-    as errors EMG 200020510
-    -->
-
     <context select="/">
       <valueOf select="substring('12345', 1.5, 2.6)">234</valueOf>
-      <valueOf select="substring('12345', 0, 3)">123</valueOf>
+      <valueOf select="substring('12345', 0, 3)">12</valueOf>
       <valueOf select="substring('12345', 0 div 0, 3)"></valueOf>
-      <valueOf select="substring('12345', 1, 0 div 0)">12345</valueOf>
+      <valueOf select="substring('12345', 1, 0 div 0)"></valueOf>
       <valueOf select="substring('12345', -42, 1 div 0)">12345</valueOf>
       <valueOf select="substring('12345', -1 div 0, 1 div 0)"></valueOf>
       <valueOf select="substring('12345', 3)">345</valueOf>
