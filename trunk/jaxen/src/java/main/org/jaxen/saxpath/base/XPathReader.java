@@ -404,11 +404,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 getXPathHandler().endAllNodeStep();
 
                 match( DOUBLE_SLASH );
-                // XXX this may be the place where // gets allowed
-                // and it shouldn't be
                 switch ( LA(1) )
                 {
-
                     case DOT:
                     case DOT_DOT:
                     case AT:
