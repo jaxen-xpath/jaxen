@@ -13,6 +13,7 @@ import java.util.List;
 
 class JaXPath
 {
+    /** the parsed form of the xpath expression */
     private XPath xpath;
 
     public JaXPath(String xpathExpr) throws SAXPathException
