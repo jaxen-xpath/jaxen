@@ -295,7 +295,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
      * @param contextNode  the origin context node
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
-     * @param namespaceURI  the uri of the namespace of the attributes to return
+     * @param namespaceURI  the URI of the namespace of the attributes to return
      * @return an Iterator that traverses the named attributes, not null
      */
     public Iterator getAttributeAxisIterator(
@@ -382,10 +382,6 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
                 answer = node.getDocument();
                 if (answer == contextNode) {
                     return null;
-                }
-                if ( answer == null )
-                {
-                    answer = node;
                 }
             }
             return answer;            
