@@ -167,7 +167,6 @@ public class DocumentNavigator
 
     public Iterator getChildAxisIterator(Object contextNode)
     {
-        System.err.println( "getChildAxisIterator()" );
         return null;
     }
 
@@ -186,8 +185,6 @@ public class DocumentNavigator
                                          String namespacePrefix,
                                          String namespaceURI)
     {
-        System.err.println( "getChildAxisIterator(NAME) " + localName + " // " + contextNode + " // " + ((Element)contextNode).getObject() );
-
         Class cls = ((Element)contextNode).getObject().getClass();
 
         String methodName = javacase( localName );
@@ -206,14 +203,7 @@ public class DocumentNavigator
             }
             catch (NoSuchMethodException ee)
             {
-                try
-                {
-                    method = cls.getMethod( "get" + methodName + "es", EMPTY_CLASS_ARRAY );
-                }
-                catch (NoSuchMethodException eee)
-                {
-                    method = null;
-                }
+                method = null;
             }
         }
 
