@@ -250,10 +250,11 @@ public class BaseXPath implements XPath, Serializable
         
         List result = selectNodesForContext( context );
 
-        if ( result == null || result.isEmpty() )
+        if ( result == null )
             return false;
 
-        return BooleanFunction.evaluate( result.get(0), context.getNavigator() ).booleanValue();
+            
+        return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();
     }
 
     /** Retrieve a number-value interpretation of this XPath
