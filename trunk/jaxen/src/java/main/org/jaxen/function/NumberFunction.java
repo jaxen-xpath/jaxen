@@ -137,7 +137,7 @@ public class NumberFunction implements Function
   
   public static boolean isNaN( double val )
     {
-    return isNaN( new Double( val ) );
+    return Double.isNaN(val);
     }
   
   public static boolean isNaN( Double val )
