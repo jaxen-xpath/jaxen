@@ -452,8 +452,7 @@ public abstract class XPathTestBase extends TestCase
             prefix = eachNs.getPrefix();
             uri    = eachNs.getURI();
 
-            nsContext.addNamespacePrefixTranslation( prefix,
-                                                     uri );
+            nsContext.addNamespace( prefix, uri );
 
             System.err.println( " ---> " + prefix + " == " + uri );
         }
