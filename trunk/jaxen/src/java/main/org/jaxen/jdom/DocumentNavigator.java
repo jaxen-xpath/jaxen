@@ -134,6 +134,8 @@ public class DocumentNavigator extends DefaultNavigator
 
         nsList.addAll( elem.getAdditionalNamespaces() );
 
+        nsList.add( Namespace.XML_NAMESPACE );
+
         return nsList.iterator();
     }
 
