@@ -140,11 +140,11 @@ public class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
 
 {
 
-    public DefaultAllNodeStep(IterableAxis axis)
+    public DefaultAllNodeStep(IterableAxis axis, PredicateSet predicateSet)
 
     {
 
-        super( axis );
+        super( axis, predicateSet );
 
     }
 

@@ -142,11 +142,11 @@ public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeSt
 
 {
 
-    public DefaultCommentNodeStep(IterableAxis axis)
+    public DefaultCommentNodeStep(IterableAxis axis, PredicateSet predicateSet)
 
     {
 
-        super( axis );
+        super( axis, predicateSet );
 
     }
 

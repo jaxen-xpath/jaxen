@@ -142,11 +142,11 @@ public class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
 
 {
 
-    public DefaultTextNodeStep(IterableAxis axis)
+    public DefaultTextNodeStep(IterableAxis axis, PredicateSet predicateSet )
 
     {
 
-        super( axis );
+        super( axis, predicateSet );
 
     }
 

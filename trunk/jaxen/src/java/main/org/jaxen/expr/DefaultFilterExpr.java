@@ -154,23 +154,23 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
 
 
 
-    public DefaultFilterExpr()
+    public DefaultFilterExpr(PredicateSet predicateSet)
 
     {
 
-        this.predicates = new PredicateSet();
+        this.predicates = predicateSet;
 
     }
 
 
 
-    public DefaultFilterExpr(Expr expr)
+    public DefaultFilterExpr(Expr expr, PredicateSet predicateSet)
 
     {
 
         this.expr       = expr;
 
-        this.predicates = new PredicateSet();
+        this.predicates = predicateSet;
 
     }
 
