@@ -4,9 +4,9 @@ package org.jaxen.function;
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
-import org.jaxen.expr.DefaultExpr;
 
 import java.util.List;
+import java.util.Iterator;
 
 /**
  *  <p><b>4.3</b> <code><i>boolean</i> boolean(<i>object</i>)</code> 
@@ -29,6 +29,40 @@ public class BooleanFunction implements Function
 
     public static Boolean evaluate(Object obj)
     {
-        return DefaultExpr.convertToBoolean( obj );
+        if ( obj instanceof Boolean )
+        {
+            return (Boolean) obj;
+        }
+        else if ( obj instanceof Number )
+        {
+            if ( ((Number)obj).doubleValue() == Double.NaN
+                 ||
+                 ((Number)obj).doubleValue() == 0 )
+            {
+                return Boolean.FALSE;
+            }
+
+            return Boolean.TRUE;
+        }
+        else if ( obj instanceof String )
+        {
+            return ( ((String)obj).length() > 0
+                     ? Boolean.TRUE
+                     : Boolean.FALSE );
+        }
+        else if ( obj instanceof List )
+        {
+            return ( ((List)obj).isEmpty()
+                     ? Boolean.FALSE
+                     : Boolean.TRUE );
+        }
+        else if ( obj instanceof Iterator )
+        {
+            return ( ((Iterator)obj).hasNext()
+                     ? Boolean.TRUE
+                     : Boolean.FALSE );
+        }
+
+        return Boolean.FALSE;
     }
 }

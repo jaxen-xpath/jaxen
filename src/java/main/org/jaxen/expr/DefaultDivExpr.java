@@ -3,6 +3,8 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 
+import org.jaxen.function.NumberFunction;
+
 class DefaultDivExpr extends DefaultMultiplicativeExpr
 {
     public DefaultDivExpr(Expr lhs,
@@ -19,8 +21,10 @@ class DefaultDivExpr extends DefaultMultiplicativeExpr
 
     public Object evaluate(Context context)
     {
-        Number lhsValue = convertToNumber( getLHS().evaluate( context ) );
-        Number rhsValue = convertToNumber( getRHS().evaluate( context ) );
+        Number lhsValue = NumberFunction.evaluate( getLHS().evaluate( context ),
+                                                   context.getNavigator() );
+        Number rhsValue = NumberFunction.evaluate( getRHS().evaluate( context ),
+                                                   context.getNavigator() );
 
         double result = lhsValue.doubleValue() / rhsValue.doubleValue();
 

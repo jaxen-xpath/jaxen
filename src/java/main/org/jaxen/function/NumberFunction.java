@@ -5,9 +5,8 @@ import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
-import org.jaxen.expr.DefaultExpr;
-
 import java.util.List;
+import java.util.Iterator;
 
 /**
  * <p><b>4.4</b> <code><i>number</i> number(<i>object</i>)</code> 
@@ -36,10 +35,39 @@ public class NumberFunction implements Function
         {
             return (Number) obj;
         }
-        else
+        else if ( obj instanceof Boolean )
         {
-            return DefaultExpr.convertToNumber( StringFunction.evaluate( obj,
-                                                                         nav ) );
+            if ( obj == Boolean.TRUE )
+            {
+                return new Integer( 1 );
+            }
+            else
+            {
+                return new Integer( 0 );
+            }
         }
+        else if ( obj instanceof String )
+        {
+            try
+            {
+                Double doubleValue = new Double( (String) obj );
+
+                return doubleValue;
+            }
+            catch (NumberFormatException e)
+            {
+                return new Double( Double.NaN );
+            }
+        }
+        else if ( obj instanceof List
+                  ||
+                  obj instanceof Iterator )
+        {
+            return evaluate( StringFunction.evaluate( obj,
+                                                      nav ),
+                             nav );
+        }
+        
+        return new Double( Double.NaN );
     }
 }

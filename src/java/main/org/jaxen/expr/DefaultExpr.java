@@ -42,6 +42,7 @@ public abstract class DefaultExpr implements Expr
         return Collections.singletonList( obj );
     }
 
+    /*
     static public String convertToString(Object obj)
     {
         if ( obj instanceof String )
@@ -175,4 +176,5 @@ public abstract class DefaultExpr implements Expr
 
         return Boolean.FALSE;
     }
+    */
 }

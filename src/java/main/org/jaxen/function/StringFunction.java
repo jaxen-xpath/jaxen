@@ -6,8 +6,6 @@ import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
-import org.jaxen.expr.DefaultExpr;
-
 import java.util.List;
 import java.util.Iterator;
 
@@ -41,7 +39,11 @@ public class StringFunction implements Function
     public static String evaluate(Object obj,
                                   Navigator nav)
     {
-        if (obj instanceof String)
+        if ( obj == null )
+        {
+            return "";
+        }
+        if ( obj instanceof String)
         {
             return (String) obj;
         }
@@ -65,9 +67,33 @@ public class StringFunction implements Function
                                  nav );
             }
         }
-        else if ( obj != null )
+        else if ( obj instanceof Boolean )
         {
-            return DefaultExpr.convertToString( obj );
+            return obj.toString();
+        }
+        else if ( obj instanceof Integer )
+        {
+            return obj.toString();
+        }
+        else if ( obj instanceof Double )
+        {
+            Double num = (Double) obj;
+            
+            if ( num.isNaN() )
+            {
+                return "NaN";
+            }
+            else if ( num.isInfinite() )
+            {
+                if ( num.intValue() < 0 )
+                {
+                    return "-Infinity";
+                }
+                else
+                {
+                    return "Infinity";
+                }
+            }
         }
 
         return "";

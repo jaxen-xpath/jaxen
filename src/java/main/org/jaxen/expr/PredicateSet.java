@@ -4,6 +4,8 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 
+import org.jaxen.function.BooleanFunction;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -101,7 +103,7 @@ class PredicateSet
                 }
                 else
                 {
-                    Boolean includes = DefaultExpr.convertToBoolean( predResult );
+                    Boolean includes = BooleanFunction.evaluate( predResult );
 
                     if ( includes.booleanValue() )
                     {

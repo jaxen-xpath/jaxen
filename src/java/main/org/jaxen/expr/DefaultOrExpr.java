@@ -4,6 +4,8 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 
+import org.jaxen.function.BooleanFunction;
+
 class DefaultOrExpr extends DefaultLogicalExpr 
 {
     public DefaultOrExpr(Expr lhs,
@@ -25,14 +27,14 @@ class DefaultOrExpr extends DefaultLogicalExpr
 
     public Object evaluate(Context context)
     {
-        Boolean lhsValue = convertToBoolean( getLHS().evaluate( context ) );
+        Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ) );
 
         if ( lhsValue == Boolean.TRUE )
         {
             return Boolean.TRUE;
         }
 
-        Boolean rhsValue = convertToBoolean( getRHS().evaluate( context ) );
+        Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ) );
 
         if ( rhsValue == Boolean.TRUE )
         {

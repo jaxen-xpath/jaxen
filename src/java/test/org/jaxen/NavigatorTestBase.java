@@ -71,6 +71,7 @@ public abstract class NavigatorTestBase extends TestCase
         "/comment()",
         "//comment()",
         "//attribute::*[.='crunchy']",
+        "//attribute::*[.!='crunchy']",
     };
 
     public NavigatorTestBase(String name)
