@@ -7,6 +7,8 @@ import org.jaxen.ContextSupport;
 import org.jaxen.UnsupportedAxisException;
 import org.jaxen.JaxenException;
 
+import org.jaxen.util.IdentityHashMap;
+
 import org.jaxen.util.SingleObjectIterator;
 import org.jaxen.util.LinkedIterator;
 
@@ -14,13 +16,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Collections;
 
 abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
 {
     private List steps;
+
+    private final static Object PRESENT = new Object();
 
     public DefaultLocationPath()
     {
@@ -91,7 +94,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
     public Object evaluate(Context context) throws JaxenException
     {
         List     contextNodeSet  = new ArrayList();
-        Set      unique          = new HashSet();
+        Map      unique          = new IdentityHashMap();
 
         contextNodeSet.addAll( context.getNodeSet() );
 
@@ -133,9 +136,10 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                     if ( eachStep.matches( eachAxisNode,
                                            context.getContextSupport() ) )
                     {
-                        if ( ! unique.contains( eachAxisNode ) )
+                        if ( ! unique.containsKey( eachAxisNode ) )
                         {
-                            unique.add( eachAxisNode );
+                            unique.put( eachAxisNode,
+                                        PRESENT );
                             newNodeSet.add( eachAxisNode );
                         }
                     }
