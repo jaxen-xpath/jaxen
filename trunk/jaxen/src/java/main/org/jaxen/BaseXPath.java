@@ -330,11 +330,6 @@ public class BaseXPath implements XPath, Serializable
         
         Object result = selectSingleNodeForContext( context );
 
-        if ( result == null )
-        {
-            return null;
-        }
-
         return NumberFunction.evaluate( result,
                                         context.getNavigator() );
     }

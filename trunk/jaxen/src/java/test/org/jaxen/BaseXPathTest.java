@@ -124,6 +124,17 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    public void testNumberValueOfEmptyNodeSetIsNaN() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/x");
+        
+        doc.appendChild(doc.createElement("root"));
+        Double numberValue = (Double) xpath.numberValueOf(doc);
+        assertTrue(numberValue.isNaN());
+        
+    }
+    
+    
     public void testEvaluateWithMultiNodeAnswer() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("(/descendant-or-self::node())");
