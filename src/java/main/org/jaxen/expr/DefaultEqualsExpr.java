@@ -34,7 +34,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr
                                     Navigator nav)
     {
         int lhsSize = lhsSet.size();
-        int rhsSize = lhsSet.size();
+        int rhsSize = rhsSet.size();
         
         String lhsElem = null;
         String rhsElem = null;
@@ -46,7 +46,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr
             
             for ( int j = 0; j < rhsSize ; ++j )
             {
-                rhsElem = StringFunction.evaluate( lhsSet.get( j ),
+                rhsElem = StringFunction.evaluate( rhsSet.get( j ),
                                                    nav );
                 
                 if ( lhsElem.equals( rhsElem ) )
