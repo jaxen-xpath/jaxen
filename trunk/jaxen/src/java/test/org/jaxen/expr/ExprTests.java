@@ -88,6 +88,7 @@ public class ExprTests extends TestCase {
         TestSuite result = new TestSuite();
         result.addTest(new TestSuite(DefaultXPathExprTest.class));
         result.addTest(new TestSuite(ModTest.class));
+        result.addTest(new TestSuite(EqualsTest.class));
         return result;
         
     }
