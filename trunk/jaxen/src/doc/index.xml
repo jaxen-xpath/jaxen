@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
-<document url="http://saxpath.org/index.xml">
+<document url="http://jaxen.org/index.xml">
   <body>
-    <title>SAXPath: Simple API for XPath</title>
+    <title>Jaxen: Java XPathEngine</title>
 
     <header>
       <p>
-      The <i>SAXPath</i> project is a Simple API for XPath. 
-      SAXPath is analogous to SAX in that the API abstracts away the details of 
-      parsing and provides a simple event based callback interface. 
+      The <i>Jaxen</i> project is a Java XPath Engine.
+      Jaxen is a universal object model walker, capable of evaluating
+      XPath expressions across multiple models.  Currently supported
+      are <a href="http://dom4j.org">dom4j</a> and <a href="http://jdom.org">JDOM</a>.
       </p>
     </header>
 
@@ -23,14 +24,14 @@
       <p>Contributors are welcome to join this project. 
         Once you've browsed the <a href="faq.html">FAQ</a> you could try
         sending an email to one of the mailing lists below or check out the
-        <a href="http://sourceforge.net/projects/saxpath/">project page</a>.</p>
+        <a href="http://sourceforge.net/projects/jaxen/">project page</a>.</p>
 
     </section>
 
     <section title="Mailing Lists">
       <p>There is a
-        <a href="http://lists.sourceforge.net/lists/listinfo/saxpath-users">
-          saxpath-users
+        <a href="http://lists.sourceforge.net/lists/listinfo/jaxen-interest">
+          jaxen-interest
         </a> 
         email list where you can share ideas and experiences, ask for help, 
         give us feedback or discuss your requirements.

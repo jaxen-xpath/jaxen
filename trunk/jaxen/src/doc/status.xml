@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<document url="http://saxpath.org/status.xml">
+<document url="http://jaxen.org/status.xml">
   <body>
     <title>Status</title>
     
@@ -18,7 +18,7 @@
     </section>
 
     <section title="Contributors">    
-      <p>The following people have contributed to the SAXPath project. 
+      <p>The following people have contributed to the Jaxen project. 
       Many thanks to you all!</p>
       <ul>
         <li>Bob McWhirter</li>
