@@ -199,7 +199,7 @@
 
     <jar jarfile="${build.dir}/${name}.jar"
          basedir="${build.dest}"
-         includes="org/saxpath/**,com/werken/**"/>
+         includes="org/jaxen/**"/>
 
     <jar jarfile="${build.dir}/${name}-all.jar"
          basedir="${build.dest}"
