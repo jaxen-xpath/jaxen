@@ -60,7 +60,6 @@
  */
 package org.jaxen.expr;
 
-//public interface Step extends Predicated, Expr
 public interface CommentNodeStep extends Step
 {
 }
