@@ -62,6 +62,7 @@
 package org.jaxen.function;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -108,6 +109,21 @@ public class LocalNameTest extends TestCase {
         {
            assertEquals("The argument to the local-name function must be a node-set", e.getMessage());
         }
+       catch (Exception e)
+        {
+            e.printStackTrace();
+            fail( e.getMessage() );
+        }
+    }    
+
+    public void testLocalNameNoArguments()
+    {
+        try
+        {
+            XPath xpath = new DOMXPath( "local-name()" );
+            List results = xpath.selectNodes( doc );
+            assertEquals("", results.get(0));
+       }
        catch (Exception e)
         {
             e.printStackTrace();

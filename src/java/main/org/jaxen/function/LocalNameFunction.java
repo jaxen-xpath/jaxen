@@ -82,8 +82,7 @@ public class LocalNameFunction implements Function
     {
         if ( args.size() == 0 )
         {
-            return evaluate( context.getNodeSet(),
-                             context.getNavigator() );
+            return "";
         }
 
         if ( args.size() == 1 )
