@@ -11,10 +11,10 @@
       </p>
       <ul>
           <li>
-            <a href="http://prdownloads.sourceforge.net/jaxen/org.jaxen-$VERSION$.zip">org.jaxen-$VERSION$.zip</a> for Windows platforms (ZIP)
+            <a href="http://prdownloads.sourceforge.net/jaxen/jaxen-$VERSION$.zip">jaxen-$VERSION$.zip</a> for Windows platforms (ZIP)
           </li>
           <li>
-            <a href="http://prdownloads.sourceforge.net/jaxen/org.jaxen-$VERSION$.tar.gz">org.jaxen-$VERSION$.tar.gz</a> for all other platforms (Tarball)
+            <a href="http://prdownloads.sourceforge.net/jaxen/jaxen-$VERSION$.tar.gz">jaxen-$VERSION$.tar.gz</a> for all other platforms (Tarball)
           </li>
       </ul>
     </section>
