@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import org.jaxen.function.NumberFunction;
 
@@ -30,7 +31,7 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
         return "-(" + getExpr().getText() + ")";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Number number = NumberFunction.evaluate( getExpr().evaluate( context ),
                                                  context.getNavigator() );

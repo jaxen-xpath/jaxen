@@ -3,6 +3,7 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
 
 import org.jaxen.function.BooleanFunction;
 
@@ -64,7 +65,7 @@ class PredicateSet
     }
 
     protected void evaluatePredicates(List contextNodeSet,
-                                      ContextSupport support)
+                                      ContextSupport support) throws JaxenException
     {
         List      newNodeSet  = new ArrayList();
         List      predicates  = getPredicates();

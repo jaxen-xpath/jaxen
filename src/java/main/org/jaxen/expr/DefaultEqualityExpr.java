@@ -4,6 +4,7 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 import org.jaxen.Navigator;
+import org.jaxen.JaxenException;
 
 import org.jaxen.function.StringFunction;
 import org.jaxen.function.BooleanFunction;
@@ -25,7 +26,7 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr
         return "[(DefaultEqualityExpr): " + getLHS() + ", " + getRHS() + "]";
     }
     
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Object lhsValue = getLHS().evaluate( context );
         Object rhsValue = getRHS().evaluate( context );

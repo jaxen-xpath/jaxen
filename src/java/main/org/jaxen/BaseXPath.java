@@ -16,22 +16,22 @@ public abstract class BaseXPath extends JaXPath
         super( xpathExpr );
     }
 
-    public List selectNodes(Object context)
+    public List selectNodes(Object context) throws JaxenException
     {
         return jaSelectNodes( (Context) getContext( context ) );
     }
 
-    public Object selectSingleNode(Object context)
+    public Object selectSingleNode(Object context) throws JaxenException
     {
         return jaSelectSingleNode( (Context) getContext( context ) );
     }
 
-    public String valueOf(Object context)
+    public String valueOf(Object context) throws JaxenException
     {
         return jaValueOf( (Context) getContext( context ) );
     }
 
-    public Number numberValueOf(Object context)
+    public Number numberValueOf(Object context) throws JaxenException
     {
         return jaNumberValueOf( (Context) getContext( context ) );
     }

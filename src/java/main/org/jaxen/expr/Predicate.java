@@ -4,6 +4,7 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
 
 public interface Predicate 
 {
@@ -14,10 +15,6 @@ public interface Predicate
 
     String getText();
 
-    Object evaluate(Context context);
+    Object evaluate(Context context) throws JaxenException;
 
-    boolean matches(Object node,
-                    int position,
-                    int contextSize,
-                    ContextSupport support);
 }

@@ -5,6 +5,7 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.UnsupportedAxisException;
+import org.jaxen.JaxenException;
 
 import org.jaxen.util.SingleObjectIterator;
 import org.jaxen.util.LinkedIterator;
@@ -87,7 +88,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
         return buf.toString();
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         List     contextNodeSet  = new ArrayList();
         Set      unique          = new HashSet();
@@ -115,41 +116,41 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             {
                 eachContextNode = contextNodeSet.get( i );
                 
-                try
+                //try
+                //{
+                Iterator axisNodeIter = eachStep.axisIterator( eachContextNode,
+                                                               context.getContextSupport() );
+                
+                if ( axisNodeIter == null )
                 {
-                    Iterator axisNodeIter = eachStep.axisIterator( eachContextNode,
-                                                                   context.getContextSupport() );
-
-                    if ( axisNodeIter == null )
-                    {
-                        continue INNER;
-                    }
+                    continue INNER;
+                }
+                
+                Object   eachAxisNode = null;
+                
+                while ( axisNodeIter.hasNext() )
+                {
+                    eachAxisNode = axisNodeIter.next();
                     
-                    Object   eachAxisNode = null;
-
-                    while ( axisNodeIter.hasNext() )
+                    if ( eachStep.matches( eachAxisNode,
+                                           context.getContextSupport() ) )
                     {
-                        eachAxisNode = axisNodeIter.next();
-
-                        if ( eachStep.matches( eachAxisNode,
-                                               context.getContextSupport() ) )
+                        if ( ! unique.contains( eachAxisNode ) )
                         {
-                            if ( ! unique.contains( eachAxisNode ) )
-                            {
-                                unique.add( eachAxisNode );
-                                newNodeSet.add( eachAxisNode );
-                            }
+                            unique.add( eachAxisNode );
+                            newNodeSet.add( eachAxisNode );
                         }
                     }
                 }
-                catch (UnsupportedAxisException e)
-                {
-                    e.printStackTrace();
-                    break OUTTER;
-                }
+                //}
+                //catch (UnsupportedAxisException e)
+                //{
+                    //e.printStackTrace();
+                    //break OUTTER;
+                //}
             }
-
-
+            
+            
             eachStep.getPredicateSet().evaluatePredicates( newNodeSet,
                                                            context.getContextSupport() );
             contextNodeSet.clear();
@@ -157,7 +158,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             newNodeSet.clear();
             unique.clear();
         }
-
+        
         return contextNodeSet;
     }
 }

@@ -1,8 +1,9 @@
-// Copyright 2001 werken digital. All rights reserved.
+// Copyright 2001 bob mcwhirter & James Strachan.
 
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import org.jaxen.function.BooleanFunction;
 
@@ -25,7 +26,7 @@ class DefaultAndExpr extends DefaultLogicalExpr
         return "[(DefaultAndExpr): " + getLHS() + ", " + getRHS() + "]";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ) );
 

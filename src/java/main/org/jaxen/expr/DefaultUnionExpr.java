@@ -3,7 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
-import org.jaxen.util.LinkedIterator;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         return "[(DefaultUnionExpr): " + getLHS() + ", " + getRHS() + "]";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         List results = new ArrayList();
 

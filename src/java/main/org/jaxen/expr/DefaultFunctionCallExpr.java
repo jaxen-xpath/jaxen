@@ -5,6 +5,7 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -113,7 +114,7 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
         return "[(DefaultFunctionCallExpr): " + getPrefix() + ":" + getFunctionName() + "(" + getParameters() + ") ]";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Function func = context.getFunction( getPrefix(),
                                              getFunctionName() );

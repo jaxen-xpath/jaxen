@@ -2,6 +2,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import org.jaxen.function.NumberFunction;
 
@@ -19,7 +20,7 @@ class DefaultMultiplyExpr extends DefaultMultiplicativeExpr
         return "*";
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
         Number lhsValue = NumberFunction.evaluate( getLHS().evaluate( context ),
                                                    context.getNavigator() );
