@@ -251,20 +251,22 @@
 
   <document url="xml/testNamespaces.xml">
     <context select="/">
+              <!-- the root is not an element, so no namespaces -->
       <test select="namespace::*" count="0" debug="off"/>
       <test select="/namespace::*" count="0" debug="off"/>
-      <test select="/Template/Application1/namespace::*" count="2" debug="off"/>
-      <test select="/Template/Application2/namespace::*" count="2" debug="off"/>
-      <test select="/Template/Application2/namespace::*" count="2" debug="off"/>
-      <test select="//namespace::*" count="4" debug="off"/>
+              <!-- must count the default xml: prefix as well -->
+      <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
+      <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
+              <!-- every element has separate copies -->
+      <test select="//namespace::*" count="25" debug="off"/>
     </context>
     <context select="/Template/Application1">
-      <test select="namespace::*" count="2" debug="off"/>
+              <!-- must count the default xml: prefix as well -->
+      <test select="namespace::*" count="3" debug="off"/>
       <test select="/namespace::*" count="0" debug="off"/>
-      <test select="/Template/Application1/namespace::*" count="2" debug="off"/>
-      <test select="/Template/Application2/namespace::*" count="2" debug="off"/>
-      <test select="/Template/Application2/namespace::*" count="2" debug="off"/>
-      <test select="//namespace::*" count="4" debug="off"/>
+      <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
+      <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
+      <test select="//namespace::*" count="25" debug="off"/>
     </context>
   </document>
 
