@@ -123,13 +123,13 @@ public class XPathReaderTest extends TestCase
     {
         XPathReader reader = new XPathReader();
 
-        System.err.println( "Valid Expressions" );
+        System.out.println( "Valid Expressions" );
 
         for( int i = 0; i < paths.length; ++i )
         {
-            System.err.println( "----------------------------------------" );
-            System.err.println( paths[i] );
-            System.err.println( "----------------------------------------" );
+            System.out.println( "----------------------------------------" );
+            System.out.println( paths[i] );
+            System.out.println( "----------------------------------------" );
             try
             {
                 reader.parse( paths[i] );
@@ -150,14 +150,14 @@ public class XPathReaderTest extends TestCase
     {
         XPathReader reader = new XPathReader();
 
-        System.err.println( "Bogus Expressions" );
+        System.out.println( "Bogus Expressions" );
 
         for( int i = 0; i < bogusPaths.length; ++i )
         {
             final String[] bogusPath = bogusPaths[i];
-            System.err.println( "----------------------------------------" );
-            System.err.println( bogusPath[0] );
-            System.err.println( "----------------------------------------" );
+            System.out.println( "----------------------------------------" );
+            System.out.println( bogusPath[0] );
+            System.out.println( "----------------------------------------" );
 
             try
             {
