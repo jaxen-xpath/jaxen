@@ -6,7 +6,8 @@
     <section title="Change History">
       <section title="Changes in CVS since last release">
         <p>
-          Initial version
+          Initial beta development cycle.  Please see
+          CVS changelogs for up-to-date list of changes.
         </p>
        </section>
     </section>
@@ -15,14 +16,20 @@
     </section>
 
     <section title="Known problems">    
+      <ul>
+        <li><b>namespace</b> axis is truly not working for most models (except DOM).</li> 
+        <li><b>preceding</b> and <b>following</b> axes not implemented for most models.</li>
+        <li><b>id()</b> function not implemented.</li>
+      </ul>
     </section>
 
     <section title="Contributors">    
       <p>The following people have contributed to the Jaxen project. 
       Many thanks to you all!</p>
       <ul>
-        <li>Bob McWhirter</li>
-        <li>James Strachan</li>
+        <li>Bob McWhirter (<a href="http://code.werken.com/">werken digital</a>)</li>
+        <li>James Strachan (<a href="http://metastuff.com">Metastuff</a>)</li>
+        <li>David Megginson (<a href="http://megginson.com/">Megginson Technologies</a>)</li>
       </ul>
     </section>
   </body>
