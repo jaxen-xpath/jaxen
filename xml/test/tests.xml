@@ -153,9 +153,28 @@
 
   <document url="xml/defaultNamespace.xml">
     <context select="/">
-       <test select="/*:a/*:b/*:c" count="1"/>
+      <test select="/*:a/*:b/*:c" count="1"/>
       <test select="/x:a/x:b/x:c" count="0"/>
       <test select="/a/b/c" count="0"/>
+    </context>
+  </document>
+
+  <document url="xml/testNamespaces.xml">
+    <context select="/">
+      <test select="namespace::*" count="0"/>
+      <test select="/namespace::*" count="0"/>
+      <test select="/Template/Application1/namespace::*" count="2"/>
+      <test select="/Template/Application2/namespace::*" count="2"/>
+      <test select="/Template/Application2/namespace::*" count="2"/>
+      <test select="//namespace::*" count="4"/>
+    </context>
+    <context select="/Template/Application1">
+      <test select="namespace::*" count="2"/>
+      <test select="/namespace::*" count="0"/>
+      <test select="/Template/Application1/namespace::*" count="2"/>
+      <test select="/Template/Application2/namespace::*" count="2"/>
+      <test select="/Template/Application2/namespace::*" count="2"/>
+      <test select="//namespace::*" count="4"/>
     </context>
   </document>
 
