@@ -110,7 +110,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
       <p>The following people have contributed to the Jaxen project. 
       Many thanks to you all!</p>
       <ul>
-        <li>Bob McWhirter (<a href="http://code.werken.com/">werken digital</a>)</li>
+        <li>Bob McWhirter (<a href="http://code.werken.com/">The Werken Company</a>)</li>
         <li>James Strachan (<a href="http://www.spiritsoft.com">SpiritSoft</a>)</li>
         <li>David Megginson (<a href="http://megginson.com/">Megginson Technologies</a>)</li>
         <li>Erwin Bolwidt</li>
@@ -121,6 +121,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         <li>Elliotte Rusty Harold (<a href="http://www.cafeconleche.org">Cafe con Leche</a>)</li>
         <li>Mark Wilson (<a href="http://www.wilsoncom.de">WilsonCon</a>)</li>
         <li>Jan Dvorak</li>
+        <li>Jérôme Nègre (<a href="http://e-xmlmedia.com">e-xmlmedia.com</a>)</li>
       </ul>
     </section>
   </body>
