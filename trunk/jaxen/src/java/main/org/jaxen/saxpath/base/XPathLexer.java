@@ -1000,18 +1000,13 @@ boolean hasMoreChars()
 
 boolean isIdentifierChar(char c)
 {
-    switch ( c )
-    {
-        case '-':
-        case '.':
-            return true;
-    }
 
-    return Character.isUnicodeIdentifierPart( c );
+
+    return Verifier.isXMLNCNameCharacter( c );
 }
 
 boolean isIdentifierStartChar(char c)
 {
-    return c == '_' || Character.isUnicodeIdentifierStart( c );
+    return Verifier.isXMLNCNameStartCharacter( c );
 }
 }
