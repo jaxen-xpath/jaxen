@@ -1,4 +1,4 @@
-// Copyright 2001 werken digital. All rights reserved.
+// Copyright 2001 bob mcwhirter and James Strachan. All rights reserved.
 
 package org.jaxen.expr;
 
@@ -64,6 +64,22 @@ class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
         return this;
     }
 
+    /** Returns true if the current filter matches at least one of the context nodes
+     */
+    public boolean asBoolean(Context context) throws JaxenException 
+    {
+        Object results = getExpr().evaluate( context );
+        
+        if ( results instanceof List )
+        {
+            return getPredicateSet().evaluateAsBoolean( 
+                (List) results, context.getContextSupport() 
+            );
+        }
+        
+        return false;
+    }
+    
     public Object evaluate(Context context) throws JaxenException
     {
         Object results = getExpr().evaluate( context );

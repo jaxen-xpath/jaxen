@@ -1,3 +1,4 @@
+// Copyright 2001 bob mcwhirter and James Strachan. All rights reserved.
 
 package org.jaxen.expr;
 
@@ -64,6 +65,16 @@ class PredicateSet
         return buf.toString();
     }
 
+    // XXXX: Note - this could be *MUCH* more efficient
+    // currently this creates many redundant collections and should halt 
+    // evaluation on the first matching item.            
+    protected boolean evaluateAsBoolean(List contextNodeSet,
+                                      ContextSupport support) throws JaxenException
+    {
+        evaluatePredicates( contextNodeSet, support );
+        return ! contextNodeSet.isEmpty();
+    }
+    
     protected void evaluatePredicates(List contextNodeSet,
                                       ContextSupport support) throws JaxenException
     {

@@ -16,7 +16,7 @@ import org.jaxen.Context;
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
   * @version $Revision$
   */
-public class NoNodeTest extends Pattern {
+public class NoNodeTest extends NodeTest {
     
     private static NoNodeTest instance = new NoNodeTest();
     

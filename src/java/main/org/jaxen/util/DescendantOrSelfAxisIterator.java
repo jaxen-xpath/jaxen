@@ -1,4 +1,4 @@
-// Copyright 2001 werken digital. All rights reserved.
+// Copyright 2001 bob mcwhirter and James Strachan. All rights reserved.
 
 package org.jaxen.util;
 

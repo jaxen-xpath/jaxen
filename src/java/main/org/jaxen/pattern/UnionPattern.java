@@ -10,6 +10,7 @@
 package org.jaxen.pattern;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 /** <p><code>UnionPattern</code> represents a union pattern.</p>
   *
@@ -64,7 +65,8 @@ public class UnionPattern extends Pattern {
     
     /** @return true if the pattern matches the given node
       */
-    public boolean matches( Object node, Context context ) {
+    public boolean matches( Object node, Context context ) throws JaxenException
+    {
         return lhs.matches( node, context ) || rhs.matches( node, context );
     }
     
@@ -107,7 +109,8 @@ public class UnionPattern extends Pattern {
         String name2 = rhs.getMatchesNodeName();
         
         this.matchesNodeName = null;
-        if ( name1 != null && name2 != null && name1.equals( name2 ) ) {
+        if ( name1 != null && name2 != null && name1.equals( name2 ) ) 
+        {
             this.matchesNodeName = name1;
         }
     }    
