@@ -105,9 +105,9 @@ public class SimpleVariableContext implements VariableContext, Serializable
      *  if any.
      *  </p>
      *
-     *  @param namespaceURI The namespace URI of the variable.
-     *  @param localName The local name of the variable
-     *  @param value The value to be bound to the variable.
+     *  @param namespaceURI the namespace URI of the variable
+     *  @param localName the local name of the variable
+     *  @param value The value to be bound to the variable
      */
     public void setVariableValue( String namespaceURI,
                                   String localName,
@@ -126,8 +126,8 @@ public class SimpleVariableContext implements VariableContext, Serializable
      *  in an XPath expression.
      *  </p>
      *
-     *  @param localName The local name of the variable
-     *  @param value The value to be bound to the variable.
+     *  @param localName the local name of the variable
+     *  @param value the value to be bound to the variable
      */
     public void setVariableValue( String localName,
                                   Object value )

@@ -73,10 +73,8 @@ import org.jaxen.JaxenException;
  * one or more context nodes using the {@link #selectNodes(Object)}
  * method, as in the following example:</p>
  *
- * <pre>
- * XPath path = new DOMXPath("a/b/c");
- * List results = path.selectNodes(domNode);
- * </pre>
+ * <pre>XPath path = new DOMXPath("a/b/c");
+ * List results = path.selectNodes(domNode);</pre>
  *
  * @see BaseXPath
  *
