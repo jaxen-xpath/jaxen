@@ -17,7 +17,7 @@ public abstract class XPathTestBase extends TestCase
 {
     private static final String TESTS_XML = "xml/test/tests.xml";
 
-    private static final boolean        verbose         = true;
+    private static final boolean        verbose         = false;
     private              SAXReader      xmlReader       = new SAXReader();
     private             ContextSupport  contextSupport;
 
@@ -102,7 +102,7 @@ public abstract class XPathTestBase extends TestCase
 
         JaXPath xpath = new JaXPath( xpathStr );
 
-        List list = xpath.selectNodes( getContext( testDoc ) );
+        List list = xpath.jaSelectNodes( getContext( testDoc ) );
 
         Iterator iter = list.iterator();
         Object   contextNode = null;
@@ -179,7 +179,7 @@ public abstract class XPathTestBase extends TestCase
         {
             int expectedSize = Integer.parseInt( count );
 
-            List results = xpath.selectNodes( getContext( context ) );
+            List results = xpath.jaSelectNodes( getContext( context ) );
                
             log ( debug,
                   "    Expected Size :: " + expectedSize );
@@ -206,7 +206,7 @@ public abstract class XPathTestBase extends TestCase
                 }
             }
             
-            Object newContext = xpath.selectSingleNode( getContext( context ) );
+            Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
 
             String valueOfXPathStr = valueOf.attributeValue( "select" );
 
@@ -215,7 +215,7 @@ public abstract class XPathTestBase extends TestCase
 
             JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
 
-            Object node = valueOfXPath.selectSingleNode( getContext( newContext ) );
+            Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
 
 
             String expected = valueOf.getText();
@@ -256,7 +256,7 @@ public abstract class XPathTestBase extends TestCase
 
         JaXPath xpath = new JaXPath( xpathStr );
 
-        Object node = xpath.selectSingleNode( getContext( context ) );
+        Object node = xpath.jaSelectSingleNode( getContext( context ) );
 
         String expected = valueOf.getText();
         String result = StringFunction.evaluate( node,

@@ -9,10 +9,9 @@ import org.saxpath.XPathReader;
 import org.saxpath.SAXPathException;
 import org.saxpath.helpers.XPathReaderFactory;
 
-
 import java.util.List;
 
-public class JaXPath
+class JaXPath
 {
     private XPath xpath;
 
@@ -29,14 +28,14 @@ public class JaXPath
         this.xpath = handler.getXPath();
     }
 
-    public List selectNodes(Context context)
+    public List jaSelectNodes(Context context)
     { 
         return this.xpath.asList( context );
     }
 
-    public Object selectSingleNode(Context context)
+    public Object jaSelectSingleNode(Context context)
     {
-        List results = selectNodes( context );
+        List results = jaSelectNodes( context );
 
         if ( results.isEmpty() )
         {
@@ -46,9 +45,9 @@ public class JaXPath
         return results.get( 0 );
     }
 
-    public String valueOf(Context context)
+    public String jaValueOf(Context context)
     {
-        Object result = selectSingleNode( context );
+        Object result = jaSelectSingleNode( context );
 
         if ( result == null )
         {
@@ -59,9 +58,9 @@ public class JaXPath
                                         context.getNavigator() );
     }
 
-    public Number numberValueOf(Context context)
+    public Number jaNumberValueOf(Context context)
     {
-        Object result = selectSingleNode( context );
+        Object result = jaSelectSingleNode( context );
 
         if ( result == null )
         {

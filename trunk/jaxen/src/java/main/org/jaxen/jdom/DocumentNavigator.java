@@ -20,6 +20,16 @@ import java.util.Iterator;
 
 public class DocumentNavigator extends DefaultNavigator
 {
+    private static class Singleton
+    {
+        private static DocumentNavigator instance = new DocumentNavigator();
+    }
+
+    public static DocumentNavigator getInstance()
+    {
+        return Singleton.instance;
+    }
+
     public boolean isElement(Object obj)
     {
         return obj instanceof Element;
@@ -300,6 +310,7 @@ public class DocumentNavigator extends DefaultNavigator
         if ( element != null )
         {
             Namespace namespace = element.getNamespace( prefix );
+
             if ( namespace != null ) 
             {
                 return namespace.getURI();
