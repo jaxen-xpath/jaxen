@@ -67,6 +67,7 @@ import org.jaxen.expr.XPathExpr;
 import org.jaxen.function.BooleanFunction;
 import org.jaxen.function.StringFunction;
 import org.jaxen.function.NumberFunction;
+import org.jaxen.util.SingletonList;
 
 import org.saxpath.XPathReader;
 import org.saxpath.SAXPathException;
@@ -74,7 +75,6 @@ import org.saxpath.helpers.XPathReaderFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /** Base functionality for all concrete, implementation-specific XPaths.
@@ -618,7 +618,7 @@ public class BaseXPath implements XPath, Serializable
         }
         else
         {
-            List list = Collections.singletonList(node);
+            List list = new SingletonList(node);
 
             fullContext.setNodeSet( list );
         }
