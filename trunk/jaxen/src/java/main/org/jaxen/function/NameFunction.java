@@ -58,10 +58,10 @@ public class NameFunction implements Function
             {
                 return nav.getProcessingInstructionTarget( first );
             }
-            // else if ( nav.isNamespace( first ) )
-            // {
-                // return nav.getNamespacePrefix( first );
-            // }
+            else if ( nav.isNamespace( first ) )
+            {
+                return nav.getNamespacePrefix( first );
+            }
         }
 
         return "";

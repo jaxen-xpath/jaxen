@@ -109,7 +109,8 @@ public class DefaultNameStep extends DefaultStep
         }
         else if ( nav.isNamespace( node ) )
         {
-            return ( ! hasPrefix ) && matchesAnyName;
+            nodeUri = null;
+            nodeName = nav.getNamespacePrefix( node );
         }
         else
         {
@@ -128,20 +129,18 @@ public class DefaultNameStep extends DefaultStep
             return true;
         }
         
-        // If we have a prefix, but the node doesn't
-        // have *any* namespace-uri, then we fast-fail.
+        // If we have a prefix that does not map to no namespace,
+        // but the node doesn't have *any* namespace-uri, then we fast-fail.
         
-        if ( hasPrefix
+        if ( ( myUri != null   && !"".equals( myUri ) )
              &&
-             ( nodeUri == null
-               ||
-               "".equals( nodeUri ) ) )
+             ( nodeUri == null || "".equals( nodeUri ) ) )
         {
             return false;
         }
         
         // If we don't have a prefix, but the node does
-        // have any namespacie-uri, then we fast-fail.
+        // have any namespace-uri, then we fast-fail.
         
         if ( ! hasPrefix
              &&
