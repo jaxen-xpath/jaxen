@@ -136,6 +136,7 @@ import java.util.Set;
 
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
+import org.jaxen.XPathSyntaxException;
 
 
 
@@ -184,10 +185,11 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         List results = new ArrayList();
 
 
+        // FIXME do not allow unions with non-node-sets 
+        try {
+        List lhsResults = (List) getLHS().evaluate( context );
 
-        List lhsResults = convertToList( getLHS().evaluate( context ) );
-
-        List rhsResults = convertToList( getRHS().evaluate( context ) );
+        List rhsResults = (List) getRHS().evaluate( context );
 
 
 
@@ -230,6 +232,10 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 
 
         return results;
+        }
+        catch (ClassCastException e) {
+            throw new XPathSyntaxException(this.getText(), context.getPosition(), "Unions are only allowed over node-sets");
+        }
 
     }
 
