@@ -9,6 +9,7 @@ import org.jaxen.function.StringFunction;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 /**
  * <p>An abastract base class for Locale-specific extension 
@@ -60,25 +61,65 @@ public abstract class LocaleFunctionSupport implements Function
     }
     
     /** 
-     * Tries to find a static Locale instance by name
+     * Tries to find a Locale instance by name using xml:lang style encodings
+     * like 'en', 'en-US', 'en-US-Brooklyn'.
      *
-     * @parem name is the name of the Locale such as 'FRANCE'
-     * @return the Locale for the given name or null if one could not
-     *      be found or some wierd reflection error occurs.
+     * @param localeText is the xml:lang encoding of a Locale
+     * @return the Locale for the given text or null if one could not
+     *      be found 
      */
-    protected Locale findLocale(String name) {
-        try 
+    protected Locale findLocale(String localeText) {
+        StringTokenizer enum = new StringTokenizer( localeText, "-" );
+        if (enum.hasMoreTokens()) 
         {
-            Field field = Locale.class.getField(name);
-            if (field != null) 
+            String language = enum.nextToken();
+            if (! enum.hasMoreTokens()) 
+            {                
+                return findLocaleForLanguage(language);
+            }
+            else 
             {
-                return (Locale) field.get(null);
+                String country = enum.nextToken();
+                if (! enum.hasMoreTokens()) 
+                {
+                    return new Locale(language, country);
+                }
+                else 
+                {
+                    String variant = enum.nextToken();
+                    return new Locale(language, country, variant);
+                }
             }
         }
-        catch (Exception e) 
+        return null;
+    }
+    
+    /** 
+     * Finds the locale with the given language name with no country
+     * or variant, such as Locale.ENGLISH or Locale.FRENCH
+     *
+     * @param language is the language code to look for
+     * @return the Locale for the given language or null if one could not
+     *      be found 
+     */
+    protected Locale findLocaleForLanguage(String language) {
+        Locale[] locales = Locale.getAvailableLocales();
+        for ( int i = 0, size = locales.length; i < size; i++ ) 
         {
-            // ignore any exceptions
-        }
+            Locale locale = locales[i];
+            if ( language.equals( locale.getLanguage() ) ) 
+            {
+                String country = locale.getCountry();
+                if ( country == null || country.length() == 0 ) 
+                {
+                    String variant = locale.getVariant();
+                    if ( variant == null || variant.length() == 0 ) 
+                    {
+                        return locale;
+                    }
+                }
+            }
+        }    
         return null;
     }
 }

@@ -63,6 +63,8 @@ public class UpperFunction extends LocaleFunctionSupport
                                                 nav );
         if (locale != null)
         {
+            // System.out.println( "Using Locale: " + locale );
+            
             return str.toUpperCase(locale);
         }
         else 
