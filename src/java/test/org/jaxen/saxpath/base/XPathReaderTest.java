@@ -89,7 +89,8 @@ public class XPathReaderTest extends TestCase
         new String[]{"foo/tacos()", "Expected node-type"},
         new String[]{"*:foo", "Unexpected ':'"},
         new String[]{"/foo/bar[baz", "Expected: ]"},
-        new String[]{"/cracker/cheese[(mold > 1) and (sense/taste", "Expected: )"}
+        new String[]{"/cracker/cheese[(mold > 1) and (sense/taste", "Expected: )"},
+        new String[]{"//", "Expected axis specifier )"}
     };
 
     public XPathReaderTest( String name )
