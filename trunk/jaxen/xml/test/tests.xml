@@ -393,6 +393,16 @@
     </context>
   </document>
 
+  <!-- test axis node ordering -->
+  <document url="xml/web.xml">
+    <context select="/">
+      <!-- Reported as Jira issue JAXEN-24 -->
+      <test select="//servlet-mapping/preceding::*[1][name()='description']" count="1"/> 
+      <test select="/web-app/servlet//description/following::*[1][name()='servlet-mapping']" count="1"/> 
+      <test select="/web-app/servlet//description/following::*[2][name()='servlet-name']" count="1"/>
+    </context>
+  </document>
+  
   <!-- test document function -->
   <document url="xml/text.xml">
     <context select="/">
