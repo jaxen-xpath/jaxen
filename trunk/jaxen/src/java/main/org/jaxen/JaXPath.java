@@ -2,6 +2,7 @@
 package org.jaxen;
 
 import org.jaxen.expr.XPath;
+import org.jaxen.function.BooleanFunction;
 import org.jaxen.function.StringFunction;
 import org.jaxen.function.NumberFunction;
 
@@ -57,6 +58,18 @@ class JaXPath
 
         return StringFunction.evaluate( result,
                                         context.getNavigator() );
+    }
+
+    protected boolean jaBooleanValueOf(Context context) throws JaxenException
+    {
+        Object result = jaSelectSingleNode( context );
+
+        if ( result == null )
+        {
+            return false;
+        }
+
+        return BooleanFunction.evaluate( result ).equals(Boolean.TRUE);
     }
 
     protected Number jaNumberValueOf(Context context) throws JaxenException

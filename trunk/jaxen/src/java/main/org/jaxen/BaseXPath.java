@@ -32,6 +32,11 @@ public abstract class BaseXPath extends JaXPath
         return jaValueOf( (Context) getContext( context ) );
     }
 
+    public boolean booleanValueOf(Object context) throws JaxenException
+    {
+        return jaBooleanValueOf( (Context) getContext( context ) );
+    }
+
     public Number numberValueOf(Object context) throws JaxenException
     {
         return jaNumberValueOf( (Context) getContext( context ) );
