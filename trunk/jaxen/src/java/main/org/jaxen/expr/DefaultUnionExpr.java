@@ -64,6 +64,7 @@
 package org.jaxen.expr;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -116,6 +117,8 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
                     unique.add( each );
                 }
             }
+            
+            Collections.sort(results, new NodeComparator(context.getNavigator()));
     
             return results;
         }
