@@ -232,6 +232,10 @@ public class JdomNavigator extends DefaultNavigator
         return buf.toString();
     }
 
-        
-                                          
+    public String getCommentStringValue(Object obj)
+    {
+        Comment cmt = (Comment) obj;
+
+        return cmt.getText();
+    }
 }
