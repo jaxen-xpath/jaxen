@@ -35,7 +35,7 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
         {
             String name = getName();
 
-            if ( "".equals( name ) )
+            if ( name == null || "".equals( name ) )
             {
                 return true;
             }

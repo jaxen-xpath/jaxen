@@ -88,7 +88,7 @@ public class DefaultNameStep extends DefaultStep
 
         String  myPrefix  = getPrefix();         
         String  myUri     = null;
-        boolean hasPrefix = ( ! ( "".equals( myPrefix ) ) );
+        boolean hasPrefix = ( myPrefix != null ) && (! ( "".equals( myPrefix ) ) );
 
         String nodeUri  = null;
         String nodeName = null;
