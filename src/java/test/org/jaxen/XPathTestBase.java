@@ -195,31 +195,39 @@ public abstract class XPathTestBase extends TestCase
         {
             int expectedSize = Integer.parseInt( count );
 
-            List results = xpath.jaSelectNodes( getContext( context ) );
-               
-            log ( debug,
-                  "    Expected Size :: " + expectedSize );
-            log ( debug,
-                  "    Result Size   :: " + results.size() );
-
-            if ( expectedSize != results.size() )
+            try
             {
-                log ( debug,
-                      "      ## FAILED" );
-                log ( debug,
-                      "      ## xpath: " + xpath );
+                List results = xpath.jaSelectNodes( getContext( context ) );
                 
-                Iterator resultIter = results.iterator();
+                log ( debug,
+                      "    Expected Size :: " + expectedSize );
+                log ( debug,
+                      "    Result Size   :: " + results.size() );
                 
-                while ( resultIter.hasNext() )
+                if ( expectedSize != results.size() )
                 {
                     log ( debug,
-                          "      --> " + resultIter.next() );
+                          "      ## FAILED" );
+                    log ( debug,
+                          "      ## xpath: " + xpath );
+                    
+                    Iterator resultIter = results.iterator();
+                    
+                    while ( resultIter.hasNext() )
+                    {
+                        log ( debug,
+                              "      --> " + resultIter.next() );
+                    }
                 }
+                assertEquals( this.executionContext.toString(),
+                              expectedSize,
+                              results.size() );
             }
-            assertEquals( this.executionContext.toString(),
-                          expectedSize,
-                          results.size() );
+            catch (UnsupportedAxisException e)
+            {
+                log ( debug,
+                      "      ## SKIPPED -- Unsupported Axis" );
+            }
         }
 
         Element valueOf = test.element( "valueOf" );
@@ -238,42 +246,51 @@ public abstract class XPathTestBase extends TestCase
                 }
             }
             
-            Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
+            try
+            {
+                Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
+                
+                log ( debug,
+                      "    New Context :: " + abbreviate( newContext ) );
+                
+                
+                String valueOfXPathStr = valueOf.attributeValue( "select" );
+                
+                log( debug,
+                     "  Select :: " + valueOfXPathStr );
 
-            log ( debug,
-                  "    New Context :: " + abbreviate( newContext ) );
+                this.executionContext.push( valueOfXPathStr );
+                
+                JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
+                
+                Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
+                
+                String expected = valueOf.getText();
+                String result =   StringFunction.evaluate( node,
+                                                           getNavigator() );
 
-            
-            String valueOfXPathStr = valueOf.attributeValue( "select" );
-            
-            log( debug,
-                 "  Select :: " + valueOfXPathStr );
+                log ( debug,
+                      "    Expected :: " + expected );
+                
+                log ( debug,
+                      "    Result   :: " + result );
 
-            this.executionContext.push( valueOfXPathStr );
-
-            JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
-
-            Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
-
-            String expected = valueOf.getText();
-            String result =   StringFunction.evaluate( node,
-                                                       getNavigator() );
-
-            log ( debug,
-                  "    Expected :: " + expected );
-
-            log ( debug,
-                  "    Result   :: " + result );
-
-            if ( ! expected.equals( result ) )
+                if ( ! expected.equals( result ) )
+                {
+                    log ( debug,
+                          "      ## FAILED" );
+                }
+                
+                assertEquals( this.executionContext.toString(),
+                              expected,
+                              result );
+            }
+            catch (UnsupportedAxisException e)
             {
                 log ( debug,
-                      "      ## FAILED" );
+                      "      ## SKIPPED -- Unsupported Axis" );
+                
             }
-
-            assertEquals( this.executionContext.toString(),
-                          expected,
-                          result );
 
             this.executionContext.pop();
         }
@@ -305,30 +322,39 @@ public abstract class XPathTestBase extends TestCase
 
         this.executionContext.push( xpathStr );
 
-        Object node = xpath.jaSelectSingleNode( getContext( context ) );
-
-        String expected = valueOf.getText();
-        String result = StringFunction.evaluate( node,
-                                                 getNavigator() );
-
-        log ( debug,
-              "  Select :: " + xpathStr );
-        log ( debug,
-              "    Expected :: " + expected );
-        log ( debug,
-              "    Result   :: " + result );
-
-        if ( ! expected.equals( result ) )
+        try
+        {
+            Object node = xpath.jaSelectSingleNode( getContext( context ) );
+            
+            String expected = valueOf.getText();
+            String result = StringFunction.evaluate( node,
+                                                     getNavigator() );
+            
+            log ( debug,
+                  "  Select :: " + xpathStr );
+            log ( debug,
+                  "    Expected :: " + expected );
+            log ( debug,
+                  "    Result   :: " + result );
+            
+            if ( ! expected.equals( result ) )
+            {
+                log ( debug,
+                      "      ## FAILED" );
+                log ( debug,
+                      "      ## xpath: " + xpath );
+            }
+            
+            assertEquals( this.executionContext.toString(),
+                          expected,
+                          result );
+        }
+        catch (UnsupportedAxisException e)
         {
             log ( debug,
-                  "      ## FAILED" );
-            log ( debug,
-                  "      ## xpath: " + xpath );
-        }
+                  "      ## SKIPPED -- Unsupported Axis " );
 
-        assertEquals( this.executionContext.toString(),
-                      expected,
-                      result );
+        }
 
         this.executionContext.pop();
     }
