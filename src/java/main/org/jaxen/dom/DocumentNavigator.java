@@ -129,22 +129,22 @@ public class DocumentNavigator extends DefaultNavigator
 
         if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
             return new NodeIterator (node) {
-                    protected Node getFirstNode (Node node)
+                    protected Node getFirstNode (Node n)
                     {
                         // FIXME: assumes castability.
-                        return ((Attr)node).getOwnerElement();
+                        return ((Attr)n).getOwnerElement();
                     }
-                    protected Node getNextNode (Node node) {
+                    protected Node getNextNode (Node n) {
                         return null;
                     }
                 };
         } else {
             return new NodeIterator (node) {
-                    protected Node getFirstNode (Node node)
+                    protected Node getFirstNode (Node n)
                     {
-                        return node.getParentNode();
+                        return n.getParentNode();
                     }
-                    protected Node getNextNode (Node node) {
+                    protected Node getNextNode (Node n) {
                         return null;
                     }
                 };
