@@ -207,8 +207,15 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     void numberInteger() throws org.jaxen.saxpath.SAXPathException
     {
         Token token = match( INTEGER );
-            
-        getXPathHandler().number( Integer.parseInt( token.getTokenText() ) );
+        
+        String text = token.getTokenText();
+        try {
+            getXPathHandler().number( Integer.parseInt( text ) );
+        }
+        catch (NumberFormatException ex) {
+            getXPathHandler().number( Double.parseDouble( text ) );
+        }
+        
     }
 
     void literal() throws org.jaxen.saxpath.SAXPathException
