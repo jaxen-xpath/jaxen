@@ -227,7 +227,7 @@ public class XPathTest extends TestCase
             root.add(element);
             Document doc = new DefaultDocument(root);
             
-            XPath xpath = new JDOMXPath( "/*/*/namespace::node()" );
+            XPath xpath = new Dom4jXPath( "/*/*/namespace::node()" );
 
             List results = xpath.selectNodes( doc );
 
