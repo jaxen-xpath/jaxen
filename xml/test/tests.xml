@@ -552,5 +552,20 @@
     </context>
   </document>
 
+  <!-- test cases for the lang() function -->
+  <document url="xml/lang.xml">
+    <context select="/">
+      <test select="/e1/e2[lang('hr')]" count="0"/>
+      <test select="/e1/e2/e3[lang('en')]" count="1"/>
+      <test select="/e1/e2/e3[lang('en-US')]" count="1"/>
+      <test select="/e1/e2/e3[lang('en-GB')]" count="0"/>
+      <test select="/e1/e2/e3[lang('hu')]" count="2"/>
+      <test select="/e1/e2/e3[lang('hu-HU')]" count="0"/>
+      <test select="/e1/e2/e3[lang('es')]" count="1"/>
+      <test select="/e1/e2/e3[lang('es-BR')]" count="0"/>
+    </context>
+  </document>
+
  </tests>
+
 
