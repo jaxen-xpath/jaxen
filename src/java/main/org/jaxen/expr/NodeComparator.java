@@ -80,13 +80,23 @@ class NodeComparator implements Comparator {
         
         if (navigator == null) return 0;
         
+        if (navigator.isAttribute(o1) && navigator.isAttribute(o2)) {
+            try {
+                return compare(navigator.getParentNode(o1), navigator.getParentNode(o2));
+            }
+            catch (UnsupportedAxisException ex) {
+                return 0;
+            }
+        }            
+        // ???? namespaces
+
         try {
             int depth1 = getDepth(o1);
             int depth2 = getDepth(o2);
             
             Object a1 = o1;
             Object a2 = o2;
-            
+                        
             while (depth1 > depth2) {
                 a1 = navigator.getParentNode(a1);
                 depth1--;
