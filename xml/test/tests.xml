@@ -124,6 +124,35 @@
   </document>
 
 
+
+  <!-- test positioning -->
+
+  <document url="xml/fibo.xml">
+    <context select="/">
+      <test select="/*/fibonacci[position() &lt; 10]" count="9"/>
+    </context>
+  </document>
+
+
+  <!-- test mumber functions -->
+
+  <document url="xml/much_ado.xml">
+    <context select="/PLAY/ACT/SCENE[1]">
+      <valueOf select="count(ancestor::PLAY)">1</valueOf>
+      <valueOf select="count(ancestor::*)">3</valueOf>
+      <valueOf select="5+count(ancestor::*)-1">7</valueOf>
+    </context>
+    <context select="/">
+      <valueOf select="/PLAY/TITLE">Much Ado about Nothing</valueOf>
+      <valueOf select="2+2">4</valueOf>
+      <valueOf select="5 * 4 + 1">21</valueOf>
+      <valueOf select="count(descendant::ACT)">5</valueOf>
+      <valueOf select="10 + count(descendant::ACT) * 5">35</valueOf>
+      <valueOf select="(10 + count(descendant::ACT)) * 5">75</valueOf>
+    </context>
+  </document>
+
+
   <!-- test namespace -->
 
   <document url="xml/namespaces.xml">
@@ -178,32 +207,4 @@
       <test select="//namespace::*" count="4" debug="off"/>
     </context>
   </document>
-
-  <!-- test positioning -->
-
-  <document url="xml/fibo.xml">
-    <context select="/">
-      <test select="/*/fibonacci[position() &lt; 10]" count="9"/>
-    </context>
-  </document>
-
-
-  <!-- test mumber functions -->
-
-  <document url="xml/much_ado.xml">
-    <context select="/PLAY/ACT/SCENE[1]">
-      <valueOf select="count(ancestor::PLAY)">1</valueOf>
-      <valueOf select="count(ancestor::*)">3</valueOf>
-      <valueOf select="5+count(ancestor::*)-1">7</valueOf>
-    </context>
-    <context select="/">
-      <valueOf select="/PLAY/TITLE">Much Ado about Nothing</valueOf>
-      <valueOf select="2+2">4</valueOf>
-      <valueOf select="5 * 4 + 1">21</valueOf>
-      <valueOf select="count(descendant::ACT)">5</valueOf>
-      <valueOf select="10 + count(descendant::ACT) * 5">35</valueOf>
-      <valueOf select="(10 + count(descendant::ACT)) * 5">75</valueOf>
-    </context>
-  </document>
-
  </tests>
