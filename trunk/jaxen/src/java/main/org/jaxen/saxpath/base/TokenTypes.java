@@ -114,6 +114,7 @@ class TokenTypes
     //static final int EOF = 100;
     static final int SKIP = -2;
     static final int EOF = -1;
+    static final int ERROR = -3;
 
     String getTokenText( int tokenType )
     {
@@ -186,6 +187,8 @@ class TokenTypes
                 return "(double)";
             case COMMA:
                 return ",";
+            case ERROR:
+                return "(error)";
             default:
                 return null;
         }

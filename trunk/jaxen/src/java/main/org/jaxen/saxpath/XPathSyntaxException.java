@@ -91,7 +91,7 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
 
     public String toString()
     {
-        return "com.werken.saxpath.XPathSyntaxException: " + getPosition() + ": " + getMessage();
+        return getClass() + ": " + getPosition() + ": " + getMessage();
     }
 
     public String getPositionMarker()

@@ -80,7 +80,7 @@ public class XPathReaderTest extends TestCase
         "/foo/bar[@a='1' and @b='2']",
         "/foo/bar[@a='1' and @b!='2']",
         "//attribute::*[.!='crunchy']",
-        "'//*[contains(string(text()),'yada yada')]'",
+        "'//*[contains(string(text()),\"yada yada\")]'",
     };
 
     private String[][] bogusPaths = {
@@ -483,9 +483,12 @@ public class XPathReaderTest extends TestCase
             expected().startOrExpr();
             expected().startAndExpr();
             expected().startEqualityExpr();
+            expected().startEqualityExpr();
+            expected().startRelationalExpr();
             expected().startRelationalExpr();
             expected().startAdditiveExpr();
             expected().startAdditiveExpr();
+            expected().startMultiplicativeExpr();
             expected().startMultiplicativeExpr();
             expected().startUnaryExpr();
             expected().startUnionExpr();
@@ -499,9 +502,12 @@ public class XPathReaderTest extends TestCase
             expected().endUnionExpr( false );
             expected().endUnaryExpr( Operator.NO_OP );
             expected().endMultiplicativeExpr( Operator.NO_OP );
+            expected().endMultiplicativeExpr( Operator.NO_OP );
             expected().endAdditiveExpr( Operator.NO_OP );
             expected().endAdditiveExpr( Operator.NO_OP );
             expected().endRelationalExpr( Operator.NO_OP );
+            expected().endRelationalExpr( Operator.NO_OP );
+            expected().endEqualityExpr( Operator.NO_OP );
             expected().endEqualityExpr( Operator.NO_OP );
             expected().endAndExpr( false );
             expected().endOrExpr( false );

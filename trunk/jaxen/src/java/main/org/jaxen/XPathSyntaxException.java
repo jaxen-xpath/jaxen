@@ -78,6 +78,14 @@ public class XPathSyntaxException extends JaxenException
     /** The position of the error. */
     private int    position;
 
+    public XPathSyntaxException(org.jaxen.saxpath.XPathSyntaxException e)
+    {
+        super( e );
+
+        this.xpath    = e.getXPath();
+        this.position = e.getPosition();
+    }
+
     /** Construct.
      *
      *  @param xpath The erroneous xpath.

@@ -622,6 +622,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 nameTest( axis );
                 break;
             }
+            default:
+                throw createSyntaxException("Expected <QName> or *");
         }
     }
 
@@ -845,10 +847,33 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     void equalityExpr() throws org.jaxen.saxpath.SAXPathException
     {
         getXPathHandler().startEqualityExpr();
+        getXPathHandler().startEqualityExpr();
 
         relationalExpr();
 
         int operator = Operator.NO_OP;
+
+        switch ( LA(1) )
+        {
+            case EQUALS:
+            {
+                match( EQUALS );
+                relationalExpr();
+                operator = Operator.EQUALS;
+                break;
+            }
+            case NOT_EQUALS:
+            {
+                match( NOT_EQUALS );
+                relationalExpr();
+                operator = Operator.NOT_EQUALS;
+                break;
+            }
+        }
+
+        getXPathHandler().endEqualityExpr( operator );
+
+        operator = Operator.NO_OP;
 
         switch ( LA(1) )
         {
@@ -874,10 +899,47 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     void relationalExpr() throws org.jaxen.saxpath.SAXPathException
     {
         getXPathHandler().startRelationalExpr();
+        getXPathHandler().startRelationalExpr();
 
         additiveExpr();
 
         int operator = Operator.NO_OP;
+
+        switch ( LA(1) )
+        {
+            case LESS_THAN:
+            {
+                match( LESS_THAN );
+                additiveExpr();
+                operator = Operator.LESS_THAN;
+                break;
+            }
+            case GREATER_THAN:
+            {
+                match( GREATER_THAN );
+                additiveExpr();
+                operator = Operator.GREATER_THAN;
+                break;
+            }
+            case LESS_THAN_EQUALS:
+            {
+                match( LESS_THAN_EQUALS );
+                additiveExpr();
+                operator = Operator.LESS_THAN_EQUALS;
+                break;
+            }
+            case GREATER_THAN_EQUALS:
+            {
+                match( GREATER_THAN_EQUALS );
+                additiveExpr();
+                operator = Operator.GREATER_THAN_EQUALS;
+                break;
+            }
+        }
+
+        getXPathHandler().endRelationalExpr( operator );
+
+        operator = Operator.NO_OP;
 
         switch ( LA(1) )
         {
@@ -943,6 +1005,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         getXPathHandler().endAdditiveExpr( operator );
 
+        operator = Operator.NO_OP;
+
         switch ( LA(1) )
         {
             case PLUS:
@@ -972,6 +1036,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     void multiplicativeExpr() throws org.jaxen.saxpath.SAXPathException
     {
         getXPathHandler().startMultiplicativeExpr();
+        getXPathHandler().startMultiplicativeExpr();
 
         unaryExpr();
 
@@ -982,9 +1047,38 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             case STAR:
             {
                 match( STAR );
-                multiplicativeExpr();
+                unaryExpr();
                 operator = Operator.MULTIPLY;
                 break;                
+            }
+            case DIV:
+            {
+                match( DIV );
+                unaryExpr();
+                operator = Operator.DIV;
+                break;
+            }
+            case MOD:
+            {
+                match( MOD );
+                unaryExpr();
+                operator = Operator.MOD;
+                break;
+            }
+        }
+
+        getXPathHandler().endMultiplicativeExpr( operator );
+
+        operator = Operator.NO_OP;
+
+        switch ( LA(1) )
+        {
+            case STAR:
+            {
+                match( STAR );
+                multiplicativeExpr();
+                operator = Operator.MULTIPLY;
+                break;
             }
             case DIV:
             {

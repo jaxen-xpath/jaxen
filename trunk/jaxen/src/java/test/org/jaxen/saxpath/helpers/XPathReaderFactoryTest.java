@@ -116,6 +116,11 @@ public class XPathReaderFactoryTest extends TestCase
         {
             fail( e.getMessage() );
         }
+        finally
+        {
+            System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                                "" );
+        }
     }
 
     public void testInvalidByProperty()
@@ -133,6 +138,11 @@ public class XPathReaderFactoryTest extends TestCase
         {
             // expected and correct
         }
+        finally
+        {
+            System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                                "" );
+        }
     }
 
     public void testNonExistantByProperty()
@@ -149,6 +159,11 @@ public class XPathReaderFactoryTest extends TestCase
         catch (org.jaxen.saxpath.SAXPathException e)
         {
             // expected and correct
+        }
+        finally
+        {
+            System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                                "" );
         }
     }
 

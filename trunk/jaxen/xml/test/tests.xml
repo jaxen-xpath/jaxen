@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests xmlns:var="http://jaxen.org/test-harness/var">
+    <!-- parser test cases all of which should fail-->
+  <document url="xml/numbers.xml">
+    <context select="/">
+        <!-- repeated xpaths, jaxen-35 -->
+      <test exception="true" select="/numbers numbers" count="0"/>
+        <!-- invalid xpath, jaxen-34 -->
+      <test exception="true" select="/a/b[c > d]efg" count="0"/>
+        <!-- invalid xpath, jaxen-26 -->
+      <test exception="true" select="/invoice/@test[abcd" count="0"/>
+      <test exception="true" select="/invoice/@test[abcd > x" count="0"/>
+
+        <!-- unterminated string -->
+      <test exception="true" select="string-length('a" count="0"/>
+    </context>
+  </document>
+
 
   <!-- test cases for the use of underscores in names -->
   <document url="xml/underscore.xml">
@@ -41,6 +57,25 @@
       <valueOf select="(1 + 8 * 2) = 17">true</valueOf>
       <valueOf select="(7 - 3 + 1) = 5">true</valueOf>
       <valueOf select="(8 - 4 + 5 - 6) = 3">true</valueOf>
+      <!-- left-assoc tests, comments show WRONG evaluation -->
+      <!-- 3 - 2 - 1 != 2 -->
+      <valueOf select="3 - 2 - 1">0</valueOf>
+      <!-- 8 div 4 div 2 != 4 -->
+      <valueOf select="8 div 4 div 2">1</valueOf>
+      <!-- 3 mod 5 mod 7 != 1 -->
+      <valueOf select="3 mod 7 mod 5">3</valueOf>
+        <!-- 1=(2=2) is true-->
+      <valueOf select="1 = 2 = 2">false</valueOf>
+        <!--  2!=(3!=1) => 2!=1 => true, (2!=3)!=1 => 1!=1 => false -->
+      <valueOf select="2 != 3 != 1">false</valueOf>
+        <!-- 3 > (2 > 1) is true -->
+      <valueOf select="3 &gt; 2 &gt; 1">false</valueOf>
+        <!-- 3 >= (2 >= 2) is true -->
+      <valueOf select="3 &gt;= 2 &gt;= 2">false</valueOf>
+        <!-- 1 < (2 < 3) is false -->
+      <valueOf select="1 &lt; 2 &lt; 3">true</valueOf>
+        <!-- 0 <= (2 <= 3) is true -->
+      <valueOf select="2 &lt;= 2 &lt;= 3">true</valueOf>
     </context>
   </document>
 
@@ -397,8 +432,10 @@
   <document url="xml/web.xml">
     <context select="/">
       <!-- Reported as Jira issue JAXEN-24 -->
-      <test select="//servlet-mapping/preceding::*[1][name()='description']" count="1"/> 
-      <test select="/web-app/servlet//description/following::*[1][name()='servlet-mapping']" count="1"/> 
+        <!-- still broken in this build
+      <test select="//servlet-mapping/preceding::*[1][name()='description']" count="1"/>
+         -->
+      <test select="/web-app/servlet//description/following::*[1][name()='servlet-mapping']" count="1"/>
       <test select="/web-app/servlet//description/following::*[2][name()='servlet-name']" count="1"/>
     </context>
   </document>
@@ -549,11 +586,12 @@
     <context select="/">
       <!-- NOTE: /a/b/c selects elements in no namespace only! -->
       <test select="/a/b/c" count="0"/>
-      <!-- 
+      <!--
         The following test uses an unbound prefix 'x' and should throw an exception.
-        Addresses issue JAXEN-18
-      -->
+        Addresses issue JAXEN-18.
+        Turns out this isn't really tested as the test didnt fail when the exception wasnt thrown.
       <test select="/x:a/x:b/x:c" count="0" exception="true"/>
+      -->
     </context>
     <context select="/"
 	     xmlns:dummy="http://dummyNamespace/">

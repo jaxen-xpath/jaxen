@@ -133,9 +133,12 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (org.jaxen.saxpath.XPathSyntaxException e)
         {
-            throw new org.jaxen.XPathSyntaxException( e.getXPath(),
-                                                      e.getPosition(),
-                                                      e.getMessage() );
+            org.jaxen.XPathSyntaxException je = new org.jaxen.XPathSyntaxException( e.getXPath(),
+                                                                  e.getPosition(),
+                                                                  e.getMessage() );
+            je.initCause(e);
+            //throw je;
+            throw new org.jaxen.XPathSyntaxException(e);
         }
         catch (org.jaxen.saxpath.SAXPathException e)
         {
