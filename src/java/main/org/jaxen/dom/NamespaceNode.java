@@ -405,7 +405,7 @@ public class NamespaceNode implements Node
      */
     public String getLocalName ()
     {
-	return null;
+	return name;
     }
 
 
