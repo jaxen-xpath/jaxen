@@ -1,67 +1,50 @@
-/*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- * 
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions, and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions, and the disclaimer that follows 
- *    these conditions in the documentation and/or other materials 
- *    provided with the distribution.
- *
- * 3. The name "Jaxen" must not be used to endorse or promote products
- *    derived from this software without prior written permission.  For
- *    written permission, please contact license@jaxen.org.
- * 
- * 4. Products derived from this software may not be called "Jaxen", nor
- *    may "Jaxen" appear in their name, without prior written permission
- *    from the Jaxen Project Management (pm@jaxen.org).
- * 
- * In addition, we request (but do not require) that you include in the 
- * end-user documentation provided with the redistribution and/or in the 
- * software itself an acknowledgement equivalent to the following:
- *     "This product includes software developed by the
- *      Jaxen Project (http://www.jaxen.org/)."
- * Alternatively, the acknowledgment may be graphical using the logos 
- * available at http://www.jaxen.org/
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- *
- * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
- * 
- * $Id$
- */
-
-
-
 package org.jaxen;
+
+/*
+ $Id$
+
+ Copyright 2003 (C) The Werken Company. All Rights Reserved.
+ 
+ Redistribution and use of this software and associated documentation
+ ("Software"), with or without modification, are permitted provided
+ that the following conditions are met:
+
+ 1. Redistributions of source code must retain copyright
+    statements and notices.  Redistributions must also contain a
+    copy of this document.
+ 
+ 2. Redistributions in binary form must reproduce the
+    above copyright notice, this list of conditions and the
+    following disclaimer in the documentation and/or other
+    materials provided with the distribution.
+ 
+ 3. The name "jaxen" must not be used to endorse or promote
+    products derived from this Software without prior written
+    permission of The Werken Company.  For written permission,
+    please contact bob@werken.com.
+ 
+ 4. Products derived from this Software may not be called "jaxen"
+    nor may "jaxen" appear in their names without prior written
+    permission of The Werken Company. "jaxen" is a registered
+    trademark of The Werken Company.
+ 
+ 5. Due credit should be given to The Werken Company.
+    (http://jaxen.werken.com/).
+ 
+ THIS SOFTWARE IS PROVIDED BY THE WERKEN COMPANY AND CONTRIBUTORS
+ ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
+ NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
+ THE WERKEN COMPANY OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ */
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -78,17 +61,16 @@ import org.saxpath.SAXPathException;
  *  {@link UnsupportedAxisException} is to be thrown.
  *  </p>
  *
- *  @author bob mcwhirter (bob@werken.com)
+ *  @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ *
+ *  @version $Id$
  */
 public interface Navigator extends Serializable
 {
-
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
     //     Axis Iterators
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     /** Retrieve an <code>Iterator</code> matching the <code>child</code>
      *  xpath axis.
@@ -100,7 +82,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getChildAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getChildAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>descendant</code>
      *  xpath axis.
@@ -112,7 +95,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getDescendantAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getDescendantAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>parent</code> xpath axis.
      *
@@ -123,7 +107,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getParentAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getParentAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>ancestor</code>
      *  xpath axis.
@@ -135,7 +120,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getAncestorAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getAncestorAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
      *  <code>following-sibling</code> xpath axis.
@@ -147,7 +133,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getFollowingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getFollowingSiblingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
      *  <code>preceding-sibling</code> xpath axis.
@@ -159,7 +146,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getPrecedingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getPrecedingSiblingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>following</code>
      *  xpath axis.
@@ -171,7 +159,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getFollowingAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getFollowingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>preceding</code> xpath axis.
      *
@@ -182,7 +171,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getPrecedingAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getPrecedingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>attribute</code>
      *  xpath axis.
@@ -194,7 +184,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getAttributeAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getAttributeAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>namespace</code>
      *  xpath axis.
@@ -206,7 +197,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getNamespaceAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getNamespaceAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>self</code> xpath
      *  axis.
@@ -218,7 +210,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getSelfAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
      *  <code>descendant-or-self</code> xpath axis.
@@ -230,7 +223,8 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getDescendantOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getDescendantOrSelfAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
      *  <code>ancestor-or-self</code> xpath axis.
@@ -242,29 +236,31 @@ public interface Navigator extends Serializable
      *  @throws UnsupportedAxisException is the semantics of this axis are
      *          not supported by this object model.
      */
-    Iterator getAncestorOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
+    Iterator getAncestorOrSelfAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
     //     Extractors
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     /** Loads a document from the given URI
      *
-     * @param uri is the URI of the document to load
+     *  @param uri is the URI of the document to load
      *
-     * @throws FunctionCallException if the document could not be loaded
+     *  @return The document.
+     *
+      * @throws FunctionCallException if the document could not be loaded
      */
-    Object getDocument(String uri) throws FunctionCallException;
+    Object getDocument(String uri)
+        throws FunctionCallException;
 
     /** Returns the document node that contains the given context node.
      *
-     *  @param object The context node.
+     *  @see #isDocument(Object)
+     *
+     *  @param contextNode The context node.
      *
      *  @return The document of the context node.
-     *
-     *  @see #isDocument(Object)
      */
     Object getDocumentNode(Object contextNode);
     
@@ -275,14 +271,18 @@ public interface Navigator extends Serializable
      *  node or an element node.
      *  </p>
      *
-     *  @param object The context node.
+     *  @see #isDocument
+     *  @see #isElement
+     *
+     *  @param contextNode The context node.
      *
      *  @return The parent of the context node.
      *
-     *  @see #isDocument
-     *  @see #isElement
+     *  @throws UnsupportedAxisException If the parent axis is not
+     *          supported by the model.
      */
-    Object getParentNode(Object contextNode) throws UnsupportedAxisException;
+    Object getParentNode(Object contextNode)
+        throws UnsupportedAxisException;
     
     /** Retrieve the namespace URI of the given element node.
      *
@@ -310,7 +310,7 @@ public interface Navigator extends Serializable
 
     /** Retrieve the namespace URI of the given attribute node.
      *
-     *  @param element The context attribute node.
+     *  @param attr The context attribute node.
      *
      *  @return The namespace URI of the attribute node.
      */
@@ -318,7 +318,7 @@ public interface Navigator extends Serializable
 
     /** Retrieve the name of the given attribute node.
      *
-     *  @param element The context attribute node.
+     *  @param attr The context attribute node.
      *
      *  @return The name of the attribute node.
      */
@@ -326,7 +326,7 @@ public interface Navigator extends Serializable
 
     /** Retrieve the QName of the given attribute node.
      *
-     *  @param element The context attribute node.
+     *  @param attr The context attribute node.
      *
      *  @return The QName of the attribute node.
      */
@@ -348,11 +348,9 @@ public interface Navigator extends Serializable
      */
     String getProcessingInstructionData(Object pi);
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
     //     isXXX testers
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     /** Returns whether the given object is a document node. A document node
      *  is the node that is selected by the xpath expression <code>/</code>.
@@ -418,11 +416,9 @@ public interface Navigator extends Serializable
      */
     boolean isProcessingInstruction(Object object);
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
     //     String-Value extractors
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     /** Retrieve the string-value of a comment node.
      *
@@ -450,7 +446,7 @@ public interface Navigator extends Serializable
 
     /** Retrieve the string-value of a namespace node.
      *
-     *  @param attr The namespace node.
+     *  @param ns The namespace node.
      *
      *  @return The string-value of the node.
      */
@@ -458,17 +454,15 @@ public interface Navigator extends Serializable
 
     /** Retrieve the string-value of a text node.
      *
-     *  @param attr The text node.
+     *  @param txt The text node.
      *
      *  @return The string-value of the node.
      */
     String getTextStringValue(Object txt);
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
     //     General utilities
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     /** Retrieve the namespace prefix of a namespace node.
      *
@@ -488,25 +482,30 @@ public interface Navigator extends Serializable
      *  is provided to allow a non-conforming ease-of-use enhancement.
      *  </p>
      *
+     *  @see NamespaceContext
+     *
      *  @param prefix The prefix to translate.
      *  @param element The element to consider during translation.
      *
      *  @return The namespace URI associated with the prefix.
-     *
-     *  @see NamespaceContext
      */
-    String translateNamespacePrefixToUri(String prefix, Object element);
+    String translateNamespacePrefixToUri(String prefix,
+                                         Object element);
 
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on documents that use the same navigator as this one.
+     *
+     *  @see XPath
      *
      *  @param xpath The xpath expression.
      *
      *  @return A new XPath expression object.
      *
-     *  @see XPath
+     *  @throws SAXPathException If an error occurs while parsing the
+     *          xpath expression.
      */
-    XPath parseXPath(String xpath) throws SAXPathException;
+    XPath parseXPath(String xpath)
+        throws SAXPathException;
 
     /**
      *  Returns the element whose ID is given by elementId.
@@ -523,7 +522,8 @@ public interface Navigator extends Serializable
      *            element exists in the document or if the implementation
      *            does not know about attribute types
      */
-    Object getElementById(Object contextNode, String elementId);
+    Object getElementById(Object contextNode,
+                          String elementId);
 
     /** Returns a number that identifies the type of node that the given
      *  object represents in this navigator.

@@ -1,8 +1,7 @@
 body {
  background: #fff;
  color: #000;
- max-width: 9in;
-	letter-spacing:1px;
+ letter-spacing:1px;
  }
 
 a {
@@ -19,17 +18,28 @@ table {
         font-family: sans-serif;
 	border: solid 1px #999999;
         padding:6px;
-        background-color:#eeeeee;
+        background-color:#dddddd;
 	color:#990000;
 	font-size:14pt;
 	margin: 1pt;
 	margin-top: 6pt;
+	margin-left: -10px;
 }
 
 .app h3 a {
-	font-size:9pt;
+	font-size:14pt;
 	font-stretch:expanded;
 }
+
+.app h3 a:before {
+	content: "[ ";
+}
+
+.app h3 a:after {
+	content: " ]";
+}
+
+
 
 .app h4 {
         font-family: sans-serif;
@@ -37,12 +47,20 @@ table {
         padding:2px;
         background-color:#eeeeee;
 	color:#990000;
-	padding-left: 24px;
-	margin-left:.25in;
+	margin-left: -5px;
+	padding-left: 10px;
 }
 
 .app h4 a {
 	font-size:8pt;
+}
+
+.app h4 a:before {
+	content: "...";
+}
+
+.app h4 a:after {
+	content: "...";
 }
 
 .app th {
@@ -92,8 +110,8 @@ div#banner {
  }
 
 #bodycol div.h3 p {
-	max-width: 5.5in;
-	margin-left: 36pt;
+        max-width: 5in;
+	margin-left: 20px;
 	line-height: 1.6em;
 	font-size: 8pt;
 	color:#777777;
@@ -123,6 +141,7 @@ div#banner {
  border-bottom: none;
  border-top: none;
  min-width:1.5in;
+ margin-left:10px;
  }
 
 #navcolumn div strong {
@@ -168,11 +187,9 @@ div#banner {
  margin-top: 1em;
  }
 
-p tt {
- font-size: 7pt;
+pre {
  margin-right: 7px;
  margin-left: 7px;
- color: #000000;
  }
 
 #footer {
