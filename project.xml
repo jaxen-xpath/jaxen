@@ -184,9 +184,6 @@
       <id>jdom</id>
       <version>b10</version>
       <url>http://jdom.org</url>
-<!--
-      <jar>jdom-1.0.b10.jar</jar>
--->
     </dependency>
 
     <dependency>

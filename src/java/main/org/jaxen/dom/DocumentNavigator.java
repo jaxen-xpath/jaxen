@@ -1,3 +1,5 @@
+package org.jaxen.dom;
+
 /*
  * $Header$
  * $Revision$
@@ -5,7 +7,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2004 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,12 +59,7 @@
  * Jaxen Project, please see <http://www.jaxen.org/>.
  *
  * $Id$
- */
-
-// DocumentNavigator.java - Jaxen adapter for the W3C DOM level 2.
-// This file is in the Public Domain, and comes with NO WARRANTY.
-
-package org.jaxen.dom;
+*/
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -74,6 +71,7 @@ import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
+import org.jaxen.JaxenConstants;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -113,12 +111,6 @@ public class DocumentNavigator extends DefaultNavigator
     ////////////////////////////////////////////////////////////////////
     // Constants.
     ////////////////////////////////////////////////////////////////////
-
-    /**
-     * Constant: empty iterator.
-     */
-    private final static Iterator EMPTY_ITERATOR =
-    new HashMap().values().iterator();
 
     /**
      * Constant: singleton navigator.
@@ -341,7 +333,7 @@ public class DocumentNavigator extends DefaultNavigator
         if (isElement(contextNode)) {
             return new AttributeIterator((Node)contextNode);
         } else {
-            return EMPTY_ITERATOR;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
     }
 
@@ -405,7 +397,7 @@ public class DocumentNavigator extends DefaultNavigator
                 nsMap.remove("");
             return nsMap.values().iterator();
         } else {
-            return EMPTY_ITERATOR;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
     }
 

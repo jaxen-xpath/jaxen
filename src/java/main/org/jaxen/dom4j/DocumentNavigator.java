@@ -1,49 +1,65 @@
-/*
- $Id$
-
- Copyright 2003 (C) The Werken Company. All Rights Reserved.
- 
- Redistribution and use of this software and associated documentation
- ("Software"), with or without modification, are permitted provided
- that the following conditions are met:
-
- 1. Redistributions of source code must retain copyright
-    statements and notices.  Redistributions must also contain a
-    copy of this document.
- 
- 2. Redistributions in binary form must reproduce the
-    above copyright notice, this list of conditions and the
-    following disclaimer in the documentation and/or other
-    materials provided with the distribution.
- 
- 3. The name "jaxen" must not be used to endorse or promote
-    products derived from this Software without prior written
-    permission of The Werken Company.  For written permission,
-    please contact bob@werken.com.
- 
- 4. Products derived from this Software may not be called "jaxen"
-    nor may "jaxen" appear in their names without prior written
-    permission of The Werken Company. "jaxen" is a registered
-    trademark of The Werken Company.
- 
- 5. Due credit should be given to The Werken Company.
-    (http://jaxen.werken.com/).
- 
- THIS SOFTWARE IS PROVIDED BY THE WERKEN COMPANY AND CONTRIBUTORS
- ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
- NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
- THE WERKEN COMPANY OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
- STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- OF THE POSSIBILITY OF SUCH DAMAGE.
-
- */
 package org.jaxen.dom4j;
+
+/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright (C) 2000-2005 bob mcwhirter & James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions, and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions, and the disclaimer that follows
+ *    these conditions in the documentation and/or other materials
+ *    provided with the distribution.
+ *
+ * 3. The name "Jaxen" must not be used to endorse or promote products
+ *    derived from this software without prior written permission.  For
+ *    written permission, please contact license@jaxen.org.
+ *
+ * 4. Products derived from this software may not be called "Jaxen", nor
+ *    may "Jaxen" appear in their name, without prior written permission
+ *    from the Jaxen Project Management (pm@jaxen.org).
+ *
+ * In addition, we request (but do not require) that you include in the
+ * end-user documentation provided with the redistribution and/or in the
+ * software itself an acknowledgement equivalent to the following:
+ *     "This product includes software developed by the
+ *      Jaxen Project (http://www.jaxen.org/)."
+ * Alternatively, the acknowledgment may be graphical using the logos
+ * available at http://www.jaxen.org/
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter <bob@werken.com> and
+ * James Strachan <jstrachan@apache.org>.  For more information on the
+ * Jaxen Project, please see <http://www.jaxen.org/>.
+ *
+ * $Id$
+*/
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -68,6 +84,7 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.NamedAccessNavigator;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
+import org.jaxen.JaxenConstants;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.util.SingleObjectIterator;
 
@@ -154,8 +171,8 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         Element elem = (Element) obj;
         
         String uri = elem.getNamespaceURI();
-        if ( uri != null && uri.length() == 0 ) 
-            return null;
+        if ( uri == null)
+            return "";
         else
             return uri;
     }
@@ -179,8 +196,8 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         Attribute attr = (Attribute) obj;
 
         String uri = attr.getNamespaceURI();
-        if ( uri != null && uri.length() == 0 ) 
-            return null;
+        if ( uri == null)
+            return "";
         else
             return uri;
     }
@@ -194,14 +211,16 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
 
     public Iterator getChildAxisIterator(Object contextNode)
     {
+        Iterator result = null;
         if ( contextNode instanceof Branch )
         {
             Branch node = (Branch) contextNode;
-            
-            return node.nodeIterator();
+            result = node.nodeIterator();
         }
-
-        return null;
+        if (result != null) {
+            return result;
+        }
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     /**
@@ -225,24 +244,24 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
             Document node = (Document) contextNode;
             Element el = node.getRootElement();
             if (el.getName().equals(localName) == false) {
-                return null;
+                return JaxenConstants.EMPTY_ITERATOR;
             }
             if (namespaceURI != null) {
                 if (namespaceURI.equals(el.getNamespaceURI()) == false) {
-                    return null;
+                    return JaxenConstants.EMPTY_ITERATOR;
                 }
             }
             return new SingleObjectIterator(el);
         }
 
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     public Iterator getParentAxisIterator(Object contextNode)
     {
         if ( contextNode instanceof Document )
         {
-            return null;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
 
         Node node = (Node) contextNode;
@@ -261,7 +280,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
     {
         if ( ! ( contextNode instanceof Element ) )
         {
-            return null;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
 
         Element elem = (Element) contextNode;
@@ -277,7 +296,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
      * @param namespaceURI  the uri of the namespace of the attributes to return
-     * @return an Iterator that traverses the named attributes, or null if none
+     * @return an Iterator that traverses the named attributes, not null
      */
     public Iterator getAttributeAxisIterator(
             Object contextNode, String localName, String namespacePrefix, String namespaceURI) {
@@ -286,18 +305,18 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
             Element node = (Element) contextNode;
             Attribute attr = node.attribute(QName.get(localName, namespacePrefix, namespaceURI));
             if (attr == null) {
-                return null;
+                return JaxenConstants.EMPTY_ITERATOR;
             }
             return new SingleObjectIterator(attr);
         }
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
         
     public Iterator getNamespaceAxisIterator(Object contextNode)
     {
         if ( ! ( contextNode instanceof Element ) )
         {
-            return null;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
 
         Element element = (Element) contextNode;
@@ -350,6 +369,9 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
             if ( answer == null ) 
             {
                 answer = node.getDocument();
+                if (answer == contextNode) {
+                    return null;
+                }
                 if ( answer == null )
                 {
                     answer = node;

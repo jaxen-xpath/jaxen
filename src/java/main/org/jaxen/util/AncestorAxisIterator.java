@@ -68,32 +68,15 @@ import java.util.Iterator;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
-public class AncestorAxisIterator extends StackedIterator
+public class AncestorAxisIterator extends AncestorOrSelfAxisIterator
 {
     public AncestorAxisIterator(Object contextNode,
                                 Navigator navigator)
     {
         super( contextNode,
                navigator );
-        pushIterator( internalCreateIterator( contextNode ) );
-    }
-
-    protected AncestorAxisIterator()
-    {
-
-    }
-
-    protected Iterator createIterator(Object contextNode) 
-    {
-        try
-        {
-            return getNavigator().getParentAxisIterator( contextNode );
+        if (hasNext()) {
+            next();
         }
-        catch (UnsupportedAxisException e)
-        {
-            // okay...
-        }
-
-        return null;
     }
 }

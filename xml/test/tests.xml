@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests xmlns:var="http://jaxen.org/test-harness/var">
+    <!-- test for jaxen-24 -->
+   <document url="xml/jaxen24.xml">
+       <context select="/body/div">
+           <test select="preceding::*[1]" count="1"/>
+           <valueOf select="local-name(preceding::*[1])">span</valueOf>
+       </context>
+   </document>
+
+    <!-- test for jaxen-3 -->
+  <document url="xml/simple.xml">
+    <context select="/">
+      <valueOf select="string()">abd</valueOf>
+    </context>
+    <context select="/root">
+      <valueOf select="string()">abd</valueOf>
+    </context>
+    <context select="/root/a">
+      <valueOf select="string()">a</valueOf>
+    </context>
+    <context select="/root/c">
+      <valueOf select="string()">d</valueOf>
+    </context>
+  </document>
+
+
     <!-- test for jaxen-3 -->
   <document url="xml/jaxen3.xml">
     <context select="/">

@@ -427,7 +427,7 @@ public abstract class XPathTestBase extends TestCase
 
         try
         {
-            Object node = xpath.selectSingleNode( getContext( context ) );
+            Object node = xpath.evaluate( getContext( context ) );
             
             String expected = valueOf.getText();
             String result = StringFunction.evaluate( node,

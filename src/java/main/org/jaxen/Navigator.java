@@ -1,50 +1,65 @@
 package org.jaxen;
 
 /*
- $Id$
-
- Copyright 2003 (C) The Werken Company. All Rights Reserved.
- 
- Redistribution and use of this software and associated documentation
- ("Software"), with or without modification, are permitted provided
- that the following conditions are met:
-
- 1. Redistributions of source code must retain copyright
-    statements and notices.  Redistributions must also contain a
-    copy of this document.
- 
- 2. Redistributions in binary form must reproduce the
-    above copyright notice, this list of conditions and the
-    following disclaimer in the documentation and/or other
-    materials provided with the distribution.
- 
- 3. The name "jaxen" must not be used to endorse or promote
-    products derived from this Software without prior written
-    permission of The Werken Company.  For written permission,
-    please contact bob@werken.com.
- 
- 4. Products derived from this Software may not be called "jaxen"
-    nor may "jaxen" appear in their names without prior written
-    permission of The Werken Company. "jaxen" is a registered
-    trademark of The Werken Company.
- 
- 5. Due credit should be given to The Werken Company.
-    (http://jaxen.werken.com/).
- 
- THIS SOFTWARE IS PROVIDED BY THE WERKEN COMPANY AND CONTRIBUTORS
- ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
- NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
- THE WERKEN COMPANY OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
- STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- OF THE POSSIBILITY OF SUCH DAMAGE.
-
- */
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright (C) 2000-2005 bob mcwhirter & James Strachan.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions, and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions, and the disclaimer that follows
+ *    these conditions in the documentation and/or other materials
+ *    provided with the distribution.
+ *
+ * 3. The name "Jaxen" must not be used to endorse or promote products
+ *    derived from this software without prior written permission.  For
+ *    written permission, please contact license@jaxen.org.
+ *
+ * 4. Products derived from this software may not be called "Jaxen", nor
+ *    may "Jaxen" appear in their name, without prior written permission
+ *    from the Jaxen Project Management (pm@jaxen.org).
+ *
+ * In addition, we request (but do not require) that you include in the
+ * end-user documentation provided with the redistribution and/or in the
+ * software itself an acknowledgement equivalent to the following:
+ *     "This product includes software developed by the
+ *      Jaxen Project (http://www.jaxen.org/)."
+ * Alternatively, the acknowledgment may be graphical using the logos
+ * available at http://www.jaxen.org/
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter <bob@werken.com> and
+ * James Strachan <jstrachan@apache.org>.  For more information on the
+ * Jaxen Project, please see <http://www.jaxen.org/>.
+ *
+ * $Id$
+*/
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -56,7 +71,8 @@ import java.util.Iterator;
  *  There is a method to obtain a <code>java.util.Iterator</code>,
  *  for each axis specified by XPath.  If the target object model
  *  does not support the semantics of a particular axis, an
- *  {@link UnsupportedAxisException} is to be thrown.
+ *  {@link UnsupportedAxisException} is to be thrown. If there are
+ *  no nodes on that axis, an empty iterator should be returned.
  *  </p>
  *
  *  @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
@@ -75,7 +91,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -88,7 +104,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -100,7 +116,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -113,7 +129,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -126,7 +142,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -139,7 +155,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -152,7 +168,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -164,7 +180,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -177,7 +193,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -190,7 +206,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -203,7 +219,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -216,7 +232,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -229,7 +245,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the original context node
      *
-     *  @return an Iterator capable of traversing the axis
+     *  @return An Iterator capable of traversing the axis, not null.
      *
      *  @throws UnsupportedAxisException if the semantics of this axis are
      *          not supported by this object model
@@ -274,7 +290,7 @@ public interface Navigator extends Serializable
      *
      *  @param contextNode the context node
      *
-     *  @return the parent of the context node
+     *  @return The parent of the context node, or null if this is a document node.
      *
      *  @throws UnsupportedAxisException If the parent axis is not
      *          supported by the model.
@@ -428,9 +444,9 @@ public interface Navigator extends Serializable
 
     /** Retrieve the string-value of an element node.
      *
-     *  @param element the element node
+     *  @param element The comment node.
      *
-     *  @return the string-value of the node
+     *  @return The string-value of the node.
      */
     String getElementStringValue(Object element);
 

@@ -1,3 +1,5 @@
+package org.jaxen.util;
+
 /*
  * $Header$
  * $Revision$
@@ -5,35 +7,35 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions, and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions, and the disclaimer that follows 
- *    these conditions in the documentation and/or other materials 
+ *    notice, this list of conditions, and the disclaimer that follows
+ *    these conditions in the documentation and/or other materials
  *    provided with the distribution.
  *
  * 3. The name "Jaxen" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
  *    written permission, please contact license@jaxen.org.
- * 
+ *
  * 4. Products derived from this software may not be called "Jaxen", nor
  *    may "Jaxen" appear in their name, without prior written permission
  *    from the Jaxen Project Management (pm@jaxen.org).
- * 
- * In addition, we request (but do not require) that you include in the 
- * end-user documentation provided with the redistribution and/or in the 
+ *
+ * In addition, we request (but do not require) that you include in the
+ * end-user documentation provided with the redistribution and/or in the
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
  *      Jaxen Project (http://www.jaxen.org/)."
- * Alternatively, the acknowledgment may be graphical using the logos 
+ * Alternatively, the acknowledgment may be graphical using the logos
  * available at http://www.jaxen.org/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
@@ -50,20 +52,14 @@
  * SUCH DAMAGE.
  *
  * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter <bob@werken.com> and
+ * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <http://www.jaxen.org/>.
- * 
+ *
  * $Id$
- */
-
-/**
- * @author Erwin Bolwidt
- */
-
-package org.jaxen.util;
+*/
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -71,11 +67,11 @@ import java.util.NoSuchElementException;
 
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
+import org.jaxen.JaxenRuntimeException;
+import org.jaxen.JaxenConstants;
 
 public class FollowingAxisIterator implements Iterator
 {
-    private final static Iterator EMPTY_ITERATOR = Collections.EMPTY_LIST.iterator();
-    
     private Object contextNode;
     
     private Navigator navigator;
@@ -90,7 +86,7 @@ public class FollowingAxisIterator implements Iterator
         this.contextNode = contextNode;
         this.navigator = navigator;
         this.siblings = navigator.getFollowingSiblingAxisIterator(contextNode);
-        this.currentSibling = EMPTY_ITERATOR;
+        this.currentSibling = JaxenConstants.EMPTY_ITERATOR;
     }
 
     private boolean goForward()
@@ -137,10 +133,7 @@ public class FollowingAxisIterator implements Iterator
         }
         catch (UnsupportedAxisException e)
         {
-            // Appearantly, the parent/following-siblings axis is not supported
-            // for the parent node, so the iterator can't go up in the
-            // ancestry anymore.
-            return false;
+            throw new JaxenRuntimeException(e);
         }
     }
 
