@@ -61,6 +61,8 @@
 
 package org.jaxen.dom.html;
 
+import java.util.Locale;
+
 import org.jaxen.XPath;
 import org.jaxen.Navigator;
 import org.jaxen.saxpath.SAXPathException;
@@ -181,9 +183,9 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
       if (name != null && !isXMLNode(node))
       {
           if (toLowerCase)
-              name = name.toLowerCase();
+              name = name.toLowerCase(Locale.ENGLISH);
           else
-              name = name.toUpperCase();
+              name = name.toUpperCase(Locale.ENGLISH);
       }
       return name;
   }
