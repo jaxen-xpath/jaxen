@@ -2,6 +2,7 @@
 package org.jaxen;
 
 import org.jaxen.function.*;
+import org.jaxen.function.ext.MatrixConcatFunction;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -115,5 +116,11 @@ public class XPathFunctionContext extends SimpleFunctionContext
         registerFunction( "",
                           "true",
                           new TrueFunction() );
+        
+        
+        // register extension functions
+        registerFunction( "",
+                          "matrix-concat",
+                          new MatrixConcatFunction() );
     }
 }
