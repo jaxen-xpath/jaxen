@@ -203,7 +203,14 @@ public class DocumentNavigator
             }
             catch (NoSuchMethodException ee)
             {
-                method = null;
+                try
+                {
+                    method = cls.getMethod( localName, EMPTY_CLASS_ARRAY );
+                }
+                catch (NoSuchMethodException eee)
+                {
+                    method = null;
+                }
             }
         }
 
