@@ -65,9 +65,20 @@
     </context>
   </document>
 
+
+  <!-- test mumber functions -->
+
   <document url="xml/much_ado.xml">
+    <context select="/PLAY/ACT/SCENE[1]">
+      <valueOf select="count(ancestor::*)">3</valueOf>
+      <valueOf select="5+count(ancestor::*)-1">7</valueOf>
+    </context>
     <context select="/">
       <valueOf select="/PLAY/TITLE">Much Ado about Nothing</valueOf>
+      <valueOf select="2+2">4</valueOf>
+      <valueOf select="5 * 4 + 1">21</valueOf>
+      <valueOf select="10 + count(descendant::ACT) * 5">75</valueOf>
+      <valueOf select="(10 + count(descendant::ACT)) * 5">75</valueOf>
     </context>
   </document>
 
