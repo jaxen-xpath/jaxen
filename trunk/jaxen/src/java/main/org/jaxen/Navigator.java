@@ -161,6 +161,8 @@ public interface Navigator
      */
     Iterator getAncestorOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
 
+    Object getDocument(String url);
+
     Object getDocumentNode(Object contextNode);
     
     Object getParentNode(Object contextNode) throws UnsupportedAxisException;
