@@ -133,7 +133,9 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                 }
                 
                 Object   eachAxisNode = null;
-                
+
+                List interimSet=new ArrayList();
+
                 while ( axisNodeIter.hasNext() )
                 {
                     eachAxisNode = axisNodeIter.next();
@@ -147,15 +149,16 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                         {
                             unique.put( eachAxisNode,
                                         PRESENT );
-                            newNodeSet.add( eachAxisNode );
+                            interimSet.add( eachAxisNode );
                         }
                     }
                 }
+
+		eachStep.getPredicateSet().evaluatePredicates(interimSet,
+							      context.getContextSupport() );
+		newNodeSet.addAll(interimSet);
             }
             
-            
-            eachStep.getPredicateSet().evaluatePredicates( newNodeSet,
-                                                           context.getContextSupport() );
             contextNodeSet.clear();
             contextNodeSet.addAll( newNodeSet );
             newNodeSet.clear();
