@@ -19,12 +19,8 @@ import java.util.Stack;
 
 public abstract class XPathTestBase extends TestCase
 {
-    protected static String    NS_URI       = "http://jaxen.org/test-harness/ns";
-
-    protected static Namespace NS_NAMESPACE = new Namespace( "ns",
-                                                             NS_URI );
-
-    protected static String TESTS_XML = "xml/test/tests.xml";
+    protected static String    VAR_URI   = "http://jaxen.org/test-harness/var";
+    protected static String    TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean            verbose         = true;
 
@@ -116,6 +112,7 @@ public abstract class XPathTestBase extends TestCase
                                Element contextElem) throws Exception
     {
         setupNamespaceContext( contextElem );
+        setupVariableContext( contextElem );
 
         String xpathStr = contextElem.attributeValue( "select" );
 
@@ -462,5 +459,33 @@ public abstract class XPathTestBase extends TestCase
         }
 
         getContextSupport().setNamespaceContext( nsContext );
+    }
+
+    private void setupVariableContext(Element contextElem)
+    {
+        SimpleVariableContext varContext = new SimpleVariableContext();
+
+        Iterator  varIter = contextElem.attributeIterator();
+        Attribute eachVar = null;
+
+        String varName  = null;
+        String varValue = null;
+
+        while ( varIter.hasNext() )
+        {
+            eachVar = (Attribute) varIter.next();
+
+            if ( eachVar.getNamespace().getURI().equals( VAR_URI ) )
+            {
+                varName  = eachVar.getName();
+                varValue = eachVar.getValue();
+
+                varContext.setVariableValue( "",
+                                             varName,
+                                             varValue );
+            }
+        }
+
+        getContextSupport().setVariableContext( varContext );
     }
 }

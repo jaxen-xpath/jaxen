@@ -17,6 +17,11 @@ public class SimpleVariableContext implements VariableContext
                                  String localName,
                                  Object value)
     {
+        if ( prefix == null )
+        {
+            prefix = "";
+        }
+
         this.variables.put( prefix + ":" + localName,
                             value );
     }
@@ -24,6 +29,11 @@ public class SimpleVariableContext implements VariableContext
     public Object getVariableValue(String prefix,
                                    String localName)
     {
+        if ( prefix == null )
+        {
+            prefix = "";
+        }
+
         return this.variables.get( prefix + ":" + localName );
     }
 }
