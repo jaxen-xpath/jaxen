@@ -132,7 +132,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
 
     /**
      * Constructs a new, empty map with the specified initial capacity
-     * and default load factor, which is <tt>0.75</tt>.
+     * and default load factor, which is <code>0.75</code>.
      *
      * @param   initialCapacity   the initial capacity of the HashMap
      * @throws  IllegalArgumentException if the initial capacity is less
@@ -144,7 +144,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
 
     /**
      * Constructs a new, empty map with a default capacity and load
-     * factor, which is <tt>0.75</tt>.
+     * factor, which is <code>0.75</code>.
      */
     public IdentityHashMap() {
         this(11, 0.75f);
@@ -154,7 +154,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Constructs a new map with the same mappings as the given map.  The
      * map is created with a capacity of twice the number of mappings in
      * the given map or 11 (whichever is greater), and a default load factor,
-     * which is <tt>0.75</tt>.
+     * which is <code>0.75</code>.
      *
      * @param t the map whose mappings are to be placed in this map
      */
@@ -173,20 +173,20 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     }
 
     /**
-     * Returns <tt>true</tt> if this map contains no key-value mappings
+     * Returns <code>true</code> if this map contains no key-value mappings
      *
-     * @return <tt>true</tt> if this map contains no key-value mappings
+     * @return <code>true</code> if this map contains no key-value mappings
      */
     public boolean isEmpty() {
         return count == 0;
     }
 
     /**
-     * Returns <tt>true</tt> if this map maps one or more keys to the
+     * Returns <code>true</code> if this map maps one or more keys to the
      * specified value.
      *
      * @param value value whose presence in this map is to be tested.
-     * @return <tt>true</tt> if this map maps one or more keys to the
+     * @return <code>true</code> if this map maps one or more keys to the
      *         specified value
      */
     public boolean containsValue(Object value) {
@@ -208,10 +208,10 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     }
 
     /**
-     * Returns <tt>true</tt> if this map contains a mapping for the specified
+     * Returns <code>true</code> if this map contains a mapping for the specified
      * key.
      * 
-     * @return <tt>true</tt> if this map contains a mapping for the specified
+     * @return <code>true</code> if this map contains a mapping for the specified
      * key.
      * @param key key whose presence in this Map is to be tested
      */
@@ -236,10 +236,10 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
 
     /**
      * Returns the value to which this map maps the specified key.  Returns
-     * <tt>null</tt> if the map contains no mapping for this key.  A return
-     * value of <tt>null</tt> does not <i>necessarily</i> indicate that the
+     * <code>null</code> if the map contains no mapping for this key.  A return
+     * value of <code>null</code> does not <i>necessarily</i> indicate that the
      * map contains no mapping for the key; it's also possible that the map
-     * explicitly maps the key to <tt>null</tt>.  The <tt>containsKey</tt>
+     * explicitly maps the key to <code>null</code>.  The <code>containsKey</code>
      * operation may be used to distinguish these two cases.
      *
      * @return the value to which this map maps the specified key
@@ -266,7 +266,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     }
 
     /**
-     * Rehashes the contents of this map into a new <tt>IdentityHashMap</tt> instance
+     * Rehashes the contents of this map into a new <code>IdentityHashMap</code> instance
      * with a larger capacity. This method is called automatically when the
      * number of keys in this map exceeds its capacity and load factor.
      */
@@ -300,10 +300,10 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      *
      * @param key key with which the specified value is to be associated
      * @param value value to be associated with the specified key
-     * @return previous value associated with specified key, or <tt>null</tt>
-     *         if there was no mapping for key.  A <tt>null</tt> return can
+     * @return previous value associated with specified key, or <code>null</code>
+     *         if there was no mapping for key.  A <code>null</code> return can
      *         also indicate that the IdentityHashMap previously associated
-     *         <tt>null</tt> with the specified key.
+     *         <code>null</code> with the specified key.
      */
     public Object put(Object key, Object value) {
         // XXX this method is a HotSpot in Jaxen
@@ -356,9 +356,9 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Removes the mapping for this key from this map if present.
      *
      * @param key key whose mapping is to be removed from the map
-     * @return previous value associated with specified key, or <tt>null</tt>
-     *         if there was no mapping for key.  A <tt>null</tt> return can
-     *         also indicate that the map previously associated <tt>null</tt>
+     * @return previous value associated with specified key, or <code>null</code>
+     *         if there was no mapping for key.  A <code>null</code> return can
+     *         also indicate that the map previously associated <code>null</code>
      *         with the specified key.
      */
     public Object remove(Object key) {
@@ -434,7 +434,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     }
 
     /**
-     * Returns a shallow copy of this <tt>IdentityHashMap</tt> instance: the keys and
+     * Returns a shallow copy of this <code>IdentityHashMap</code> instance: the keys and
      * values themselves are not cloned.
      *
      * @return a shallow copy of this map
@@ -468,10 +468,10 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Returns a set view of the keys contained in this map.  The set is
      * backed by the map, so changes to the map are reflected in the set, and
      * vice-versa.  The set supports element removal, which removes the
-     * corresponding mapping from this map, via the <tt>Iterator.remove</tt>,
-     * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt>, and
-     * <tt>clear</tt> operations.  It does not support the <tt>add</tt> or
-     * <tt>addAll</tt> operations.
+     * corresponding mapping from this map, via the <code>Iterator.remove</code>,
+     * <code>Set.remove</code>, <code>removeAll</code>, <code>retainAll</code>, and
+     * <code>clear</code> operations.  It does not support the <code>add</code> or
+     * <code>addAll</code> operations.
      *
      * @return a set view of the keys contained in this map
      */
@@ -505,9 +505,9 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * collection is backed by the map, so changes to the map are reflected in
      * the collection, and vice-versa.  The collection supports element
      * removal, which removes the corresponding mapping from this map, via the
-     * <tt>Iterator.remove</tt>, <tt>Collection.remove</tt>,
-     * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt> operations.
-     * It does not support the <tt>add</tt> or <tt>addAll</tt> operations.
+     * <code>Iterator.remove</code>, <code>Collection.remove</code>,
+     * <code>removeAll</code>, <code>retainAll</code>, and <code>clear</code> operations.
+     * It does not support the <code>add</code> or <code>addAll</code> operations.
      *
      * @return a collection view of the values contained in this map
      */
@@ -533,13 +533,13 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
 
     /**
      * Returns a collection view of the mappings contained in this map.  Each
-     * element in the returned collection is a <tt>Map.Entry</tt>.  The
+     * element in the returned collection is a <code>Map.Entry</code>.  The
      * collection is backed by the map, so changes to the map are reflected in
      * the collection, and vice-versa.  The collection supports element
      * removal, which removes the corresponding mapping from the map, via the
-     * <tt>Iterator.remove</tt>, <tt>Collection.remove</tt>,
-     * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt> operations.
-     * It does not support the <tt>add</tt> or <tt>addAll</tt> operations.
+     * <code>Iterator.remove</code>, <code>Collection.remove</code>,
+     * <code>removeAll</code>, <code>retainAll</code>, and <code>clear</code> operations.
+     * It does not support the <code>add</code> or <code>addAll</code> operations.
      *
      * @return a collection view of the mappings contained in this map
      * @see Map.Entry
@@ -778,12 +778,12 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     }
 
     /**
-     * Save the state of the <tt>IdentityHashMap</tt> instance to a stream (i.e.,
+     * Save the state of the <code>IdentityHashMap</code> instance to a stream (i.e.,
      * serialize it).
      *
-     * @serialData the <i>capacity</i> of the IdentityHashMap (the length of the
+     * @serialData the <em>capacity</em> of the IdentityHashMap (the length of the
      *             bucket array) is emitted (int), followed  by the
-     *             <i>size</i> of the IdentityHashMap (the number of key-value
+     *             <em>size</em> of the IdentityHashMap (the number of key-value
      *             mappings), followed by the key (Object) and value (Object)
      *             for each key-value mapping represented by the IdentityHashMap.
      *             The key-value mappings are emitted in no particular order.
@@ -815,7 +815,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     private static final long serialVersionUID = 362498820763181265L;
 
     /**
-     * Reconstitute the <tt>IdentityHashMap</tt> instance from a stream (i.e.,
+     * Reconstitute the <code>IdentityHashMap</code> instance from a stream (i.e.,
      * deserialize it).
      */
     private void readObject(java.io.ObjectInputStream s)
