@@ -11,6 +11,7 @@ import org.jaxen.JaxenHandler;
 import org.jaxen.expr.*;
 import org.jaxen.pattern.*;
 
+import org.saxpath.Axis;
 import org.saxpath.SAXPathException;
 import org.saxpath.XPathReader;
 import org.saxpath.XPathSyntaxException;
@@ -23,6 +24,7 @@ import org.saxpath.helpers.XPathReaderFactory;
   */
 public class PatternParser 
 {
+    private static final boolean TRACE = false;
     private static final boolean USE_HANDLER = false;
     
     public static Pattern parse(String text) throws JaxenException, SAXPathException
@@ -53,6 +55,11 @@ public class PatternParser
     
     protected static Pattern convertExpr(Expr expr) throws JaxenException 
     {
+        if ( TRACE )
+        {
+            System.out.println( "Converting: " + expr + " into a pattern." );
+        }
+        
         if ( expr instanceof LocationPath )
         {
             return convertExpr( (LocationPath) expr );
@@ -76,17 +83,46 @@ public class PatternParser
         }
     }
     
-    protected static LocationPathPattern convertExpr(LocationPath path) throws JaxenException
+    protected static LocationPathPattern convertExpr(LocationPath locationPath) throws JaxenException
     {
         LocationPathPattern answer = new LocationPathPattern();        
-        answer.setAbsolute( path.isAbsolute() );
-        List steps = path.getSteps();
+        //answer.setAbsolute( locationPath.isAbsolute() );
+        List steps = locationPath.getSteps();
         
         // go through steps backwards
+        LocationPathPattern path = answer;
+        boolean first = true;
         for ( ListIterator iter = steps.listIterator( steps.size() ); iter.hasPrevious(); ) 
         {
             Step step = (Step) iter.previous();
-            answer = convertStep( answer, step );
+            if ( first )
+            {
+                first = false;
+                path = convertStep( path, step );
+            }
+            else
+            {
+                if ( navigationStep( step ) ) 
+                {
+                    LocationPathPattern parent = new LocationPathPattern();
+                    int axis = step.getAxis();
+                    if ( axis == Axis.DESCENDANT || axis == Axis.DESCENDANT_OR_SELF ) 
+                    {
+                        path.setAncestorPattern( parent );
+                    }
+                    else
+                    {
+                        path.setParentPattern( parent );
+                    }
+                    path = parent;
+                }
+                path = convertStep( path, step );
+            }
+        }
+        if ( locationPath.isAbsolute() )
+        {
+            LocationPathPattern parent = new LocationPathPattern( NodeTypeTest.DOCUMENT_TEST );
+            path.setParentPattern( parent );
         }
         return answer;
     }   
@@ -95,7 +131,15 @@ public class PatternParser
     {
         if ( step instanceof DefaultAllNodeStep )
         {
-            // do nothing
+            int axis = step.getAxis();
+            if ( axis == Axis.ATTRIBUTE )
+            {
+                path.setNodeTest( NodeTypeTest.ATTRIBUTE_TEST );
+            }
+            else 
+            {
+                path.setNodeTest( NodeTypeTest.ELEMENT_TEST );
+            }
         }
         else if ( step instanceof DefaultCommentNodeStep )
         {
@@ -113,16 +157,19 @@ public class PatternParser
         {
             path.setNodeTest( NodeTypeTest.COMMENT_TEST );
         }
-        
-        
         else if ( step instanceof DefaultNameStep )
         {
             DefaultNameStep nameStep = (DefaultNameStep) step;
             String localName = nameStep.getLocalName();
             String prefix = nameStep.getPrefix();
-            short nodeType = Pattern.ELEMENT_NODE;
+            int axis = nameStep.getAxis();
             if ( ! nameStep.isMatchesAnyName() )
             {
+                short nodeType = Pattern.ANY_NODE;
+                if ( axis == Axis.ATTRIBUTE )
+                {
+                    nodeType = Pattern.ATTRIBUTE_NODE;
+                }
                 if ( prefix != null && prefix.length() > 0 && ! prefix.equals( "*" ) )
                 {
                     path.setNodeTest( new NamespaceTest( prefix, nodeType ) );
@@ -130,6 +177,13 @@ public class PatternParser
                 else 
                 {
                     path.setNodeTest( new NameTest( localName, nodeType ) );
+                }
+            }
+            else 
+            {
+                if ( axis == Axis.ATTRIBUTE )
+                {
+                    path.setNodeTest( NodeTypeTest.ATTRIBUTE_TEST );
                 }
             }
             return convertDefaultStep(path, nameStep);
@@ -158,5 +212,23 @@ public class PatternParser
             path.addFilter( filter );
         }         
         return path;
+    }
+    
+    protected static boolean navigationStep( Step step )
+    {
+        if ( step instanceof DefaultNameStep )
+        {
+            return true;
+        }
+        else
+        if ( step.getClass().equals( DefaultStep.class ) )
+        {
+            DefaultStep defaultStep = (DefaultStep) step;
+            return ! step.getPredicates().isEmpty();
+        }
+        else 
+        {
+            return true;
+        }
     }
 }

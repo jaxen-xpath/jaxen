@@ -99,9 +99,16 @@ public class LocationPathPattern extends Pattern {
     
     /** Allows the NodeTest to be set
      */
-    public void setNodeTest(NodeTest nodeTest)
+    public void setNodeTest(NodeTest nodeTest) throws JaxenException
     {
-        this.nodeTest = nodeTest;
+        if ( this.nodeTest instanceof AnyNodeTest )
+        {
+            this.nodeTest = nodeTest;
+        }   
+        else 
+        {
+            throw new JaxenException( "Attempt to overwrite nodeTest: " + this.nodeTest + " with: " + nodeTest );
+        }
     }
     
     /** @return true if the pattern matches the given node
@@ -109,11 +116,13 @@ public class LocationPathPattern extends Pattern {
     public boolean matches( Object node, Context context ) throws JaxenException
     {
         Navigator navigator = context.getNavigator();
-        
+
+/*        
         if ( isAbsolute() )
         {
             node = navigator.getDocumentNode( node );
         }
+*/
         if (! nodeTest.matches(node, context) )
         {
             return false;
@@ -230,4 +239,10 @@ public class LocationPathPattern extends Pattern {
     {
         this.absolute = absolute;
     }
+    
+    public boolean hasAnyNodeTest()
+    {
+        return nodeTest instanceof AnyNodeTest;
+    }
+        
 }

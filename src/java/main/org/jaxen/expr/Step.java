@@ -16,6 +16,8 @@ public interface Step extends Predicated
     String getText();
     void simplify();
 
+    public int getAxis();
+    
     /*
     Iterator asIterator(Iterator contextIterator,
                         ContextSupport support);

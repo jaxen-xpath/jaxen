@@ -46,6 +46,18 @@ public class NameTest extends NodeTest {
             return navigator.isAttribute( node )
                 && name.equals( navigator.getAttributeName( node ) );
         }
+        else
+        {
+            if ( navigator.isElement( node ) )
+            {
+                return name.equals( navigator.getElementName( node ) );
+            }
+            else
+            if ( navigator.isAttribute( node ) )
+            {
+                return name.equals( navigator.getAttributeName( node ) );
+            }
+        }
         return false;
     }
     

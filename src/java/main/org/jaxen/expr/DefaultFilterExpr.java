@@ -5,6 +5,7 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.List;
@@ -82,7 +83,17 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
      */
     public boolean asBoolean(Context context) throws JaxenException 
     {
-        Object results = getExpr().evaluate( context );
+        Object results = null;
+        if ( expr != null ) 
+        {
+            results = expr.evaluate( context );
+        }
+        else
+        {
+            ArrayList list = new ArrayList(1);
+            list.addAll( context.getNodeSet() );
+            results = list;
+        }
         
         if ( results instanceof List )
         {
