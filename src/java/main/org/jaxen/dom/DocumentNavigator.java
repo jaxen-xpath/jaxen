@@ -260,7 +260,7 @@ public class DocumentNavigator extends DefaultNavigator
     {
         if ( context instanceof Element ) 
         {
-            return translateNamespacePrefixToUri( "xmlns:" + prefix, context );
+            return walkHierachyForURI( "xmlns:" + prefix, (Element) context );
         }
         else if ( context instanceof Node ) 
         {
@@ -268,13 +268,13 @@ public class DocumentNavigator extends DefaultNavigator
             Node parent = node.getParentNode();
             if ( parent instanceof Element )
             {
-                return translateNamespacePrefixToUri( "xmlns:" + prefix, context );
+                return walkHierachyForURI( "xmlns:" + prefix, (Element) parent);
             }
         }
         return null;        
     }
     
-    public String translateNamespacePrefixToUri(String prefix, Element element)
+    public String walkHierachyForURI(String prefix, Element element)
     {
         String answer = element.getAttribute( prefix );
         if ( answer == null ) 
@@ -285,7 +285,7 @@ public class DocumentNavigator extends DefaultNavigator
                 Node parent = element.getParentNode();
                 if ( parent != null && parent instanceof Element )
                 {
-                    answer = translateNamespacePrefixToUri(prefix, (Element) parent);
+                    answer = walkHierachyForURI(prefix, (Element) parent);
                 }
             }
         }
