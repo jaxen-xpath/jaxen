@@ -28,12 +28,12 @@ class JaXPath
         this.xpath = handler.getXPath();
     }
 
-    public List jaSelectNodes(Context context)
+    protected List jaSelectNodes(Context context)
     { 
         return this.xpath.asList( context );
     }
 
-    public Object jaSelectSingleNode(Context context)
+    protected Object jaSelectSingleNode(Context context)
     {
         List results = jaSelectNodes( context );
 
@@ -45,7 +45,7 @@ class JaXPath
         return results.get( 0 );
     }
 
-    public String jaValueOf(Context context)
+    protected String jaValueOf(Context context)
     {
         Object result = jaSelectSingleNode( context );
 
@@ -58,7 +58,7 @@ class JaXPath
                                         context.getNavigator() );
     }
 
-    public Number jaNumberValueOf(Context context)
+    protected Number jaNumberValueOf(Context context)
     {
         Object result = jaSelectSingleNode( context );
 

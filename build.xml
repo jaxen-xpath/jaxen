@@ -7,8 +7,8 @@
     <tstamp/>
     <property name="Name" value="Jaxen"/>
     <property name="name" value="jaxen"/>
-    <property name="version" value="1.0-beta-2"/>
-    <property name="current.version" value="1.0-beta-2"/>
+    <property name="version" value="1.0-beta-3"/>
+    <property name="current.version" value="1.0-beta-3"/>
     <property name="year" value="2001"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
