@@ -93,6 +93,7 @@ public abstract class DefaultExpr implements Expr
 
     static public List convertToList(Object obj)
     {
+        // before this method is entered the nodes are in the wrong order????
         if ( obj instanceof List )
         {
             return (List) obj;
