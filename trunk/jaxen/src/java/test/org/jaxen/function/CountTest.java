@@ -61,44 +61,58 @@
 
 package org.jaxen.function;
 
-import java.util.List;
+import java.io.IOException;
 
-import org.jaxen.Context;
-import org.jaxen.Function;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import junit.framework.TestCase;
+
 import org.jaxen.FunctionCallException;
+import org.jaxen.XPath;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
- *  <p><b>4.1</b> <code><i>number</i> count(<i>node-set</i>)</code> 
- *  
- *  @author bob mcwhirter (bob @ werken.com)
+ * @author Elliotte Rusty Harold
+ *
  */
-public class CountFunction implements Function
-{
+public class CountTest extends TestCase {
 
-    public Object call(Context context,
-                       List args) throws FunctionCallException
+    private Document doc;
+    
+    public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
-        if (args.size() == 1)
-        {
-            return evaluate( args.get(0) );
-        }
-
-        throw new FunctionCallException( "count() requires one argument." );
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.parse( "xml/basic.xml" );
     }
 
-    public static Number evaluate(Object obj) throws FunctionCallException
-    {
-      if( obj == null )
-        {
-        return new Double( 0 );
-        }
-      
-        if (obj instanceof List)
-        {
-            return new Double( ((List)obj).size() );
-        }
-      
-        throw new FunctionCallException("Count function can only be used for node-sets");
-        
+
+    public CountTest(String name) {
+        super(name);
     }
+
+    public void testCount3()
+    {
+        try
+        {
+            XPath xpath = new DOMXPath( "count(3)" );
+            xpath.selectNodes( doc );
+            fail("Allowed count of number");
+       }
+       catch (FunctionCallException e) 
+        {
+           assertEquals("Count function can only be used for node-sets", e.getMessage());
+        }
+       catch (Exception e)
+        {
+            e.printStackTrace();
+            fail( e.getMessage() );
+        }
+    }    
+
 }
