@@ -16,6 +16,25 @@
     </context>
   </document>
 
+  <!-- test cases for the use of = with nodesets -->
+  <document url="xml/web.xml">
+    <context select="/">
+      <valueOf select="/web-app/servlet/servlet-name = 'file'">true</valueOf>
+      <valueOf select="/web-app/servlet/servlet-name = 'snoop'">true</valueOf>
+    </context>
+  </document>
+
+  <document url="xml/numbers.xml">
+    <context select="/">
+      <valueOf select="/numbers/set/nr = '-3'">true</valueOf>
+      <valueOf select="/numbers/set/nr = -3">true</valueOf>
+      <valueOf select="/numbers/set/nr = 24">true</valueOf>
+      <valueOf select="/numbers/set/nr/@value = '9999'">true</valueOf>
+      <valueOf select="/numbers/set/nr/@value = 9999.0">true</valueOf>
+      <valueOf select="/numbers/set/nr/@value = 66">true</valueOf>
+    </context>
+  </document>
+
   
 
   <!-- test cases for preceding axis with different node types -->
