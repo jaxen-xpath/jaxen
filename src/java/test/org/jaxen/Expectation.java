@@ -45,6 +45,11 @@ class Expectation
         return met;
     }
 
+    public int getNumberOfExpectations()
+    {
+        return this.expectations.size();
+    }
+
     public SubExpectation getFailedExpectation()
     {
         if ( this.failedIndex < 0 )

@@ -225,7 +225,7 @@ public abstract class NavigatorTestBase extends TestCase
                 
                 if ( met )
                 {
-                    System.err.println( "passed...... " + xpathStr );
+                    System.err.println( "passed...... (" + expect.getNumberOfExpectations() + ")  " + xpathStr );
                 }
                 else
                 {
