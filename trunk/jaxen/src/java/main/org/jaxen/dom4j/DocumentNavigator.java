@@ -263,6 +263,13 @@ public class DocumentNavigator extends DefaultNavigator
         return ns.getURI();
     }
 
+    public String getNamespacePrefix(Object obj)
+    {
+        Namespace ns = (Namespace) obj;
+
+        return ns.getPrefix();
+    }
+
     public String getCommentStringValue(Object obj)
     {
         Comment cmt = (Comment) obj;
