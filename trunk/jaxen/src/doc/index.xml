@@ -23,7 +23,6 @@
       <li>Sun chooses Jaxen for the XPath engine 
         <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> and 
         <a href="http://java.sun.com/webservices/webservicespack.html">Web Services pack</a>
-        which means Jaxen will be included in the J2EE reference implementation!
       </li>
       <li>
         Since the reference implementation of 
