@@ -7,8 +7,8 @@ import org.w3c.dom.Node;
 
 import org.jaxen.dom.XPath;
 
-import org.saxpath.SAXPathException;
-import org.saxpath.XPathSyntaxException;
+import org.jaxen.XPathSyntaxException;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.Iterator;
@@ -54,7 +54,7 @@ public class DOMDemo
         {
             System.err.println( e.getMultilineMessage() );
         }
-        catch (SAXPathException e)
+        catch (JaxenException e)
         {
             e.printStackTrace();
         }
