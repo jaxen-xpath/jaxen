@@ -252,7 +252,7 @@ public class DocumentNavigator extends DefaultNavigator
 
         String prefix = elem.getNamespacePrefix();
 
-        if ( "".equals( prefix ) )
+        if ( prefix == null || "".equals( prefix ) )
         {
             return elem.getName();
         }
@@ -266,7 +266,7 @@ public class DocumentNavigator extends DefaultNavigator
 
         String prefix = attr.getNamespacePrefix();
 
-        if ( "".equals( prefix ) )
+        if ( prefix == null || "".equals( prefix ) )
         {
             return attr.getName();
         }
