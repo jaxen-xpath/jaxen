@@ -76,29 +76,43 @@ class PredicateSet
         return ! contextNodeSet.isEmpty();
     }
     
-    protected void evaluatePredicates(List contextNodeSet,
+    protected List evaluatePredicates(List contextNodeSet,
                                       ContextSupport support) throws JaxenException
     {
+	// Easy way out (necessary)
+
+	if (predicates.size()==0) return contextNodeSet;
+
         List      newNodeSet  = new ArrayList();
+	List      filterSet   = contextNodeSet;
+
         List      predicates  = getPredicates();
         Iterator  predIter    = predicates.iterator();
         
         Predicate eachPred    = null;
         Object    contextNode = null;
 
-        int    contextSize = 0;
         Object predResult  = null;
         Context predContext = new Context( support );
 
-        while ( predIter.hasNext() )
+	// Filter the 'filterSet' against all predicates. This has been
+	// tuned for performance, so there are two separate loops
+
+	// In the first run, all nodes matching the first predicate will
+	// be copied from contextNodeSet to newNodeSet
+
+	// In the second loop, newNodeSet is filtered progressively against
+	// the remaining predicates, eliminating any non-matching nodes
+
+	if ( predIter.hasNext() )
         {
             eachPred = (Predicate) predIter.next();
 
-            contextSize = contextNodeSet.size();
+            int filterSize = filterSet.size();
 
-            for ( int i = 0 ; i < contextSize ; ++i )
+            for ( int i = 0 ; i < filterSize ; ++i )
             {
-                contextNode = contextNodeSet.get( i );
+                contextNode = filterSet.get( i );
 
                 List list = new ArrayList( 1 );
 
@@ -107,7 +121,7 @@ class PredicateSet
                 predContext.setNodeSet( list );
 
                 predContext.setPosition( i + 1 );
-                predContext.setSize( contextSize );
+                predContext.setSize( filterSize );
 
                 predResult = eachPred.evaluate( predContext );
 
@@ -130,10 +144,82 @@ class PredicateSet
                     }
                 }
             }
-
-            contextNodeSet.clear();
-            contextNodeSet.addAll( newNodeSet );
-            newNodeSet.clear();
         }
+
+
+	// This will be true if any filtering takes place from here on
+
+	boolean nodesFiltered = false;
+
+	// Second loop: Filter filterSet until no more predicates are left
+
+	filterSet = newNodeSet;
+
+	while ( predIter.hasNext() )
+        {
+            eachPred = (Predicate) predIter.next();
+
+
+	    int filterSize = filterSet.size();
+
+            for ( int i = 0 ; i < filterSize ; ++i )
+            {
+                contextNode = filterSet.get(i);
+
+		// Check if a node has been eliminated already
+
+		if (contextNode == null) continue;
+
+                List list = new ArrayList( 1 );
+
+                list.add( contextNode );
+
+                predContext.setNodeSet( list );
+
+                predContext.setPosition( i + 1 );
+                predContext.setSize( filterSize );
+
+                predResult = eachPred.evaluate( predContext );
+
+                if ( predResult instanceof Number )
+                {
+                    int proximity = ((Number)predResult).intValue();
+
+                    if ( proximity != ( i + 1 ) )
+                    {
+                        filterSet.set(i,null);
+			nodesFiltered = true;
+                    }
+                }
+                else
+                {
+                    Boolean includes = BooleanFunction.evaluate( predResult, predContext.getNavigator() );
+
+                    if ( !includes.booleanValue() )
+                    {
+                        filterSet.set(i,null);
+			nodesFiltered = true;
+                    }
+                }
+            }
+        }
+
+	// Go through the filtered set and delete any null nodes (if necessary)
+
+	if (nodesFiltered) 
+	{
+	    // System.err.println("FILTERING");
+
+	    Iterator iter=filterSet.iterator();
+
+	    while (iter.hasNext()) {
+		Object obj=iter.next();
+
+		if (obj==null) 
+		    iter.remove();
+	    }
+	}
+
+	return filterSet;
     }
 }
