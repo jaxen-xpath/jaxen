@@ -91,7 +91,7 @@ public class UnionPattern extends Pattern {
     public Pattern simplify() 
     {
         this.lhs = lhs.simplify();
-        this.rhs = lhs.simplify();
+        this.rhs = rhs.simplify();
         init();
         return this;
     }
