@@ -160,8 +160,8 @@ public class BaseXPathTest extends TestCase {
     public void testAncestorAxis() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ancestor::*");
-        org.w3c.dom.Element root = doc.createElementNS("", "Test");
-        org.w3c.dom.Element parent = doc.createElementNS("", "Test");
+        org.w3c.dom.Element root = doc.createElementNS("", "root");
+        org.w3c.dom.Element parent = doc.createElementNS("", "parent");
         doc.appendChild(root);
         org.w3c.dom.Element child = doc.createElementNS("", "child");
         root.appendChild(parent);
@@ -170,7 +170,26 @@ public class BaseXPathTest extends TestCase {
         List result = xpath.selectNodes(child);
         assertEquals(2, result.size());
         assertEquals(root, result.get(0));   
-        assertEquals(child, result.get(1));
+        assertEquals(parent, result.get(1));
+        
+    }    
+    
+    
+    public void testAncestorOrSelfAxis() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ancestor-or-self::*");
+        org.w3c.dom.Element root = doc.createElementNS("", "root");
+        org.w3c.dom.Element parent = doc.createElementNS("", "parent");
+        doc.appendChild(root);
+        org.w3c.dom.Element child = doc.createElementNS("", "child");
+        root.appendChild(parent);
+        parent.appendChild(child);
+        
+        List result = xpath.selectNodes(child);
+        assertEquals(3, result.size());
+        assertEquals(root, result.get(0));   
+        assertEquals(parent, result.get(1));
+        assertEquals(child, result.get(2));
         
     }    
     
@@ -406,7 +425,30 @@ public class BaseXPathTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
         
-    }    
+    } 
+    
+    public void testSelectSingleNodeSelectsNothing() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("id('p1')");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
+        Object result = xpath.selectSingleNode(doc);
+        assertNull(result);
+        
+    } 
+    
+    
+    public void testBooleanValueOfEmptyNodeSetIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/b/c");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
+        List result = xpath.selectNodes(doc);
+        assertTrue(! xpath.booleanValueOf(result));
+        
+    } 
     
     
 }
