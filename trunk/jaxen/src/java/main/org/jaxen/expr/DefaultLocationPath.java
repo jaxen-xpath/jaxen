@@ -150,7 +150,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             stepContext.setNodeSet(contextNodeSet);
             contextNodeSet = eachStep.evaluate(stepContext);
             // now we need to reverse the list if this is a reverse axis
-            // ???? should create an isReverseAxis method in Steo to handle this
+            // ???? should create an isReverseAxis method in Step to handle this
             int axis = eachStep.getAxis();
             if (axis == org.jaxen.saxpath.Axis.PRECEDING
               || axis == org.jaxen.saxpath.Axis.PRECEDING_SIBLING
@@ -159,6 +159,13 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                 Collections.reverse(contextNodeSet);
             }
         }
+        
+        if (getSteps().size() > 1) {
+            Collections.sort(contextNodeSet, new NodeComparator(support.getNavigator()));
+        }
+        
+        // FIXME I suspect we need to do this in DefaultUnionExpression too
+        
         return contextNodeSet;
     }
 
