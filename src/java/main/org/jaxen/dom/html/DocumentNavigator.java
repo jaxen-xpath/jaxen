@@ -81,7 +81,7 @@ import org.w3c.dom.Node;
  * changes all element, but not attribute, names to lowercase or uppercase
  * to aid in navigating through HTML documents.  Note that case modification
  * are bypassed for XHTML documents.  XHTML is case sensitive and can be
- * expected to store all elements and atributes in lower case. Also Note that
+ * expected to store all elements and attributes in lower case. Also note that
  * HTML attribute names are stored as lower case in the HTML (and XHTML) DOM
  * already which is why the case of attribute names are not modified.
  *
@@ -148,8 +148,7 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
      */
     public static Navigator getInstance (boolean toLowerCase)
     {
-        if (toLowerCase)
-          return LOWERCASE;
+        if (toLowerCase) return LOWERCASE;
         return UPPERCASE;
     }
 
@@ -182,10 +181,8 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
       //is not an XML document.
       if (name != null && !isXMLNode(node))
       {
-          if (toLowerCase)
-              name = name.toLowerCase(Locale.ENGLISH);
-          else
-              name = name.toUpperCase(Locale.ENGLISH);
+          if (toLowerCase) name = name.toLowerCase(Locale.ENGLISH);
+          else name = name.toUpperCase(Locale.ENGLISH);
       }
       return name;
   }
