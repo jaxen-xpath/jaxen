@@ -33,6 +33,32 @@
       <test select="//metatest[ evaluate(@select) = . ]" count="1"/>
     </context>
   </document>
+  
+  <document url="xml/numbers.xml">
+    <context select="/numbers/set[1]">
+      <test select="*[-3 = .]" count="1"/>
+      <valueOf select="54 &lt; *">true</valueOf>
+      <valueOf select="55 &lt;= *">true</valueOf>
+      <valueOf select="69 &lt; *">false</valueOf>
+      <valueOf select="-2 &gt; *">true</valueOf>
+      <valueOf select="-3 &gt;= *">true</valueOf>
+      <valueOf select="-4 &gt;= *">false</valueOf>
+    </context>
+    <context select="/numbers/set[2]">
+      <valueOf select="1 > nr/@value">false</valueOf>
+      <valueOf select="55 > nr/@value">false</valueOf>
+      <valueOf select="55 >= nr/@value">true</valueOf>
+      <valueOf select="1000000 > nr/@value">true</valueOf>
+    </context>
+    <!--
+    <context select="/numbers">
+      <valueOf select="set[1] > set[2]/nr/@value">false</valueOf>
+      <valueOf select="set[1] >= set[2]/nr/@value">true</valueOf>
+      <valueOf select="set[2]/nr/@value &lt; set[1]">false</valueOf>
+      <valueOf select="set[2]/nr/@value &lt;= set[1]">true</valueOf>
+    </context>
+    -->
+  </document>
 
   <!-- test sibling axes -->
 
