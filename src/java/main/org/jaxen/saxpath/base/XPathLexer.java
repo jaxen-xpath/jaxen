@@ -283,14 +283,25 @@ class XPathLexer
 
             if ( token == null )
             {
-                token = new Token( TokenTypes.EOF,
+                if (!hasMoreChars())
+                {
+                    token = new Token( TokenTypes.EOF,
                                    getXPath(),
                                    currentPosition(),
                                    endPosition() );
             }
+                else
+                {
+                    token = new Token( TokenTypes.ERROR,
+                                   getXPath(),
+                                   currentPosition(),
+                                   endPosition() );
+                }
+            }
+
         }
         while ( token.getTokenType() == TokenTypes.SKIP );
-        
+
         setPreviousToken( token );
         
         return token;
@@ -485,7 +496,7 @@ Token and()
                            getXPath(),
                            currentPosition(),
                            currentPosition()+3 );
-            
+
         consume();
         consume();
         consume();

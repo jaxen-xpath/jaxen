@@ -260,6 +260,9 @@ public abstract class XPathTestBase extends TestCase
         String count = test.attributeValue( "count" );
 		String exception = test.attributeValue( "exception" );
 
+        try
+        {
+
         BaseXPath xpath = new BaseXPath( xpathStr );
 
         if ( count != null )
@@ -269,21 +272,21 @@ public abstract class XPathTestBase extends TestCase
             try
             {
                 List results = xpath.selectNodes( getContext( context ) );
-                
+
                 log ( debug,
                       "    Expected Size :: " + expectedSize );
                 log ( debug,
                       "    Result Size   :: " + results.size() );
-                
+
                 if ( expectedSize != results.size() )
                 {
                     log ( debug,
                           "      ## FAILED" );
                     log ( debug,
                           "      ## xpath: " + xpath + " = " + xpath.debug() );
-                    
+
                     Iterator resultIter = results.iterator();
-                    
+
                     while ( resultIter.hasNext() )
                     {
                         log ( debug,
@@ -293,6 +296,10 @@ public abstract class XPathTestBase extends TestCase
                 assertEquals( this.executionContext.toString(),
                               expectedSize,
                               results.size() );
+
+                if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
+                    fail("An exception was expected.");
+                }
             }
             catch (UnsupportedAxisException e)
             {
@@ -301,26 +308,26 @@ public abstract class XPathTestBase extends TestCase
             }
             catch (JaxenException e) {
             	// If an exception attribute was switched on, this is the desired behaviour..
-            	
+
             	if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
             		log (debug, "    Caught expected exception "+e.getMessage());
             	} else
             		throw e;
             }
-        }      
+        }
 
         Iterator valueOfIter = test.elementIterator( "valueOf" );
 
         while ( valueOfIter.hasNext() )
         {
-        
+
             //Element valueOf = test.element( "valueOf" );
             Element valueOf = (Element) valueOfIter.next();
 
             if ( valueOf != null )
             {
                 debugStr = valueOf.attributeValue( "debug" );
-                
+
                 if ( debugStr != null )
                 {
                     if ( "true".equals( debugStr )
@@ -330,42 +337,42 @@ public abstract class XPathTestBase extends TestCase
                         debug = true;
                     }
                 }
-                
+
                 try
                 {
                     Object newContext = xpath.selectSingleNode( getContext( context ) );
-                    
+
                     log ( debug,
                           "    New Context :: " + abbreviate( newContext ) );
-                    
-                    
+
+
                     String valueOfXPathStr = valueOf.attributeValue( "select" );
-                    
+
                     log( debug,
                          "  Select :: " + valueOfXPathStr );
-                    
+
                     this.executionContext.push( valueOfXPathStr );
-                    
+
                     BaseXPath valueOfXPath = new BaseXPath( valueOfXPathStr );
-                    
+
                     Object node = valueOfXPath.selectSingleNode( getContext( newContext ) );
-                
+
                     String expected = valueOf.getText();
                     String result =   StringFunction.evaluate( node,
                                                                getNavigator() );
-                    
+
                     log ( debug,
                           "    Expected :: " + expected );
-                    
+
                     log ( debug,
                           "    Result   :: " + result );
-                    
+
                     if ( ! expected.equals( result ) )
                     {
                         log ( debug,
                               "      ## FAILED" );
                     }
-                    
+
                     assertEquals( this.executionContext.toString(),
                                   expected,
                                   result );
@@ -376,12 +383,21 @@ public abstract class XPathTestBase extends TestCase
                 {
                     log ( debug,
                           "      ## SKIPPED -- Unsupported Axis" );
-                    
+
                 }
-                
+
             }
         }
-        
+        }
+        catch (JaxenException e) {
+            // If an exception attribute was switched on, this is the desired behaviour..
+
+            if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
+                log (debug, "    Caught expected exception "+e.getMessage());
+            } else
+                throw e;
+        }
+
         this.executionContext.pop();
     }
 
