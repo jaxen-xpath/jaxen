@@ -60,8 +60,8 @@
 
   <document url="xml/id.xml">
     <context select="/"
-             var:foobar="foobar"
-             var:foo="foo">
+	     var:foobar="foobar"
+	     var:foo="foo">
       <valueOf select="$foobar">foobar</valueOf>
       <test select="/foo[@id=$foobar]" count="1"/>
       <test select="/foo[@id='$foobar']" count="0"/>
@@ -81,23 +81,12 @@
     </context>
   </document>
 
-  <document url="xml/testNamespaces.xml">
-    <context select="/">
-      <!-- namespace nodes have their element as their parent -->
-      <test select="/Template/namespace::xml/parent::Template" count="1"/>
-    </context>
-    <!-- namespace nodes can also be used as context nodes -->
-    <context select="/Template/namespace::xml">
-      <test select="parent::Template" count="1"/>
-    </context>
-  </document>
-      
   <document url="xml/pi.xml">
     <context select="/">
       <test select="//processing-instruction()" count="3"/>
       <test select="//processing-instruction('cheese')" count="2"/>
       <test select="//processing-instruction('toast')" count="1">
-        <valueOf select="string()">is tasty</valueOf>
+	<valueOf select="string()">is tasty</valueOf>
       </test>
     </context>
 
@@ -126,8 +115,8 @@
       <valueOf select="-4 &gt;= *">false</valueOf>
     </context>
     <!-- TODO
-         This context should work, but needs a fixed version of saxpath to parse the right-hand side
-         of the greater-than expression.
+    This context should work, but needs a fixed version of saxpath to parse the right-hand side
+    of the greater-than expression.
     <context select="/numbers/set[2]">
       <valueOf select="1 &gt; nr/@value">false</valueOf>
       <valueOf select="55 &gt; nr/@value">false</valueOf>
@@ -195,29 +184,29 @@
 
   <document url="xml/web.xml">
     <context select="/">
- 
+      
       <test select="*" count="1">
-        <valueOf select="name()">web-app</valueOf>
+	<valueOf select="name()">web-app</valueOf>
       </test>
 
       <!-- NOTE that the child::node() tests only work if the
-           XML document does not comments or PIs
+      XML document does not comments or PIs
       -->
- 
+      
       <test select="./*" count="1">
-        <valueOf select="name()">web-app</valueOf>
+	<valueOf select="name()">web-app</valueOf>
       </test>
       <test select="child::*" count="1">
-        <valueOf select="name()">web-app</valueOf>
+	<valueOf select="name()">web-app</valueOf>
       </test>
       <test select="/*" count="1">
-        <valueOf select="name()">web-app</valueOf>
+	<valueOf select="name()">web-app</valueOf>
       </test>
       <test select="/child::node()" count="1">
-        <valueOf select="name(.)">web-app</valueOf>
+	<valueOf select="name(.)">web-app</valueOf>
       </test>
       <test select="child::node()" count="1">
-        <valueOf select="name(.)">web-app</valueOf>
+	<valueOf select="name(.)">web-app</valueOf>
       </test>
 
       <!-- empty names -->
@@ -295,22 +284,22 @@
       <test select="/moreovernews/article[@code='13563275']" count="1"/>
 
       <test select="/moreovernews/article[@code='13563275']">
-        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+	<valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
       <test select="/*/article[@code='13563275']">
-        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+	<valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
       <test select="//article[@code='13563275']">
-        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+	<valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
       <test select="//*[@code='13563275']">
-        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+	<valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
       <test select="/child::node()/child::node()[@code='13563275']">
-        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+	<valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
       <test select="/*/*[@code='13563275']">
-        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+	<valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
     </context>
   </document>
@@ -404,73 +393,17 @@
     </context>
   </document>
 
-
-  <!-- test namespace -->
-  <document url="xml/namespaces.xml">
-    <context select="/" 
-             xmlns:foo="fooNamespace"
-             xmlns:voo="fooNamespace"
-             xmlns:bar="barNamespace"
-             xmlns:alias="fooNamespace">
-      <test select="/*" count="1"/>
-      <test select="/foo:a" count="1"/>
-      <test select="/foo:a/b" count="1"/>
-      <test select="/voo:a/b/c" count="1"/>
-      <test select="/voo:a/bar:f" count="1"/>
-      <test select="/*[namespace-uri()='fooNamespace' and local-name()='a']" count="1"/>
-      <test select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']" count="1"/>
-      <test select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']/*[local-name()='y' and namespace-uri()='fooNamespace']" count="1"/>
-    </context>
-
-    <!-- the prefix here and in the document have no relation; it's their
-         namespace-uri binding that counts -->
-    <context select="/" xmlns:foo="http://somethingElse/">
-      <test select="/foo:a/b/c" count="0"/>
-    </context>
-
-    <context select="/"
-             xmlns:foo="fooNamespace"
-             xmlns:bar="barNamespace"
-             xmlns:alias="fooNamespace">
-      <valueOf select="/foo:a/b/c">Hello</valueOf>
-      <valueOf select="/foo:a/foo:d/foo:e">Hey</valueOf>
-      <valueOf select="/foo:a/alias:x/alias:y">Hey3</valueOf>
-      <valueOf select="/foo:a/foo:x/foo:y">Hey3</valueOf>
-      <valueOf select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']/*[local-name()='y' and namespace-uri()='fooNamespace']">Hey3</valueOf>
-    </context>
-
-  </document>
-
-  <document url="xml/defaultNamespace.xml">
-    <context select="/">
-      <!-- NOTE: /a/b/c selects elements in no namespace only! -->
-      <test select="/a/b/c" count="0"/>
-      <test select="/x:a/x:b/x:c" count="0"/>
-    </context>
-    <context select="/" 
-             xmlns:dummy="dummyNamespace">
-      <test select="/dummy:a/dummy:b/dummy:c" count="1"/>
-    </context>
-  </document>
-
-  <document url="xml/text.xml">
-    <context select="/">
-      <test select="/foo/bar/text()" count="3"/>
-      <valueOf select="normalize-space(/foo/bar/text())">baz</valueOf>
-    </context>
-  </document>
-
   <!-- test document function -->
   <document url="xml/text.xml">
     <context select="/">
       <test select="document('xml/web.xml')" count="1">
-        <valueOf select="/web-app/servlet[1]/servlet-name">snoop</valueOf>
-        <valueOf select="/web-app/servlet[1]/servlet-name/text()">snoop</valueOf>
+	<valueOf select="/web-app/servlet[1]/servlet-name">snoop</valueOf>
+	<valueOf select="/web-app/servlet[1]/servlet-name/text()">snoop</valueOf>
       </test>
       <valueOf select="document('xml/web.xml')/web-app/servlet[1]/servlet-name">snoop</valueOf>
     </context>
     <!-- Test to check if the context changes when an extension function is used.
-         First test is an example, second is the actual test.
+    First test is an example, second is the actual test.
     -->
     <context select="/foo/bar/cheese[1]">
       <valueOf select="concat(./@id,'foo',@id)">3foo3</valueOf>
@@ -485,75 +418,47 @@
     </context>
   </document>
 
-  <document url="xml/testNamespaces.xml">
-    <context select="/">
-              <!-- the root is not an element, so no namespaces -->
-      <test select="namespace::*" count="0" debug="off"/>
-      <test select="/namespace::*" count="0" debug="off"/>
-              <!-- must count the default xml: prefix as well -->
-      <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
-      <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
-
-              <!-- every element has separate copies -->
-      <test select="//namespace::*" count="25" debug="off"/>
-    </context>
-
-    <context select="/Template/Application1">
-              <!-- must count the default xml: prefix as well -->
-      <test select="namespace::*" count="3" debug="off"/>
-      <test select="/namespace::*" count="0" debug="off"/>
-      <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
-      <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
-      <test select="//namespace::*" count="25" debug="off"/>
-      <test select="//namespace::xplt" count="8" debug="off"/>
-      <!-- the name test literally matches the prefix as given in the 
-           document, and does not use the uri -->
-      <test xmlns:somethingelse="www.xxxx.com"
-        select="//namespace::somethingelse" count="0" debug="off"/>
-   </context>
-  </document>
-
   <document url="xml/simple.xml">
 
-   <!-- test behaviour of AbsoluteLocationPath -->
-   <context select="/root/a">
-    <valueOf select="concat( ., /root/b )">ab</valueOf>
-    <valueOf select="concat( ../b, . )">ba</valueOf>
-    <valueOf select="concat( /root/b, . )">ba</valueOf>
-    <valueOf select="concat( /root/c/d, ../b )">db</valueOf>
-   </context>
+    <!-- test behaviour of AbsoluteLocationPath -->
+    <context select="/root/a">
+      <valueOf select="concat( ., /root/b )">ab</valueOf>
+      <valueOf select="concat( ../b, . )">ba</valueOf>
+      <valueOf select="concat( /root/b, . )">ba</valueOf>
+      <valueOf select="concat( /root/c/d, ../b )">db</valueOf>
+    </context>
 
-   <!-- test the translate() function -->
-   <context select="/">
-    <valueOf select="translate( '', '', '' )"></valueOf>
-    <valueOf select="translate( 'abcd', '', '' )">abcd</valueOf>
-    <valueOf select="translate( 'abcd', 'abcd', 'abcd' )">abcd</valueOf>
-    <valueOf select="translate( 'abcd', 'dcba', 'dcba' )">abcd</valueOf>
-    <valueOf select="translate( 'abcd', 'abcd', 'dcba' )">dcba</valueOf>
-    <valueOf select="translate( 'abcd', 'abcd', 'ab' )">ab</valueOf>
-    <valueOf select="translate( 'abcd', 'cdab', 'cd' )">cd</valueOf>
-    <valueOf select="translate( 'abcd', 'acbd', 'xy' )">xy</valueOf>
-    <valueOf select="translate( 'abcd', 'abcdb', 'abcdb' )">abcd</valueOf>
-    <valueOf select="translate( 'abcd', 'abcd', 'abcdb' )">abcd</valueOf>
-   </context>
+    <!-- test the translate() function -->
+    <context select="/">
+      <valueOf select="translate( '', '', '' )"></valueOf>
+      <valueOf select="translate( 'abcd', '', '' )">abcd</valueOf>
+      <valueOf select="translate( 'abcd', 'abcd', 'abcd' )">abcd</valueOf>
+      <valueOf select="translate( 'abcd', 'dcba', 'dcba' )">abcd</valueOf>
+      <valueOf select="translate( 'abcd', 'abcd', 'dcba' )">dcba</valueOf>
+      <valueOf select="translate( 'abcd', 'abcd', 'ab' )">ab</valueOf>
+      <valueOf select="translate( 'abcd', 'cdab', 'cd' )">cd</valueOf>
+      <valueOf select="translate( 'abcd', 'acbd', 'xy' )">xy</valueOf>
+      <valueOf select="translate( 'abcd', 'abcdb', 'abcdb' )">abcd</valueOf>
+      <valueOf select="translate( 'abcd', 'abcd', 'abcdb' )">abcd</valueOf>
+    </context>
 
-   <!-- test the substring() function using the example in
-   http://www.w3.org/TR/xpath#function-substring
-	some of these test differ from the results in the spec as they seem to 
-	be inconsistent. In the latest version e.g. negative indices are treated
-	as errors EMG 200020510
-   -->
+    <!-- test the substring() function using the example in
+    http://www.w3.org/TR/xpath#function-substring
+    some of these test differ from the results in the spec as they seem to 
+    be inconsistent. In the latest version e.g. negative indices are treated
+    as errors EMG 200020510
+    -->
 
-   <context select="/">
-    <valueOf select="substring('12345', 1.5, 2.6)">234</valueOf>
-    <valueOf select="substring('12345', 0, 3)">123</valueOf>
-    <valueOf select="substring('12345', 0 div 0, 3)"></valueOf>
-    <valueOf select="substring('12345', 1, 0 div 0)">12345</valueOf>
-    <valueOf select="substring('12345', -42, 1 div 0)">12345</valueOf>
-    <valueOf select="substring('12345', -1 div 0, 1 div 0)"></valueOf>
-    <valueOf select="substring('12345', 3)">345</valueOf>
-    <valueOf select="substring('12345',1,15)">12345</valueOf>
-   </context>
+    <context select="/">
+      <valueOf select="substring('12345', 1.5, 2.6)">234</valueOf>
+      <valueOf select="substring('12345', 0, 3)">123</valueOf>
+      <valueOf select="substring('12345', 0 div 0, 3)"></valueOf>
+      <valueOf select="substring('12345', 1, 0 div 0)">12345</valueOf>
+      <valueOf select="substring('12345', -42, 1 div 0)">12345</valueOf>
+      <valueOf select="substring('12345', -1 div 0, 1 div 0)"></valueOf>
+      <valueOf select="substring('12345', 3)">345</valueOf>
+      <valueOf select="substring('12345',1,15)">12345</valueOf>
+    </context>
 
   </document>
 
@@ -586,6 +491,96 @@
     </context>
   </document>
 
- </tests>
+  <!-- test namespace -->
+  <document url="xml/namespaces.xml">
+    <context select="/"
+	     xmlns:foo="http://fooNamespace/"
+	     xmlns:voo="http://fooNamespace/"
+	     xmlns:bar="http://barNamespace/"
+	     xmlns:alias="http://fooNamespace/">
+      <test select="/*" count="1"/>
+      <test select="/foo:a" count="1"/>
+      <test select="/foo:a/b" count="1"/>
+      <test select="/voo:a/b/c" count="1"/>
+      <test select="/voo:a/bar:f" count="1"/>
+      <test select="/*[namespace-uri()='http://fooNamespace/' and local-name()='a']" count="1"/>
+      <test select="/*[local-name()='a' and namespace-uri()='http://fooNamespace/']/*[local-name()='x' and namespace-uri()='http://fooNamespace/']" count="1"/>
+      <test select="/*[local-name()='a' and namespace-uri()='http://fooNamespace/']/*[local-name()='x' and namespace-uri()='http://fooNamespace/']/*[local-name()='y' and namespace-uri()='http://fooNamespace/']" count="1"/>
+    </context>
+    <!-- the prefix here and in the document have no relation; it's their
+    namespace-uri binding that counts -->
+    <context select="/" xmlns:foo="http://somethingElse/">
+      <test select="/foo:a/b/c" count="0"/>
+    </context>
 
+    <context select="/"
+	     xmlns:foo="http://fooNamespace/"
+	     xmlns:bar="http://barNamespace/"
+	     xmlns:alias="http://fooNamespace/">
+      <valueOf select="/foo:a/b/c">Hello</valueOf>
+      <valueOf select="/foo:a/foo:d/foo:e">Hey</valueOf>
+      <valueOf select="/foo:a/alias:x/alias:y">Hey3</valueOf>
+      <valueOf select="/foo:a/foo:x/foo:y">Hey3</valueOf>
+      <valueOf select="/*[local-name()='a' and namespace-uri()='http://fooNamespace/']/*[local-name()='x' and namespace-uri()='http://fooNamespace/']/*[local-name()='y' and namespace-uri()='http://fooNamespace/']">Hey3</valueOf>
+    </context>
 
+  </document>
+
+  <document url="xml/defaultNamespace.xml">
+    <context select="/">
+      <!-- NOTE: /a/b/c selects elements in no namespace only! -->
+      <test select="/a/b/c" count="0"/>
+      <test select="/x:a/x:b/x:c" count="0"/>
+    </context>
+    <context select="/"
+	     xmlns:dummy="http://dummyNamespace/">
+      <test select="/dummy:a/dummy:b/dummy:c" count="1"/>
+    </context>
+  </document>
+  <document url="xml/text.xml">
+    <context select="/">
+      <test select="/foo/bar/text()" count="3"/>
+      <valueOf select="normalize-space(/foo/bar/text())">baz</valueOf>
+    </context>
+  </document>
+
+  <document url="xml/testNamespaces.xml">
+    <context select="/">
+      <!-- the root is not an element, so no namespaces -->
+      <test select="namespace::*" count="0" debug="off"/>
+      <test select="/namespace::*" count="0" debug="off"/>
+      <!-- must count the default xml: prefix as well -->
+      <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
+      <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
+
+      <!-- every element has separate copies -->
+      <test select="//namespace::*" count="25" debug="off"/>
+    </context>
+
+    <context select="/Template/Application1">
+      <!-- must count the default xml: prefix as well -->
+      <test select="namespace::*" count="3" debug="off"/>
+      <test select="/namespace::*" count="0" debug="off"/>
+      <test select="/Template/Application1/namespace::*" count="3" debug="off"/>
+      <test select="/Template/Application2/namespace::*" count="3" debug="off"/>
+      <test select="//namespace::*" count="25" debug="off"/>
+      <test select="//namespace::xplt" count="8" debug="off"/>
+      <!-- the name test literally matches the prefix as given in the
+      document, and does not use the uri -->
+      <test xmlns:somethingelse="http://www.xxxx.com/"
+	    select="//namespace::somethingelse" count="0" debug="off"/>
+    </context>
+  </document>
+
+  <document url="xml/testNamespaces.xml">
+    <context select="/">
+      <!-- namespace nodes have their element as their parent -->
+      <test select="/Template/namespace::xml/parent::Template" count="1"/>
+    </context>
+    <!-- namespace nodes can also be used as context nodes -->
+    <context select="/Template/namespace::xml">
+      <test select="parent::Template" count="1"/>
+    </context>
+  </document>
+
+</tests>

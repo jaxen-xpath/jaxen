@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<a xmlns="dummyNamespace">
+<a xmlns="http://dummyNamespace/">
   <b>
     <c>Hello</c>
   </b>
