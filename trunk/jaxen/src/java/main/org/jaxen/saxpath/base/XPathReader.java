@@ -68,13 +68,15 @@ import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.XPathHandler;
 import org.jaxen.saxpath.XPathSyntaxException;
+import org.jaxen.saxpath.SAXPathParseException;
+import org.jaxen.saxpath.SAXPathException;
 
 /** Implementation of SAXPath's <code>XPathReader</code> which
  *  generates callbacks to an <code>XPathHandler</code>.
  *
  *  @author bob mcwhirter (bob@werken.com)
  */
-public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
+public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathReader
 {
     private LinkedList tokens;
     private XPathLexer lexer;
@@ -468,7 +470,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
             }
             default:
             {
-                throwSyntaxException( "Expected one of '.', '..', '@', '*', <QName>" );
+                throw createSyntaxException( "Expected one of '.', '..', '@', '*', <QName>" );
                 //throw new XPathSyntaxException( "Expected one of '.', '..', '@', '*', <qname>" );
             }
         }
@@ -514,7 +516,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
                 }
                 default:
                 {
-                    throwSyntaxException( "Expected one of '.', '..', '@', '*', <QName>" );
+                    throw createSyntaxException( "Expected one of '.', '..', '@', '*', <QName>" );
                     // throw new XPathSyntaxException( "Expected one of '.', '..', '@', '*', <qname>" );
                 }
             }
@@ -680,7 +682,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
         }
         else
         {
-            throwSyntaxException( "Expected node-type" );
+            throw createSyntaxException( "Expected node-type" );
         }
     }
 
@@ -1050,7 +1052,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
         getXPathHandler().endUnionExpr( create );
     }
 
-    Token match(int tokenType)
+    Token match(int tokenType) throws XPathSyntaxException
     {
         LT(1);
 
@@ -1062,9 +1064,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
             return token;
         }
 
-        // throw an exception
-
-        return null;
+        throw createSyntaxException( "Expected: " + getTokenText( tokenType ) );
     }
 
     int LA(int position)
@@ -1103,14 +1103,14 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
         return false;
     }
 
-    void throwSyntaxException(String message) throws org.jaxen.saxpath.SAXPathException
+    XPathSyntaxException createSyntaxException(String message)
     {
         String xpath    = this.lexer.getXPath();
         int    position = LT(1).getTokenBegin();
 
-        throw new XPathSyntaxException( xpath,
-                                        position,
-                                        message );
+        return new XPathSyntaxException( xpath,
+                                         position,
+                                         message );
     }
 
     void throwInvalidAxis(String invalidAxis) throws org.jaxen.saxpath.SAXPathException
@@ -1127,6 +1127,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
 
     void throwUnexpected() throws org.jaxen.saxpath.SAXPathException
     {
-        throwSyntaxException( "Unexpected '" + LT(1).getTokenText() + "'" );
+        throw createSyntaxException( "Unexpected '" + LT(1).getTokenText() + "'" );
     }
 }
