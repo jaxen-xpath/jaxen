@@ -63,6 +63,14 @@ public class StringFunction implements Function
         {
             return nav.getProcessingInstructionData( obj );
         }
+        else if ( nav.isComment( obj ) )
+        {
+            return nav.getCommentStringValue( obj );
+        }
+        else if ( nav.isNamespace( obj ) )
+        {
+            return nav.getNamespaceStringValue( obj );
+        }
         else if (obj instanceof List)
         {
             List list = (List) obj;
@@ -107,10 +115,6 @@ public class StringFunction implements Function
             {
                 return num.toString();
             }
-        }
-        else if ( nav.isComment( obj ) )
-        {
-            return nav.getCommentStringValue( obj );
         }
 
         return "";
