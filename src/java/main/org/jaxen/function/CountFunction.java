@@ -27,6 +27,11 @@ public class CountFunction implements Function
 
     public static Integer evaluate(Object obj)
     {
+      if( obj == null )
+        {
+        return new Integer( 0 );
+        }
+      
         if (obj instanceof List)
         {
             return new Integer( ((List)obj).size() );
