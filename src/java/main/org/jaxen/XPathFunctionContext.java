@@ -122,5 +122,9 @@ public class XPathFunctionContext extends SimpleFunctionContext
         registerFunction( "",
                           "matrix-concat",
                           new MatrixConcatFunction() );
+        
+        registerFunction( "",
+                          "document",
+                          new DocumentFunction() );
     }
 }

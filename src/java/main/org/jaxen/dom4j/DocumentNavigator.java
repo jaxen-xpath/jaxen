@@ -293,7 +293,10 @@ public class DocumentNavigator extends DefaultNavigator
     {
         try
         {
-            return reader.read( uri );
+            System.out.println( "Parsing: " + uri );           
+            Document document = reader.read( uri );
+            System.out.println( "Found: " + document );
+            return document;
         }
         catch (DocumentException e)
         {
