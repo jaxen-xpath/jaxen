@@ -614,6 +614,7 @@
 
   <target name="internal.javadoc">
     <javadoc packagenames="${javadoc.packages}"
+             overview="${build.src.main}/org/jaxen/overview.html"
              sourcepath="${build.src.main}"
              destdir="${javadoc.dest}"
              private="${javadoc.private}"

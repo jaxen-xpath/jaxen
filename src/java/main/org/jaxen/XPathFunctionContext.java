@@ -8,18 +8,62 @@ import org.jaxen.function.ext.MatrixConcatFunction;
 import java.util.Map;
 import java.util.HashMap;
 
+/** A <code>FunctionContext</code> implementing the core XPath
+ *  function library, with extensions.
+ *
+ *  <p>
+ *  The core XPath function library is provided through this
+ *  implementation of <code>FunctionContext</code>.  Additionally,
+ *  extension functions have been provided, as enumerated below.
+ *  </p>
+ *
+ *  <p>
+ *  This class implements a <i>Singleton</i> pattern (see {@link #getInstance}),
+ *  as it is perfectly re-entrant and thread-safe.  If using the
+ *  singleton, it is inadvisable to call {@link #registerFunction}
+ *  as that will extend the global function context, affecting other
+ *  users of the singleton.  But that's your call, really, now isn't
+ *  it?  That may be what you really want to do.
+ *  </p>
+ *
+ *  <p>
+ *  Extension functions:
+ *
+ *  <ul>
+ *     <li>matrix-concat(..)</li>
+ *     <li>evaluate(..)</li>
+ *  </ul>
+ *
+ *  @see FunctionContext
+ *
+ *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ */
 public class XPathFunctionContext extends SimpleFunctionContext
 {
+   /** Singleton implementation.
+    */
     private static class Singleton
     {
+        /** Singleton instance.
+         */
         private static XPathFunctionContext instance = new XPathFunctionContext();
     }
 
+    /** Retrieve the singleton instance.
+     *
+     *  @return The singleton instance.
+     */
     public static FunctionContext getInstance()
     {
         return Singleton.instance;
     }
 
+    /** Construct.
+     *
+     *  <p>
+     *  Construct with all core XPath functions registered.
+     *  </p>
+     */
     public XPathFunctionContext()
     {
         registerFunction( null,  // namespace URI
