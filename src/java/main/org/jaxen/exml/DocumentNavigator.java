@@ -22,9 +22,12 @@ import electric.xml.Parent;
 import electric.xml.Attributes;
 import electric.xml.ParseException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import java.io.File;
 
@@ -72,7 +75,7 @@ public class DocumentNavigator extends DefaultNavigator
 
     public boolean isNamespace(Object obj)
     {
-        return false;
+        return obj instanceof Namespace;
     }
 
     public String getElementName(Object obj)
@@ -118,9 +121,42 @@ public class DocumentNavigator extends DefaultNavigator
         if ( contextNode instanceof Element )
         {
             Element elem = (Element) contextNode;
+            Map nsMap = new HashMap();
 
-            return new NamespaceIterator( elem.getAttributes() );
+            Element current = elem;
+
+            while ( current != null ) {
+                Dictionary namespaces = current.getNamespaces();
+
+                if ( namespaces != null ) {
+                    Enumeration keys = namespaces.keys();
+                    
+                    while ( keys.hasMoreElements() ) {
+                        
+                        String prefix = (String)keys.nextElement();
+                        if ( !nsMap.containsKey(prefix) ) {
+
+                            String uri = (String)namespaces.get(prefix);
+                            nsMap.put( prefix,
+                                       new Namespace(elem, prefix, uri) );
+                        }
+                    }
+                }
+                Parent parent = current.getParent();
+                if ( parent instanceof Element )
+                    current = (Element)parent;
+                else
+                    break;
+            }
+
+            Namespace xml =
+                new Namespace( elem, "xml",
+                               "http://www.w3.org/XML/1998/namespace" );
+            nsMap.put( "xml", xml );
+
+            return nsMap.values().iterator();
         }
+
         return null;
     }
 
@@ -141,12 +177,10 @@ public class DocumentNavigator extends DefaultNavigator
                 parent = ((Element)contextNode).getDocument();
             }
         }
-        /*
         else if ( contextNode instanceof Attribute )
         {
-            parent = ((Attribute)contextNode).getParent();
+            parent = ((Attribute)contextNode).getElement();
         }
-        */
         else if ( contextNode instanceof Instruction )
         {
             parent = ((Instruction)contextNode).getParent();
@@ -158,6 +192,10 @@ public class DocumentNavigator extends DefaultNavigator
         else if ( contextNode instanceof Comment )
         {
             parent = ((Text)contextNode).getParent();
+        }
+        else if ( contextNode instanceof Namespace )
+        {
+            parent = ((Namespace)contextNode).getElement();
         }
         
         if ( parent != null )
@@ -214,9 +252,16 @@ public class DocumentNavigator extends DefaultNavigator
         return attr.getQName();
     }
 
+    public String getNamespacePrefix(Object obj)
+    {
+        Namespace ns = (Namespace) obj;
+        return ns.getPrefix();
+    }
+
     public String getNamespaceStringValue(Object obj)
     {
-        return "";
+        Namespace ns = (Namespace) obj;
+        return ns.getURI();
     }
 
     public String getTextStringValue(Object obj)
