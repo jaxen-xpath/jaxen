@@ -91,7 +91,8 @@ public class FalseFunction implements Function
      * Returns false.
      * 
      * @return Boolean.FALSE
-     */    public static Boolean evaluate()
+     */
+    public static Boolean evaluate()
     {
         return Boolean.FALSE;
     }
