@@ -62,15 +62,13 @@
 
 package org.jaxen.dom4j;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import junit.framework.Test;
+import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import org.dom4j.io.SAXReader;
 import org.jaxen.Navigator;
 import org.jaxen.XPathTestBase;
-
-import org.dom4j.io.SAXReader;
 
 public class DocumentNavigatorTest extends XPathTestBase
 {

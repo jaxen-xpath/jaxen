@@ -68,11 +68,6 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-import org.jaxen.pattern.Pattern;
-import org.jaxen.pattern.PatternParser;
-
-import org.saxpath.XPathSyntaxException;
-
 /** Tests the use of priority in the Pattern implementations.
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>

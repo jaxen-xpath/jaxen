@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2003 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,16 +64,14 @@ package org.jaxen.jdom;
 
 import junit.framework.TestCase;
 
-import org.jaxen.XPath;
+import java.util.Iterator;
+import java.util.List;
 
+import org.jaxen.XPath;
+import org.jaxen.saxpath.SAXPathException;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
-
-import org.saxpath.SAXPathException;
-
-import java.util.List;
-import java.util.Iterator;
 
 public class XPathTest extends TestCase
 {

@@ -64,8 +64,8 @@ package org.jaxen;
 
 import junit.framework.TestCase;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContextTest extends TestCase
 {

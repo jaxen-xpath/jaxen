@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2003 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2002 werken digital.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,26 +20,26 @@
  *    these conditions in the documentation and/or other materials 
  *    provided with the distribution.
  *
- * 3. The name "Jaxen" must not be used to endorse or promote products
+ * 3. The name "SAXPath" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
- *    written permission, please contact license@jaxen.org.
+ *    written permission, please contact license@saxpath.org.
  * 
- * 4. Products derived from this software may not be called "Jaxen", nor
- *    may "Jaxen" appear in their name, without prior written permission
- *    from the Jaxen Project Management (pm@jaxen.org).
+ * 4. Products derived from this software may not be called "SAXPath", nor
+ *    may "SAXPath" appear in their name, without prior written permission
+ *    from the SAXPath Project Management (pm@saxpath.org).
  * 
  * In addition, we request (but do not require) that you include in the 
  * end-user documentation provided with the redistribution and/or in the 
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
- *      Jaxen Project (http://www.jaxen.org/)."
+ *      SAXPath Project (http://www.saxpath.org/)."
  * Alternatively, the acknowledgment may be graphical using the logos 
- * available at http://www.jaxen.org/
+ * available at http://www.saxpath.org/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
+ * DISCLAIMED.  IN NO EVENT SHALL THE SAXPath AUTHORS OR THE PROJECT
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
@@ -51,80 +51,36 @@
  *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
+ * individuals on behalf of the SAXPath Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * SAXPath Project, please see <http://www.saxpath.org/>.
  * 
  * $Id$
  */
 
 
-package org.jaxen;
+package org.jaxen.saxpath.helpers;
 
-import junit.framework.TestCase;
+import org.jaxen.saxpath.XPathHandler;
+import org.jaxen.saxpath.XPathReader;
 
-import org.jaxen.saxpath.SAXPathException;
 
-public class AddNamespaceTest extends TestCase
+public class MockXPathReader implements XPathReader
 {
-    public AddNamespaceTest(String name)
+    public MockXPathReader()
     {
-        super( name );
     }
 
-    public void setUp()
+    public void parse(String xpath)
     {
-
     }
 
-    public void tearDown()
+    public void setXPathHandler(XPathHandler handler)
     {
-
     }
 
-    public void testDefaultContext()
-    {
-        try
-        {
-            MockXPath xpath = new MockXPath("foo");
-            
-            xpath.addNamespace("cheese",
-                               "http://cheese.org");
-            
-            xpath.addNamespace("squeeze",
-                               "http://squeeze.org");
-
-            NamespaceContext nsContext = xpath.getNamespaceContext();
-
-            assertEquals( "http://cheese.org",
-                          nsContext.translateNamespacePrefixToUri( "cheese" ) );
-
-            assertEquals( "http://squeeze.org",
-                          nsContext.translateNamespacePrefixToUri( "squeeze" ) );
-                          
-
-        }
-        catch (JaxenException e)
-        {
-            fail( e.getMessage() );
-        }
-        catch (SAXPathException e)
-        {
-            fail( e.getMessage() );
-        }
-    }
-}
-
-class MockXPath extends BaseXPath
-{
-
-    public MockXPath(String expr) throws SAXPathException
-    {
-        super( expr );
-    }
-
-    public Navigator getNavigator()
+    public XPathHandler getXPathHandler()
     {
         return null;
     }
