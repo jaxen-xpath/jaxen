@@ -423,6 +423,7 @@ public class DocumentNavigator extends DefaultNavigator
         if ( reader == null ) 
         {
             reader = new SAXReader();
+            reader.setMergeAdjacentText( true );
         }
         return reader;
     }

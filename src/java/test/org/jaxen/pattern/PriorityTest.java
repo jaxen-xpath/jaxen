@@ -154,7 +154,12 @@ public class PriorityTest extends TestCase
         System.out.println( "expr: " + expr + " has priority: " + d + " nodeType: " + nt );
         System.out.println( "pattern: " + pattern );
         
-        assertEquals( "expr: " + expr, new Double(priority), new Double(d) );
-        assertEquals( "nodeType: " + expr, new Short(nodeType), new Short(nt) );
+        assertEquals( "expr: " + expr,
+                      new Double( priority ),
+                      new Double( d ) );
+
+        assertEquals( "nodeType: " + expr,
+                      nodeType, 
+                      nt );
     }
 }

@@ -74,11 +74,15 @@ import org.dom4j.io.SAXReader;
 
 public class DocumentNavigatorTest extends XPathTestBase
 {
-    private SAXReader reader = new SAXReader();
+    private SAXReader reader; 
 
     public DocumentNavigatorTest(String name)
     {
         super( name );
+
+        this.reader = new SAXReader();
+
+        this.reader.setMergeAdjacentText( true );
     }
 
     public static void main(String[] args) 
