@@ -109,6 +109,12 @@
       <email>jdvorak@users.sourceforge.net</email>
     </developer>
 
+    <developer>
+      <name>Attila Szegedi</name>
+      <id>szegedia</id>
+      <email>szegedia@users.sourceforge.net</email>
+    </developer>
+
   </developers>
 
   <contributors>
