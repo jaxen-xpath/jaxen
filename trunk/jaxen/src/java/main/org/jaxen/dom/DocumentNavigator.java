@@ -85,6 +85,7 @@ public class DocumentNavigator extends DefaultNavigator
         {
             answer = node.getNodeName();
         }    
+        //System.out.println( "getElementName() : " + answer );
 /*        
         // hack to fix getLocalName() not working
         int idx = answer.indexOf(':');
@@ -117,6 +118,7 @@ public class DocumentNavigator extends DefaultNavigator
         {
             answer = node.getLocalName();
         }
+        //System.out.println( "getElementQName() : " + answer );
         return answer;
     }
 
@@ -295,10 +297,12 @@ public class DocumentNavigator extends DefaultNavigator
         {
             prefix = "xmlns:" + prefix;
         }
-            
+
+        String answer = null;
+        
         if ( context instanceof Element ) 
         {
-            return walkHierachyForURI( prefix, (Element) context );
+            answer = walkHierachyForURI( prefix, (Element) context );
         }
         else if ( context instanceof Node ) 
         {
@@ -306,19 +310,22 @@ public class DocumentNavigator extends DefaultNavigator
             Node parent = node.getParentNode();
             if ( parent instanceof Element )
             {
-                return walkHierachyForURI( prefix, (Element) parent);
+                answer = walkHierachyForURI( prefix, (Element) parent);
             }
         }
-        return null;        
+        
+        //System.out.println( "translateNamespacePrefixToUri matched prefix: " + prefix + " to: " + answer + " from node: " + context );
+        
+        return answer;        
     }
     
     public String walkHierachyForURI(String prefix, Element element)
     {
         String answer = element.getAttribute( prefix );
-        if ( answer == null ) 
+        if ( answer == null || answer.length() <= 0 ) 
         {
             answer = element.getAttributeNS( prefix, "" );
-            if ( answer == null ) 
+            if ( answer == null || answer.length() <= 0 ) 
             {
                 Node parent = element.getParentNode();
                 if ( parent != null && parent instanceof Element )
