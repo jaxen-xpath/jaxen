@@ -15,6 +15,14 @@
 
   <document url="xml/axis.xml">
 
+    <context select="/root">
+      <test select="preceding-sibling::*" count="0"/>
+    </context>
+
+    <context select="/root/a/a.3">
+      <test select="preceding::*" count="2"/>
+    </context>
+
     <context select="/root/a/a.3">
       <test select="preceding-sibling::*" count="2"/>
     </context>
@@ -30,6 +38,19 @@
     </context>
 
   </document>
+
+  <document url="xml/web.xml">
+
+    <context select="/web-app/servlet[2]/servlet-name">
+      <test select="preceding::*" count="3"/>
+    </context>
+
+    <context select="/web-app/servlet[2]/servlet-name">
+      <test select="following::*" count="13"/>
+    </context>
+
+  </document>
+
 
   <!-- test name -->
 

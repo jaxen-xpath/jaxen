@@ -54,7 +54,16 @@ public class NameFunction implements Function
             {
                 return nav.getAttributeQName( first );
             }
+            else if ( nav.isProcessingInstruction( first ) )
+            {
+                return nav.getProcessingInstructionTarget( first );
+            }
+            // else if ( nav.isNamespace( first ) )
+            // {
+                // return nav.getNamespacePrefix( first );
+            // }
         }
+
         return "";
     }
     
