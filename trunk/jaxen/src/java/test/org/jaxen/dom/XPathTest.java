@@ -6,6 +6,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import junit.framework.TestCase;
 
+import org.jaxen.XPath;
+
 import org.saxpath.SAXPathException;
 
 import org.w3c.dom.Document;
@@ -39,7 +41,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/foo/bar/baz" );
+            XPath xpath = new DOMXPath( "/foo/bar/baz" );
         }
         catch (SAXPathException e)
         {
@@ -51,7 +53,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/foo/bar/baz" );
+            XPath xpath = new DOMXPath( "/foo/bar/baz" );
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);

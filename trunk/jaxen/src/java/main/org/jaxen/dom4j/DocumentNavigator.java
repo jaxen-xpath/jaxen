@@ -2,7 +2,7 @@
 
 package org.jaxen.dom4j;
 
-import org.jaxen.BaseXPath;
+import org.jaxen.XPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 import org.jaxen.util.SingleObjectIterator;
@@ -231,9 +231,9 @@ public class DocumentNavigator extends DefaultNavigator
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on DOM4J documents.
      */
-    public BaseXPath parseXPath (String xpath) throws SAXPathException
+    public XPath parseXPath (String xpath) throws SAXPathException
     {
-        return new XPath(xpath);
+        return new Dom4jXPath(xpath);
     }
 
     public Object getParentNode(Object contextNode)

@@ -442,9 +442,9 @@ public interface Navigator extends Serializable
      *
      *  @return A new XPath expression object.
      *
-     *  @see BaseXPath
+     *  @see XPath
      */
-    BaseXPath parseXPath(String xpath) throws SAXPathException;
+    XPath parseXPath(String xpath) throws SAXPathException;
 
     /**
      *  Returns the element whose ID is given by elementId.

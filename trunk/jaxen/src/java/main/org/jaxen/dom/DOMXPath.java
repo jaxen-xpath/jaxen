@@ -1,12 +1,13 @@
+// XPath.java - top-level entry point for DOM XPath matching.
 
-package org.jaxen.exml;
+package org.jaxen.dom;
 
 import org.jaxen.JaxenException;
 
 import org.jaxen.Navigator;
 import org.jaxen.BaseXPath;
 
-/** An XPath implementation for the EXML model
+/** An XPath implementation for the W3C DOM model
  *
  * <p>This is the main entry point for matching an XPath against a DOM
  * tree.  You create a compiled XPath object, then match it against
@@ -14,18 +15,18 @@ import org.jaxen.BaseXPath;
  * method, as in the following example:</p>
  *
  * <pre>
- * XPath path = new XPath("a/b/c");
- * List results = path.selectNodes(domContextNode);
+ * XPath path = new DOMXPath("a/b/c");
+ * List results = path.selectNodes(domNode);
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://www.themindelectric.com/">TheMindElectric  website</a>
  *
+ * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *
  * @version $Revision$
  */
-public class XPath extends BaseXPath
+public class DOMXPath extends BaseXPath
 {
     /** Construct given an XPath expression string.
      *
@@ -34,8 +35,9 @@ public class XPath extends BaseXPath
      *  @throws JaxenException if there is a syntax error while
      *          parsing the expression.
      */
-    public XPath(String xpathExpr) throws JaxenException
+    public DOMXPath(String xpathExpr) throws JaxenException
     {
         super( xpathExpr, DocumentNavigator.getInstance() );
     }
+
 } 
