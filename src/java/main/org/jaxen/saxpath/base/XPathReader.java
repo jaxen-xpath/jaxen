@@ -391,10 +391,6 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                         steps();
                         break;
                     }
-                    case EOF:
-                    {
-                        return;
-                    }
                 }
                 break;
             }
