@@ -49,7 +49,7 @@ package org.jaxen;
 import java.io.Serializable;
 
 /** Supporting context information for resolving
- *  namespace prefixess, functions, and variables.
+ *  namespace prefixes, functions, and variables.
  * 
  *  <p>
  *  <b>NOTE:</b> This class is not typically used directly,
@@ -97,10 +97,10 @@ public class ContextSupport
 
     /** Construct.
      *
-     *  @param namespaceContext The NamespaceContext.
-     *  @param functionContext The FunctionContext.
-     *  @param variableContext The VariableContext.
-     *  @param navigator The model navigator.
+     *  @param namespaceContext the NamespaceContext
+     *  @param functionContext the FunctionContext
+     *  @param variableContext the VariableContext
+     *  @param navigator the model navigator
      */
     public ContextSupport(NamespaceContext namespaceContext,
                           FunctionContext functionContext,
@@ -120,7 +120,7 @@ public class ContextSupport
 
     /** Set the <code>NamespaceContext</code>.
      *
-     *  @param namespaceContext The namespace context.
+     *  @param namespaceContext the namespace context
      */
     public void setNamespaceContext(NamespaceContext namespaceContext)
     {
@@ -129,7 +129,7 @@ public class ContextSupport
 
     /** Retrieve the <code>NamespaceContext</code>.
      *
-     *  @return The namespace context.
+     *  @return the namespace context
      */
     public NamespaceContext getNamespaceContext()
     {
@@ -138,7 +138,7 @@ public class ContextSupport
 
     /** Set the <code>FunctionContext</code>.
      *
-     *  @param functionContext The function context.
+     *  @param functionContext the function context
      */
     public void setFunctionContext(FunctionContext functionContext)
     {
@@ -147,7 +147,7 @@ public class ContextSupport
 
     /** Retrieve the <code>FunctionContext</code>.
      *
-     *  @return The function context.
+     *  @return the function context
      */
     public FunctionContext getFunctionContext()
     {
@@ -156,7 +156,7 @@ public class ContextSupport
 
     /** Set the <code>VariableContext</code>.
      *
-     *  @param variableContext The variable context.
+     *  @param variableContext the variable context
      */
     public void setVariableContext(VariableContext variableContext)
     {
@@ -165,7 +165,7 @@ public class ContextSupport
 
     /** Retrieve the <code>VariableContext</code>.
      *
-     *  @return The variable context.
+     *  @return the variable context
      */
     public VariableContext getVariableContext()
     {
@@ -174,7 +174,7 @@ public class ContextSupport
 
     /** Retrieve the <code>Navigator</code>.
      *
-     *  @return The navigator.
+     *  @return the navigator
      */
     public Navigator getNavigator()
     {
@@ -185,12 +185,16 @@ public class ContextSupport
 
     /** Translate a namespace prefix to its URI.
      *
-     *  @param prefix The prefix.
+     *  @param prefix The prefix
      *
-     *  @return The naemspace URI mapped to the prefix.
+     *  @return the namespace URI mapped to the prefix
      */
     public String translateNamespacePrefixToUri(String prefix)
     {
+        
+        if ("xml".equals(prefix)) {
+            return "http://www.w3.org/XML/1998/namespace";
+        }
         NamespaceContext context = getNamespaceContext();
 
         if ( context != null )
@@ -203,13 +207,13 @@ public class ContextSupport
 
     /** Retrieve a variable value.
      *
-     *  @param namespaceURI The function namespace URI.
-     *  @param prefix The function prefix.
-     *  @param localName The function name.
+     *  @param namespaceURI the function namespace URI
+     *  @param prefix the function prefix
+     *  @param localName the function name
      *
-     *  @return The variable value.
+     *  @return the variable value.
      *
-     *  @throws UnresolvableException If unable to locate a bound variable.
+     *  @throws UnresolvableException if unable to locate a bound variable.
      */
     public Object getVariableValue( String namespaceURI,
                                     String prefix,
@@ -230,13 +234,13 @@ public class ContextSupport
 
     /** Retrieve a <code>Function</code>.
      *
-     *  @param namespaceURI The function namespace URI.
-     *  @param prefix The function prefix.
-     *  @param localName The function name.
+     *  @param namespaceURI the function namespace URI
+     *  @param prefix the function prefix
+     *  @param localName the function name
      *
-     *  @return The function object.
+     *  @return the function object
      *
-     *  @throws UnresolvableException If unable to locate a bound function.
+     *  @throws UnresolvableException if unable to locate a bound function
      */
     public Function getFunction( String namespaceURI,
                                  String prefix,
