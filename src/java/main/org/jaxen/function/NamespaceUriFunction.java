@@ -96,7 +96,7 @@ public class NamespaceUriFunction implements Function
     }
 
     public static String evaluate(List list,
-                                  Navigator nav)
+                                  Navigator nav) throws FunctionCallException
     {
         if ( ! list.isEmpty() )
         {
@@ -115,9 +115,34 @@ public class NamespaceUriFunction implements Function
             {
                 return nav.getAttributeNamespaceUri( first );
             }
+                        else if ( nav.isProcessingInstruction( first ) )
+            {
+                return nav.getProcessingInstructionTarget( first );
+            }
+            else if ( nav.isNamespace( first ) )
+            {
+                return nav.getNamespaceStringValue( first );
+            }
+            else if ( nav.isDocument( first ) )
+            {
+                return "";
+            }
+            else if ( nav.isComment( first ) )
+            {
+                return "";
+            }
+            else if ( nav.isText( first ) )
+            {
+                return "";
+            }
+            else {
+                throw new FunctionCallException("The argument to the name function must be a node-set");   
+            }
+
         }
 
         return "";
+
     }
 }
 

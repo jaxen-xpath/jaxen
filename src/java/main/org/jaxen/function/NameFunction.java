@@ -96,7 +96,7 @@ public class NameFunction implements Function
     }
 
     public static String evaluate(List list,
-                                  Navigator nav)
+                                  Navigator nav) throws FunctionCallException
     {
         if ( ! list.isEmpty() )
         {            
@@ -123,9 +123,25 @@ public class NameFunction implements Function
             {
                 return nav.getNamespacePrefix( first );
             }
+            else if ( nav.isDocument( first ) )
+            {
+                return "";
+            }
+            else if ( nav.isComment( first ) )
+            {
+                return "";
+            }
+            else if ( nav.isText( first ) )
+            {
+                return "";
+            }
+            else {
+                throw new FunctionCallException("The argument to the name function must be a node-set");   
+            }
         }
 
         return "";
+
     }
     
 }

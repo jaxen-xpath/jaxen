@@ -82,7 +82,8 @@ public class LocalNameFunction implements Function
     {
         if ( args.size() == 0 )
         {
-            return "";
+            return evaluate( context.getNodeSet(),
+                             context.getNavigator() ); 
         }
 
         if ( args.size() == 1 )
@@ -122,9 +123,24 @@ public class LocalNameFunction implements Function
             {
                 return nav.getNamespacePrefix( first );
             }
+            else if ( nav.isDocument( first ) )
+            {
+                return "";
+            }
+            else if ( nav.isComment( first ) )
+            {
+                return "";
+            }
+            else if ( nav.isText( first ) )
+            {
+                return "";
+            }
+            else {
+                throw new FunctionCallException("The argument to the local-name function must be a node-set");   
+            }
         }
 
-        throw new FunctionCallException("The argument to the local-name function must be a node-set");
+        return "";
     }
 }
 
