@@ -316,7 +316,8 @@
 
   <target name="jar.full" depends="compile.all">
     <jar jarfile="${build.dir}/${name}-full.jar"
-         basedir="${build.dest.main}">
+         basedir="${build.dest.main}"
+         manifest="src/conf/MANIFEST.MF">
     </jar>
   </target>
 
