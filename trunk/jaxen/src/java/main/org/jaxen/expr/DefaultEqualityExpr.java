@@ -38,9 +38,9 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr
         if ( bothAreSets( lhsValue,
                           rhsValue ) )
         {
-            evaluateSetSet( (List) lhsValue,
-                            (List) rhsValue,
-                            nav );
+            return evaluateSetSet( (List) lhsValue,
+                                   (List) rhsValue,
+                                   nav );
         }
 
         if ( eitherIsSet( lhsValue,
