@@ -9,6 +9,7 @@ import org.saxpath.SAXPathException;
 import org.saxpath.XPathSyntaxException;
 
 import java.util.List;
+import java.util.Iterator;
 
 public class JDOMDemo 
 {
@@ -30,7 +31,18 @@ public class JDOMDemo
             
             List results = xpath.selectNodes( doc );
             
-            System.out.println("selectSingleNodes() -> " + results );
+            Iterator resultIter = results.iterator();
+
+            System.out.println("Document :: " + args[0] );
+            System.out.println("   XPath :: " + args[1] );
+            System.out.println("");
+            System.out.println("Results" );
+            System.out.println("----------------------------------");
+
+            while ( resultIter.hasNext() )
+            {
+                System.out.println( resultIter.next() );
+            }
         }
         catch (JDOMException e)
         {
