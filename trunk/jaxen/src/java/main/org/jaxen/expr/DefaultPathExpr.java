@@ -276,23 +276,21 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr
         return this;
     }
 
-
-
-
     public Object evaluate(Context context) throws JaxenException
-
     {
-
-        Object results = getFilterExpr().evaluate( context );
+        Object results = null;
+        if (getFilterExpr() != null){
+            results = getFilterExpr().evaluate( context );
 
 
 
         context.setNodeSet( convertToList( results ) );
-
-        
-
-        return getLocationPath().evaluate( context );
-	}
+        }
+        if (getLocationPath() != null){
+            return getLocationPath().evaluate( context );
+        }
+        return results;
+    }
 	
 	public void accept(Visitor visitor)
 	{
