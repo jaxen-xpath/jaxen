@@ -34,6 +34,13 @@
     </context>
   </document>
 
+  <!-- test basic math... -->
+  <document url="xml/numbers.xml">
+    <context select="/">
+      <valueOf select="(7 - 3 + 1) = 5">true</valueOf>
+    </context>
+  </document>
+
   <!-- test cases for preceding axis with different node types -->
   <document url="xml/pi2.xml">
     <context select="/a/c">
@@ -115,7 +122,8 @@
       <valueOf select="-3 &gt;= *">true</valueOf>
       <valueOf select="-4 &gt;= *">false</valueOf>
     </context>
-    <!-- This context should work, but needs a fixed version of saxpath to parse the right-hand side
+    <!-- TODO
+         This context should work, but needs a fixed version of saxpath to parse the right-hand side
          of the greater-than expression.
     <context select="/numbers/set[2]">
       <valueOf select="1 &gt; nr/@value">false</valueOf>
