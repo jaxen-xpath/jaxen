@@ -208,15 +208,18 @@ public abstract class XPathTestBase extends TestCase
             
             Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
 
+            log ( debug,
+                  "    New Context :: " + newContext );
+            
+            
             String valueOfXPathStr = valueOf.attributeValue( "select" );
-
+            
             log( debug,
                  "  Select :: " + valueOfXPathStr );
 
             JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
 
             Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
-
 
             String expected = valueOf.getText();
             String result =   StringFunction.evaluate( node,
