@@ -63,46 +63,33 @@
 package org.jaxen;
 
 
-
-/** Generic Jaxen exception.
+/**
+ * Generic Jaxen exception.
  *
- *  <p>
- *  This is the root of all Jaxen exceptions.
- *  It may wrap other exceptions.  See {@link #getRootCause}.
+ * <p> This is the root of all Jaxen exceptions. It may wrap other exceptions.
  *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
 public class JaxenException extends org.jaxen.saxpath.SAXPathException
 {
-    /** Root cause, if any. */
-    private Throwable rootCause;
-
-    /** Construct with a message.
+    /**
+     * Construct with a message.
      *
-     *  @param message The error message.
+     * @param message The error message.
      */
-    public JaxenException(String message)
+    public JaxenException( String message )
     {
         super( message );
     }
 
-    /** Construct with a root cause.
+    /**
+     * Construct with a root cause.
      *
-     *  @param rootCause Root cause of the error.
+     * @param rootCause Root cause of the error.
      */
-    public JaxenException(Throwable rootCause)
+    public JaxenException( Throwable rootCause )
     {
-        super( "wrapped exception" );
-        this.rootCause = rootCause;
-    }
-
-    /** Retrieve the root cause, if any.
-     *
-     *  @return Root cause of the error.
-     */
-    public Throwable getRootCause()
-    {
-        return this.rootCause;
+        super( rootCause );
     }
 }
 
