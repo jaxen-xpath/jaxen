@@ -66,6 +66,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.jaxen.Context;
+import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
 
 abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
@@ -139,13 +140,12 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
         List nodeSet = context.getNodeSet();
         List contextNodeSet = new ArrayList(nodeSet.size());
         contextNodeSet.addAll(nodeSet);
-
+        ContextSupport support = context.getContextSupport();
         Iterator stepIter = getSteps().iterator();
-        Step eachStep = null;
         while ( stepIter.hasNext() )
         {
-            eachStep = (Step) stepIter.next();
-            Context stepContext = new Context(context.getContextSupport());
+            Step eachStep = (Step) stepIter.next();
+            Context stepContext = new Context(support);
             stepContext.setNodeSet(contextNodeSet);
             // XXX the final evaluation of this line reshuffles the context node-set JAXEN-55
             contextNodeSet = eachStep.evaluate(stepContext);
