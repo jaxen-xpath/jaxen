@@ -128,53 +128,8 @@ public class DocumentNavigator extends DefaultNavigator
     {
         if ( contextNode instanceof Node )
         {            
-            final Node parent = (Node) contextNode;
-            return new Iterator() 
-            {
-                boolean first = true;
-                Node current = parent.getFirstChild();
-                Node next;
-
-                public boolean hasNext()
-                {
-                    while ( current != null )
-                    {
-                        if ( first ) 
-                        {
-                            first = false;
-                        }
-                        else 
-                        {
-                            current = current.getNextSibling();
-                            if ( current == null )
-                            {
-                                return false;
-                            }
-                        }
-                        int type = current.getNodeType();
-                        if ( type == Node.DOCUMENT_TYPE_NODE || type == Node.NOTATION_NODE ) {
-                            continue;
-                        }
-                        break;
-                    }
-                    return true;
-                }
-
-                public Object next()
-                {
-                    return current;
-                }
-
-                public void remove()
-                {
-                    if ( current != null )
-                    {
-                        parent.removeChild( current );
-                    }
-                }
-            };
+            return new ChildIterator( (Node) contextNode );
         }
-
         return null;
     }
 
@@ -182,7 +137,7 @@ public class DocumentNavigator extends DefaultNavigator
     {
         if ( contextNode instanceof Document )
         {
-            return null;
+            return new SingleObjectIterator( contextNode );
         }
 
         Node node = (Node) contextNode;
@@ -205,27 +160,7 @@ public class DocumentNavigator extends DefaultNavigator
         }
 
         Element element = (Element) contextNode;
-        final NamedNodeMap attributes = element.getAttributes();
-        return new Iterator() 
-        {
-            int index = -1;
-            int size = attributes.getLength();
-
-            public boolean hasNext()
-            {
-                return ++index < size;
-            }
-
-            public Object next()
-            {
-                return attributes.item(index);
-            }
-
-            public void remove()
-            {
-                throw new UnsupportedOperationException( "remove() is not supported by this iterator" );
-            }
-        };
+        return new AttributesIterator( element.getAttributes() );
     }
 
     public Iterator getNamespaceAxisIterator(Object contextNode)
