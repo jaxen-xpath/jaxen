@@ -68,7 +68,6 @@ import org.jaxen.JaxenRuntimeException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
-import java.util.ArrayList;
 
 public class DescendantAxisIterator implements Iterator
 {
