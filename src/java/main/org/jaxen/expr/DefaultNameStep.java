@@ -54,6 +54,7 @@ import java.util.Map;
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
+import org.jaxen.UnresolvableException;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 import org.jaxen.saxpath.Axis;
@@ -284,7 +285,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      * @param contextSupport  the context support
      * @return true if matches
      */
-    public boolean matches(Object node, ContextSupport contextSupport) {
+    public boolean matches(Object node, ContextSupport contextSupport) throws JaxenException {
         Navigator nav  = contextSupport.getNavigator();
         String myUri = null;
         String nodeName = null;
@@ -314,6 +315,8 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
         if (hasPrefix) {
             myUri = contextSupport.translateNamespacePrefixToUri(this.prefix);
+            if (myUri == null)
+            	throw new UnresolvableException("Cannot resolve namespace prefix '"+this.prefix+"'");
         } else if (matchesAnyName) {
             return true;
         }

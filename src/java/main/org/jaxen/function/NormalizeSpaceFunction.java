@@ -98,7 +98,10 @@ public class NormalizeSpaceFunction implements Function
 
         if ( str.length() <= 1 )
         {
-            return str;
+            if (Character.isWhitespace(str.charAt(0)))
+            	return "";
+            else
+            	return str;
         }
 
         StringBuffer buffer = new StringBuffer();

@@ -87,7 +87,7 @@ public interface Step extends Predicated, Visitable
      * (which must be on the axis).
      */    
     boolean matches(Object node,
-                    ContextSupport contextSupport);
+                    ContextSupport contextSupport) throws JaxenException;
 
     String getText();
 
