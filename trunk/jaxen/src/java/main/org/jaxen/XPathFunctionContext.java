@@ -169,6 +169,10 @@ public class XPathFunctionContext extends SimpleFunctionContext
                           "true",
                           new TrueFunction() );
         
+        registerFunction( null,  // namespace URI
+                          "translate",
+                          new TranslateFunction() );
+        
 
         // register extension functions
         // extension functions should go into a namespace, but which one?

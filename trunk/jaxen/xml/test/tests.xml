@@ -498,14 +498,30 @@
   </document>
 
   
-    <!-- testing for correct behaviour of AbsoluteLocationPath -->
 
   <document url="xml/simple.xml">
+
+   <!-- test behaviour of AbsoluteLocationPath -->
    <context select="/root/a">
     <valueOf select="concat( ., /root/b )">ab</valueOf>
     <valueOf select="concat( ../b, . )">ba</valueOf>
     <valueOf select="concat( /root/b, . )">ba</valueOf>
    </context>
+
+   <!-- test the translate() function -->
+   <context select="/">
+    <valueOf select="translate( '', '', '' )"></valueOf>
+    <valueOf select="translate( 'abcd', '', '' )">abcd</valueOf>
+    <valueOf select="translate( 'abcd', 'abcd', 'abcd' )">abcd</valueOf>
+    <valueOf select="translate( 'abcd', 'dcba', 'dcba' )">abcd</valueOf>
+    <valueOf select="translate( 'abcd', 'abcd', 'dcba' )">dcba</valueOf>
+    <valueOf select="translate( 'abcd', 'abcd', 'ab' )">ab</valueOf>
+    <valueOf select="translate( 'abcd', 'cdab', 'cd' )">cd</valueOf>
+    <valueOf select="translate( 'abcd', 'acbd', 'xy' )">xy</valueOf>
+    <valueOf select="translate( 'abcd', 'abcdb', 'abcdb' )">abcd</valueOf>
+    <valueOf select="translate( 'abcd', 'abcd', 'abcdb' )">abcd</valueOf>
+   </context>
+
   </document>
 
   <!-- test cases for String extension functions -->
