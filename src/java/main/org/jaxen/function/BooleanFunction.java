@@ -105,7 +105,7 @@ public class BooleanFunction implements Function
         }
         
         // now check for primitive types
-        // otherwise a non-empty nodeset is true
+        // otherwise a non-empty node-set is true
 
         // if it's a Boolean, let it decide
         if ( obj instanceof Boolean )
@@ -116,7 +116,7 @@ public class BooleanFunction implements Function
         else if ( obj instanceof Number )
         {
             double d = ((Number) obj).doubleValue();
-            if ( d == 0 || d == Double.NaN )
+            if ( d == 0 || Double.isNaN(d) )
             {
                 return Boolean.FALSE;
             }
@@ -131,37 +131,10 @@ public class BooleanFunction implements Function
         }
         else 
         {
-            // assume its a node so that this nodeset is non-empty 
-            // and so its true
+            // assume it's a node so that this node-set is non-empty 
+            // and so it's true
             return ( obj != null ) ? Boolean.TRUE : Boolean.FALSE;
         }
 
-/*
-        This is the old way to test nodes
-        - don't think this is correct and its certainly less efficient
- 
-        else {
-            // convert to String if it's a special object type
-            if ( nav.isElement( obj ) )
-            {
-                obj = nav.getElementStringValue( obj );
-            }
-            else if ( nav.isAttribute( obj ) )
-            {
-                obj = nav.getAttributeStringValue( obj );
-            }
-            else if ( nav.isText( obj ) )
-            {
-                obj = nav.getTextStringValue( obj );
-            }
-            else if ( obj instanceof String )
-            {
-                return ( ((String)obj).length() > 0
-                         ? Boolean.TRUE
-                         : Boolean.FALSE );
-            }
-            return Boolean.FALSE;
-        }
-*/
     }
 }
