@@ -135,6 +135,22 @@ public class XPathLexerTest extends TestCase
                       tokenText() );
     }
 
+    
+    /**
+     * This tests that characters added in XML 1.1 and Unicode 3.0
+     * are not recognized as legal name characters. 
+     */
+    public void testBurmeseIdentifier()
+    {
+        setText( "\u1000foo" );
+
+        nextToken();
+
+        assertEquals( TokenTypes.ERROR,
+                      tokenType() );
+
+    }
+
     public void testIdentifierAndOperator()
     {
         setText( "foo and bar" );
