@@ -458,6 +458,13 @@
       </test>
       <valueOf select="document('xml/web.xml')/web-app/servlet[1]/servlet-name">snoop</valueOf>
     </context>
+    <!-- Test to check if the context changes when an extension function is used.
+         First test is an example, second is the actual test.
+    -->
+    <context select="/foo/bar/cheese[1]">
+      <valueOf select="concat(./@id,'foo',@id)">3foo3</valueOf>
+      <valueOf select="concat(./@id,document('xml/web.xml')/web-app/servlet[1]/servlet-name,./@id)">3snoop3</valueOf>
+    </context>
   </document>
 
   <document url="xml/message.xml">
@@ -502,6 +509,7 @@
     <valueOf select="concat( ., /root/b )">ab</valueOf>
     <valueOf select="concat( ../b, . )">ba</valueOf>
     <valueOf select="concat( /root/b, . )">ba</valueOf>
+    <valueOf select="concat( /root/c/d, ../b )">db</valueOf>
    </context>
 
    <!-- test the translate() function -->

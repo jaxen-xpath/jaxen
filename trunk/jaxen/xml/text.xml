@@ -2,7 +2,7 @@
 <foo>
 	<bar>
 		baz
-		<cheese/>
+		<cheese id="3"/>
 		baz
 		<cheese/>
 		baz

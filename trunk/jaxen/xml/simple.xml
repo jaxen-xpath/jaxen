@@ -2,4 +2,7 @@
 <root>
   <a>a</a>
   <b>b</b>
+  <c>
+    <d>d</d>
+  </c>
 </root>

@@ -99,7 +99,7 @@ public class BooleanFunction implements Function
             {
                 return Boolean.FALSE;
             }
-            
+     
             // otherwise, unwrap the list and check the primitive
             obj = list.get(0);
         }
