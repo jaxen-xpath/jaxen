@@ -33,7 +33,7 @@ public class StringFunction implements Function
                              context.getNavigator() );
         }
 
-        throw new FunctionCallException( "string() requries one argument." );
+        throw new FunctionCallException( "string() requires one argument." );
     }
     
     public static String evaluate(Object obj,

@@ -26,7 +26,7 @@ public class SubstringBeforeFunction implements Function
                              context.getNavigator() );
         }
 
-        throw new FunctionCallException( "substring-before() requries two arguments." );
+        throw new FunctionCallException( "substring-before() requires two arguments." );
     }
 
     public static String evaluate(Object strArg,
