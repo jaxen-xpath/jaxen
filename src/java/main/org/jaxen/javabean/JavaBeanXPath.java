@@ -136,11 +136,8 @@ public class JavaBeanXPath extends BaseXPath
     {
         Object result = super.evaluate( node );
 
-        System.err.println( "RESULT: " + result );
-
         if ( result instanceof Element )
         {
-            System.err.println( "unwrapping to " + ((Element)result).getObject() );
             return ((Element)result).getObject();
         }
         else if ( result instanceof Collection )
