@@ -278,6 +278,9 @@
       <test select="/*/fibonacci[position() &lt; 10]" count="9"/>
       <valueOf select="sum(//fibonacci)">196417.0</valueOf>
       <valueOf select="sum(//fibonacci/@index)">325.0</valueOf>
+      <valueOf select="/*/fibonacci[2]">1</valueOf>
+      <valueOf select="/*/fibonacci[ count(/*/fibonacci) ]">75025</valueOf>
+      <valueOf select="/*/fibonacci[ count(/*/fibonacci) - 1 ]">46368</valueOf>
     </context>
   </document>
 

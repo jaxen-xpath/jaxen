@@ -21,6 +21,13 @@ public class SimpleVariableContext implements VariableContext
                             value );
     }
 
+    /** Associates the local name with no namespace URI to the given value */
+    public void setVariableValue( String localName,
+                                  Object value )
+    {
+        this.variables.put( new QualifiedName(null, localName), value );
+    }
+
     public Object getVariableValue( String namespaceURI,
                                     String prefix,
                                     String localName )
