@@ -194,4 +194,19 @@ public abstract class DefaultNavigator implements Navigator
     {
         return null;
     }
+
+    /**
+     *  Default implementation that can not find elements. Override in subclass
+     *  if subclass does know about attribute types.
+     *
+     *  @param contextNode   a node from the document in which to look for the
+     *                       id
+     *  @param elementId   id to look for
+     *
+     *  @return   null
+     */
+    public Object getElementById(Object object, String elementId)
+    {
+        return null;
+    }
 }
