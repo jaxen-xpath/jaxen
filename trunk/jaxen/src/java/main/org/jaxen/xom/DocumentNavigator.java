@@ -86,7 +86,6 @@ import org.jaxen.saxpath.SAXPathException;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
 
 /**
  * Interface for navigating around the XOM object model.
