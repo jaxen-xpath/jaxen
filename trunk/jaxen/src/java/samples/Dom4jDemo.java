@@ -1,5 +1,6 @@
 
 import org.dom4j.Document;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import org.jaxen.dom4j.XPath;
@@ -40,7 +41,16 @@ public class Dom4jDemo
             
             while ( resultIter.hasNext() )
             {
-                System.out.println( resultIter.next() );
+                Object object = resultIter.next();
+                if ( object instanceof Node ) 
+                {
+                    Node node = (Node) object;
+                    System.out.println( node.asXML() );
+                }
+                else 
+                {
+                    System.out.println( resultIter.next() );
+                }
             }
         }
         catch (XPathSyntaxException e)
