@@ -1,66 +1,50 @@
-/*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- * 
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions, and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions, and the disclaimer that follows 
- *    these conditions in the documentation and/or other materials 
- *    provided with the distribution.
- *
- * 3. The name "Jaxen" must not be used to endorse or promote products
- *    derived from this software without prior written permission.  For
- *    written permission, please contact license@jaxen.org.
- * 
- * 4. Products derived from this software may not be called "Jaxen", nor
- *    may "Jaxen" appear in their name, without prior written permission
- *    from the Jaxen Project Management (pm@jaxen.org).
- * 
- * In addition, we request (but do not require) that you include in the 
- * end-user documentation provided with the redistribution and/or in the 
- * software itself an acknowledgement equivalent to the following:
- *     "This product includes software developed by the
- *      Jaxen Project (http://www.jaxen.org/)."
- * Alternatively, the acknowledgment may be graphical using the logos 
- * available at http://www.jaxen.org/
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- *
- * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
- * 
- * $Id$
- */
-
-
 package org.jaxen;
+
+/*
+ $Id$
+
+ Copyright 2003 (C) The Werken Company. All Rights Reserved.
+ 
+ Redistribution and use of this software and associated documentation
+ ("Software"), with or without modification, are permitted provided
+ that the following conditions are met:
+
+ 1. Redistributions of source code must retain copyright
+    statements and notices.  Redistributions must also contain a
+    copy of this document.
+ 
+ 2. Redistributions in binary form must reproduce the
+    above copyright notice, this list of conditions and the
+    following disclaimer in the documentation and/or other
+    materials provided with the distribution.
+ 
+ 3. The name "jaxen" must not be used to endorse or promote
+    products derived from this Software without prior written
+    permission of The Werken Company.  For written permission,
+    please contact bob@werken.com.
+ 
+ 4. Products derived from this Software may not be called "jaxen"
+    nor may "jaxen" appear in their names without prior written
+    permission of The Werken Company. "jaxen" is a registered
+    trademark of The Werken Company.
+ 
+ 5. Due credit should be given to The Werken Company.
+    (http://jaxen.werken.com/).
+ 
+ THIS SOFTWARE IS PROVIDED BY THE WERKEN COMPANY AND CONTRIBUTORS
+ ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT
+ NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
+ THE WERKEN COMPANY OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ OF THE POSSIBILITY OF SUCH DAMAGE.
+
+ */
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -87,58 +71,115 @@ import java.util.ArrayList;
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
  *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
  *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
- *  @see org.jaxen.exml.ElectricXPath  XPath for Electric XML
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
-public class Context implements Serializable
+public class Context
+    implements Serializable
 {
+    // ----------------------------------------------------------------------
+    //     Instance members
+    // ----------------------------------------------------------------------
+
+    /** Context-support. */
     private ContextSupport contextSupport;
 
-    private List           nodeSet;
+    /** Context node-set. */
+    private List nodeSet;
 
+    /** Current context size. */
     private int size;
+
+    /** Current context position. */
     private int position;
 
+    // ----------------------------------------------------------------------
+    //     Constructors
+    // ----------------------------------------------------------------------
+
+    /** Construct.
+     *
+     *  @param contextSupport The context-support.
+     */
     public Context(ContextSupport contextSupport)
     {
         this.contextSupport = contextSupport;
         this.nodeSet        = Collections.EMPTY_LIST;
     }
+    
+    // ----------------------------------------------------------------------
+    //     Instance methods
+    // ----------------------------------------------------------------------
 
-    public List getNodeSet()
-    {
-        return this.nodeSet;
-    }
-
+    /** Set the context node-set.
+     *
+     *  @param nodeSet The context node-set.
+     */
     public void setNodeSet(List nodeSet)
     {
         this.nodeSet = nodeSet;
     }
 
-    public ContextSupport getContextSupport()
+    /** Retrieve the context node-set.
+     *
+     *  @return The context node-set.
+     */
+    public List getNodeSet()
     {
-        return this.contextSupport;
+        return this.nodeSet;
     }
 
+    /** Set the <code>ContextSupport</code>.
+     *
+     *  @param contextSupport The context-support.
+     */
     public void setContextSupport(ContextSupport contextSupport)
     {
         this.contextSupport = contextSupport;
     }
 
+    /** Retrieve the <code>ContextSupport</code>.
+     *
+     *  @return The context-support.
+     */
+    public ContextSupport getContextSupport()
+    {
+        return this.contextSupport;
+    }
+
+    /** Retrieve the current <code>Navigator</code>.
+     *
+     *  @return The navigator.
+     */
     public Navigator getNavigator()
     {
         return getContextSupport().getNavigator();
     }
 
+    /** Translate a namespace prefix to its URI.
+     *
+     *  @param prefix The prefix.
+     *
+     *  @return The naemspace URI mapped to the prefix.
+     */
     public String translateNamespacePrefixToUri(String prefix)
     {
         return getContextSupport().translateNamespacePrefixToUri( prefix );
     }
 
-    public Object getVariableValue( String namespaceURI,
-                                    String prefix,
-                                    String localName )
+    /** Retrieve a variable value.
+     *
+     *  @param namespaceURI The function namespace URI.
+     *  @param prefix The function prefix.
+     *  @param localName The function name.
+     *
+     *  @return The variable value.
+     *
+     *  @throws UnresolvableException If unable to locate a bound variable.
+     */
+    public Object getVariableValue(String namespaceURI,
+                                   String prefix,
+                                   String localName)
         throws UnresolvableException
     {
         return getContextSupport().getVariableValue( namespaceURI,
@@ -146,9 +187,19 @@ public class Context implements Serializable
                                                      localName );
     }
 
-    public Function getFunction( String namespaceURI,
-                                 String prefix,
-                                 String localName )
+    /** Retrieve a <code>Function</code>.
+     *
+     *  @param namespaceURI The function namespace URI.
+     *  @param prefix The function prefix.
+     *  @param localName The function name.
+     *
+     *  @return The function object.
+     *
+     *  @throws UnresolvableException If unable to locate a bound function.
+     */
+    public Function getFunction(String namespaceURI,
+                                String prefix,
+                                String localName)
         throws UnresolvableException
     {
         return getContextSupport().getFunction( namespaceURI,
@@ -156,26 +207,54 @@ public class Context implements Serializable
                                                 localName );
     }
 
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    //     Properties
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    /** Set the current size in the context node-set.
+     *
+     *  @param size The size.
+     */
     public void setSize(int size)
     {
         this.size = size;
     }
 
-    public void setPosition(int position)
-    {
-        this.position = position;
-    }
-
+    /** Retrieve the size of the context node-set.
+     *
+     *  @return The size.
+     */
     public int getSize()
     {
         return this.size;
     }
 
+    /** Set the current position in the context node-set.
+     *
+     *  @param position The position
+     */
+    public void setPosition(int position)
+    {
+        this.position = position;
+    }
+
+    /** Retrieve current position in the context node-set.
+     *
+     *  @return The current position.
+     */
     public int getPosition()
     {
         return this.position;
     }
 
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    //     Helpers
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    /** Create a type-safe shallow copy.
+     *
+     *  @return The duplicate.
+     */
     public Context duplicate()
     {
         Context dupe = new Context( getContextSupport() );
