@@ -164,8 +164,6 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             Collections.sort(contextNodeSet, new NodeComparator(support.getNavigator()));
         }
         
-        // FIXME I suspect we need to do this in DefaultUnionExpression too
-        
         return contextNodeSet;
     }
 
