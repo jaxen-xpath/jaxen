@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <author email="bob@eng.werken.com">bob mcwhirter</author>
+    <title>Releases</title>
+  </properties>
+
+  <body>
+    <section name="Official Builds">
+      <p>
+      Official builds can be found <a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/">here</a>.
+      </p>
+
+      <p>
+      The latest official build is <b>1.0-FCS</b>.
+      </p>
+
+      <ul>
+        <li><a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/jaxen-1.0-FCS.zip">1.0-FCS in zip format.</a></li>
+        <li><a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/jaxen-1.0-FCS.tar.gz">1.0-FCS in tar/gz format.</a></li>
+      </ul>
+    </section>
+
+    <section name="Nighly Builds">
+      <p>
+      Nighly builds have been temporarily suspended as we ramp up
+      with using <a href="http://jakarta.apache.org/turbine/maven/index.html">maven</a>.
+      </p>
+    </section>
+
+  </body>
+
+</document>
+
