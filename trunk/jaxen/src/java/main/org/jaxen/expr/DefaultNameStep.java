@@ -64,11 +64,7 @@ public class DefaultNameStep extends DefaultStep
         String nodeUri  = null;
         String nodeName = null;
 
-        if ( nav.isDocument( node ) )
-        {
-            return matchesAnyName;
-        }
-        else if ( nav.isElement( node ) )
+        if ( nav.isElement( node ) )
         {
             nodeUri  = nav.getElementNamespaceUri( node );
             nodeName = nav.getElementName( node );
@@ -78,6 +74,10 @@ public class DefaultNameStep extends DefaultStep
         {
             nodeUri  = nav.getAttributeNamespaceUri( node );
             nodeName = nav.getAttributeName( node );
+        }
+        else if ( nav.isDocument( node ) )
+        {
+            return matchesAnyName;
         }
         else if ( nav.isNamespace( node ) )
         {
