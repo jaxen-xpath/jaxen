@@ -654,7 +654,7 @@ public class DocumentNavigator extends DefaultNavigator
      *
      * @param object The target node.
      * @return The Namespace URI as a (possibly empty) string if the
-     * node is a comment, null otherwise.
+     * node is a namespace node, null otherwise.
      */
     public String getNamespaceStringValue (Object object)
     {
@@ -664,6 +664,20 @@ public class DocumentNavigator extends DefaultNavigator
             return null;
     }
 
+    /**
+     * Get the prefix value of a Namespace node.
+     *
+     * @param object The target node.
+     * @return The Namespace prefix a (possibly empty) string if the
+     * node is a namespace node, null otherwise.
+     */
+    public String getNamespacePrefix (Object object)
+    {
+        if (isNamespace(object))
+            return ((NamespaceNode)object).getLocalName();
+        else
+            return null;
+    }
 
     /**
      * Translate a Namespace prefix to a URI.
