@@ -8,9 +8,9 @@
   <currentVersion>1.1-beta-1-dev</currentVersion>
 
   <organization>
-    <name>The Werken Company</name>
-    <url>http://www.werken.com/</url>
-    <logo>http://images.werken.com/werken_large.gif</logo>
+    <name>Codehaus</name>
+    <url>http://www.codehaus.org</url>
+    <logo>http://images.werken.com/codehaus-plain.gif</logo>
   </organization>
   <inceptionYear>2001</inceptionYear>
   <package>org.jaxen</package>
@@ -24,14 +24,14 @@
 
   <url>http://jaxen.org/</url>
 
-  <issueTrackingUrl>http://jira.werken.com/BrowseProject.jspa?id=10022</issueTrackingUrl>
+  <issueTrackingUrl>http://jira.codehaus.org/BrowseProject.jspa?id=10022</issueTrackingUrl>
   <siteAddress>jaxen.org</siteAddress>
-  <siteDirectory>/www/jaxen.werken.com/</siteDirectory>
+  <siteDirectory>/www/jaxen.org/</siteDirectory>
   <distributionDirectory></distributionDirectory>
   
   <repository>
-    <connection>scm:cvs::pserver:anonymous@cvs.werken.com:/cvsroot/jaxen:jaxen</connection>
-    <url>http://cvs.werken.com/viewcvs.cgi/jaxen/?cvsroot=jaxen</url>
+    <connection>scm:cvs::pserver:anonymous@cvs.codehaus.org:/cvsroot/jaxen:jaxen</connection>
+    <url>http://cvs.codehaus.org/viewcvs.cgi/jaxen/?cvsroot=jaxen</url>
   </repository>
 
   <versions/>
@@ -41,9 +41,9 @@
 
     <mailingList>
       <name>jaxen-interest</name>
-      <archive>http://lists.werken.com/pipermail/jaxen-interest/</archive>
-      <subscribe>http://lists.werken.com/mailman/listinfo/jaxen-interest</subscribe>
-      <unsubscribe>http://lists.werken.com/mailman/listinfo/jaxen-interest</unsubscribe>
+      <archive>http://lists.codehaus.org/pipermail/jaxen-interest/</archive>
+      <subscribe>http://lists.codehaus.org/mailman/listinfo/jaxen-interest</subscribe>
+      <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jaxen-interest</unsubscribe>
     </mailingList>
 
   </mailingLists>
@@ -171,7 +171,7 @@
 
   <build>
 
-    <nagEmailAddress>jaxen-interest@lists.werken.com</nagEmailAddress>
+    <nagEmailAddress>jaxen-interest@lists.codehaus.org</nagEmailAddress>
 
     <sourceDirectory>src/java/main</sourceDirectory>
 
