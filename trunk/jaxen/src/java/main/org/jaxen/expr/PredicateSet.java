@@ -71,9 +71,9 @@ class PredicateSet
     protected boolean evaluateAsBoolean(List contextNodeSet,
                                       ContextSupport support) throws JaxenException
     {
-        evaluatePredicates( contextNodeSet, support );
+        List result = evaluatePredicates( contextNodeSet, support );
         
-        return ! contextNodeSet.isEmpty();
+        return ! result.isEmpty();
     }
     
     protected List evaluatePredicates(List contextNodeSet,
