@@ -99,7 +99,13 @@ class PredicateSet
             for ( int i = 0 ; i < contextSize ; ++i )
             {
                 contextNode = contextNodeSet.get( i );
-                predContext.setNodeSet( Collections.singletonList( contextNode ) );
+
+                List list = new ArrayList( 1 );
+
+                list.add( contextNode );
+
+                predContext.setNodeSet( list );
+
                 predContext.setPosition( i + 1 );
                 predContext.setSize( contextSize );
 

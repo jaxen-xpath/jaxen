@@ -4,6 +4,7 @@ package org.jaxen;
 import org.saxpath.SAXPathException;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class BaseXPath extends JaXPath
@@ -87,7 +88,11 @@ public abstract class BaseXPath extends JaXPath
         }
         else
         {
-            fullContext.setNodeSet( Collections.singletonList( context ) );
+            List list = new ArrayList( 1 );
+
+            list.add( context );
+
+            fullContext.setNodeSet( list );
         }
 
         return fullContext;
