@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,40 +60,49 @@
  */
 
 
+
 package org.jaxen;
 
-import junit.framework.Test;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect the org.jaxen. tests.
+ *  Test for function context.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b4
  *
  */
-public class CoreTests extends TestCase {
+public class FunctionContextTest extends TestCase
+{
 
-    
-    public CoreTests(String name) {
-        super(name);   
-    }
-
-    
-    public static Test suite() {
+    public void testJAXEN50() throws JaxenException, ParserConfigurationException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        return result;
+        DOMXPath xpath = new DOMXPath("true()");
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.example.org/");
+        
+        SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
+        // Add all namespace declarations from the node
+        nsContext.addElementNamespaces(xpath.getNavigator(), doc);
+        xpath.setNamespaceContext(nsContext);
+        
+        boolean result = xpath.booleanValueOf(doc);
+        assertTrue(result);
         
     }
-
-    
+ 
 }
