@@ -1,4 +1,4 @@
-// Copyright 2001 werken digital. All rights reserved.
+// Copyright 2001 bob mcwhirter and James Strachan. All rights reserved.
 
 package org.jaxen;
 
@@ -156,5 +156,15 @@ public abstract class DefaultNavigator implements Navigator
         else {
             return Pattern.UNKNOWN_NODE;
         }
+    }
+    
+    public Object getParentNode(Object contextNode) throws UnsupportedAxisException
+    {
+        Iterator iter = getParentAxisIterator( contextNode );
+        if ( iter != null && iter.hasNext() )
+        {
+            return iter.next();
+        }
+        return null;
     }
 }

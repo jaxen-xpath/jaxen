@@ -1,4 +1,4 @@
-// Copyright 2001 werken digital. All rights reserved.
+// Copyright 2001 bob mcwhirter and James Strachan. All rights reserved.
 
 package org.jaxen;
 
@@ -162,6 +162,8 @@ public interface Navigator
     Iterator getAncestorOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
 
     Object getDocumentNode(Object contextNode);
+    
+    Object getParentNode(Object contextNode) throws UnsupportedAxisException;
     
     String getElementNamespaceUri(Object element);
     String getElementName(Object element);
