@@ -110,7 +110,12 @@ public class SubstringFunction implements Function
             if (!d2.isNaN()){
                 len = RoundFunction.evaluate(d2, nav ).intValue();
             }
+            else {
+                len = 0;
+            }
         }
+
+        int end = start + len;
 
         // negative start is treated as 0
         if ( start < 0){
@@ -119,9 +124,6 @@ public class SubstringFunction implements Function
             return "";
         }
 
-        // if the length is longer than the rest of the string just
-        // take the rest of the string
-        int end = start + len;
         if (end > strlen){
             end = strlen;
         }
