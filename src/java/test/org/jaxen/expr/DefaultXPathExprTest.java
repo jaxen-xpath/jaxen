@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,57 +60,57 @@
  */
 
 
-package org.jaxen;
 
-import org.jaxen.dom.DOMTests;
-import org.jaxen.dom4j.DOM4JTests;
-import org.jaxen.expr.ExprTests;
-import org.jaxen.function.FunctionTests;
-import org.jaxen.javabean.JavaBeanTests;
-import org.jaxen.jdom.JDOMTests;
-import org.jaxen.pattern.PatternTests;
-import org.jaxen.saxpath.base.BaseTests;
-import org.jaxen.saxpath.helpers.HelpersTests;
-import org.jaxen.xom.XOMTests;
+package org.jaxen.expr;
 
-import junit.framework.Test;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect all the Jaxen tests into one suite.
+ *  Test for function context.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b4
  *
  */
-public class JaxenTests extends TestCase {
+public class DefaultXPathExprTest extends TestCase
+{
 
-    
-    public JaxenTests(String name) {
-        super(name);   
-    }
-
-    
-    public static Test suite() {
+    public void testJAXEN40() throws JaxenException, ParserConfigurationException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(CoreTests.suite());
-        result.addTest(DOMTests.suite());
-        result.addTest(JDOMTests.suite());
-        result.addTest(DOM4JTests.suite());
-        result.addTest(XOMTests.suite());
-        result.addTest(JavaBeanTests.suite());
-        result.addTest(PatternTests.suite());
-        result.addTest(BaseTests.suite());
-        result.addTest(HelpersTests.suite());
-        result.addTest(FunctionTests.suite());
-        result.addTest(ExprTests.suite());
-        return result;
+        DOMXPath xpath = new DOMXPath("root/child1/grandchild1 | root/child2/grandchild2");
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElement("root");
+        Element child1 = doc.createElement("child1");
+        Element child2 = doc.createElement("child2");
+        Element grandchild1 = doc.createElement("grandchild1");
+        Element grandchild2 = doc.createElement("grandchild2");
+        root.appendChild(child1);
+        root.appendChild(child2);
+        child1.appendChild(grandchild1);
+        child2.appendChild(grandchild2);
+        
+        doc.appendChild(root);
+        
+        List results = xpath.selectNodes(doc);
+        assertEquals(2, results.size());
+        assertTrue(results.indexOf(grandchild1) >= 0);
+        assertTrue(results.indexOf(grandchild2) >= 0);
         
     }
-
-    
+ 
 }

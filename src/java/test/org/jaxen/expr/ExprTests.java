@@ -60,18 +60,7 @@
  */
 
 
-package org.jaxen;
-
-import org.jaxen.dom.DOMTests;
-import org.jaxen.dom4j.DOM4JTests;
-import org.jaxen.expr.ExprTests;
-import org.jaxen.function.FunctionTests;
-import org.jaxen.javabean.JavaBeanTests;
-import org.jaxen.jdom.JDOMTests;
-import org.jaxen.pattern.PatternTests;
-import org.jaxen.saxpath.base.BaseTests;
-import org.jaxen.saxpath.helpers.HelpersTests;
-import org.jaxen.xom.XOMTests;
+package org.jaxen.expr;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -79,17 +68,17 @@ import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect all the Jaxen tests into one suite.
+ *   Collect Jaxen's DOM tests.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b4
  *
  */
-public class JaxenTests extends TestCase {
+public class ExprTests extends TestCase {
 
     
-    public JaxenTests(String name) {
+    public ExprTests(String name) {
         super(name);   
     }
 
@@ -97,17 +86,7 @@ public class JaxenTests extends TestCase {
     public static Test suite() {
         
         TestSuite result = new TestSuite();
-        result.addTest(CoreTests.suite());
-        result.addTest(DOMTests.suite());
-        result.addTest(JDOMTests.suite());
-        result.addTest(DOM4JTests.suite());
-        result.addTest(XOMTests.suite());
-        result.addTest(JavaBeanTests.suite());
-        result.addTest(PatternTests.suite());
-        result.addTest(BaseTests.suite());
-        result.addTest(HelpersTests.suite());
-        result.addTest(FunctionTests.suite());
-        result.addTest(ExprTests.suite());
+        result.addTest(new TestSuite(DefaultXPathExpr.class));
         return result;
         
     }
