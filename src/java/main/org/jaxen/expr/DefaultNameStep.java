@@ -8,12 +8,31 @@ import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
 
+/** Expression object that represents any flavor
+ *  of name-test steps within an XPath.
+ *
+ *  <p>
+ *  This includes simple steps, such as "foo",
+ *  non-default-axis steps, such as "following-sibling::foo"
+ *  or "@foo", and namespace-aware steps, such
+ *  as "foo:bar".
+ *  </p>
+ *
+ *  @author bob mcwhirter (bob@werken.com)
+ */
 public class DefaultNameStep extends DefaultStep
 {
+    /** Our prefix, bound through the current Context.
+     *  The empty-string ("") if no prefix was specified.
+     *  Decidedly NOT-NULL, due to SAXPath constraints.
+     */
     private String prefix;
+
+    /** Our local-name.*/
     private String localName;
+
+    /** Quick flag denoting if the localname was '*' */
     private boolean matchesAnyName;
-    private boolean matchesAnyNamespace;
 
     public DefaultNameStep(IterableAxis axis,
                            String prefix,
@@ -21,10 +40,9 @@ public class DefaultNameStep extends DefaultStep
     {
         super( axis );
 
-        this.prefix    = prefix;
-        this.localName = localName;
-        this.matchesAnyName = "*".equals( localName );
-        this.matchesAnyNamespace = matchesAnyName || prefix.equals( "*" );        
+        this.prefix              = prefix;
+        this.localName           = localName;
+        this.matchesAnyName      = "*".equals( localName );
     }
 
     public String getPrefix()
@@ -40,11 +58,6 @@ public class DefaultNameStep extends DefaultStep
     public boolean isMatchesAnyName() 
     {
         return matchesAnyName;
-    }
-
-    public boolean isMatchesAnyNamespace() 
-    {
-        return matchesAnyNamespace;
     }
 
     public String getText()
@@ -69,7 +82,13 @@ public class DefaultNameStep extends DefaultStep
     public boolean matches(Object node,
                            ContextSupport contextSupport)
     {
+        //System.err.println( "DefaultNameStep.matches(" + node + ")" );
+
         Navigator nav  = contextSupport.getNavigator();
+
+        String  myPrefix  = getPrefix();         
+        String  myUri     = null;
+        boolean hasPrefix = ( ! ( "".equals( myPrefix ) ) );
 
         String nodeUri  = null;
         String nodeName = null;
@@ -86,48 +105,75 @@ public class DefaultNameStep extends DefaultStep
         }
         else if ( nav.isDocument( node ) )
         {
-            return matchesAnyName;
+            return ( ! hasPrefix ) && matchesAnyName;
         }
         else if ( nav.isNamespace( node ) )
         {
-            return matchesAnyName;
+            return ( ! hasPrefix ) && matchesAnyName;
         }
         else
         {
             return false;
         }
 
-        //System.out.println( "Matching nodeURI: " + nodeUri + " name: " + nodeName );
+        // System.out.println( "Matching nodeURI: " + nodeUri + " name: " + nodeName );
         
-        if ( matchesAnyNamespace )
+        
+        if ( hasPrefix )
         {
-            return matchesAnyName || getLocalName().equals( nodeName );
+            myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
         }
-        else
+        else if ( matchesAnyName )
         {
-            String myPrefix = getPrefix();         
-            String myUri = null;
-            
-            if ( myPrefix != null && myPrefix.length() > 0 ) 
-            {
-                myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
-            }
-            
-            if ( myUri == null ) 
-            {
-                myUri = contextSupport.translateNamespacePrefixToUri( myPrefix );
-            }
-                
-            if ( matchesNamespaceURIs( myUri, nodeUri ) )
-            {
-                return matchesAnyName || getLocalName().equals( nodeName );
-            }
+            return true;
         }
+        
+        // If we have a prefix, but the node doesn't
+        // have *any* namespace-uri, then we fast-fail.
+        
+        if ( hasPrefix
+             &&
+             ( nodeUri == null
+               ||
+               "".equals( nodeUri ) ) )
+        {
+            return false;
+        }
+        
+        // If we don't have a prefix, but the node does
+        // have any namespacie-uri, then we fast-fail.
+        
+        if ( ! hasPrefix
+             &&
+             ( nodeUri != null
+               &&
+               ! "".equals( nodeUri ) ) )
+        {
+                return false;
+        }
+             
+        // To fail-fast, we check the equality of
+        // local-names first.  Shorter strings compare
+        // quicker.
+
+        if ( getLocalName().equals( nodeName )
+             ||
+             matchesAnyName )
+        {
+            if ( ! hasPrefix )
+            {
+                return true;
+            }
+
+            return matchesNamespaceURIs( myUri,
+                                         nodeUri );
+        }
+        
         return false;
     }
     
     /** @return true if the two namespace URIs are equal
-     * Note that we may wish to consider null being equal to ""
+     *   Note that we may wish to consider null being equal to ""
      */
     protected boolean matchesNamespaceURIs( String u1, String u2 ) {
         //System.out.println( "Comparing URI: " + u1 + " against URI: " + u2 );
