@@ -317,6 +317,11 @@ public class ConformanceXPathHandler implements XPathHandler
 
         return false;
     }
+    
+    public int hashCode() {
+        return this.events.hashCode();
+    }
+    
 
     public String toString()
     {
