@@ -466,7 +466,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             case IDENTIFIER:
             case STAR:
             {
-                step( true );
+                step();
                 break;
             }
             case EOF:
@@ -516,7 +516,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 case IDENTIFIER:
                 case STAR:
                 {
-                    step( false );
+                    step();
                     break;
                 }
                 default:
@@ -529,7 +529,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         } while ( true );
     }
 
-    void step(boolean first) throws org.jaxen.saxpath.SAXPathException
+    void step() throws org.jaxen.saxpath.SAXPathException
     {
         int axis = 0;
 
@@ -852,6 +852,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     void equalityExpr() throws org.jaxen.saxpath.SAXPathException
     {
         getXPathHandler().startEqualityExpr();
+        // XXX why call this twice?
         getXPathHandler().startEqualityExpr();
 
         relationalExpr();
