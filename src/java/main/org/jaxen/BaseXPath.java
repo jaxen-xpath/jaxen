@@ -113,7 +113,7 @@ public abstract class BaseXPath extends JaXPath
         return support;
     }
 
-    protected abstract Navigator getNavigator();
+    public abstract Navigator getNavigator();
     
     
 

@@ -32,8 +32,7 @@ public class XPath extends BaseXPath
      * @exception SAXPathException If there is a syntactic error in
      *            the XPath expression.
      */
-    public XPath(String xpathExpr)
-	throws SAXPathException
+    public XPath(String xpathExpr) throws SAXPathException
     {
         super( xpathExpr );
     }
@@ -47,7 +46,7 @@ public class XPath extends BaseXPath
      *
      * @return An instance of a navigator for a DOM2 object tree.
      */
-    protected Navigator getNavigator()
+    public Navigator getNavigator()
     {
         return DocumentNavigator.getInstance();
     }

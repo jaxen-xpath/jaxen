@@ -13,7 +13,7 @@ public class XPath extends BaseXPath
         super( xpathExpr );
     }
 
-    protected Navigator getNavigator()
+    public Navigator getNavigator()
     {
         return DocumentNavigator.getInstance();
     }
