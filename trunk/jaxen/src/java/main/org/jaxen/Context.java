@@ -5,6 +5,30 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
+/** Wrapper around implementation-specific objects used
+ *  as the context of an expression evaluation.
+ *
+ *  <p>
+ *  <b>NOTE:</b> This class is not typically used directly,
+ *  but is exposed for writers of implementation-specific
+ *  XPath packages.
+ *  </p>
+ *
+ *  <p>
+ *  The <code>Context</code> bundles utilities together
+ *  for evaluation of the expression.  It wraps the provided
+ *  objects for ease-of-passage through the expression AST.
+ *  </p>
+ *
+ *  @see ContextSupport
+ *  @see BaseXPath
+ *  @see org.jaxen.dom4j.XPath XPath for dom4j
+ *  @see org.jaxen.jdom.XPath  XPath for JDOM
+ *  @see org.jaxen.dom.XPath   XPath for W3C DOM
+ *  @see org.jaxen.exml.XPath  XPath for EXML
+ *
+ *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ */
 public class Context implements Serializable
 {
     private ContextSupport contextSupport;

@@ -5,6 +5,17 @@ import java.io.Serializable;
 
 /** Supporting context information for resolving
  *  namespace prefixess, functions, and variables.
+ * 
+ *  <p>
+ *  <b>NOTE:</b> This class is not typically used directly,
+ *  but is exposed for writers of implementation-specific
+ *  XPath packages.
+ *  </p>
+ *
+ *  @see org.jaxen.dom4j.XPath XPath for dom4j
+ *  @see org.jaxen.jdom.XPath  XPath for JDOM
+ *  @see org.jaxen.dom.XPath   XPath for W3C DOM
+ *  @see org.jaxen.exml.XPath  XPath for EXML
  *
  *  @author bob mcwhirter (bob@werken.com)
  */
