@@ -77,7 +77,7 @@ import org.jaxen.util.SingletonList;
 /** Base functionality for all concrete, implementation-specific XPaths.
  *
  *  <p>
- *  This class provides generic functionalty for further-defined
+ *  This class provides generic functionality for further-defined
  *  implementation-specific XPaths.
  *  </p>
  *
