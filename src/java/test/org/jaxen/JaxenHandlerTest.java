@@ -53,6 +53,7 @@ public class JaxenHandlerTest extends TestCase
         "/child::node()/child::node()[@id='_13563275']",
         "$foo:bar",
         "foo:bar()",
+        "/foo/bar[@a='1' and @c!='2']",
     };
 
     String[] bogusPaths = { };
