@@ -62,15 +62,14 @@
 
 package org.jaxen.function;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
-import org.jaxen.function.StringFunction;
-
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * <p><b>4.2</b> <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code> 

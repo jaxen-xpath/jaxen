@@ -62,7 +62,7 @@
 
 package org.jaxen;
 
-import org.saxpath.SAXPathException;
+
 
 /** Generic Jaxen exception.
  *
@@ -72,7 +72,7 @@ import org.saxpath.SAXPathException;
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
-public class JaxenException extends SAXPathException
+public class JaxenException extends org.jaxen.saxpath.SAXPathException
 {
     /** Root cause, if any. */
     private Throwable rootCause;

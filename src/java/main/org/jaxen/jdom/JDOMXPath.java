@@ -62,11 +62,8 @@
 
 package org.jaxen.jdom;
 
-import org.jaxen.JaxenException;
-
 import org.jaxen.BaseXPath;
-import org.jaxen.Navigator;
-import org.jaxen.XPath;
+import org.jaxen.JaxenException;
 
 /** An XPath implementation for the JDOM model
  *

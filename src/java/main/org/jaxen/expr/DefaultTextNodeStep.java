@@ -129,11 +129,7 @@ package org.jaxen.expr;
 
 
 import org.jaxen.ContextSupport;
-
 import org.jaxen.Navigator;
-
-
-
 import org.jaxen.expr.iter.IterableAxis;
 
 

@@ -128,22 +128,14 @@ package org.jaxen.expr;
 
 
 
-import org.jaxen.Context;
-import org.jaxen.util.SingletonList;
-
-import org.jaxen.ContextSupport;
-
-import org.jaxen.Navigator;
-
-import org.jaxen.JaxenException;
-
-
-
+import java.util.Collections;
 import java.util.List;
 
-import java.util.ArrayList;
-
-import java.util.Collections;
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
+import org.jaxen.util.SingletonList;
 
 
 

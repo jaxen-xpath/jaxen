@@ -62,20 +62,17 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.jaxen.expr.Expr;
 import org.jaxen.expr.XPathExpr;
 import org.jaxen.function.BooleanFunction;
-import org.jaxen.function.StringFunction;
 import org.jaxen.function.NumberFunction;
+import org.jaxen.function.StringFunction;
+import org.jaxen.saxpath.XPathReader;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 import org.jaxen.util.SingletonList;
-
-import org.saxpath.XPathReader;
-import org.saxpath.SAXPathException;
-import org.saxpath.helpers.XPathReaderFactory;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Base functionality for all concrete, implementation-specific XPaths.
  *
@@ -134,13 +131,13 @@ public class BaseXPath implements XPath, Serializable
 
             this.xpath = handler.getXPathExpr();
         }
-        catch (org.saxpath.XPathSyntaxException e)
+        catch (org.jaxen.saxpath.XPathSyntaxException e)
         {
             throw new org.jaxen.XPathSyntaxException( e.getXPath(),
                                                       e.getPosition(),
                                                       e.getMessage() );
         }
-        catch (SAXPathException e)
+        catch (org.jaxen.saxpath.SAXPathException e)
         {
             throw new JaxenException( e );
         }

@@ -63,13 +63,11 @@
 
 package org.jaxen.expr;
 
-import org.jaxen.Context;
+import java.util.Iterator;
+import java.util.List;
+
 import org.jaxen.util.SingleObjectIterator;
 import org.jaxen.util.SingletonList;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public abstract class DefaultExpr implements Expr
 {

@@ -61,7 +61,7 @@
 
 package org.jaxen.pattern;
 
-import org.jaxen.Context;
+
 
 /** <p><code>NodeTest</code> is a simple test on a node.</p>
   *

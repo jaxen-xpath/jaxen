@@ -129,14 +129,21 @@ package org.jaxen.expr;
 
 
 import org.jaxen.JaxenException;
-
-
-
-import org.jaxen.expr.iter.*;
-
-
-
-import org.saxpath.Axis;
+import org.jaxen.expr.iter.IterableAncestorAxis;
+import org.jaxen.expr.iter.IterableAncestorOrSelfAxis;
+import org.jaxen.expr.iter.IterableAttributeAxis;
+import org.jaxen.expr.iter.IterableAxis;
+import org.jaxen.expr.iter.IterableChildAxis;
+import org.jaxen.expr.iter.IterableDescendantAxis;
+import org.jaxen.expr.iter.IterableDescendantOrSelfAxis;
+import org.jaxen.expr.iter.IterableFollowingAxis;
+import org.jaxen.expr.iter.IterableFollowingSiblingAxis;
+import org.jaxen.expr.iter.IterableNamespaceAxis;
+import org.jaxen.expr.iter.IterableParentAxis;
+import org.jaxen.expr.iter.IterablePrecedingAxis;
+import org.jaxen.expr.iter.IterablePrecedingSiblingAxis;
+import org.jaxen.expr.iter.IterableSelfAxis;
+import org.jaxen.saxpath.Axis;
 
 
 

@@ -63,10 +63,10 @@
 
 package org.jaxen.util;
 
+import java.util.Iterator;
+
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
-
-import java.util.Iterator;
 
 public class DescendantAxisIterator extends StackedIterator
 {

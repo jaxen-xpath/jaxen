@@ -69,8 +69,8 @@ import java.util.StringTokenizer;
 
 import org.jaxen.Context;
 import org.jaxen.Function;
-import org.jaxen.Navigator;
 import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
 
 /**
  * <p><b>4.1</b> <code><i>node-set</i> id(<i>object</i>)</code> 

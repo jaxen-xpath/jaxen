@@ -63,7 +63,6 @@ package org.jaxen.pattern;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jaxen.Context;

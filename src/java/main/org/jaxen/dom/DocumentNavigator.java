@@ -64,25 +64,21 @@
 
 package org.jaxen.dom;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.jaxen.XPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
-
-import org.saxpath.SAXPathException;
-
+import org.jaxen.XPath;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
-import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.ProcessingInstruction;
 
 /** Interface for navigating around the W3C DOM Level 2 object model.
  *
@@ -415,7 +411,7 @@ public class DocumentNavigator extends DefaultNavigator
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on DOM documents.
      */
-    public XPath parseXPath (String xpath) throws SAXPathException
+    public XPath parseXPath (String xpath) throws org.jaxen.saxpath.SAXPathException
     {
         return new DOMXPath(xpath);
     }

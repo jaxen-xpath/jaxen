@@ -1,0 +1,1005 @@
+/*
+ * $Header$
+ * $Revision$
+ * $Date$
+ *
+ * ====================================================================
+ *
+ * Copyright (C) 2000-2002 werken digital.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions, and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions, and the disclaimer that follows 
+ *    these conditions in the documentation and/or other materials 
+ *    provided with the distribution.
+ *
+ * 3. The name "SAXPath" must not be used to endorse or promote products
+ *    derived from this software without prior written permission.  For
+ *    written permission, please contact license@saxpath.org.
+ * 
+ * 4. Products derived from this software may not be called "SAXPath", nor
+ *    may "SAXPath" appear in their name, without prior written permission
+ *    from the SAXPath Project Management (pm@saxpath.org).
+ * 
+ * In addition, we request (but do not require) that you include in the 
+ * end-user documentation provided with the redistribution and/or in the 
+ * software itself an acknowledgement equivalent to the following:
+ *     "This product includes software developed by the
+ *      SAXPath Project (http://www.saxpath.org/)."
+ * Alternatively, the acknowledgment may be graphical using the logos 
+ * available at http://www.saxpath.org/
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE SAXPath AUTHORS OR THE PROJECT
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the SAXPath Project and was originally 
+ * created by bob mcwhirter <bob@werken.com> and 
+ * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * SAXPath Project, please see <http://www.saxpath.org/>.
+ * 
+ * $Id$
+ */
+
+
+
+package org.jaxen.saxpath.base;
+
+class XPathLexer
+{
+    private String xpath;
+    private int    currentPosition;
+    private int    endPosition;
+
+    private Token  previousToken;
+
+    public XPathLexer(String xpath)
+    {
+        setXPath( xpath );
+    }
+
+    XPathLexer()
+    {
+    }
+
+    void setXPath(String xpath)
+    {
+        this.xpath           = xpath;
+        this.currentPosition = 0;
+        this.endPosition     = xpath.length();
+    }
+
+    public String getXPath()
+    {
+        return this.xpath;
+    }
+
+    public Token nextToken()
+    {
+        Token token = null;
+
+        do
+        {
+            token = null;
+
+            switch ( LA(1) )
+            {
+                case '$':
+                {
+                    token = dollar();
+                    break;
+                }
+                    
+                case '"':
+                case '\'':
+                {
+                    token = literal();
+                    break;
+                }
+                    
+                case '/':
+                {
+                    token = slashes();
+                    break;
+                }
+
+                case ',':
+                {
+                    token = comma();
+                    break;
+                }
+                    
+                case '(':
+                {
+                    token = leftParen();
+                    break;
+                }
+                    
+                case ')':
+                {
+                    token = rightParen();
+                    break;
+                }
+                    
+                case '[':
+                {
+                    token = leftBracket();
+                    break;
+                }
+                    
+                case ']':
+                {
+                    token = rightBracket();
+                    break;
+                }
+                    
+                case '+':
+                {
+                    token = plus();
+                    break;
+                }
+                    
+                case '-':
+                {
+                    token = minus();
+                    break;
+                }
+                    
+                case '<':
+                case '>':
+                {
+                    token = relationalOperator();
+                    break;
+                }        
+
+                case '=':
+                {
+                    token = equals();
+                    break;
+                }
+                    
+                case '!':
+                {
+                    if ( LA(2) == '=' )
+                    {
+                        token = notEquals();
+                    }
+                    else
+                    {
+                        token = not();
+                    }
+                    break;
+                }
+                    
+                case '|':
+                {
+                    token = pipe();
+                    break;
+                }
+                    
+                case '@':
+                {
+                    token = at();
+                    break;
+                }
+                    
+                case ':':
+                {
+                    if ( LA(2) == ':' )
+                    {
+                        token = doubleColon();
+                    }
+                    else
+                    {
+                        token = colon();
+                    }
+                    break;
+                }
+                    
+                case '*':
+                {
+                    token = star();
+                    break;
+                }
+                    
+                case '.':
+                {
+                    switch ( LA(2) )
+                    {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                        {
+                            token = number();
+                            break;
+                        }
+                        default:
+                        {
+                            token = dots();
+                            break;
+                        }
+                    }
+                    break;
+                }
+
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                {
+                    token = number();
+                    break;
+                }
+
+                case ' ':
+                case '\t':
+                case '\n':
+                case '\r':
+                {
+                    token = whitespace();
+                    break;
+                }
+                    
+                default:
+                {
+                    if ( isIdentifierStartChar( LA(1) ) )
+                    {
+                        token = identifierOrOperatorName();
+                    }
+                }
+            }
+
+            if ( token == null )
+            {
+                token = new Token( TokenTypes.EOF,
+                                   getXPath(),
+                                   currentPosition(),
+                                   endPosition() );
+            }
+        }
+        while ( token.getTokenType() == TokenTypes.SKIP );
+        
+        setPreviousToken( token );
+        
+        return token;
+    }
+
+Token identifierOrOperatorName()
+{
+    Token token = null;
+
+    Token previousToken = getPreviousToken();
+
+    if ( previousToken != null )
+    {
+        // For some reason, section 3.7, Lexical structure,
+        // doesn't seem to feel like it needs to mention the
+        // SLASH, DOUBLE_SLASH, and COLON tokens for the test
+        // if an NCName is an operator or not.
+        //
+        // Accoring to section 3.7, "/foo" should be considered
+        // as a SLASH following by an OperatorName being 'foo'.
+        // Which is just simply, clearly, wrong, in my mind.
+        //
+        //     -bob
+        
+        switch ( previousToken.getTokenType() )
+        {
+            case TokenTypes.AT:
+            case TokenTypes.DOUBLE_COLON:
+            case TokenTypes.LEFT_PAREN:
+            case TokenTypes.LEFT_BRACKET:
+            case TokenTypes.AND:
+            case TokenTypes.OR:
+            case TokenTypes.MOD:
+            case TokenTypes.DIV:
+            case TokenTypes.COLON:
+            case TokenTypes.SLASH:
+            case TokenTypes.DOUBLE_SLASH:
+            case TokenTypes.PIPE:
+            case TokenTypes.DOLLAR:
+            case TokenTypes.PLUS:
+            case TokenTypes.MINUS:
+            case TokenTypes.STAR:
+            case TokenTypes.COMMA:
+            case TokenTypes.LESS_THAN:
+            case TokenTypes.GREATER_THAN:
+            case TokenTypes.LESS_THAN_EQUALS:
+            case TokenTypes.GREATER_THAN_EQUALS:
+            case TokenTypes.EQUALS:
+            case TokenTypes.NOT_EQUALS:
+            {
+                token = identifier();
+                break;
+            }
+            default:
+            {
+                token = operatorName();
+                break;
+            }
+        }
+    }
+    else
+    {
+        token = identifier();
+    }
+
+    return token;
+}
+
+Token identifier()
+{
+    Token token = null;
+
+    int start = currentPosition();
+
+    while ( hasMoreChars() )
+    {
+        if ( isIdentifierChar( LA(1) ) )
+        {
+            consume();
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    token = new Token( TokenTypes.IDENTIFIER,
+                       getXPath(),
+                       start,
+                       currentPosition() );
+
+    return token;
+}
+
+Token operatorName()
+{
+    Token token = null;
+
+    switch ( LA(1) )
+    {
+        case 'a':
+        {
+            token = and();
+            break;
+        }
+
+        case 'o':
+        {
+            token = or();
+            break;
+        }
+
+        case 'm':
+        {
+            token = mod();
+            break;
+        }
+
+        case 'd':
+        {
+            token = div();
+            break;
+        }
+    }
+
+    return token;
+}
+
+Token mod()
+{
+    Token token = null;
+
+    if ( ( LA(1) == 'm' )
+         &&
+         ( LA(2) == 'o' )
+         &&
+         ( LA(3) == 'd' ) 
+         &&
+         ( ! isIdentifierChar( LA(4) ) ) )
+    {
+        token = new Token( TokenTypes.MOD,
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+3 );
+
+        consume();
+        consume();
+        consume();
+    }
+
+    return token;
+}
+
+Token div()
+{
+    Token token = null;
+
+    if ( ( LA(1) == 'd' )
+         &&
+         ( LA(2) == 'i' )
+         &&
+         ( LA(3) == 'v' ) 
+         &&
+         ( ! isIdentifierChar( LA(4) ) ) )
+    {
+        token = new Token( TokenTypes.DIV,
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+3 );
+
+        consume();
+        consume();
+        consume();
+    }
+
+    return token;
+}
+
+Token and()
+{
+    Token token = null;
+
+    if ( ( LA(1) == 'a' )
+         &&
+         ( LA(2) == 'n' )
+         &&
+         ( LA(3) == 'd' )
+         &&
+         ( ! isIdentifierChar( LA(4) ) ) )
+    {
+        token = new Token( TokenTypes.AND,
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+3 );
+            
+        consume();
+        consume();
+        consume();
+    }
+
+    return token;
+}
+
+Token or()
+{
+    Token token = null;
+
+    if ( ( LA(1) == 'o' )
+         &&
+         ( LA(2) == 'r' ) 
+         &&
+         ( ! isIdentifierChar( LA(3) ) ) )
+    {
+        token = new Token( TokenTypes.OR,
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+2 );
+
+        consume();
+        consume();
+    }
+
+    return token;
+}
+
+Token number()
+{
+    int     start         = currentPosition();
+    boolean periodAllowed = true;
+
+  loop:
+    while( true )
+    {
+        switch ( LA(1) )
+        {
+            case '.':
+            {
+                if ( periodAllowed )
+                {
+                    periodAllowed = false;
+                    consume();
+                }
+                else
+                {
+                    break loop;
+                }
+                break;
+            }
+            
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            {
+                consume();
+                break;
+            }
+            default:
+            {
+                break loop;
+            }
+        }
+    }
+
+    Token token = null;
+
+    if ( periodAllowed )
+    {
+        token = new Token( TokenTypes.INTEGER,
+                           getXPath(),
+                           start,
+                           currentPosition() );
+    }
+    else
+    {
+        token = new Token( TokenTypes.DOUBLE,
+                           getXPath(),
+                           start,
+                           currentPosition() );
+    }
+
+    return token;
+}
+
+Token whitespace()
+{
+    consume();
+        
+  loop:
+    while( hasMoreChars() )
+    {
+        switch ( LA(1) )
+        {
+            case ' ':
+            case '\t':
+            case '\n':
+            case '\r':
+            {
+                consume();
+                break;
+            }
+                
+            default:
+            {
+                break loop;
+            }
+        }
+    }
+
+    return new Token( TokenTypes.SKIP,
+                      getXPath(),
+                      0,
+                      0 );
+}
+
+Token comma()
+{
+    Token token = new Token( TokenTypes.COMMA,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token equals()
+{
+    Token token = new Token( TokenTypes.EQUALS,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token minus()
+{
+    Token token = new Token( TokenTypes.MINUS,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+    consume();
+        
+    return token;
+}
+
+Token plus()
+{
+    Token token = new Token( TokenTypes.PLUS,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+    consume();
+
+    return token;
+}
+
+Token dollar()
+{
+    Token token = new Token( TokenTypes.DOLLAR,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+    consume();
+
+    return token;
+}
+
+Token pipe()
+{
+    Token token = new Token( TokenTypes.PIPE,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token at()
+{
+    Token token = new Token( TokenTypes.AT,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token colon()
+{
+    Token token = new Token( TokenTypes.COLON,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+    consume();
+
+    return token;
+}
+
+Token doubleColon()
+{
+    Token token = new Token( TokenTypes.DOUBLE_COLON,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+2 );
+
+    consume();
+    consume();
+
+    return token;
+}
+
+Token not()
+{
+    Token token = new Token( TokenTypes.NOT,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition() + 1 );
+
+    consume();
+
+    return token;
+}
+
+Token notEquals()
+{
+    Token token = new Token( TokenTypes.NOT_EQUALS,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition() + 2 );
+
+    consume();
+    consume();
+
+    return token;
+}
+
+Token relationalOperator()
+{
+    Token token = null;
+
+    switch ( LA(1) )
+    {
+        case '<':
+        {
+            if ( LA(2) == '=' )
+            {
+                token = new Token( TokenTypes.LESS_THAN_EQUALS,
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 2 );
+                consume();
+            }
+            else
+            {
+                token = new Token( TokenTypes.LESS_THAN,
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 1);
+            }
+
+            consume();
+            break;
+        }
+        case '>':
+        {
+            if ( LA(2) == '=' )
+            {
+                token = new Token( TokenTypes.GREATER_THAN_EQUALS,
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 2 );
+                consume();
+            }
+            else
+            {
+                token = new Token( TokenTypes.GREATER_THAN,
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 1 );
+            }
+
+            consume();
+            break;
+        }
+    }
+
+    return token;
+            
+}
+
+Token star()
+{
+    Token token = new Token( TokenTypes.STAR,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+        
+    return token;
+}
+
+Token literal()
+{
+    Token token = null;
+
+    char match  = LA(1);
+
+    consume();
+
+    int start = currentPosition();
+        
+    while ( ( token == null )
+            &&
+            hasMoreChars() )
+    {
+        if ( LA(1) == match )
+        {
+            token = new Token( TokenTypes.LITERAL,
+                               getXPath(),
+                               start,
+                               currentPosition() );
+        }
+        consume();
+    }
+
+    return token;
+}
+
+Token dots()
+{
+    Token token = null;
+
+    switch ( LA(2) )
+    {
+        case '.':
+        {
+            token = new Token( TokenTypes.DOT_DOT,
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+2 ) ;
+            consume();
+            consume();
+            break;
+        }
+        default:
+        {
+            token = new Token( TokenTypes.DOT,
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+1 );
+            consume();
+            break;
+        }
+    }
+
+    return token;
+}
+
+Token leftBracket()
+{
+    Token token = new Token( TokenTypes.LEFT_BRACKET,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token rightBracket()
+{
+    Token token = new Token( TokenTypes.RIGHT_BRACKET,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token leftParen()
+{
+    Token token = new Token( TokenTypes.LEFT_PAREN,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token rightParen()
+{
+    Token token = new Token( TokenTypes.RIGHT_PAREN,
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+    consume();
+
+    return token;
+}
+
+Token slashes()
+{
+    Token token = null;
+
+    switch ( LA(2) )
+    {
+        case '/':
+        {
+            token = new Token( TokenTypes.DOUBLE_SLASH,
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+2 );
+            consume();
+            consume();
+            break;
+        }
+        default:
+        {
+            token = new Token( TokenTypes.SLASH,
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+1 );
+            consume();
+        }
+    }
+
+    return token;
+}
+
+char LA(int i) 
+{
+    if ( currentPosition + ( i - 1 ) >= endPosition() )
+    {
+        return (char) -1;
+    }
+
+    return getXPath().charAt( currentPosition() + (i - 1) );
+}
+
+void consume()
+{
+    ++this.currentPosition;
+}
+
+void consume(int i)
+{
+    this.currentPosition += i;
+}
+
+int currentPosition()
+{
+    return this.currentPosition;
+}
+
+int endPosition()
+{
+    return this.endPosition;
+}
+
+Token getPreviousToken()
+{
+    return this.previousToken;
+}
+
+void setPreviousToken(Token previousToken)
+{
+    this.previousToken = previousToken;
+}
+
+boolean hasMoreChars()
+{
+    return currentPosition() < endPosition();
+}
+
+boolean isIdentifierChar(char c)
+{
+    switch ( c )
+    {
+        case '-':
+        case '.':
+            return true;
+    }
+
+    return Character.isUnicodeIdentifierPart( c );
+}
+
+boolean isIdentifierStartChar(char c)
+{
+    return c == '_' || Character.isUnicodeIdentifierStart( c );
+}
+}

@@ -63,14 +63,14 @@
 
 package org.jaxen.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
-
-import java.util.Iterator;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 public class FollowingSiblingAxisIterator implements Iterator
 {

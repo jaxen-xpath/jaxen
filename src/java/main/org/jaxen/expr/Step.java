@@ -61,13 +61,13 @@
 
 package org.jaxen.expr;
 
-import org.jaxen.Context;
-import org.jaxen.ContextSupport;
-import org.jaxen.UnsupportedAxisException;
-import org.jaxen.JaxenException;
-
 import java.util.Iterator;
 import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
+import org.jaxen.UnsupportedAxisException;
 
 /**
  * A Step represents a location step in a LocationPath. The node-set selected by 
@@ -95,7 +95,7 @@ public interface Step extends Predicated, Visitable
 
     /**
      * Get an identifier for the current axis.
-     * @see org.saxpath.Axis
+     * @see org.jaxen.saxpath.Axis
      */
     public int getAxis();
 

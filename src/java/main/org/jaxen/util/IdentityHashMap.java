@@ -60,9 +60,16 @@
  */
 
 package org.jaxen.util;
-import java.io.*;
-
-import java.util.*;
+import java.io.IOException;
+import java.util.AbstractCollection;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
                                          java.io.Serializable {

@@ -61,18 +61,15 @@
 
 package org.jaxen.function.ext;
 
-import org.jaxen.Context;
-import org.jaxen.Function;
-import org.jaxen.FunctionCallException;
-import org.jaxen.Navigator;
-import org.jaxen.function.StringFunction;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.Function;
+import org.jaxen.Navigator;
+import org.jaxen.function.StringFunction;
 
 /** <p><b>Extension Function</b> <code><i>boolean</i> matrix-concat(<i>nodeSet</i>,<i>nodeSet</i>,<i>nodeSet*</i>)</code> 
   * 

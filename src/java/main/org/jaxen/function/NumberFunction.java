@@ -61,13 +61,13 @@
 
 package org.jaxen.function;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
-
-import java.util.List;
-import java.util.Iterator;
 
 /**
  * <p><b>4.4</b> <code><i>number</i> number(<i>object</i>)</code> 

@@ -63,12 +63,7 @@
 
 package org.jaxen.expr;
 
-import org.jaxen.Context;
-import org.jaxen.util.SingleObjectIterator;
-
 import java.util.List;
-import java.util.Iterator;
-import java.util.Collections;
 
 abstract class DefaultTruthExpr extends DefaultBinaryExpr 
 {

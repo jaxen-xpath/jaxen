@@ -128,21 +128,14 @@ package org.jaxen.expr;
 
 
 
-import org.jaxen.Context;
-
-import org.jaxen.JaxenException;
-
-
-
-import java.util.List;
-
 import java.util.ArrayList;
-
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-import java.util.HashSet;
-
-import java.util.Iterator;
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 
 

@@ -63,12 +63,10 @@
 
 package org.jaxen.dom4j;
 
-import org.jaxen.XPath;
-import org.jaxen.DefaultNavigator;
-import org.jaxen.FunctionCallException;
-import org.jaxen.util.SingleObjectIterator;
-
-import org.saxpath.SAXPathException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 import org.dom4j.Attribute;
 import org.dom4j.Branch;
@@ -82,11 +80,10 @@ import org.dom4j.Node;
 import org.dom4j.ProcessingInstruction;
 import org.dom4j.Text;
 import org.dom4j.io.SAXReader;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Iterator;
+import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
+import org.jaxen.XPath;
+import org.jaxen.util.SingleObjectIterator;
 
 /** Interface for navigating around the EXML object model.
  *
@@ -292,7 +289,7 @@ public class DocumentNavigator extends DefaultNavigator
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on DOM4J documents.
      */
-    public XPath parseXPath (String xpath) throws SAXPathException
+    public XPath parseXPath (String xpath) throws org.jaxen.saxpath.SAXPathException
     {
         return new Dom4jXPath(xpath);
     }

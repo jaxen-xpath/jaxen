@@ -62,13 +62,13 @@
 
 package org.jaxen.function.xslt;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
-import org.jaxen.Navigator;
 import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
 import org.jaxen.function.StringFunction;
-
-import java.util.List;
 
 /**
  * Implements the XSLT document() function

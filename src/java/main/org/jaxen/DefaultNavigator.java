@@ -63,18 +63,18 @@
 
 package org.jaxen;
 
-import org.jaxen.pattern.Pattern;
-import org.jaxen.util.SelfAxisIterator;
-import org.jaxen.util.DescendantOrSelfAxisIterator;
-import org.jaxen.util.AncestorOrSelfAxisIterator;
-import org.jaxen.util.AncestorAxisIterator;
-import org.jaxen.util.DescendantAxisIterator;
-import org.jaxen.util.PrecedingAxisIterator;
-import org.jaxen.util.FollowingAxisIterator;
-import org.jaxen.util.PrecedingSiblingAxisIterator;
-import org.jaxen.util.FollowingSiblingAxisIterator;
-
 import java.util.Iterator;
+
+import org.jaxen.pattern.Pattern;
+import org.jaxen.util.AncestorAxisIterator;
+import org.jaxen.util.AncestorOrSelfAxisIterator;
+import org.jaxen.util.DescendantAxisIterator;
+import org.jaxen.util.DescendantOrSelfAxisIterator;
+import org.jaxen.util.FollowingAxisIterator;
+import org.jaxen.util.FollowingSiblingAxisIterator;
+import org.jaxen.util.PrecedingAxisIterator;
+import org.jaxen.util.PrecedingSiblingAxisIterator;
+import org.jaxen.util.SelfAxisIterator;
 
 /** Default implementation of {@link Navigator}.
  *

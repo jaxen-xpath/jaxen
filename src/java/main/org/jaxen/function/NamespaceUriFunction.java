@@ -62,12 +62,12 @@
 
 package org.jaxen.function;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
-
-import java.util.List;
 
 /**
  * <p><b>4.1</b> <code><i>string</i> namespace-uri(<i>node-set?</i>)</code> 

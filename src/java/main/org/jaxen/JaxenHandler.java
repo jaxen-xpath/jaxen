@@ -63,23 +63,21 @@
 
 package org.jaxen;
 
-import org.jaxen.expr.XPathFactory;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 import org.jaxen.expr.DefaultXPathFactory;
-import org.jaxen.expr.XPathExpr;
-import org.jaxen.expr.LocationPath;
-import org.jaxen.expr.FilterExpr;
 import org.jaxen.expr.Expr;
-import org.jaxen.expr.Step;
+import org.jaxen.expr.FilterExpr;
+import org.jaxen.expr.FunctionCallExpr;
+import org.jaxen.expr.LocationPath;
 import org.jaxen.expr.Predicate;
 import org.jaxen.expr.Predicated;
-import org.jaxen.expr.FunctionCallExpr;
-
-import org.saxpath.XPathHandler;
-import org.saxpath.Axis;
-import org.saxpath.Operator;
-
-import java.util.LinkedList;
-import java.util.Iterator;
+import org.jaxen.expr.Step;
+import org.jaxen.expr.XPathExpr;
+import org.jaxen.expr.XPathFactory;
+import org.jaxen.saxpath.Operator;
+import org.jaxen.saxpath.XPathHandler;
 
 /** SAXPath <code>XPathHandler</code> implementation capable
  *  of building Jaxen expression trees which can walk various

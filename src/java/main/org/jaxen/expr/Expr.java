@@ -128,18 +128,9 @@ package org.jaxen.expr;
 
 
 
-import org.jaxen.Context;
-
-
-
 import java.io.Serializable;
 
-import java.util.List;
-
-import java.util.Iterator;
-
-
-
+import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
 

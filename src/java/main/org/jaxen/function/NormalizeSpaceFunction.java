@@ -62,13 +62,13 @@
 
 package org.jaxen.function;
 
+import java.util.List;
+import java.util.StringTokenizer;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
-
-import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * <p><b>4.2</b> <code><i>string</i> normalize-space(<i>string</i>)</code> 

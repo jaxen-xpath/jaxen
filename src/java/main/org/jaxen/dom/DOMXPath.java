@@ -63,10 +63,8 @@
 
 package org.jaxen.dom;
 
-import org.jaxen.JaxenException;
-
-import org.jaxen.Navigator;
 import org.jaxen.BaseXPath;
+import org.jaxen.JaxenException;
 
 /** An XPath implementation for the W3C DOM model
  *

@@ -60,19 +60,13 @@
  */
 package org.jaxen.expr;
 
-import org.jaxen.Context;
-import org.jaxen.ContextSupport;
-import org.jaxen.UnsupportedAxisException;
-import org.jaxen.JaxenException;
-import org.jaxen.util.IdentityHashMap;
-import org.jaxen.util.SingleObjectIterator;
-import org.jaxen.util.LinkedIterator;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
 {

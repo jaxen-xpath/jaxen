@@ -49,8 +49,6 @@ package org.jaxen;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import org.saxpath.SAXPathException;
-
 /** Interface for navigating around an arbitrary object
  *  model, using xpath semantics.
  *
@@ -501,11 +499,11 @@ public interface Navigator extends Serializable
      *
      *  @return A new XPath expression object.
      *
-     *  @throws SAXPathException If an error occurs while parsing the
+     *  @throws org.jaxen.saxpath.SAXPathException If an error occurs while parsing the
      *          xpath expression.
      */
     XPath parseXPath(String xpath)
-        throws SAXPathException;
+        throws org.jaxen.saxpath.SAXPathException;
 
     /**
      *  Returns the element whose ID is given by elementId.

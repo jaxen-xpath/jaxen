@@ -68,14 +68,24 @@ import java.util.ListIterator;
 
 import org.jaxen.JaxenException;
 import org.jaxen.JaxenHandler;
-import org.jaxen.expr.*;
-import org.jaxen.pattern.*;
-
-import org.saxpath.Axis;
-import org.saxpath.SAXPathException;
-import org.saxpath.XPathReader;
-import org.saxpath.XPathSyntaxException;
-import org.saxpath.helpers.XPathReaderFactory;
+import org.jaxen.expr.DefaultAllNodeStep;
+import org.jaxen.expr.DefaultCommentNodeStep;
+import org.jaxen.expr.DefaultFilterExpr;
+import org.jaxen.expr.DefaultNameStep;
+import org.jaxen.expr.DefaultProcessingInstructionNodeStep;
+import org.jaxen.expr.DefaultStep;
+import org.jaxen.expr.DefaultTextNodeStep;
+import org.jaxen.expr.DefaultXPathFactory;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.FilterExpr;
+import org.jaxen.expr.LocationPath;
+import org.jaxen.expr.Predicate;
+import org.jaxen.expr.PredicateSet;
+import org.jaxen.expr.Step;
+import org.jaxen.expr.UnionExpr;
+import org.jaxen.saxpath.Axis;
+import org.jaxen.saxpath.XPathReader;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 
 /** <code>PatternParser</code> is a helper class for parsing
@@ -89,7 +99,7 @@ public class PatternParser
 
     private static final boolean USE_HANDLER = false;
 
-    public static Pattern parse(String text) throws JaxenException, SAXPathException
+    public static Pattern parse(String text) throws JaxenException, org.jaxen.saxpath.SAXPathException
 
     {
 
@@ -97,7 +107,7 @@ public class PatternParser
 
         {
 
-            XPathReader reader = XPathReaderFactory.createReader();            
+            XPathReader reader = XPathReaderFactory.createReader();
 
             PatternHandler handler = new PatternHandler();       
 
@@ -119,7 +129,7 @@ public class PatternParser
 
         {
 
-            XPathReader reader = XPathReaderFactory.createReader();            
+            XPathReader reader = XPathReaderFactory.createReader();
 
             JaxenHandler handler = new JaxenHandler();
 
@@ -254,7 +264,7 @@ public class PatternParser
 
                     int axis = step.getAxis();
 
-                    if ( axis == Axis.DESCENDANT || axis == Axis.DESCENDANT_OR_SELF ) 
+                    if ( axis == Axis.DESCENDANT || axis == Axis.DESCENDANT_OR_SELF )
 
                     {
 

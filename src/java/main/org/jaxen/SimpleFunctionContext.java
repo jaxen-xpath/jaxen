@@ -62,7 +62,6 @@
 
 package org.jaxen;
 
-import java.util.Map;
 import java.util.HashMap;
 
 /** Simple default implementation of <code>FunctionContext</code>.
