@@ -113,7 +113,7 @@ class NodeComparator implements Comparator {
                 Object p1 = navigator.getParentNode(a1);
                 Object p2 = navigator.getParentNode(a2);
                 if (p1 == p2) {
-                    return compareSiblings(p1, a1, a2);
+                    return compareSiblings(a1, a2);
                 }
                 a1 = p1;
                 a2 = p2;
@@ -130,16 +130,15 @@ class NodeComparator implements Comparator {
         return navigator.isAttribute(o) || navigator.isNamespace(o);
     }
 
-    private int compareSiblings(Object parent, Object sib1, Object sib2) 
+    private int compareSiblings(Object sib1, Object sib2) 
       throws UnsupportedAxisException {
 
-        Iterator children = navigator.getChildAxisIterator(parent);
-        while (children.hasNext()) {
-            Object next = children.next();
-            if (next == sib1) return -1;
-            else if (next == sib2) return 1;
+        Iterator following = navigator.getFollowingSiblingAxisIterator(sib1);
+        while (following.hasNext()) {
+            Object next = following.next();
+            if (next == sib2) return -1;
         }
-        return 0;
+        return 1;
         
     }
 
