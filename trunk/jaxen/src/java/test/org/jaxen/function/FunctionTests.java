@@ -92,6 +92,7 @@ public class FunctionTests extends TestCase {
         result.addTest(new TestSuite(NumberTest.class));
         result.addTest(new TestSuite(StringTest.class));
         result.addTest(new TestSuite(BooleanTest.class));
+       result.addTest(new TestSuite(IdTest.class));
         return result;
         
     }
