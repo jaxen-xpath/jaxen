@@ -1,14 +1,20 @@
 <?xml version="1.0"?>
 <document url="http://jaxen.org/index.xml">
   <body>
-    <title>Jaxen: Java XPathEngine</title>
+    <title>Jaxen: Java XPath Engine</title>
 
     <header>
       <p>
       The <i>Jaxen</i> project is a Java XPath Engine.
       Jaxen is a universal object model walker, capable of evaluating
-      XPath expressions across multiple models.  Currently supported
-      are <a href="http://dom4j.org">dom4j</a> and <a href="http://jdom.org">JDOM</a>.
+      XPath expressions across multiple models.  
+      The following models are currently supported:-      
+      <ul>
+      <li><a href="http://www.w3.org/DOM/">DOM</a></li>
+      <li><a href="http://dom4j.org">dom4j</a></li>
+      <li><a href="http://www.themindelectric.com/products/xml/xml.html">EXML</a></li>
+      <li><a href="http://jdom.org">JDOM</a></li>
+      </ul>
       </p>
     </header>
 
