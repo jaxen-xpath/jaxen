@@ -129,6 +129,7 @@ package org.jaxen.expr;
 
 
 import org.jaxen.Context;
+import org.jaxen.util.SingletonList;
 
 import org.jaxen.ContextSupport;
 
@@ -236,7 +237,7 @@ public class DefaultAbsoluteLocationPath extends DefaultLocationPath
 
 
 
-        List list = Collections.singletonList(docNode);
+        List list = new SingletonList(docNode);
 
 
 

@@ -61,45 +61,31 @@
 
 
 
-package org.jaxen.expr;
+package org.jaxen.util;
 
-import org.jaxen.Context;
-import org.jaxen.util.SingleObjectIterator;
-import org.jaxen.util.SingletonList;
+import java.util.AbstractList;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-public abstract class DefaultExpr implements Expr
-{
-    public Expr simplify()
-    {
-        return this;
+/**
+ * A utility class that implements singleton lists
+ * (to avoid dependency on JDK 1.3).
+ * @version $Id$
+ * @author Attila Szegedi
+ */
+public class SingletonList extends AbstractList {
+    private final Object element;
+    
+    public SingletonList(Object element) {
+        this.element = element;
+    }
+    
+    public int size() {
+        return 1;
     }
 
-    static public Iterator convertToIterator(Object obj)
-    {
-        if ( obj instanceof Iterator )
-        {
-            return (Iterator) obj;
+    public Object get(int index) {
+        if(index == 0) {
+            return element;
         }
-
-        if ( obj instanceof List )
-        {
-            return ((List)obj).iterator();
-        }
-
-        return new SingleObjectIterator( obj );
-    }
-
-    static public List convertToList(Object obj)
-    {
-        if ( obj instanceof List )
-        {
-            return (List) obj;
-        }
-
-        return new SingletonList(obj);
+        throw new IndexOutOfBoundsException(index + " != 0");
     }
 }
