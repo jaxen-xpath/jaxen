@@ -224,4 +224,32 @@ public class XPathTest extends TestCase
         }
     }
     
+    public void testNamespaceNodesAreInherited()
+    {
+        try
+        {
+            Namespace ns0 = Namespace.getNamespace("p0", "www.acme0.org");
+            Namespace ns1 = Namespace.getNamespace("p1", "www.acme1.org");
+            Namespace ns2 = Namespace.getNamespace("p2", "www.acme2.org");
+            Element element = new Element("test", ns1);
+            Attribute attribute = new Attribute("foo", "bar", ns2);
+            element.setAttribute(attribute);
+            Element root = new Element("root", ns0);
+            root.addContent(element);
+            Document doc = new Document(root);
+            
+            XPath xpath = new JDOMXPath( "/*/*/namespace::node()" );
+
+            List results = xpath.selectNodes( doc );
+
+            assertEquals( 4,
+                          results.size() );
+
+        }
+        catch (Exception e)
+        {
+            fail( e.getMessage() );
+        }
+    }
+    
 }
