@@ -164,6 +164,8 @@ public class LocationPathPattern extends Pattern {
         
         if (filters != null) 
         {
+            context.setNodeSet( Collections.singletonList( node ) );
+            
             // XXXX: filters aren't positional, so should we clone context?
             boolean answer = true;
             for (Iterator iter = filters.iterator(); iter.hasNext(); ) 
