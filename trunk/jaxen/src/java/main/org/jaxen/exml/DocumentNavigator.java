@@ -293,7 +293,7 @@ public class DocumentNavigator extends DefaultNavigator
 
         Element elem = (Element) contextNode;
 
-        return new AttributesIterator( elem.getAttributes() );
+        return new AttributesIterator( elem.getAttributeObjects() );
     }
 
     /** Returns a parsed form of the given xpath string, which will be suitable
