@@ -8,6 +8,7 @@
 
   <body>
     <links>
+      <item name="Jaxen@SourceForge" href="http://www.sourceforge.net/projects/jaxen"/>
       <item name="The Werken Company" href="http://www.werken.com/"/>
     </links>
     <menu name="jaxen">
