@@ -30,6 +30,9 @@
         <valueOf select="name(.)">web-app</valueOf>
       </test>
 
+      <test select="/*/servlet" count="2"/>
+      <valueOf select="count(/*/servlet)">2</valueOf>
+
       <!-- empty names -->
 
       <valueOf select="name()"></valueOf>
@@ -49,6 +52,7 @@
       <valueOf select="name(child::node())">web-app</valueOf>
       <valueOf select="name(./*)">web-app</valueOf>
       <valueOf select="name(*)">web-app</valueOf>
+
     </context>
 
     <context select="/*">
