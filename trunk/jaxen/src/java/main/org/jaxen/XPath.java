@@ -48,7 +48,7 @@ package org.jaxen;
 
 import java.util.List;
 
-/** Defines the interface to an object which represents an XPath 1 expression which
+/** Defines the interface to an object which represents an XPath 1.0 expression which
  *  can be evaluated against a variety of different XML object models.
  *
  *  <p>
@@ -56,7 +56,7 @@ import java.util.List;
  *  node or node set object (which is typically a List of node objects) or 
  *  a Jaxen Context object.
  *  A null context is allowed, meaning that 
- *  there is no XML nodes on which to evaluate.
+ *  there are no XML nodes on which to evaluate.
  *  </p>
  *
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
@@ -100,13 +100,14 @@ public interface XPath
      *  references to entities within the source document.
      *  </p>
      *  
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. 
+     *         This value can be null.
      *
-     *  @return The result of evaluating the XPath expression
-     *          against the supplied context.
+     *  @return the result of evaluating the XPath expression
+     *          against the supplied context
      *
-     *  @throws JaxenException If an error occurs while attempting
-     *          to perform evaluation.
+     *  @throws JaxenException if an error occurs while attempting
+     *          to perform evaluation
      */
     Object evaluate(Object context) throws JaxenException;
     
@@ -117,9 +118,6 @@ public interface XPath
     /** Retrieve a string-value interpretation of this XPath
      *  expression when evaluated against a given context.
      *
-     *  @deprecated As of Jaxen 1.0 RC1 please use 
-     *      {@link #stringValueOf(Object) instead}
-     *
      *  <p>
      *  The string-value of the expression is determined per
      *  the <code>string(..)</code> core function as defined
@@ -128,12 +126,15 @@ public interface XPath
      *  of the first node in the node set..
      *  </p>
      *
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @deprecated use {@link #stringValueOf(Object) instead}
      *
-     *  @return The string-value interpretation of this expression.
+     *  @param context the node, node-set or Context object for evaluation. 
+     *         This value can be null.
      *
-     *  @throws JaxenException If an error occurs while attempting
-     *          to perform evaluation.
+     *  @return the string-value of this expression
+     *
+     *  @throws JaxenException if an error occurs while attempting
+     *          to perform evaluation
      */
     String valueOf(Object context)
         throws JaxenException;
@@ -149,14 +150,14 @@ public interface XPath
      *  of the first node in the node set..
      *  </p>
      *
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. This value can be null
      *
-     *  @return The string-value interpretation of this expression.
+     *  @return the string-value interpretation of this expression
      *
-     *  @throws JaxenException If an error occurs while attempting
-     *          to perform evaluation.
+     *  @throws JaxenException if an error occurs while attempting
+     *          to perform evaluation
      */
-    String stringValueOf(Object context)
+     String stringValueOf(Object context)
         throws JaxenException;
     
     /** Retrieve a boolean-value interpretation of this XPath
@@ -164,18 +165,18 @@ public interface XPath
      *
      *  <p>
      *  The boolean-value of the expression is determined per
-     *  the <code>boolean(..)</code> core function as defined
+     *  the <code>boolean()</code> core function as defined
      *  in the XPath specification.  This means that an expression
      *  that selects zero nodes will return <code>false</code>,
      *  while an expression that selects one-or-more nodes will
      *  return <code>true</code>.
      *  </p>
      *
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The boolean-value interpretation of this expression.
+     *  @return the boolean-value of this expression
      *
-     *  @throws JaxenException If an error occurs while attempting
+     *  @throws JaxenException if an error occurs while attempting
      *          to perform evaluation.
      */
     boolean booleanValueOf(Object context)
@@ -193,11 +194,11 @@ public interface XPath
      *  of the first node is returned.
      *  </p>
      *
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. This value can be null
      *
-     *  @return The number-value interpretation of this expression.
+     *  @return the number-value interpretation of this expression.
      *
-     *  @throws JaxenException If an error occurs while attempting
+     *  @throws JaxenException if an error occurs while attempting
      *          to perform evaluation.
      */
     Number numberValueOf(Object context)
@@ -221,12 +222,12 @@ public interface XPath
      *
      *  @see #selectSingleNode
      *
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. This value can be null
      *
-     *  @return The <code>node-set</code> of all items selected
+     *  @return the <code>node-set</code> of all items selected
      *          by this XPath expression.
      *
-     *  @throws JaxenException If an error occurs while attempting
+     *  @throws JaxenException if an error occurs while attempting
      *          to perform evaluation.
      */
     List selectNodes(Object context)
@@ -241,17 +242,18 @@ public interface XPath
      *  specification.  The exception occurs when using XPath
      *  expressions involving the <code>union</code> operator
      *  (denoted with the pipe '|' character).
+     *  This is a bug and needs to be fixed.
      *  </p>
      *
      *  @see #selectNodes
      *
-     *  @param context The node, nodeset or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The <code>node-set</code> of all items selected
-     *          by this XPath expression.
+     *  @return the <code>node-set</code> of all items selected
+     *          by this XPath expression
      *
-     *  @throws JaxenException If an error occurs while attempting
-     *          to perform evaluation.
+     *  @throws JaxenException if an error occurs while attempting
+     *          to perform evaluation
      */
     Object selectSingleNode(Object context)
         throws JaxenException;
@@ -264,7 +266,7 @@ public interface XPath
      *  expression.
      *
      *  <p>
-     *  Namespace prefix-to-URI mappings in an XPath are independant
+     *  Namespace prefix-to-URI mappings in an XPath are independent
      *  of those used within any document.  Only the mapping explicitly
      *  added to this XPath will be available for resolving the
      *  XPath expression.
@@ -277,11 +279,11 @@ public interface XPath
      *  then this method will throw a <code>JaxenException</code>.
      *  </p>
      *
-     *  @param prefix The namespace prefix.
-     *  @param uri The namespace URI.
+     *  @param prefix the namespace prefix
+     *  @param uri the namespace URI
      *
-     *  @throws JaxenException If a <code>NamespaceContext</code>
-     *          used by this XPath has been explicitly installed.
+     *  @throws JaxenException if a <code>NamespaceContext</code>
+     *          used by this XPath has been explicitly installed
      */
     void addNamespace(String prefix,
                       String uri)
@@ -302,8 +304,8 @@ public interface XPath
      *  @see NamespaceContext
      *  @see NamespaceContext#translateNamespacePrefixToUri
      *
-     *  @param namespaceContext The <code>NamespaceContext</code> to
-     *         install for this expression.
+     *  @param namespaceContext the <code>NamespaceContext</code> to
+     *         install for this expression
      */
     void setNamespaceContext(NamespaceContext namespaceContext);
 
@@ -318,8 +320,8 @@ public interface XPath
      *  @see FunctionContext
      *  @see FunctionContext#getFunction
      *
-     *  @param functionContext The <code>FunctionContext</code> to
-     *         install for this expression.
+     *  @param functionContext the <code>FunctionContext</code> to
+     *         install for this expression
      */
     void setFunctionContext(FunctionContext functionContext);
 
@@ -334,7 +336,7 @@ public interface XPath
      *  @see VariableContext
      *  @see VariableContext#getVariableValue
      *
-     *  @param variableContext The <code>VariableContext</code> to
+     *  @param variableContext the <code>VariableContext</code> to
      *         install for this expression.
      */
     void setVariableContext(VariableContext variableContext);
@@ -355,7 +357,7 @@ public interface XPath
      *
      *  @see NamespaceContext
      *
-     *  @return The <code>NamespaceContext</code> used by this expression.
+     *  @return the <code>NamespaceContext</code> used by this expression
      */
     NamespaceContext getNamespaceContext();
 
@@ -375,7 +377,7 @@ public interface XPath
      *
      *  @see FunctionContext
      *
-     *  @return The <code>FunctionContext</code> used by this expression.
+     *  @return the <code>FunctionContext</code> used by this expression.
      */
     FunctionContext getFunctionContext();
 
@@ -395,7 +397,7 @@ public interface XPath
      *
      *  @see VariableContext
      *  
-     *  @return The <code>VariableContext</code> used by this expression.
+     *  @return the <code>VariableContext</code> used by this expression
      */
     VariableContext getVariableContext();
     
@@ -403,7 +405,7 @@ public interface XPath
     /** Retrieve the XML object-model-specific {@link Navigator} 
      *  for us in evaluating this XPath expression.
      *
-     *  @return The implementation-specific <code>Navigator</code>.
+     *  @return the implementation-specific <code>Navigator</code>
      */
     Navigator getNavigator();
 }
