@@ -2,6 +2,7 @@
 package org.jaxen;
 
 import org.jaxen.function.*;
+import org.jaxen.function.ext.EvaluateFunction;
 import org.jaxen.function.ext.MatrixConcatFunction;
 
 import java.util.Map;
@@ -40,6 +41,10 @@ public class XPathFunctionContext extends SimpleFunctionContext
         registerFunction( "",
                           "count",
                           new CountFunction() );
+
+        registerFunction( "",
+                          "document",
+                          new DocumentFunction() );
 
         registerFunction( "",
                           "false",
@@ -121,14 +126,15 @@ public class XPathFunctionContext extends SimpleFunctionContext
                           "true",
                           new TrueFunction() );
         
-        
+
         // register extension functions
         registerFunction( "",
                           "matrix-concat",
                           new MatrixConcatFunction() );
-        
+
         registerFunction( "",
-                          "document",
-                          new DocumentFunction() );
+                          "evaluate",
+                          new EvaluateFunction() );
+        
     }
 }
