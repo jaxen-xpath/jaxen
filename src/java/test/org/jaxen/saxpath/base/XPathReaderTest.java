@@ -62,11 +62,23 @@
 
 package org.jaxen.saxpath.base;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import junit.framework.TestCase;
+
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
+import org.jaxen.dom.DOMXPath;
 import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.XPathSyntaxException;
 import org.jaxen.saxpath.conformance.ConformanceXPathHandler;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class XPathReaderTest extends TestCase
 {
@@ -226,19 +238,23 @@ public class XPathReaderTest extends TestCase
 
     public void testNumberOrNumber()
     {
-        XPathReader reader = new XPathReader();
+
         try
         {
-            reader.parse( " 4 | 5" );
+            XPath xpath = new DOMXPath( "4 | 5" );
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+        
+            Document doc = builder.parse( "xml/basic.xml" );
+
+            xpath.selectNodes( doc );
             fail( "Should have thrown XPathSyntaxException for 4 | 5");
         }
-        catch( XPathSyntaxException e )
+        catch( JaxenException e )
         {
-            assertEquals( "Node-set expected", e.getMessage() );
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
+            assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
         catch( Exception e )
         {
@@ -246,6 +262,8 @@ public class XPathReaderTest extends TestCase
         }
     }
 
+    
+    
     public void testValidAxis()
     {
         XPathReader reader = new XPathReader();
