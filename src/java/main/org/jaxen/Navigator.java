@@ -223,6 +223,7 @@ public interface Navigator
     String getCommentStringValue(Object comment);
     String getElementStringValue(Object element);
     String getAttributeStringValue(Object attr);
+    String getNamespacePrefix(Object ns);
     String getNamespaceStringValue(Object ns);
     String getTextStringValue(Object txt);
     
