@@ -63,7 +63,6 @@
 package org.jaxen;
 
 import org.jaxen.function.*;
-import org.jaxen.function.DocumentFunction;
 import org.jaxen.function.ext.*;
 import org.jaxen.function.xslt.*;
 
