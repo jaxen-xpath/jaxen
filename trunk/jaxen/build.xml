@@ -296,24 +296,22 @@
   <!-- ======================================================================== -->
   
   <target name="compile.all" 
-          depends="compile.core,compile.dom4j,compile.jdom,compile.dom,compile.exml">
-  </target>
+          depends="compile.core,compile.dom4j,compile.jdom,compile.dom,compile.exml"/>
 
   <target name="compile.all.test" 
-          depends="compile.all,compile.core.test,compile.dom4j.test,compile.jdom.test,compile.dom.test,compile.exml.test">
-  </target>
+          depends="compile.all,compile.core.test,compile.dom4j.test,compile.jdom.test,compile.dom.test,compile.exml.test"/>
 
   <target name="test.all"
-          depends="test.core,test.dom4j,test.jdom,test.dom,test.exml">
-  </target>
+          depends="test.core,test.dom4j,test.jdom,test.dom,test.exml"/>
 
   <target name="jar.all"
-          depends="jar.core,jar.dom4j,jar.jdom,jar.dom,jar.exml">
-  </target>
+          depends="jar.core,jar.dom4j,jar.jdom,jar.dom,jar.exml"/>
 
   <target name="prepare.all"
-          depends="prepare.core,prepare.dom4j,prepare.jdom,prepare.dom,prepare.exml">
-  </target>
+          depends="prepare.core,prepare.dom4j,prepare.jdom,prepare.dom,prepare.exml"/>
+
+  <target name="demo.all"
+          depends="demo.dom4j,demo.jdom,demo.exml,demo.dom"/>
 
   <target name="jar.full" depends="compile.all">
     <jar jarfile="${build.dir}/${name}-full.jar"

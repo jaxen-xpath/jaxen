@@ -5,8 +5,8 @@ import org.jdom.input.SAXBuilder;
 
 import org.jaxen.jdom.XPath;
 
-import org.saxpath.SAXPathException;
-import org.saxpath.XPathSyntaxException;
+import org.jaxen.XPathSyntaxException;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.Iterator;
@@ -52,7 +52,11 @@ public class JDOMDemo
         {
             System.err.println( e.getMultilineMessage() );
         }
-        catch (SAXPathException e)
+        catch (JaxenException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

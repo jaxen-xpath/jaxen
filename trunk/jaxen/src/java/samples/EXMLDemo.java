@@ -4,8 +4,8 @@ import electric.xml.ParseException;
 
 import org.jaxen.exml.XPath;
 
-import org.saxpath.SAXPathException;
-import org.saxpath.XPathSyntaxException;
+import org.jaxen.XPathSyntaxException;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.Iterator;
@@ -51,7 +51,11 @@ public class EXMLDemo
         {
             System.err.println( e.getMultilineMessage() );
         }
-        catch (SAXPathException e)
+        catch (JaxenException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

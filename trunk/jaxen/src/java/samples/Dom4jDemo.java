@@ -4,10 +4,9 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import org.jaxen.dom4j.XPath;
-import org.jaxen.JaxenException;
 
-import org.saxpath.SAXPathException;
-import org.saxpath.XPathSyntaxException;
+import org.jaxen.XPathSyntaxException;
+import org.jaxen.JaxenException;
 
 import java.util.List;
 import java.util.Iterator;
@@ -59,10 +58,6 @@ public class Dom4jDemo
             System.err.println( e.getMultilineMessage() );
         }
         catch (JaxenException e)
-        {
-            e.printStackTrace();
-        }
-        catch (SAXPathException e)
         {
             e.printStackTrace();
         }
