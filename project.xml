@@ -46,6 +46,11 @@
       <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jaxen-interest</unsubscribe>
     </mailingList>
 
+    <mailingList>
+      <name>jaxen-cvs</name>
+      <subscribe>http://lists.codehaus.org/mailman/listinfo/jaxen-cvs</subscribe>
+      <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jaxen-cvs</unsubscribe>
+    </mailingList>
   </mailingLists>
 
   <developers>
