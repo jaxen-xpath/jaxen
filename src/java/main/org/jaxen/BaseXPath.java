@@ -91,7 +91,6 @@ import org.jaxen.util.SingletonList;
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
  *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
  *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
- *  @see org.jaxen.exml.ElectricXPath  XPath for Electric XML
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
@@ -112,10 +111,10 @@ public class BaseXPath implements XPath, Serializable
     
     /** Construct given an XPath expression string. 
      *
-     *  @param xpathExpr The XPath expression.
+     *  @param xpathExpr the XPath expression
      *
      *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
+     *          parsing the expression
      */
     protected BaseXPath(String xpathExpr) throws JaxenException
     {
@@ -150,12 +149,12 @@ public class BaseXPath implements XPath, Serializable
 
     /** Construct given an XPath expression string.
      *
-     *  @param xpathExpr The XPath expression.
+     *  @param xpathExpr the XPath expression
      *
      *  @param navigator the XML navigator to use
      *
      *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
+     *          parsing the expression
      */
     public BaseXPath(String xpathExpr, Navigator navigator) throws JaxenException
     {
@@ -191,10 +190,10 @@ public class BaseXPath implements XPath, Serializable
      *  references to entities within the source document.
      *  </p>
      *  
-     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
+     *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The result of evaluating the XPath expression
-     *          against the supplied context.
+     *  @return the result of evaluating the XPath expression
+     *          against the supplied context
      */
     public Object evaluate(Object node) throws JaxenException
     {
@@ -230,10 +229,10 @@ public class BaseXPath implements XPath, Serializable
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
+     *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The <code>node-set</code> of all items selected
-     *          by this XPath expression.
+     *  @return the <code>node-set</code> of all items selected
+     *          by this XPath expression
      *
      *  @see #selectSingleNode
      */
@@ -255,10 +254,10 @@ public class BaseXPath implements XPath, Serializable
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
+     *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The <code>node-set</code> of all items selected
-     *          by this XPath expression.
+     *  @return the <code>node-set</code> of all items selected
+     *          by this XPath expression
      *
      *  @see #selectNodes
      */
@@ -309,9 +308,9 @@ public class BaseXPath implements XPath, Serializable
      *  return <code>true</code>.
      *  </p>
      *
-     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
+     *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The boolean-value interpretation of this expression.
+     *  @return the boolean-value interpretation of this expression
      */
     public boolean booleanValueOf(Object node) throws JaxenException
     {
@@ -337,9 +336,9 @@ public class BaseXPath implements XPath, Serializable
      *  of the first node is returned.
      *  </p>
      *
-     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
+     *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return The number-value interpretation of this expression.
+     *  @return the number-value interpretation of this expression
      */
     public Number numberValueOf(Object node) throws JaxenException
     {
@@ -375,11 +374,11 @@ public class BaseXPath implements XPath, Serializable
      *  then this method will throw a <code>JaxenException</code>.
      *  </p>
      *
-     *  @param prefix The namespace prefix.
+     *  @param prefix the namespace prefix
      *  @param uri The namespace URI.
      *
-     *  @throws JaxenException If a <code>NamespaceContext</code>
-     *          used by this XPath has been explicitly installed.
+     *  @throws JaxenException if a <code>NamespaceContext</code>
+     *          used by this XPath has been explicitly installed
      */
     public void addNamespace(String prefix,
                              String uri) throws JaxenException
@@ -413,8 +412,8 @@ public class BaseXPath implements XPath, Serializable
      *  namespace prefixes within the expression into namespace URIs.
      *  </p>
      *
-     *  @param namespaceContext The <code>NamespaceContext</code> to
-     *         install for this expression.
+     *  @param namespaceContext the <code>NamespaceContext</code> to
+     *         install for this expression
      *
      *  @see NamespaceContext
      *  @see NamespaceContext#translateNamespacePrefixToUri
@@ -432,8 +431,8 @@ public class BaseXPath implements XPath, Serializable
      *  all function calls used within the expression.
      *  </p>
      *
-     *  @param functionContext The <code>FunctionContext</code> to
-     *         install for this expression.
+     *  @param functionContext the <code>FunctionContext</code> to
+     *         install for this expression
      *
      *  @see FunctionContext
      *  @see FunctionContext#getFunction
@@ -452,7 +451,7 @@ public class BaseXPath implements XPath, Serializable
      *  </p>
      *
      *  @param variableContext The <code>VariableContext</code> to
-     *         install for this expression.
+     *         install for this expression
      *
      *  @see VariableContext
      *  @see VariableContext#getVariableValue
@@ -476,7 +475,7 @@ public class BaseXPath implements XPath, Serializable
      *  installed and returned.
      *  </p>
      *
-     *  @return The <code>NamespaceContext</code> used by this expression.
+     *  @return the <code>NamespaceContext</code> used by this expression
      *
      *  @see NamespaceContext
      */
@@ -504,7 +503,7 @@ public class BaseXPath implements XPath, Serializable
      *  installed and returned.
      *  </p>
      *
-     *  @return The <code>FunctionContext</code> used by this expression.
+     *  @return the <code>FunctionContext</code> used by this expression
      *
      *  @see FunctionContext
      */
@@ -532,7 +531,7 @@ public class BaseXPath implements XPath, Serializable
      *  installed and returned.
      *  </p>
      *  
-     *  @return The <code>VariableContext</code> used by this expression.
+     *  @return the <code>VariableContext</code> used by this expression
      *
      *  @see VariableContext
      */
@@ -559,7 +558,7 @@ public class BaseXPath implements XPath, Serializable
      *  the expression.
      *  </p>
      *
-     *  @return The root of the AST of this expression.
+     *  @return the root of the AST of this expression
      */
     public Expr getRootExpr() 
     {
@@ -568,7 +567,7 @@ public class BaseXPath implements XPath, Serializable
     
     /** Return the original expression text.
      *
-     *  @return The normalized XPath expression string.
+     *  @return the normalized XPath expression string
      */
     public String toString()
     {
@@ -577,7 +576,7 @@ public class BaseXPath implements XPath, Serializable
 
     /** Returns the string version of this xpath.
      *
-     *  @return The normalized XPath expression string.
+     *  @return the normalized XPath expression string
      *
      *  @see #toString
      */
@@ -596,10 +595,10 @@ public class BaseXPath implements XPath, Serializable
     /** Create a {@link Context} wrapper for the provided
      *  implementation-specific object.
      *
-     *  @param node The implementation-specific object 
-     *         to be used as the context.
+     *  @param node the implementation-specific object 
+     *         to be used as the context
      *
-     *  @return A <code>Context</code> wrapper around the object.
+     *  @return a <code>Context</code> wrapper around the object
      */
     protected Context getContext(Object node)
     {
@@ -628,8 +627,8 @@ public class BaseXPath implements XPath, Serializable
      *  <code>NamespaceContext</code>, <code>FunctionContext</code>,
      *  <code>VariableContext</code>, and {@link Navigator}.
      *
-     *  @return Aggregate <code>ContextSupport</code> for this
-     *          XPath expression.
+     *  @return aggregate <code>ContextSupport</code> for this
+     *          XPath expression
      */
     protected ContextSupport getContextSupport()
     {
@@ -649,7 +648,7 @@ public class BaseXPath implements XPath, Serializable
     /** Retrieve the XML object-model-specific {@link Navigator} 
      *  for us in evaluating this XPath expression.
      *
-     *  @return The implementation-specific <code>Navigator</code>.
+     *  @return the implementation-specific <code>Navigator</code>
      */
     public Navigator getNavigator()
     {
@@ -666,7 +665,7 @@ public class BaseXPath implements XPath, Serializable
 
     /** Create a default <code>FunctionContext</code>.
      *
-     *  @return The default <code>FunctionContext</code>.
+     *  @return the default <code>FunctionContext</code>
      */
     protected FunctionContext createFunctionContext()
     {
@@ -675,7 +674,7 @@ public class BaseXPath implements XPath, Serializable
     
     /** Create a default <code>NamespaceContext</code>.
      *
-     *  @return A default <code>NamespaceContext</code> instance.
+     *  @return a default <code>NamespaceContext</code> instance
      */
     protected NamespaceContext createNamespaceContext()
     {
@@ -684,7 +683,7 @@ public class BaseXPath implements XPath, Serializable
     
     /** Create a default <code>VariableContext</code>.
      *
-     *  @return A default <code>VariableContext</code> instance.
+     *  @return a default <code>VariableContext</code> instance
      */
     protected VariableContext createVariableContext()
     {
@@ -706,7 +705,7 @@ public class BaseXPath implements XPath, Serializable
      *
      *  @param context is the Context which gets evaluated.
      *
-     *  @return The <code>node-set</code> of all items selected
+     *  @return the <code>node-set</code> of all items selected
      *          by this XPath expression.
      *
      */
@@ -728,8 +727,8 @@ public class BaseXPath implements XPath, Serializable
      *
      *  @param context is the Context which gets evaluated.
      *
-     *  @return The <code>node-set</code> of all items selected
-     *          by this XPath expression.
+     *  @return the <code>node-set</code> of all items selected
+     *          by this XPath expression
      *
      *  @see #selectNodesForContext
      */
