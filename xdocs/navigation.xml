@@ -2,11 +2,11 @@
 
 <project name="jaxen" repository="jaxen" href="http://jaxen.org">
 
-  <title>Jaxen: Universal Java XPath Engine</title>
+  <title>jaxen: universal java xpath engine</title>
 
   <body>
     <links>
-      <item name="Jaxen@SourceForge" href="http://www.sourceforge.net/projects/jaxen"/>
+      <item name="jaxen@SourceForge" href="http://www.sourceforge.net/projects/jaxen"/>
       <item name="The Werken Company" href="http://www.werken.com/"/>
     </links>
     <menu name="jaxen">
