@@ -7,8 +7,8 @@
     <tstamp/>
     <property name="Name" value="jaxen"/>
     <property name="name" value="jaxen"/>
-    <property name="version" value="0.1"/>
-    <property name="current.version" value="0.1"/>
+    <property name="version" value="1.0-beta-1"/>
+    <property name="current.version" value="1.0-beta-1"/>
     <property name="year" value="2001"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
@@ -25,7 +25,7 @@
     <property name="lib.dir" value="./lib"/>
     <property name="packages" value="org.*"/>
 
-    <property name="api.packages" value="org.jaxen*"/>
+    <property name="api.packages" value="org.jaxen.*"/>
 
     <property name="build.dir" value="./build"/>
     <property name="build.src" value="./build/src"/>
@@ -76,7 +76,6 @@
     <echo message="   javadoc  --> generates the full JavaDoc documentation"/>
     <echo message="   clean    --> cleans up the directory"/>
     <echo message="   test     --> builds and runs the unit tests"/>
-    <echo message="   demo-all --> runs the main standard sample programs"/>
     <echo message="   release  --> builds a release distribution and updates the local website"/>
     <echo message=""/>
     <echo message="-------------------------------------------------------------"/>
@@ -194,7 +193,8 @@
     -->
 
      <!-- add dependent JARs -->
-    <!-- <unjar src="${lib.dir}/org.saxpath.jar" dest="${build.dest}"/> -->
+
+    <unjar src="${lib.dir}/saxpath.jar" dest="${build.dest}"/>
     <delete dir="${build.dest}/META-INF"/>
 
     <jar jarfile="${build.dir}/${name}.jar"
@@ -306,9 +306,6 @@
     <copy todir="${dist.dir}/src">
       <fileset dir="./src" includes="**/*.java,**/*.xml,**/*.xsl,**/*.properties,**/*.mf,**/*.css,**/*.gif,**/*.g"/>
     </copy>
-    <copy todir="${dist.dir}/xml">
-      <fileset dir="./xml" />
-    </copy>
     <copy todir="${dist.dir}/lib">
       <fileset dir="./lib" />
     </copy>
@@ -317,16 +314,12 @@
     </copy>
 
     <copy todir="${dist.dir}">
-      <fileset dir="." includes="build.sh, build.bat, cp.bat, run.bat, run.sh, runnojit.bat, *.xml, *.html" />
+      <fileset dir="." includes="build.pl, *.xml, *.html" />
     </copy>
 
-    <chmod perm="+x" file="${dist.dir}/run.sh"/>
-    <chmod perm="+x" file="${dist.dir}/build.sh"/>
+    <chmod perm="+x" file="${dist.dir}/build.pl"/>
 
-    <fixcrlf srcdir="${dist.dir}" includes="run.sh"       cr="remove"/>
-    <fixcrlf srcdir="${dist.dir}" includes="run.bat"      cr="add"/>
-    <fixcrlf srcdir="${dist.dir}" includes="build.sh"     cr="remove"/>
-    <fixcrlf srcdir="${dist.dir}" includes="build.bat"    cr="add"/>
+    <fixcrlf srcdir="${dist.dir}" includes="build.pl"     cr="remove"/>
   </target>
 
   <!-- =================================================================== -->
