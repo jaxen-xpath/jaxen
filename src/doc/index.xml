@@ -20,6 +20,19 @@
     
     <section title="News">
       <ul>
+      <li>Check out these new <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> comparing dom4j and Jaxen against Xerces and Xalan. 
+      </li>
+      <li>Sun chooses Jaxen for the XPath engine 
+        <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> and 
+        <a href="http://java.sun.com/webservices/webservicespack.html">Web Services pack</a>
+        which means Jaxen will be included in the J2EE reference implementation!
+      </li>
+      <li>
+        Since the reference implementation of 
+        <a href="http://developer.java.sun.com/developer/earlyAccess/xml/jaxm/">JAXM</a>
+        is based on <a href="http://dom4j.org">dom4j</a> and Jaxen that means you can use
+        Jaxen to query SOAP messages on the Java platform too!
+      </li>
       <li>Check out Elliotte Rusty Harolds book chapter on XPath and 
         <a href="http://cafeconleche.org/books/xmljava/chapters/ch16s06.html">Jaxen</a>
       </li>
