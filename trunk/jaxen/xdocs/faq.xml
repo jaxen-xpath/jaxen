@@ -70,8 +70,7 @@
       <p>
       <code>jaxen</code> currently has navigators defined for <a href="http://dom4j.org/">dom4j</a>
       and <a href="http://jdom.org/">JDOM</a>, two popular and convenient object models
-      for representing XML documents.  Additionally, <a href="http://themindelectric.com/">The Mind Electric's</a>
-      EXML embeds <code>jaxen</code>, providing better XPath support within the GLUE platform.
+      for representing XML documents.  
       Of course, <a href="http://w3c.org/">W3C DOM</a> is also supported.
       </p>
     </section>
