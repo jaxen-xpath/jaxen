@@ -161,10 +161,10 @@ class JaXPath implements Serializable
     {
         List result = jaSelectNodes( context );
 
-        if ( result == null )
+        if ( result == null || result.isEmpty() )
             return false;
 
-        return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();
+        return BooleanFunction.evaluate( result.get(0), context.getNavigator() ).booleanValue();
     }
 
     /** Retrieve a number-value interpretation of this XPath

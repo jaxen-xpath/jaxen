@@ -106,6 +106,12 @@ public class XPathTest extends TestCase
 
             assertTrue( "Xpath worked: " + xpath, answer );
 
+            xpath = new XPath( "'a' = 'b'" );
+            
+            answer = xpath.booleanValueOf( doc );
+
+            assertTrue( "XPath should return false: " + xpath, ! answer );
+
         }
         catch (Exception e)
         {
