@@ -187,4 +187,6 @@ public interface Navigator
     String getTextStringValue(Object txt);
     
     String translateNamespacePrefixToUri(String prefix, Object element);
+    
+    short getNodeType(Object node);
 }

@@ -2,6 +2,7 @@
 
 package org.jaxen;
 
+import org.jaxen.pattern.Pattern;
 import org.jaxen.util.SelfAxisIterator;
 import org.jaxen.util.DescendantOrSelfAxisIterator;
 import org.jaxen.util.AncestorOrSelfAxisIterator;
@@ -126,4 +127,34 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
 
+    public short getNodeType(Object node)
+    {
+        if ( isElement(node) ) 
+        {
+            return Pattern.ELEMENT_NODE;
+        }
+        else if ( isAttribute(node) ) 
+        {
+            return Pattern.ATTRIBUTE_NODE;
+        }
+        else if ( isText(node) ) 
+        {
+            return Pattern.TEXT_NODE;
+        }
+        else if ( isComment(node) ) 
+        {
+            return Pattern.COMMENT_NODE;
+        }
+        else if ( isDocument(node) ) 
+        {
+            return Pattern.DOCUMENT_NODE;
+        }
+        else if ( isProcessingInstruction(node) ) 
+        {
+            return Pattern.DOCUMENT_NODE;
+        }
+        else {
+            return Pattern.UNKNOWN_NODE;
+        }
+    }
 }
