@@ -92,7 +92,7 @@ public class SumFunction implements Function
     }
 
     public static Double evaluate(Object obj,
-                                  Navigator nav)
+                                  Navigator nav) throws FunctionCallException
     {
         double sum  = 0;
         double term = 0;
@@ -111,8 +111,7 @@ public class SumFunction implements Function
         }
         else
         {
-            sum += NumberFunction.evaluate( obj,
-                                            nav ).doubleValue();
+            throw new FunctionCallException("The argument to the sum function must be a node-set");
         }
 
         return new Double(sum);
