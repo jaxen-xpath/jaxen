@@ -146,4 +146,40 @@ public class BooleanTest extends TestCase {
         
     }    
 
+    public void testZeroIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("boolean(0)");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        
+        List result = xpath.selectNodes(a);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.FALSE, result.get(0));
+        
+    }    
+
+    public void testEmptyStringIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("boolean('')");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        
+        List result = xpath.selectNodes(a);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.FALSE, result.get(0));
+        
+    }    
+
+    public void testNonEmptyStringIsTrue() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("boolean('false')");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        
+        List result = xpath.selectNodes(a);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.TRUE, result.get(0));
+        
+    }    
+
 }
