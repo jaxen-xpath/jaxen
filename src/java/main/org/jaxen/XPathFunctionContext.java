@@ -25,12 +25,96 @@ public class XPathFunctionContext implements FunctionContext
         this.functions = new HashMap();
 
         registerFunction( "",
+                          "boolean",
+                          new BooleanFunction() );
+
+        registerFunction( "",
+                          "ceiling",
+                          new CeilingFunction() );
+
+        registerFunction( "",
+                          "concat",
+                          new ConcatFunction() );
+
+        registerFunction( "",
+                          "contains",
+                          new ContainsFunction() );
+        
+        registerFunction( "",
                           "count",
                           new CountFunction() );
 
         registerFunction( "",
                           "false",
                           new FalseFunction() );
+
+        registerFunction( "",
+                          "floor",
+                          new FloorFunction() );
+
+        registerFunction( "",
+                          "last",
+                          new LastFunction() );
+
+        registerFunction( "",
+                          "local-name",
+                          new LocalNameFunction() );
+
+        registerFunction( "",
+                          "name",
+                          new NameFunction() );
+
+        registerFunction( "",
+                          "namespace-uri",
+                          new NamespaceUriFunction() );
+
+        registerFunction( "",
+                          "normalize-space",
+                          new NormalizeSpaceFunction() );
+
+        registerFunction( "",
+                          "not",
+                          new NotFunction() );
+
+        registerFunction( "",
+                          "number",
+                          new NumberFunction() );
+
+        registerFunction( "",
+                          "position",
+                          new PositionFunction() );
+
+        registerFunction( "",
+                          "round",
+                          new RoundFunction() );
+
+        registerFunction( "",
+                          "starts-with",
+                          new StartsWithFunction() );
+
+        registerFunction( "",
+                          "string",
+                          new StringFunction() );
+
+        registerFunction( "",
+                          "string-length",
+                          new StringLengthFunction() );
+
+        registerFunction( "",
+                          "substring-after",
+                          new SubstringAfterFunction() );
+
+        registerFunction( "",
+                          "substring-before",
+                          new SubstringBeforeFunction() );
+
+        registerFunction( "",
+                          "substring",
+                          new SubstringFunction() );
+
+        registerFunction( "",
+                          "sum",
+                          new SumFunction() );
 
         registerFunction( "",
                           "true",
