@@ -145,25 +145,23 @@ public abstract class DefaultStep implements Step
 
         List interimSet = new ArrayList();
         List newNodeSet = new ArrayList();
-
+        ContextSupport support = context.getContextSupport();
+            
         for ( int i = 0 ; i < contextSize ; ++i )
         {
             Object eachContextNode = contextNodeSet.get( i );
 
-            Iterator axisNodeIter = axisIterator( eachContextNode,
-                                                  context.getContextSupport() );
+            Iterator axisNodeIter = axisIterator( eachContextNode, support );
             if ( axisNodeIter == null )
             {
                 continue;
             }
 
-            Object eachAxisNode = null;
             while ( axisNodeIter.hasNext() )
             {
-                eachAxisNode = axisNodeIter.next();
+                Object eachAxisNode = axisNodeIter.next();
 
-                if ( matches( eachAxisNode,
-                              context.getContextSupport() ) )
+                if ( matches( eachAxisNode, support ) )
                 {
                     if ( ! unique.containsKey( eachAxisNode ) )
                     {
@@ -173,7 +171,7 @@ public abstract class DefaultStep implements Step
                 }
             }
             newNodeSet.addAll(getPredicateSet().evaluatePredicates(
-                              interimSet,context.getContextSupport() ));
+                              interimSet, support ));
             interimSet.clear();
         }
         return newNodeSet;
