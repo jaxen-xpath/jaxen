@@ -26,6 +26,7 @@ public class DOMDemo
         try
         {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
         
             Document doc = builder.parse( args[0] );

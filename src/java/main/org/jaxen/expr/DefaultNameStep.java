@@ -88,6 +88,8 @@ public class DefaultNameStep extends DefaultStep
             return false;
         }
 
+        //System.out.println( "Matching nodeURI: " + nodeUri + " name: " + nodeName );
+        
         if ( matchesAnyNamespace )
         {
             return matchesAnyName || getLocalName().equals( nodeName );
@@ -119,6 +121,8 @@ public class DefaultNameStep extends DefaultStep
      * Note that we may wish to consider null being equal to ""
      */
     protected boolean matchesNamespaceURIs( String u1, String u2 ) {
+        //System.out.println( "Comparing URI: " + u1 + " against URI: " + u2 );
+        
         if ( u1 == u2 ) {
             return true;
         }

@@ -45,6 +45,7 @@ public class DocumentNavigatorTest extends XPathTestBase
     public Object getDocument(String url) throws Exception
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         return builder.parse( url );

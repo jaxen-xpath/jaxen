@@ -54,6 +54,7 @@ public class XPathTest extends TestCase
             XPath xpath = new XPath( "/foo/bar/baz" );
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
         
             Document doc = builder.parse( BASIC_XML );
