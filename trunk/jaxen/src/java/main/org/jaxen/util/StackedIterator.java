@@ -101,10 +101,10 @@ public abstract class StackedIterator implements Iterator
         this.contextNode   = contextNode;
         this.navigator     = navigator;
         
-        pushIterator( internalCreateIterator( contextNode ) );
+        //pushIterator( internalCreateIterator( contextNode ) );
     }
 
-    private Iterator internalCreateIterator(Object contextNode)
+    protected Iterator internalCreateIterator(Object contextNode)
     {
         if ( this.created.contains( contextNode ) )
         {
@@ -154,7 +154,7 @@ public abstract class StackedIterator implements Iterator
     {
         if ( iter != null )
         {
-            this.iteratorStack.addLast( iter );
+            this.iteratorStack.addFirst(iter); //addLast( iter );
         }
     }
 
