@@ -341,4 +341,13 @@ public class DocumentNavigator extends DefaultNavigator
         }
         return answer;
     }
+    
+    public short getNodeType(Object node) 
+    {
+        if ( node instanceof Node )
+        {
+            return ((Node) node).getNodeType();
+        }
+        return 0;
+    }
 }
