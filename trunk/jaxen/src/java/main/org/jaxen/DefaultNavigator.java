@@ -257,7 +257,7 @@ public abstract class DefaultNavigator implements Navigator
     }
 
     /**
-     *  Default implementation that can not find elements. Override in subclass
+     *  Default implementation that cannot find elements. Override in subclass
      *  if subclass does know about attribute types.
      *
      *  @param contextNode   a node from the document in which to look for the
@@ -266,7 +266,7 @@ public abstract class DefaultNavigator implements Navigator
      *
      *  @return   null
      */
-    public Object getElementById(Object object, String elementId)
+    public Object getElementById(Object contextNode, String elementId)
     {
         return null;
     }
