@@ -203,7 +203,7 @@ public class DocumentNavigator extends DefaultNavigator
         }
         else if ( contextNode instanceof Comment )
         {
-            parent = ((Text)contextNode).getParent();
+            parent = ((Comment)contextNode).getParent();
         }
         
         if ( parent != null )
