@@ -108,9 +108,17 @@
   <document url="xml/web.xml">
 
     <context select="/">
+      <valueOf select="/web-app/servlet[1]/servlet-name">snoop</valueOf>
+      <valueOf select="/web-app/servlet[1]/servlet-name/text()">snoop</valueOf>
       <valueOf select="/web-app/servlet[2]/servlet-name">file</valueOf>
+      <valueOf select="/web-app/servlet[2]/servlet-name/text()">file</valueOf>
     </context>
 
+    <context select="/web-app/servlet[1]">
+      <valueOf select="servlet-name">snoop</valueOf>
+      <valueOf select="servlet-name/text()">snoop</valueOf>
+    </context>
+    
     <context select="/web-app/servlet[2]/servlet-name">
       <test select="preceding::*" count="3"/>
     </context>
