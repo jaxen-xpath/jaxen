@@ -67,8 +67,11 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Nodes;
+import nu.xom.Text;
 
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.xom.XOMXPath;
@@ -266,6 +269,20 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x4, result.get(3));
         
     }    
+    
+    // test for Jaxen-83
+    public void testPrincipleNodeTypeOfSelfAxisIsElement() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("child/@*[self::test]");
+        org.w3c.dom.Element a = doc.createElementNS("", "child");
+        org.w3c.dom.Attr test = doc.createAttributeNS("", "test");
+        test.setValue("value");
+        a.setAttributeNode(test);
+        doc.appendChild(a);
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(0, result.size());      
+    }
     
     
     // another Jaxen-55 test to try to pin down exactly what does
