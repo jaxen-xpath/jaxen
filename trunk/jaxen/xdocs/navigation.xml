@@ -3,8 +3,6 @@
 <project name="jaxen" repository="jaxen" href="http://jaxen.org">
 
   <title>Jaxen: Universal Java XPath Engine</title>
-  <organizationLogo href="/images/werken.gif">The Werken Company</organizationLogo>
-  <logo href="/images/logo.gif">Jaxen: Universal Java XPath Engine</logo>
 
   <body>
     <links>
