@@ -9,7 +9,7 @@ import org.jaxen.function.StringFunction;
 import java.util.List;
 
 /**
- * <p><code><i>string</i> uppercase(<i>string</i>)</code>
+ * <p><code><i>string</i> upper-case(<i>string</i>)</code>
  *
  * @author mark wilson (markw @ wilsoncom.de)
  */
@@ -24,7 +24,7 @@ public class UpperFunction implements Function
             return evaluate( args.get(0),
                              context.getNavigator() );
         }
-        throw new FunctionCallException( "uppercase() requires one argument." );
+        throw new FunctionCallException( "upper-case() requires one argument." );
     }
 
     public static String evaluate(Object strArg,

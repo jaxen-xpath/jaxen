@@ -511,8 +511,8 @@
   <!-- test cases for String extension functions -->
   <document url="xml/web.xml">
     <context select="/web-app/servlet[1]">
-      <valueOf select="uppercase( servlet-class )">SNOOPSERVLET</valueOf>
-      <valueOf select="lowercase( servlet-class )">snoopservlet</valueOf>
+      <valueOf select="upper-case( servlet-class )">SNOOPSERVLET</valueOf>
+      <valueOf select="lower-case( servlet-class )">snoopservlet</valueOf>
       <valueOf select="ends-with( servlet-class, 'Servlet' )">true</valueOf>
       <valueOf select="ends-with( servlet-class, 'S' )">false</valueOf>
     </context>

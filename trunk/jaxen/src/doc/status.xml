@@ -34,8 +34,8 @@ XPath xpath = new JDOMXPath( "//foo" );
         </p>
         <p>Added new extension functions kindly provided by Mark Wilson. They are as follows...
           <ul>
-            <li>uppercase() - converts the argument to an upper case string</li>
-            <li>lowercase() - converts the argument to a lower case string</li>
+            <li>upper-case() - converts the argument to an upper case string</li>
+            <li>lower-case() - converts the argument to a lower case string</li>
             <li>ends-with() - evaluates true if the first string ends with the postfix</li>
           </ul>
         </p>
