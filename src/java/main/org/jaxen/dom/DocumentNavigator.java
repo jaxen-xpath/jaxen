@@ -2,13 +2,13 @@
 package org.jaxen.dom;
 
 import org.jaxen.DefaultNavigator;
-
 import org.jaxen.util.SingleObjectIterator;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.w3c.dom.ProcessingInstruction;
@@ -74,7 +74,12 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Node node = (Node) obj;
 
-        return node.getLocalName();
+        String answer = node.getLocalName();
+        if ( answer == null )
+        {
+            answer = node.getNodeName();
+        }        
+        return answer;
     }
 
     public String getElementNamespaceUri(Object obj)
@@ -88,6 +93,8 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Node node = (Node) obj;
 
+        System.out.println( "getElementQName(): " + node.getNodeName() );
+        
         return node.getNodeName();
     }
 
@@ -95,7 +102,12 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Node node = (Node) obj;
 
-        return node.getLocalName();
+        String answer = node.getLocalName();
+        if ( answer == null )
+        {
+            answer = node.getNodeName();
+        }        
+        return answer;
     }
 
     public String getAttributeNamespaceUri(Object obj)
@@ -117,40 +129,50 @@ public class DocumentNavigator extends DefaultNavigator
         if ( contextNode instanceof Node )
         {            
             final Node parent = (Node) contextNode;
-            final Node child = parent.getFirstChild();
-            if ( child != null ) 
+            return new Iterator() 
             {
-                return new Iterator() 
+                boolean first = true;
+                Node current = parent.getFirstChild();
+                Node next;
+
+                public boolean hasNext()
                 {
-                    Node current = child;
-                    
-                    public boolean hasNext()
+                    while ( current != null )
                     {
-                        if ( current != null ) 
+                        if ( first ) 
                         {
-                            return current.getNextSibling() != null;
+                            first = false;
                         }
-                        return false;
-                    }
-                    
-                    public Object next()
-                    {
-                        if ( current != null ) 
+                        else 
                         {
                             current = current.getNextSibling();
+                            if ( current == null )
+                            {
+                                return false;
+                            }
                         }
-                        return current;
+                        int type = current.getNodeType();
+                        if ( type == Node.DOCUMENT_TYPE_NODE || type == Node.NOTATION_NODE ) {
+                            continue;
+                        }
+                        break;
                     }
-                    
-                    public void remove()
+                    return true;
+                }
+
+                public Object next()
+                {
+                    return current;
+                }
+
+                public void remove()
+                {
+                    if ( current != null )
                     {
-                        if ( current != null )
-                        {
-                            parent.removeChild( current );
-                        }
+                        parent.removeChild( current );
                     }
-                };
-            }
+                }
+            };
         }
 
         return null;
@@ -160,7 +182,7 @@ public class DocumentNavigator extends DefaultNavigator
     {
         if ( contextNode instanceof Document )
         {
-            return new SingleObjectIterator( contextNode );
+            return null;
         }
 
         Node node = (Node) contextNode;
@@ -177,17 +199,33 @@ public class DocumentNavigator extends DefaultNavigator
 
     public Iterator getAttributeAxisIterator(Object contextNode)
     {
-/*
         if ( ! ( contextNode instanceof Element ) )
         {
             return null;
         }
 
-        Element elem = (Element) contextNode;
+        Element element = (Element) contextNode;
+        final NamedNodeMap attributes = element.getAttributes();
+        return new Iterator() 
+        {
+            int index = -1;
+            int size = attributes.getLength();
 
-        return elem.attributeIterator();
-*/
-        return null;
+            public boolean hasNext()
+            {
+                return ++index < size;
+            }
+
+            public Object next()
+            {
+                return attributes.item(index);
+            }
+
+            public void remove()
+            {
+                throw new UnsupportedOperationException( "remove() is not supported by this iterator" );
+            }
+        };
     }
 
     public Iterator getNamespaceAxisIterator(Object contextNode)
