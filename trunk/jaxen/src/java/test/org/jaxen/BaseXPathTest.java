@@ -64,9 +64,13 @@ package org.jaxen;
 
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import nu.xom.Document;
 import nu.xom.Element;
 
+import org.jaxen.dom.DOMXPath;
 import org.jaxen.xom.XOMXPath;
 
 import junit.framework.TestCase;
@@ -126,6 +130,20 @@ public class BaseXPathTest extends TestCase {
         
         BaseXPath xpath = new XOMXPath("/element");
         Document doc = new Document(new Element("root"));
+        
+        String stringValue = xpath.stringValueOf(doc);
+        assertEquals("", stringValue);
+        
+    }
+
+    public void testAllNodesQuery() throws JaxenException, ParserConfigurationException {
+        
+        BaseXPath xpath = new DOMXPath("//. | /");
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        org.w3c.dom.Document doc = factory.newDocumentBuilder().newDocument();
+        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
         
         String stringValue = xpath.stringValueOf(doc);
         assertEquals("", stringValue);
