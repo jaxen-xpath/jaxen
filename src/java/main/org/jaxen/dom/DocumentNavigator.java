@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.w3c.dom.ProcessingInstruction;
 
@@ -86,16 +87,20 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Node node = (Node) obj;
 
-        return node.getNamespaceURI();
+        String answer = node.getNamespaceURI();
+        return ( answer == null ) ? "" : answer;        
     }
 
     public String getElementQName(Object obj)
     {
         Node node = (Node) obj;
 
-        System.out.println( "getElementQName(): " + node.getNodeName() );
-        
-        return node.getNodeName();
+        String answer = node.getNodeName();
+        if ( answer == null )
+        {
+            answer = node.getLocalName();
+        }
+        return answer;
     }
 
     public String getAttributeName(Object obj)
@@ -114,21 +119,29 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Node node = (Node) obj;
 
-        return node.getNamespaceURI();
+        String answer = node.getNamespaceURI();
+        return ( answer == null ) ? "" : answer;        
     }
 
     public String getAttributeQName(Object obj)
     {
         Node node = (Node) obj;
 
-        return node.getNodeName();
+        String answer = node.getNodeName();
+        if ( answer == null )
+        {
+            answer = node.getLocalName();
+        }    
+        return answer;
     }
 
     public Iterator getChildAxisIterator(Object contextNode)
     {
         if ( contextNode instanceof Node )
         {            
-            return new ChildIterator( (Node) contextNode );
+            Node node = (Node) contextNode;
+            NodeList children = node.getChildNodes();
+            return new ChildIterator( node.getChildNodes() );
         }
         return null;
     }

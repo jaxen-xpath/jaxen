@@ -31,6 +31,8 @@ public class DOMDemo
             Document doc = builder.parse( args[0] );
             
             XPath xpath = new XPath( args[1] );
+
+            System.out.println( "XPah:h " + xpath );
             
             List results = xpath.selectNodes( doc );
 
