@@ -69,7 +69,7 @@ import org.jaxen.JaxenException;
  *
  * <p>This is the main entry point for matching an XPath against a DOM
  * tree.  You create a compiled XPath object, then match it against
- * one or more context nodes using the {@link #selectNodes}
+ * one or more context nodes using the {@link #selectNodes(Object)}
  * method, as in the following example:</p>
  *
  * <pre>
@@ -90,10 +90,10 @@ public class JDOMXPath extends BaseXPath
 {
     /** Construct given an XPath expression string.
      *
-     *  @param xpathExpr The XPath expression.
+     *  @param xpathExpr the XPath expression.
      *
      *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
+     *          parsing the expression
      */
     public JDOMXPath(String xpathExpr) throws JaxenException
     {

@@ -52,7 +52,7 @@ import org.jaxen.ContextSupport;
 import org.jaxen.UnsupportedAxisException;
 
 /**
- * Provide access to the xpath axes.
+ * Provide access to the XPath axes.
  * 
  * @author Bob McWhirter
  * @author James Strachan
@@ -90,13 +90,13 @@ public abstract class IterableAxis implements Serializable {
     public abstract Iterator iterator(Object contextNode, ContextSupport support) throws UnsupportedAxisException;
 
     /**
-     * Gets the iterator for a specific xpath axis that supports named access.
+     * Gets the iterator for a specific XPath axis that supports named access.
      *
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
      * @param localName  the local name of the nodes to return
      * @param namespacePrefix  the prefix of the namespace of the nodes to return
-     * @param namespaceURI  the uri of the namespace of the nodes to return
+     * @param namespaceURI  the URI of the namespace of the nodes to return
      */
     public Iterator namedAccessIterator(
         Object contextNode,

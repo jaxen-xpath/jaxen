@@ -63,7 +63,7 @@ public class IterableChildAxis extends IterableAxis {
     /**
      * Constructor.
      * 
-     * @param the axis value
+     * @param value the axis value
      */
     public IterableChildAxis(int value) {
         super(value);
@@ -86,7 +86,7 @@ public class IterableChildAxis extends IterableAxis {
      * @param support  the additional context information
      * @param localName  the local name of the children to return
      * @param namespacePrefix  the prefix of the namespace of the children to return
-     * @param namespaceURI  the uri of the namespace of the children to return
+     * @param namespaceURI  the URI of the namespace of the children to return
      */
     public Iterator namedAccessIterator(
         Object contextNode,
@@ -103,7 +103,7 @@ public class IterableChildAxis extends IterableAxis {
     /**
      * Does this axis support named access?
      * 
-     * @param contextSupport  the additional context information
+     * @param support the additional context information
      * @return true if named access supported. If not iterator() will be used
      */
     public boolean supportsNamedAccess(ContextSupport support) {
