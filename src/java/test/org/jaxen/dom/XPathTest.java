@@ -98,7 +98,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new DOMXPath( "/foo/bar/baz" );
+            new DOMXPath( "/foo/bar/baz" );
         }
         catch (SAXPathException e)
         {
