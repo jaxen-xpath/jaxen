@@ -135,6 +135,16 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
 
+    public String getProcessingInstructionTarget(Object obj)
+    {
+        return null;
+    }
+
+    public String getProcessingInstructionData(Object obj)
+    {
+        return null;
+    }
+
     public short getNodeType(Object node)
     {
         if ( isElement(node) ) 

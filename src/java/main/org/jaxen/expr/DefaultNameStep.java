@@ -78,7 +78,6 @@ public class DefaultNameStep extends DefaultStep
         {
             nodeUri  = nav.getElementNamespaceUri( node );
             nodeName = nav.getElementName( node );
-
         }
         else if ( nav.isAttribute( node ) )
         {

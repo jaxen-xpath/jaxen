@@ -298,6 +298,20 @@ public class DocumentNavigator extends DefaultNavigator
         return buf.toString();
     }
 
+    public String getProcessingInstructionTarget(Object obj)
+    {
+        ProcessingInstruction pi = (ProcessingInstruction) obj;
+
+        return pi.getTarget();
+    }
+
+    public String getProcessingInstructionData(Object obj)
+    {
+        ProcessingInstruction pi = (ProcessingInstruction) obj;
+
+        return pi.getData();
+    }
+
     public String getCommentStringValue(Object obj)
     {
         Comment cmt = (Comment) obj;

@@ -181,6 +181,9 @@ public interface Navigator
     String getAttributeName(Object attr);
     String getAttributeQName(Object attr);
 
+    String getProcessingInstructionTarget(Object pi);
+    String getProcessingInstructionData(Object pi);
+
     boolean isDocument(Object object);
     boolean isElement(Object object);
     boolean isAttribute(Object object);

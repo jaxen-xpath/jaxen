@@ -14,6 +14,7 @@ import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 
 import org.w3c.dom.Attr;
+import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -42,7 +43,7 @@ import org.w3c.dom.NodeList;
 public class DocumentNavigator extends DefaultNavigator
 {
 
-
+    
     ////////////////////////////////////////////////////////////////////
     // Constants.
     ////////////////////////////////////////////////////////////////////
@@ -60,7 +61,7 @@ public class DocumentNavigator extends DefaultNavigator
 	new DocumentNavigator();
 
 
-
+    
     ////////////////////////////////////////////////////////////////////
     // Constructor.
     ////////////////////////////////////////////////////////////////////
@@ -81,11 +82,11 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public static DocumentNavigator getInstance ()
     {
-	return SINGLETON;
+        return SINGLETON;
     }
 
 
-
+    
     ////////////////////////////////////////////////////////////////////
     // Implementation of org.jaxen.DefaultNavigator.
     ////////////////////////////////////////////////////////////////////
@@ -99,16 +100,16 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getChildAxisIterator (Object contextNode)
     {
-	return new NodeIterator ((Node)contextNode) {
-	    protected Node getFirstNode (Node node)
-	    {
-	        return node.getFirstChild();
-	    }
-	    protected Node getNextNode (Node node)
-	    {
-		return node.getNextSibling();
-	    }
-	};
+        return new NodeIterator ((Node)contextNode) {
+                protected Node getFirstNode (Node node)
+                {
+                    return node.getFirstChild();
+                }
+                protected Node getNextNode (Node node)
+                {
+                    return node.getNextSibling();
+                }
+            };
     }
 
 
@@ -120,30 +121,30 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getParentAxisIterator (Object contextNode)
     {
-	Node node = (Node)contextNode;
+        Node node = (Node)contextNode;
 
-	if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
-	    return new NodeIterator (node) {
-		protected Node getFirstNode (Node node)
-		{
-				// FIXME: assumes castability.
-		    return ((Attr)node).getOwnerElement();
-		}
-		protected Node getNextNode (Node node) {
-		    return null;
-		}
-	    };
-	} else {
-	    return new NodeIterator (node) {
-		protected Node getFirstNode (Node node)
-		{
-		    return node.getParentNode();
-		}
-		protected Node getNextNode (Node node) {
-		    return null;
-		}
-	    };
-	}
+        if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
+            return new NodeIterator (node) {
+                    protected Node getFirstNode (Node node)
+                    {
+                        // FIXME: assumes castability.
+                        return ((Attr)node).getOwnerElement();
+                    }
+                    protected Node getNextNode (Node node) {
+                        return null;
+                    }
+                };
+        } else {
+            return new NodeIterator (node) {
+                    protected Node getFirstNode (Node node)
+                    {
+                        return node.getParentNode();
+                    }
+                    protected Node getNextNode (Node node) {
+                        return null;
+                    }
+                };
+        }
     }
 
 
@@ -155,15 +156,15 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getFollowingSiblingAxisIterator (Object contextNode)
     {
-	return new NodeIterator ((Node)contextNode) {
-	    protected Node getFirstNode (Node node)
-	    {
-		return getNextNode(node);
-	    }
-	    protected Node getNextNode (Node node) {
-		return node.getNextSibling();
-	    }
-	};
+        return new NodeIterator ((Node)contextNode) {
+                protected Node getFirstNode (Node node)
+                {
+                    return getNextNode(node);
+                }
+                protected Node getNextNode (Node node) {
+                    return node.getNextSibling();
+                }
+            };
     }
 
 
@@ -175,15 +176,15 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getPrecedingSiblingAxisIterator (Object contextNode)
     {
-	return new NodeIterator ((Node)contextNode) {
-	    protected Node getFirstNode (Node node)
-	    {
-		return getNextNode(node);
-	    }
-	    protected Node getNextNode (Node node) {
-		return node.getPreviousSibling();
-	    }
-	};
+        return new NodeIterator ((Node)contextNode) {
+                protected Node getFirstNode (Node node)
+                {
+                    return getNextNode(node);
+                }
+                protected Node getNextNode (Node node) {
+                    return node.getPreviousSibling();
+                }
+            };
     }
 
 
@@ -195,33 +196,33 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getFollowingAxisIterator (Object contextNode)
     {
-	return new NodeIterator ((Node)contextNode) {
-	    protected Node getFirstNode (Node node)
-	    {
-		if (node == null)
-		    return null;
-		else {
-		    Node sibling = node.getNextSibling();
-		    if (sibling == null)
-			return getFirstNode(node.getParentNode());
-		    else
-			return sibling;
-		}
-	    }
-	    protected Node getNextNode (Node node) {
-		if (node == null)
-		    return null;
-		else {
-		    Node n = node.getFirstChild();
-		    if (n == null)
-			n = node.getNextSibling();
-		    if (n == null)
-			return getFirstNode(node.getParentNode());
-		    else
-			return n;
-		}
-	    }
-	};
+        return new NodeIterator ((Node)contextNode) {
+                protected Node getFirstNode (Node node)
+                {
+                    if (node == null)
+                        return null;
+                    else {
+                        Node sibling = node.getNextSibling();
+                        if (sibling == null)
+                            return getFirstNode(node.getParentNode());
+                        else
+                            return sibling;
+                    }
+                }
+                protected Node getNextNode (Node node) {
+                    if (node == null)
+                        return null;
+                    else {
+                        Node n = node.getFirstChild();
+                        if (n == null)
+                            n = node.getNextSibling();
+                        if (n == null)
+                            return getFirstNode(node.getParentNode());
+                        else
+                            return n;
+                    }
+                }
+            };
     }
 
 
@@ -233,33 +234,33 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getPrecedingAxisIterator (Object contextNode)
     {
-	return new NodeIterator ((Node)contextNode) {
-	    protected Node getFirstNode (Node node)
-	    {
-		if (node == null)
-		    return null;
-		else {
-		    Node sibling = node.getPreviousSibling();
-		    if (sibling == null)
-			return getFirstNode(node.getParentNode());
-		    else
-			return sibling;
-		}
-	    }
-	    protected Node getNextNode (Node node) {
-		if (node == null)
-		    return null;
-		else {
-		    Node n = node.getLastChild();
-		    if (n == null)
-			n = node.getPreviousSibling();
-		    if (n == null)
-			return getFirstNode(node.getParentNode());
-		    else
-			return n;
-		}
-	    }
-	};
+        return new NodeIterator ((Node)contextNode) {
+                protected Node getFirstNode (Node node)
+                {
+                    if (node == null)
+                        return null;
+                    else {
+                        Node sibling = node.getPreviousSibling();
+                        if (sibling == null)
+                            return getFirstNode(node.getParentNode());
+                        else
+                            return sibling;
+                    }
+                }
+                protected Node getNextNode (Node node) {
+                    if (node == null)
+                        return null;
+                    else {
+                        Node n = node.getLastChild();
+                        if (n == null)
+                            n = node.getPreviousSibling();
+                        if (n == null)
+                            return getFirstNode(node.getParentNode());
+                        else
+                            return n;
+                    }
+                }
+            };
     }
 
 
@@ -271,11 +272,11 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getAttributeAxisIterator (Object contextNode)
     {
-	if (isElement(contextNode)) {
-	    return new AttributeIterator((Node)contextNode);
-	} else {
-	    return EMPTY_ITERATOR;
-	}
+        if (isElement(contextNode)) {
+            return new AttributeIterator((Node)contextNode);
+        } else {
+            return EMPTY_ITERATOR;
+        }
     }
 
 
@@ -292,54 +293,54 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getNamespaceAxisIterator (Object contextNode)
     {
-				// Only elements have Namespace nodes
-	if (isElement(contextNode)) {
+        // Only elements have Namespace nodes
+        if (isElement(contextNode)) {
 
-	    HashMap nsMap = new HashMap();
+            HashMap nsMap = new HashMap();
 
-				// Start at the current node at walk
-				// up to the root, noting what Namespace
-				// declarations are in force.
+            // Start at the current node at walk
+            // up to the root, noting what Namespace
+            // declarations are in force.
 
-				// TODO: deal with empty URI for
-				// cancelling Namespace scope
-	    for (Node n = (Node)contextNode;
-		 n != null;
-		 n = n.getParentNode()) {
-		if (n.hasAttributes()) {
-		    NamedNodeMap atts = n.getAttributes();
-		    int length = atts.getLength();
-		    for (int i = 0; i < length; i++) {
-			Node att = atts.item(i);
-			if (att.getNodeName().startsWith("xmlns")) {
-			    NamespaceNode ns =
-				new NamespaceNode((Node)contextNode, att);
-				// Add only if there's not a closer
-				// declaration in force.
-			    String name = ns.getNodeName();
-			    if (!nsMap.containsKey(name))
-				nsMap.put(name, ns);
-			}
-		    }
-		}
-	    }
-				// Section 5.4 of the XPath rec requires
-				// this to be present.
-	    nsMap.put("xml",
-		      new
-		      NamespaceNode((Node)contextNode,
-				    "xml",
-				    "http://www.w3.org/XML/1998/namespace"));
+            // TODO: deal with empty URI for
+            // cancelling Namespace scope
+            for (Node n = (Node)contextNode;
+                 n != null;
+                 n = n.getParentNode()) {
+                if (n.hasAttributes()) {
+                    NamedNodeMap atts = n.getAttributes();
+                    int length = atts.getLength();
+                    for (int i = 0; i < length; i++) {
+                        Node att = atts.item(i);
+                        if (att.getNodeName().startsWith("xmlns")) {
+                            NamespaceNode ns =
+                                new NamespaceNode((Node)contextNode, att);
+                            // Add only if there's not a closer
+                            // declaration in force.
+                            String name = ns.getNodeName();
+                            if (!nsMap.containsKey(name))
+                                nsMap.put(name, ns);
+                        }
+                    }
+                }
+            }
+            // Section 5.4 of the XPath rec requires
+            // this to be present.
+            nsMap.put("xml",
+                      new
+                      NamespaceNode((Node)contextNode,
+                                    "xml",
+                                    "http://www.w3.org/XML/1998/namespace"));
 
-				// An empty default Namespace cancels
-				// any previous default.
-	    NamespaceNode defaultNS = (NamespaceNode)nsMap.get("");
-	    if (defaultNS != null && defaultNS.getNodeValue().equals(""))
-		nsMap.remove("");
-	    return nsMap.values().iterator();
-	} else {
-	    return EMPTY_ITERATOR;
-	}
+            // An empty default Namespace cancels
+            // any previous default.
+            NamespaceNode defaultNS = (NamespaceNode)nsMap.get("");
+            if (defaultNS != null && defaultNS.getNodeValue().equals(""))
+                nsMap.remove("");
+            return nsMap.values().iterator();
+        } else {
+            return EMPTY_ITERATOR;
+        }
     }
 
 
@@ -351,10 +352,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Object getDocumentNode (Object contextNode)
     {
-	if (isDocument(contextNode))
-	    return contextNode;
-	else
-	    return ((Node)contextNode).getOwnerDocument();
+        if (isDocument(contextNode))
+            return contextNode;
+        else
+            return ((Node)contextNode).getOwnerDocument();
     }
 
 
@@ -367,10 +368,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getElementNamespaceUri (Object object)
     {
-	String uri = ((Node)object).getNamespaceURI();
-	if (uri == null)
-	    uri = "";
-	return uri;
+        String uri = ((Node)object).getNamespaceURI();
+        if (uri == null)
+            uri = "";
+        return uri;
     }
 
 
@@ -383,10 +384,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getElementName (Object object)
     {
-	String name = ((Node)object).getLocalName();
-	if (name == null)
-	    name = ((Node)object).getNodeName();
-	return name;
+        String name = ((Node)object).getLocalName();
+        if (name == null)
+            name = ((Node)object).getNodeName();
+        return name;
     }
 
 
@@ -399,10 +400,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getElementQName (Object object)
     {
-	String qname = ((Node)object).getNodeName();
-	if (qname == null)
-	    qname = ((Node)object).getLocalName();
-	return qname;
+        String qname = ((Node)object).getNodeName();
+        if (qname == null)
+            qname = ((Node)object).getLocalName();
+        return qname;
     }
 
 
@@ -415,10 +416,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeNamespaceUri (Object object)
     {
-	String uri = ((Node)object).getNamespaceURI();
-	if (uri == null)
-	    uri = "";
-	return uri;
+        String uri = ((Node)object).getNamespaceURI();
+        if (uri == null)
+            uri = "";
+        return uri;
     }
 
 
@@ -431,10 +432,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeName (Object object)
     {
-	String name = ((Node)object).getLocalName();
-	if (name == null)
-	    name = ((Node)object).getNodeName();
-	return name;
+        String name = ((Node)object).getLocalName();
+        if (name == null)
+            name = ((Node)object).getNodeName();
+        return name;
     }
 
 
@@ -447,10 +448,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeQName (Object object)
     {
-	String qname = ((Node)object).getNodeName();
-	if (qname == null)
-	    qname = ((Node)object).getLocalName();
-	return qname;
+        String qname = ((Node)object).getNodeName();
+        if (qname == null)
+            qname = ((Node)object).getLocalName();
+        return qname;
     }
 
 
@@ -462,8 +463,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isDocument (Object object)
     {
-	return (object instanceof Node) &&
-	    (((Node)object).getNodeType() == Node.DOCUMENT_NODE);
+        return (object instanceof Node) &&
+            (((Node)object).getNodeType() == Node.DOCUMENT_NODE);
     }
 
 
@@ -475,7 +476,7 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isNamespace (Object object)
     {
-	return (object instanceof NamespaceNode);
+        return (object instanceof NamespaceNode);
     }
 
 
@@ -487,8 +488,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isElement (Object object)
     {
-	return (object instanceof Node) &&
-	    (((Node)object).getNodeType() == Node.ELEMENT_NODE);
+        return (object instanceof Node) &&
+            (((Node)object).getNodeType() == Node.ELEMENT_NODE);
     }
 
 
@@ -500,8 +501,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isAttribute (Object object)
     {
-	return (object instanceof Node) &&
-	    (((Node)object).getNodeType() == Node.ATTRIBUTE_NODE);
+        return (object instanceof Node) &&
+            (((Node)object).getNodeType() == Node.ATTRIBUTE_NODE);
     }
 
 
@@ -513,8 +514,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isComment (Object object)
     {
-	return (object instanceof Node) &&
-	    (((Node)object).getNodeType() == Node.COMMENT_NODE);
+        return (object instanceof Node) &&
+            (((Node)object).getNodeType() == Node.COMMENT_NODE);
     }
 
 
@@ -526,17 +527,17 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isText (Object object)
     {
-	if (object instanceof Node) {
-	    switch (((Node)object).getNodeType()) {
-	    case Node.TEXT_NODE:
-	    case Node.CDATA_SECTION_NODE:
-		return true;
-	    default:
-		return false;
-	    }
-	} else {
-	    return false;
-	}
+        if (object instanceof Node) {
+            switch (((Node)object).getNodeType()) {
+                case Node.TEXT_NODE:
+                case Node.CDATA_SECTION_NODE:
+                    return true;
+                default:
+                    return false;
+            }
+        } else {
+            return false;
+        }
     }
 
 
@@ -548,8 +549,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public boolean isProcessingInstruction (Object object)
     {
-	return (object instanceof Node) &&
-	    (((Node)object).getNodeType() == Node.PROCESSING_INSTRUCTION_NODE);
+        return (object instanceof Node) &&
+            (((Node)object).getNodeType() == Node.PROCESSING_INSTRUCTION_NODE);
     }
 
 
@@ -562,10 +563,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getElementStringValue (Object object)
     {
-	if (isElement(object))
-	    return getStringValue((Node)object, new StringBuffer()).toString();
-	else
-	    return null;
+        if (isElement(object))
+            return getStringValue((Node)object, new StringBuffer()).toString();
+        else
+            return null;
     }
 
 
@@ -578,15 +579,15 @@ public class DocumentNavigator extends DefaultNavigator
      */
     private StringBuffer getStringValue (Node node, StringBuffer buffer)
     {
-	if (isText(node)) {
-	    buffer.append(node.getNodeValue());
-	} else {
-	    NodeList children = node.getChildNodes();
-	    int length = children.getLength();
-	    for (int i = 0; i < length; i++)
-		getStringValue(children.item(i), buffer);
-	}
-	return buffer;
+        if (isText(node)) {
+            buffer.append(node.getNodeValue());
+        } else {
+            NodeList children = node.getChildNodes();
+            int length = children.getLength();
+            for (int i = 0; i < length; i++)
+                getStringValue(children.item(i), buffer);
+        }
+        return buffer;
     }
 
 
@@ -599,10 +600,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeStringValue (Object object)
     {
-	if (isAttribute(object))
-	    return ((Node)object).getNodeValue();
-	else
-	    return null;
+        if (isAttribute(object))
+            return ((Node)object).getNodeValue();
+        else
+            return null;
     }
 
 
@@ -614,10 +615,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getTextStringValue (Object object)
     {
-	if (isText(object))
-	    return ((Node)object).getNodeValue();
-	else
-	    return null;
+        if (isText(object))
+            return ((Node)object).getNodeValue();
+        else
+            return null;
     }
 
 
@@ -630,10 +631,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getCommentStringValue (Object object)
     {
-	if (isComment(object))
-	    return ((Node)object).getNodeValue();
-	else
-	    return null;
+        if (isComment(object))
+            return ((Node)object).getNodeValue();
+        else
+            return null;
     }
 
 
@@ -646,10 +647,10 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getNamespaceStringValue (Object object)
     {
-	if (isNamespace(object))
-	    return ((NamespaceNode)object).getNodeValue();
-	else
-	    return null;
+        if (isNamespace(object))
+            return ((NamespaceNode)object).getNodeValue();
+        else
+            return null;
     }
 
 
@@ -658,13 +659,13 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String translateNamespacePrefixToUri (String prefix, Object element)
     {
-	Iterator it = getNamespaceAxisIterator(element);
-	while (it.hasNext()) {
-	    NamespaceNode ns = (NamespaceNode)it.next();
-	    if (prefix.equals(ns.getNodeName()))
-		return ns.getNodeValue();
-	}
-	return null;
+        Iterator it = getNamespaceAxisIterator(element);
+        while (it.hasNext()) {
+            NamespaceNode ns = (NamespaceNode)it.next();
+            if (prefix.equals(ns.getNodeName()))
+                return ns.getNodeValue();
+        }
+        return null;
     }
 
     /**
@@ -690,15 +691,29 @@ public class DocumentNavigator extends DefaultNavigator
         }
     }
 
-
+    public String getProcessingInstructionTarget(Object obj)
+    {
+        ProcessingInstruction pi = (ProcessingInstruction) obj;
+
+        return pi.getTarget();
+    }
+
+    public String getProcessingInstructionData(Object obj)
+    {
+        ProcessingInstruction pi = (ProcessingInstruction) obj;
+
+        return pi.getData();
+    }
+
+    
     ////////////////////////////////////////////////////////////////////
     // Inner class: iterate over DOM nodes.
     ////////////////////////////////////////////////////////////////////
 
 
-				// FIXME: needs to recurse into
-				// DocumentFragment and EntityReference
-				// to use their children.
+    // FIXME: needs to recurse into
+    // DocumentFragment and EntityReference
+    // to use their children.
 
     /**
      * A generic iterator over DOM nodes.
@@ -712,109 +727,109 @@ public class DocumentNavigator extends DefaultNavigator
     {
 
 
-	/**
-	 * Constructor.
-	 *
-	 * @param contextNode The starting node.
-	 */
-	public NodeIterator (Node contextNode)
-	{
-	    node = getFirstNode(contextNode);
-	    while (!isXPathNode(node))
-		node = getNextNode(node);
-	}
+        /**
+         * Constructor.
+         *
+         * @param contextNode The starting node.
+         */
+        public NodeIterator (Node contextNode)
+        {
+            node = getFirstNode(contextNode);
+            while (!isXPathNode(node))
+                node = getNextNode(node);
+        }
 
 
-	/**
-	 * @see Iterator#hasNext
-	 */
-	public boolean hasNext ()
-	{
-	    return (node != null);
-	}
+        /**
+         * @see Iterator#hasNext
+         */
+        public boolean hasNext ()
+        {
+            return (node != null);
+        }
 
 
-	/**
-	 * @see Iterator#next
-	 */
-	public Object next ()
-	{
-	    if (node == null)
-		throw new NoSuchElementException();
-	    Node ret = node;
-	    node = getNextNode(node);
-	    while (!isXPathNode(node))
-		node = getNextNode(node);
-	    return ret;
-	}
+        /**
+         * @see Iterator#next
+         */
+        public Object next ()
+        {
+            if (node == null)
+                throw new NoSuchElementException();
+            Node ret = node;
+            node = getNextNode(node);
+            while (!isXPathNode(node))
+                node = getNextNode(node);
+            return ret;
+        }
 
 
-	/**
-	 * @see Iterator#remove
-	 */
-	public void remove ()
-	{
-	    throw new UnsupportedOperationException();
-	}
+        /**
+         * @see Iterator#remove
+         */
+        public void remove ()
+        {
+            throw new UnsupportedOperationException();
+        }
 
 
-	/**
-	 * Get the first node for iteration.
-	 *
-	 * <p>This method must derive an initial node for iteration
-	 * from a context node.</p>
-	 *
-	 * @param contextNode The starting node.
-	 * @return The first node in the iteration.
-	 * @see #getNextNode
-	 */
-	protected abstract Node getFirstNode (Node contextNode);
+        /**
+         * Get the first node for iteration.
+         *
+         * <p>This method must derive an initial node for iteration
+         * from a context node.</p>
+         *
+         * @param contextNode The starting node.
+         * @return The first node in the iteration.
+         * @see #getNextNode
+         */
+        protected abstract Node getFirstNode (Node contextNode);
 
 
-	/**
-	 * Get the next node for iteration.
-	 *
-	 * <p>This method must locate a following node from the
-	 * current context node.</p>
-	 *
-	 * @param contextNode The current node in the iteration.
-	 * @return The following node in the iteration, or null
-	 * if there is none.
-	 * @see #getFirstNode
-	 */
-	protected abstract Node getNextNode (Node contextNode);
+        /**
+         * Get the next node for iteration.
+         *
+         * <p>This method must locate a following node from the
+         * current context node.</p>
+         *
+         * @param contextNode The current node in the iteration.
+         * @return The following node in the iteration, or null
+         * if there is none.
+         * @see #getFirstNode
+         */
+        protected abstract Node getNextNode (Node contextNode);
 
 
-	/**
-	 * Test whether a DOM node is usable by XPath.
-	 *
-	 * @param node The DOM node to test.
-	 * @return true if the node is usable, false if it should be
-	 * skipped.
-	 */
-	private boolean isXPathNode (Node node)
-	{
-				// null is usable, because it means end
-	    if (node == null)
-		return true;
+        /**
+         * Test whether a DOM node is usable by XPath.
+         *
+         * @param node The DOM node to test.
+         * @return true if the node is usable, false if it should be
+         * skipped.
+         */
+        private boolean isXPathNode (Node node)
+        {
+            // null is usable, because it means end
+            if (node == null)
+                return true;
 
-	    switch (node.getNodeType()) {
-	    case Node.DOCUMENT_FRAGMENT_NODE:
-	    case Node.DOCUMENT_TYPE_NODE:
-	    case Node.ENTITY_NODE:
-	    case Node.ENTITY_REFERENCE_NODE:
-	    case Node.NOTATION_NODE:
-		return false;
-	    default:
-		return true;
-	    }
-	}
+            switch (node.getNodeType()) {
+                case Node.DOCUMENT_FRAGMENT_NODE:
+                case Node.DOCUMENT_TYPE_NODE:
+                case Node.ENTITY_NODE:
+                case Node.ENTITY_REFERENCE_NODE:
+                case Node.NOTATION_NODE:
+                    return false;
+                default:
+                    return true;
+            }
+        }
 
-	private Node node;
+        private Node node;
     }
 
 
-
+    
     ////////////////////////////////////////////////////////////////////
     // Inner class: iterate over a DOM named node map.
     ////////////////////////////////////////////////////////////////////
@@ -826,53 +841,53 @@ public class DocumentNavigator extends DefaultNavigator
     class AttributeIterator implements Iterator
     {
 
-	/**
-	 * Constructor.
-	 *
-	 * @param parent The parent DOM element for the attributes.
-	 */
-	AttributeIterator (Node parent)
-	{
-	    this.parent = parent;
-	    this.map = parent.getAttributes();
-	    this.pos = 0;
-	}
+        /**
+         * Constructor.
+         *
+         * @param parent The parent DOM element for the attributes.
+         */
+        AttributeIterator (Node parent)
+        {
+            this.parent = parent;
+            this.map = parent.getAttributes();
+            this.pos = 0;
+        }
 
 
-	/**
-	 * @see Iterator#hasNext
-	 */
-	public boolean hasNext ()
-	{
-	    return pos < map.getLength();
-	}
+        /**
+         * @see Iterator#hasNext
+         */
+        public boolean hasNext ()
+        {
+            return pos < map.getLength();
+        }
 
 
-	/**
-	 * @see Iterator#next
-	 */
-	public Object next ()
-	{
-	    Node attr = map.item(pos++);
-	    if (attr == null)
-		throw new NoSuchElementException();
-	    else
-		return attr;
-	}
+        /**
+         * @see Iterator#next
+         */
+        public Object next ()
+        {
+            Node attr = map.item(pos++);
+            if (attr == null)
+                throw new NoSuchElementException();
+            else
+                return attr;
+        }
 
 
-	/**
-	 * @see Iterator#remove
-	 */
-	public void remove ()
-	{
-	    throw new UnsupportedOperationException();
-	}
+        /**
+         * @see Iterator#remove
+         */
+        public void remove ()
+        {
+            throw new UnsupportedOperationException();
+        }
 
 
-	private Node parent;
-	private NamedNodeMap map;
-	private int pos;
+        private Node parent;
+        private NamedNodeMap map;
+        private int pos;
 
     }
 

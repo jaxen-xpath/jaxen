@@ -304,6 +304,20 @@ public class DocumentNavigator extends DefaultNavigator
             throw new FunctionCallException("Failed to parse doucment for URI: " + uri, e);
         }
     }
+
+    public String getProcessingInstructionTarget(Object obj)
+    {
+        ProcessingInstruction pi = (ProcessingInstruction) obj;
+
+        return pi.getTarget();
+    }
+
+    public String getProcessingInstructionData(Object obj)
+    {
+        ProcessingInstruction pi = (ProcessingInstruction) obj;
+
+        return pi.getText();
+    }
     
     // Properties
     //-------------------------------------------------------------------------    
