@@ -108,7 +108,7 @@ public abstract class XPathTestBase extends TestCase
 
     public void log(String text)
     {
-        log( this.verbose,
+        log( verbose,
              text );
     }
 
@@ -240,7 +240,7 @@ public abstract class XPathTestBase extends TestCase
 
         String debugStr  = test.attributeValue( "debug" );
 
-        boolean debug = this.verbose;
+        boolean debug = verbose;
 
         if ( debugStr != null )
         {
@@ -409,7 +409,7 @@ public abstract class XPathTestBase extends TestCase
 
         String debugStr  = valueOf.attributeValue( "debug" );
 
-        boolean debug = this.verbose;
+        boolean debug = verbose;
 
         if ( debugStr != null )
         {
