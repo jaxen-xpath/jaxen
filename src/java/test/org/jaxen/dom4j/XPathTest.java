@@ -112,7 +112,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new Dom4jXPath( "/foo/bar/baz" );
+            new Dom4jXPath( "/foo/bar/baz" );
         }
         catch (SAXPathException e)
         {
