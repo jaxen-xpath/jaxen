@@ -4,7 +4,7 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
-
+import org.jaxen.Navigator;
 import org.jaxen.function.BooleanFunction;
 
 class DefaultOrExpr extends DefaultLogicalExpr 
@@ -28,14 +28,15 @@ class DefaultOrExpr extends DefaultLogicalExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
-        Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ) );
+        Navigator nav = context.getNavigator();
+        Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ), nav );
 
         if ( lhsValue == Boolean.TRUE )
         {
             return Boolean.TRUE;
         }
 
-        Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ) );
+        Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ), nav );
 
         if ( rhsValue == Boolean.TRUE )
         {

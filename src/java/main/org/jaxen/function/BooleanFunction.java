@@ -4,6 +4,7 @@ package org.jaxen.function;
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
 
 import java.util.List;
 import java.util.Iterator;
@@ -21,14 +22,29 @@ public class BooleanFunction implements Function
     {
         if ( args.size() == 1 )
         {
-            return evaluate( args.get(0) );
+            return evaluate( args.get(0), context.getNavigator() );
         }
 
         throw new FunctionCallException("boolean() requires one argument");
     }
 
-    public static Boolean evaluate(Object obj)
+    public static Boolean evaluate(Object obj, Navigator nav)
     {
+      
+      // convert to String if it's a special object type
+        if ( nav.isElement( obj ) )
+        {
+            obj = nav.getElementStringValue( obj );
+        }
+        else if ( nav.isAttribute( obj ) )
+        {
+            obj = nav.getAttributeStringValue( obj );
+        }
+        else if ( nav.isText( obj ) )
+        {
+            obj = nav.getTextStringValue( obj );
+        }
+        
         if ( obj instanceof Boolean )
         {
             return (Boolean) obj;

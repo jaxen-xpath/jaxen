@@ -105,9 +105,10 @@ class DefaultLessThanEqualExpr extends DefaultRelationalExpr
     }
 
     protected Object evaluateSetBoolean(List theSet,
-                                        Boolean theBool)
+                                        Boolean theBool,
+                                        Navigator nav)
     {
-        return ( ( BooleanFunction.evaluate( theSet ).equals( theBool ) )
+        return ( ( BooleanFunction.evaluate( theSet, nav ).equals( theBool ) )
                  ? Boolean.TRUE
                  : Boolean.FALSE );
     }

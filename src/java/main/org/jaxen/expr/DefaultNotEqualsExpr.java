@@ -28,6 +28,8 @@ class DefaultNotEqualsExpr extends DefaultEqualityExpr
     {
         return "[(DefaultNotEqualsExpr): " + getLHS() + ", " + getRHS() + "]";
     }
+    
+    
 
     protected Object evaluateSetSet(List lhsSet,
                                     List rhsSet,
@@ -58,6 +60,11 @@ class DefaultNotEqualsExpr extends DefaultEqualityExpr
         
         return Boolean.FALSE;
     }
+    
+    protected Object evaluateEmptySet(Object theOther)
+      {
+      return theOther == null ? Boolean.TRUE : Boolean.FALSE;
+      }    
 
     protected Object evaluateSetBoolean(List theSet,
                                         Boolean theBool,
@@ -68,7 +75,7 @@ class DefaultNotEqualsExpr extends DefaultEqualityExpr
 
         for ( int i = 0 ; i < setSize ; ++i )
         {
-            if ( ! theBool.equals( BooleanFunction.evaluate( theSet.get( i ) ) ) )
+            if ( ! theBool.equals( BooleanFunction.evaluate( theSet.get( i ), nav ) ) )
             {
                 return Boolean.TRUE;
             }
@@ -102,7 +109,7 @@ class DefaultNotEqualsExpr extends DefaultEqualityExpr
         int setSize = theSet.size();
 
         for ( int i = 0 ; i < setSize ; ++i )
-        {
+        {            
             if ( ! theStr.equals( StringFunction.evaluate( theSet.get( i ),
                                                            nav ) ) )
             {

@@ -57,7 +57,8 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
                 else if ( isBoolean( rhsValue ) )
                 {
                     return evaluateSetBoolean( (List) lhsValue,
-                                               (Boolean) rhsValue );
+                                               (Boolean) rhsValue,
+                                               nav );
                 }
             }
             else
@@ -77,7 +78,8 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
                 else if ( isBoolean( lhsValue ) )
                 {
                     return evaluateSetBoolean( (List) rhsValue,
-                                               (Boolean) rhsValue );
+                                               (Boolean) rhsValue,
+                                               nav );
                 }
             }
         }
@@ -91,7 +93,8 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
                                              Navigator nav);
     
     protected abstract Object evaluateSetBoolean(List theSet,
-                                                 Boolean theBool);
+                                                 Boolean theBool,
+                                                 Navigator nav );
 
     protected abstract Object evaluateSetString(List theSet,
                                                 String theStr,

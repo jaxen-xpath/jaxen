@@ -57,8 +57,13 @@ class DefaultEqualsExpr extends DefaultEqualityExpr
         }
         
         return Boolean.FALSE;
-    }
-
+      }
+    
+    protected Object evaluateEmptySet(Object theOther)
+      {
+      return theOther != null ? Boolean.TRUE : Boolean.FALSE;
+      }
+                                                                 
     protected Object evaluateSetBoolean(List theSet,
                                         Boolean theBool,
                                         Navigator nav)
@@ -68,7 +73,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr
 
         for ( int i = 0 ; i < setSize ; ++i )
         {
-            if ( theBool.equals( BooleanFunction.evaluate( theSet.get( i ) ) ) )
+            if ( theBool.equals( BooleanFunction.evaluate( theSet.get( i ), nav ) ) )
             {
                 return Boolean.TRUE;
             }
@@ -102,7 +107,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr
         int setSize = theSet.size();
 
         for ( int i = 0 ; i < setSize ; ++i )
-        {
+        {            
             if ( theStr.equals( StringFunction.evaluate( theSet.get( i ),
                                                          nav ) ) )
             {

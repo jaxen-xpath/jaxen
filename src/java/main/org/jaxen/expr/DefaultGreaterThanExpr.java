@@ -104,7 +104,8 @@ class DefaultGreaterThanExpr extends DefaultRelationalExpr
     }
 
     protected Object evaluateSetBoolean(List theSet,
-                                        Boolean theBool)
+                                        Boolean theBool,
+                                        Navigator nav )
     {
         return Boolean.FALSE;
     }
