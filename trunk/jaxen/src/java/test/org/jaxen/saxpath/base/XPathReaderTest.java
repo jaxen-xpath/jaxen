@@ -163,7 +163,7 @@ public class XPathReaderTest extends TestCase
             {
                 reader.parse( bogusPath[0] );
 
-                fail( "Should have thrown XPathSyntaxException" );
+                fail( "Should have thrown XPathSyntaxException for " + bogusPath[0]);
             }
             catch( XPathSyntaxException e )
             {
@@ -177,6 +177,51 @@ public class XPathReaderTest extends TestCase
             {
                 fail( e.getMessage() );
             }
+        }
+    }
+
+    public void testCountNonNodeSet()
+    {
+        XPathReader reader = new XPathReader();
+        try
+        {
+            reader.parse( "count(3)" );
+
+            fail( "Should have thrown XPathSyntaxException for count(3)");
+        }
+        catch( XPathSyntaxException e )
+        {
+            assertEquals( "count(3)", e.getMessage() );
+        }
+        catch( org.jaxen.saxpath.SAXPathException e )
+        {
+            fail( e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
+        }
+    }
+
+    public void testChildrenOfNumber()
+    {
+        XPathReader reader = new XPathReader();
+        try
+        {
+            reader.parse( "1/child::test" );
+            fail( "Should have thrown XPathSyntaxException for count(3)");
+        }
+        catch( XPathSyntaxException e )
+        {
+            assertEquals( "1/child::test", e.getMessage() );
+        }
+        catch( org.jaxen.saxpath.SAXPathException e )
+        {
+            fail( e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
         }
     }
 
