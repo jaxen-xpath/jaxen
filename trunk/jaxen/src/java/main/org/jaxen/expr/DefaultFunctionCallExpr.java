@@ -120,10 +120,9 @@ public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCall
         buf.append("(");
 
         Iterator paramIter = getParameters().iterator();
-        Expr eachParam = null;
 
         while (paramIter.hasNext()) {
-            eachParam = (Expr) paramIter.next();
+            Expr eachParam = (Expr) paramIter.next();
 
             buf.append(eachParam.getText());
 
@@ -142,13 +141,12 @@ public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCall
     {
         List paramExprs = getParameters();
         int paramSize = paramExprs.size();
-        Expr eachParam = null;
 
         List newParams = new ArrayList(paramSize);
 
         for (int i = 0; i < paramSize; ++i)
         {
-            eachParam = (Expr) paramExprs.get(i);
+            Expr eachParam = (Expr) paramExprs.get(i);
 
             newParams.add(eachParam.simplify());
         }
@@ -190,14 +188,12 @@ public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCall
         int paramSize = paramExprs.size();
 
         List paramValues = new ArrayList(paramSize);
-        Expr eachParam = null;
-        Object eachValue = null;
 
         for (int i = 0; i < paramSize; ++i)
         {
-            eachParam = (Expr) paramExprs.get(i);
+            Expr eachParam = (Expr) paramExprs.get(i);
 
-            eachValue = eachParam.evaluate(context);
+            Object eachValue = eachParam.evaluate(context);
 
             paramValues.add(eachValue);
         }
