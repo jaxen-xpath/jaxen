@@ -116,8 +116,6 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             {
                 eachContextNode = contextNodeSet.get( i );
                 
-                //try
-                //{
                 Iterator axisNodeIter = eachStep.axisIterator( eachContextNode,
                                                                context.getContextSupport() );
                 
@@ -142,12 +140,6 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                         }
                     }
                 }
-                //}
-                //catch (UnsupportedAxisException e)
-                //{
-                    //e.printStackTrace();
-                    //break OUTTER;
-                //}
             }
             
             

@@ -17,33 +17,62 @@ public class ChildIterator implements Iterator
     private NodeList children;
     private int index = -1;
 
+    private Node next;
+
 
     public ChildIterator(NodeList children)
     {
         this.children = children;
+        this.next     = null;
+        stepAhead();
     }
 
     public boolean hasNext()
     {
-        while ( ++index < children.getLength() )
-        {
-            Node node = children.item(index);
-            int type = node.getNodeType();
-            if ( type == Node.DOCUMENT_TYPE_NODE || type == Node.NOTATION_NODE ) {
-                continue;
-            }
-            return true;
-        }        
-        return false;
+        return ( this.next != null );
     }
 
     public Object next() throws NoSuchElementException
     {
-        if ( index >= children.getLength() )
+        if ( ! hasNext() )
         {
             throw new NoSuchElementException();
         }
-        return children.item(index);
+
+        Object obj = this.next;
+
+        this.next = null;
+
+        stepAhead();
+
+        return obj;
+    }
+
+    private void stepAhead()
+    {
+        if ( this.next != null )
+        {
+            return;
+        }
+
+        while ( ++index < children.getLength() )
+        {
+            this.next = children.item( index );
+
+            int  type = this.next.getNodeType();
+
+            if ( type == Node.DOCUMENT_TYPE_NODE
+                 ||
+                 type == Node.NOTATION_NODE )
+            {
+                this.next = null;
+                continue;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     public void remove()

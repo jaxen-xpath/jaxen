@@ -121,33 +121,26 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
 
         if ( func != null )
         {
-            try
+            List paramExprs = getParameters();
+            int  paramSize  = paramExprs.size();
+            
+            List paramValues = new ArrayList( paramSize );
+            Expr eachParam   = null;
+            Object eachValue = null;
+            
+            for ( int i = 0 ; i < paramSize ; ++i )
             {
-                List paramExprs = getParameters();
-                int  paramSize  = paramExprs.size();
-
-                List paramValues = new ArrayList( paramSize );
-                Expr eachParam   = null;
-                Object eachValue = null;
-
-                for ( int i = 0 ; i < paramSize ; ++i )
-                {
-                    eachParam = (Expr) paramExprs.get( i );
-
-                    eachValue = eachParam.evaluate( context );
-
-                    paramValues.add( eachValue );
-                }
-
-                return func.call( context,
-                                  paramValues );
+                eachParam = (Expr) paramExprs.get( i );
+                
+                eachValue = eachParam.evaluate( context );
+                
+                paramValues.add( eachValue );
             }
-            catch (FunctionCallException e)
-            {
-                return null;
-            }
+            
+            return func.call( context,
+                              paramValues );
         }
-
+        
         return null;
     }
 }
