@@ -25,6 +25,10 @@ public class DocumentNavigatorTest extends XPathTestBase
     public static void main(String[] args) 
     {
         verbose = true;
+        if ( args.length > 0 ) 
+        {
+            TESTS_XML = args[0];
+        }
         TestRunner.run( suite() );
     }
     

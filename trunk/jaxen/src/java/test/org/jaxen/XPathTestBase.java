@@ -16,7 +16,7 @@ import java.util.Stack;
 
 public abstract class XPathTestBase extends TestCase
 {
-    private static final String TESTS_XML = "xml/test/tests.xml";
+    protected static String TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean            verbose         = true;
     private          SAXReader          xmlReader       = new SAXReader();
