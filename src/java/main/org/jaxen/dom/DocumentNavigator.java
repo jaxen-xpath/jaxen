@@ -773,7 +773,7 @@ public class DocumentNavigator extends DefaultNavigator
         }
         catch (Exception e)
         {
-            throw new FunctionCallException("Failed to parse doucment for URI: " + uri, e);
+            throw new FunctionCallException("Failed to parse document for URI: " + uri, e);
         }
     }
 
