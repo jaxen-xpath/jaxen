@@ -2,6 +2,7 @@
 package org.jaxen.jdom;
 
 import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
 
 import org.jaxen.util.SingleObjectIterator;
 
@@ -13,6 +14,8 @@ import org.jdom.Text;
 import org.jdom.CDATA;
 import org.jdom.ProcessingInstruction;
 import org.jdom.Namespace;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -336,5 +339,19 @@ public class DocumentNavigator extends DefaultNavigator
             }
         }
         return null;
+    }
+
+    public Object getDocument(String url) throws FunctionCallException
+    {
+        try
+        {
+            SAXBuilder builder = new SAXBuilder();
+            
+            return builder.build( url );
+        }
+        catch (JDOMException e)
+        {
+            throw new FunctionCallException( e.getMessage() );
+        }
     }
 }

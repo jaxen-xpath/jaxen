@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 import java.util.Iterator;
 
@@ -85,8 +86,12 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr
         return this;
     }
 
-    public Object evaluate(Context context)
+    public Object evaluate(Context context) throws JaxenException
     {
-        return null;
+        Object results = getFilterExpr().evaluate( context );
+        context.setNodeSet( convertToList( results ) );
+
+        
+        return getLocationPath().evaluate( context );
     }
 }
