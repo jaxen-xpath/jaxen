@@ -21,13 +21,50 @@
 
     <section title="Why is Jaxen useful?">
       <p>
-        After implementing an XPath engine for both <a href="http://dom4j.org">dom4j</a> and
-        <a href="http://jdom.org">JDOM</a>, and attempting to keep them both in sync, it was
-        decided that factoring out the commonality would be a Good Thing.  Thus, Jaxen
-        provides a single point for XPath expression evaluation, regardless of the target
-        object model, whether its <b>dom4j</b>, <b>JDOM</b>, <b>DOM</b>, <b>JavaBeans</b>,
-        or whatnot.
+      After implementing an XPath engine for both <a href="http://dom4j.org">dom4j</a> and
+      <a href="http://jdom.org">JDOM</a>, and attempting to keep them both in sync, it was
+      decided that factoring out the commonality would be a Good Thing.  Thus, Jaxen
+      provides a single point for XPath expression evaluation, regardless of the target
+      object model, whether its <b>dom4j</b>, <b>JDOM</b>, <b>DOM</b>, <b>JavaBeans</b>,
+      or whatnot.
       </p>
+    </section>
+
+    <section title="What are some related technologies?">
+      <p>
+      Jaxen itself is based upon <a href="http://saxpath.org/">SAXPath</a>, which is
+      an event-based model for parsing XPath expressions.
+      </p>
+
+      <p>
+      Jaxen currently has navigators defined for <a href="http://dom4j.org/">dom4j</a>
+      and <a href="http://jdom.org/">JDOM</a>, two popular and convenient object models
+      for representing XML documents.
+      </p>
+    </section>
+
+    <section title="How do I support a different object model?">
+      <p>
+      The only thing required is an implementation of the interface 
+      <code>org.jaxen.Navigator</code>.  Not all of the interface is required,
+      and a default implementation, in the form of <code>org.jaxen.DefaultNavigator</code>
+      is also provided.
+      </p>
+
+      <p>
+      Since many of the XPath axes can be defined in terms of each other (for example,
+      the <code>ancestor</code> axis is merely a the <code>parent</code> recursively
+      applied), only a few low-level axis iterators are required to initially get
+      started.  Of course, you may implement them directly, instead of relying upon
+      Jaxen's composition ability.
+      </p>
+
+      <p>
+      To support a model such as W3C-DOM, it should be relatively easy to start with
+      an existing <code>Navigator</code> (such as <code>dom4j</code>'s), and quickly
+      get up to speed.
+      </p>
+
     </section>
 
   </body>

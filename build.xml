@@ -218,14 +218,12 @@
              use="true"
              splitindex="true"
              noindex="false"
-             windowtitle="SAXPath and Jaxen ${javadoc.flavor}"
-             doctitle="SAXPath and Jaxen ${javadoc.flavor}"
+             windowtitle="Jaxen ${javadoc.flavor}"
+             doctitle="Jaxen ${javadoc.flavor}"
              bottom="Copyright &#169; ${year} ${copyright.owner}.  All Rights Reserved.">
 
-        <group title="SAXPath: Simple API for XPath Parsing" packages="org.saxpath*"/>
         <group title="Jaxen: Java XPath Engine"              packages="org.jaxen*"/>
 	<group title="Jaxen Navigators"                      packages="org.jaxen.jdom*:org.jaxen.dom4j*"/>
-        <group title="werken digital SAXPath"                packages="com.werken*"/>
 
     </javadoc>
 <!--
