@@ -7,7 +7,7 @@ import org.jaxen.UnsupportedAxisException;
 
 import java.util.Iterator;
 
-public class DescendantOrSelfAxisIterator extends AncestorAxisIterator
+public class DescendantOrSelfAxisIterator extends DescendantAxisIterator
 {
     public DescendantOrSelfAxisIterator(Object contextNode,
                                         Navigator navigator)
@@ -23,19 +23,5 @@ public class DescendantOrSelfAxisIterator extends AncestorAxisIterator
 
         init( contextNode,
               navigator );
-    }
-
-    protected Iterator createIterator(Object contextNode) 
-    {
-        try
-        {
-            return getNavigator().getChildAxisIterator( contextNode );
-        }
-        catch (UnsupportedAxisException e)
-        {
-            // okay...
-        }
-
-        return null;
     }
 }
