@@ -410,6 +410,12 @@
     </antcall>
   </target>
 
+  <target name="test.dom">
+    <antcall target="test.internal">
+       <param name="test.packages" value="org/jaxen/dom/**"/>
+    </antcall>
+  </target>
+
   <target name="test.dom4j">
     <antcall target="test.internal">
        <param name="test.packages" value="org/jaxen/dom4j/**"/>
@@ -483,6 +489,18 @@
           <pathelement location="${build.dest}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
           <pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="demo.dom" depends="samples">
+    <java classname="DOMDemo" fork="true">
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+          <pathelement location="${build.dest}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/> 
       </classpath>
     </java>
   </target>
