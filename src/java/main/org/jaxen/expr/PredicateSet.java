@@ -125,7 +125,7 @@ public class PredicateSet implements Serializable
         return buf.toString();
     }
 
-    // XXXX: Note - this could be *MUCH* more efficient
+    // FIXME: Note - this could be *MUCH* more efficient
     // currently this creates many redundant collections and should halt
     // evaluation on the first matching item.
     protected boolean evaluateAsBoolean(List contextNodeSet,
@@ -151,27 +151,31 @@ public class PredicateSet implements Serializable
             nodes2Filter =
                 applyPredicate((Predicate)predIter.next(), nodes2Filter, support);
         }
+        
         return nodes2Filter;
     }
+   
     public List applyPredicate(Predicate predicate, List nodes2Filter, ContextSupport support)
             throws JaxenException {
-        List filteredNodes = new ArrayList();
-        final int nodes2FilerSize = nodes2Filter.size();
+        final int nodes2FilterSize = nodes2Filter.size();
+        List filteredNodes = new ArrayList(nodes2FilterSize);
         // Set up a dummy context with a list to hold each node
         Context predContext = new Context(support);
         List tempList = new ArrayList(1);
         predContext.setNodeSet(tempList);
         // loop through the current nodes to filter and add to the
         // filtered nodes list if the predicate succeeds
-        for (int i = 0; i < nodes2FilerSize; ++i) {
+        for (int i = 0; i < nodes2FilterSize; ++i) {
             Object contextNode = nodes2Filter.get(i);
             tempList.clear();
             tempList.add(contextNode);
             predContext.setNodeSet(tempList);
             predContext.setPosition(i + 1);
-            predContext.setSize(nodes2FilerSize);
+            predContext.setSize(nodes2FilterSize);
             Object predResult = predicate.evaluate(predContext);
             if (predResult instanceof Number) {
+                // Here we assume nodes are in forward or reverse order
+                // as appropriate for axis
                 int proximity = ((Number) predResult).intValue();
                 if (proximity == (i + 1)) {
                     filteredNodes.add(contextNode);
