@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -128,7 +128,7 @@ public class IdTest extends TestCase {
         
     }    
 
-    public void testIDFunctionRequiresOneArgument() 
+    public void testIDFunctionRequiresAtLeastOneArgument() 
       throws JaxenException {
         
         try {
@@ -137,6 +137,22 @@ public class IdTest extends TestCase {
             doc.appendChild(a);
             xpath.selectNodes(doc);
             fail("Allowed empty id() function");
+        }
+        catch (FunctionCallException success) {
+            assertNotNull(success.getMessage());
+        }
+        
+    }    
+
+    public void testIDFunctionRequiresAtMostOneArgument() 
+      throws JaxenException {
+        
+        try {
+            BaseXPath xpath = new DOMXPath("id('p', 'q')");
+            org.w3c.dom.Element a = doc.createElementNS("", "a");
+            doc.appendChild(a);
+            xpath.selectNodes(doc);
+            fail("Allowed two-argument id() function");
         }
         catch (FunctionCallException success) {
             assertNotNull(success.getMessage());
