@@ -100,7 +100,6 @@ public class EvaluateFunction implements Function
         if (contextNodes.size() == 0)
             return Collections.EMPTY_LIST;
       
-        Object contextNode = contextNodes.get(0);
         Navigator nav = context.getNavigator();
 
         String xpathString;

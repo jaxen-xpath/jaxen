@@ -269,6 +269,9 @@ public class BaseXPath implements XPath, Serializable
         return results.get( 0 );
     }
 
+    /**
+     * @deprecated
+     */
     public String valueOf(Object node) throws JaxenException
     {
         return stringValueOf( node );
@@ -615,9 +618,7 @@ public class BaseXPath implements XPath, Serializable
         }
         else
         {
-            List list = new ArrayList( 1 );
-
-            list.add( node );
+            List list = Collections.singletonList(node);
 
             fullContext.setNodeSet( list );
         }

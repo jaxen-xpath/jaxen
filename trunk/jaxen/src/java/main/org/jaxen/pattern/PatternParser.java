@@ -583,8 +583,6 @@ public class PatternParser
 
         {
 
-            DefaultStep defaultStep = (DefaultStep) step;
-
             return ! step.getPredicates().isEmpty();
 
         }

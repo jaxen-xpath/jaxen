@@ -66,6 +66,7 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.util.SingleObjectIterator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -99,10 +100,6 @@ public abstract class DefaultExpr implements Expr
             return (List) obj;
         }
 
-        List list = new ArrayList( 1 );
-
-        list.add( obj );
-
-        return list;
+        return Collections.singletonList(obj);
     }
 }

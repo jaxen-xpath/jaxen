@@ -227,9 +227,7 @@ public class LocationPathPattern extends Pattern {
         
         if (filters != null) 
         {
-            List list = new ArrayList( 1 );
-
-            list.add( node );
+            List list = Collections.singletonList(node);
 
             context.setNodeSet( list );
             

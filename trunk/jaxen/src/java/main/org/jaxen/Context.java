@@ -63,6 +63,7 @@
 package org.jaxen;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -102,7 +103,7 @@ public class Context implements Serializable
     public Context(ContextSupport contextSupport)
     {
         this.contextSupport = contextSupport;
-        this.nodeSet        = new ArrayList(0);
+        this.nodeSet        = Collections.EMPTY_LIST;
     }
 
     public List getNodeSet()
