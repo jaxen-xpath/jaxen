@@ -128,13 +128,11 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (org.jaxen.saxpath.XPathSyntaxException e)
         {
-            // ???? why are we not throwing je here?
             org.jaxen.XPathSyntaxException je = new org.jaxen.XPathSyntaxException( e.getXPath(),
                                                                   e.getPosition(),
                                                                   e.getMessage() );
             je.initCause(e);
-            //throw je;
-            throw new org.jaxen.XPathSyntaxException(e);
+            throw je;
         }
         catch (org.jaxen.saxpath.SAXPathException e)
         {
@@ -306,9 +304,7 @@ public class BaseXPath implements XPath, Serializable
         
         List result = selectNodesForContext( context );
 
-        if ( result == null )
-            return false;
-
+        if ( result == null ) return false;
             
         return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();
     }
