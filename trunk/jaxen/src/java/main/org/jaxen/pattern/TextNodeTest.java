@@ -88,6 +88,11 @@ public class TextNodeTest extends NodeTest {
         return -0.5;
     }
 
+    public short getMatchType()
+    {
+        return Pattern.TEXT_NODE;
+    }
+
     public String getText() 
     {
         return "text()";
