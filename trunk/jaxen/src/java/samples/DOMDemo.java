@@ -5,7 +5,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import org.jaxen.dom4j.XPath;
+import org.jaxen.dom.XPath;
 
 import org.saxpath.SAXPathException;
 import org.saxpath.XPathSyntaxException;

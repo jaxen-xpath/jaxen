@@ -178,7 +178,7 @@
   <!-- =================================================================== -->
   <!-- Compiles the samples directory                                       -->
   <!-- =================================================================== -->
-  <target name="samples" depends="prepare-samples,collections">
+  <target name="samples" depends="prepare-samples,collections,compile">
     <javac srcdir="${build.src}"
            destdir="${build.dest}"
            debug="${debug}"
