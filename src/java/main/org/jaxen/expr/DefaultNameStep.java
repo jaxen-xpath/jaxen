@@ -132,7 +132,7 @@ import org.jaxen.ContextSupport;
 
 import org.jaxen.Navigator;
 
-
+import org.saxpath.Axis;
 
 import org.jaxen.expr.iter.IterableAxis;
 
@@ -291,19 +291,20 @@ public class DefaultNameStep extends DefaultStep implements NameStep
 
         Navigator nav  = contextSupport.getNavigator();
 
-        String  myUri     = null;
+        String myUri = null;
 
         String nodeName = null;
+        String nodeUri = null;
 
-        int type = 0;
         if ( nav.isElement( node ) )
         {
             nodeName = nav.getElementName( node );
+            nodeUri  = nav.getElementNamespaceUri( node );
         }
         else if ( nav.isAttribute( node ) )
         {
             nodeName = nav.getAttributeName( node );
-            type = 1;
+            nodeUri  = nav.getAttributeNamespaceUri( node );
         }
         else if ( nav.isDocument( node ) )
         {
@@ -311,6 +312,10 @@ public class DefaultNameStep extends DefaultStep implements NameStep
         }
         else if ( nav.isNamespace( node ) )
         {
+            if ( matchesAnyName && getAxis() != Axis.NAMESPACE) { 
+                // Only works for namespace::*
+                return false;
+            }
             nodeName = nav.getNamespacePrefix( node );
         }
         else
@@ -320,65 +325,36 @@ public class DefaultNameStep extends DefaultStep implements NameStep
 
         // System.out.println( "Matching nodeURI: " + nodeUri + " name: " + nodeName );
 
-
         if ( hasPrefix )
         {
             myUri = contextSupport.translateNamespacePrefixToUri( this.prefix );
-            // If we have a prefix that does not map to no namespace,
-            // but the node doesn't have *any* namespace-uri, then we fast-fail.
-
-            String nodeUri = null;
-            switch(type){
-                case 0:
-                    nodeUri  = nav.getElementNamespaceUri( node );
-                break;
-                case 1:
-                    nodeUri  = nav.getAttributeNamespaceUri( node );
-                break;
-            }
-
-            if ( ( myUri != null   && !"".equals( myUri ) )
-                 &&
-                 ( nodeUri == null || "".equals( nodeUri ) ) )
-            {
-                return false;
-            }
         }
-        else if ( matchesAnyName )
+        else if (matchesAnyName) 
         {
             return true;
         }
 
-
+        // If we map to a non-empty namespace and the node does not
+        // or vice-versa, fail-fast.
+        if ( hasNamespace(myUri) != hasNamespace(nodeUri) )
+        {
+            return false;
+        }
+        
         // To fail-fast, we check the equality of
         // local-names first.  Shorter strings compare
         // quicker.
-
-        if ( getLocalName().equals( nodeName ))
+        if ( getLocalName().equals( nodeName ) || matchesAnyName)
         {
-            if ( ! hasPrefix )
-            {
-                return true;
-            }
-
-            String nodeUri = null;
-            switch(type){
-                case 0:
-                    nodeUri  = nav.getElementNamespaceUri( node );
-                break;
-                case 1:
-                    nodeUri  = nav.getAttributeNamespaceUri( node );
-                break;
-            }
-
-            if( nodeUri != null && !("".equals( nodeUri))){
-                return matchesNamespaceURIs( myUri, nodeUri );
-            }
+            return matchesNamespaceURIs( myUri, nodeUri );
         }
 
         return false;
     }
 
+    private boolean hasNamespace(String uri) {
+        return uri != null && !"".equals(uri);
+    }
 
     /** @return true if the two namespace URIs are equal
 
