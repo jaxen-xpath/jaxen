@@ -1,24 +1,10 @@
 
-To install Jaxen, you need either:
+To install Jaxen, you need to place:
 
-        jaxen-full.jar
+        jaxen-1.1-beta-4.jar
 
-Which includes support for all object-models
-
-Or, you need
-
-        jaxen-core.jar
-
-And any additional jaxen-*.jar files for the object-models
-you support.  Currently supported are:
-
-        Model       Required Jar
-        ----------- -------------------
-        dom4j       jaxen-dom4j.jar
-        JDOM        jaxen-jdom.jar
-        DOM         jaxen-dom.jar
-        EXML        jaxen-exml.jar
-
+In your CLASSPATH or your jre/lib/ext directory.
+This includes support for all object-models.
 Of course, you'll also need the supporting jars for your 
 object-model, just as jdom.jar, xom.jar, or similar.
 
