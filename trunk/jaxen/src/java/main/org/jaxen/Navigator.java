@@ -50,7 +50,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 /** Interface for navigating around an arbitrary object
- *  model, using xpath semantics.
+ *  model, using XPath semantics.
  *
  *  <p>
  *  There is a method to obtain a <code>java.util.Iterator</code>,
@@ -71,129 +71,129 @@ public interface Navigator extends Serializable
     // ----------------------------------------------------------------------
 
     /** Retrieve an <code>Iterator</code> matching the <code>child</code>
-     *  xpath axis.
+     *  XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getChildAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>descendant</code>
-     *  xpath axis.
+     *  XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getDescendantAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
-    /** Retrieve an <code>Iterator</code> matching the <code>parent</code> xpath axis.
+    /** Retrieve an <code>Iterator</code> matching the <code>parent</code> XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getParentAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>ancestor</code>
-     *  xpath axis.
+     *  XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getAncestorAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
-     *  <code>following-sibling</code> xpath axis.
+     *  <code>following-sibling</code> XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getFollowingSiblingAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
-     *  <code>preceding-sibling</code> xpath axis.
+     *  <code>preceding-sibling</code> XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getPrecedingSiblingAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>following</code>
-     *  xpath axis.
+     *  XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getFollowingAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
-    /** Retrieve an <code>Iterator</code> matching the <code>preceding</code> xpath axis.
+    /** Retrieve an <code>Iterator</code> matching the <code>preceding</code> XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getPrecedingAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>attribute</code>
-     *  xpath axis.
+     *  XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getAttributeAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the <code>namespace</code>
-     *  xpath axis.
+     *  XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getNamespaceAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
@@ -201,38 +201,38 @@ public interface Navigator extends Serializable
     /** Retrieve an <code>Iterator</code> matching the <code>self</code> xpath
      *  axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getSelfAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
-     *  <code>descendant-or-self</code> xpath axis.
+     *  <code>descendant-or-self</code> XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getDescendantOrSelfAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
     /** Retrieve an <code>Iterator</code> matching the
-     *  <code>ancestor-or-self</code> xpath axis.
+     *  <code>ancestor-or-self</code> XPath axis.
      *
-     *  @param contextNode The origin context node.
+     *  @param contextNode the original context node
      *
-     *  @return An Iterator capable of traversing the axis.
+     *  @return an Iterator capable of traversing the axis
      *
-     *  @throws UnsupportedAxisException is the semantics of this axis are
-     *          not supported by this object model.
+     *  @throws UnsupportedAxisException if the semantics of this axis are
+     *          not supported by this object model
      */
     Iterator getAncestorOrSelfAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
@@ -243,9 +243,9 @@ public interface Navigator extends Serializable
 
     /** Loads a document from the given URI
      *
-     *  @param uri is the URI of the document to load
+     *  @param uri the URI of the document to load
      *
-     *  @return The document.
+     *  @return the document
      *
       * @throws FunctionCallException if the document could not be loaded
      */
@@ -256,9 +256,9 @@ public interface Navigator extends Serializable
      *
      *  @see #isDocument(Object)
      *
-     *  @param contextNode The context node.
+     *  @param contextNode the context node
      *
-     *  @return The document of the context node.
+     *  @return the document of the context node
      */
     Object getDocumentNode(Object contextNode);
     
@@ -272,9 +272,9 @@ public interface Navigator extends Serializable
      *  @see #isDocument
      *  @see #isElement
      *
-     *  @param contextNode The context node.
+     *  @param contextNode the context node
      *
-     *  @return The parent of the context node.
+     *  @return the parent of the context node
      *
      *  @throws UnsupportedAxisException If the parent axis is not
      *          supported by the model.
@@ -284,41 +284,41 @@ public interface Navigator extends Serializable
     
     /** Retrieve the namespace URI of the given element node.
      *
-     *  @param element The context element node.
+     *  @param element the context element node
      *
-     *  @return The namespace URI of the element node.
+     *  @return the namespace URI of the element node
      */
     String getElementNamespaceUri(Object element);    
 
     /** Retrieve the name of the given element node.
      *
-     *  @param element The context element node.
+     *  @param element the context element node
      *
-     *  @return The name of the element node.
+     *  @return the name of the element node
      */
     String getElementName(Object element);    
 
     /** Retrieve the QName of the given element node.
      *
-     *  @param element The context element node.
+     *  @param element the context element node
      *
-     *  @return The QName of the element node.
+     *  @return the QName of the element node
      */
     String getElementQName(Object element);
 
     /** Retrieve the namespace URI of the given attribute node.
      *
-     *  @param attr The context attribute node.
+     *  @param attr The context attribute node
      *
-     *  @return The namespace URI of the attribute node.
+     *  @return the namespace URI of the attribute node
      */
     String getAttributeNamespaceUri(Object attr);    
 
     /** Retrieve the name of the given attribute node.
      *
-     *  @param attr The context attribute node.
+     *  @param attr The context attribute node
      *
-     *  @return The name of the attribute node.
+     *  @return the name of the attribute node
      */
     String getAttributeName(Object attr);
 
@@ -326,7 +326,7 @@ public interface Navigator extends Serializable
      *
      *  @param attr The context attribute node.
      *
-     *  @return The QName of the attribute node.
+     *  @return the QName of the attribute node.
      */
     String getAttributeQName(Object attr);
 
@@ -334,7 +334,7 @@ public interface Navigator extends Serializable
      *
      *  @param pi The context processing-instruction node.
      *
-     *  @return The target of the processing-instruction node.
+     *  @return the target of the processing-instruction node.
      */
     String getProcessingInstructionTarget(Object pi);
 
@@ -342,7 +342,7 @@ public interface Navigator extends Serializable
      *
      *  @param pi The context processing-instruction node.
      *
-     *  @return The data of the processing-instruction node.
+     *  @return the data of the processing-instruction node.
      */
     String getProcessingInstructionData(Object pi);
 
@@ -353,7 +353,7 @@ public interface Navigator extends Serializable
     /** Returns whether the given object is a document node. A document node
      *  is the node that is selected by the xpath expression <code>/</code>.
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is a document node,
      *          else <code>false</code>
@@ -362,7 +362,7 @@ public interface Navigator extends Serializable
 
     /** Returns whether the given object is an element node.
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is an element node,
      *          else <code>false</code>
@@ -371,7 +371,7 @@ public interface Navigator extends Serializable
 
     /** Returns whether the given object is an attribute node. 
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is an attribute node,
      *          else <code>false</code>
@@ -380,7 +380,7 @@ public interface Navigator extends Serializable
 
     /** Returns whether the given object is a namespace node. 
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is a namespace node,
      *          else <code>false</code>
@@ -389,7 +389,7 @@ public interface Navigator extends Serializable
 
     /** Returns whether the given object is a comment node. 
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is a comment node,
      *          else <code>false</code>
@@ -398,7 +398,7 @@ public interface Navigator extends Serializable
 
     /** Returns whether the given object is a text node. 
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is a text node,
      *          else <code>false</code>
@@ -407,7 +407,7 @@ public interface Navigator extends Serializable
 
     /** Returns whether the given object is a processing-instruction node.
      *
-     *  @param object The object to test.
+     *  @param object the object to test.
      *
      *  @return <code>true</code> if the object is a processing-instruction node,
      *          else <code>false</code>
@@ -420,41 +420,41 @@ public interface Navigator extends Serializable
 
     /** Retrieve the string-value of a comment node.
      *
-     *  @param comment The comment node.
+     *  @param comment the comment node
      *
-     *  @return The string-value of the node.
+     *  @return the string-value of the node
      */
     String getCommentStringValue(Object comment);
 
     /** Retrieve the string-value of an element node.
      *
-     *  @param element The comment node.
+     *  @param element the element node
      *
-     *  @return The string-value of the node.
+     *  @return the string-value of the node
      */
     String getElementStringValue(Object element);
 
     /** Retrieve the string-value of an attribute node.
      *
-     *  @param attr The attribute node.
+     *  @param attr the attribute node
      *
-     *  @return The string-value of the node.
+     *  @return the string-value of the node
      */
     String getAttributeStringValue(Object attr);
 
     /** Retrieve the string-value of a namespace node.
      *
-     *  @param ns The namespace node.
+     *  @param ns The namespace node
      *
-     *  @return The string-value of the node.
+     *  @return the string-value of the node
      */
     String getNamespaceStringValue(Object ns);
 
     /** Retrieve the string-value of a text node.
      *
-     *  @param txt The text node.
+     *  @param txt the text node
      *
-     *  @return The string-value of the node.
+     *  @return the string-value of the node
      */
     String getTextStringValue(Object txt);
 
@@ -464,9 +464,9 @@ public interface Navigator extends Serializable
 
     /** Retrieve the namespace prefix of a namespace node.
      *
-     *  @param ns The namespace node.
+     *  @param ns the namespace node
      *
-     *  @return The prefix associated with the node.
+     *  @return the prefix associated with the node
      */
     String getNamespacePrefix(Object ns);
 
@@ -482,10 +482,10 @@ public interface Navigator extends Serializable
      *
      *  @see NamespaceContext
      *
-     *  @param prefix The prefix to translate.
-     *  @param element The element to consider during translation.
+     *  @param prefix the prefix to translate
+     *  @param element the element to consider during translation
      *
-     *  @return The namespace URI associated with the prefix.
+     *  @return the namespace URI associated with the prefix
      */
     String translateNamespacePrefixToUri(String prefix,
                                          Object element);
@@ -495,12 +495,12 @@ public interface Navigator extends Serializable
      *
      *  @see XPath
      *
-     *  @param xpath The xpath expression.
+     *  @param xpath the XPath expression
      *
-     *  @return A new XPath expression object.
+     *  @return a new XPath expression object
      *
-     *  @throws org.jaxen.saxpath.SAXPathException If an error occurs while parsing the
-     *          xpath expression.
+     *  @throws org.jaxen.saxpath.SAXPathException if an error occurs while parsing the
+     *          XPath expression
      */
     XPath parseXPath(String xpath)
         throws org.jaxen.saxpath.SAXPathException;
