@@ -62,14 +62,12 @@ class JaXPath
 
     protected boolean jaBooleanValueOf(Context context) throws JaxenException
     {
-        Object result = jaSelectSingleNode( context );
+        List result = jaSelectNodes( context );
 
         if ( result == null )
-        {
             return false;
-        }
 
-        return BooleanFunction.evaluate( result ).equals(Boolean.TRUE);
+        return BooleanFunction.evaluate( result ).booleanValue();
     }
 
     protected Number jaNumberValueOf(Context context) throws JaxenException
