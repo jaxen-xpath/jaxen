@@ -58,6 +58,11 @@
     <jar jarfile="target/${final.name}.jar" excludes="**/package.html" basedir="${classesdir}">
     </jar>
   </target>
+  <!-- Target added for gump build -->
+  <target name="jar-untested" description="o Jar untested code" depends="compile">
+    <jar jarfile="target/${final.name}.jar" excludes="**/package.html" basedir="${classesdir}">
+    </jar>
+  </target>  
   <target name="clean" description="o Clean up the generated directories">
     <delete dir="${defaulttargetdir}">
     </delete>
@@ -171,4 +176,7 @@
     <unjar dest="${maven.home}" src="${user.home}/maven-install-latest.jar">
     </unjar>
   </target>
+  <!-- Target for gump build -->
+  <target name="gump" description="o Compile/Jar for Gump Integration"
+		depends="compile,jar-untested" />
 </project>
