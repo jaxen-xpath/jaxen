@@ -97,6 +97,7 @@ public class JaxenTests extends TestCase {
     public static Test suite() {
         
         TestSuite result = new TestSuite();
+        result.addTest(FunctionTests.suite());
         result.addTest(CoreTests.suite());
         result.addTest(DOMTests.suite());
         result.addTest(JDOMTests.suite());
@@ -106,7 +107,6 @@ public class JaxenTests extends TestCase {
         result.addTest(PatternTests.suite());
         result.addTest(BaseTests.suite());
         result.addTest(HelpersTests.suite());
-        result.addTest(FunctionTests.suite());
         result.addTest(ExprTests.suite());
         return result;
         
