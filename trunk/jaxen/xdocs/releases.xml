@@ -17,7 +17,7 @@
       </p>
 
       <p>
-      The latest official build is <b>1.0-FCS</b>.
+      The latest official build is <strong>1.0-FCS</strong>.
       </p>
 
       <ul>
@@ -28,8 +28,8 @@
 
     <section name="Nightly Builds">
       <p>
-      Nighly builds have been temporarily suspended as we ramp up
-      with using <a href="http://maven.apache.org/">maven</a>.
+      Nightly builds have been temporarily suspended as we ramp up
+      with using <a href="http://maven.apache.org/">Maven</a>.
       </p>
     </section>
 
