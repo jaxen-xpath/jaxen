@@ -30,6 +30,31 @@
       </p>
     </section>
 
+    <section title="Why is Jaxen better than &lt;some other xpath technology&gt;">
+      <p>
+      Jaxen is better than <b>werken.xpath</b> specifically because it better
+      handles XPath expressions, and syntax error reporting.  Additionally, since
+      Jaxen is a unified code-base, developer effort isn't split between maintaining
+      the <b>dom4j</b> version and the <b>JDOM</b> version.  More hand working on
+      the same project reduces bug count.
+      </p>
+
+      <p>
+      Jaxen may be perceived to be better than other XPath technologies since it
+      provides a single cohesive API for evaluating XPaths against multiple object
+      models.  Learn the Jaxen API, and apply it to <b>dom4j</b>, <b>JDOM</b>,
+      <b>EXML</b> or <b>DOM</b> trees in exactly the same way.
+      </p>
+
+      <p>
+      Also, since Jaxen works against an adaptor which provides InfoSet access
+      to arbitrary object models, it should be possible to build even larger
+      tools in terms of Jaxen, to work with multiple models.  For example, an
+      <b>XQL</b> engine could be developed, which would automagically work with
+      all models already supported by Jaxen.
+      </p>
+    </section>
+
     <section title="What are some related technologies?">
       <p>
       Jaxen itself is based upon <a href="http://saxpath.org/">SAXPath</a>, which is
