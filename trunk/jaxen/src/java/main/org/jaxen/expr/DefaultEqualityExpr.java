@@ -59,6 +59,11 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr
                 theSet   = (List) rhsValue;
                 theOther = lhsValue;
             }
+           
+	   if( theSet == null || theSet.size() == 0 )
+              {
+              evaluateEmptySet( theOther );
+              }
 
             if ( isNumber( theOther ) )
             {
@@ -84,9 +89,9 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr
 
         if ( eitherIsBoolean( lhsValue,
                               rhsValue ) )
-        {
-            return evaluateObjectObject( BooleanFunction.evaluate( lhsValue ),
-                                         BooleanFunction.evaluate( rhsValue ) );
+        {            
+            return evaluateObjectObject( BooleanFunction.evaluate( lhsValue, nav ),
+                                         BooleanFunction.evaluate( rhsValue, nav ) );
         }
 
         if ( eitherIsNumber( lhsValue,
@@ -109,6 +114,8 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr
     protected abstract Object evaluateSetSet(List lhsSet,
                                              List rhsSet,
                                              Navigator nav);
+    
+    protected abstract Object evaluateEmptySet(Object theOther);
 
     protected abstract Object evaluateSetBoolean(List set,
                                                  Boolean bool,

@@ -67,7 +67,7 @@ class JaXPath
         if ( result == null )
             return false;
 
-        return BooleanFunction.evaluate( result ).booleanValue();
+        return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();
     }
 
     protected Number jaNumberValueOf(Context context) throws JaxenException

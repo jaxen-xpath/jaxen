@@ -122,7 +122,7 @@ class PredicateSet
                 }
                 else
                 {
-                    Boolean includes = BooleanFunction.evaluate( predResult );
+                    Boolean includes = BooleanFunction.evaluate( predResult, predContext.getNavigator() );
 
                     if ( includes.booleanValue() )
                     {

@@ -3,6 +3,7 @@ package org.jaxen.function;
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
 
 import java.util.List;
 
@@ -19,15 +20,15 @@ public class NotFunction implements Function
     {
         if (args.size() == 1)
         {
-            return evaluate( args.get(0) );
+            return evaluate( args.get(0), context.getNavigator() );
         }
 
         throw new FunctionCallException( "not() requires one argument." );
     }
 
-    public static Boolean evaluate(Object obj)
+    public static Boolean evaluate(Object obj, Navigator nav)
     {
-        return ( ( BooleanFunction.evaluate( obj ).booleanValue() )
+        return ( ( BooleanFunction.evaluate( obj, nav ).booleanValue() )
                  ? Boolean.FALSE
                  : Boolean.TRUE
                  );
