@@ -87,6 +87,7 @@ public class FunctionTests extends TestCase {
         
         TestSuite result = new TestSuite();
         result.addTest(new TestSuite(CountTest.class));
+        result.addTest(new TestSuite(LocalNameTest.class));
         return result;
         
     }

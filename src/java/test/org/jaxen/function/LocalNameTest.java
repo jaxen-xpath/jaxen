@@ -59,73 +59,60 @@
  * $Id$
  */
 
-
 package org.jaxen.function;
 
-import java.util.List;
+import java.io.IOException;
 
-import org.jaxen.Context;
-import org.jaxen.Function;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import junit.framework.TestCase;
+
 import org.jaxen.FunctionCallException;
-import org.jaxen.Navigator;
+import org.jaxen.XPath;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
- *   <p><b>4.1</b> <code><i>string</i> local-name(<i>node-set?</i>)</code> 
- *  
- *  @author bob mcwhirter (bob @ werken.com)
+ * @author Elliotte Rusty Harold
+ *
  */
-public class LocalNameFunction implements Function
-{
+public class LocalNameTest extends TestCase {
 
-    public Object call(Context context,
-                       List args) throws FunctionCallException
+    private Document doc;
+    
+    public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
-        if ( args.size() == 0 )
-        {
-            return evaluate( context.getNodeSet(),
-                             context.getNavigator() );
-        }
-
-        if ( args.size() == 1 )
-        {
-            return evaluate( args,
-                             context.getNavigator() );
-        }
-
-        throw new FunctionCallException( "local-name() requires zero or one argument." );
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.parse( "xml/basic.xml" );
     }
 
-    public static String evaluate(List list,
-                                  Navigator nav) throws FunctionCallException
-    {
-        if ( ! list.isEmpty() )
-        {            
-            Object first = list.get(0);
 
-            if (first instanceof List)
-            {
-                return evaluate( (List) first,
-                                 nav );
-            }
-            else if ( nav.isElement( first ) )
-            {
-                return nav.getElementName( first );
-            }
-            else if ( nav.isAttribute( first ) )
-            {
-                return nav.getAttributeName( first );
-            }
-            else if ( nav.isProcessingInstruction( first ) )
-            {
-                return nav.getProcessingInstructionTarget( first );
-            }
-            else if ( nav.isNamespace( first ) )
-            {
-                return nav.getNamespacePrefix( first );
-            }
-        }
-
-        throw new FunctionCallException("The argument to the local-name function must be a node-set");
+    public LocalNameTest(String name) {
+        super(name);
     }
+
+    public void testLocalNameOfNumber()
+    {
+        try
+        {
+            XPath xpath = new DOMXPath( "local-name(3)" );
+            xpath.selectNodes( doc );
+            fail("local-name of non-node-set");
+       }
+       catch (FunctionCallException e) 
+        {
+           assertEquals("The argument to the local-name function must be a node-set", e.getMessage());
+        }
+       catch (Exception e)
+        {
+            e.printStackTrace();
+            fail( e.getMessage() );
+        }
+    }    
+
 }
-
