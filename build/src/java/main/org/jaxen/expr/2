@@ -1,0 +1,197 @@
+// Copyright 2001 werken digital. All rights reserved.
+
+package org.jaxen.expr;
+
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.UnsupportedAxisException;
+import org.jaxen.iter.IterableAxis;
+import org.jaxen.iter.IterableChildAxis;
+
+import org.jaxen.util.LinkedIterator;
+
+import org.saxpath.Axis;
+
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.Iterator;
+
+abstract class DefaultStep implements Step
+{
+    private IterableAxis axis;
+    private PredicateSet predicates;
+
+    public DefaultStep(IterableAxis axis)
+    {
+        this.axis       = axis;
+        this.predicates = new PredicateSet();
+    }
+
+    public void addPredicate(Predicate predicate)
+    {
+        this.predicates.addPredicate( predicate );
+    }
+
+    public List getPredicates()
+    {
+        return this.predicates.getPredicates();
+    }
+
+    public int getAxis()
+    {
+        return this.axis.value();
+    }
+
+    public IterableAxis getIterableAxis()
+    {
+        return this.axis;
+    }
+
+    public String getAxisName()
+    {
+        return Axis.lookup( getAxis() );
+    }
+
+    public String getText()
+    {
+        return this.predicates.getText();
+    }
+
+    public String toString()
+    {
+        return super.toString();
+    }
+
+    /*
+    public Expr simplify()
+    {
+        this.predicates.simplify();
+
+        return this;
+    }
+    */
+
+    public void simplify()
+    {
+        this.predicates.simplify();
+    }
+
+    /*
+    public String asString(Context context)
+    {
+        Iterator iter = asIterator( context );
+
+        if ( ! iter.hasNext() )
+        {
+            return "";
+        }
+
+        Object first = iter.next();
+
+        return DefaultExpr.convertToString( first );
+    }
+
+    public Boolean asBoolean(Context context)
+    {
+        Iterator iter = asIterator( context );
+
+        if ( ! iter.hasNext() )
+        {
+            return Boolean.FALSE;
+        }
+
+        return Boolean.TRUE;
+    }
+
+    public Number asNumber(Context context)
+    {
+        return DefaultExpr.convertToNumber( DefaultExpr.convertToString( asIterator( context ) ) );
+    }
+
+    public Set asSet(Context context)
+    {
+        Iterator iter = asIterator( context );
+
+        Set set = new TreeSet();
+
+        while ( iter.hasNext() )
+        {
+            set.add( iter.next() );
+        }
+
+        return set;
+    }
+    */
+
+    public Iterator asIterator(Iterator contextIter,
+                               ContextSupport support)
+    {
+        System.err.println("DefaultStep.asIterator()");
+
+        LinkedIterator outputIter = new LinkedIterator();
+
+        Object contextNode = null;
+
+        while ( contextIter.hasNext() )
+        {
+            contextNode = contextIter.next();
+
+            System.err.println("DefaultStep node ---> " + contextNode );
+
+            try
+            {
+                outputIter.addIterator( getIterableAxis().iterator( contextNode,
+                                                                    this,
+                                                                    support ) );
+
+                System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+                Iterator tmp = ((IterableChildAxis)getIterableAxis()).nonMatchIter( contextNode,
+                                                                                    support );
+
+                while ( tmp.hasNext() )
+                {
+                    System.err.println("_______:" + tmp.next() );
+                }
+
+                System.err.println("-11111-------------------------------------");
+
+                tmp = ((IterableChildAxis)getIterableAxis()).nonMatchIter( contextNode,
+                                                                           support );
+
+                Object each;
+                    
+                while ( tmp.hasNext() )
+                {
+                    each = tmp.next();
+
+                    if ( matches( each,
+                                  support ) )
+                    {
+                        System.err.println("       match: " + each );
+                    }
+                }
+
+                System.err.println("-22222-------------------------------------");
+
+                tmp = getIterableAxis().iterator( contextNode,
+                                                  this,
+                                                  support );
+
+                while ( tmp.hasNext() )
+                {
+                    System.err.println("__XX___:" + tmp.next() );
+                }
+
+                System.err.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            }
+            catch (UnsupportedAxisException e)
+            {
+                
+            }
+        }
+
+        return outputIter;
+    }
+}
