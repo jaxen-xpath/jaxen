@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /** An iterator over W3C DOM children
  *
@@ -13,54 +14,40 @@ import org.w3c.dom.Node;
  */
 public class ChildIterator implements Iterator
 {
-    private Node parent;
-    private Node current;
-    private boolean first = true;
+    private NodeList children;
+    private int index = -1;
 
-    public ChildIterator(Node parent)
+
+    public ChildIterator(NodeList children)
     {
-        this.parent = parent;
+        this.children = children;
     }
 
     public boolean hasNext()
     {
-        while ( true )
+        while ( ++index < children.getLength() )
         {
-            if ( first ) 
-            {
-                first = false;
-                current = parent.getFirstChild();
-            }
-            else 
-            {
-                current = current.getNextSibling();
-                if ( current == null )
-                {
-                    return false;
-                }
-            }
-            int type = current.getNodeType();
+            Node node = children.item(index);
+            int type = node.getNodeType();
             if ( type == Node.DOCUMENT_TYPE_NODE || type == Node.NOTATION_NODE ) {
                 continue;
             }
             return true;
-        }
+        }        
+        return false;
     }
 
     public Object next() throws NoSuchElementException
     {
-        if ( current == null ) 
+        if ( index >= children.getLength() )
         {
             throw new NoSuchElementException();
         }
-        return current;
+        return children.item(index);
     }
 
     public void remove()
     {
-        if ( current != null )
-        {
-            parent.removeChild( current );
-        }
+        throw new UnsupportedOperationException( "remove() is not supported by this iterator" );
     }
 }
