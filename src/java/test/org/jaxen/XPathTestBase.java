@@ -120,7 +120,7 @@ public abstract class XPathTestBase extends TestCase
             return;
         }
             
-        System.err.println( text );
+        System.out.println( text );
     }
 
     public void testXPaths() throws Exception
@@ -539,7 +539,7 @@ public abstract class XPathTestBase extends TestCase
 
             nsContext.addNamespace( prefix, uri );
 
-            System.err.println( " ---> " + prefix + " == " + uri );
+            System.out.println( " ---> " + prefix + " == " + uri );
         }
 
         getContextSupport().setNamespaceContext( nsContext );

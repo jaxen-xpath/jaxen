@@ -123,18 +123,18 @@ public class PatternHandlerTest extends TestCase
             for ( int i = 0; i < paths.length; i++ ) {
                 String path = paths[i];
                 
-                System.err.println("-----------------");
-                System.err.println( "parsing: " + path );
-                System.err.println("-----------------");
+                System.out.println("-----------------");
+                System.out.println( "parsing: " + path );
+                System.out.println("-----------------");
 
                 Pattern pattern = PatternParser.parse( path );
 
-                System.err.println("-----------------");
-                System.err.println("-----------------");
+                System.out.println("-----------------");
+                System.out.println("-----------------");
 
-                System.err.println( pattern.toString() );
-                System.err.println("-----------------");
-                System.err.println( pattern.getText() );
+                System.out.println( pattern.toString() );
+                System.out.println("-----------------");
+                System.out.println( pattern.getText() );
             }
         }
         catch (Exception e)

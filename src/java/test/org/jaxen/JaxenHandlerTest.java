@@ -205,9 +205,9 @@ public class JaxenHandlerTest extends TestCase
             for ( int i = 0; i < bogusPaths.length; i++ ) {
                 String path = bogusPaths[i];
                 
-                System.err.println("-----------------");
-                System.err.println( "parsing bogus path : " + path );
-                System.err.println("-----------------");
+                System.out.println("-----------------");
+                System.out.println( "parsing bogus path : " + path );
+                System.out.println("-----------------");
 
                 try
                 {                    
@@ -215,18 +215,18 @@ public class JaxenHandlerTest extends TestCase
 
                     XPathExpr xpath = handler.getXPathExpr(false);
 
-                    System.err.println( "Parsed as: " + xpath );
+                    System.out.println( "Parsed as: " + xpath );
                     
                     fail( "Parsed bogus path as: " + xpath );
                 }
                 catch (XPathSyntaxException e)
                 {                    
                     
-                    System.err.println("-----------------");
+                    System.out.println("-----------------");
                     //System.err.println( "Exception: " + e.getMessage() );
-                    System.err.println( "Exception: ");
-                    System.err.println( e.getMultilineMessage() );
-                    System.err.println("-----------------");
+                    System.out.println( "Exception: ");
+                    System.out.println( e.getMultilineMessage() );
+                    System.out.println("-----------------");
                 }
             }
         }
