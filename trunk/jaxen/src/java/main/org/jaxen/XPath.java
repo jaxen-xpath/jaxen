@@ -15,6 +15,7 @@ import java.util.Collections;
  *  @see org.jaxen.exml.ElectricXPath  XPath for Electric XML
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
 public interface XPath {
 
