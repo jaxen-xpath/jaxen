@@ -205,10 +205,9 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
                 // run through iterator, filtering using matches()
                 // adding to list for predicate test
-                Object eachAxisNode = null;
                 List newNodeSet = new ArrayList();
                 while (axisNodeIter.hasNext()) {
-                    eachAxisNode = axisNodeIter.next();
+                    Object eachAxisNode = axisNodeIter.next();
                     if (matches(eachAxisNode, support)) {
                         newNodeSet.add(eachAxisNode);
                     }
