@@ -136,7 +136,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get a singleton DocumentNavigator for efficiency.
      *
-     * @return A singleton instance of a DocumentNavigator.
+     * @return a singleton instance of a DocumentNavigator.
      */
     public static Navigator getInstance ()
     {
@@ -153,8 +153,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all of this node's children.
      *
-     * @param contextNode The context node for the child axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the child axis.
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getChildAxisIterator (Object contextNode)
     {
@@ -175,7 +175,7 @@ public class DocumentNavigator extends DefaultNavigator
      * Get a (single-member) iterator over this node's parent.
      *
      * @param contextNode the context node for the parent axis.
-     * @return A possibly-empty iterator (not null).
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getParentAxisIterator (Object contextNode)
     {
@@ -210,7 +210,7 @@ public class DocumentNavigator extends DefaultNavigator
      * Get an iterator over all following siblings.
      *
      * @param contextNode the context node for the sibling iterator.
-     * @return A possibly-empty iterator (not null).
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getFollowingSiblingAxisIterator (Object contextNode)
     {
@@ -229,8 +229,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all preceding siblings.
      *
-     * @param contextNode The context node for the preceding sibling axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the preceding sibling axis.
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getPrecedingSiblingAxisIterator (Object contextNode)
     {
@@ -249,8 +249,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all following nodes, depth-first.
      *
-     * @param contextNode The context node for the following axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the following axis.
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getFollowingAxisIterator (Object contextNode)
     {
@@ -287,8 +287,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all preceding nodes, depth-first.
      *
-     * @param contextNode The context node for the preceding axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the preceding axis.
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getPrecedingAxisIterator (Object contextNode)
     {
@@ -325,8 +325,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get an iterator over all attributes.
      *
-     * @param contextNode The context node for the attribute axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the attribute axis
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getAttributeAxisIterator (Object contextNode)
     {
@@ -346,8 +346,8 @@ public class DocumentNavigator extends DefaultNavigator
      * the iterator (i.e. it won't reflect subsequent changes
      * to the DOM).</p>
      *
-     * @param contextNode The context node for the Namespace axis.
-     * @return A possibly-empty iterator (not null).
+     * @param contextNode the context node for the namespace axis
+     * @return a possibly-empty iterator (not null)
      */
     public Iterator getNamespaceAxisIterator (Object contextNode)
     {
@@ -401,7 +401,7 @@ public class DocumentNavigator extends DefaultNavigator
         }
     }
 
-    /** Returns a parsed form of the given xpath string, which will be suitable
+    /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on DOM documents.
      */
     public XPath parseXPath (String xpath) throws org.jaxen.saxpath.SAXPathException
@@ -412,8 +412,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the top-level document node.
      *
-     * @param contextNode Any node in the document.
-     * @return The root node.
+     * @param contextNode any node in the document
+     * @return the root node
      */
     public Object getDocumentNode (Object contextNode)
     {
@@ -427,9 +427,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the Namespace URI of an element.
      *
-     * @param object The target node.
-     * @return A string (possibly empty) if the node is an element,
-     * and null otherwise.
+     * @param object the target node
+     * @return a string (possibly empty) if the node is an element,
+     * and null otherwise
      */
     public String getElementNamespaceUri (Object object)
     {
@@ -441,9 +441,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the local name of an element.
      *
-     * @param object The target node.
-     * @return A string representing the unqualified local name
-     * if the node is an element, or null otherwise.
+     * @param object the target node
+     * @return a string representing the unqualified local name
+     * if the node is an element, or null otherwise
      */
     public String getElementName (Object object)
     {
@@ -457,9 +457,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the qualified name of an element.
      *
-     * @param object The target node.
-     * @return A string representing the qualified (i.e. possibly
-     * prefixed) name if the node is an element, or null otherwise.
+     * @param object the target node
+     * @return a string representing the qualified (i.e. possibly
+     * prefixed) name if the node is an element, or null otherwise
      */
     public String getElementQName (Object object)
     {
@@ -473,9 +473,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the Namespace URI of an attribute.
      *
-     * @param object The target node.
-     * @param A possibly-empty string representing the Namespace URI
-     * if the node is an attribute, or null otherwise.
+     * @param object the target node
      */
     public String getAttributeNamespaceUri (Object object)
     {
@@ -487,9 +485,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the local name of an attribute.
      *
-     * @param object The target node.
-     * @return A string representing the unqualified local name
-     * if the node is an attribute, or null otherwise.
+     * @param object the target node
+     * @return a string representing the unqualified local name
+     * if the node is an attribute, or null otherwise
      */
     public String getAttributeName (Object object)
     {
@@ -503,9 +501,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the qualified name of an attribute.
      *
-     * @param object The target node.
-     * @return A string representing the qualified (i.e. possibly
-     * prefixed) name if the node is an attribute, or null otherwise.
+     * @param object the target node
+     * @return a string representing the qualified (i.e. possibly
+     * prefixed) name if the node is an attribute, or null otherwise
      */
     public String getAttributeQName (Object object)
     {
@@ -519,8 +517,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Test if a node is a top-level document.
      *
-     * @param object The target node.
-     * @return true if the node is the document root, false otherwise.
+     * @param object the target node
+     * @return true if the node is the document root, false otherwise
      */
     public boolean isDocument (Object object)
     {
@@ -530,10 +528,10 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Test if a node is a Namespace.
+     * Test if a node is a namespace.
      *
-     * @param object The target node.
-     * @return true if the node is a Namespace, false otherwise.
+     * @param object the target node
+     * @return true if the node is a namespace, false otherwise
      */
     public boolean isNamespace (Object object)
     {
@@ -544,8 +542,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Test if a node is an element.
      *
-     * @param object The target node.
-     * @return true if the node is an element, false otherwise.
+     * @param object the target node
+     * @return true if the node is an element, false otherwise
      */
     public boolean isElement (Object object)
     {
@@ -557,8 +555,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Test if a node is an attribute.
      *
-     * @param object The target node.
-     * @return true if the node is an attribute, false otherwise.
+     * @param object the target node
+     * @return true if the node is an attribute, false otherwise
      */
     public boolean isAttribute (Object object)
     {
@@ -570,8 +568,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Test if a node is a comment.
      *
-     * @param object The target node.
-     * @return true if the node is a comment, false otherwise.
+     * @param object the target node
+     * @return true if the node is a comment, false otherwise
      */
     public boolean isComment (Object object)
     {
@@ -583,8 +581,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Test if a node is plain text.
      *
-     * @param object The target node.
-     * @return true if the node is a text node, false otherwise.
+     * @param object the target node
+     * @return true if the node is a text node, false otherwise
      */
     public boolean isText (Object object)
     {
@@ -605,8 +603,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Test if a node is a processing instruction.
      *
-     * @param object The target node.
-     * @return true if the node is a processing instruction, false otherwise.
+     * @param object the target node
+     * @return true if the node is a processing instruction, false otherwise
      */
     public boolean isProcessingInstruction (Object object)
     {
@@ -618,9 +616,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the string value of an element node.
      *
-     * @param object The target node.
-     * @return The text inside the node and its descendants if the node
-     * is an element, null otherwise.
+     * @param object the target node
+     * @return the text inside the node and its descendants if the node
+     * is an element, null otherwise
      */
     public String getElementStringValue (Object object)
     {
@@ -634,9 +632,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Construct an element's string value recursively.
      *
-     * @param node The current node.
-     * @param buffer The buffer for building the text.
-     * @return The buffer passed as a parameter (for convenience).
+     * @param node the current node
+     * @param buffer the buffer for building the text
+     * @return the buffer passed as a parameter (for convenience)
      */
     private StringBuffer getStringValue (Node node, StringBuffer buffer)
     {
@@ -655,9 +653,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the string value of an attribute node.
      *
-     * @param object The target node.
-     * @return The text of the attribute value if the node is an
-     * attribute, null otherwise.
+     * @param object the target node
+     * @return the text of the attribute value if the node is an
+     * attribute, null otherwise
      */
     public String getAttributeStringValue (Object object)
     {
@@ -671,8 +669,8 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the string value of text.
      *
-     * @param object The target node.
-     * @return The string of text if the node is text, null otherwise.
+     * @param object the target node
+     * @return the string of text if the node is text, null otherwise
      */
     public String getTextStringValue (Object object)
     {
@@ -686,9 +684,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the string value of a comment node.
      *
-     * @param object The target node.
-     * @return The text of the comment if the node is a comment,
-     * null otherwise.
+     * @param object the target node
+     * @return the text of the comment if the node is a comment,
+     * null otherwise
      */
     public String getCommentStringValue (Object object)
     {
@@ -700,11 +698,11 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Get the string value of a Namespace node.
+     * Get the string value of a namespace node.
      *
-     * @param object The target node.
-     * @return The Namespace URI as a (possibly empty) string if the
-     * node is a namespace node, null otherwise.
+     * @param object the target node
+     * @return the namespace URI as a (possibly empty) string if the
+     * node is a namespace node, null otherwise
      */
     public String getNamespaceStringValue (Object object)
     {
@@ -717,9 +715,9 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the prefix value of a Namespace node.
      *
-     * @param object The target node.
-     * @return The Namespace prefix a (possibly empty) string if the
-     * node is a namespace node, null otherwise.
+     * @param object the target node
+     * @return the Namespace prefix a (possibly empty) string if the
+     * node is a namespace node, null otherwise
      */
     public String getNamespacePrefix (Object object)
     {
@@ -805,7 +803,7 @@ public class DocumentNavigator extends DefaultNavigator
         /**
          * Constructor.
          *
-         * @param contextNode The starting node.
+         * @param contextNode the starting node.
          */
         public NodeIterator (Node contextNode)
         {
@@ -854,8 +852,8 @@ public class DocumentNavigator extends DefaultNavigator
          * <p>This method must derive an initial node for iteration
          * from a context node.</p>
          *
-         * @param contextNode The starting node.
-         * @return The first node in the iteration.
+         * @param contextNode the starting node
+         * @return the first node in the iteration
          * @see #getNextNode
          */
         protected abstract Node getFirstNode (Node contextNode);
@@ -867,9 +865,9 @@ public class DocumentNavigator extends DefaultNavigator
          * <p>This method must locate a following node from the
          * current context node.</p>
          *
-         * @param contextNode The current node in the iteration.
-         * @return The following node in the iteration, or null
-         * if there is none.
+         * @param contextNode the current node in the iteration
+         * @return the following node in the iteration, or null
+         * if there is none
          * @see #getFirstNode
          */
         protected abstract Node getNextNode (Node contextNode);
@@ -878,9 +876,9 @@ public class DocumentNavigator extends DefaultNavigator
         /**
          * Test whether a DOM node is usable by XPath.
          *
-         * @param node The DOM node to test.
+         * @param node the DOM node to test
          * @return true if the node is usable, false if it should be
-         * skipped.
+         * skipped
          */
         private boolean isXPathNode (Node node)
         {
@@ -923,7 +921,6 @@ public class DocumentNavigator extends DefaultNavigator
          */
         AttributeIterator (Node parent)
         {
-            this.parent = parent;
             this.map = parent.getAttributes();
             this.pos = 0;
         }
@@ -960,7 +957,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
 
 
-        private Node parent;
         private NamedNodeMap map;
         private int pos;
 
@@ -975,8 +971,7 @@ public class DocumentNavigator extends DefaultNavigator
      *  must call <code>setValidating(true)</code> on the
      *  DocumentBuilderFactory.
      *
-     *  @param contextNode   a node from the document in which to look for the
-     *                       id
+     *  @param object   a node from the document in which to look for the id
      *  @param elementId   id to look for
      *
      *  @return   element whose ID is given by elementId, or null if no such
