@@ -69,6 +69,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Nodes;
 
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.xom.XOMXPath;
@@ -150,4 +151,26 @@ public class BaseXPathTest extends TestCase {
         
     }
 
+    
+    public void testAncestorAxis() throws JaxenException, ParserConfigurationException {
+        
+        BaseXPath xpath = new DOMXPath("ancestor::*");
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        org.w3c.dom.Document doc = factory.newDocumentBuilder().newDocument();
+        org.w3c.dom.Element root = doc.createElementNS("", "Test");
+        org.w3c.dom.Element parent = doc.createElementNS("", "Test");
+        doc.appendChild(root);
+        org.w3c.dom.Element child = doc.createElementNS("", "child");
+        root.appendChild(parent);
+        parent.appendChild(child);
+        
+        List result = xpath.selectNodes(child);
+        assertEquals(2, result.size());
+        assertEquals(root, result.get(0));   
+        assertEquals(child, result.get(1));
+        
+    }    
+    
+    
 }
