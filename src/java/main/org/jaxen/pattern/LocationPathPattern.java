@@ -64,9 +64,19 @@ public class LocationPathPattern extends Pattern {
         {
             ancestorPattern = ancestorPattern.simplify();
         }
-        if ( parentPattern == null && ancestorPattern == null && filters == null )
+        if ( filters == null )
         {
-            return nodeTest;
+            if ( parentPattern == null && ancestorPattern == null )
+            {
+                return nodeTest;
+            }
+            if ( parentPattern != null && ancestorPattern == null )
+            {
+                if ( nodeTest instanceof AnyNodeTest )
+                {
+                    return parentPattern;
+                }
+            }
         }
         return this;
     }

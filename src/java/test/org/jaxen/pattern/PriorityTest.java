@@ -42,41 +42,58 @@ public class PriorityTest extends TestCase
     {
     }
 
+    public void testDocumentNode() throws Exception
+    {
+        testPriority( "/", -0.5, Pattern.DOCUMENT_NODE );
+    }
+    
     public void testNameNode() throws Exception
     {
-        testPriority( "foo", 0 );
+        testPriority( "foo", 0, Pattern.ELEMENT_NODE );
     }
     
     public void testQNameNode() throws Exception
     {
-        testPriority( "foo:bar", 0 );
+        testPriority( "foo:bar", 0, Pattern.ELEMENT_NODE );
     }
     
     public void testFilter() throws Exception
     {
-        testPriority( "foo[@id='123']", 0.5 );
+        testPriority( "foo[@id='123']", 0.5, Pattern.ELEMENT_NODE );
     }
     
     public void testURI() throws Exception
     {
-        testPriority( "foo:*", -0.25);
+        testPriority( "foo:*", -0.25, Pattern.ELEMENT_NODE );
     }
 
-    public void testAnyNode() throws Exception
+    public void testNodeType() throws Exception
     {
-        testPriority( "*", -0.5 );
+        testPriority( "text()", -0.5, Pattern.TEXT_NODE );
     }
     
-    protected void testPriority(String expr, double priority) throws Exception 
+    public void testAttribute() throws Exception
+    {
+        testPriority( "@*", -0.5, Pattern.ATTRIBUTE_NODE );
+    }
+    
+    public void testAnyNode() throws Exception
+    {
+        testPriority( "*", -0.5, Pattern.ELEMENT_NODE );
+    }
+    
+    protected void testPriority(String expr, double priority, short nodeType) throws Exception 
     {
         System.out.println( "parsing: " + expr );
         
         Pattern pattern = PatternParser.parse( expr );
         double d = pattern.getPriority();
+        short nt = pattern.getMatchType();
         
-        System.out.println( "expr: " + expr + " has priority: " + d );
+        System.out.println( "expr: " + expr + " has priority: " + d + " nodeType: " + nt );
         System.out.println( "pattern: " + pattern );
         
         assertEquals( "expr: " + expr, new Double(priority), new Double(d) );
+        assertEquals( "nodeType: " + expr, new Short(nodeType), new Short(nt) );
     }
 }
