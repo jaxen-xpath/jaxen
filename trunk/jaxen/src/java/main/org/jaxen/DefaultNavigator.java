@@ -8,6 +8,8 @@ import org.jaxen.util.DescendantOrSelfAxisIterator;
 import org.jaxen.util.AncestorOrSelfAxisIterator;
 import org.jaxen.util.AncestorAxisIterator;
 import org.jaxen.util.DescendantAxisIterator;
+import org.jaxen.util.PrecedingAxisIterator;
+import org.jaxen.util.FollowingAxisIterator;
 import org.jaxen.util.PrecedingSiblingAxisIterator;
 import org.jaxen.util.FollowingSiblingAxisIterator;
 
@@ -30,10 +32,10 @@ import java.util.Iterator;
  *  </p>
  *
  *  @author bob mcwhirter (bob@werken.com)
+ *  @author Erwin Bolwidt (ejb@klomp.org)
  */
 public abstract class DefaultNavigator implements Navigator
 {
-
     /** Throws <code>UnsupportedAxisException</code>
      */
     public Iterator getChildAxisIterator(Object contextNode) throws UnsupportedAxisException
@@ -64,8 +66,6 @@ public abstract class DefaultNavigator implements Navigator
      */
     public Iterator getFollowingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
-        // throw new UnsupportedAxisException("following-sibling");
-
         return new FollowingSiblingAxisIterator( contextNode,
                                                  this );
     }
@@ -74,8 +74,6 @@ public abstract class DefaultNavigator implements Navigator
      */
     public Iterator getPrecedingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
-        //throw new UnsupportedAxisException("preceding-sibling");
-
         return new PrecedingSiblingAxisIterator( contextNode,
                                                  this );
     }
@@ -84,14 +82,20 @@ public abstract class DefaultNavigator implements Navigator
      */
     public Iterator getFollowingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
-        throw new UnsupportedAxisException("following");
+        return new FollowingAxisIterator( contextNode,
+                                          this );
+
+        // throw new UnsupportedAxisException("following");
     }
 
     /** Throws <code>UnsupportedAxisException</code>
      */
     public Iterator getPrecedingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
-        throw new UnsupportedAxisException("preceding");
+        return new PrecedingAxisIterator( contextNode,
+                                         this );
+
+        // throw new UnsupportedAxisException("preceding");
     }
 
     /** Throws <code>UnsupportedAxisException</code>
