@@ -146,6 +146,14 @@
       <email>brian.ewins@gmail.com</email>
     </developer>
 
+    <developer>
+      <name>Elliotte Rusty Harold</name>
+      <id>elharo</id>
+      <email>elharo@metalab.unc.edu</email>
+      <organization>Cafe au Lait</organization>
+      <url>http://www.elharo.com/</url>
+    </developer>
+    
   </developers>
 
   <contributors>
@@ -187,12 +195,14 @@
     </dependency>
 
     <dependency>
-      <id>xml-apis</id>
-      <version>1.0.b2</version>
+      <groupId>xerces</groupId>
+      <artifactId>xmlParserAPIs</artifactId>
+      <version>2.6.2</version>
     </dependency>
 
     <dependency>
-      <id>xerces</id>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
       <version>2.6.2</version>
     </dependency>
 
