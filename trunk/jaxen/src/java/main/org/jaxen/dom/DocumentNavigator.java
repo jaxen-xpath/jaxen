@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -31,6 +35,7 @@ import org.w3c.dom.NodeList;
  * these.</p>
  *
  * @author David Megginson
+ * @author James Strachan
  * @see XPath
  * @see NamespaceNode
  */
@@ -662,6 +667,28 @@ public class DocumentNavigator extends DefaultNavigator
 	return null;
     }
 
+    /**
+     * Use JAXP to load a namespace aware document from a given URI 
+     *
+     * @param uri is the URI of the document to load
+     * @return the new W3C DOM Level 2 Document instance
+     * @throws FunctionCallException containing a nested exception
+     *      if a problem occurs trying to parse the given document
+     */
+    public Object getDocument(String uri) throws FunctionCallException
+    {
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            return builder.parse( uri );
+        }
+        catch (Exception e)
+        {
+            throw new FunctionCallException("Failed to parse doucment for URI: " + uri, e);
+        }
+    }
 
 
     ////////////////////////////////////////////////////////////////////
