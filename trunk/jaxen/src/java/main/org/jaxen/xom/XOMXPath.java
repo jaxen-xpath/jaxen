@@ -79,7 +79,7 @@ import org.jaxen.JaxenException;
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://www.cafeconleche.org/XOM">The XOM website</a>
+ * @see <a href="http://www.xom.nu/">The XOM website</a>
  *
  * @version $Revision$
  */
