@@ -9,6 +9,7 @@
       <test select="/foo[@id=$foobar]" count="1"/>
       <test select="/foo[@id='$foobar']" count="0"/>
       <test select="/foo[concat($foo, 'bar')=@id]" count="1"/>
+      <test select="CD_Library/artist[@name=$artist]" count="0"/>
     </context>
   </document>
 
