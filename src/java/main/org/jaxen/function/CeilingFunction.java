@@ -21,7 +21,7 @@ public class CeilingFunction implements Function
     {
         if (args.size() == 1)
         {
-            return evaluate( args.get(1),
+            return evaluate( args.get(0),
                              context.getNavigator() );
         }
 
