@@ -88,6 +88,14 @@ public class NumberFunction implements Function
                                                       nav ),
                              nav );
         }
+        else if ( nav.isElement( obj ) 
+                  ||
+                  nav.isAttribute( obj ) )
+        {
+            return evaluate( StringFunction.evaluate( obj,
+                                                      nav ),
+                             nav );
+        }
         
         return new Double( Double.NaN );
     }

@@ -33,7 +33,8 @@ public class SumFunction implements Function
     public static Double evaluate(Object obj,
                                   Navigator nav)
     {
-        double sum = 0;
+        double sum  = 0;
+        double term = 0;
 
         if (obj instanceof List)
         {
@@ -41,8 +42,10 @@ public class SumFunction implements Function
 
             while ( nodeIter.hasNext() )
             {
-                sum += NumberFunction.evaluate( nodeIter.next(),
+                term = NumberFunction.evaluate( nodeIter.next(),
                                                 nav ).doubleValue();
+
+                sum += term;
             }
         }
         else

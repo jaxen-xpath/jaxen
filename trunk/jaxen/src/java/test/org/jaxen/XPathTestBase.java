@@ -12,14 +12,17 @@ import org.dom4j.io.SAXReader;
 import java.util.List;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Stack;
 
 public abstract class XPathTestBase extends TestCase
 {
     private static final String TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean            verbose         = true;
-    private              SAXReader      xmlReader       = new SAXReader();
-    private             ContextSupport  contextSupport;
+    private          SAXReader          xmlReader       = new SAXReader();
+    private          ContextSupport     contextSupport;
+
+    private Stack executionContext = new Stack();
 
     public XPathTestBase(String name)
     {
@@ -80,6 +83,8 @@ public abstract class XPathTestBase extends TestCase
         log( "-----------------------------" );
         log( "Document [" + url + "]" );
 
+        this.executionContext.push( url );
+
         Iterator iter    = docElem.elementIterator( "context" );
         Element  context = null;
 
@@ -90,6 +95,9 @@ public abstract class XPathTestBase extends TestCase
             testContext( testDoc,
                          context );
         }
+
+        this.executionContext.pop();
+
         log( "-----------------------------" );
     }
 
@@ -99,6 +107,8 @@ public abstract class XPathTestBase extends TestCase
         String xpathStr = contextElem.attributeValue( "select" );
 
         log( "Initial Context :: " + xpathStr );
+
+        this.executionContext.push( xpathStr );
 
         JaXPath xpath = new JaXPath( xpathStr );
 
@@ -115,6 +125,8 @@ public abstract class XPathTestBase extends TestCase
                       contextElem,
                       contextNode );
         }
+
+        this.executionContext.pop();
     }
 
     protected void runTests(Object testDoc,
@@ -171,6 +183,8 @@ public abstract class XPathTestBase extends TestCase
         log( debug,
              "  Select :: " + xpathStr );
 
+        this.executionContext.push( xpathStr );
+
         String count = test.attributeValue( "count" );
 
         JaXPath xpath = new JaXPath( xpathStr );
@@ -186,7 +200,21 @@ public abstract class XPathTestBase extends TestCase
             log ( debug,
                   "    Result Size   :: " + results.size() );
 
-            assertEquals( expectedSize,
+            if ( expectedSize != results.size() )
+            {
+                log ( debug,
+                      "      ## FAILED" );
+                
+                Iterator resultIter = results.iterator();
+                
+                while ( resultIter.hasNext() )
+                {
+                    log ( debug,
+                          "      " + resultIter.next() );
+                }
+            }
+            assertEquals( this.executionContext.toString(),
+                          expectedSize,
                           results.size() );
         }
 
@@ -210,12 +238,14 @@ public abstract class XPathTestBase extends TestCase
 
             log ( debug,
                   "    New Context :: " + newContext );
-            
+
             
             String valueOfXPathStr = valueOf.attributeValue( "select" );
             
             log( debug,
                  "  Select :: " + valueOfXPathStr );
+
+            this.executionContext.push( valueOfXPathStr );
 
             JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
 
@@ -231,10 +261,20 @@ public abstract class XPathTestBase extends TestCase
             log ( debug,
                   "    Result   :: " + result );
 
-            assertEquals( expected,
+            if ( ! expected.equals( result ) )
+            {
+                log ( debug,
+                      "      ## FAILED" );
+            }
+
+            assertEquals( this.executionContext.toString(),
+                          expected,
                           result );
+
+            this.executionContext.pop();
         }
         
+        this.executionContext.pop();
     }
 
     protected void testValueOf(Object testDoc,
@@ -259,6 +299,8 @@ public abstract class XPathTestBase extends TestCase
 
         JaXPath xpath = new JaXPath( xpathStr );
 
+        this.executionContext.push( xpathStr );
+
         Object node = xpath.jaSelectSingleNode( getContext( context ) );
 
         String expected = valueOf.getText();
@@ -272,8 +314,17 @@ public abstract class XPathTestBase extends TestCase
         log ( debug,
               "    Result   :: " + result );
 
-        assertEquals( expected,
+        if ( ! expected.equals( result ) )
+        {
+            log ( debug,
+                  "      ## FAILED" );
+        }
+
+        assertEquals( this.executionContext.toString(),
+                      expected,
                       result );
+
+        this.executionContext.pop();
     }
                                
     protected Context getContext(Object contextNode)
