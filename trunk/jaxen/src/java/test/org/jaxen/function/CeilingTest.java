@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,44 +59,94 @@
  * $Id$
  */
 
-
 package org.jaxen.function;
 
-import junit.framework.Test;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.jaxen.BaseXPath;
+import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 /**
- * <p>
- *   Suite for Jaxen's function tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
  *
  */
-public class FunctionTests extends TestCase {
+public class CeilingTest extends TestCase {
 
+    private Document doc;
     
-    public FunctionTests(String name) {
-        super(name);   
+    public void setUp() throws ParserConfigurationException, SAXException, IOException
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.newDocument();
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(CountTest.class));
-        result.addTest(new TestSuite(LocalNameTest.class));
-        result.addTest(new TestSuite(SumTest.class));
-        result.addTest(new TestSuite(NumberTest.class));
-        result.addTest(new TestSuite(StringTest.class));
-        result.addTest(new TestSuite(BooleanTest.class));
-        result.addTest(new TestSuite(CeilingTest.class));
-        result.addTest(new TestSuite(IdTest.class));
-        return result;
-        
+
+    public CeilingTest(String name) {
+        super(name);
     }
 
-    
+
+
+    public void testCeiling() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ceiling(1.5)");
+        
+        Object result = xpath.evaluate(doc);
+        assertEquals(2, ((Double) result).doubleValue(), 0.0001);
+        
+    }    
+
+    public void testNegativeCeiling() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ceiling(-1.5)");
+        
+        Object result = xpath.evaluate(doc);
+        assertEquals(-1, ((Double) result).doubleValue(), 0.0001);
+        
+    }    
+
+    public void testCeilingFunctionRequiresAtLeastArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ceiling()");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed ceiling function with no arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+
+    public void testBooleanFunctionRequiresExactlyOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ceiling(2.2, 1.2)");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed ceiling function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+
 }
