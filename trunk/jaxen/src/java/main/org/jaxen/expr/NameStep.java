@@ -118,20 +118,12 @@
 
  */
 
-
-
-
-
-
-
 package org.jaxen.expr;
 
 
-
-public interface NumberExpr extends Expr
-
+//public interface Step extends Predicated, Expr
+public interface NameStep extends Step
 {
-    public Number getNumber();
+    public String getPrefix();
+    public String getLocalName();
 }
-
-

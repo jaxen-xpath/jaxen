@@ -117,21 +117,8 @@
  * $Id$
 
  */
-
-
-
-
-
-
-
 package org.jaxen.expr;
 
-
-
-public interface NumberExpr extends Expr
-
-{
-    public Number getNumber();
+public interface Visitable {
+    public void accept(Visitor visitor);
 }
-
-
