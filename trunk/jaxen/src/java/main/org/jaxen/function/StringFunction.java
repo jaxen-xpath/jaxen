@@ -59,6 +59,10 @@ public class StringFunction implements Function
         {
             return nav.getTextStringValue( obj );
         }
+        else if ( nav.isProcessingInstruction( obj ) )
+        {
+            return nav.getProcessingInstructionData( obj );
+        }
         else if (obj instanceof List)
         {
             List list = (List) obj;

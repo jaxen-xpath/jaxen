@@ -29,6 +29,22 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
     {
         Navigator nav = support.getNavigator();
 
-        return nav.isProcessingInstruction( node );
+        boolean isPi = nav.isProcessingInstruction( node );
+
+        if ( isPi )
+        {
+            String name = getName();
+
+            if ( "".equals( name ) )
+            {
+                return true;
+            }
+            else
+            {
+                return name.equals( nav.getProcessingInstructionTarget( node ) );
+            }
+        }
+
+        return false;
     }
 }
