@@ -58,6 +58,7 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.NamedAccessNavigator;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
+import org.jaxen.JaxenConstants;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.util.SingleObjectIterator;
 
@@ -167,7 +168,7 @@ public class DocumentNavigator
 
     public Iterator getChildAxisIterator(Object contextNode)
     {
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     /**
@@ -216,7 +217,7 @@ public class DocumentNavigator
 
         if ( method == null )
         {
-            return null;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
 
         try
@@ -225,7 +226,7 @@ public class DocumentNavigator
             
             if ( result == null )
             {
-                return null;
+                return JaxenConstants.EMPTY_ITERATOR;
             } 
             
             if ( result instanceof Collection )
@@ -235,7 +236,7 @@ public class DocumentNavigator
             
             if ( result.getClass().isArray() )
             {
-                return null;
+                return JaxenConstants.EMPTY_ITERATOR;
             }
             
             return new SingleObjectIterator( new Element( (Element) contextNode, localName, result ) );
@@ -249,7 +250,7 @@ public class DocumentNavigator
             // swallow
         }
 
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     public Iterator getParentAxisIterator(Object contextNode)
@@ -259,12 +260,12 @@ public class DocumentNavigator
             return new SingleObjectIterator( ((Element)contextNode).getParent() );
         }
 
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     public Iterator getAttributeAxisIterator(Object contextNode)
     {
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     /**
@@ -275,18 +276,18 @@ public class DocumentNavigator
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
      * @param namespaceURI  the uri of the namespace of the attributes to return
-     * @return an Iterator that traverses the named attributes, or null if none
+     * @return an Iterator that traverses the named attributes, not null
      */
     public Iterator getAttributeAxisIterator(Object contextNode,
                                              String localName,
                                              String namespacePrefix,
                                              String namespaceURI) {
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
         
     public Iterator getNamespaceAxisIterator(Object contextNode)
     {
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     public Object getDocumentNode(Object contextNode)
@@ -301,7 +302,7 @@ public class DocumentNavigator
             return ((Element)contextNode).getParent();
         }
 
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     public String getTextStringValue(Object obj)

@@ -1,3 +1,5 @@
+package org.jaxen.util;
+
 /*
  * $Header$
  * $Revision$
@@ -5,35 +7,35 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions, and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions, and the disclaimer that follows 
- *    these conditions in the documentation and/or other materials 
+ *    notice, this list of conditions, and the disclaimer that follows
+ *    these conditions in the documentation and/or other materials
  *    provided with the distribution.
  *
  * 3. The name "Jaxen" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
  *    written permission, please contact license@jaxen.org.
- * 
+ *
  * 4. Products derived from this software may not be called "Jaxen", nor
  *    may "Jaxen" appear in their name, without prior written permission
  *    from the Jaxen Project Management (pm@jaxen.org).
- * 
- * In addition, we request (but do not require) that you include in the 
- * end-user documentation provided with the redistribution and/or in the 
+ *
+ * In addition, we request (but do not require) that you include in the
+ * end-user documentation provided with the redistribution and/or in the
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
  *      Jaxen Project (http://www.jaxen.org/)."
- * Alternatively, the acknowledgment may be graphical using the logos 
+ * Alternatively, the acknowledgment may be graphical using the logos
  * available at http://www.jaxen.org/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
@@ -50,164 +52,138 @@
  * SUCH DAMAGE.
  *
  * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter <bob@werken.com> and
+ * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <http://www.jaxen.org/>.
- * 
+ *
  * $Id$
- */
+*/
 
-package org.jaxen.util;
-
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-
+import org.jaxen.JaxenConstants;
+import org.jaxen.JaxenRuntimeException;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+
 /**
- * @author Erwin Bolwidt
+ * This implementation of 'preceding' works like so:
+ * the preceding axis includes preceding-siblings of this node and their
+ * descendants. Also, for each ancestor node of this node, it includes
+ * all preceding-siblings of that ancestor, and their descendants. Finally, it
+ * includes the ancestor nodes themselves.
+ * <p/>
+ * The reversed descendant-or-self axes that are required are calculated using a
+ * stack of reversed 'child-or-self' axes. When asked for a node, it is always taken
+ * from a child-or-self axis. If it was the last node on that axis, the node is returned.
+ * Otherwise, this axis is pushed on the stack, and the process is repeated with the child-or-self
+ * of the node. Eventually this recurses down to the last descendant of any node, then works
+ * back up to the root.
+ * <p/>
+ * I reckon most object models could provide a faster implementation of the reversed
+ * 'children-or-self' used here.
  */
 public class PrecedingAxisIterator implements Iterator
 {
-    private final class ReverseDescendantOrSelfAxisIterator extends StackedIterator
-    {
-        ReverseDescendantOrSelfAxisIterator(Object contextNode)
-            throws UnsupportedAxisException
-        {
-            pushIterator(PrecedingAxisIterator.this.navigator.getSelfAxisIterator(contextNode));
-            init(contextNode, PrecedingAxisIterator.this.navigator);
-        }
-        
-        protected Iterator createIterator(Object contextNode) 
-        {
-            try
-            {
-                Iterator iter = PrecedingAxisIterator.this.navigator.getChildAxisIterator(contextNode);
-
-                if (iter == null)
-                {
-                    return null;
-                }
-
-                LinkedList reverse = new LinkedList();
-
-                while ( iter.hasNext() )
-                {
-                    reverse.addFirst( iter.next() );
-                }
-
-                return reverse.iterator();
-            }
-            catch (UnsupportedAxisException e)
-            {
-                // okay...
-            }
-            return null;
-        }
-    }
-
-    private final static Iterator EMPTY_ITERATOR = Collections.EMPTY_LIST.iterator();
-
-    private Object contextNode;
+    private Iterator ancestorOrSelf;
+    private Iterator precedingSibling;
+    private ListIterator childrenOrSelf;
+    private Stack stack;
 
     private Navigator navigator;
-
-    private Iterator siblings;
-
-    private Iterator currentSibling;
 
     public PrecedingAxisIterator(Object contextNode,
                                  Navigator navigator) throws UnsupportedAxisException
     {
-        this.contextNode    = contextNode;
-        this.navigator      = navigator;        
-        this.siblings       = navigator.getPrecedingSiblingAxisIterator(contextNode);
-        this.currentSibling = EMPTY_ITERATOR;
+        this.navigator = navigator;
+        this.ancestorOrSelf = navigator.getAncestorOrSelfAxisIterator(contextNode);
+        this.precedingSibling = JaxenConstants.EMPTY_ITERATOR;
+        this.childrenOrSelf = JaxenConstants.EMPTY_LIST_ITERATOR;
+        this.stack = new Stack();
     }
 
-    private boolean goBack()
+
+    public boolean hasNext()
     {
-        while ( ! siblings.hasNext() )
-        {
-            if (!goUp())
-            {
-                return false;
-            }
-        }
-
-        Object prevSibling = siblings.next();
-
         try
         {
-            this.currentSibling = new ReverseDescendantOrSelfAxisIterator( prevSibling );
+            while (!childrenOrSelf.hasPrevious())
+            {
+                if (stack.isEmpty())
+                {
+                    while (!precedingSibling.hasNext())
+                    {
+                        if (!ancestorOrSelf.hasNext())
+                        {
+                            return false;
+                        }
+                        Object contextNode = ancestorOrSelf.next();
+                        precedingSibling = new PrecedingSiblingAxisIterator(contextNode, navigator);
+                    }
+                    Object node = precedingSibling.next();
+                    childrenOrSelf = childrenOrSelf(node);
+                }
+                else
+                {
+                    childrenOrSelf = (ListIterator) stack.pop();
+                }
+            }
             return true;
         }
         catch (UnsupportedAxisException e)
         {
-            return false;
+            throw new JaxenRuntimeException(e);
         }
     }
 
-    private boolean goUp()
+    private ListIterator childrenOrSelf(Object node)
     {
-        if ( contextNode == null
-             ||
-             navigator.isDocument(contextNode) )
-        {
-            return false;
-        }
-
         try
         {
-            contextNode = navigator.getParentNode(contextNode);
-
-            if ( contextNode != null
-                 &&
-                 ! navigator.isDocument(contextNode) )
+            ArrayList reversed = new ArrayList();
+            reversed.add(node);
+            Iterator childAxisIterator = navigator.getChildAxisIterator(node);
+            if (childAxisIterator != null)
             {
-                siblings = navigator.getPrecedingSiblingAxisIterator(contextNode);
-
-                return true;
+                while (childAxisIterator.hasNext())
+                {
+                    reversed.add(childAxisIterator.next());
+                }
             }
-
-            return false;
+            return reversed.listIterator(reversed.size());
         }
         catch (UnsupportedAxisException e)
         {
-            // Appearantly, the preceding-siblings axis is not supported
-            // for the parent node, so the iterator can't go up in the
-            // ancestry anymore.
-            return false;
+            throw new JaxenRuntimeException(e);
         }
-    }
-
-    public boolean hasNext()
-    {
-        while ( ! currentSibling.hasNext() )
-        {
-            if ( ! goBack() )
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     public Object next() throws NoSuchElementException
     {
-        if ( ! hasNext() )
+        if (!hasNext())
         {
             throw new NoSuchElementException();
         }
-
-        return currentSibling.next();
+        while (true)
+        {
+            Object result = childrenOrSelf.previous();
+            if (childrenOrSelf.hasPrevious())
+            {
+                // if this isn't 'self' construct 'descendant-or-self'
+                stack.push(childrenOrSelf);
+                childrenOrSelf = childrenOrSelf(result);
+                continue;
+            }
+            return result;
+        }
     }
+
 
     public void remove() throws UnsupportedOperationException
     {

@@ -78,6 +78,7 @@ import org.jaxen.XPath;
 import org.jaxen.UnsupportedAxisException;
 import org.jaxen.FunctionCallException;
 import org.jaxen.BaseXPath;
+import org.jaxen.JaxenConstants;
 import org.jaxen.util.SingleObjectIterator;
 
 import org.jaxen.saxpath.SAXPathException;
@@ -85,6 +86,7 @@ import org.jaxen.saxpath.SAXPathException;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * Interface for navigating around the XOM object model.
@@ -251,7 +253,7 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
                 }
             };
         }
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     public Iterator getChildAxisIterator(Object o) throws UnsupportedAxisException {
@@ -262,7 +264,7 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
                 }
             };
         }
-        return null;
+        return JaxenConstants.EMPTY_ITERATOR;
     }
 
     //
@@ -389,7 +391,7 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public Iterator getNamespaceAxisIterator(Object o)
     {
         if (! isElement(o)) {
-            return null;
+            return JaxenConstants.EMPTY_ITERATOR;
         }
         Map nsMap = new HashMap();
         Element elt = (Element)o;

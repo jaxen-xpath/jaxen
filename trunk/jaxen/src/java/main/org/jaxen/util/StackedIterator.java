@@ -71,6 +71,11 @@ import java.util.Set;
 
 import org.jaxen.Navigator;
 
+/**
+ * @deprecated this iterator is no longer used to implement any of the jaxen axes. If you have implemented
+ * a navigator-specific axis based on this class, take a look at the DescendantAxisIterator for ideas 
+ * on how to remove that dependency.
+ */
 public abstract class StackedIterator implements Iterator
 {
     private Object     contextNode;

@@ -2,7 +2,8 @@
   <Application1 xmlns:xplt="http://www.xxxx.com/"
                 xmlns:xpl="http://www.xxxx.com/"
                 version="3.0"
-  > 
+                randomAttribute="foo"
+  >
     <xpl:insertText/> 
     <xplt:anyElement> 
       <Name/> 
