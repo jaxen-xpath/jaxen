@@ -89,8 +89,8 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr
     public Object evaluate(Context context) throws JaxenException
     {
         Object results = getFilterExpr().evaluate( context );
-        context.setNodeSet( convertToList( results ) );
 
+        context.setNodeSet( convertToList( results ) );
         
         return getLocationPath().evaluate( context );
     }

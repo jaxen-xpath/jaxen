@@ -10,6 +10,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Stack;
@@ -19,6 +20,7 @@ public abstract class XPathTestBase extends TestCase
     protected static String TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean            verbose         = true;
+
     private          SAXReader          xmlReader       = new SAXReader();
     private          ContextSupport     contextSupport;
 
@@ -371,7 +373,11 @@ public abstract class XPathTestBase extends TestCase
     {
         Context context = new Context( getContextSupport() );
 
-        context.setNodeSet( Collections.singletonList( contextNode ) );
+        List list = new ArrayList( 1 );
+
+        list.add( contextNode );
+
+        context.setNodeSet( list );
 
         return context;
     }

@@ -8,6 +8,7 @@ import org.jaxen.Navigator;
 import org.jaxen.JaxenException;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class DefaultAbsoluteLocationPath extends DefaultLocationPath 
@@ -55,7 +56,11 @@ public class DefaultAbsoluteLocationPath extends DefaultLocationPath
             return Collections.EMPTY_LIST;
         }
 
-        context.setNodeSet( Collections.singletonList( docNode ) );
+        List list = new ArrayList(1);
+
+        list.add( docNode );
+
+        context.setNodeSet( list );
 
         return super.evaluate( context );
     }
