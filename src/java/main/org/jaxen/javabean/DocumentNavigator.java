@@ -47,10 +47,7 @@ package org.jaxen.javabean;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Collection;
 
 import org.jaxen.DefaultNavigator;
@@ -59,7 +56,6 @@ import org.jaxen.NamedAccessNavigator;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.jaxen.JaxenConstants;
-import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.util.SingleObjectIterator;
 
 /** 
