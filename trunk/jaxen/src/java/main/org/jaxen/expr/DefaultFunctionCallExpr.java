@@ -140,7 +140,8 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
             return func.call( context,
                               paramValues );
         }
-        
-        return null;
+
+        throw new FunctionCallException( "Undefined function " + getPrefix() +
+                                         ':' + getFunctionName() );
     }
 }
