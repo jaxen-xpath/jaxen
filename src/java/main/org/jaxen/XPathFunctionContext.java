@@ -154,6 +154,7 @@ public class XPathFunctionContext extends SimpleFunctionContext
      */
     public XPathFunctionContext()
     {
+        // XXX could this be a HotSpot????
         registerFunction( null,  // namespace URI
                           "boolean",
                           new BooleanFunction() );
@@ -269,7 +270,7 @@ public class XPathFunctionContext extends SimpleFunctionContext
 
         // register extension functions
         // extension functions should go into a namespace, but which one?
-        // for now, keep them in default namespace to not to break any code
+        // for now, keep them in default namespace to not break any code
 
         registerFunction( null,  // namespace URI
                           "matrix-concat",
