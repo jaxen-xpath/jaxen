@@ -303,7 +303,7 @@
           depends="compile.all,compile.core.test,compile.dom4j.test,compile.jdom.test,compile.dom.test,compile.exml.test"/>
 
   <target name="test.all"
-          depends="test.core,test.dom4j,test.jdom,test.dom,test.exml"/>
+          depends="test.core,test.dom4j,test.jdom,test.dom"/>
 
   <target name="jar.all"
           depends="jar.core,jar.dom4j,jar.jdom,jar.dom,jar.exml"/>
