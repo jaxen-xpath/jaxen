@@ -44,6 +44,8 @@
     <property name="web.dist" value="${web.htdocs}/dist"/>
     <property name="web.ftp" value="./build/ftp"/>
 
+    <property name="test.packages" value="**"/>
+
     <property name="xml.format.options" value="-indentSize 2 -trimText -newlines"/>
 
     <filter token="year" value="${year}"/>
@@ -444,15 +446,25 @@
   <!-- =================================================================== -->
 
   <target name="demo.jdom" depends="samples">
-    <java classname="JDOMDemo">
+    <java classname="JDOMDemo" fork="true">
       <arg value="xml/basic.xml"/>
       <arg value="/foo/bar/baz"/>
       <classpath>
           <pathelement location="${build.dest}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
-          <pathelement location="${lib.dir}/jdom.jar"/>
-          <pathelement location="${lib.dir}/xerces.jar"/>
-          <!-- <pathelement path="${java.class.path}"/> -->
+          <pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="demo.dom4j" depends="samples">
+    <java classname="Dom4jDemo" fork="true">
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+          <pathelement location="${build.dest}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/> 
       </classpath>
     </java>
   </target>
