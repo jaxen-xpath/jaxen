@@ -95,7 +95,11 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Element elem = (Element) obj;
         
-        return elem.getNamespaceURI();
+        String uri = elem.getNamespaceURI();
+        if ( uri != null && uri.length() == 0 ) 
+            return null;
+        else
+            return uri;
     }
 
     public String getElementQName(Object obj)
@@ -116,7 +120,11 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Attribute attr = (Attribute) obj;
 
-        return attr.getNamespaceURI();
+        String uri = attr.getNamespaceURI();
+        if ( uri != null && uri.length() == 0 ) 
+            return null;
+        else
+            return uri;
     }
 
     public String getAttributeQName(Object obj)

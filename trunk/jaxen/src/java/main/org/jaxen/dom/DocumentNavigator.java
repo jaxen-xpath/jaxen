@@ -380,8 +380,6 @@ public class DocumentNavigator extends DefaultNavigator
     public String getElementNamespaceUri (Object object)
     {
         String uri = ((Node)object).getNamespaceURI();
-        if (uri == null)
-            uri = "";
         return uri;
     }
 
@@ -428,8 +426,6 @@ public class DocumentNavigator extends DefaultNavigator
     public String getAttributeNamespaceUri (Object object)
     {
         String uri = ((Node)object).getNamespaceURI();
-        if (uri == null)
-            uri = "";
         return uri;
     }
 
