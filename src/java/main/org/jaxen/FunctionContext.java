@@ -77,7 +77,7 @@ package org.jaxen;
 public interface FunctionContext
 {
     /** An implementation should return a <code>Function</code> implementation object
-     *  based on the namespace uri and local name of the function-call
+     *  based on the namespace URI and local name of the function-call
      *  expression.
      *
      *  <p>
@@ -87,14 +87,14 @@ public interface FunctionContext
      *  The prefix may otherwise be completely ignored.
      *  </p>
      *
-     *  @param namespaceURI  the namespace uri to which the prefix parameter
-     *                       is bound in the xpath expression. If the function
-     *                       call expression had no prefix, the namespace uri
+     *  @param namespaceURI  the namespace URI to which the prefix parameter
+     *                       is bound in the XPath expression. If the function
+     *                       call expression had no prefix, the namespace URI
      *                       is <code>null</code>.
      *  @param prefix        the prefix that was used in the function call
-     *                       expression.
-     *  @param localName     the local name of the function-call expression;
-     *                       if there is no prefix, then this is the whole
+     *                       expression
+     *  @param localName     the local name of the function-call expression.
+     *                       If there is no prefix, then this is the whole
      *                       name of the function.
      *
      *  @return  a Function implementation object.
