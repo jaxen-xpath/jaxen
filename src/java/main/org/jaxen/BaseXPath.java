@@ -338,7 +338,7 @@ public class BaseXPath implements XPath, Serializable
      *
      *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return the number-value interpretation of this expression
+     *  @return a <code>Double</code> interpretation of this expression
      */
     public Number numberValueOf(Object node) throws JaxenException
     {
@@ -711,6 +711,9 @@ public class BaseXPath implements XPath, Serializable
      */
     protected List selectNodesForContext(Context context) throws JaxenException
     {
+        // FIXME This may no longer be in document order
+        // Before returning this we need to resort into
+        // document order
         return this.xpath.asList( context );
     }
     
