@@ -37,9 +37,9 @@ class DefaultLessThanExpr extends DefaultRelationalExpr
             lhsStr = StringFunction.evaluate( lhsSet.get( i ),
                                               nav );
 
-            for ( int j = 0 ; j < rhsSetSize ; ++i )
+            for ( int j = 0 ; j < rhsSetSize ; ++j )
             {
-                rhsStr = StringFunction.evaluate( rhsSet.get( i ),
+                rhsStr = StringFunction.evaluate( rhsSet.get( j ),
                                                   nav );
 
                 if ( lhsStr.compareTo( rhsStr ) < 0 )
@@ -65,13 +65,12 @@ class DefaultLessThanExpr extends DefaultRelationalExpr
             setElement = StringFunction.evaluate( theSet.get( i ),
                                                   nav );
 
-            if ( reverse && ( setElement.compareTo( theStr ) > 0 ) )
-            {
-                return Boolean.TRUE;
-            }
-            else if ( setElement.compareTo( theStr ) < 0 )
-            {
-                return Boolean.TRUE;
+            if ( reverse ) {
+                if ( setElement.compareTo( theStr ) > 0 )
+                    return Boolean.TRUE;
+            } else {
+                if ( setElement.compareTo( theStr ) < 0 )
+                    return Boolean.TRUE;
             }
         }
 
@@ -93,13 +92,12 @@ class DefaultLessThanExpr extends DefaultRelationalExpr
             setElement = (Comparable) NumberFunction.evaluate( theSet.get( i ),
                                                                nav );
 
-            if ( reverse && ( setElement.compareTo( theNum ) > 0 ) )
-            {
-                return Boolean.TRUE;
-            }
-            else if ( setElement.compareTo( theNum ) < 0 )
-            {
-                return Boolean.TRUE;
+            if ( reverse ) {
+                if ( setElement.compareTo( theNum ) > 0 )
+                    return Boolean.TRUE;
+            } else {
+                if ( setElement.compareTo( theNum ) < 0 )
+                    return Boolean.TRUE;
             }
         }
 
