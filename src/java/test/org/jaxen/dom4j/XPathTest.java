@@ -1,7 +1,10 @@
 
 package org.jaxen.dom4j;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 
 import org.saxpath.SAXPathException;
 
@@ -17,6 +20,16 @@ public class XPathTest extends TestCase
 
     private static final String BASIC_XML = "xml/basic.xml";
 
+    public static void main( String[] args ) 
+    {
+        TestRunner.run( suite() );
+    }
+    
+    public static Test suite() 
+    {
+        return new TestSuite( XPathTest.class );
+    }
+    
     public XPathTest(String name)
     {
         super( name );
@@ -71,6 +84,27 @@ public class XPathTest extends TestCase
                           ((Element)iter.next()).getName() );
 
             assertTrue( ! iter.hasNext() );
+
+        }
+        catch (Exception e)
+        {
+            fail( e.getMessage() );
+        }
+    }
+    
+    public void testAsBoolean()
+    {
+        try
+        {
+            XPath xpath = new XPath( "/root/a = 'a'" );
+
+            SAXReader reader = new SAXReader();
+
+            Document doc = reader.read( "xml/simple.xml" );
+
+            boolean answer = xpath.booleanValueOf( doc );
+
+            assertTrue( "Xpath worked: " + xpath, answer );
 
         }
         catch (Exception e)
