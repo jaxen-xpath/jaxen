@@ -54,7 +54,7 @@ public class EvaluateFunction implements Function
             xpath.setVariableContext( support.getVariableContext() );
             xpath.setFunctionContext( support.getFunctionContext() );
             xpath.setNamespaceContext( support.getNamespaceContext() );
-            return xpath.selectNodes(context);
+            return xpath.selectNodes( context.duplicate() );
         }
         catch ( SAXPathException e ) {
             throw new FunctionCallException(e.toString());
