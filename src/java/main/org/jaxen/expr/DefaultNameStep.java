@@ -164,6 +164,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      * This method overrides the version in DefaultStep for performance.
      */
     public List evaluate(Context context) throws JaxenException {
+
         List contextNodeSet  = context.getNodeSet();
         int contextSize = contextNodeSet.size();
         // optimise for context size 0

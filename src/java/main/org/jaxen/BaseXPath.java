@@ -237,7 +237,7 @@ public class BaseXPath implements XPath, Serializable
     public List selectNodes(Object node) throws JaxenException
     {
         Context context = getContext( node );
-        
+
         return selectNodesForContext( context );
     }
 
