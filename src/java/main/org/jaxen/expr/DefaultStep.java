@@ -16,7 +16,7 @@ import java.util.TreeSet;
 import java.util.List;
 import java.util.Iterator;
 
-abstract class DefaultStep implements Step
+public abstract class DefaultStep implements Step
 {
     private IterableAxis axis;
     private PredicateSet predicates;
