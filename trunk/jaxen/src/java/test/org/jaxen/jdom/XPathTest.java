@@ -64,6 +64,7 @@ package org.jaxen.jdom;
 
 import junit.framework.TestCase;
 
+import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
@@ -71,6 +72,7 @@ import org.jaxen.XPath;
 import org.jaxen.saxpath.SAXPathException;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.Text;
 import org.jdom.input.SAXBuilder;
 
 public class XPathTest extends TestCase
@@ -139,4 +141,60 @@ public class XPathTest extends TestCase
             fail( e.getMessage() );
         }
     }
+    
+    
+    public void testGetDocumentNode()
+    {
+        try
+        {
+            XPath xpath = new JDOMXPath( "/" );
+
+            SAXBuilder builder = new SAXBuilder();
+
+            Document doc = builder.build( BASIC_XML );
+
+            Element root = doc.getRootElement();
+            List results = xpath.selectNodes( root );
+
+            assertEquals( 1,
+                          results.size() );
+
+            Iterator iter = results.iterator();
+
+            assertEquals( doc, iter.next());
+
+        }
+        catch (Exception e)
+        {
+            fail( e.getMessage() );
+        }
+    }
+    
+    public void testJaxen53Text()
+    {
+        try
+        {
+            XPath xpath = new JDOMXPath( "//data/text() " );
+
+            SAXBuilder builder = new SAXBuilder();
+
+            Document doc = builder.build( new StringReader("<root>\n<data>1</data>\n</root>") );
+
+            List results = xpath.selectNodes( doc );
+
+            assertEquals( 1,
+                          results.size() );
+
+            Iterator iter = results.iterator();
+
+            Text result = (Text) iter.next();
+            assertEquals( "1", result.getValue());
+
+        }
+        catch (Exception e)
+        {
+            fail( e.getMessage() );
+        }
+    }
+    
 }
