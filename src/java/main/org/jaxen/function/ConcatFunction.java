@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Iterator;
 
 /**
- *  <p><b>4.2</b> <code><i>boolean</i> concat(<i>string</i>,<i>string</i>,<i>string*</i>)</code> 
+ *  <p><b>4.2</b> <code><i>string</i> concat(<i>string</i>,<i>string</i>,<i>string*</i>)</code> 
  *  
  *  @author bob mcwhirter (bob@werken.com)
  */
