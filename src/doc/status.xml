@@ -30,11 +30,19 @@ XPath xpath = new ElectricXPath( "//foo" );
 XPath xpath = new JDOMXPath( "//foo" );
 </pre>
         </p>
+        <p>Added new extension functions kindly provided by Mark Wilson. They are as follows...
+          <ul>
+            <li>uppercase() - converts the argument to an upper case string</li>
+            <li>lowercase() - converts the argument to a lower case string</li>
+            <li>ends-with() - evaluates true if the first string ends with the postfix</li>
+          </ul>
+        </p>
         <p>Some auxillary implementation detail changes, which shouldn't affect the public API in any way are as follows
           <ul>
             <li>The org.jaxen.JaXPath class has been removed. Now we have an org.jaxen.XPath interface its no longer required.</li>
             <li>The org.jaxen.expr.XPath class has been renamed to org.jaxen.expr.XPathExpr to avoid confusion and to use a more consistent name.
             Similarly the DefaultXPath class has been renamed to DefaultXPathExpr as well.</li>
+            <li>The very confusing jaSelect*() methods have gone from JaXPath and BaseXPath. All evaluation methods can take a Context object, null, a node or a node set.</li>
           </ul>
         </p>
        </section>
@@ -90,6 +98,7 @@ XPath xpath = new JDOMXPath( "//foo" );
         <li>Christian Nentwich</li>
         <li>Alexander Day Chaffee (<a href="http://www.purpletech.com">Purple Technology</a>)</li>
         <li>Elliotte Rusty Harold(<a href="http://www.cafeconleche.org">Cafe con Leche</a>)</li>
+        <li>Mark Wilson {<a href="http://www.wilsoncom.de">WilsonCon</a>)</li>
       </ul>
     </section>
   </body>
