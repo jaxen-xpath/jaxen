@@ -141,24 +141,26 @@
       <version>1.4-dev</version>
     </dependency>
 
+<!--
     <dependency>
       <id>EXML</id>
       <version>5.0-b2</version>
     </dependency>
+-->
 
     <dependency>
       <id>jdom</id>
-      <version>b8</version>
+      <version>1.0b8</version>
     </dependency>
 
     <dependency>
-      <id>xmlParserAPIs</id>
+      <id>xml-apis</id>
+      <version>1.0.b2</version>
+    </dependency>
+
+    <dependency>
+      <id>xerces</id>
       <version>2.0.2</version>
-    </dependency>
-
-    <dependency>
-      <id>xercesImpl</id>
-      <version>2.0.0</version>
     </dependency>
 
     <dependency>
@@ -188,9 +190,23 @@
 
     <!-- Unit test classes -->
 
-    <unitTestPatterns>
-      <unitTestPattern>include = **/*Test.java</unitTestPattern>
-    </unitTestPatterns>
+    <unitTest>
+      <resources>
+        <resource>
+          <directory>src/java/test</directory>
+          <includes>
+            <include>**/*.werk</include>
+            <include>**/*.xml</include>
+            <include>**/*.properties</include>
+          </includes>
+        </resource>
+      </resources>
+
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+    </unitTest>
+
 
     <!-- Integration unit test classes -->
 
