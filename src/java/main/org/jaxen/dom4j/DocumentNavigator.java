@@ -21,6 +21,12 @@ import java.util.Iterator;
 
 public class DocumentNavigator extends DefaultNavigator
 {
+    /** Should we just return new namespace declarations in //namespace::** or
+     * return a namespace node for all elements in a namespace
+     */
+    private static final boolean ONLY_RETURN_NAMESPACE_DECLARATIONS = true;
+    
+    
     private static class Singleton
     {
         private static DocumentNavigator instance = new DocumentNavigator();
@@ -158,20 +164,57 @@ public class DocumentNavigator extends DefaultNavigator
             return null;
         }
 
-        Element elem = (Element) contextNode;
-
-        List nsList = new ArrayList();
-
-        Namespace ns = elem.getNamespace();
-
-        if ( ns != Namespace.NO_NAMESPACE )
+        Element element = (Element) contextNode;
+        if ( ONLY_RETURN_NAMESPACE_DECLARATIONS ) 
         {
-            nsList.add( elem.getNamespace() );
+            List nsList = new ArrayList();
+            Namespace elementNS = element.getNamespace();
+            String uri = elementNS.getURI();
+            if ( uri != null && uri.length() > 0 ) 
+            {
+                // the namespace may have already been declared by a parent element
+                Element parent = element.getParent();
+                if ( parent != null ) 
+                {
+                    if ( parent.getNamespaceForPrefix( elementNS.getPrefix() ) == null )
+                    {
+                        nsList.add( elementNS.asXPathResult( element ) );
+                    }
+                }
+                else 
+                {            
+                    nsList.add( elementNS.asXPathResult( element ) );
+                }
+            }
+
+            List additionalNS = element.additionalNamespaces();
+            for ( Iterator iter = additionalNS.iterator(); iter.hasNext(); )
+            {
+                Namespace namespace = (Namespace) iter.next();            
+                nsList.add( namespace.asXPathResult( element ) );
+            }
+            
+            return nsList.iterator();
         }
+        else 
+        {
+            List nsList = new ArrayList();
+            List declaredNS = element.declaredNamespaces();
+            for ( Iterator iter = declaredNS.iterator(); iter.hasNext(); )
+            {
+                Namespace namespace = (Namespace) iter.next();
 
-        nsList.addAll( elem.additionalNamespaces() );
+                // the namespace may have already been declared by a parent
+                Element parent = element.getParent();
+                if ( parent == null 
+                    || parent.getNamespaceForURI( namespace.getURI() ) == null )
+                {            
+                    nsList.add( namespace.asXPathResult( element ) );
+                }
+            }
 
-        return nsList.iterator();
+            return nsList.iterator();
+        }
     }
 
     public Object getDocumentNode(Object contextNode)
