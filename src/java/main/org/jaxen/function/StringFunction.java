@@ -62,7 +62,6 @@
 
 package org.jaxen.function;
 
-import org.jaxen.Cast;
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
