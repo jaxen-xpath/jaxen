@@ -63,8 +63,6 @@
 
 package org.jaxen.expr;
 
-import org.jaxen.JaxenException;
-
 abstract class DefaultArithExpr extends DefaultBinaryExpr 
 {
     public DefaultArithExpr(Expr lhs,
@@ -78,12 +76,5 @@ abstract class DefaultArithExpr extends DefaultBinaryExpr
     {
         return "[(DefaultArithExpr): " + getLHS() + ", " + getRHS() + "]";
     }
-    
-    public void assertInteger( Number number ) throws JaxenException
-      {
-      if( number.doubleValue() != number.intValue() )
-        {
-        throw new JaxenException( number + " is not an integer" );
-        }
-      }
+
 }
