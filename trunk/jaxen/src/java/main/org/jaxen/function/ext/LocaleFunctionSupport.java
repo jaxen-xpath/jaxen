@@ -127,24 +127,24 @@ public abstract class LocaleFunctionSupport implements Function
      *      be found 
      */
     protected Locale findLocale(String localeText) {
-        StringTokenizer enum = new StringTokenizer( localeText, "-" );
-        if (enum.hasMoreTokens()) 
+        StringTokenizer tokens = new StringTokenizer( localeText, "-" );
+        if (tokens.hasMoreTokens())
         {
-            String language = enum.nextToken();
-            if (! enum.hasMoreTokens()) 
+            String language = tokens.nextToken();
+            if (! tokens.hasMoreTokens())
             {                
                 return findLocaleForLanguage(language);
             }
             else 
             {
-                String country = enum.nextToken();
-                if (! enum.hasMoreTokens()) 
+                String country = tokens.nextToken();
+                if (! tokens.hasMoreTokens())
                 {
                     return new Locale(language, country);
                 }
                 else 
                 {
-                    String variant = enum.nextToken();
+                    String variant = tokens.nextToken();
                     return new Locale(language, country, variant);
                 }
             }
