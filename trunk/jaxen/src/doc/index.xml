@@ -5,14 +5,13 @@
 
     <header>
       <p>
-      The <i>Jaxen</i> project is a Java XPath Engine.
-      Jaxen is a universal object model walker, capable of evaluating
-      XPath expressions across multiple models.  
-      The following models are currently supported:-      
+      <i>Jaxen</i> is a fast Java engine for <a href="http://www.w3.org/TR/xpath">XPath 1.0</a>
+      that works on all XML object models. The following models are currently supported out of the box
+      </p>
       <ul>
       <li><a href="http://www.w3.org/DOM/">DOM</a></li>
       <li><a href="http://dom4j.org">dom4j</a></li>
-      <li><a href="http://www.themindelectric.com/products/xml/xml.html">EXML</a></li>
+      <li><a href="http://www.themindelectric.com/products/xml/xml.html">Electric XML</a></li>
       <li><a href="http://jdom.org">JDOM</a></li>
       </ul>
       </p>
