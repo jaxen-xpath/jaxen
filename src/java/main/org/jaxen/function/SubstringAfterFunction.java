@@ -46,6 +46,6 @@ public class SubstringAfterFunction implements Function
             return "";
         }
 
-        return str.substring(loc+1);
+        return str.substring(loc+match.length());
     }
 }
