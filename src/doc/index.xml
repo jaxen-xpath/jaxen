@@ -23,6 +23,10 @@
       <li>Check out Elliotte Rusty Harolds book chapter on XPath and 
         <a href="http://cafeconleche.org/books/xmljava/chapters/ch16s06.html">Jaxen</a>
       </li>
+      <li>Alex Chaffee wrote 
+        <a href="http://www.purpletech.com/xpe/">XPath Explorer</a> 
+        to help visualize results of XPath expressions.
+      </li>
       </ul>
     </section>
 
