@@ -175,6 +175,89 @@ public class BaseXPathTest extends TestCase {
     }    
     
     
+    public void testPrecedingSiblingAxisIsInDocumentOrder() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("preceding-sibling::*");
+        org.w3c.dom.Element root = doc.createElementNS("", "root");
+        doc.appendChild(root);
+        org.w3c.dom.Element child1 = doc.createElementNS("", "child1");
+        root.appendChild(child1);
+        org.w3c.dom.Element child2 = doc.createElementNS("", "child2");
+        root.appendChild(child2);
+        org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
+        root.appendChild(child3);
+        
+        List result = xpath.selectNodes(child3);
+        assertEquals(2, result.size());
+        assertEquals(child1, result.get(0));   
+        assertEquals(child2, result.get(1));
+        
+    }    
+    
+    
+    public void testPrecedingAxisIsInDocumentOrder() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("preceding::*");
+        org.w3c.dom.Element root = doc.createElementNS("", "root");
+        doc.appendChild(root);
+        org.w3c.dom.Element parent1 = doc.createElementNS("", "parent1");
+        root.appendChild(parent1);
+        org.w3c.dom.Element parent2 = doc.createElementNS("", "parent2");
+        root.appendChild(parent2);
+        org.w3c.dom.Element child1 = doc.createElementNS("", "child1");
+        parent2.appendChild(child1);
+        org.w3c.dom.Element child2 = doc.createElementNS("", "child2");
+        parent2.appendChild(child2);
+        org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
+        parent2.appendChild(child3);
+        
+        List result = xpath.selectNodes(child3);
+        assertEquals(3, result.size());
+        assertEquals(parent1, result.get(0));   
+        assertEquals(child1, result.get(1));   
+        assertEquals(child2, result.get(2));
+        
+    }    
+    
+    
+    public void testPrecedingAxisWithPositionalPredicate() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("preceding::*[1]");
+        org.w3c.dom.Element root = doc.createElementNS("", "root");
+        doc.appendChild(root);
+        org.w3c.dom.Element child1 = doc.createElementNS("", "child1");
+        root.appendChild(child1);
+        org.w3c.dom.Element child2 = doc.createElementNS("", "child2");
+        root.appendChild(child2);
+        org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
+        root.appendChild(child3);
+        
+        List result = xpath.selectNodes(child3);
+        assertEquals(1, result.size());  
+        assertEquals(child2, result.get(0));
+        
+    }    
+    
+    
+    public void testAncestorAxisWithPositionalPredicate() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("ancestor::*[1]");
+        org.w3c.dom.Element root = doc.createElementNS("", "root");
+        doc.appendChild(root);
+        org.w3c.dom.Element child1 = doc.createElementNS("", "child1");
+        root.appendChild(child1);
+        org.w3c.dom.Element child2 = doc.createElementNS("", "child2");
+        child1.appendChild(child2);
+        org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
+        child2.appendChild(child3);
+        
+        List result = xpath.selectNodes(child3);
+        assertEquals(1, result.size());  
+        assertEquals(child2, result.get(0));
+        
+    }    
+    
+    
     public void testAncestorOrSelfAxis() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ancestor-or-self::*");
