@@ -68,7 +68,7 @@ import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect Jaxen's DOM tests.
+ *   Collect Jaxen's expression tests.
  * </p>
  * 
  * @author Elliotte Rusty Harold
@@ -86,7 +86,7 @@ public class ExprTests extends TestCase {
     public static Test suite() {
         
         TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(DefaultXPathExpr.class));
+        result.addTest(new TestSuite(DefaultXPathExprTest.class));
         return result;
         
     }
