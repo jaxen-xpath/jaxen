@@ -70,7 +70,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
+import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
@@ -80,7 +82,7 @@ import org.xml.sax.SAXException;
  * @author Elliotte Rusty Harold
  *
  */
-public class LocalNameTest extends TestCase {
+public class LastTest extends TestCase {
 
     private Document doc;
     
@@ -89,46 +91,69 @@ public class LocalNameTest extends TestCase {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
-        doc = builder.parse( "xml/basic.xml" );
+        doc = builder.newDocument();
     }
 
 
-    public LocalNameTest(String name) {
+    public LastTest(String name) {
         super(name);
     }
 
-    public void testLocalNameOfNumber()
+    // test case for JAXEN-55
+    public void testLastFunction() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("//x[position()=last()]");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        x2.appendChild(doc.createTextNode("2"));
+        x3.appendChild(doc.createTextNode("3"));
+        x4.appendChild(doc.createTextNode("4"));
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(2, result.size());
+        assertEquals(x3, result.get(0));
+        assertEquals(x4, result.get(1));
+        
+    }    
+
+    public void testLastFunctionAllowsNoArguments() throws JaxenException
     {
         try
         {
-            XPath xpath = new DOMXPath( "local-name(3)" );
-            xpath.selectNodes( doc );
-            fail("local-name of non-node-set");
-       }
-       catch (FunctionCallException e) 
-        {
-           assertEquals("The argument to the local-name function must be a node-set", e.getMessage());
+            BaseXPath xpath = new DOMXPath("//x[position()=last(.)]");
+            org.w3c.dom.Element a = doc.createElementNS("", "a");
+            org.w3c.dom.Element b = doc.createElementNS("", "b");
+            doc.appendChild(a);
+            a.appendChild(b);
+            org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+            org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+            org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+            a.appendChild(x4);
+            b.appendChild(x2);
+            b.appendChild(x3);
+            x2.appendChild(doc.createTextNode("2"));
+            x3.appendChild(doc.createTextNode("3"));
+            x4.appendChild(doc.createTextNode("4"));
+       
+            xpath.selectNodes(doc);
+            fail("last() function took arguments");
         }
-       catch (Exception e)
+        catch (FunctionCallException e) 
         {
-            e.printStackTrace();
-            fail( e.getMessage() );
-        }
-    }    
-
-    public void testLocalNameNoArguments()
-    {
-        try
-        {
-            XPath xpath = new DOMXPath( "local-name()" );
-            List results = xpath.selectNodes( doc );
-            assertEquals("", results.get(0));
-       }
-       catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
+            assertEquals("last() requires no arguments.", e.getMessage());
         }
     }    
 
+    
+    
+    
 }
