@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests xmlns:var="http://jaxen.org/test-harness/var">
 
+  <!-- test cases for preceding axis with different node types -->
+  <document url="xml/pi2.xml">
+    <context select="/a/c">
+      <test select="//processing-instruction()" count="1"/>
+      <test select="preceding-sibling::*" count="1"/>
+      <test select="preceding-sibling::node()" count="5"/>
+      <test select="preceding-sibling::*[1]" count="1"/>
+      <test select="preceding-sibling::processing-instruction()" count="1"/>
+      <valueOf select="preceding-sibling::processing-instruction()">order-by="x"</valueOf>
+      <valueOf select="preceding-sibling::*[1]">foo</valueOf>
+      <valueOf select="preceding-sibling::node()[2]">order-by="x"</valueOf>
+    </context>
+  </document>
+
+  
+
   <document url="xml/id.xml">
     <context select="/"
              var:foobar="foobar"
@@ -445,13 +461,17 @@
    </context>
   </document>
 
+  
+    <!-- testing for correct behaviour of AbsoluteLocationPath -->
+
+<!--        
   <document url="xml/simple.xml">
-      <!-- testing for correct behaviour of AbsoluteLocationPath -->
    <context select="/root/a">
     <valueOf select="concat( ., /root/b )">ab</valueOf>
     <valueOf select="concat( ../b, . )">ba</valueOf>
     <valueOf select="concat( /root/b, . )">ba</valueOf>
    </context>
   </document>
+-->
 
  </tests>

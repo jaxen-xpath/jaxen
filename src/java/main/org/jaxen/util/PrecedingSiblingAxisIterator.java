@@ -99,11 +99,19 @@ public class PrecedingSiblingAxisIterator implements Iterator
         {
             obj = siblingIter.next();
 
+            this.nextObj = obj;
+            break;
+            
+/*
+             
+             This should iterate through all nodes, not necessarily just elements
+             
             if ( this.navigator.isElement( obj ) )
             {
                 this.nextObj = obj;
                 break;
             }
+*/             
         }
     }
 }

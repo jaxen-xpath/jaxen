@@ -64,7 +64,7 @@ public class PrecedingAxisIterator implements Iterator
                                  Navigator navigator) throws UnsupportedAxisException
     {
         this.contextNode    = contextNode;
-        this.navigator      = navigator;
+        this.navigator      = navigator;        
         this.siblings       = navigator.getPrecedingSiblingAxisIterator(contextNode);
         this.currentSibling = EMPTY_ITERATOR;
     }
