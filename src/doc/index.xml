@@ -17,6 +17,14 @@
       </ul>
       </p>
     </header>
+    
+    <section title="News">
+      <ul>
+      <li>Check out Elliotte Rusty Harolds book chapter on XPath and 
+        <a href="http://cafeconleche.org/books/xmljava/chapters/ch16s06.html">Jaxen</a>
+      </li>
+      </ul>
+    </section>
 
     <section title="Getting Started">
       <p>You can download the current $VERSION$ release 
