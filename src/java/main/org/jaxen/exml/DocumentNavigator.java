@@ -12,6 +12,8 @@ import electric.xml.Attribute;
 import electric.xml.Text;
 import electric.xml.CData;
 import electric.xml.Instruction;
+import electric.xml.Child;
+import electric.xml.Children;
 //import electric.xml.Namespace;
 
 import java.util.ArrayList;
@@ -230,37 +232,28 @@ public class DocumentNavigator extends DefaultNavigator
     {
         Element elem = (Element) obj;
 
+        return getStringValue( elem );
+    }
+
+    private String getStringValue(Element e)
+    {
         StringBuffer buf = new StringBuffer();
 
-        // List     content     = elem.getContent();
-        // Iterator contentIter = content.iterator();
+        Children children = e.getChildren();
+        Child    eachChild = null;
 
-        Iterator contentIter = new ElementsIterator( elem.getElements() );
-
-        Object   each        = null;
-
-        while ( contentIter.hasNext() )
+        while ( ( eachChild = children.next() ) != null )
         {
-            each = contentIter.next();
-
-            if ( each instanceof String )
+            if ( eachChild instanceof Element )
             {
-                buf.append( each );
+                buf.append( getStringValue( (Element) eachChild ) );
             }
-            else if ( each instanceof Text )
+            else if ( eachChild instanceof Text )
             {
-                buf.append( ((Text)each).getString() );
-            }
-            else if ( each instanceof CData )
-            {
-                buf.append( ((CData)each).getString() );
-            }
-            else if ( each instanceof Element )
-            {
-                buf.append( getElementStringValue( each ) );
+                buf.append( ((Text)eachChild).getString() );
             }
         }
-
+        
         return buf.toString();
     }
 
@@ -269,5 +262,22 @@ public class DocumentNavigator extends DefaultNavigator
         Comment cmt = (Comment) obj;
 
         return cmt.getString();
+    }
+
+    public String translateNamespacePrefixToUri(String prefix, Object context)
+    {
+        Element element = null;
+
+        if ( context instanceof Element ) 
+        {
+            element = (Element) context;
+        }
+
+        if ( element != null )
+        {
+            return element.getNamespace( prefix );
+        }
+
+        return null;
     }
 }
