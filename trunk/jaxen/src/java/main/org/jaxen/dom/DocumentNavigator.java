@@ -297,13 +297,14 @@ public class DocumentNavigator extends DefaultNavigator
                 {
                     if (node == null)
                         return null;
-                    else {
-                        Node sibling = node.getPreviousSibling();
-                        if (sibling == null)
+                    Node sibling = node.getPreviousSibling();
+                    if (sibling == null)
                             return getFirstNode(node.getParentNode());
-                        else
-                            return sibling;
+                    while (sibling != null) {
+                            node = sibling;
+                            sibling = node.getLastChild();
                     }
+                    return node;
                 }
                 protected Node getNextNode (Node node) {
                     if (node == null)
@@ -320,7 +321,6 @@ public class DocumentNavigator extends DefaultNavigator
                 }
             };
     }
-
 
     /**
      * Get an iterator over all attributes.
