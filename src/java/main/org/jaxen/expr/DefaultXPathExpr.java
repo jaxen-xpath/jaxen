@@ -104,6 +104,9 @@ public class DefaultXPathExpr implements XPathExpr
 
     public List asList(Context context) throws JaxenException
     {
-        return DefaultExpr.convertToList( getRootExpr().evaluate( context ) );
+        Expr expr = getRootExpr();
+        Object value = expr.evaluate( context );
+        List result = DefaultExpr.convertToList( value );
+        return result;
     }
 }
