@@ -138,8 +138,9 @@
       <test select="/processing-instruction()" count="3"/>
       <test select="/comment()" count="1"/>
       <test select="comment()" count="1"/>
-      <test select="/child::node()/comment()" count="2"/>
-      <test select="/*/comment()" count="2"/>
+      <test select="/child::node()/comment()" count="0"/>
+      <test select="/*/comment()" count="0"/>
+      <test select="//comment()" count="1"/>
     </context>
   </document>
 
@@ -150,8 +151,8 @@
   <document url="xml/fibo.xml">
     <context select="/">
       <test select="/*/fibonacci[position() &lt; 10]" count="9"/>
-      <valueOf select="sum(//fibonacci)">222</valueOf>
-      <valueOf select="sum(//fibonacci/@index)">222</valueOf>
+      <valueOf select="sum(//fibonacci)">196417.0</valueOf>
+      <valueOf select="sum(//fibonacci/@index)">325.0</valueOf>
     </context>
   </document>
 
@@ -172,8 +173,8 @@
     <context select="/PLAY/ACT/SCENE[1]">
       <test select="/descendant::ACT" count="5"/>
       <test select="../../descendant::ACT" count="5"/>
-      <valueOf select="count(ancestor::PLAY)">1</valueOf>
       <valueOf select="count(ancestor::*)">3</valueOf>
+      <valueOf select="count(ancestor::PLAY)">1</valueOf>
       <valueOf select="5+count(ancestor::*)-1">7</valueOf>
     </context>
   </document>
