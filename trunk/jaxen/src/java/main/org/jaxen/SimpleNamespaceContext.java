@@ -1,6 +1,7 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.HashMap;
  *  Provides mappings from namespace prefix to namespace URI to the xpath
  *  engine.
  */
-public class SimpleNamespaceContext implements NamespaceContext
+public class SimpleNamespaceContext implements NamespaceContext, Serializable
 {
     private Map namespaces;
 

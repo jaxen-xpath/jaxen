@@ -1,17 +1,20 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
+
 /** Supporting context information for resolving
  *  namespace prefixess, functions, and variables.
  *
  *  @author bob mcwhirter (bob@werken.com)
  */
-public class ContextSupport
+public class ContextSupport implements Serializable
 {
+    private transient FunctionContext  functionContext;
+    
     private NamespaceContext namespaceContext;
-    private FunctionContext  functionContext;
     private VariableContext  variableContext;
-
+    
     private Navigator        navigator;
     
     /** Construct an empty <code>ContextSupport</code>.

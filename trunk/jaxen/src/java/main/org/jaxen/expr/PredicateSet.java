@@ -8,12 +8,13 @@ import org.jaxen.JaxenException;
 
 import org.jaxen.function.BooleanFunction;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-class PredicateSet
+class PredicateSet implements Serializable
 {
     private List predicates;
 

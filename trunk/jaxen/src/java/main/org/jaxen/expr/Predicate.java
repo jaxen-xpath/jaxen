@@ -2,11 +2,13 @@
 
 package org.jaxen.expr;
 
+import java.io.Serializable;
+
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
 
-public interface Predicate 
+public interface Predicate extends Serializable
 {
     Expr getExpr();
     void setExpr(Expr expr);

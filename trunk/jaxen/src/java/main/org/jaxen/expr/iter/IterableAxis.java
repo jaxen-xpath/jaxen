@@ -5,9 +5,10 @@ import org.jaxen.ContextSupport;
 import org.jaxen.UnsupportedAxisException;
 import org.jaxen.expr.Step;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public abstract class IterableAxis
+public abstract class IterableAxis implements Serializable
 {
     private int value;
 

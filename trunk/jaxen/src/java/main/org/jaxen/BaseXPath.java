@@ -95,17 +95,32 @@ public abstract class BaseXPath extends JaXPath
 
     public NamespaceContext getNamespaceContext()
     {
-        return getContextSupport().getNamespaceContext();
+        NamespaceContext answer = getContextSupport().getNamespaceContext();
+        if ( answer == null ) {
+            answer = createNamespaceContext();
+            getContextSupport().setNamespaceContext( answer );
+        }
+        return answer;
     }
 
     public FunctionContext getFunctionContext()
     {
-        return getContextSupport().getFunctionContext();
+        FunctionContext answer = getContextSupport().getFunctionContext();
+        if ( answer == null ) {
+            answer = createFunctionContext();
+            getContextSupport().setFunctionContext( answer );
+        }
+        return answer;
     }
 
     public VariableContext getVariableContext()
     {
-        return getContextSupport().getVariableContext();
+        VariableContext answer = getContextSupport().getVariableContext();
+        if ( answer == null ) {
+            answer = createVariableContext();
+            getContextSupport().setVariableContext( answer );
+        }
+        return answer;
     }
     
     

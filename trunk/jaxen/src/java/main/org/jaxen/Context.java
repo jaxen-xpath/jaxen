@@ -1,10 +1,11 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Context
+public class Context implements Serializable
 {
     private ContextSupport contextSupport;
 

@@ -35,7 +35,7 @@ import java.util.Iterator;
  */
 public class DocumentNavigator extends DefaultNavigator
 {
-    private SAXReader reader = new SAXReader();
+    private transient SAXReader reader;
     
     private static class Singleton
     {
@@ -322,7 +322,7 @@ public class DocumentNavigator extends DefaultNavigator
     {
         try
         {
-            return reader.read( uri );
+            return getSAXReader().read( uri );
         }
         catch (DocumentException e)
         {
@@ -348,6 +348,10 @@ public class DocumentNavigator extends DefaultNavigator
     //-------------------------------------------------------------------------    
     public SAXReader getSAXReader()
     {
+        if ( reader == null ) 
+        {
+            reader = new SAXReader();
+        }
         return reader;
     }
     
