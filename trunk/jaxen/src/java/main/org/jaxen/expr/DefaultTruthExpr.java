@@ -43,6 +43,11 @@ abstract class DefaultTruthExpr extends DefaultBinaryExpr
     {
         return ( obj instanceof List );
     }
+    
+    protected boolean setIsEmpty( List set )
+      {
+      return (set == null || set.size() == 0);
+      }
 
     protected boolean eitherIsBoolean(Object lhs,
                                       Object rhs)

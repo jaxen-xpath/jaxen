@@ -2,151 +2,94 @@
 
 package org.jaxen.expr;
 
+import java.util.List;
+import java.util.Iterator;
 import org.jaxen.Context;
 import org.jaxen.Navigator;
 import org.jaxen.JaxenException;
-
-import java.util.List;
+import org.jaxen.function.NumberFunction;
 
 abstract class DefaultRelationalExpr extends DefaultTruthExpr 
-{
-    public DefaultRelationalExpr(Expr lhs,
-                                 Expr rhs)
+  {
+  public DefaultRelationalExpr( Expr lhs, Expr rhs )
     {
-        super( lhs,
-               rhs );
+    super( lhs, rhs );
     }
-    
-    public String toString()
+  
+  public String toString()
     {
-        return "[(DefaultRelationalExpr): " + getLHS() + ", " + getRHS() + "]";
+    return "[(DefaultRelationalExpr): " + getLHS() + ", " + getRHS() + "]";
     }
 
-    public Object evaluate(Context context) throws JaxenException
+  public Object evaluate( Context context ) throws JaxenException
     {
-        Object lhsValue = getLHS().evaluate( context );
-        Object rhsValue = getRHS().evaluate( context );
+    Object lhsValue = getLHS().evaluate( context );
+    Object rhsValue = getRHS().evaluate( context );
+    Navigator nav = context.getNavigator();
 
-        Navigator nav = context.getNavigator();
+    if( bothAreSets( lhsValue, rhsValue ) )
+      {
+      return evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
+      }
 
-        if ( bothAreSets( lhsValue,
-                          rhsValue ) )
-        {
-            return evaluateSetSet( (List) lhsValue,
-                                   (List) rhsValue,
-                                   nav );
+    if( eitherIsSet( lhsValue, rhsValue ) )
+      {
+      if( isSet( lhsValue ) )
+        {        
+        return evaluateSetSet( (List) lhsValue, convertToList( rhsValue ), nav );              
         }
-
-        if ( eitherIsSet( lhsValue,
-                          rhsValue ) )
+      else
         {
-            if ( isSet( lhsValue ) )
-            {
-                if ( isString( rhsValue ) )
-                {
-                    return evaluateSetString( (List) lhsValue,
-                                              (String) rhsValue,
-                                              nav );
-                }
-                else if ( isNumber( rhsValue ) )
-                {
-                    return evaluateSetNumber( (List) lhsValue,
-                                              (Number) rhsValue,
-                                              nav );
-                }
-                else if ( isBoolean( rhsValue ) )
-                {
-                    return evaluateSetBoolean( (List) lhsValue,
-                                               (Boolean) rhsValue,
-                                               nav );
-                }
-            }
-            else
-            {
-                if ( isString( lhsValue ) )
-                {
-                    return evaluateStringSet( (String) lhsValue,
-                                              (List) rhsValue,
-                                              nav );
-                }
-                else if ( isNumber( lhsValue )  )
-                {
-                    return evaluateNumberSet( (Number) lhsValue,
-                                              (List) rhsValue,
-                                              nav );
-                }
-                else if ( isBoolean( lhsValue ) )
-                {
-                    return evaluateSetBoolean( (List) rhsValue,
-                                               (Boolean) rhsValue,
-                                               nav );
-                }
-            }
+        return evaluateSetSet( convertToList( lhsValue ), (List) rhsValue, nav );              
         }
-
-        return evaluateObjectObject( lhsValue,
-                                     rhsValue );
-    }
-
-    protected abstract Object evaluateSetSet(List lhsSet,
-                                             List rhsSet,
-                                             Navigator nav);
+      }
     
-    protected abstract Object evaluateSetBoolean(List theSet,
-                                                 Boolean theBool,
-                                                 Navigator nav );
+    return evaluateObjectObject( lhsValue, rhsValue, nav ) ? Boolean.TRUE : Boolean.FALSE;
+    }
 
-    protected abstract Object evaluateSetString(List theSet,
-                                                String theStr,
-                                                boolean reverse,
-                                                Navigator nav);
-
-    protected abstract Object evaluateSetNumber(List theSet,
-                                                Number theNum,
-                                                boolean reverse,
-                                                Navigator nav);
-
-    protected abstract Object evaluateObjectObject(Object lhs,
-                                                   Object rhs);
+  private Object evaluateSetSet( List lhsSet, List rhsSet, Navigator nav )
+    {
+    if( setIsEmpty( lhsSet ) || setIsEmpty( rhsSet ) ) // return false if either is null or empty
+      {
+      return Boolean.FALSE;
+      }    
     
-    protected Object evaluateStringSet(String theStr,
-                                       List theSet,
-                                       Navigator nav)
-    {
-        return evaluateSetString( theSet,
-                                  theStr,
-                                  true,
-                                  nav );
+    for( Iterator lhsIterator = lhsSet.iterator(); lhsIterator.hasNext(); )
+      {
+      Object lhs = lhsIterator.next();        
+      
+      for( Iterator rhsIterator = rhsSet.iterator(); rhsIterator.hasNext(); )
+        {
+        Object rhs = rhsIterator.next();
+        
+        if( evaluateObjectObject( lhs, rhs, nav ) )
+          {
+          return Boolean.TRUE;
+          }
+        }
+      }      
+    
+    return Boolean.FALSE;
     }
-
-    protected Object evaluateSetString(List theSet,
-                                       String theStr,
-                                       Navigator nav)
+  
+  private boolean evaluateObjectObject( Object lhs, Object rhs, Navigator nav )
     {
-        return evaluateSetString( theSet,
-                                  theStr,
-                                  false,
-                                  nav );
+    if( lhs == null || rhs == null )
+      {
+      return false;
+      }
+    
+    Double lhsNum = NumberFunction.evaluate( lhs, nav );
+    Double rhsNum = NumberFunction.evaluate( rhs, nav );      
+    
+    if( NumberFunction.isNaN( lhsNum ) || NumberFunction.isNaN( rhsNum ) )
+      {
+      return false;
+      }
+    
+    return evaluateDoubleDouble( lhsNum, rhsNum );
     }
-
-    protected Object evaluateNumberSet(Number theNum,
-                                       List theSet,
-                                       Navigator nav)
-    {
-        return evaluateSetNumber( theSet,
-                                  theNum,
-                                  true,
-                                  nav );
-    }
-
-    protected Object evaluateSetNumber(List theSet,
-                                       Number theNum,
-                                       Navigator nav)
-    {
-        return evaluateSetNumber( theSet,
-                                  theNum,
-                                  false,
-                                  nav );
-    }
-}
+  
+  protected abstract boolean evaluateDoubleDouble( Double lhs, Double rhs );    
+  }
 
