@@ -3,3 +3,6 @@ target
 .project
 maven.log
 .DS_Store
+*.iml
+*.ipr
+*.iws
