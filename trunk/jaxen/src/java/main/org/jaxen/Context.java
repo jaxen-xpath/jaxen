@@ -47,9 +47,9 @@ package org.jaxen;
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 /** Wrapper around implementation-specific objects used
  *  as the context of an expression evaluation.

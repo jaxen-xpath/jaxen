@@ -129,11 +129,7 @@ package org.jaxen.expr;
 
 
 import org.jaxen.Context;
-
 import org.jaxen.JaxenException;
-
-
-
 import org.jaxen.function.NumberFunction;
 
 

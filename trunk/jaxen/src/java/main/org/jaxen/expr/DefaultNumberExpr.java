@@ -130,16 +130,6 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 
-import org.jaxen.util.SingleObjectIterator;
-
-
-
-import java.util.Iterator;
-
-import java.util.Set;
-
-import java.util.Collections;
-
 
 
 

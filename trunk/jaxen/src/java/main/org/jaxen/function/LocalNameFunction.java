@@ -62,12 +62,12 @@
 
 package org.jaxen.function;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
-import org.jaxen.Navigator;
 import org.jaxen.FunctionCallException;
-
-import java.util.List;
+import org.jaxen.Navigator;
 
 /**
  *   <p><b>4.1</b> <code><i>string</i> local-name(<i>node-set?</i>)</code> 

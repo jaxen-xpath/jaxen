@@ -62,12 +62,39 @@
 
 package org.jaxen;
 
-import org.jaxen.function.*;
-import org.jaxen.function.ext.*;
+import org.jaxen.function.BooleanFunction;
+import org.jaxen.function.CeilingFunction;
+import org.jaxen.function.ConcatFunction;
+import org.jaxen.function.ContainsFunction;
+import org.jaxen.function.CountFunction;
+import org.jaxen.function.FalseFunction;
+import org.jaxen.function.FloorFunction;
+import org.jaxen.function.IdFunction;
+import org.jaxen.function.LangFunction;
+import org.jaxen.function.LastFunction;
+import org.jaxen.function.LocalNameFunction;
+import org.jaxen.function.NameFunction;
+import org.jaxen.function.NamespaceUriFunction;
+import org.jaxen.function.NormalizeSpaceFunction;
+import org.jaxen.function.NotFunction;
+import org.jaxen.function.NumberFunction;
+import org.jaxen.function.PositionFunction;
+import org.jaxen.function.RoundFunction;
+import org.jaxen.function.StartsWithFunction;
+import org.jaxen.function.StringFunction;
+import org.jaxen.function.StringLengthFunction;
+import org.jaxen.function.SubstringAfterFunction;
+import org.jaxen.function.SubstringBeforeFunction;
+import org.jaxen.function.SubstringFunction;
+import org.jaxen.function.SumFunction;
+import org.jaxen.function.TranslateFunction;
+import org.jaxen.function.TrueFunction;
+import org.jaxen.function.ext.EndsWithFunction;
+import org.jaxen.function.ext.EvaluateFunction;
+import org.jaxen.function.ext.LowerFunction;
+import org.jaxen.function.ext.MatrixConcatFunction;
+import org.jaxen.function.ext.UpperFunction;
 import org.jaxen.function.xslt.DocumentFunction;
-
-import java.util.Map;
-import java.util.HashMap;
 
 /** A <code>FunctionContext</code> implementing the core XPath
  *  function library, with extensions.

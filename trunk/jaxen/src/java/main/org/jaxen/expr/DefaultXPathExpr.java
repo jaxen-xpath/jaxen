@@ -63,10 +63,10 @@
 
 package org.jaxen.expr;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
-
-import java.util.List;
 
 public class DefaultXPathExpr implements XPathExpr
 {

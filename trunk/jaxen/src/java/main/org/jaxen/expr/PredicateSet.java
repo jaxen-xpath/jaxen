@@ -128,27 +128,16 @@ package org.jaxen.expr;
 
 
 
-import org.jaxen.Context;
-
-import org.jaxen.ContextSupport;
-
-import org.jaxen.JaxenException;
-
-
-
-import org.jaxen.function.BooleanFunction;
-
-
-
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-import java.util.ArrayList;
-
-import java.util.Collections;
-
-import java.util.Iterator;
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
+import org.jaxen.JaxenException;
+import org.jaxen.function.BooleanFunction;
 
 
 

@@ -63,13 +63,7 @@
 
 package org.jaxen.expr;
 
-import org.jaxen.Context;
 import org.jaxen.JaxenException;
-import org.jaxen.util.SingleObjectIterator;
-
-import java.util.Set;
-import java.util.Iterator;
-import java.util.Collections;
 
 abstract class DefaultArithExpr extends DefaultBinaryExpr 
 {

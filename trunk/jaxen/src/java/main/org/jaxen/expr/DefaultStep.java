@@ -70,8 +70,8 @@ import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
 import org.jaxen.UnsupportedAxisException;
 import org.jaxen.expr.iter.IterableAxis;
+import org.jaxen.saxpath.Axis;
 import org.jaxen.util.IdentityHashMap;
-import org.saxpath.Axis;
 
 public abstract class DefaultStep implements Step
 {

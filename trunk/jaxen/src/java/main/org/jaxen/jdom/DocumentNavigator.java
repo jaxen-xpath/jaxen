@@ -62,28 +62,24 @@
 
 package org.jaxen.jdom;
 
-import org.jaxen.XPath;
-import org.jaxen.DefaultNavigator;
-import org.jaxen.FunctionCallException;
-
-import org.jaxen.util.SingleObjectIterator;
-
-import org.saxpath.SAXPathException;
-
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Comment;
-import org.jdom.Text;
-import org.jdom.Attribute;
-import org.jdom.CDATA;
-import org.jdom.ProcessingInstruction;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
+import org.jaxen.XPath;
+import org.jaxen.util.SingleObjectIterator;
+import org.jdom.Attribute;
+import org.jdom.CDATA;
+import org.jdom.Comment;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.Namespace;
+import org.jdom.ProcessingInstruction;
+import org.jdom.Text;
+import org.jdom.input.SAXBuilder;
 
 /** Interface for navigating around the EXML object model.
  *
@@ -302,7 +298,7 @@ public class DocumentNavigator extends DefaultNavigator
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on JDOM documents.
      */
-    public XPath parseXPath (String xpath) throws SAXPathException
+    public XPath parseXPath (String xpath) throws org.jaxen.saxpath.SAXPathException
     {
         return new JDOMXPath(xpath);
     }

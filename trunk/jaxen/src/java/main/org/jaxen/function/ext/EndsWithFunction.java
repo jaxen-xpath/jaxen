@@ -61,13 +61,13 @@
 
 package org.jaxen.function.ext;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 import org.jaxen.function.StringFunction;
-
-import java.util.List;
 
 /**
  * <p><code><i>boolean</i> ends-with(<i>string</i>,<i>string</i>)</code>

@@ -63,8 +63,8 @@
 package org.jaxen;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 /** Simple default implementation for <code>VariableContext</code>.
  *

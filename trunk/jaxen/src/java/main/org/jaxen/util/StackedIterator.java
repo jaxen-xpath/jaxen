@@ -63,15 +63,13 @@
 
 package org.jaxen.util;
 
-import org.jaxen.Navigator;
-
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import java.util.LinkedList;
-
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import org.jaxen.Navigator;
 
 public abstract class StackedIterator implements Iterator
 {

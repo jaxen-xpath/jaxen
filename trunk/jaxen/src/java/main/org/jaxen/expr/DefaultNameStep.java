@@ -129,12 +129,9 @@ package org.jaxen.expr;
 
 
 import org.jaxen.ContextSupport;
-
 import org.jaxen.Navigator;
-
-import org.saxpath.Axis;
-
 import org.jaxen.expr.iter.IterableAxis;
+import org.jaxen.saxpath.Axis;
 
 
 
@@ -293,7 +290,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep
         }
         else if ( nav.isNamespace( node ) )
         {
-            if ( matchesAnyName && getAxis() != Axis.NAMESPACE) { 
+            if ( matchesAnyName && getAxis() != Axis.NAMESPACE) {
                 // Only works for namespace::*
                 return false;
             }

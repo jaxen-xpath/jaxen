@@ -128,16 +128,12 @@ package org.jaxen.expr;
 
 
 
+import java.util.Iterator;
 import java.util.List;
 
-import java.util.Iterator;
-
 import org.jaxen.Context;
-
-import org.jaxen.Navigator;
-
 import org.jaxen.JaxenException;
-
+import org.jaxen.Navigator;
 import org.jaxen.function.NumberFunction;
 
 

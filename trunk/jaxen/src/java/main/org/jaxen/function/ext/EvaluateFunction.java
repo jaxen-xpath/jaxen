@@ -62,18 +62,15 @@
 package org.jaxen.function.ext;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import org.jaxen.XPath;
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.Function;
-import org.jaxen.Navigator;
 import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
+import org.jaxen.XPath;
 import org.jaxen.function.StringFunction;
-
-import org.saxpath.SAXPathException;
 
 /**
  * <code><i>node-set</i> evaluate(<i>string</i>)</code> 
@@ -116,7 +113,7 @@ public class EvaluateFunction implements Function
             xpath.setNamespaceContext( support.getNamespaceContext() );
             return xpath.selectNodes( context.duplicate() );
         }
-        catch ( SAXPathException e ) {
+        catch ( org.jaxen.saxpath.SAXPathException e ) {
             throw new FunctionCallException(e.toString());
         }
     }

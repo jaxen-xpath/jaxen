@@ -1,34 +1,32 @@
 package org.jaxen.util;
 
-import org.jaxen.expr.Expr;
-import org.jaxen.expr.Visitor;
-import org.jaxen.expr.PathExpr;
-import org.jaxen.expr.LocationPath;
-import org.jaxen.expr.LogicalExpr;
-import org.jaxen.expr.EqualityExpr;
-import org.jaxen.expr.FilterExpr;
-import org.jaxen.expr.RelationalExpr;
-import org.jaxen.expr.AdditiveExpr;
-import org.jaxen.expr.MultiplicativeExpr;
-import org.jaxen.expr.UnaryExpr;
-import org.jaxen.expr.UnionExpr;
-import org.jaxen.expr.NumberExpr;
-import org.jaxen.expr.LiteralExpr;
-import org.jaxen.expr.VariableReferenceExpr;
-import org.jaxen.expr.FunctionCallExpr;
-import org.jaxen.expr.NameStep;
-import org.jaxen.expr.ProcessingInstructionNodeStep;
-import org.jaxen.expr.AllNodeStep;
-import org.jaxen.expr.TextNodeStep;
-import org.jaxen.expr.CommentNodeStep;
-import org.jaxen.expr.Step;
-import org.jaxen.expr.Predicate;
-
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
-import org.jaxen.expr.Predicate;
 
-import java.io.PrintWriter;
+import org.jaxen.expr.AdditiveExpr;
+import org.jaxen.expr.AllNodeStep;
+import org.jaxen.expr.CommentNodeStep;
+import org.jaxen.expr.EqualityExpr;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.FilterExpr;
+import org.jaxen.expr.FunctionCallExpr;
+import org.jaxen.expr.LiteralExpr;
+import org.jaxen.expr.LocationPath;
+import org.jaxen.expr.LogicalExpr;
+import org.jaxen.expr.MultiplicativeExpr;
+import org.jaxen.expr.NameStep;
+import org.jaxen.expr.NumberExpr;
+import org.jaxen.expr.PathExpr;
+import org.jaxen.expr.Predicate;
+import org.jaxen.expr.ProcessingInstructionNodeStep;
+import org.jaxen.expr.RelationalExpr;
+import org.jaxen.expr.Step;
+import org.jaxen.expr.TextNodeStep;
+import org.jaxen.expr.UnaryExpr;
+import org.jaxen.expr.UnionExpr;
+import org.jaxen.expr.VariableReferenceExpr;
+import org.jaxen.expr.Visitor;
 
 public class XPath2XMLVisitor implements Visitor {
     protected PrintWriter printer;

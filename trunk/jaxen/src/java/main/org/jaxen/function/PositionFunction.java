@@ -62,11 +62,11 @@
 
 package org.jaxen.function;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
-
-import java.util.List;
 
 /**
  * <p><b>4.1</b> <code><i>number</i> position()</code>

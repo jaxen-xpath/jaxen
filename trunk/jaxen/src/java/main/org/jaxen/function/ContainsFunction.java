@@ -61,12 +61,12 @@
 
 package org.jaxen.function;
 
+import java.util.List;
+
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
-
-import java.util.List;
 
 /**
  *  <p><b>4.2</b> <code><i>boolean</i> contains(<i>string</i>,<i>string</i>)</code> 

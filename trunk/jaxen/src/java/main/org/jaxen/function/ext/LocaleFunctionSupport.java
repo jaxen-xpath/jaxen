@@ -61,16 +61,13 @@
 
 package org.jaxen.function.ext;
 
-import org.jaxen.Context;
-import org.jaxen.Function;
-import org.jaxen.FunctionCallException;
-import org.jaxen.Navigator;
-import org.jaxen.function.StringFunction;
-
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
+
+import org.jaxen.Function;
+import org.jaxen.Navigator;
+import org.jaxen.function.StringFunction;
 
 /**
  * <p>An abastract base class for Locale-specific extension 
