@@ -18,15 +18,15 @@ public class PrecedingAxisIterator implements Iterator
         ReverseDescendantOrSelfAxisIterator(Object contextNode)
             throws UnsupportedAxisException
         {
-            pushIterator(navigator.getSelfAxisIterator(contextNode));
-            init(contextNode, navigator);
+            pushIterator(PrecedingAxisIterator.this.navigator.getSelfAxisIterator(contextNode));
+            init(contextNode, PrecedingAxisIterator.this.navigator);
         }
         
         protected Iterator createIterator(Object contextNode) 
         {
             try
             {
-                Iterator iter = navigator.getChildAxisIterator(contextNode);
+                Iterator iter = PrecedingAxisIterator.this.navigator.getChildAxisIterator(contextNode);
 
                 if (iter == null)
                 {
