@@ -11,29 +11,29 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions, and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions, and the disclaimer that follows 
- *    these conditions in the documentation and/or other materials 
+ *    notice, this list of conditions, and the disclaimer that follows
+ *    these conditions in the documentation and/or other materials
  *    provided with the distribution.
  *
  * 3. The name "Jaxen" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
  *    written permission, please contact license@jaxen.org.
- * 
+ *
  * 4. Products derived from this software may not be called "Jaxen", nor
  *    may "Jaxen" appear in their name, without prior written permission
  *    from the Jaxen Project Management (pm@jaxen.org).
- * 
- * In addition, we request (but do not require) that you include in the 
- * end-user documentation provided with the redistribution and/or in the 
+ *
+ * In addition, we request (but do not require) that you include in the
+ * end-user documentation provided with the redistribution and/or in the
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
  *      Jaxen Project (http://www.jaxen.org/)."
- * Alternatively, the acknowledgment may be graphical using the logos 
+ * Alternatively, the acknowledgment may be graphical using the logos
  * available at http://www.jaxen.org/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
@@ -50,12 +50,12 @@
  * SUCH DAMAGE.
  *
  * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project and was originally
+ * created by bob mcwhirter <bob@werken.com> and
+ * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <http://www.jaxen.org/>.
- * 
+ *
  * $Id$
  */
 
@@ -72,6 +72,7 @@ import java.util.NoSuchElementException;
 
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
+import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -86,7 +87,7 @@ import org.w3c.dom.ProcessingInstruction;
  *  This class is not intended for direct usage, but is
  *  used by the Jaxen engine during evaluation.
  *  </p>
- * 
+ *
  *  <p>This class implements the org.jaxen.DefaultNavigator interface
  *  for the Jaxen XPath library, version 1.0beta3 (it is not guaranteed
  *  to work with subsequent releases).  This adapter allows the Jaxen
@@ -145,7 +146,7 @@ public class DocumentNavigator extends DefaultNavigator
      *
      * @return A singleton instance of a DocumentNavigator.
      */
-    public static DocumentNavigator getInstance ()
+    public static Navigator getInstance ()
     {
         return SINGLETON;
     }
@@ -751,7 +752,7 @@ public class DocumentNavigator extends DefaultNavigator
     }
 
     /**
-     * Use JAXP to load a namespace aware document from a given URI 
+     * Use JAXP to load a namespace aware document from a given URI
      *
      * @param uri is the URI of the document to load
      * @return the new W3C DOM Level 2 Document instance
@@ -1000,6 +1001,6 @@ public class DocumentNavigator extends DefaultNavigator
             return null;
     }
 
-}    
+}
 
 // end of DocumentNavigator.java
