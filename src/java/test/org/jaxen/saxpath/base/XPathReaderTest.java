@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 werken digital.
+ * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,26 +20,26 @@
  *    these conditions in the documentation and/or other materials
  *    provided with the distribution.
  *
- * 3. The name "SAXPath" must not be used to endorse or promote products
+ * 3. The name "Jaxen" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
- *    written permission, please contact license@saxpath.org.
+ *    written permission, please contact license@jaxen.org.
  *
- * 4. Products derived from this software may not be called "SAXPath", nor
- *    may "SAXPath" appear in their name, without prior written permission
- *    from the SAXPath Project Management (pm@saxpath.org).
+ * 4. Products derived from this software may not be called "Jaxen", nor
+ *    may "Jaxen" appear in their name, without prior written permission
+ *    from the Jaxen Project Management (pm@jaxen.org).
  *
  * In addition, we request (but do not require) that you include in the
  * end-user documentation provided with the redistribution and/or in the
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
- *      SAXPath Project (http://www.saxpath.org/)."
+ *      Jaxen Project (http://www.jaxen.org/)."
  * Alternatively, the acknowledgment may be graphical using the logos
- * available at http://www.saxpath.org/
+ * available at http://www.jaxen.org/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE SAXPath AUTHORS OR THE PROJECT
+ * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
@@ -51,13 +51,14 @@
  *
  * ====================================================================
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the SAXPath Project and was originally
+ * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
- * SAXPath Project, please see <http://www.saxpath.org/>.
+ * Jaxen Project, please see <http://www.jaxen.org/>.
  *
  * $Id$
  */
+
 
 
 package org.jaxen.saxpath.base;
