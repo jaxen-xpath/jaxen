@@ -150,7 +150,7 @@ public class LangFunction implements Function
                         isSublang(nav.getAttributeStringValue(attr), lang);
                 }
             }
-            element = nav.getParentNode(node);
+            element = nav.getParentNode(element);
         }
         return false;
     }
