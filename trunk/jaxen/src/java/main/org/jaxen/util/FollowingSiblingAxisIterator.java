@@ -63,10 +63,8 @@
 
 package org.jaxen.util;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import org.jaxen.Navigator;
@@ -79,71 +77,44 @@ public class FollowingSiblingAxisIterator implements Iterator
 
     private Iterator  siblingIter;
 
-    private Object    nextObj;
-
     public FollowingSiblingAxisIterator(Object contextNode,
                                         Navigator navigator) throws UnsupportedAxisException
     {
         this.contextNode = contextNode;
         this.navigator   = navigator;
-
         init();
-
-        stepAhead();
     }
 
     private void init() throws UnsupportedAxisException
     {
         Object parent = this.navigator.getParentNode( this.contextNode );
 
-        List siblings = Collections.EMPTY_LIST;
-
-        boolean foundSelf = false;
-
         if ( parent != null )
         {
-            Iterator childIter = this.navigator.getChildAxisIterator( parent );
+            siblingIter = this.navigator.getChildAxisIterator( parent );
             Object   eachChild = null;
             
-            siblings = new ArrayList();
-            
-            while ( childIter.hasNext() )
+            while ( siblingIter.hasNext() )
             {
-                eachChild = childIter.next();
-
-                if ( foundSelf )
-                {
-                    siblings.add( eachChild );
-                }
-                else if ( eachChild == this.contextNode )
-                {
-                    foundSelf = true;
-                }
+                eachChild = siblingIter.next();
+                if ( eachChild == this.contextNode ) break;
             }
         }
+        else {
+            // ???? make an EmptyIterator class
+            siblingIter = (new LinkedList()).iterator();
+        }
 
-        this.siblingIter = siblings.iterator();
     }
 
     public boolean hasNext()
     {
-        return ( this.nextObj != null );
+        return siblingIter.hasNext();
     }
 
     public Object next() throws NoSuchElementException
     {
-        if ( ! hasNext() )
-        {
-            throw new NoSuchElementException();
-        }
-
-        Object obj = this.nextObj;
-
-        this.nextObj = null;
-
-        stepAhead();
-
-        return obj;
+        return siblingIter.next();
     }
 
     public void remove() throws UnsupportedOperationException
@@ -151,24 +122,4 @@ public class FollowingSiblingAxisIterator implements Iterator
         throw new UnsupportedOperationException();
     }
 
-    private void stepAhead()
-    {
-        if ( this.nextObj != null )
-        {
-            return;
-        }
-
-        Object obj = null;
-
-        while ( siblingIter.hasNext() )
-        {
-            obj = siblingIter.next();
-
-            if ( this.navigator.isElement( obj ) )
-            {
-                this.nextObj = obj;
-                break;
-            }
-        }
-    }
 }
