@@ -310,6 +310,32 @@ public class XPathReaderTest extends TestCase
         }
     }    
     
+    public void testUnionofNodesAndNonNodes()
+    {
+
+        try
+        {
+            XPath xpath = new DOMXPath( "count(//*) | //* " );
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+        
+            Document doc = builder.parse( "xml/basic.xml" );
+
+            xpath.selectNodes( doc );
+            fail( "Should have thrown XPathSyntaxException for \"count(//*) | //* ");
+        }
+        catch( JaxenException e )
+        {
+            assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
+        }
+    }    
+    
     public void testValidAxis()
     {
         XPathReader reader = new XPathReader();
