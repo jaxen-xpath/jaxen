@@ -71,6 +71,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import junit.framework.TestCase;
 
 import org.jaxen.BaseXPath;
+import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
@@ -179,6 +180,38 @@ public class BooleanTest extends TestCase {
         List result = xpath.selectNodes(a);
         assertEquals(1, result.size());
         assertEquals(Boolean.TRUE, result.get(0));
+        
+    }    
+
+    public void testBooleanFunctionRequiresOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("boolean()");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        
+        try {
+            xpath.selectNodes(a);
+            fail("Allowed boolean function with no arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+
+    public void testBooleanFunctionRequiresExactlyOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("boolean('', '')");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        
+        try {
+            xpath.selectNodes(a);
+            fail("Allowed boolean function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
         
     }    
 
