@@ -62,7 +62,6 @@
 
 package org.jaxen;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -70,12 +69,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
-import nu.xom.Namespace;
-import nu.xom.Nodes;
-import nu.xom.canonical.Canonicalizer;
 
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.NamespaceNode;
@@ -500,10 +495,10 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element root = doc.createElement("root");
         superroot.appendChild(root);
         
-        org.w3c.dom.Attr p0 = doc.createAttributeNS(Namespace.XML_NAMESPACE, "xml:id");
+        org.w3c.dom.Attr p0 = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:id");
         p0.setValue("p0");
         superroot.setAttributeNodeNS(p0);
-        org.w3c.dom.Attr p1 = doc.createAttributeNS(Namespace.XML_NAMESPACE, "xml:id");
+        org.w3c.dom.Attr p1 = doc.createAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:id");
         p1.setValue("p1");
         root.setAttributeNodeNS(p1);
         
