@@ -77,16 +77,11 @@ public class PatternParser
             Pattern rhs = convertExpr( unionExpr.getRHS() );
             return new UnionPattern( lhs, rhs );
         }
-        else if ( expr instanceof BinaryExpr )
+        else 
         {
-            BinaryExpr binaryExpr = (BinaryExpr) expr;
             LocationPathPattern answer = new LocationPathPattern();
-            answer.addFilter( new DefaultFilterExpr( binaryExpr ) );
+            answer.addFilter( new DefaultFilterExpr( expr ) );
             return answer;
-        }
-        else
-        {
-            throw new JaxenException( "Cannot convert: " + expr + " to a Pattern" );
         }
     }
     
