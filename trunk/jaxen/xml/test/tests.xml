@@ -460,6 +460,15 @@
       <valueOf select="substring('12345',1,15)">12345</valueOf>
     </context>
 
+	<!-- Some tests for the normalize-space() function -->
+	
+	<context select="/">
+	  <valueOf select="normalize-space('    abc    ')">abc</valueOf>
+	  <valueOf select="normalize-space(' a  b  c  ')">a b c</valueOf>
+	  <valueOf select="normalize-space(' a &#x0d; b &#x0a;  c  ')">a b c</valueOf>
+	  <!-- Next test case addresses issue JAXEN-22 -->
+	  <valueOf select="normalize-space(' ')"></valueOf>
+	</context>
   </document>
 
 
@@ -530,7 +539,11 @@
     <context select="/">
       <!-- NOTE: /a/b/c selects elements in no namespace only! -->
       <test select="/a/b/c" count="0"/>
-      <test select="/x:a/x:b/x:c" count="0"/>
+      <!-- 
+        The following test uses an unbound prefix 'x' and should throw an exception.
+        Addresses issue JAXEN-18
+      -->
+      <test select="/x:a/x:b/x:c" count="0" exception="true"/>
     </context>
     <context select="/"
 	     xmlns:dummy="http://dummyNamespace/">

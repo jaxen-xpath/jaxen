@@ -100,9 +100,7 @@
       </classpath>
       <batchtest todir="${testreportdir}">
         <fileset dir="src/java/test">
-<!--
-          <include name="**/*Test.java">
--->
+          <include name="**/*Test.java"/>
           <include name="org/jaxen/javabean/*Test.java">
           </include>
         </fileset>

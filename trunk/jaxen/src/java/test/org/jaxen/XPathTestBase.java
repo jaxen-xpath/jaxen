@@ -255,6 +255,7 @@ public abstract class XPathTestBase extends TestCase
         this.executionContext.push( xpathStr );
 
         String count = test.attributeValue( "count" );
+		String exception = test.attributeValue( "exception" );
 
         BaseXPath xpath = new BaseXPath( xpathStr );
 
@@ -295,7 +296,15 @@ public abstract class XPathTestBase extends TestCase
                 log ( debug,
                       "      ## SKIPPED -- Unsupported Axis" );
             }
-        }
+            catch (JaxenException e) {
+            	// If an exception attribute was switched on, this is the desired behaviour..
+            	
+            	if (exception !=null && (exception.equals("on") || exception.equals("true"))) {
+            		log (debug, "    Caught expected exception "+e.getMessage());
+            	} else
+            		throw e;
+            }
+        }      
 
         Iterator valueOfIter = test.elementIterator( "valueOf" );
 
