@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests xmlns:var="http://jaxen.org/test-harness/var">
+    <!-- test for jaxen-3 -->
+  <document url="xml/jaxen3.xml">
+    <context select="/">
+      <test select="/Configuration/hostname/attrlist/hostname[. = 'CE-A'] " count="1"/>
+    </context>
+  </document>
+
     <!-- parser test cases all of which should fail-->
   <document url="xml/numbers.xml">
     <context select="/">
