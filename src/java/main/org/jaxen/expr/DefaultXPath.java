@@ -6,7 +6,7 @@ import org.jaxen.Context;
 
 import java.util.List;
 
-class DefaultXPath implements XPath
+public class DefaultXPath implements XPath
 {
     private Expr rootExpr;
 

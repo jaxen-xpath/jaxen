@@ -9,7 +9,7 @@ import org.jaxen.Navigator;
 import java.util.List;
 import java.util.Collections;
 
-class DefaultAbsoluteLocationPath extends DefaultLocationPath 
+public class DefaultAbsoluteLocationPath extends DefaultLocationPath 
 {
     public DefaultAbsoluteLocationPath()
     {

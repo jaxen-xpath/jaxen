@@ -8,7 +8,7 @@ import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
 
-class DefaultNameStep extends DefaultStep
+public class DefaultNameStep extends DefaultStep
 {
     private String prefix;
     private String localName;
@@ -59,8 +59,6 @@ class DefaultNameStep extends DefaultStep
     public boolean matches(Object node,
                            ContextSupport contextSupport)
     {
-        //System.err.println("does match? --> " + node );
-
         Navigator nav  = contextSupport.getNavigator();
 
         String nodeUri  = null;
@@ -100,6 +98,7 @@ class DefaultNameStep extends DefaultStep
             return false;
         }
 
+
         if ( matchesAnyNamespace )
         {
             return matchesAnyName || getLocalName().equals( nodeName );
@@ -108,6 +107,7 @@ class DefaultNameStep extends DefaultStep
         {
             String myPrefix = getPrefix();            
             String myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
+
             if ( myUri == null ) 
             {
                 myUri = contextSupport.translateNamespacePrefixToUri( myPrefix );

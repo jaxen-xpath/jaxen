@@ -246,7 +246,7 @@ public class DefaultXPathFactory implements XPathFactory
         return new DefaultPredicate( predicateExpr );
     }
 
-    private IterableAxis getIterableAxis(int axis)
+    protected IterableAxis getIterableAxis(int axis)
     {
         IterableAxis iter = null;
 

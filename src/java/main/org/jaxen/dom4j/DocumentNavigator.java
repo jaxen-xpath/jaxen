@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-public class Dom4jNavigator extends DefaultNavigator
+public class DocumentNavigator extends DefaultNavigator
 {
     public boolean isElement(Object obj)
     {

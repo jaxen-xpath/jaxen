@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-public class JdomNavigator extends DefaultNavigator
+public class DocumentNavigator extends DefaultNavigator
 {
     public boolean isElement(Object obj)
     {
@@ -179,6 +179,11 @@ public class JdomNavigator extends DefaultNavigator
 
     public Object getDocumentNode(Object contextNode)
     {
+        if ( contextNode instanceof Document )
+        {
+            return contextNode;
+        }
+
         Element elem = (Element) contextNode;
 
         return elem.getDocument();
@@ -266,5 +271,40 @@ public class JdomNavigator extends DefaultNavigator
         Comment cmt = (Comment) obj;
 
         return cmt.getText();
+    }
+
+    public String translateNamespacePrefixToUri(String prefix, Object context)
+    {
+        Element element = null;
+        if ( context instanceof Element ) 
+        {
+            element = (Element) context;
+        }
+        else if ( context instanceof Attribute )
+        {
+            element = ((Attribute)context).getParent();
+        }
+        else if ( context instanceof Text )
+        {
+            element = ((Text)context).getParent();
+        }
+        else if ( context instanceof Comment )
+        {
+            element = ((Comment)context).getParent();
+        }
+        else if ( context instanceof ProcessingInstruction )
+        {
+            element = ((ProcessingInstruction)context).getParent();
+        }
+
+        if ( element != null )
+        {
+            Namespace namespace = element.getNamespace( prefix );
+            if ( namespace != null ) 
+            {
+                return namespace.getURI();
+            }
+        }
+        return null;
     }
 }

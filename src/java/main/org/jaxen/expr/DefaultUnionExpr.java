@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
-class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
+public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 {
     public DefaultUnionExpr(Expr lhs,
                             Expr rhs)
