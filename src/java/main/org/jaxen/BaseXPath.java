@@ -699,10 +699,10 @@ public class BaseXPath implements XPath, Serializable
     }
  
 
-    /** Select only the first node that is selectable by this XPath
+    /** Return only the first node that is selected by this XPath
      *  expression.  If multiple nodes match, only one node will be
      *  returned. The selected node will be the first
-     *  selectable node in document-order, as defined by the XPath
+     *  selected node in document-order, as defined by the XPath
      *  specification.  
      *  </p>
      *
