@@ -229,6 +229,20 @@ public class DocumentNavigator extends DefaultNavigator
         return getStringValue( elem );
     }
 
+    public String getProcessingInstructionTarget(Object obj)
+    {
+        Instruction pi = (Instruction) obj;
+
+        return pi.getTarget();
+    }
+
+    public String getProcessingInstructionData(Object obj)
+    {
+        Instruction pi = (Instruction) obj;
+
+        return pi.getContent();
+    }
+
     private String getStringValue(Element e)
     {
         StringBuffer buf = new StringBuffer();
