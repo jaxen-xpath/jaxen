@@ -744,8 +744,9 @@
   <!-- Unit Testing Targets                                                -->
   <!-- =================================================================== -->
 
-  <target name="test.pattern">
-    <antcall target="test.internal">
+  <target name="test.pattern"
+          depends="compile.core.test">
+    <antcall target="internal.test">
        <param name="test.packages" value="org/jaxen/pattern/**"/>
     </antcall>
   </target>

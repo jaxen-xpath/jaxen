@@ -165,28 +165,29 @@ public class PatternParser
             String localName = nameStep.getLocalName();
             String prefix = nameStep.getPrefix();
             int axis = nameStep.getAxis();
-            if ( ! nameStep.isMatchesAnyName() )
+            short nodeType = Pattern.ANY_NODE;
+            if ( axis == Axis.ATTRIBUTE )
             {
-                short nodeType = Pattern.ANY_NODE;
-                if ( axis == Axis.ATTRIBUTE )
+                nodeType = Pattern.ATTRIBUTE_NODE;
+            }
+            if ( nameStep.isMatchesAnyName() )
+            {
+                if ( prefix.length() == 0 || prefix.equals( "*" ) ) 
                 {
-                    nodeType = Pattern.ATTRIBUTE_NODE;
-                }
-                if ( prefix != null && prefix.length() > 0 && ! prefix.equals( "*" ) )
-                {
-                    path.setNodeTest( new NamespaceTest( prefix, nodeType ) );
+                    if ( axis == Axis.ATTRIBUTE )
+                    {
+                        path.setNodeTest( NodeTypeTest.ATTRIBUTE_TEST );
+                    }
                 }
                 else 
                 {
-                    path.setNodeTest( new NameTest( localName, nodeType ) );
+                    path.setNodeTest( new NamespaceTest( prefix, nodeType ) );
                 }
             }
             else 
             {
-                if ( axis == Axis.ATTRIBUTE )
-                {
-                    path.setNodeTest( NodeTypeTest.ATTRIBUTE_TEST );
-                }
+                path.setNodeTest( new NameTest( localName, nodeType ) );
+                // XXXX: should support namespace in the test too
             }
             return convertDefaultStep(path, nameStep);
         }

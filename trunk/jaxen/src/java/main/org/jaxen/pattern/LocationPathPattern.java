@@ -186,7 +186,11 @@ public class LocationPathPattern extends Pattern {
     
     public double getPriority() 
     {
-        return 0.0;
+        if ( filters != null ) 
+        {
+            return 0.5;
+        }
+        return nodeTest.getPriority();
     }
 
 
