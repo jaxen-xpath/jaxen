@@ -222,13 +222,11 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
         Map unique = new IdentityHashMap();
         List interimSet = new ArrayList();
         List newNodeSet = new ArrayList();
-        Object eachContextNode = null;
-        Object eachAxisNode = null;
         
         if (namedAccess) {
             String uri = support.translateNamespacePrefixToUri(prefix);
             for (int i = 0; i < contextSize; ++i) {
-                eachContextNode = contextNodeSet.get(i);
+                Object eachContextNode = contextNodeSet.get(i);
 
                 Iterator axisNodeIter = getIterableAxis().namedAccessIterator(
                                 eachContextNode, support, localName, prefix, uri);
@@ -238,7 +236,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
                 // ensure only one of each node in the result
                 while (axisNodeIter.hasNext()) {
-                    eachAxisNode = axisNodeIter.next();
+                    Object eachAxisNode = axisNodeIter.next();
                     if (unique.put(eachAxisNode, PRESENT) == null) {
                         interimSet.add(eachAxisNode);
                     }
@@ -251,7 +249,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
             
         } else {
             for (int i = 0; i < contextSize; ++i) {
-                eachContextNode = contextNodeSet.get(i);
+                Object eachContextNode = contextNodeSet.get(i);
                 // ???? What if we first grabbed all the iterators for 
                 // each contextNode and then sorted/stacked them somehow in document 
                 // order; and then evaluated them? This would probably break positional predicates
@@ -265,7 +263,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 // XXX This iterator goes in the wrong order for descendant axes
                 // breadth-first instead of depth first; this is where the reshuffling happens
                 while (axisNodeIter.hasNext()) {
-                    eachAxisNode = axisNodeIter.next();
+                    Object eachAxisNode = axisNodeIter.next();
 
                     if (matches(eachAxisNode, support)) {
                         if (unique.put(eachAxisNode, PRESENT) == null) {
