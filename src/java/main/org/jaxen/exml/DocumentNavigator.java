@@ -14,7 +14,7 @@ import electric.xml.CData;
 import electric.xml.Instruction;
 import electric.xml.Child;
 import electric.xml.Children;
-//import electric.xml.Namespace;
+import electric.xml.Parent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,13 +97,9 @@ public class DocumentNavigator extends DefaultNavigator
 
     public Iterator getChildAxisIterator(Object contextNode)
     {
-        if ( contextNode instanceof Element )
+        if ( contextNode instanceof Parent )
         {
-            return new ElementsIterator( ((Element)contextNode).getElements() );
-        }
-        else if ( contextNode instanceof Document )
-        {
-            return new ElementsIterator( ((Document)contextNode).getElements() );
+            return new ChildrenIterator( ((Parent)contextNode).getChildren() );
         }
 
         return null;
