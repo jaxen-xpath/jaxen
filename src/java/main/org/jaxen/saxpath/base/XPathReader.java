@@ -914,10 +914,31 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
     void additiveExpr() throws org.jaxen.saxpath.SAXPathException
     {
         getXPathHandler().startAdditiveExpr();
+        getXPathHandler().startAdditiveExpr();
 
         multiplicativeExpr();
 
         int operator = Operator.NO_OP;
+
+        switch ( LA(1) )
+        {
+            case PLUS:
+            {
+                match( PLUS );
+                operator = Operator.ADD;
+                multiplicativeExpr();
+                break;
+            }
+            case MINUS:
+            {
+                match( MINUS );
+                operator = Operator.SUBTRACT;
+                multiplicativeExpr();
+                break;
+            }
+        }
+
+        getXPathHandler().endAdditiveExpr( operator );
 
         switch ( LA(1) )
         {
@@ -933,6 +954,11 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader, TokenTypes
                 match( MINUS );
                 operator = Operator.SUBTRACT;
                 additiveExpr();
+                break;
+            }
+            default:
+            {
+                operator = Operator.NO_OP;
                 break;
             }
         }
