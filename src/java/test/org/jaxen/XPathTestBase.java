@@ -75,6 +75,7 @@ import org.dom4j.Element;
 import org.dom4j.Namespace;
 import org.dom4j.io.SAXReader;
 import org.jaxen.function.StringFunction;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 public abstract class XPathTestBase extends TestCase
 {
@@ -96,6 +97,8 @@ public abstract class XPathTestBase extends TestCase
     public void setUp()
     {
         this.contextSupport = null;
+        System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                            "" );
     }
 
     public void tearDown()
