@@ -197,7 +197,7 @@ public class JaxenHandler implements XPathHandler
         endLocationPath();
     }
 
-    protected void endLocationPath()
+    protected void endLocationPath() throws JaxenException
     {
         LocationPath path = (LocationPath) peekFrame().removeFirst();
 

@@ -159,7 +159,7 @@ public class PatternHandler extends JaxenHandler
         endLocationPath();
     }
 
-    protected void endLocationPath() 
+    protected void endLocationPath() throws JaxenException
     {
         // start at the back, its the main pattern then add everything else as 
         LinkedList list = popFrame();
