@@ -19,6 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
+/** A Navigator for the <a href="http://dom4j.org">dom4j</a> model.
+ *
+ * @author bob mcwhirter (bob @ werken.com)
+ * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ * @version $Revision$
+ */
 public class DocumentNavigator extends DefaultNavigator
 {
     /** Should we just return new namespace declarations in //namespace::** or

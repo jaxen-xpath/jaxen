@@ -1,7 +1,9 @@
 
-import org.dom4j.Document;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import org.jaxen.dom4j.XPath;
 
@@ -11,21 +13,22 @@ import org.saxpath.XPathSyntaxException;
 import java.util.List;
 import java.util.Iterator;
 
-public class Dom4jDemo 
+public class DOMDemo 
 {
     public static void main(String[] args)
     {
         if ( args.length != 2 )
         {
-            System.err.println("usage: Dom4jDemo <document url> <xpath expr>");
+            System.err.println("usage: DOMDemo <document url> <xpath expr>");
             System.exit( 1 );
         }
 
         try
         {
-            SAXReader reader = new SAXReader();
-            
-            Document doc = reader.read( args[0] );
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+        
+            Document doc = builder.parse( args[0] );
             
             XPath xpath = new XPath( args[1] );
             
@@ -41,16 +44,7 @@ public class Dom4jDemo
             
             while ( resultIter.hasNext() )
             {
-                Object object = resultIter.next();
-                if ( object instanceof Node ) 
-                {
-                    Node node = (Node) object;
-                    System.out.println( node.asXML() );
-                }
-                else 
-                {
-                    System.out.println( object );
-                }
+                System.out.println( resultIter.next() );
             }
         }
         catch (XPathSyntaxException e)
