@@ -7,8 +7,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.jaxen.BaseXPath;
 
-/**
- * An XPath implementation for the W3C DOM model
+/** An XPath implementation for the W3C DOM model
  *
  * <p>This is the main entry point for matching an XPath against a DOM
  * tree.  You create a compiled XPath object, then match it against
@@ -20,32 +19,35 @@ import org.jaxen.BaseXPath;
  * List results = path.selectNodes(domContextNode);
  * </pre>
  *
+ * @see BaseXPath
+ *
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ *
  * @version $Revision$
  */
 public class XPath extends BaseXPath
 {
-
-    /**
-     * Constructor.
+    /** Construct given an XPath expression string.
      *
-     * @param xpathExpr A string containing an XPath expression.
-     * @exception JaxenException If there is a syntactic error in
-     *            the XPath expression.
+     *  @param xpathExpr The XPath expression.
+     *
+     *  @throws JaxenException if there is a syntax error while
+     *          parsing the expression.
      */
     public XPath(String xpathExpr) throws JaxenException
     {
         super( xpathExpr );
     }
 
-
-    /**
-     * Generate a navigator object for a DOM tree.
+    /** Retrieve the DOM-specific {@link Navigator} 
+     *  for us in evaluating this XPath expression.
      *
-     * <p>This method is used internally by the superclass to get
-     * the right kind of navigator.</p>
+     * <p>
+     * This method is used internally by the superclass to get
+     * the right kind of navigator.
+     * </p>
      *
-     * @return An instance of a navigator for a DOM2 object tree.
+     *  @return The implementation-specific <code>Navigator</code>.
      */
     public Navigator getNavigator()
     {
@@ -53,5 +55,3 @@ public class XPath extends BaseXPath
     }
 
 } 
-
-// end of XPath.java

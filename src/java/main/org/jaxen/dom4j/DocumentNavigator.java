@@ -27,21 +27,32 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Iterator;
 
-/** A Navigator for the <a href="http://dom4j.org">dom4j</a> model.
+/** Interface for navigating around the EXML object model.
  *
- * @author bob mcwhirter (bob @ werken.com)
- * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
- * @version $Revision$
+ *  <p>
+ *  This class is not intended for direct usage, but is
+ *  used by the Jaxen engine during evaluation.
+ *  </p>
+ *
+ *  @see XPath
+ *
+ *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
 public class DocumentNavigator extends DefaultNavigator
 {
     private transient SAXReader reader;
-    
+
+    /** Singleton implementation.
+     */
     private static class Singleton
     {
+        /** Singleton instance.
+         */
         private static DocumentNavigator instance = new DocumentNavigator();
     }
 
+    /** Retrieve the singleton instance of this <code>DocumentNavigator</code>.
+     */
     public static DocumentNavigator getInstance()
     {
         return Singleton.instance;

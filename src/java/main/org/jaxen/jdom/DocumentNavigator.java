@@ -25,10 +25,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/** Interface for navigating around the EXML object model.
+ *
+ *  <p>
+ *  This class is not intended for direct usage, but is
+ *  used by the Jaxen engine during evaluation.
+ *  </p>
+ *
+ *  @see XPath
+ *
+ *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ */
 public class DocumentNavigator extends DefaultNavigator
 {
+    /** Singleton implementation.
+     */
     private static class Singleton
     {
+        /** Singleton instance.
+         */
         private static DocumentNavigator instance = new DocumentNavigator();
     }
 
