@@ -1,0 +1,968 @@
+<project default="all" basedir=".">
+
+   <!-- Patternsets for compiling support for -->
+   <!-- only some of the supported models.   -->
+ 
+   <patternset id="jaxen.core">
+     <include name="**/*"/>
+     <exclude name="org/jaxen/dom4j/*"/>
+     <exclude name="org/jaxen/jdom/*"/>
+     <exclude name="org/jaxen/dom/*"/>
+     <exclude name="org/jaxen/exml/*"/>
+
+   </patternset>
+
+   <patternset id="jaxen.dom4j">
+      <include name="org/jaxen/dom4j/*"/>
+   </patternset>
+
+   <patternset id="jaxen.jdom">
+      <include name="org/jaxen/jdom/*"/>
+   </patternset>
+
+   <patternset id="jaxen.dom">
+      <include name="org/jaxen/dom/*"/>
+   </patternset>
+
+   <patternset id="jaxen.exml">
+      <include name="org/jaxen/exml/*"/>
+   </patternset>
+
+   <patternset id="jaxen.samples">
+      <include name="*"/>
+
+   </patternset>
+
+  <!-- =================================================================== -->
+  <!-- Initialization target                                               -->
+  <!-- =================================================================== -->
+
+  <target name="init">
+
+    <tstamp/>
+
+    <property name="Name"            value="Jaxen"/>
+
+    <property name="name"            value="jaxen"/>
+    <property name="version"         value="1.0-FCS"/>
+    <property name="current.version" value="1.0-FCS"/>
+    <!-- <property name="current.version" value="1.0-beta-8"/> -->
+    <property name="year"            value="2002"/>
+
+    <property name="copyright.owner"  value="bob mcwhirter &amp; James Strachan"/>
+    <property name="copyright.year"   value="2002"/>
+    <property name="sourceforge.link" value="&lt;p&gt; &lt;img src='http://sourceforge.net/sflogo.php?group_id=16035' width='88' height='31' border='0' alt='SourceForge Logo' /&gt;"/>
+
+    <echo message="----------- ${Name} ${version} [${year}] ------------"/>
+
+    <!-- Object Models Supported -->
+
+    <available classname="org.dom4j.Document"    property="support.dom4j"/>
+    <available classname="org.jdom.Document"     property="support.jdom"/>
+    <available classname="org.w3c.dom.Document"  property="support.dom"/>
+    <available classname="electric.xml.Document" property="support.exml"/>
+
+    <!-- Compilation Properties -->
+
+    <property name="build.compiler" value="classic"/>
+    <property name="debug"          value="on"/>
+    <property name="optimize"       value="on"/>
+    <property name="deprecation"    value="on"/>
+
+    <property name="src.dir"      value="./src/java/main"/>
+    <property name="doc.dir"      value="./src/doc"/>
+    <property name="samples.dir"  value="./src/java/samples"/>
+    <property name="test.dir"     value="./src/java/test"/>
+
+    <property name="lib.dir"      value="./lib"/>
+
+    <property name="packages.all"  value="org.*"/>
+    <property name="packages.api"  value="org.jaxen.*"/>
+
+    <property name="build.dir"      value="./build"/>
+    <property name="build.src"      value="./build/src"/>
+    <property name="build.src.main" value="./build/src/main"/>
+    <property name="build.src.test" value="./build/src/test"/>
+    <property name="build.src.samples" value="./build/src/samples"/>
+
+    <property name="build.dest"      value="./build/classes"/>
+    <property name="build.dest.main" value="./build/classes/main"/>
+    <property name="build.dest.test" value="./build/classes/test"/>
+    <property name="build.dest.samples" value="./build/classes/samples"/>
+
+    <property name="build.doc"  value="./build/doc"/>
+
+    <property name="build.apidocs"       value="./build/doc/apidocs"/>
+    <property name="build.javadocs"      value="./build/doc/javadoc"/>
+
+    <property name="build.generated.src" value="./build/generated"/>
+
+    <property name="dist.root"     value="./dist"/>
+    <property name="dist.dir"      value="${dist.root}/tmp/${name}-${version}"/>
+    <property name="dist.jar.dir"  value="${dist.root}/tmp"/>
+    <property name="dist.target"   value="${dist.root}"/>
+
+    <property name="web.htdocs"  value="../htdocs"/>
+    <property name="web.dist"    value="${web.htdocs}/dist"/>
+    <property name="web.ftp"     value="./build/ftp"/>
+
+    <property name="test.packages" value="**"/>
+
+    <property name="xml.format.options" value="-indentSize 2 -trimText -newlines"/>
+
+    <filter token="year"    value="${year}"/>
+    <filter token="version" value="${version}"/>
+    <filter token="date"    value="${TODAY}"/>
+    <filter token="log"     value="true"/>
+    <filter token="verbose" value="true"/>
+
+    <!-- JDK1.1 collections -->
+
+    <property name="coll.import" value="com.sun.java.util.collections"/>
+    <available classname="${coll.import}.Collection" property="coll.present"/>
+  </target>
+
+  <target name="display.config"
+          depends="init">
+
+    <property name="support.dom4j" value="Not Supported"/>
+    <property name="support.jdom"  value="Not Supported"/>
+
+    <property name="support.dom"   value="Not Supported"/>
+    <property name="support.exml"  value="Not Supported"/>
+
+    <available classname="org.dom4j.Document"    
+               property="support.dom4j"
+               value="Supported"/>
+
+    <available classname="org.jdom.Document"     
+               property="support.jdom"
+               value="Supported"/>
+
+    <available classname="org.w3c.dom.Document"  
+               property="support.dom"
+               value="Supported"/>
+
+    <available classname="electric.xml.Document" 
+               property="support.exml"
+               value="Supported"/>
+
+    <echo message="Supported Models"/>
+    <echo message="-------------------------------------------------------------"/>
+    <echo message="   dom4j.... ${support.dom4j}"/>
+    <echo message="   jdom..... ${support.jdom}"/>
+    <echo message="   dom...... ${support.dom}"/>
+    <echo message="   EXML..... ${support.exml}"/>
+    <echo message="-------------------------------------------------------------"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Help on usage                                                       -->
+  <!-- =================================================================== -->
+
+  <target name="usage">
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="Jaxen Build file"/>
+    <echo message="-------------------------------------------------------------"/>
+
+    <echo message=""/>
+    <echo message=" available targets are:"/>
+    <echo message=""/>
+    <echo message="   all      --> cleans then builds everything (default)"/>
+    <echo message="   package  --> generates jaxen-full.jar file"/>
+    <echo message="   jars     --> generates all of the jaxen jar files"/>
+    <echo message="   compile  --> compiles the source code"/>
+    <echo message="   doc      --> generates the website documentation"/>
+    <echo message="   api      --> generates the API documentation"/>
+
+    <echo message="   javadoc  --> generates the full JavaDoc documentation"/>
+    <echo message="   clean    --> cleans up the directory"/>
+    <echo message="   test     --> builds and runs the unit tests"/>
+    <echo message="   release  --> builds a release distribution and updates the local website"/>
+    <echo message="   config   --> displays configuration information"/>
+    <echo message=""/>
+    <echo message="-------------------------------------------------------------"/>
+    <echo message=""/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the build directory                                        -->
+  <!-- =================================================================== -->
+  <target name="prepare" depends="init">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.dest}"/>
+    <mkdir dir="${build.dest.main}"/>
+    <mkdir dir="${build.dest.test}"/>
+
+    <mkdir dir="${build.dest.samples}"/>
+    <mkdir dir="${build.src}"/>
+    <mkdir dir="${build.src.main}"/>
+    <mkdir dir="${build.src.test}"/>
+    <mkdir dir="${build.src.samples}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Does replacement on files for dealing with collections.             -->
+
+  <!-- XXX The efficiency could be improved here; all replacements should  -->
+  <!-- XXX happen during one read/write phase and only for files that have -->
+  <!-- XXX changed.                                                        -->
+  <!-- =================================================================== -->
+
+  <target name="collections" 
+          if="coll.present">
+    <replace dir="${build.src}" includes="**"
+             token="java.util.Collection" value="${coll.import}.Collection"/>
+    <replace dir="${build.src}" includes="**"
+             token="java.util.Map" value="${coll.import}.Map"/>
+    <replace dir="${build.src}" includes="**"
+             token="java.util.HashMap" value="${coll.import}.HashMap"/>
+
+    <replace dir="${build.src}" includes="**"
+             token="java.util.List" value="${coll.import}.List"/>
+    <replace dir="${build.src}" includes="**"
+             token="java.util.LinkedList" value="${coll.import}.LinkedList"/>
+    <replace dir="${build.src}" includes="**"
+             token="java.util.Set" value="${coll.import}.Set"/>
+    <replace dir="${build.src}" includes="**"
+             token="java.util.HashSet" value="${coll.import}.HashSet"/>
+    <replace dir="${build.src}" includes="**"
+             token="java.util.Iterator" value="${coll.import}.Iterator"/>
+    <!-- The following replace handles the "import java.util.*" case by    -->
+    <!-- adding an "import com.sun.java.util.collections.*" after it.      -->
+    <!-- BTW, \u000a is the Unicode escape for a new line. (jhunter)       -->
+    <replace dir="${build.src}" includes="**"
+             token="java.util.*"
+             value="java.util.*;\u000aimport ${coll.import}.*"/>
+
+  </target>
+
+  <!-- ************************************************************************ -->
+  <!-- New Compilation Structure                                                -->
+  <!-- ************************************************************************ -->
+
+  <target name="internal.compile">
+    <javac destdir="${build.dest.main}"
+           debug="${debug}"
+           optimize="${optimize}"
+           deprecation="${deprecation}">
+        <src path="${build.src.main}"/>
+        <patternset refid="jaxen.${object.model}"/>
+
+    </javac>
+  </target>
+
+  <target name="internal.compile.test">
+    <javac destdir="${build.dest.test}"
+           debug="${debug}"
+           optimize="${optimize}"
+           deprecation="${deprecation}">
+        <src path="${build.src.test}"/>
+        <classpath path="${build.dest.test}"/>
+        <classpath path="${build.dest.main}"/>
+        <patternset refid="jaxen.${object.model}"/>
+
+    </javac>
+  </target>
+
+  <target name="internal.compile.samples">
+    <javac destdir="${build.dest.samples}"
+           debug="${debug}"
+           optimize="${optimize}"
+           deprecation="${deprecation}">
+        <src path="${build.src.samples}"/>
+        <classpath path="${build.dest.samples}"/>
+        <classpath path="${build.dest.main}"/>
+        <patternset refid="jaxen.${object.model}"/>
+
+    </javac>
+  </target>
+
+  <target name="internal.jar">
+    <jar jarfile="${build.dir}/${name}-${object.model}.jar"
+         basedir="${build.dest.main}">
+      <patternset refid="jaxen.${object.model}"/>
+    </jar>
+  </target>
+
+  <target name="internal.test">
+
+    <mkdir dir="${build.dir}/test-results"/>
+
+    <junit printsummary="yes" haltonfailure="yes">
+      <formatter type="plain"/>
+
+      <classpath>
+        <pathelement location="${build.dest.main}" />
+        <pathelement location="${build.dest.test}" />
+        <pathelement path="${java.class.path}" />
+
+      </classpath>
+
+      <batchtest fork="yes" todir="${build.dir}/test-results">
+        <fileset dir="${test.dir}">
+          <include name="${test.packages}/*Test.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <!-- ======================================================================== -->
+  <!-- Jaxen All                                                                -->
+  <!-- ======================================================================== -->
+  
+  <target name="compile.all" 
+          depends="compile.core,compile.dom4j,compile.jdom,compile.dom,compile.exml"/>
+
+  <target name="compile.all.test" 
+          depends="compile.all,compile.core.test,compile.dom4j.test,compile.jdom.test,compile.dom.test,compile.exml.test"/>
+
+  <target name="test.all"
+          depends="test.core,test.dom4j,test.jdom,test.dom"/>
+
+  <target name="jar.all"
+          depends="jar.core,jar.dom4j,jar.jdom,jar.dom,jar.exml"/>
+
+  <target name="prepare.all"
+          depends="prepare.core,prepare.dom4j,prepare.jdom,prepare.dom,prepare.exml"/>
+
+  <target name="demo.all"
+          depends="demo.dom4j,demo.jdom,demo.exml,demo.dom"/>
+
+  <target name="jar.full" depends="compile.all">
+    <jar jarfile="${build.dir}/${name}-full.jar"
+         basedir="${build.dest.main}"
+         manifest="src/conf/MANIFEST.MF">
+    </jar>
+  </target>
+
+  <!-- ======================================================================== -->
+
+  <!-- Jaxen Core                                                               -->
+  <!-- ======================================================================== -->
+
+  <target name="prepare.core" 
+          depends="prepare">
+    <copy todir="${build.src.main}">
+      <fileset dir="${src.dir}">
+         <patternset refid="jaxen.core"/>
+      </fileset>
+    </copy>
+
+  </target>
+
+  <target name="compile.core" 
+          depends="prepare.core">
+    <antcall target="internal.compile">
+      <param name="object.model" value="core"/> 
+    </antcall>
+  </target>
+
+  <target name="prepare.core.test"
+          depends="prepare">
+    <copy todir="${build.src.test}">
+
+      <fileset dir="${test.dir}">
+         <patternset refid="jaxen.core"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.core.test" 
+          depends="compile.core,prepare.core.test">
+    <antcall target="internal.compile.test">
+      <param name="object.model" value="core"/> 
+    </antcall>
+
+  </target>
+
+  <target name="test.core"
+          depends="compile.core.test">
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen"/>
+    </antcall>
+  </target>
+
+  <target name="jar.core"
+          depends="compile.core">
+    <antcall target="internal.jar">
+
+      <param name="object.model" value="core"/>
+    </antcall>
+  </target>
+
+  <!-- ======================================================================== -->
+  <!-- dom4j (http://dom4j.org/)                                                -->
+  <!-- ======================================================================== -->
+
+  <target name="prepare.dom4j" 
+          depends="prepare"
+          if="support.dom4j">
+    <copy todir="${build.src.main}">
+
+      <fileset dir="${src.dir}">
+        <patternset refid="jaxen.dom4j"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.dom4j" depends="compile.core,prepare.dom4j">
+    <antcall target="internal.compile">
+      <param name="object.model" value="dom4j"/> 
+    </antcall>
+
+  </target>
+
+  <target name="prepare.dom4j.test"
+          depends="compile.dom4j">
+    <copy todir="${build.src.test}">
+      <fileset dir="${test.dir}">
+        <patternset refid="jaxen.dom4j"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.dom4j.test" 
+          depends="compile.core.test,prepare.dom4j.test"
+          if="support.dom4j">
+    <antcall target="internal.compile.test">
+      <param name="object.model" value="dom4j"/> 
+    </antcall>
+  </target>
+
+  <target name="test.dom4j"
+          depends="compile.dom4j.test">
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen/dom4j/**"/>
+
+    </antcall>
+  </target>
+
+  <target name="jar.dom4j"
+          if="support.dom4j"
+          depends="compile.dom4j">
+    <antcall target="internal.jar">
+      <param name="object.model" value="dom4j"/>
+    </antcall>
+  </target>
+
+  <!-- ======================================================================== -->
+
+  <!-- JDOM (http://jdom.org/)                                                  -->
+  <!-- ======================================================================== -->
+   
+  <target name="prepare.jdom" 
+          depends="prepare">
+    <copy todir="${build.src.main}">
+      <fileset dir="${src.dir}">
+        <patternset refid="jaxen.jdom"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.jdom" 
+          if="support.jdom"
+          depends="compile.core,prepare.jdom">
+    <echo message="support.jdom ${support.jdom}"/>
+    <antcall target="internal.compile">
+      <param name="object.model" value="jdom"/>
+    </antcall>
+  </target>
+
+  <target name="prepare.jdom.test"
+          depends="compile.jdom">
+    <copy todir="${build.src.test}">
+
+      <fileset dir="${test.dir}">
+        <patternset refid="jaxen.jdom"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.jdom.test"
+          depends="compile.core.test,prepare.jdom.test"
+          if="support.jdom">
+    <antcall target="internal.compile.test">
+      <param name="object.model" value="jdom"/>
+
+    </antcall>
+  </target>
+
+  <target name="test.jdom"
+          depends="compile.jdom.test">
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen/jdom/**"/>
+    </antcall>
+  </target>
+
+  <target name="jar.jdom"
+          if="support.jdom"
+          depends="compile.jdom">
+
+    <antcall target="internal.jar">
+      <param name="object.model" value="jdom"/>
+    </antcall>
+  </target>
+
+  <!-- ======================================================================== -->
+  <!-- DOM (http://www.w3c.org/)                                                -->
+  <!-- ======================================================================== -->
+
+  <target name="prepare.dom" 
+          depends="prepare">
+
+    <copy todir="${build.src.main}">
+      <fileset dir="${src.dir}">
+        <patternset refid="jaxen.dom"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.dom" 
+          if="support.dom"
+          depends="compile.core,prepare.dom">
+    <antcall target="internal.compile">
+
+      <param name="object.model" value="dom"/>
+    </antcall>
+  </target>
+
+  <target name="prepare.dom.test"
+          depends="compile.dom">
+    <copy todir="${build.src.test}">
+      <fileset dir="${test.dir}">
+        <patternset refid="jaxen.dom"/>
+      </fileset>
+
+    </copy>
+  </target>
+
+  <target name="compile.dom.test"
+          depends="compile.core.test,prepare.dom.test"
+          if="support.dom">
+    <antcall target="internal.compile.test">
+      <param name="object.model" value="dom"/>
+    </antcall>
+  </target>
+
+  <target name="test.dom"
+          depends="compile.dom.test">
+
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen/dom/**"/>
+    </antcall>
+  </target>
+
+  <target name="jar.dom"
+          if="support.dom"
+          depends="compile.dom">
+    <antcall target="internal.jar">
+      <param name="object.model" value="dom"/>
+    </antcall>
+
+  </target>
+
+  <!-- ======================================================================== -->
+  <!-- EXML (http://www.themindelectric.com/)                                   -->
+  <!-- ======================================================================== -->
+
+  <target name="prepare.exml" 
+          depends="prepare">
+    <copy todir="${build.src.main}">
+      <fileset dir="${src.dir}">
+        <patternset refid="jaxen.exml"/>
+
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.exml" 
+          if="support.exml"
+          depends="compile.core,prepare.exml">
+    <antcall target="internal.compile">
+      <param name="object.model" value="exml"/>
+    </antcall>
+  </target>
+
+  <target name="prepare.exml.test"
+          depends="compile.exml">
+    <copy todir="${build.src.test}">
+      <fileset dir="${test.dir}">
+        <patternset refid="jaxen.exml"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.exml.test"
+          depends="compile.core.test,prepare.exml.test"
+          if="support.exml">
+
+    <antcall target="internal.compile.test">
+      <param name="object.model" value="exml"/>
+    </antcall>
+  </target>
+
+  <target name="test.exml"
+          depends="compile.exml.test">
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen/exml/**"/>
+    </antcall>
+
+  </target>
+
+  <target name="jar.exml"
+          if="support.exml"
+          depends="compile.exml">
+    <antcall target="internal.jar">
+      <param name="object.model" value="exml"/>
+    </antcall>
+  </target>
+ 
+  <!-- ************************************************************************ -->
+  <!-- Documentation                                                            -->
+
+  <!-- ************************************************************************ -->
+
+  <target name="javadoc.all" depends="prepare.all">
+    <mkdir dir="${build.javadocs}"/>
+    <antcall target="internal.javadoc">
+      <param name="javadoc.packages" value="${packages.all}"/>
+      <param name="javadoc.dest"     value="${build.javadocs}"/>
+      <param name="javadoc.private"  value="false"/>
+    </antcall>
+
+  </target>
+
+  <target name="javadoc.api" depends="prepare.all">
+    <mkdir dir="${build.apidocs}"/>
+    <antcall target="internal.javadoc">
+      <param name="javadoc.packages" value="${packages.api}"/>
+      <param name="javadoc.dest"     value="${build.apidocs}"/>
+      <param name="javadoc.private"  value="false"/>
+    </antcall>
+
+  </target>
+
+  <target name="javadoc.devel" depends="prepare.all">
+    <mkdir dir="${build.apidocs}"/>
+    <antcall target="internal.javadoc">
+      <param name="javadoc.packages" value="${packages.api}"/>
+      <param name="javadoc.dest"     value="${build.apidocs}"/>
+      <param name="javadoc.private"  value="true"/>
+    </antcall>
+
+  </target>
+
+  <target name="internal.javadoc">
+    <javadoc packagenames="${javadoc.packages}"
+             overview="${build.src.main}/org/jaxen/overview.html"
+             sourcepath="${build.src.main}"
+             destdir="${javadoc.dest}"
+             private="${javadoc.private}"
+             author="true"
+             version="true"
+             use="true"
+             splitindex="true"
+             noindex="false"
+             windowtitle="${Name} Full JavaDoc"
+             doctitle="${Name}"
+             bottom="Copyright &#169; ${copyright.year} ${copyright.owner}. All Rights Reserved.  Hosted by ${sourceforge.link}"
+             stylesheetfile="${doc.dir}/style/javadoc.css">
+
+      <group title="Core" packages="org.jaxen*" />
+      <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*:org.jaxen.exml*:org.jaxen.dom*" />
+
+      <link href="http://java.sun.com/products/jdk/1.3/docs/api"
+            offline="true"
+            packagelistLoc="./src/javadoc/j2se"/>
+
+      <link href="http://java.sun.com/xml/jaxp-docs-1.1/docs/api"
+            offline="true"
+            packagelistLoc="./src/javadoc/jaxp"/>
+
+    </javadoc>
+  </target>
+
+  <!-- Build the documentation -->
+  <target name="doc" depends="prepare">
+    <mkdir    dir="${doc.dir}/images"/>
+    <mkdir    dir="${build.doc}"/>
+    <style    basedir="${doc.dir}" destdir="${build.doc}" style="style/style.xsl"
+              includes="**/*.xml" excludes="style/**,project.xml,cookbook/**"/>
+    <copy todir="${build.doc}" overwrite="yes"> 
+      <fileset dir="${doc.dir}" includes="license.txt,document.dtd"/>
+
+    </copy>
+    <copy todir="${build.doc}/images" overwrite="yes">
+      <fileset dir="${doc.dir}/images"/>
+    </copy>
+    <copy todir="${build.doc}" overwrite="yes">
+      <fileset dir="${doc.dir}" includes="*.css"/>
+    </copy>
+    <copy todir="${build.doc}/style" overwrite="yes">
+      <fileset dir="${doc.dir}/style" includes="images/**"/>
+
+    </copy>
+
+    <replace file="${build.doc}/index.html" token="$$VERSION$$" value="${current.version}"/>
+    <replace file="${build.doc}/download.html" token="$$VERSION$$" value="${current.version}"/>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Creates the distribution                                            -->
+  <!-- =================================================================== -->
+
+  <target name="dist" depends="jar.full,jar.all,doc">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}/lib"/>
+    <mkdir dir="${dist.dir}/src"/>
+    <mkdir dir="${dist.dir}/doc"/>
+    <mkdir dir="${dist.dir}/doc/apidocs"/>
+    <mkdir dir="${dist.dir}/xml"/>
+
+    <copy todir="${dist.dir}">
+
+      <fileset dir="${build.dir}">
+        <patternset>
+          <include name="*.jar"/>
+        </patternset>
+      </fileset>
+    </copy>
+
+    <copy todir="${dist.dir}/src">
+      <fileset dir="./src" includes="**/*.java,**/*.xml,**/*.xsl,**/*.properties,**/*.mf,**/*.css,**/*.gif,**/*.g"/>
+
+    </copy>
+
+    <copy todir="${dist.dir}/lib">
+      <fileset dir="./lib" />
+    </copy>
+
+    <copy todir="${dist.dir}/doc">
+      <fileset dir="${build.doc}" />
+    </copy>
+
+    <copy todir="${dist.dir}/xml">
+      <fileset dir="./xml"/>
+    </copy>
+
+    <copy todir="${dist.dir}">
+      <fileset dir="." includes="build.pl, *.xml, *.html, INSTALL, LICENSE" />
+    </copy>
+
+    <chmod perm="+x" file="${dist.dir}/build.pl"/>
+
+    <fixcrlf srcdir="${dist.dir}" includes="build.pl"     cr="remove"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Packages the distribution as .zip                                   -->
+  <!-- =================================================================== -->
+
+  <target name="dist-zip" depends="dist">
+    <zip zipfile="${dist.target}/${name}-daily.zip" basedir="${dist.jar.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Packages the distribution as .jar                                   -->
+  <!-- =================================================================== -->
+
+  <target name="dist-jar" depends="dist">
+    <jar jarfile="${dist.target}/${name}-daily.jar" basedir="${dist.jar.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+
+  <!-- Packages the distribution with .tar.gzip                            -->
+  <!-- =================================================================== -->
+
+  <target name="dist-tgz" depends="dist">
+    <tar tarfile="${dist.target}/${name}-daily.tar" basedir="${dist.jar.dir}"/>
+    <gzip zipfile="${dist.target}/${name}-daily.tar.gz" src="${dist.target}/${name}-daily.tar"/>
+  </target>
+
+
+  <!-- =================================================================== -->
+
+  <!-- Performs a release on the website                                   -->
+  <!-- =================================================================== -->
+
+  <target name="release" depends="clean,compile.all,javadoc.all,javadoc.api,dist-zip,dist-tgz,dist-jar">
+     <copy file="${dist.target}/${name}-daily.tar.gz"
+           tofile="${dist.target}/${name}-${version}.tar.gz"/>
+     <copy file="${dist.target}/${name}-daily.zip"
+           tofile="${dist.target}/${name}-${version}.zip"/>
+  </target>
+
+
+  <!--
+  <target name="ftp" depends="dist-zip,dist-tgz,dist-jar">
+    <mkdir dir="${web.ftp}"/>
+    <copy todir="${web.ftp}" overwrite="yes">
+      <fileset dir="${dist.root}" includes="*.jar, *.zip, *.tar, *.gz"/>
+    </copy>
+  </target>
+  -->
+
+  <!-- =================================================================== -->
+  <!-- Clean targets                                                       -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.root}"/>
+  </target>
+
+  <target name="distclean" depends="clean">
+
+    <delete dir="${dist.root}"/>
+    <delete file="${name}-daily.tar.gz"/>
+    <delete file="${name}-daily.tar"/>
+    <delete file="${name}-daily.zip"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Unit Testing Targets                                                -->
+  <!-- =================================================================== -->
+
+  <target name="test.pattern"
+          depends="compile.core.test">
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen/pattern/**"/>
+    </antcall>
+  </target>
+
+  <target name="test.internal">
+    <mkdir dir="${build.dir}/test-results"/>
+
+    <junit printsummary="yes" haltonfailure="yes">
+      <formatter type="plain"/>
+
+      <classpath>
+        <pathelement location="${build.dest}" />
+        <pathelement path="${java.class.path}" />
+      </classpath>
+
+      <batchtest fork="yes" todir="${build.dir}/test-results">
+        <fileset dir="${test.dir}">
+
+          <include name="${test.packages}/*Test.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Samples targets                                                      -->
+  <!-- =================================================================== -->
+
+  <target name="prepare.samples" 
+          depends="prepare">
+    <copy todir="${build.src.samples}">
+      <fileset dir="${samples.dir}">
+         <patternset refid="jaxen.samples"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.samples" 
+          depends="compile.all,prepare.samples">
+
+    <antcall target="internal.compile.samples">
+      <param name="object.model" value="samples"/> 
+    </antcall>
+  </target>
+
+  <target name="demo.jdom" depends="samples">
+    <java classname="JDOMDemo" fork="true">
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="demo.dom4j" depends="samples">
+
+    <java classname="Dom4jDemo" fork="true">
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/> 
+      </classpath>
+
+    </java>
+  </target>
+
+  <target name="demo.exml" depends="samples">
+    <java classname="EXMLDemo" fork="true">
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+          <pathelement location="${build.dest.main}"/>
+
+          <pathelement location="${build.dest.samples}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="demo.dom" depends="samples">
+    <java classname="DOMDemo" fork="true">
+
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/> 
+      </classpath>
+    </java>
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Helper targets                                                      -->
+  <!-- =================================================================== -->
+
+  <target name="all"     
+          depends="clean,jar.full,doc,javadoc"/>
+
+  <target name="package"
+          depends="jar.full"/>
+
+  <target name="jars"
+          depends="jar.all"/>
+
+  <target name="compile"
+          depends="compile.all"/>
+
+  <target name="api" 
+          depends="javadoc.api"/>
+
+  <target name="javadoc" 
+          depends="javadoc.all"/>
+
+  <target name="test" 
+          depends="test.all"/>
+
+  <target name="samples" 
+          depends="compile.samples"/>
+
+  <target name="config" 
+          depends="display.config"/>
+
+</project>
+
+<!-- End of file -->
