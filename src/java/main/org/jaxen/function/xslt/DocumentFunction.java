@@ -92,7 +92,7 @@ public class DocumentFunction implements Function
                              nav );
         }
 
-        throw new FunctionCallException( "false() requires no arguments." );
+        throw new FunctionCallException( "document() requires one argument." );
     }
 
     public static Object evaluate(String url,
