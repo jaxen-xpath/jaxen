@@ -162,4 +162,11 @@ public class Dom4jNavigator extends DefaultNavigator
 
         return ns.getURI();
     }
+
+    public String getCommentStringValue(Object obj)
+    {
+        Comment cmt = (Comment) obj;
+
+        return cmt.getText();
+    }
 }

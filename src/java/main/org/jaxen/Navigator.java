@@ -179,6 +179,7 @@ public interface Navigator
     boolean isText(Object object);
     boolean isProcessingInstruction(Object object);
 
+    String getCommentStringValue(Object comment);
     String getElementStringValue(Object element);
     String getAttributeStringValue(Object attr);
     String getNamespaceStringValue(Object ns);

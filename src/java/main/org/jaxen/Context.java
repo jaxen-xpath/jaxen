@@ -2,6 +2,7 @@
 package org.jaxen;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Context
 {
@@ -15,6 +16,7 @@ public class Context
     public Context(ContextSupport contextSupport)
     {
         this.contextSupport = contextSupport;
+        this.nodeSet        = new ArrayList(0);
     }
 
     public List getNodeSet()
@@ -76,4 +78,19 @@ public class Context
         return this.position;
     }
 
+    public Context duplicate()
+    {
+        Context dupe = new Context( getContextSupport() );
+
+        List thisNodeSet = getNodeSet();
+
+        if ( thisNodeSet != null )
+        {
+            List dupeNodeSet = new ArrayList( thisNodeSet.size() );
+            dupeNodeSet.addAll( thisNodeSet );
+            dupe.setNodeSet( dupeNodeSet );
+        }
+
+        return dupe;
+    }
 }

@@ -48,21 +48,42 @@ public class NumberFunction implements Function
         }
         else if ( obj instanceof String )
         {
-            try
-            {
-                Double doubleValue = new Double( (String) obj );
+            String str = (String) obj;
 
-                return doubleValue;
-            }
-            catch (NumberFormatException e)
+            if ( str.indexOf( "." ) >= 0 )
             {
-                return new Double( Double.NaN );
+                try
+                {
+                    Double doubleValue = new Double( str );
+                    
+                    return doubleValue;
+                }
+                catch (NumberFormatException e)
+                {
+                    return new Double( Double.NaN );
+                }
+            }
+            else
+            {
+                try
+                {
+                    Integer integerValue = new Integer( str );
+
+                    return integerValue;
+                }
+                catch (NumberFormatException e)
+                {
+                    return new Double( Double.NaN );
+                }
             }
         }
         else if ( obj instanceof List
                   ||
                   obj instanceof Iterator )
         {
+            String strValue = StringFunction.evaluate( obj,
+                                                       nav );
+
             return evaluate( StringFunction.evaluate( obj,
                                                       nav ),
                              nav );

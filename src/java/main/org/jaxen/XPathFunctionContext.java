@@ -6,10 +6,8 @@ import org.jaxen.function.*;
 import java.util.Map;
 import java.util.HashMap;
 
-public class XPathFunctionContext implements FunctionContext
+public class XPathFunctionContext extends SimpleFunctionContext
 {
-    private Map functions;
-
     private static class Singleton
     {
         private static XPathFunctionContext instance = new XPathFunctionContext();
@@ -22,8 +20,6 @@ public class XPathFunctionContext implements FunctionContext
 
     public XPathFunctionContext()
     {
-        this.functions = new HashMap();
-
         registerFunction( "",
                           "boolean",
                           new BooleanFunction() );
@@ -119,19 +115,5 @@ public class XPathFunctionContext implements FunctionContext
         registerFunction( "",
                           "true",
                           new TrueFunction() );
-    }
-
-    protected void registerFunction(String prefix,
-                                    String localName,
-                                    Function function)
-    {
-        this.functions.put( prefix + ":" + localName,
-                            function );
-    }
-
-    public Function getFunction(String prefix,
-                                String localName)
-    {
-        return (Function) this.functions.get( prefix + ":" + localName );
     }
 }

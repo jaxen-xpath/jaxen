@@ -94,6 +94,14 @@ public class StringFunction implements Function
                     return "Infinity";
                 }
             }
+            else
+            {
+                return num.toString();
+            }
+        }
+        else if ( nav.isComment( obj ) )
+        {
+            return nav.getCommentStringValue( obj );
         }
 
         return "";
