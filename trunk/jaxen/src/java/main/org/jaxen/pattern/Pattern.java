@@ -72,31 +72,31 @@ import org.jaxen.JaxenException;
   */
 public abstract class Pattern {
 
-    // These node numbers are compatable with both DOM and dom4j's node types
+    // These node numbers are compatible with both DOM and dom4j's node types
     /** Matches Element nodes */
     public static final short ELEMENT_NODE = 1;
-    /** Matches elements nodes */
+    /** Matches attribute nodes */
     public static final short ATTRIBUTE_NODE = 2;
-    /** Matches elements nodes */
+    /** Matches text nodes */
     public static final short TEXT_NODE = 3;
-    /** Matches elements nodes */
+    /** Matches CDATA section nodes */
     public static final short CDATA_SECTION_NODE = 4;
-    /** Matches elements nodes */
+    /** Matches entity reference nodes */
     public static final short ENTITY_REFERENCE_NODE = 5;
-    /** Matches elements nodes */
+    /** Matches entity nodes */
     //public static final short ENTITY_NODE = 6;
     /** Matches ProcessingInstruction */
     public static final short PROCESSING_INSTRUCTION_NODE = 7;
-    /** Matches Comments nodes */
+    /** Matches comment nodes */
     public static final short COMMENT_NODE = 8;
-    /** Matches Document nodes */
+    /** Matches document nodes */
     public static final short DOCUMENT_NODE = 9;
     /** Matches DocumentType nodes */
     public static final short DOCUMENT_TYPE_NODE = 10;
     //public static final short DOCUMENT_FRAGMENT_NODE = 11;
     //public static final short NOTATION_NODE = 12;
     
-    /** Matchs a Namespace Node - NOTE this differs from DOM */
+    /** Matches a Namespace Node - NOTE this differs from DOM */
     // XXXX: ????
     public static final short NAMESPACE_NODE = 13;
     
