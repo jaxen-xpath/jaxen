@@ -23,26 +23,30 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
-/**
- * W3C DOM Level 2 adapter for the Jaxen XPath library.
+/** Interface for navigating around the W3C DOM Level 2 object model.
  *
- * <p>This class implements the org.jaxen.DefaultNavigator interface
- * for the Jaxen XPath library, version 1.0beta3 (it is not guaranteed
- * to work with subsequent releases).  This adapter allows the Jaxen
- * library to be used to execute XPath queries against any object tree
- * that implements the DOM level 2 interfaces.</p>
+ *  <p>
+ *  This class is not intended for direct usage, but is
+ *  used by the Jaxen engine during evaluation.
+ *  </p>
+ * 
+ *  <p>This class implements the org.jaxen.DefaultNavigator interface
+ *  for the Jaxen XPath library, version 1.0beta3 (it is not guaranteed
+ *  to work with subsequent releases).  This adapter allows the Jaxen
+ *  library to be used to execute XPath queries against any object tree
+ *  that implements the DOM level 2 interfaces.</p>
  *
- * <p>Note: DOM level 2 does not include a node representing an XML
- * Namespace declaration.  This navigator will return Namespace decls
- * as instantiations of the custom {@link NamespaceNode} class, and
- * users will have to check result sets to locate and isolate
- * these.</p>
+ *  <p>Note: DOM level 2 does not include a node representing an XML
+ *  Namespace declaration.  This navigator will return Namespace decls
+ *  as instantiations of the custom {@link NamespaceNode} class, and
+ *  users will have to check result sets to locate and isolate
+ *  these.</p>
  *
- * @author David Megginson
- * @author James Strachan
- * @see XPath
- * @see NamespaceNode
+ *  @author David Megginson
+ *  @author James Strachan
+ *
+ *  @see XPath
+ *  @see NamespaceNode
  */
 public class DocumentNavigator extends DefaultNavigator
 {

@@ -21,6 +21,13 @@ import org.saxpath.SAXPathException;
  */
 public interface Navigator extends Serializable
 {
+
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     Axis Iterators
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
     /** Retrieve an <code>Iterator</code> matching the <code>child</code>
      *  xpath axis.
      *
@@ -175,6 +182,12 @@ public interface Navigator extends Serializable
      */
     Iterator getAncestorOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
 
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     Extractors
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
     /** Loads a document from the given URI
      *
      * @param uri is the URI of the document to load
@@ -183,55 +196,253 @@ public interface Navigator extends Serializable
      */
     Object getDocument(String uri) throws FunctionCallException;
 
-    /** Returns the "document" node that contains the given context node.
+    /** Returns the document node that contains the given context node.
+     *
+     *  @param object The context node.
+     *
+     *  @return The document of the context node.
+     *
      *  @see #isDocument(Object)
      */
     Object getDocumentNode(Object contextNode);
     
     /** Returns the parent of the given context node.
-     *  @see #isDocument(Object)
+     *
+     *  <p>
+     *  The parent of any node must either be a document
+     *  node or an element node.
+     *  </p>
+     *
+     *  @param object The context node.
+     *
+     *  @return The parent of the context node.
+     *
+     *  @see #isDocument
+     *  @see #isElement
      */
     Object getParentNode(Object contextNode) throws UnsupportedAxisException;
     
-    String getElementNamespaceUri(Object element);
-    String getElementName(Object element);
+    /** Retrieve the namespace URI of the given element node.
+     *
+     *  @param element The context element node.
+     *
+     *  @return The namespace URI of the element node.
+     */
+    String getElementNamespaceUri(Object element);    
+
+    /** Retrieve the name of the given element node.
+     *
+     *  @param element The context element node.
+     *
+     *  @return The name of the element node.
+     */
+    String getElementName(Object element);    
+
+    /** Retrieve the QName of the given element node.
+     *
+     *  @param element The context element node.
+     *
+     *  @return The QName of the element node.
+     */
     String getElementQName(Object element);
 
-    String getAttributeNamespaceUri(Object attr);
+    /** Retrieve the namespace URI of the given attribute node.
+     *
+     *  @param element The context attribute node.
+     *
+     *  @return The namespace URI of the attribute node.
+     */
+    String getAttributeNamespaceUri(Object attr);    
+
+    /** Retrieve the name of the given attribute node.
+     *
+     *  @param element The context attribute node.
+     *
+     *  @return The name of the attribute node.
+     */
     String getAttributeName(Object attr);
+
+    /** Retrieve the QName of the given attribute node.
+     *
+     *  @param element The context attribute node.
+     *
+     *  @return The QName of the attribute node.
+     */
     String getAttributeQName(Object attr);
 
+    /** Retrieve the target of a processing-instruction.
+     *
+     *  @param pi The context processing-instruction node.
+     *
+     *  @return The target of the processing-instruction node.
+     */
     String getProcessingInstructionTarget(Object pi);
+
+    /** Retrieve the data of a processing-instruction.
+     *
+     *  @param pi The context processing-instruction node.
+     *
+     *  @return The data of the processing-instruction node.
+     */
     String getProcessingInstructionData(Object pi);
+
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     isXXX testers
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
 
     /** Returns whether the given object is a document node. A document node
      *  is the node that is selected by the xpath expression <code>/</code>.
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is a document node,
+     *          else <code>false</code>
      */
     boolean isDocument(Object object);
-    /** Returns whether the given object is an element node. */
+
+    /** Returns whether the given object is an element node.
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is an element node,
+     *          else <code>false</code>
+     */
     boolean isElement(Object object);
-    /** Returns whether the given object is an attribute node. */
+
+    /** Returns whether the given object is an attribute node. 
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is an attribute node,
+     *          else <code>false</code>
+     */
     boolean isAttribute(Object object);
-    /** Returns whether the given object is a namespace node. */
+
+    /** Returns whether the given object is a namespace node. 
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is a namespace node,
+     *          else <code>false</code>
+     */
     boolean isNamespace(Object object);
-    /** Returns whether the given object is a comment node. */
+
+    /** Returns whether the given object is a comment node. 
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is a comment node,
+     *          else <code>false</code>
+     */
     boolean isComment(Object object);
-    /** Returns whether the given object is a text node. */
+
+    /** Returns whether the given object is a text node. 
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is a text node,
+     *          else <code>false</code>
+     */
     boolean isText(Object object);
-    /** Returns whether the given object is a processing-instruction node. */
+
+    /** Returns whether the given object is a processing-instruction node.
+     *
+     *  @param object The object to test.
+     *
+     *  @return <code>true</code> if the object is a processing-instruction node,
+     *          else <code>false</code>
+     */
     boolean isProcessingInstruction(Object object);
 
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     String-Value extractors
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
+    /** Retrieve the string-value of a comment node.
+     *
+     *  @param comment The comment node.
+     *
+     *  @return The string-value of the node.
+     */
     String getCommentStringValue(Object comment);
+
+    /** Retrieve the string-value of an element node.
+     *
+     *  @param element The comment node.
+     *
+     *  @return The string-value of the node.
+     */
     String getElementStringValue(Object element);
+
+    /** Retrieve the string-value of an attribute node.
+     *
+     *  @param attr The attribute node.
+     *
+     *  @return The string-value of the node.
+     */
     String getAttributeStringValue(Object attr);
-    String getNamespacePrefix(Object ns);
+
+    /** Retrieve the string-value of a namespace node.
+     *
+     *  @param attr The namespace node.
+     *
+     *  @return The string-value of the node.
+     */
     String getNamespaceStringValue(Object ns);
+
+    /** Retrieve the string-value of a text node.
+     *
+     *  @param attr The text node.
+     *
+     *  @return The string-value of the node.
+     */
     String getTextStringValue(Object txt);
+
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //     General utilities
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+
+    /** Retrieve the namespace prefix of a namespace node.
+     *
+     *  @param ns The namespace node.
+     *
+     *  @return The prefix associated with the node.
+     */
+    String getNamespacePrefix(Object ns);
+
     
+    /** Translate a namespace prefix to a namespace URI, <b>possibly</b>
+     *  considering a particular element node.
+     *
+     *  <p>
+     *  Strictly speaking, prefix-to-URI translation should occur
+     *  irrespective of any element in the document.  This method
+     *  is provided to allow a non-conforming ease-of-use enhancement.
+     *  </p>
+     *
+     *  @param prefix The prefix to translate.
+     *  @param element The element to consider during translation.
+     *
+     *  @return The namespace URI associated with the prefix.
+     *
+     *  @see NamespaceContext
+     */
     String translateNamespacePrefixToUri(String prefix, Object element);
 
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on documents that use the same navigator as this one.
+     *
+     *  @param xpath The xpath expression.
+     *
+     *  @return A new XPath expression object.
+     *
+     *  @see BaseXPath
      */
     BaseXPath parseXPath(String xpath) throws SAXPathException;
 

@@ -31,13 +31,30 @@ import java.util.Map;
 
 import java.io.File;
 
+/** Interface for navigating around the EXML object model.
+ *
+ *  <p>
+ *  This class is not intended for direct usage, but is
+ *  used by the Jaxen engine during evaluation.
+ *  </p>
+ *
+ *  @see XPath
+ *
+ *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ */
 public class DocumentNavigator extends DefaultNavigator
 {
+    /** Singleton implementation.
+     */
     private static class Singleton
     {
+        /** Singleton instance.
+         */
         private static DocumentNavigator instance = new DocumentNavigator();
     }
 
+    /** Retrieve the singleton instance of this <code>DocumentNavigator</code>.
+     */
     public static DocumentNavigator getInstance()
     {
         return Singleton.instance;
