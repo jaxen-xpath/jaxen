@@ -214,18 +214,11 @@ public class BaseXPath implements XPath, Serializable
         return answer;
     }
     
-    /** Select all nodes that are selectable by this XPath
+    /** Select all nodes that are selected by this XPath
      *  expression. If multiple nodes match, multiple nodes
-     *  will be returned.
-     *
-     *  <p>
-     *  In most cases, nodes will be returned
+     *  will be returned. Nodes will be returned
      *  in document-order, as defined by the XPath
-     *  specification.  The exception occurs when using XPath
-     *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character) over expressions
-     *  that use the XSLT document() function to select nodes
-     *  from multiple documents.
+     *  specification.  
      *  </p>
      *
      *  @param node the node, node-set or Context object for evaluation. This value can be null.
@@ -242,17 +235,11 @@ public class BaseXPath implements XPath, Serializable
         return selectNodesForContext( context );
     }
 
-    /** Select only the first node that is selectable by this XPath
+    /** Select only the first node selected by this XPath
      *  expression.  If multiple nodes match, only one node will be
-     *  returned.
-     *
-     *  In most cases, the selected node will be the first
-     *  selectable node in document-order, as defined by the XPath
-     *  specification.  The exception occurs when using XPath
-     *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character) over expressions
-     *  that use the XSLT document() function to select nodes
-     *  from multiple documents.
+     *  returned. The selected node will be the first
+     *  selected node in document-order, as defined by the XPath
+     *  specification.
      *  </p>
      *
      *  @param node the node, node-set or Context object for evaluation. This value can be null.
@@ -691,17 +678,11 @@ public class BaseXPath implements XPath, Serializable
         return new SimpleVariableContext();
     }
     
-    /** Select all nodes that are selectable by this XPath
+    /** Select all nodes that match this XPath
      *  expression on the given Context object. 
      *  If multiple nodes match, multiple nodes
-     *  will be returned.
-     *
-     *  <p>
-     *  <b>NOTE:</b> In most cases, nodes will be returned
-     *  in document-order, as defined by the XML Canonicalization
-     *  specification.  The exception occurs when using XPath
-     *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character).
+     *  will be returned in document-order, as defined by the XPath
+     *  specification.
      *  </p>
      *
      *  @param context is the Context which gets evaluated
@@ -720,14 +701,9 @@ public class BaseXPath implements XPath, Serializable
 
     /** Select only the first node that is selectable by this XPath
      *  expression.  If multiple nodes match, only one node will be
-     *  returned.
-     *
-     *  <b>NOTE:</b> In most cases, the selected node will be the first
+     *  returned. The selected node will be the first
      *  selectable node in document-order, as defined by the XPath
-     *  specification.  The exception occurs when using XPath
-     *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character) over node-sets from
-     *  multiple documents loaded via the document function.
+     *  specification.  
      *  </p>
      *
      *  @param context is the Context which gets evaluated
@@ -748,4 +724,5 @@ public class BaseXPath implements XPath, Serializable
 
         return results.get( 0 );
     }
+    
 }
