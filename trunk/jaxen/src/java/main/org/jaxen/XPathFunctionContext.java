@@ -2,8 +2,7 @@
 package org.jaxen;
 
 import org.jaxen.function.*;
-import org.jaxen.function.ext.EvaluateFunction;
-import org.jaxen.function.ext.MatrixConcatFunction;
+import org.jaxen.function.ext.*;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -182,6 +181,18 @@ public class XPathFunctionContext extends SimpleFunctionContext
         registerFunction( null,  // namespace URI
                           "evaluate",
                           new EvaluateFunction() );
+        
+        registerFunction( null,  // namespace URI
+                          "lowercase",
+                          new LowerFunction() );
+        
+        registerFunction( null,  // namespace URI
+                          "uppercase",
+                          new UpperFunction() );
+        
+        registerFunction( null,  // namespace URI
+                          "ends-with",
+                          new EndsWithFunction() );
         
     }
 }
