@@ -67,11 +67,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
-import nu.xom.Nodes;
-import nu.xom.Text;
 
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.xom.XOMXPath;
