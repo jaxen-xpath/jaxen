@@ -21,7 +21,7 @@ public class RoundFunction implements Function
     {
         if (args.size() == 1)
         {
-            return evaluate( args.get(1),
+            return evaluate( args.get(0),
                              context.getNavigator() );
         }
 
@@ -46,6 +46,6 @@ public class RoundFunction implements Function
 
         double value = n.doubleValue();
 
-        return new Long( Math.round( value ) );
+        return new Double( Math.round( value ) );
     }
 }

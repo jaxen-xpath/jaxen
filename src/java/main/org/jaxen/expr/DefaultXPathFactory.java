@@ -180,7 +180,8 @@ public class DefaultXPathFactory implements XPathFactory
 
     public NumberExpr createNumberExpr(int number) throws JaxenException
     {
-        return new DefaultNumberExpr( new Integer(number) );
+        // return new DefaultNumberExpr( new Integer(number) );
+      return new DefaultNumberExpr( new Double(number) );
     }
 
     public NumberExpr createNumberExpr(double number) throws JaxenException

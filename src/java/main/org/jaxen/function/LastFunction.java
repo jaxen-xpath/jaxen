@@ -25,8 +25,8 @@ public class LastFunction implements Function
         throw new FunctionCallException( "last() requires no arguments." );
     }
 
-    public static Integer evaluate(Context context)
+    public static Double evaluate(Context context)
     {
-        return new Integer( context.getSize() );
+        return new Double( context.getSize() );
     }
 }

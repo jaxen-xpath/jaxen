@@ -14,89 +14,62 @@ import java.util.Iterator;
  * @author bob mcwhirter (bob @ werken.com)
  */
 public class NumberFunction implements Function
-{
-
-    public Object call(Context context,
-                       List args) throws FunctionCallException
+  {
+  public Object call(Context context, List args) throws FunctionCallException
     {
-        if (args.size() == 1)
-        {
-            return evaluate( args.get(0),
-                             context.getNavigator() );
-        }
+    if (args.size() == 1)
+      {
+      return evaluate( args.get(0), context.getNavigator() );
+      }
 
-        throw new FunctionCallException( "number() requires one argument." );
+    throw new FunctionCallException( "number() requires one argument." );
     }
 
-    public static Number evaluate(Object obj,
-                                  Navigator nav)
+  public static Double evaluate(Object obj, Navigator nav)
     {
-        if (obj instanceof Number)
+    if( obj instanceof Double )
+      {
+      return (Double) obj;
+      }
+    else if (obj instanceof Number)
+      {
+      return new Double( ((Number) obj).doubleValue() );            
+      }
+    else if ( obj instanceof Boolean )
+      {
+      if ( obj == Boolean.TRUE )
         {
-            return (Number) obj;
+        return new Double( 1 );
         }
-        else if ( obj instanceof Boolean )
+      else
         {
-            if ( obj == Boolean.TRUE )
-            {
-                return new Integer( 1 );
-            }
-            else
-            {
-                return new Integer( 0 );
-            }
+        return new Double( 0 );
         }
-        else if ( obj instanceof String )
+      }
+    else if ( obj instanceof String )
+      {
+      String str = (String) obj;
+      
+      try
         {
-            String str = (String) obj;
-
-            if ( str.indexOf( "." ) >= 0 )
-            {
-                try
-                {
-                    Double doubleValue = new Double( str );
-                    
-                    return doubleValue;
-                }
-                catch (NumberFormatException e)
-                {
-                    return new Double( Double.NaN );
-                }
-            }
-            else
-            {
-                try
-                {
-                    Integer integerValue = new Integer( str );
-
-                    return integerValue;
-                }
-                catch (NumberFormatException e)
-                {
-                    return new Double( Double.NaN );
-                }
-            }
+        Double doubleValue = new Double( str );        
+        return doubleValue;
         }
-        else if ( obj instanceof List
-                  ||
-                  obj instanceof Iterator )
+      catch (NumberFormatException e)
         {
-            String strValue = StringFunction.evaluate( obj,
-                                                       nav );
-
-            return evaluate( StringFunction.evaluate( obj,
-                                                      nav ),
-                             nav );
-        }
-        else if ( nav.isElement( obj ) 
-                  ||
-                  nav.isAttribute( obj ) )
-        {
-            return evaluate( StringFunction.evaluate( obj,
-                                                      nav ),
-                             nav );
-        }
-        
         return new Double( Double.NaN );
+        }
+      }
+    else if ( obj instanceof List || obj instanceof Iterator )
+      {
+      String strValue = StringFunction.evaluate( obj, nav );
+      return evaluate( StringFunction.evaluate( obj, nav ), nav );
+      }
+    else if ( nav.isElement( obj ) || nav.isAttribute( obj ) )
+      {
+      return evaluate( StringFunction.evaluate( obj, nav ), nav );
+      }
+    
+    return new Double( Double.NaN );
     }
-}
+  }

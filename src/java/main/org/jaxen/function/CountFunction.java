@@ -25,18 +25,18 @@ public class CountFunction implements Function
         throw new FunctionCallException( "count() requires one argument." );
     }
 
-    public static Integer evaluate(Object obj)
+    public static Number evaluate(Object obj)
     {
       if( obj == null )
         {
-        return new Integer( 0 );
+        return new Double( 0 );
         }
       
         if (obj instanceof List)
         {
-            return new Integer( ((List)obj).size() );
+            return new Double( ((List)obj).size() );
         }
       
-        return new Integer( 1 );
+        return new Double( 1 );
     }
 }
