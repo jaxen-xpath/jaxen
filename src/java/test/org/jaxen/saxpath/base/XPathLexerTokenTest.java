@@ -65,7 +65,7 @@ package org.jaxen.saxpath.base;
 
 import junit.framework.TestCase;
 
-public class XPathLexerTokenTest extends TestCase implements TokenTypes
+public class XPathLexerTokenTest extends TestCase
 {
     private XPathLexer lexer;
 
@@ -86,167 +86,167 @@ public class XPathLexerTokenTest extends TestCase implements TokenTypes
 
     public void testIdentifier()
     {
-        runTest( "identifier", new int[]{ IDENTIFIER, EOF } );
+        runTest( "identifier", new int[]{ TokenTypes.IDENTIFIER, TokenTypes.EOF } );
     }
 
     public void testNumberInteger()
     {
-        runTest( "42", new int[]{ INTEGER, EOF } );
+        runTest( "42", new int[]{ TokenTypes.INTEGER, TokenTypes.EOF } );
     }
 
     public void testNumberDouble()
     {
-        runTest( "42.42", new int[]{ DOUBLE, EOF } );
+        runTest( "42.42", new int[]{ TokenTypes.DOUBLE, TokenTypes.EOF } );
     }
 
     public void testComma()
     {
-        runTest( ",", new int[]{ COMMA, EOF } );
+        runTest( ",", new int[]{ TokenTypes.COMMA, TokenTypes.EOF } );
     }
 
     public void testEquals()
     {
-        runTest( "=", new int[]{ EQUALS, EOF } );
+        runTest( "=", new int[]{ TokenTypes.EQUALS, TokenTypes.EOF } );
     }
 
     public void testMinus()
     {
-        runTest( "-", new int[]{ MINUS, EOF } );
+        runTest( "-", new int[]{ TokenTypes.MINUS, TokenTypes.EOF } );
     }
 
     public void testPlus()
     {
-        runTest( "+", new int[]{ PLUS, EOF } );
+        runTest( "+", new int[]{ TokenTypes.PLUS, TokenTypes.EOF } );
     }
 
     public void testDollar()
     {
-        runTest( "$", new int[]{ DOLLAR, EOF } );
+        runTest( "$", new int[]{ TokenTypes.DOLLAR, TokenTypes.EOF } );
     }
 
     public void testPipe()
     {
-        runTest( "|", new int[]{ PIPE, EOF } );
+        runTest( "|", new int[]{ TokenTypes.PIPE, TokenTypes.EOF } );
     }
 
     public void testAt()
     {
-        runTest( "@", new int[]{ AT, EOF } );
+        runTest( "@", new int[]{ TokenTypes.AT, TokenTypes.EOF } );
     }
 
     public void testColon()
     {
-        runTest( ":", new int[]{ COLON, EOF } );
+        runTest( ":", new int[]{ TokenTypes.COLON, TokenTypes.EOF } );
     }
 
     public void testDoubleColon()
     {
-        runTest( "::", new int[]{ DOUBLE_COLON, EOF } );
+        runTest( "::", new int[]{ TokenTypes.DOUBLE_COLON, TokenTypes.EOF } );
     }
 
     public void testNot()
     {
-        runTest( "!", new int[]{ NOT, EOF } );
+        runTest( "!", new int[]{ TokenTypes.NOT, TokenTypes.EOF } );
     }
 
     public void testNotEquals()
     {
-        runTest( "!=", new int[]{ NOT_EQUALS, EOF } );
+        runTest( "!=", new int[]{ TokenTypes.NOT_EQUALS, TokenTypes.EOF } );
     }
 
     public void testStar()
     {
-        runTest( "*", new int[]{ STAR, EOF } );
+        runTest( "*", new int[]{ TokenTypes.STAR, TokenTypes.EOF } );
     }
 
     public void testLiteralSingleQuote()
     {
-        runTest( "'literal'", new int[]{ LITERAL, EOF } );
+        runTest( "'literal'", new int[]{ TokenTypes.LITERAL, TokenTypes.EOF } );
     }
 
     public void testLiteralDoubleQuote()
     {
-        runTest( "\"literal\"", new int[]{ LITERAL, EOF } );
+        runTest( "\"literal\"", new int[]{ TokenTypes.LITERAL, TokenTypes.EOF } );
     }
 
     public void testSingleDot()
     {
-        runTest( ".", new int[]{ DOT, EOF } );
+        runTest( ".", new int[]{ TokenTypes.DOT, TokenTypes.EOF } );
     }
 
     public void testDoubleDot()
     {
-        runTest( "..", new int[]{ DOT_DOT, EOF });
+        runTest( "..", new int[]{ TokenTypes.DOT_DOT, TokenTypes.EOF });
     }
 
     public void testLeftBracket()
     {
-        runTest( "[", new int[]{ LEFT_BRACKET, EOF } );
+        runTest( "[", new int[]{ TokenTypes.LEFT_BRACKET, TokenTypes.EOF } );
     }
 
     public void testRightBracket()
     {
-        runTest( "]", new int[]{ RIGHT_BRACKET, EOF } );
+        runTest( "]", new int[]{ TokenTypes.RIGHT_BRACKET, TokenTypes.EOF } );
     }
 
     public void testLeftParen()
     {
-        runTest( "(", new int[]{ LEFT_PAREN, EOF } );
+        runTest( "(", new int[]{ TokenTypes.LEFT_PAREN, TokenTypes.EOF } );
     }
 
     public void testSingleSlash()
     {
-        runTest( "/", new int[]{ SLASH, EOF } );
+        runTest( "/", new int[]{ TokenTypes.SLASH, TokenTypes.EOF } );
     }
 
     public void testDoubleSlash()
     {
-        runTest( "//", new int[]{ DOUBLE_SLASH, EOF } );
+        runTest( "//", new int[]{ TokenTypes.DOUBLE_SLASH, TokenTypes.EOF } );
     }
 
     public void testLessThan()
     {
-        runTest( "<", new int[]{ LESS_THAN, EOF } );
+        runTest( "<", new int[]{ TokenTypes.LESS_THAN, TokenTypes.EOF } );
     }
 
     public void testLessThanEquals()
     {
-        runTest( "<=", new int[]{ LESS_THAN_EQUALS, EOF } );
+        runTest( "<=", new int[]{ TokenTypes.LESS_THAN_EQUALS, TokenTypes.EOF } );
     }
 
     public void testGreaterThan()
     {
-        runTest( ">", new int[]{ GREATER_THAN, EOF } );
+        runTest( ">", new int[]{ TokenTypes.GREATER_THAN, TokenTypes.EOF } );
     }
 
     public void testGreaterThanEquals()
     {
-        runTest( ">=", new int[]{ GREATER_THAN_EQUALS, EOF } );
+        runTest( ">=", new int[]{ TokenTypes.GREATER_THAN_EQUALS, TokenTypes.EOF } );
     }
 
     public void testOperatorAnd()
     {
-        runTest( "identifier and", new int[]{ IDENTIFIER, AND, EOF } );
+        runTest( "identifier and", new int[]{ TokenTypes.IDENTIFIER, TokenTypes.AND, TokenTypes.EOF } );
     }
 
     public void testOperatorOr()
     {
-        runTest( "identifier or", new int[]{ IDENTIFIER, OR, EOF } );
+        runTest( "identifier or", new int[]{ TokenTypes.IDENTIFIER, TokenTypes.OR, TokenTypes.EOF } );
     }
 
     public void testOperatorMod()
     {
-        runTest( "identifier mod", new int[]{ IDENTIFIER, MOD, EOF } );
+        runTest( "identifier mod", new int[]{ TokenTypes.IDENTIFIER, TokenTypes.MOD, TokenTypes.EOF } );
     }
 
     public void testOperatorDiv()
     {
-        runTest( "identifier div", new int[]{ IDENTIFIER, DIV } );
+        runTest( "identifier div", new int[]{ TokenTypes.IDENTIFIER, TokenTypes.DIV } );
     }
 
     public void testWhitespace()
     {
-        runTest( " \t \t \t", new int[]{ EOF } );
+        runTest( " \t \t \t", new int[]{ TokenTypes.EOF } );
     }
 
     private void runTest(String text,
