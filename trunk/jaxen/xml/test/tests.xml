@@ -172,7 +172,6 @@
     </context>
   </document>
 
-
   <!-- test positioning -->
 
   <document url="xml/fibo.xml">
@@ -194,7 +193,8 @@
       <valueOf select="/PLAY/TITLE">Much Ado about Nothing</valueOf>
       <valueOf select="2+2">4</valueOf>
       <valueOf select="5 * 4 + 1">21</valueOf>
-      <valueOf select="10 + count(descendant::ACT) * 5">75</valueOf>
+      <valueOf select="count(descendant::ACT)">5</valueOf>
+      <valueOf select="10 + count(descendant::ACT) * 5">35</valueOf>
       <valueOf select="(10 + count(descendant::ACT)) * 5">75</valueOf>
     </context>
   </document>

@@ -24,7 +24,7 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
     public Object evaluate(Context context)
     {
         Object lhsValue = getLHS().evaluate( context );
-        Object rhsValue = getLHS().evaluate( context );
+        Object rhsValue = getRHS().evaluate( context );
 
         Navigator nav = context.getNavigator();
 

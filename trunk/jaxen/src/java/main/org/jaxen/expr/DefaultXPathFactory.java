@@ -312,6 +312,11 @@ public class DefaultXPathFactory implements XPathFactory
                 iter = new IterableAncestorOrSelfAxis( axis );
                 break;
             }
+            case Axis.ANCESTOR:
+            {
+                iter = new IterableAncestorAxis( axis );
+                break;
+            }
         }
 
         return iter;

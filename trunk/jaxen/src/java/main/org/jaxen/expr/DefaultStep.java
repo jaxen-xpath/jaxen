@@ -64,7 +64,7 @@ public abstract class DefaultStep implements Step
 
     public String toString()
     {
-        return super.toString();
+        return getIterableAxis() + " " + super.toString();
     }
 
     public void simplify()

@@ -44,11 +44,11 @@ public class ContextTest extends TestCase
 
         Context dupe = original.duplicate();
 
-        assert( original != dupe );
+        assertTrue( original != dupe );
 
         List dupeNodeSet = dupe.getNodeSet();
 
-        assert( original.getNodeSet() != dupe.getNodeSet() );
+        assertTrue( original.getNodeSet() != dupe.getNodeSet() );
 
         dupeNodeSet.clear();
 

@@ -9,16 +9,22 @@ import java.util.NoSuchElementException;
 
 import java.util.LinkedList;
 
+import java.util.Set;
+import java.util.HashSet;
+
 public abstract class StackedIterator implements Iterator
 {
     private Object     contextNode;
     private LinkedList iteratorStack;
     private Navigator  navigator;
-    
+
+    private Set        created;
+
     public StackedIterator(Object contextNode,
                            Navigator navigator)
     {
         this.iteratorStack = new LinkedList();
+        this.created       = new HashSet();
 
         init( contextNode,
               navigator );
@@ -27,6 +33,7 @@ public abstract class StackedIterator implements Iterator
     protected StackedIterator()
     {
         this.iteratorStack = new LinkedList();
+        this.created       = new HashSet();
     }
 
     protected void init(Object contextNode,
@@ -35,7 +42,19 @@ public abstract class StackedIterator implements Iterator
         this.contextNode   = contextNode;
         this.navigator     = navigator;
         
-        pushIterator( createIterator( contextNode ) );
+        pushIterator( internalCreateIterator( contextNode ) );
+    }
+
+    private Iterator internalCreateIterator(Object contextNode)
+    {
+        if ( this.created.contains( contextNode ) )
+        {
+            return null;
+        }
+
+        this.created.add( contextNode );
+
+        return createIterator( contextNode );
     }
 
     public boolean hasNext()
@@ -60,7 +79,7 @@ public abstract class StackedIterator implements Iterator
         Iterator curIter = currentIterator();
         Object   object  = curIter.next();
 
-        pushIterator( createIterator( object ) );
+        pushIterator( internalCreateIterator( object ) );
 
         return object;
     }
