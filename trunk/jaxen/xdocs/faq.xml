@@ -49,7 +49,7 @@
       <code>jaxen</code> may be perceived to be better than other XPath technologies since it
       provides a single cohesive API for evaluating XPaths against multiple object
       models.  Learn the <code>jaxen</code> API, and apply it to <b>dom4j</b>, <b>JDOM</b>,
-      <b>EXML</b> or <b>DOM</b> trees in exactly the same way.
+      <b>XOM</b> or <b>DOM</b> trees in exactly the same way.
       </p>
 
       <p>
@@ -108,10 +108,11 @@
 
     <section name="Who uses jaxen?">
       <p>
-      <code>jaxen</code> has been embedded directly into <b>dom4j</b> to provide
+      <code>jaxen</code> has been embedded directly into <b>dom4j</b> and 
+      <a href="http://www.xom.nu/">XOM 1.1</a> to provide
       easy XPath evaluation directly from your documents.  Additionally, it's
       being integrated into David Megginson's 
-      <a href="http://sourceforge.net/projects/newsml-toolkit/">NewsML Framework</a>.
+      <a href="http://sourceforge.net/projects/newsml-toolkit/">NewsML Framework</a> and <a hnref=""XOM 1.1</a>.
       </p>
     </section>
 

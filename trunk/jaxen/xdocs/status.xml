@@ -101,8 +101,8 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         </li>
         <li>The <code>format-number()</code> XSLT function is not yet implemented but would be useful. Any volunteers?
         </li>
-        <li>While already Jaxen is pretty 
-        <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>
+        <li>Jaxen is already pretty 
+        <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>,
         but we are sure it could use some more tuning.
         </li>
         <li>selectSingleNode() and possibly the *ValueOf() methods should be return-fast
