@@ -32,39 +32,9 @@ public class BooleanFunction implements Function
     {
       
       // convert to String if it's a special object type
-        if ( nav.isElement( obj ) )
-        {
-            obj = nav.getElementStringValue( obj );
-        }
-        else if ( nav.isAttribute( obj ) )
-        {
-            obj = nav.getAttributeStringValue( obj );
-        }
-        else if ( nav.isText( obj ) )
-        {
-            obj = nav.getTextStringValue( obj );
-        }
-        
         if ( obj instanceof Boolean )
         {
             return (Boolean) obj;
-        }
-        else if ( obj instanceof Number )
-        {
-            if ( ((Number)obj).doubleValue() == Double.NaN
-                 ||
-                 ((Number)obj).doubleValue() == 0 )
-            {
-                return Boolean.FALSE;
-            }
-
-            return Boolean.TRUE;
-        }
-        else if ( obj instanceof String )
-        {
-            return ( ((String)obj).length() > 0
-                     ? Boolean.TRUE
-                     : Boolean.FALSE );
         }
         else if ( obj instanceof List )
         {
@@ -78,7 +48,35 @@ public class BooleanFunction implements Function
                      ? Boolean.TRUE
                      : Boolean.FALSE );
         }
+        else if ( obj instanceof Number )
+        {
+            if ( ((Number)obj).doubleValue() == Double.NaN
+                 ||
+                 ((Number)obj).doubleValue() == 0 )
+            {
+                return Boolean.FALSE;
+            }
 
+            return Boolean.TRUE;
+        }
+        else if ( nav.isElement( obj ) )
+        {
+            obj = nav.getElementStringValue( obj );
+        }
+        else if ( nav.isAttribute( obj ) )
+        {
+            obj = nav.getAttributeStringValue( obj );
+        }
+        else if ( nav.isText( obj ) )
+        {
+            obj = nav.getTextStringValue( obj );
+        }
+        else if ( obj instanceof String )
+        {
+            return ( ((String)obj).length() > 0
+                     ? Boolean.TRUE
+                     : Boolean.FALSE );
+        }
         return Boolean.FALSE;
     }
 }
