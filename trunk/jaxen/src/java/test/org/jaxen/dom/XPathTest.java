@@ -69,9 +69,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jaxen.FunctionCallException;
 import org.jaxen.XPath;
-import org.jaxen.XPathSyntaxException;
 import org.jaxen.saxpath.SAXPathException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
