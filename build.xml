@@ -37,8 +37,8 @@
 
     <property name="Name"            value="Jaxen"/>
     <property name="name"            value="jaxen"/>
-    <property name="version"         value="1.0-beta-5"/>
-    <property name="current.version" value="1.0-beta-5"/>
+    <property name="version"         value="1.0-beta-6"/>
+    <property name="current.version" value="1.0-beta-6"/>
     <property name="year"            value="2001"/>
 
     <property name="copyright.owner"  value="bob mcwhirter &amp; James Strachan"/>
