@@ -68,8 +68,6 @@ import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.XPathHandler;
 import org.jaxen.saxpath.XPathSyntaxException;
-import org.jaxen.saxpath.SAXPathParseException;
-import org.jaxen.saxpath.SAXPathException;
 
 /** Implementation of SAXPath's <code>XPathReader</code> which
  *  generates callbacks to an <code>XPathHandler</code>.
