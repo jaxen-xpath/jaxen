@@ -436,7 +436,7 @@ public class DocumentNavigator extends DefaultNavigator
             
             return builder.build( url );
         }
-        catch (JDOMException e)
+        catch (Exception e)
         {
             throw new FunctionCallException( e.getMessage() );
         }
