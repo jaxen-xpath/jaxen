@@ -86,7 +86,7 @@ public class EvaluateFunction implements Function
             return evaluate( context, args.get(0));
         }
 
-        throw new FunctionCallException( "id() requires one argument" );
+        throw new FunctionCallException( "evaluate() requires one argument" );
     }
 
     public static List evaluate (Context context, Object arg)
