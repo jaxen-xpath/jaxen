@@ -25,8 +25,8 @@ public class PositionFunction implements Function
         throw new FunctionCallException( "position() requires no arguments." );
     }
     
-    public static Integer evaluate(Context context)
+    public static Number evaluate(Context context)
     {
-        return new Integer( context.getPosition() );
+        return new Double( context.getPosition() );
     }
 }

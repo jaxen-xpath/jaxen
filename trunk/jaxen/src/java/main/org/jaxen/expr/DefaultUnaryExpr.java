@@ -43,11 +43,6 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
         Number number = NumberFunction.evaluate( getExpr().evaluate( context ),
                                                  context.getNavigator() );
 
-        if ( number instanceof Integer )
-        {
-            return new Integer( number.intValue() * -1 );
-        }
-
         return new Double( number.doubleValue() * -1 );
     }
 }

@@ -33,12 +33,10 @@ public class StringLengthFunction implements Function
         throw new FunctionCallException( "string-length() requires one argument." );
     }
 
-    public static Integer evaluate(Object obj,
-                                   Navigator nav)
+    public static Number evaluate(Object obj, Navigator nav )
     {
-        String str = StringFunction.evaluate( obj,
-                                              nav );
+        String str = StringFunction.evaluate( obj, nav );
 
-        return new Integer(str.length());
+        return new Double(str.length());
     }
 }

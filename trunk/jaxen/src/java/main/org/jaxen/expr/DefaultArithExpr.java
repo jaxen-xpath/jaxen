@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.JaxenException;
 import org.jaxen.util.SingleObjectIterator;
 
 import java.util.Set;
@@ -22,4 +23,12 @@ abstract class DefaultArithExpr extends DefaultBinaryExpr
     {
         return "[(DefaultArithExpr): " + getLHS() + ", " + getRHS() + "]";
     }
+    
+    public void assertInteger( Number number ) throws JaxenException
+      {
+      if( number.doubleValue() != number.intValue() )
+        {
+        throw new JaxenException( number + " is not an integer" );
+        }
+      }
 }

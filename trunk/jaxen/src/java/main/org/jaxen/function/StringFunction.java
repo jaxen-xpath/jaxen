@@ -111,6 +111,10 @@ public class StringFunction implements Function
                     return "Infinity";
                 }
             }
+            else if( num.floatValue() == num.intValue() ) // strip .0
+              {
+              return Integer.toString( num.intValue() );
+              }
             else
             {
                 return num.toString();
