@@ -63,8 +63,8 @@
 
 package org.jaxen.util;
 
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import org.jaxen.Navigator;
@@ -101,8 +101,7 @@ public class FollowingSiblingAxisIterator implements Iterator
             }
         }
         else {
-            // ???? make an EmptyIterator class
-            siblingIter = (new LinkedList()).iterator();
+            siblingIter = Collections.EMPTY_LIST.iterator();
         }
 
     }
