@@ -86,9 +86,10 @@ class DefaultNameStep extends DefaultStep
         }
         else
         {
-            String myUri = contextSupport.translateNamespacePrefixToUri( getPrefix() );
+            //String myUri = contextSupport.translateNamespacePrefixToUri( getPrefix() );
+            String myUri = nav.translateNamespacePrefixToUri( getPrefix(), node );
 
-            if ( myUri.equals( nodeUri ) )
+            if ( matchesNamespaceURIs( myUri, nodeUri ) )
             {
                 return matchesAnyName || getLocalName().equals( nodeName );
             }
@@ -102,4 +103,18 @@ class DefaultNameStep extends DefaultStep
                  getLocalName().equals( nodeName ) );
         */
     }
+    
+    /** @return true if the two namespace URIs are equal
+     * Note that we may wish to consider null being equal to ""
+     */
+    protected boolean matchesNamespaceURIs( String u1, String u2 ) {
+        if ( u1 == u2 ) {
+            return true;
+        }
+        if ( u1 != null && u2 != null ) {
+            return u1.equals( u2 );
+        }
+        return false;
+    }
+    
 }

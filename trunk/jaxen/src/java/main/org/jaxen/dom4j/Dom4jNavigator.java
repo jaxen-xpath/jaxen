@@ -176,4 +176,27 @@ public class Dom4jNavigator extends DefaultNavigator
 
         return cmt.getText();
     }
+    
+    public String translateNamespacePrefixToUri(String prefix, Object context)
+    {
+        Element element = null;
+        if ( context instanceof Element ) 
+        {
+            element = (Element) context;
+        }
+        else if ( context instanceof Node )
+        {
+            Node node = (Node) context;
+            element = node.getParent();
+        }
+        if ( element != null )
+        {
+            Namespace namespace = element.getNamespaceForPrefix( prefix );
+            if ( namespace != null ) 
+            {
+                return namespace.getURI();
+            }
+        }
+        return null;
+    }
 }
