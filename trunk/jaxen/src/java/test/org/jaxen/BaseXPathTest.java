@@ -63,6 +63,7 @@
 package org.jaxen;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nu.xom.Document;
 import nu.xom.Element;
@@ -107,6 +108,17 @@ public class BaseXPathTest extends TestCase {
         Document doc = new Document(new Element("root"));
         String stringValue = (String) xpath.evaluate(doc);
         assertEquals("", stringValue);
+        
+    }
+    
+    
+    public void testEvaluateWithMultiNodeAnswer() throws JaxenException {
+        
+        BaseXPath xpath = new XOMXPath("(/descendant-or-self::node())");
+        
+        Document doc = new Document(new Element("root"));
+        List result = (List) xpath.evaluate(doc);
+        assertEquals(2, result.size());
         
     }
     
