@@ -10,8 +10,11 @@ import java.util.NoSuchElementException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.jaxen.BaseXPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
+
+import org.saxpath.SAXPathException;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -344,6 +347,13 @@ public class DocumentNavigator extends DefaultNavigator
         }
     }
 
+    /** Returns a parsed form of the given xpath string, which will be suitable
+     *  for queries on DOM documents.
+     */
+    public BaseXPath parseXPath (String xpath) throws SAXPathException
+    {
+        return new XPath(xpath);
+    }
 
     /**
      * Get the top-level document node.
