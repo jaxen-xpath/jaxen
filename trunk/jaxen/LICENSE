@@ -2,7 +2,7 @@
 
  $Id$
 
- Copyright (C) 2000-2002 bob mcwhirter & Jason Hunter.
+ Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -48,8 +48,8 @@
 
  This software consists of voluntary contributions made by many 
  individuals on behalf of the Jaxen Project and was originally 
- created by bob mcwhirter <brett@jaxen.org> and 
- Jason Hunter <jhunter@jaxen.org>.  For more information on the 
+ created by bob mcwhirter <bob@werken.com> and 
+ James Strachan <jstrachan@apache.org>.  For more information on the 
  Jaxen Project, please see <http://www.jaxen.org/>.
  
  */
