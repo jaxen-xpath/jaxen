@@ -212,7 +212,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * key.
      * 
      * @return <code>true</code> if this map contains a mapping for the specified
-     * key.
+     * key
      * @param key key whose presence in this Map is to be tested
      */
     public boolean containsKey(Object key) {
@@ -227,8 +227,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
                     return true;
         } else {
             for (Entry e = tab[0]; e != null; e = e.next)
-                if (e.key==null)
-                    return true;
+                if (e.key==null) return true;
         }
 
         return false;
