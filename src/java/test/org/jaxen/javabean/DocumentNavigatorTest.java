@@ -27,7 +27,7 @@ public class DocumentNavigatorTest
         bob.addBrother( new Person( "larry", 42 ) );
         bob.addBrother( new Person( "ted", 22 ) );
 
-        System.err.println( xpath.evaluate( bob ) );
+        System.out.println( xpath.evaluate( bob ) );
     }
 
 }
