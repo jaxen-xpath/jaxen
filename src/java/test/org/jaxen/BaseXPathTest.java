@@ -423,16 +423,16 @@ public class BaseXPathTest extends TestCase {
         b.appendChild(x2);
         b.appendChild(x3);
         
-        Attr a1 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:a");
+        Attr a1 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:a");
         a1.setNodeValue("http://www.example.org/");
         x1.setAttributeNode(a1);
-        Attr a2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:b");
+        Attr a2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:b");
         a2.setNodeValue("http://www.example.org/");
         x2.setAttributeNode(a2);
-        Attr a3 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:c");
+        Attr a3 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:c");
         a3.setNodeValue("http://www.example.org/");
         x3.setAttributeNode(a3);
-        Attr a4 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:d");
+        Attr a4 = doc.createAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:d");
         a4.setNodeValue("http://www.example.org/");
         x4.setAttributeNode(a4);
         
