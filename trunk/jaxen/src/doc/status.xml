@@ -114,7 +114,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
       Many thanks to you all!</p>
       <ul>
         <li>Bob McWhirter (<a href="http://code.werken.com/">The Werken Company</a>)</li>
-        <li>James Strachan (<a href="http://www.spiritsoft.com">SpiritSoft</a>)</li>
+        <li><a href="http://www.apache.org/~jstrachan/">James Strachan</a> (<a href="http://www.spiritsoft.com">SpiritSoft</a>)</li>
         <li>David Megginson (<a href="http://megginson.com/">Megginson Technologies</a>)</li>
         <li>Erwin Bolwidt</li>
         <li>David Peterson</li>

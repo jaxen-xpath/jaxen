@@ -7,7 +7,6 @@
       <p>
       <i>Jaxen</i> is a fast Java engine for <a href="http://www.w3.org/TR/xpath">XPath 1.0</a>
       that works on all XML object models. The following models are currently supported out of the box
-      </p>
       <ul>
       <li><a href="http://www.w3.org/DOM/">DOM</a></li>
       <li><a href="http://dom4j.org">dom4j</a></li>
