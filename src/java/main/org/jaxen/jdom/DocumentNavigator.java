@@ -12,6 +12,7 @@ import org.saxpath.SAXPathException;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Comment;
+import org.jdom.Text;
 import org.jdom.Attribute;
 import org.jdom.CDATA;
 import org.jdom.ProcessingInstruction;
@@ -48,7 +49,7 @@ public class DocumentNavigator extends DefaultNavigator
 
     public boolean isText(Object obj)
     {
-        return ( obj instanceof String
+        return ( obj instanceof Text
                  ||
                  obj instanceof CDATA );
     }
@@ -296,9 +297,9 @@ public class DocumentNavigator extends DefaultNavigator
 
     public String getTextStringValue(Object obj)
     {
-        if ( obj instanceof String )
+        if ( obj instanceof Text )
         {
-            return (String) obj;
+            return ((Text)obj).getText();
         }
 
         if ( obj instanceof CDATA )
@@ -330,9 +331,9 @@ public class DocumentNavigator extends DefaultNavigator
         {
             each = contentIter.next();
 
-            if ( each instanceof String )
+            if ( each instanceof Text )
             {
-                buf.append( each );
+                buf.append( ((Text)each).getText() );
             }
             else if ( each instanceof CDATA )
             {
