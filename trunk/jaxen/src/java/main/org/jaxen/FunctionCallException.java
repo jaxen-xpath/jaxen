@@ -93,7 +93,7 @@ public class FunctionCallException extends JaxenException
     }
 
     public void printStackTrace( PrintStream s ) {
-        super.printStackTrace();
+        super.printStackTrace( s );
         if ( nestedException != null ) 
         {
             s.println( "Root cause:" );
@@ -102,7 +102,7 @@ public class FunctionCallException extends JaxenException
     }
     
     public void printStackTrace( PrintWriter w ) {
-        super.printStackTrace();
+        super.printStackTrace( w );
         if ( nestedException != null ) 
         {
             w.println( "Root cause:" );
