@@ -57,11 +57,6 @@
 
     <section title="What are some related technologies?">
       <p>
-      <i>Jaxen</i> itself is based upon <a href="http://saxpath.org/">SAXPath</a>, which is
-      an event-based model for parsing XPath expressions.
-      </p>
-
-      <p>
       <i>Jaxen</i> currently has navigators defined for <a href="http://dom4j.org/">dom4j</a>
       and <a href="http://jdom.org/">JDOM</a>, two popular and convenient object models
       for representing XML documents.  Additionally, <a href="http://themindelectric.com/">The Mind Electric's</a>
