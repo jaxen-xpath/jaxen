@@ -6,6 +6,13 @@
            <test select="preceding::*[1]" count="1"/>
            <valueOf select="local-name(preceding::*[1])">span</valueOf>
        </context>
+        <!-- jaxen-58 -->
+       <context select="/">
+           <test select="//preceding::x" count="0"/>
+           <test select="//following::x" count="0"/>
+           <test select="/descendant::*/preceding::x" count="0"/>
+           <test select="/descendant::node()/preceding::x" count="0"/>
+       </context>
    </document>
 
     <!-- test for jaxen-3 -->
