@@ -66,21 +66,7 @@ public class DefaultNameStep extends DefaultStep
 
         if ( nav.isDocument( node ) )
         {
-            if ( matchesAnyName )
-            {
-                return true;
-            }
-            
-            return false;
-        }
-        else if ( nav.isNamespace( node ) )
-        {
-            if ( matchesAnyName )
-            {
-                return true;
-            }
-
-            return false;
+            return matchesAnyName;
         }
         else if ( nav.isElement( node ) )
         {
@@ -93,14 +79,13 @@ public class DefaultNameStep extends DefaultStep
             nodeUri  = nav.getAttributeNamespaceUri( node );
             nodeName = nav.getAttributeName( node );
         }
+        else if ( nav.isNamespace( node ) )
+        {
+            return matchesAnyName;
+        }
         else
         {
             return false;
-        }
-
-        if ( nodeUri == null )
-        {
-            nodeUri = "";
         }
 
         if ( matchesAnyNamespace )
@@ -121,39 +106,31 @@ public class DefaultNameStep extends DefaultStep
             {
                 myUri = contextSupport.translateNamespacePrefixToUri( myPrefix );
             }
-
+                
             if ( matchesNamespaceURIs( myUri, nodeUri ) )
             {
-                boolean result = matchesAnyName || getLocalName().equals( nodeName );
-
-                return result;
-
+                return matchesAnyName || getLocalName().equals( nodeName );
             }
-
         }
-
         return false;
-
-        /*
-        return ( testUri.equals( nodeUri )
-                 &&
-                 getLocalName().equals( nodeName ) );
-        */
     }
     
     /** @return true if the two namespace URIs are equal
      * Note that we may wish to consider null being equal to ""
      */
     protected boolean matchesNamespaceURIs( String u1, String u2 ) {
-        //System.out.println( "Comparing URIs: " + u1 + " and: " + u2 + " for prefix: " + prefix );
-        
         if ( u1 == u2 ) {
             return true;
         }
-        if ( u1 != null && u2 != null ) {
-            return u1.equals( u2 );
+        if ( u1 == null ) 
+        {
+            u1 = "";
         }
-        return false;
+        if ( u2 == null ) 
+        {
+            u2 = "";
+        }
+        return u1.equals( u2 );
     }
     
 }
