@@ -3,6 +3,7 @@
 package org.jaxen.expr;
 
 import org.jaxen.Context;
+import org.jaxen.Navigator;
 
 import java.util.List;
 
@@ -25,11 +26,14 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
         Object lhsValue = getLHS().evaluate( context );
         Object rhsValue = getLHS().evaluate( context );
 
+        Navigator nav = context.getNavigator();
+
         if ( bothAreSets( lhsValue,
                           rhsValue ) )
         {
             return evaluateSetSet( (List) lhsValue,
-                                   (List) rhsValue );
+                                   (List) rhsValue,
+                                   nav );
         }
 
         if ( eitherIsSet( lhsValue,
@@ -40,12 +44,14 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
                 if ( isString( rhsValue ) )
                 {
                     return evaluateSetString( (List) lhsValue,
-                                              (String) rhsValue );
+                                              (String) rhsValue,
+                                              nav );
                 }
                 else if ( isNumber( rhsValue ) )
                 {
                     return evaluateSetNumber( (List) lhsValue,
-                                              (Number) rhsValue );
+                                              (Number) rhsValue,
+                                              nav );
                 }
                 else if ( isBoolean( rhsValue ) )
                 {
@@ -58,12 +64,14 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
                 if ( isString( lhsValue ) )
                 {
                     return evaluateStringSet( (String) lhsValue,
-                                              (List) rhsValue );
+                                              (List) rhsValue,
+                                              nav );
                 }
                 else if ( isNumber( lhsValue )  )
                 {
                     return evaluateNumberSet( (Number) lhsValue,
-                                              (List) rhsValue );
+                                              (List) rhsValue,
+                                              nav );
                 }
                 else if ( isBoolean( lhsValue ) )
                 {
@@ -78,52 +86,63 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr
     }
 
     protected abstract Object evaluateSetSet(List lhsSet,
-                                             List rhsSet);
+                                             List rhsSet,
+                                             Navigator nav);
     
     protected abstract Object evaluateSetBoolean(List theSet,
                                                  Boolean theBool);
 
     protected abstract Object evaluateSetString(List theSet,
                                                 String theStr,
-                                                boolean reverse);
+                                                boolean reverse,
+                                                Navigator nav);
 
     protected abstract Object evaluateSetNumber(List theSet,
                                                 Number theNum,
-                                                boolean reverse);
+                                                boolean reverse,
+                                                Navigator nav);
 
     protected abstract Object evaluateObjectObject(Object lhs,
                                                    Object rhs);
     
     protected Object evaluateStringSet(String theStr,
-                                       List theSet)
+                                       List theSet,
+                                       Navigator nav)
     {
         return evaluateSetString( theSet,
                                   theStr,
-                                  true );
+                                  true,
+                                  nav );
     }
 
     protected Object evaluateSetString(List theSet,
-                                       String theStr)
+                                       String theStr,
+                                       Navigator nav)
     {
         return evaluateSetString( theSet,
                                   theStr,
-                                  false );
+                                  false,
+                                  nav );
     }
 
     protected Object evaluateNumberSet(Number theNum,
-                                       List theSet)
+                                       List theSet,
+                                       Navigator nav)
     {
         return evaluateSetNumber( theSet,
                                   theNum,
-                                  true );
+                                  true,
+                                  nav );
     }
 
     protected Object evaluateSetNumber(List theSet,
-                                       Number theNum)
+                                       Number theNum,
+                                       Navigator nav)
     {
         return evaluateSetNumber( theSet,
                                   theNum,
-                                  false );
+                                  false,
+                                  nav );
     }
 }
 

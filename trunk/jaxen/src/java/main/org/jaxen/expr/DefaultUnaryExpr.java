@@ -4,6 +4,8 @@ package org.jaxen.expr;
 
 import org.jaxen.Context;
 
+import org.jaxen.function.NumberFunction;
+
 class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 {
     private Expr                   expr;
@@ -30,7 +32,8 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 
     public Object evaluate(Context context)
     {
-        Number number = convertToNumber( getExpr().evaluate( context ) );
+        Number number = NumberFunction.evaluate( getExpr().evaluate( context ),
+                                                 context.getNavigator() );
 
         if ( number instanceof Integer )
         {

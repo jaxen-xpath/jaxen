@@ -1,6 +1,12 @@
 
 package org.jaxen.expr;
 
+import org.jaxen.Navigator;
+
+import org.jaxen.function.StringFunction;
+import org.jaxen.function.NumberFunction;
+import org.jaxen.function.BooleanFunction;
+
 import java.util.List;
 
 class DefaultLessThanEqualExpr extends DefaultRelationalExpr
@@ -18,7 +24,8 @@ class DefaultLessThanEqualExpr extends DefaultRelationalExpr
     }
 
     protected Object evaluateSetSet(List lhsSet,
-                                    List rhsSet)
+                                    List rhsSet,
+                                    Navigator nav)
     {
         int lhsSetSize = lhsSet.size();
         int rhsSetSize = rhsSet.size();
@@ -28,11 +35,14 @@ class DefaultLessThanEqualExpr extends DefaultRelationalExpr
 
         for ( int i = 0 ; i < lhsSetSize ; ++i )
         {
-            lhsStr = convertToString( lhsSet.get( i ) );
+            lhsStr = StringFunction.evaluate( lhsSet.get( i ),
+                                              nav );
+            
 
             for ( int j = 0 ; j < rhsSetSize ; ++i )
             {
-                rhsStr = convertToString( lhsSet.get( i ) );
+                rhsStr = StringFunction.evaluate( rhsSet.get( i ),
+                                                  nav );
 
                 if ( lhsStr.compareTo( rhsStr ) <= 0 )
                 {
@@ -46,14 +56,16 @@ class DefaultLessThanEqualExpr extends DefaultRelationalExpr
 
     protected Object evaluateSetString(List theSet,
                                        String theStr,
-                                       boolean reverse)
+                                       boolean reverse,
+                                       Navigator nav)
     {
         int    setSize    = theSet.size();
         String setElement = null;
 
         for ( int i = 0 ; i < setSize ; ++i )
         {
-            setElement = convertToString( theSet.get( i ) );
+            setElement = StringFunction.evaluate( theSet.get( i ),
+                                                  nav );
 
             if ( reverse && ( setElement.compareTo( theStr ) >= 0 ) )
             {
@@ -70,14 +82,16 @@ class DefaultLessThanEqualExpr extends DefaultRelationalExpr
 
     protected Object evaluateSetNumber(List theSet,
                                        Number theNum,
-                                       boolean reverse)
+                                       boolean reverse,
+                                       Navigator nav)
     {
         int    setSize    = theSet.size();
         Comparable setElement = null;
 
         for ( int i = 0 ; i < setSize ; ++i )
         {
-            setElement = (Comparable) convertToNumber( theSet.get( i ) );
+            setElement = (Comparable) NumberFunction.evaluate( theSet.get( i ),
+                                                               nav );
 
             if ( reverse && ( setElement.compareTo( theNum ) >= 0 ) )
             {
@@ -95,7 +109,7 @@ class DefaultLessThanEqualExpr extends DefaultRelationalExpr
     protected Object evaluateSetBoolean(List theSet,
                                         Boolean theBool)
     {
-        return ( ( convertToBoolean( theSet ).equals( theBool ) )
+        return ( ( BooleanFunction.evaluate( theSet ).equals( theBool ) )
                  ? Boolean.TRUE
                  : Boolean.FALSE );
     }

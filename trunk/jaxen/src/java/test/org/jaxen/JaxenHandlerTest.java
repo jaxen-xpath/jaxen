@@ -16,6 +16,8 @@ import junit.framework.TestCase;
 public class JaxenHandlerTest extends TestCase
 {
     String[] ignore_paths = {
+        "foo[.='bar']",
+        "foo[.!='bar']",
     };
     
     String[] paths = {
