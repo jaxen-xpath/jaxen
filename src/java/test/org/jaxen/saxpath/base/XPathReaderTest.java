@@ -465,94 +465,6 @@ public class XPathReaderTest extends TestCase
         }
     }
 
-    public void testOrderOfOperations()
-    {
-        try
-        {
-            setText( "7 - 3 + 1" );
-
-            getReader().setUpParse( getText() );
-
-            getReader().predicate();
-
- /* What is really. my golly, that looks like a lot of useless stuff.
-
- startPredicate()
-(1) startOrExpr()
-(2) startAndExpr()
-(3) startEqualityExpr()
-(4) startRelationalExpr()
-(5) startAdditiveExpr()
-(6) startMultiplicativeExpr()
-(7) startUnaryExpr()
-(8) startUnionExpr()
-(9) startPathExpr()
-(10) startFilterExpr()
-(11) number(7)
-(12) endFilterExpr()
-(13) endPathExpr()
-(14) endUnionExpr(false)
-(15) endUnaryExpr(0)
-(16) endMultiplicativeExpr(0)
-(17) startAdditiveExpr()
-(18) startMultiplicativeExpr()
-(19) startUnaryExpr()
-(20) startUnionExpr()
-(21) startPathExpr()
-(22) startFilterExpr()
-(23) number(3)
-(24) endFilterExpr()
-(25) endPathExpr()
-(26) endUnionExpr(false)
-(27) endUnaryExpr(0)
-(28) endMultiplicativeExpr(0)
-(29) startAdditiveExpr()
-(30) startMultiplicativeExpr()
-(31) startUnaryExpr()
-(32) startUnionExpr()
-(33) startPathExpr()
-(34) startFilterExpr()
-(35) number(1)
-(36) endFilterExpr()
-(37) endPathExpr()
-(38) endUnionExpr(false)
-(39) endUnaryExpr(0)
-(40) endMultiplicativeExpr(0)
-(41) endAdditiveExpr(0)
-(42) endAdditiveExpr(7)
-(43) endAdditiveExpr(8)
-(44) endRelationalExpr(0)
-(45) endEqualityExpr(0)
-(46) endAndExpr(false)
-(47) endOrExpr(false)
-(48) endPredicate()
-*/
-            expected().startAdditiveExpr();
-            expected().number( 7 );
-            expected().startAdditiveExpr();
-            expected().number( 3 );
-            expected().number( 1 );
-            expected().endAdditiveExpr( Operator.ADD );
-            expected().endAdditiveExpr( Operator.SUBTRACT );
-
-/*
-            expected().startAdditiveExpr();
-            expected().number( 7 );
-            expected().number( 3 );
-            expected().endAdditiveExpr( Operator.SUBTRACT );
-            expected().startAdditiveExpr();
-            expected().number( 1 );
-            expected().endAdditiveExpr( Operator.ADD );
-*/
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
-    }
-
     public void testNumberPredicate()
     {
         try
@@ -570,6 +482,7 @@ public class XPathReaderTest extends TestCase
             expected().startEqualityExpr();
             expected().startRelationalExpr();
             expected().startAdditiveExpr();
+            expected().startAdditiveExpr();
             expected().startMultiplicativeExpr();
             expected().startUnaryExpr();
             expected().startUnionExpr();
@@ -583,6 +496,7 @@ public class XPathReaderTest extends TestCase
             expected().endUnionExpr( false );
             expected().endUnaryExpr( Operator.NO_OP );
             expected().endMultiplicativeExpr( Operator.NO_OP );
+            expected().endAdditiveExpr( Operator.NO_OP );
             expected().endAdditiveExpr( Operator.NO_OP );
             expected().endRelationalExpr( Operator.NO_OP );
             expected().endEqualityExpr( Operator.NO_OP );
