@@ -67,7 +67,12 @@ public class DocumentNavigator extends DefaultNavigator
 
     public boolean isNamespace(Object obj)
     {
-        //return obj instanceof Namespace;
+        if ( obj instanceof Attr )
+        {
+            Attr node = (Attr) obj;
+            String name = node.getNodeName();
+            return name != null && name.startsWith( "xmlns" );
+        }
         return false;
     }
 
@@ -167,17 +172,21 @@ public class DocumentNavigator extends DefaultNavigator
 
     public Iterator getAttributeAxisIterator(Object contextNode)
     {
-        if ( ! ( contextNode instanceof Element ) )
+        if ( contextNode instanceof Element )
         {
-            return null;
+            Element element = (Element) contextNode;
+            return new AttributeIterator( element.getAttributes() );
         }
-
-        Element element = (Element) contextNode;
-        return new AttributesIterator( element.getAttributes() );
+        return null;
     }
 
     public Iterator getNamespaceAxisIterator(Object contextNode)
     {
+        if ( contextNode instanceof Element )
+        {
+            Element element = (Element) contextNode;
+            return new NamespaceIterator( element.getAttributes() );
+        }
         return null;
     }
 
@@ -231,12 +240,13 @@ public class DocumentNavigator extends DefaultNavigator
 
     public String getNamespaceStringValue(Object obj)
     {
-/*
-        Namespace ns = (Namespace) obj;
-
-        return ns.getURI();
-*/
-        return null;
+        Node node = (Node) obj;
+        String answer = node.getNodeValue();
+        if ( answer == null )
+        {
+            answer = "";
+        }
+        return "";
     }
 
     public String getCommentStringValue(Object obj)
@@ -248,6 +258,37 @@ public class DocumentNavigator extends DefaultNavigator
     
     public String translateNamespacePrefixToUri(String prefix, Object context)
     {
-        return null;
+        if ( context instanceof Element ) 
+        {
+            return translateNamespacePrefixToUri( "xmlns:" + prefix, context );
+        }
+        else if ( context instanceof Node ) 
+        {
+            Node node = (Node) context;
+            Node parent = node.getParentNode();
+            if ( parent instanceof Element )
+            {
+                return translateNamespacePrefixToUri( "xmlns:" + prefix, context );
+            }
+        }
+        return null;        
+    }
+    
+    public String translateNamespacePrefixToUri(String prefix, Element element)
+    {
+        String answer = element.getAttribute( prefix );
+        if ( answer == null ) 
+        {
+            answer = element.getAttributeNS( prefix, "" );
+            if ( answer == null ) 
+            {
+                Node parent = element.getParentNode();
+                if ( parent != null && parent instanceof Element )
+                {
+                    answer = translateNamespacePrefixToUri(prefix, (Element) parent);
+                }
+            }
+        }
+        return answer;
     }
 }

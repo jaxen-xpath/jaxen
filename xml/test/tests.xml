@@ -96,6 +96,8 @@
       <test select="/*" count="1"/>
 
       <test select="/*/article" count="20"/>
+      <test select="//*" count="221"/>
+      <test select="//*[local-name()='article']" count="20"/>
       <test select="//article" count="20"/>
       <test select="/*/*[@code]" count="20"/>
 
