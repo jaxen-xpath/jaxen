@@ -171,6 +171,7 @@ public abstract class NavigatorTestBase extends TestCase
         new Expectation("//attribute::*[.!='crunchy']").
             expectSize( 1 ).
             expectStringValue( "true" ),
+        new Expectation("/namespace::*"),
     };
 
     public NavigatorTestBase(String name)
@@ -216,6 +217,7 @@ public abstract class NavigatorTestBase extends TestCase
                 String xpathStr = expect.getXPath();
                 JaXPath xpath = new JaXPath( xpathStr );
                 
+                System.err.println( xpath.debug() );
                 List results = xpath.selectNodes( this.context );
                 
                 assertNotNull( results );

@@ -174,6 +174,7 @@ public interface Navigator
     boolean isDocument(Object object);
     boolean isElement(Object object);
     boolean isAttribute(Object object);
+    boolean isNamespace(Object object);
 
     boolean isComment(Object object);
     boolean isText(Object object);

@@ -15,6 +15,8 @@ import org.dom4j.Namespace;
 import org.dom4j.Branch;
 import org.dom4j.Node;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 public class Dom4jNavigator extends DefaultNavigator
@@ -47,6 +49,11 @@ public class Dom4jNavigator extends DefaultNavigator
     public boolean isDocument(Object obj)
     {
         return obj instanceof Document;
+    }
+
+    public boolean isNamespace(Object obj)
+    {
+        return obj instanceof Namespace;
     }
 
     public String getElementName(Object obj)
@@ -132,6 +139,29 @@ public class Dom4jNavigator extends DefaultNavigator
         Element elem = (Element) contextNode;
 
         return elem.attributeIterator();
+    }
+
+    public Iterator getNamespaceAxisIterator(Object contextNode)
+    {
+        if ( ! ( contextNode instanceof Element ) )
+        {
+            return null;
+        }
+
+        Element elem = (Element) contextNode;
+
+        List nsList = new ArrayList();
+
+        Namespace ns = elem.getNamespace();
+
+        if ( ns != Namespace.NO_NAMESPACE )
+        {
+            nsList.add( elem.getNamespace() );
+        }
+
+        nsList.addAll( elem.additionalNamespaces() );
+
+        return nsList.iterator();
     }
 
     public Object getDocumentNode(Object contextNode)

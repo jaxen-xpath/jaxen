@@ -14,6 +14,7 @@ import org.jdom.CDATA;
 import org.jdom.ProcessingInstruction;
 import org.jdom.Namespace;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
@@ -47,6 +48,11 @@ public class JdomNavigator extends DefaultNavigator
     public boolean isDocument(Object obj)
     {
         return obj instanceof Document;
+    }
+
+    public boolean isNamespace(Object obj)
+    {
+        return obj instanceof Namespace;
     }
 
     public String getElementName(Object obj)
@@ -89,6 +95,29 @@ public class JdomNavigator extends DefaultNavigator
         }
 
         return null;
+    }
+
+    public Iterator getNamespaceAxisIterator(Object contextNode)
+    {
+        if ( ! ( contextNode instanceof Element ) )
+        {
+            return null;
+        }
+
+        Element elem = (Element) contextNode;
+
+        List nsList = new ArrayList();
+
+        Namespace ns = elem.getNamespace();
+
+        if ( ns != Namespace.NO_NAMESPACE )
+        {
+            nsList.add( elem.getNamespace() );
+        }
+
+        nsList.addAll( elem.getAdditionalNamespaces() );
+
+        return nsList.iterator();
     }
 
     public Iterator getParentAxisIterator(Object contextNode)

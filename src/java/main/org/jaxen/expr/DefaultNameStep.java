@@ -59,12 +59,32 @@ class DefaultNameStep extends DefaultStep
     public boolean matches(Object node,
                            ContextSupport contextSupport)
     {
+        //System.err.println("does match? --> " + node );
+
         Navigator nav  = contextSupport.getNavigator();
 
         String nodeUri  = null;
         String nodeName = null;
 
-        if (  nav.isElement( node ) )
+        if ( nav.isDocument( node ) )
+        {
+            if ( matchesAnyName )
+            {
+                return true;
+            }
+
+            return false;
+        }
+        else if ( nav.isNamespace( node ) )
+        {
+            if ( matchesAnyName )
+            {
+                return true;
+            }
+
+            return false;
+        }
+        else if ( nav.isElement( node ) )
         {
             nodeUri  = nav.getElementNamespaceUri( node );
             nodeName = nav.getElementName( node );

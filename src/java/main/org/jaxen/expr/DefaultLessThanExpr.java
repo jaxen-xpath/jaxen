@@ -83,7 +83,9 @@ class DefaultLessThanExpr extends DefaultRelationalExpr
                                        boolean reverse,
                                        Navigator nav)
     {
-        int    setSize    = theSet.size();
+        System.err.println(" evaluateSetNumber() " );
+
+        int        setSize    = theSet.size();
         Comparable setElement = null;
 
         for ( int i = 0 ; i < setSize ; ++i )
