@@ -264,6 +264,11 @@ public class DocumentNavigator extends DefaultNavigator
         return getNodeStringValue( (Node) obj );
     }
 
+    public String getTextStringValue(Object obj)
+    {
+        return getNodeStringValue( (Node) obj );
+    }
+
     private String getNodeStringValue(Node node)
     {
         return node.getNodeValue();

@@ -42,7 +42,11 @@ public class DocumentNavigator extends DefaultNavigator
 
     public boolean isText(Object obj)
     {
-        return obj instanceof Text;
+        return ( obj instanceof String
+                 ||
+                 obj instanceof Text
+                 ||
+                 obj instanceof CDATA );
     }
 
     public boolean isAttribute(Object obj)
@@ -232,6 +236,21 @@ public class DocumentNavigator extends DefaultNavigator
         Namespace ns = (Namespace) obj;
 
         return ns.getURI();
+    }
+
+    public String getTextStringValue(Object obj)
+    {
+        if ( obj instanceof Text )
+        {
+            return ((Text)obj).getValue();
+        }
+
+        if ( obj instanceof CDATA )
+        {
+            return ((CDATA)obj).getText();
+        }
+
+        return "";
     }
 
     public String getAttributeStringValue(Object obj)

@@ -113,15 +113,6 @@ public class DocumentNavigator extends DefaultNavigator
         {
             Element elem = (Element) contextNode;
 
-            /*
-            Attributes attrs = elem.getAttributes();
-
-            while ( attrs.current() != null )
-            {
-                System.err.println( "----> " + attrs.next() );
-            }
-            */
-
             return new NamespaceIterator( elem.getAttributes() );
         }
         return null;
@@ -212,6 +203,13 @@ public class DocumentNavigator extends DefaultNavigator
     public String getNamespaceStringValue(Object obj)
     {
         return "";
+    }
+
+    public String getTextStringValue(Object obj)
+    {
+        Text txt = (Text) obj;
+
+        return txt.getString();
     }
 
     public String getAttributeStringValue(Object obj)

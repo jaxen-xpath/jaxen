@@ -10,6 +10,7 @@ import org.dom4j.Element;
 import org.dom4j.Comment;
 import org.dom4j.Attribute;
 import org.dom4j.Text;
+import org.dom4j.CDATA;
 import org.dom4j.ProcessingInstruction;
 import org.dom4j.Namespace;
 import org.dom4j.Branch;
@@ -55,7 +56,9 @@ public class DocumentNavigator extends DefaultNavigator
 
     public boolean isText(Object obj)
     {
-        return obj instanceof Text;
+        return ( obj instanceof Text 
+                 ||
+                 obj instanceof CDATA );
     }
 
     public boolean isAttribute(Object obj)
@@ -235,6 +238,11 @@ public class DocumentNavigator extends DefaultNavigator
             return node.getDocument();
         }
         return null;
+    }
+
+    public String getTextStringValue(Object obj)
+    {
+        return getNodeStringValue( (Node) obj );
     }
 
     public String getElementStringValue(Object obj)
