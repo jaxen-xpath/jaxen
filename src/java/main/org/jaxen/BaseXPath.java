@@ -8,6 +8,9 @@ import java.util.Collections;
 
 public abstract class BaseXPath extends JaXPath
 {
+    /** Configurable variable context used to evaluate XPath variables */
+    private VariableContext variableContext;
+    
     public BaseXPath(String xpathExpr) throws SAXPathException
     {
         super( xpathExpr );
@@ -58,11 +61,25 @@ public abstract class BaseXPath extends JaXPath
     {
         ContextSupport support = new ContextSupport( new SimpleNamespaceContext(),
                                                      XPathFunctionContext.getInstance(),
-                                                     new SimpleVariableContext(),
+                                                     getVariableContext(),
                                                      getNavigator() );
 
         return support;
     }
 
     protected abstract Navigator getNavigator();
+    
+    public VariableContext getVariableContext()
+    {
+        if ( variableContext == null ) 
+        {
+            variableContext = new SimpleVariableContext();
+        }
+        return variableContext;
+    }
+    
+    public void setVariableContext(VariableContext variableContext)
+    {
+        this.variableContext = variableContext;
+    }
 }

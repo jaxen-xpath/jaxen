@@ -227,7 +227,7 @@
              stylesheetfile="${doc.dir}/style/javadoc.css">
 
         <group title="Core" packages="org.jaxen*" />
-        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*:org.jaxen.exml*" />
+        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*:org.jaxen.exml*:org.jaxen.dom*" />
     </javadoc>
   </target>
 
