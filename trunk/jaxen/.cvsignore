@@ -1,2 +1,4 @@
+dist
 target
 .project
+maven.log
