@@ -284,7 +284,7 @@
   </target>
 
   <target name="test.all"
-          depends="test.dom4j,test.jdom,test.dom,test.exml">
+          depends="test.core,test.dom4j,test.jdom,test.dom,test.exml">
   </target>
 
   <target name="jar.all"
@@ -334,6 +334,13 @@
           depends="compile.core,prepare.core.test">
     <antcall target="internal.compile.test">
       <param name="object.model" value="core"/> 
+    </antcall>
+  </target>
+
+  <target name="test.core"
+          depends="compile.core.test">
+    <antcall target="internal.test">
+       <param name="test.packages" value="org/jaxen"/>
     </antcall>
   </target>
 

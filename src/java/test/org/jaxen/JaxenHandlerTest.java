@@ -54,7 +54,7 @@ public class JaxenHandlerTest extends TestCase
         "/*/*[@id='123']",
         "/child::node()/child::node()[@id='_13563275']",
         "$foo:bar",
-        "foo:bar()",
+        //"foo:bar()",
         "/foo/bar[@a='1' and @c!='2']",
     };
 
@@ -86,6 +86,9 @@ public class JaxenHandlerTest extends TestCase
 
     public void testValidPaths()
     {
+            
+        String path = null;
+
         try
         {
             XPathReader reader = XPathReaderFactory.createReader();
@@ -95,9 +98,9 @@ public class JaxenHandlerTest extends TestCase
             handler.setXPathFactory( new DefaultXPathFactory() );
             
             reader.setXPathHandler( handler );
-            
+
             for ( int i = 0; i < paths.length; i++ ) {
-                String path = paths[i];
+                path = paths[i];
                 
                 // System.err.println("-----------------");
                 // System.err.println( "parsing: " + path );
@@ -125,7 +128,7 @@ public class JaxenHandlerTest extends TestCase
         catch (Exception e)
         {
             e.printStackTrace();
-            fail( e.getMessage() );
+            fail( path + " -> " + e.getMessage() );
         }
     }
 

@@ -42,6 +42,23 @@ public abstract class BaseXPath extends JaXPath
         return jaNumberValueOf( (Context) getContext( context ) );
     }
 
+    // Helpers
+
+    public BaseXPath addNamespace(String prefix,
+                                  String uri) throws JaxenException
+    {
+        NamespaceContext nsContext = getNamespaceContext();
+
+        if ( nsContext instanceof SimpleNamespaceContext )
+        {
+            ((SimpleNamespaceContext)nsContext).addNamespace( prefix,
+                                                              uri );
+            
+            return this;
+        }
+
+        throw new JaxenException("Operation not permitted while using a custom namespace context.");
+    }
 
     // Properties
     
