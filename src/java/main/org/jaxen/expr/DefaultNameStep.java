@@ -91,9 +91,8 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      */
     private String localName;
 
-    /** Quick flag denoting if the localname was '*' */
+    /** Quick flag denoting if the local name was '*' */
     private boolean matchesAnyName;
-    // ???? what about node()?
 
     /** Quick flag denoting if we have a namespace prefix **/
     boolean hasPrefix;
@@ -254,6 +253,9 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
         } else {
             for (int i = 0; i < contextSize; ++i) {
                 eachContextNode = contextNodeSet.get(i);
+                // ???? What if we first grabbed all the iterators for 
+                // each contextNode and then sorted/stacked them somehow in document 
+                // order; and then evaluated them? This would probably break positional predicates
 
                 Iterator axisNodeIter = axisIterator(eachContextNode, support);
                 if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
@@ -261,6 +263,8 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 }
 
                 // ensure only unique matching nodes in the result
+                // XXX This iterator goes in the wrong order for descendant axes
+                // breadth-first instead of depth first; this is where the reshuffling happens
                 while (axisNodeIter.hasNext()) {
                     eachAxisNode = axisNodeIter.next();
 
@@ -288,6 +292,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      * @return true if matches
      */
     public boolean matches(Object node, ContextSupport contextSupport) throws JaxenException {
+        
         Navigator nav  = contextSupport.getNavigator();
         String myUri = null;
         String nodeName = null;
@@ -297,30 +302,42 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
             nodeName = nav.getElementName(node);
             nodeUri = nav.getElementNamespaceUri(node);
             
-        } else if (nav.isAttribute(node)) {
+        } 
+        else if (nav.isText(node)) {
+            return false;
+            
+        } 
+        else if (nav.isAttribute(node)) {
+            if (getAxis() != Axis.ATTRIBUTE) {
+                return false;
+            }
             nodeName = nav.getAttributeName(node);
             nodeUri = nav.getAttributeNamespaceUri(node);
             
-        } else if (nav.isDocument(node)) {
-            // what about node()????
+        } 
+        else if (nav.isDocument(node)) {
             return false;
             
-        } else if (nav.isNamespace(node)) {
+        } 
+        else if (nav.isNamespace(node)) {
             if (matchesAnyName && getAxis() != Axis.NAMESPACE) {
                 // Only works for namespace::*
                 return false;
             }
             nodeName = nav.getNamespacePrefix(node);
             
-        } else {
+        } 
+        else {
             return false;
         }
 
         if (hasPrefix) {
             myUri = contextSupport.translateNamespacePrefixToUri(this.prefix);
-            if (myUri == null)
+            if (myUri == null) {
             	throw new UnresolvableException("Cannot resolve namespace prefix '"+this.prefix+"'");
-        } else if (matchesAnyName) {
+            }
+        } 
+        else if (matchesAnyName) {
             return true;
         }
 

@@ -281,9 +281,24 @@ public class BaseXPathTest extends TestCase {
         doc.appendChild(a);
         
         List result = xpath.selectNodes(doc);
-        assertEquals(0, result.size());      
+        assertEquals(0, result.size()); 
+        
     }
     
+    // test to make sure Jaxen-83 fix doesn't go too far
+    public void testSelfAxisWithNodeTestCanReturnNonPrincipalNodeType() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("child/@*[self::node()]");
+        org.w3c.dom.Element a = doc.createElementNS("", "child");
+        org.w3c.dom.Attr test = doc.createAttributeNS("", "test");
+        test.setValue("value");
+        a.setAttributeNode(test);
+        doc.appendChild(a);
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());   
+        
+    } 
     
     // another Jaxen-55 test to try to pin down exactly what does
     // and doesn't work
