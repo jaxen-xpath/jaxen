@@ -71,7 +71,6 @@ import org.jaxen.JaxenException;
 abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
 {
     private List steps;
-    private final static Object PRESENT = new Object();
     
     public DefaultLocationPath()
     {
