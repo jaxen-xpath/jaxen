@@ -87,7 +87,11 @@ public class FalseFunction implements Function
         throw new FunctionCallException( "false() requires no arguments." );
     }
 
-    public static Boolean evaluate()
+    /**
+     * Returns false.
+     * 
+     * @return Boolean.FALSE
+     */    public static Boolean evaluate()
     {
         return Boolean.FALSE;
     }
