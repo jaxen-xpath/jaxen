@@ -199,6 +199,10 @@ public class DocumentNavigator extends DefaultNavigator
         {
             parent = ((Comment)contextNode).getParent();
         }
+        else if ( contextNode instanceof Text )
+        {
+            parent = ((Text)contextNode).getParent();
+        }
         
         if ( parent != null )
         {
@@ -375,6 +379,10 @@ public class DocumentNavigator extends DefaultNavigator
         if ( context instanceof Element ) 
         {
             element = (Element) context;
+        }
+        else if ( context instanceof Text )
+        {
+            element = ((Text)context).getParent();
         }
         else if ( context instanceof Attribute )
         {
