@@ -49,7 +49,8 @@ public class PatternParser
             reader.setXPathHandler( handler );
             reader.parse( text );
 
-            return convertExpr( handler.getXPath().getRootExpr() );
+            Pattern pattern = convertExpr( handler.getXPath().getRootExpr() );
+            return pattern.simplify();
         }
     }
     
@@ -165,7 +166,7 @@ public class PatternParser
             String localName = nameStep.getLocalName();
             String prefix = nameStep.getPrefix();
             int axis = nameStep.getAxis();
-            short nodeType = Pattern.ANY_NODE;
+            short nodeType = Pattern.ELEMENT_NODE;
             if ( axis == Axis.ATTRIBUTE )
             {
                 nodeType = Pattern.ATTRIBUTE_NODE;
@@ -177,6 +178,10 @@ public class PatternParser
                     if ( axis == Axis.ATTRIBUTE )
                     {
                         path.setNodeTest( NodeTypeTest.ATTRIBUTE_TEST );
+                    }
+                    else 
+                    {
+                        path.setNodeTest( NodeTypeTest.ELEMENT_TEST );
                     }
                 }
                 else 
