@@ -533,5 +533,36 @@ public class BaseXPathTest extends TestCase {
         
     } 
     
+    public void testUnionUsesDocumentOrder() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/descendant::x | /a | /a/b");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        x1.appendChild(doc.createTextNode("1"));
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        x2.appendChild(doc.createTextNode("2"));
+        x3.appendChild(doc.createTextNode("3"));
+        x4.appendChild(doc.createTextNode("4"));
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(6, result.size());
+        assertEquals(a, result.get(0));   
+        assertEquals(x1, result.get(1));   
+        assertEquals(b, result.get(2));   
+        assertEquals(x2, result.get(3));   
+        assertEquals(x3, result.get(4));   
+        assertEquals(x4, result.get(5));
+        
+    }    
+    
     
 }
