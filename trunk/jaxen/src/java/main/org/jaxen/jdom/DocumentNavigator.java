@@ -78,7 +78,6 @@ import org.jdom.Attribute;
 import org.jdom.CDATA;
 import org.jdom.ProcessingInstruction;
 import org.jdom.Namespace;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import java.util.HashMap;
