@@ -15,6 +15,8 @@ import java.util.Iterator;
  */
 public class NumberFunction implements Function
   {
+  private final static Double NaN = new Double( Double.NaN );
+    
   public Object call(Context context, List args) throws FunctionCallException
     {
     if (args.size() == 1)
@@ -72,4 +74,14 @@ public class NumberFunction implements Function
     
     return new Double( Double.NaN );
     }
+  
+  public static boolean isNaN( double val )
+    {
+    return isNaN( new Double( val ) );
+    }
+  
+  public static boolean isNaN( Double val )
+    {
+    return val.equals( NaN );
+    }    
   }
