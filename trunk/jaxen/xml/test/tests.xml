@@ -180,6 +180,10 @@
 
   <document url="xml/web.xml">
     <context select="/">
+      <test select="descendant-or-self::*" count="20"/>
+      <test select="descendant::*" count="19"/>
+      <test select="/descendant::*" count="19"/>
+      <test select="/descendant-or-self::*" count="20"/>
       <test select="/descendant::servlet" count="2"/>
       <test select="/descendant-or-self::servlet" count="2"/>
       <test select="descendant-or-self::servlet" count="2"/>

@@ -206,6 +206,8 @@ public abstract class XPathTestBase extends TestCase
             {
                 log ( debug,
                       "      ## FAILED" );
+                log ( debug,
+                      "      ## xpath: " + xpath );
                 
                 Iterator resultIter = results.iterator();
                 
@@ -320,6 +322,8 @@ public abstract class XPathTestBase extends TestCase
         {
             log ( debug,
                   "      ## FAILED" );
+            log ( debug,
+                  "      ## xpath: " + xpath );
         }
 
         assertEquals( this.executionContext.toString(),
