@@ -147,6 +147,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             eachStep = (Step) stepIter.next();
             Context stepContext = new Context(context.getContextSupport());
             stepContext.setNodeSet(contextNodeSet);
+            // XXX the final evaluation of this line reshuffles the context node-set JAXEN-55
             contextNodeSet = eachStep.evaluate(stepContext);
         }
         return contextNodeSet;
