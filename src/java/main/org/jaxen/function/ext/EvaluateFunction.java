@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jaxen.BaseXPath;
+import org.jaxen.XPath;
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.Function;
@@ -49,7 +49,7 @@ public class EvaluateFunction implements Function
             xpathString = StringFunction.evaluate(arg, nav);
 
         try {
-            BaseXPath xpath = nav.parseXPath(xpathString);
+            XPath xpath = nav.parseXPath(xpathString);
             ContextSupport support = context.getContextSupport();
             xpath.setVariableContext( support.getVariableContext() );
             xpath.setFunctionContext( support.getFunctionContext() );

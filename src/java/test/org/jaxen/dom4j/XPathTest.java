@@ -6,11 +6,13 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-import org.saxpath.SAXPathException;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import org.jaxen.XPath;
+
+import org.saxpath.SAXPathException;
 
 import java.util.List;
 import java.util.Iterator;
@@ -49,7 +51,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/foo/bar/baz" );
+            XPath xpath = new Dom4jXPath( "/foo/bar/baz" );
         }
         catch (SAXPathException e)
         {
@@ -61,7 +63,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/foo/bar/baz" );
+            XPath xpath = new Dom4jXPath( "/foo/bar/baz" );
 
             SAXReader reader = new SAXReader();
 
@@ -96,7 +98,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/root/a = 'a'" );
+            XPath xpath = new Dom4jXPath( "/root/a = 'a'" );
 
             SAXReader reader = new SAXReader();
 
@@ -106,7 +108,7 @@ public class XPathTest extends TestCase
 
             assertTrue( "Xpath worked: " + xpath, answer );
 
-            xpath = new XPath( "'a' = 'b'" );
+            xpath = new Dom4jXPath( "'a' = 'b'" );
             
             answer = xpath.booleanValueOf( doc );
 

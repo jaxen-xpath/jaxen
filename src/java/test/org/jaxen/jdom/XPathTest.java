@@ -3,11 +3,13 @@ package org.jaxen.jdom;
 
 import junit.framework.TestCase;
 
-import org.saxpath.SAXPathException;
+import org.jaxen.XPath;
 
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
+
+import org.saxpath.SAXPathException;
 
 import java.util.List;
 import java.util.Iterator;
@@ -36,7 +38,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/foo/bar/baz" );
+            XPath xpath = new JDOMXPath( "/foo/bar/baz" );
         }
         catch (SAXPathException e)
         {
@@ -48,7 +50,7 @@ public class XPathTest extends TestCase
     {
         try
         {
-            XPath xpath = new XPath( "/foo/bar/baz" );
+            XPath xpath = new JDOMXPath( "/foo/bar/baz" );
 
             SAXBuilder builder = new SAXBuilder();
 

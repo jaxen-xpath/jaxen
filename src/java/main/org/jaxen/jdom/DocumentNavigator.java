@@ -1,7 +1,7 @@
 
 package org.jaxen.jdom;
 
-import org.jaxen.BaseXPath;
+import org.jaxen.XPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 
@@ -242,9 +242,9 @@ public class DocumentNavigator extends DefaultNavigator
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on JDOM documents.
      */
-    public BaseXPath parseXPath (String xpath) throws SAXPathException
+    public XPath parseXPath (String xpath) throws SAXPathException
     {
-        return new XPath(xpath);
+        return new JDOMXPath(xpath);
     }
 
     public Object getDocumentNode(Object contextNode)

@@ -5,6 +5,34 @@
     
     <section title="Change History">
       <section title="Changes in CVS since last release">
+        <p>There is now an XPath interface in the org.jaxen package to represent any XPath implementation.
+          So this means that the XPath API of Jaxen is now polymorphic, the same interface can work with 
+          any model.
+        </p>
+        <p>
+           This now means that the org.jaxen.* package represents a purely interface based API to any XPath
+           engine. So it should be possible to implement XPath, FunctionContext, NamespaceContext, VariableContext
+           on any XPath engine if so desired.
+        </p>
+        <p>The XPath implementation for each model has now got a fully qualified class name. 
+          The following code describes how to instantiate an XPath object for each model.
+<pre>
+// for DOM
+XPath xpath = new DOMXPath( "//foo" );
+
+// for dom4j
+XPath xpath = new Dom4jXPath( "//foo" );
+
+// for Electric XML
+XPath xpath = new ElectricXPath( "//foo" );
+
+// for JDOM
+XPath xpath = new JDOMXPath( "//foo" );
+</pre>
+        </p>
+       </section>
+       
+      <section title="Jaxen 1.0 beta 8">
         <p>
           Initial beta development cycle.  Please see
           CVS changelogs for up-to-date list of changes.
@@ -13,13 +41,32 @@
     </section>
 
     <section title="To Do List">
+      <ul>
+        <li>While already Jaxen is pretty 
+        <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>
+        but we are sure it could use some more tuning.
+        </li>
+        <li>Implement a GenericXPath which could use reflection on the nodes passed into it to
+          choose the Navigator to use. So the same GenericXPath instance could be used
+          to evaluate XPaths on any object. This feature would be particularly useful
+          in <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> 
+          since it would allow web developers to mix and match any
+          all XML models.
+        </li>
+        <li>selectSingleNode() and possibly the *ValueOf() methods should be return-fast
+          as a performance improvement.
+          For example selectSingleNode( "//foo" ) on a document with lots of &lt;foo/&gt;
+          elements would actually create a full nodeset of results then extract the first
+          element - rather than just returning as soon as the first one is found.
+        </li>
+        <li>Better user guides and examples!
+        </li>
+      </ul>
     </section>
 
     <section title="Known problems">    
       <ul>
-        <li><b>namespace</b> axis is truly not working for most models (except DOM).</li> 
-        <li><b>preceding</b> and <b>following</b> axes not implemented for most models.</li>
-        <li><b>id()</b> function not implemented.</li>
+        <li><b>id()</b> function not implemented for most models.</li>
       </ul>
     </section>
 
@@ -28,13 +75,14 @@
       Many thanks to you all!</p>
       <ul>
         <li>Bob McWhirter (<a href="http://code.werken.com/">werken digital</a>)</li>
-        <li>James Strachan (<a href="http://metastuff.com">Metastuff</a>)</li>
+        <li>James Strachan (<a href="http://www.spiritsoft.com">SpiritSoft</a>)</li>
         <li>David Megginson (<a href="http://megginson.com/">Megginson Technologies</a>)</li>
         <li>Erwin Bolwidt</li>
         <li>David Peterson</li>
         <li>Mark A. Belonga</li>
         <li>Christian Nentwich</li>
         <li>Alexander Day Chaffee (<a href="http://www.purpletech.com">Purple Technology</a>)</li>
+        <li>Elliotte Rusty Harold(<a href="http://www.cafeconleche.org">Cafe con Leche</a>)</li>
       </ul>
     </section>
   </body>

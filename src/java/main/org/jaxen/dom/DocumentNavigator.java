@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.jaxen.BaseXPath;
+import org.jaxen.XPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 
@@ -354,9 +354,9 @@ public class DocumentNavigator extends DefaultNavigator
     /** Returns a parsed form of the given xpath string, which will be suitable
      *  for queries on DOM documents.
      */
-    public BaseXPath parseXPath (String xpath) throws SAXPathException
+    public XPath parseXPath (String xpath) throws SAXPathException
     {
-        return new XPath(xpath);
+        return new DOMXPath(xpath);
     }
 
     /**

@@ -5,12 +5,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/** Base functionality for all concrete, implementation-specific XPaths.
- *
- *  <p>
- *  This class provides generic functionalty for further-defined
- *  implementation-specific XPaths.
- *  </p>
+/** 
+ * Defines the interface to an object which represents an XPath 1.0 expression which
+ * can be evaluated against a variety of different XML object models.
  *
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
  *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
@@ -19,40 +16,7 @@ import java.util.Collections;
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
-public class BaseXPath extends JaXPath implements XPath
-{
-    /** the support information and function, namespace and variable contexts */
-    private ContextSupport support;
-
-    /** the implementation-specific Navigator for retrieving XML nodes **/
-    private Navigator navigator;
-    
-    /** Construct given an XPath expression string. 
-     *
-     *  @param xpathExpr The XPath expression.
-     *
-     *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
-     */
-    protected BaseXPath(String xpathExpr) throws JaxenException
-    {
-        super( xpathExpr );
-    }
-
-    /** Construct given an XPath expression string.
-     *
-     *  @param xpathExpr The XPath expression.
-     *
-     *  @param navigator the XML navigator to use
-     *
-     *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
-     */
-    public BaseXPath(String xpathExpr, Navigator navigator) throws JaxenException
-    {
-        super( xpathExpr );
-        this.navigator = navigator;
-    }
+public interface XPath {
 
     /** Evaluate this XPath against a given context.
      *
@@ -87,27 +51,7 @@ public class BaseXPath extends JaXPath implements XPath
      *  @return The result of evaluating the XPath expression
      *          against the supplied context.
      */
-    public Object evaluate(Object context) throws JaxenException
-    {
-        List answer = selectNodes(context);
-
-        if ( answer != null
-             &&
-             answer.size() == 1 )
-        {
-            Object first = answer.get(0);
-
-            if ( first instanceof String
-                 ||
-                 first instanceof Number
-                 ||
-                 first instanceof Boolean ) 
-            {
-                return first;
-            }
-        }
-        return answer;
-    }
+    public Object evaluate(Object context) throws JaxenException;
     
     /** Select all nodes that are selectable by this XPath
      *  expression. If multiple nodes match, multiple nodes
@@ -128,10 +72,7 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @see #selectSingleNode
      */
-    public List selectNodes(Object context) throws JaxenException
-    {
-        return jaSelectNodes( (Context) getContext( context ) );
-    }
+    public List selectNodes(Object context) throws JaxenException;
 
     /** Select only the first node that is selectable by this XPath
      *  expression.  If multiple nodes match, only one node will be
@@ -151,21 +92,48 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @see #selectNodes
      */
-    public Object selectSingleNode(Object context) throws JaxenException
-    {
-        return jaSelectSingleNode( (Context) getContext( context ) );
-    }
+    public Object selectSingleNode(Object context) throws JaxenException;
 
-    public String valueOf(Object context) throws JaxenException
-    {
-        return stringValueOf( (Context) getContext( context ) );
-    }
+    
+    
+    /** Retrieve a string-value interpretation of this XPath
+     *  expression when evaluated against a given context.
+     *
+     *  <p>
+     *  The string-value of the expression is determined per
+     *  the <code>string(..)</code> core function as defined
+     *  in the XPath specification.  This means that an expression
+     *  that selects more than one nodes will return the string value
+     *  of the first node in the node set..
+     *  </p>
+     *
+     *  @param context The context for evaluation.
+     *
+     *  @return The string-value interpretation of this expression.
+     *
+     *  @deprecated As of Jaxen 1.0 RC1 please use 
+     *      {@link #stringValueOf(Object) instead}
+     */
+    public String valueOf(Object context) throws JaxenException;
 
-    public String stringValueOf(Object context) throws JaxenException
-    {
-        return jaValueOf( (Context) getContext( context ) );
-    }
+    /** Retrieve a string-value interpretation of this XPath
+     *  expression when evaluated against a given context.
+     *
+     *  <p>
+     *  The string-value of the expression is determined per
+     *  the <code>string(..)</code> core function as defined
+     *  in the XPath specification.  This means that an expression
+     *  that selects more than one nodes will return the string value
+     *  of the first node in the node set..
+     *  </p>
+     *
+     *  @param context The context for evaluation.
+     *
+     *  @return The string-value interpretation of this expression.
+     */
+    public String stringValueOf(Object context) throws JaxenException;
 
+    
     /** Retrieve a boolean-value interpretation of this XPath
      *  expression when evaluated against a given context.
      *
@@ -182,10 +150,8 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @return The boolean-value interpretation of this expression.
      */
-    public boolean booleanValueOf(Object context) throws JaxenException
-    {
-        return jaBooleanValueOf( (Context) getContext( context ) );
-    }
+    public boolean booleanValueOf(Object context) throws JaxenException;
+    
 
     /** Retrieve a number-value interpretation of this XPath
      *  expression when evaluated against a given context.
@@ -202,11 +168,9 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @return The number-value interpretation of this expression.
      */
-    public Number numberValueOf(Object context) throws JaxenException
-    {
-        return jaNumberValueOf( (Context) getContext( context ) );
-    }
+    public Number numberValueOf(Object context) throws JaxenException;
 
+    
     // Helpers
 
     /** Add a namespace prefix-to-URI mapping for this XPath
@@ -233,20 +197,7 @@ public class BaseXPath extends JaXPath implements XPath
      *          used by this XPath has been explicitly installed.
      */
     public void addNamespace(String prefix,
-                             String uri) throws JaxenException
-    {
-        NamespaceContext nsContext = getNamespaceContext();
-
-        if ( nsContext instanceof SimpleNamespaceContext )
-        {
-            ((SimpleNamespaceContext)nsContext).addNamespace( prefix,
-                                                              uri );
-
-            return;
-        }
-
-        throw new JaxenException("Operation not permitted while using a custom namespace context.");
-    }
+                             String uri) throws JaxenException;
 
 
     // ------------------------------------------------------------
@@ -270,10 +221,7 @@ public class BaseXPath extends JaXPath implements XPath
      *  @see NamespaceContext
      *  @see NamespaceContext#translateNamespacePrefixToUri
      */
-    public void setNamespaceContext(NamespaceContext namespaceContext)
-    {
-        getContextSupport().setNamespaceContext(namespaceContext);
-    }
+    public void setNamespaceContext(NamespaceContext namespaceContext);
 
     /** Set a <code>FunctionContext</code> for use with this XPath
      *  expression.
@@ -289,10 +237,7 @@ public class BaseXPath extends JaXPath implements XPath
      *  @see FunctionContext
      *  @see FunctionContext#getFunction
      */
-    public void setFunctionContext(FunctionContext functionContext)
-    {
-        getContextSupport().setFunctionContext(functionContext);
-    }
+    public void setFunctionContext(FunctionContext functionContext);
 
     /** Set a <code>VariableContext</code> for use with this XPath
      *  expression.
@@ -308,10 +253,7 @@ public class BaseXPath extends JaXPath implements XPath
      *  @see VariableContext
      *  @see VariableContext#getVariableValue
      */
-    public void setVariableContext(VariableContext variableContext)
-    {
-        getContextSupport().setVariableContext(variableContext);
-    }
+    public void setVariableContext(VariableContext variableContext);
 
     /** Retrieve the <code>NamespaceContext</code> used by this XPath
      *  expression.
@@ -331,15 +273,7 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @see NamespaceContext
      */
-    public NamespaceContext getNamespaceContext()
-    {
-        NamespaceContext answer = getContextSupport().getNamespaceContext();
-        if ( answer == null ) {
-            answer = createNamespaceContext();
-            getContextSupport().setNamespaceContext( answer );
-        }
-        return answer;
-    }
+    public NamespaceContext getNamespaceContext();
 
     /** Retrieve the <code>FunctionContext</code> used by this XPath
      *  expression.
@@ -359,15 +293,7 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @see FunctionContext
      */
-    public FunctionContext getFunctionContext()
-    {
-        FunctionContext answer = getContextSupport().getFunctionContext();
-        if ( answer == null ) {
-            answer = createFunctionContext();
-            getContextSupport().setFunctionContext( answer );
-        }
-        return answer;
-    }
+    public FunctionContext getFunctionContext();
 
     /** Retrieve the <code>VariableContext</code> used by this XPath
      *  expression.
@@ -387,122 +313,15 @@ public class BaseXPath extends JaXPath implements XPath
      *
      *  @see VariableContext
      */
-    public VariableContext getVariableContext()
-    {
-        VariableContext answer = getContextSupport().getVariableContext();
-        if ( answer == null ) {
-            answer = createVariableContext();
-            getContextSupport().setVariableContext( answer );
-        }
-        return answer;
-    }
+    public VariableContext getVariableContext();
     
-    
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-    //     Implementation methods
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-
-    
-    /** Create a {@link Context} wrapper for the provided
-     *  implementation-specific object.
-     *
-     *  @param context The implementation-specific object 
-     *         to be used as the context.
-     *
-     *  @return A <code>Context</code> wrapper around the object.
-     */
-    protected Context getContext(Object context)
-    {
-        if ( context instanceof Context )
-        {
-            return (Context) context;
-        }
-
-        Context fullContext = new Context( getContextSupport() );
-
-        if ( context instanceof List )
-        {
-            fullContext.setNodeSet( (List) context );
-        }
-        else
-        {
-            List list = new ArrayList( 1 );
-
-            list.add( context );
-
-            fullContext.setNodeSet( list );
-        }
-
-        return fullContext;
-    }
-
-    /** Retrieve the {@link ContextSupport} aggregation of
-     *  <code>NamespaceContext</code>, <code>FunctionContext</code>,
-     *  <code>VariableContext</code>, and {@link Navigator}.
-     *
-     *  @return Aggregate <code>ContextSupport</code> for this
-     *          XPath expression.
-     */
-    protected ContextSupport getContextSupport()
-    {
-        if ( support == null )
-        {
-            support = new ContextSupport( 
-                createNamespaceContext(),
-                createFunctionContext(),
-                createVariableContext(),
-                getNavigator() 
-            );
-        }
-
-        return support;
-    }
 
     /** Retrieve the XML object-model-specific {@link Navigator} 
      *  for us in evaluating this XPath expression.
      *
      *  @return The implementation-specific <code>Navigator</code>.
      */
-    public Navigator getNavigator()
-    {
-	return navigator;
-    }
-    
+    public Navigator getNavigator();
     
 
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-    //     Factory methods for default contexts
-    // ------------------------------------------------------------
-    // ------------------------------------------------------------
-
-    /** Create a default <code>FunctionContext</code>.
-     *
-     *  @return The default <code>FunctionContext</code>.
-     */
-    protected FunctionContext createFunctionContext()
-    {
-        return XPathFunctionContext.getInstance();
-    }
-    
-    /** Create a default <code>NamespaceContext</code>.
-     *
-     *  @return A default <code>NamespaceContext</code> instance.
-     */
-    protected NamespaceContext createNamespaceContext()
-    {
-        return new SimpleNamespaceContext();
-    }
-    
-    /** Create a default <code>VariableContext</code>.
-     *
-     *  @return A default <code>VariableContext</code> instance.
-     */
-    protected VariableContext createVariableContext()
-    {
-        return new SimpleVariableContext();
-    }
-    
 }
