@@ -64,6 +64,7 @@ package org.jaxen;
 
 import org.jaxen.function.*;
 import org.jaxen.function.ext.*;
+import org.jaxen.function.xslt.*;
 
 import java.util.Map;
 import java.util.HashMap;
