@@ -105,11 +105,10 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
             unique.addAll( lhsResults );
     
             Iterator rhsIter = rhsResults.iterator();
-            Object   each    = null;
     
             while ( rhsIter.hasNext() )
             {
-                each = rhsIter.next();
+                Object each = rhsIter.next();
     
                 if ( ! unique.contains( each ) )
                 {
