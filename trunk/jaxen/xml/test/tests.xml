@@ -259,6 +259,13 @@
     </context>
   </document>
 
+  <document url="xml/message.xml">
+    <context select="/">
+      <valueOf select="/message/body/data/items/item[name/text()='parentinfo']/value">Pruefgebiete</valueOf>
+      <valueOf select="document('xml/message.xml')/message/body/data/items/item[name/text()='parentinfo']/value">Pruefgebiete</valueOf>
+    </context>
+  </document>
+
   <document url="xml/testNamespaces.xml">
     <context select="/">
               <!-- the root is not an element, so no namespaces -->
