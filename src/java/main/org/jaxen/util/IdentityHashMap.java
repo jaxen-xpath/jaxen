@@ -111,10 +111,10 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Constructs a new, empty map with the specified initial 
      * capacity and the specified load factor. 
      *
-     * @param      initialCapacity   the initial capacity of the HashMap.
+     * @param      initialCapacity   the initial capacity of the HashMap
      * @param      loadFactor        the load factor of the HashMap
      * @throws     IllegalArgumentException  if the initial capacity is less
-     *               than zero, or if the load factor is nonpositive.
+     *               than zero, or if the load factor is non-positive
      */
     public IdentityHashMap(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0)
@@ -134,9 +134,9 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Constructs a new, empty map with the specified initial capacity
      * and default load factor, which is <tt>0.75</tt>.
      *
-     * @param   initialCapacity   the initial capacity of the HashMap.
-     * @throws    IllegalArgumentException if the initial capacity is less
-     *              than zero.
+     * @param   initialCapacity   the initial capacity of the HashMap
+     * @throws  IllegalArgumentException if the initial capacity is less
+     *              than zero
      */
     public IdentityHashMap(int initialCapacity) {
         this(initialCapacity, 0.75f);
@@ -156,7 +156,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * the given map or 11 (whichever is greater), and a default load factor,
      * which is <tt>0.75</tt>.
      *
-     * @param t the map whose mappings are to be placed in this map.
+     * @param t the map whose mappings are to be placed in this map
      */
     public IdentityHashMap(Map t) {
         this(Math.max(2*t.size(), 11), 0.75f);
@@ -164,18 +164,18 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     }
 
     /**
-     * Returns the number of key-value mappings in this map.
+     * Returns the number of key-value mappings in this map
      *
-     * @return the number of key-value mappings in this map.
+     * @return the number of key-value mappings in this map
      */
     public int size() {
         return count;
     }
 
     /**
-     * Returns <tt>true</tt> if this map contains no key-value mappings.
+     * Returns <tt>true</tt> if this map contains no key-value mappings
      *
-     * @return <tt>true</tt> if this map contains no key-value mappings.
+     * @return <tt>true</tt> if this map contains no key-value mappings
      */
     public boolean isEmpty() {
         return count == 0;
@@ -187,18 +187,18 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      *
      * @param value value whose presence in this map is to be tested.
      * @return <tt>true</tt> if this map maps one or more keys to the
-     *         specified value.
+     *         specified value
      */
     public boolean containsValue(Object value) {
         Entry tab[] = table;
 
         if (value==null) {
-            for (int i = tab.length ; i-- > 0 ;)
+            for (int i = tab.length ; i > 0 ; i--)
                 for (Entry e = tab[i] ; e != null ; e = e.next)
                     if (e.value==null)
                         return true;
         } else {
-            for (int i = tab.length ; i-- > 0 ;)
+            for (int i = tab.length ; i > 0 ; i--)
                 for (Entry e = tab[i] ; e != null ; e = e.next)
                     if (value.equals(e.value))
                         return true;
@@ -213,7 +213,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * 
      * @return <tt>true</tt> if this map contains a mapping for the specified
      * key.
-     * @param key key whose presence in this Map is to be tested.
+     * @param key key whose presence in this Map is to be tested
      */
     public boolean containsKey(Object key) {
         Entry tab[] = table;
@@ -242,8 +242,8 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * explicitly maps the key to <tt>null</tt>.  The <tt>containsKey</tt>
      * operation may be used to distinguish these two cases.
      *
-     * @return the value to which this map maps the specified key.
-     * @param key key whose associated value is to be returned.
+     * @return the value to which this map maps the specified key
+     * @param key key whose associated value is to be returned
      */
     public Object get(Object key) {
         Entry tab[] = table;
@@ -298,25 +298,28 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * If the map previously contained a mapping for this key, the old
      * value is replaced.
      *
-     * @param key key with which the specified value is to be associated.
-     * @param value value to be associated with the specified key.
+     * @param key key with which the specified value is to be associated
+     * @param value value to be associated with the specified key
      * @return previous value associated with specified key, or <tt>null</tt>
      *         if there was no mapping for key.  A <tt>null</tt> return can
      *         also indicate that the IdentityHashMap previously associated
      *         <tt>null</tt> with the specified key.
      */
     public Object put(Object key, Object value) {
+        // XXX this method is a HotSpot in Jaxen
         // Makes sure the key is not already in the IdentityHashMap.
+        
+        // I think this copy, which has no semantic effect, is being 
+        // done to speed things up by using a local variable instead of a field
+        // access. I'm not sure this is significant. - ERH
         Entry tab[] = table;
         int hash = 0;
         int index = 0;
 
         if (key != null) {
-            // hash = key.hashCode();
             hash = System.identityHashCode( key );
             index = (hash & 0x7FFFFFFF) % tab.length;
             for (Entry e = tab[index] ; e != null ; e = e.next) {
-                // if ((e.hash == hash) && key.equals(e.key)) {
                 if ((e.hash == hash) && ( key == e.key ) ) {
                     Object old = e.value;
                     e.value = value;
@@ -352,7 +355,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     /**
      * Removes the mapping for this key from this map if present.
      *
-     * @param key key whose mapping is to be removed from the map.
+     * @param key key whose mapping is to be removed from the map
      * @return previous value associated with specified key, or <tt>null</tt>
      *         if there was no mapping for key.  A <tt>null</tt> return can
      *         also indicate that the map previously associated <tt>null</tt>
@@ -409,7 +412,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * These mappings replace any mappings that this map had for any of the
      * keys currently in the specified Map.
      *
-     * @param t Mappings to be stored in this map.
+     * @param t mappings to be stored in this map
      */
     public void putAll(Map t) {
         Iterator i = t.entrySet().iterator();
@@ -434,7 +437,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Returns a shallow copy of this <tt>IdentityHashMap</tt> instance: the keys and
      * values themselves are not cloned.
      *
-     * @return a shallow copy of this map.
+     * @return a shallow copy of this map
      */
     public Object clone() {
         try { 
@@ -470,7 +473,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * <tt>clear</tt> operations.  It does not support the <tt>add</tt> or
      * <tt>addAll</tt> operations.
      *
-     * @return a set view of the keys contained in this map.
+     * @return a set view of the keys contained in this map
      */
     public Set keySet() {
         if (keySet == null) {
@@ -506,7 +509,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt> operations.
      * It does not support the <tt>add</tt> or <tt>addAll</tt> operations.
      *
-     * @return a collection view of the values contained in this map.
+     * @return a collection view of the values contained in this map
      */
     public Collection values() {
         if (values==null) {
@@ -538,7 +541,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt> operations.
      * It does not support the <tt>add</tt> or <tt>addAll</tt> operations.
      *
-     * @return a collection view of the mappings contained in this map.
+     * @return a collection view of the mappings contained in this map
      * @see Map.Entry
      */
     public Set entrySet() {
@@ -778,17 +781,17 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * Save the state of the <tt>IdentityHashMap</tt> instance to a stream (i.e.,
      * serialize it).
      *
-     * @serialData The <i>capacity</i> of the IdentityHashMap (the length of the
+     * @serialData the <i>capacity</i> of the IdentityHashMap (the length of the
      *             bucket array) is emitted (int), followed  by the
      *             <i>size</i> of the IdentityHashMap (the number of key-value
      *             mappings), followed by the key (Object) and value (Object)
-     *             for each key-value mapping represented by the IdentityHashMap
-     * The key-value mappings are emitted in no particular order.
+     *             for each key-value mapping represented by the IdentityHashMap.
+     *             The key-value mappings are emitted in no particular order.
      */
     private void writeObject(java.io.ObjectOutputStream s)
         throws IOException
     {
-        // Write out the threshold, loadfactor, and any hidden stuff
+        // Write out the threshold, load factor, and any hidden stuff
         s.defaultWriteObject();
 
         // Write out number of buckets
