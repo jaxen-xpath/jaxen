@@ -16,6 +16,8 @@ import electric.xml.Child;
 import electric.xml.Children;
 import electric.xml.Parent;
 
+import electric.xml.Attributes;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -105,30 +107,25 @@ public class DocumentNavigator extends DefaultNavigator
         return null;
     }
 
-    /*
     public Iterator getNamespaceAxisIterator(Object contextNode)
     {
-        if ( ! ( contextNode instanceof Element ) )
+        if ( contextNode instanceof Element )
         {
-            return null;
+            Element elem = (Element) contextNode;
+
+            /*
+            Attributes attrs = elem.getAttributes();
+
+            while ( attrs.current() != null )
+            {
+                System.err.println( "----> " + attrs.next() );
+            }
+            */
+
+            return new NamespaceIterator( elem.getAttributes() );
         }
-
-        Element elem = (Element) contextNode;
-
-        List nsList = new ArrayList();
-
-        Namespace ns = elem.getNamespace();
-
-        if ( ns != Namespace.NO_NAMESPACE )
-        {
-            nsList.add( elem.getNamespace() );
-        }
-
-        nsList.addAll( elem.getAdditionalNamespaces() );
-
-        return nsList.iterator();
+        return null;
     }
-    */
 
     public Iterator getParentAxisIterator(Object contextNode)
     {
