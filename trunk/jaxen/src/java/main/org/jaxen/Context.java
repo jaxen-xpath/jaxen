@@ -34,6 +34,11 @@ public class Context
         return this.contextSupport;
     }
 
+    public void setContextSupport(ContextSupport contextSupport)
+    {
+        this.contextSupport = contextSupport;
+    }
+
     public Navigator getNavigator()
     {
         return getContextSupport().getNavigator();
