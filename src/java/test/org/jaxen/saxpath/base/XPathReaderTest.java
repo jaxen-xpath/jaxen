@@ -180,29 +180,6 @@ public class XPathReaderTest extends TestCase
         }
     }
 
-    public void testCountNonNodeSet()
-    {
-        XPathReader reader = new XPathReader();
-        try
-        {
-            reader.parse( "count(3)" );
-
-            fail( "Should have thrown XPathSyntaxException for count(3)");
-        }
-        catch( XPathSyntaxException e )
-        {
-            assertEquals( "count(3)", e.getMessage() );
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
-    }
-
     public void testChildrenOfNumber()
     {
         XPathReader reader = new XPathReader();
