@@ -11,4 +11,6 @@ public interface LocationPath extends Expr
     List getSteps();
 
     String getText();
+    
+    public boolean isAbsolute();
 }

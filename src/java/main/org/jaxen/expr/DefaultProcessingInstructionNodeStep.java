@@ -7,7 +7,7 @@ import org.jaxen.Navigator;
 
 import org.jaxen.expr.iter.IterableAxis;
 
-class DefaultProcessingInstructionNodeStep extends DefaultStep
+public class DefaultProcessingInstructionNodeStep extends DefaultStep
 {
     private String name;
 

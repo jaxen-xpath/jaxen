@@ -46,4 +46,8 @@ public class NoNodeTest extends NodeTest {
         return NO_NODE;
     }
 
+    public String getText() 
+    {
+        return "";
+    }
 }

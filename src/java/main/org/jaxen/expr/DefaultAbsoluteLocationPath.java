@@ -20,6 +20,11 @@ public class DefaultAbsoluteLocationPath extends DefaultLocationPath
     {
         return "[(DefaultAbsoluteLocationPath): " + super.toString() + "]";
     }
+    
+    public boolean isAbsolute() 
+    {
+        return true;
+    }
 
     public String getText()
     {

@@ -30,9 +30,9 @@ public class JaxenHandler implements XPathHandler
 {
     private XPathFactory xpathFactory;
     private XPath        xpath;
-    private boolean      simplified;
+    protected boolean    simplified;
 
-    private LinkedList   stack;
+    protected LinkedList stack;
 
     /** Construct.
      */
@@ -92,6 +92,7 @@ public class JaxenHandler implements XPathHandler
         {
             //System.err.println("simplifyin....");
             this.xpath.simplify();
+            this.simplified = true;
         }
 
         return this.xpath;
@@ -196,7 +197,7 @@ public class JaxenHandler implements XPathHandler
         endLocationPath();
     }
 
-    private void endLocationPath()
+    protected void endLocationPath()
     {
         LocationPath path = (LocationPath) peekFrame().removeFirst();
 
@@ -206,7 +207,7 @@ public class JaxenHandler implements XPathHandler
         push( path );
     }
 
-    private void addSteps(LocationPath locationPath,
+    protected void addSteps(LocationPath locationPath,
                           Iterator stepIter)
     {
         while ( stepIter.hasNext() )
@@ -291,7 +292,7 @@ public class JaxenHandler implements XPathHandler
         endStep();
     }
 
-    private void endStep()
+    protected void endStep()
     {
         Step step = (Step) peekFrame().removeFirst();
 
@@ -338,7 +339,7 @@ public class JaxenHandler implements XPathHandler
         push( filter );
     }
 
-    private void addPredicates(Predicated obj,
+    protected void addPredicates(Predicated obj,
                                Iterator predIter)
     {
         while ( predIter.hasNext() )
@@ -347,7 +348,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    private void returnExpr()
+    protected void returnExpr()
     {
         Expr expr = (Expr) pop();
         popFrame();
@@ -562,7 +563,7 @@ public class JaxenHandler implements XPathHandler
         push( function );
     }
 
-    private void addParameters(FunctionCallExpr function,
+    protected void addParameters(FunctionCallExpr function,
                                Iterator paramIter)
     {
         while ( paramIter.hasNext() )
@@ -571,42 +572,42 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    private int stackSize()
+    protected int stackSize()
     {
         return peekFrame().size();
     }
 
-    private void push(Object obj)
+    protected void push(Object obj)
     {
         peekFrame().addLast( obj );
 
         //System.err.println("push(" + this.stack.size() + "/" + peekFrame().size() + ") == " + obj );
     }
 
-    private Object pop()
+    protected Object pop()
     {
         //System.err.println("pop(" + this.stack.size() + "/" + peekFrame().size() + ")");
         return peekFrame().removeLast();
     }
 
-    private boolean canPop()
+    protected boolean canPop()
     {
         return ( peekFrame().size() > 0 );
     }
 
-    private void pushFrame()
+    protected void pushFrame()
     {
         this.stack.addLast( new LinkedList() );
         //System.err.println("pushFrame(" + this.stack.size() + ")");
     }
 
-    private LinkedList popFrame()
+    protected LinkedList popFrame()
     {
         //System.err.println("popFrame(" + this.stack.size() + ")");
         return (LinkedList) this.stack.removeLast();
     }
 
-    private LinkedList peekFrame()
+    protected LinkedList peekFrame()
     {
         return (LinkedList) this.stack.getLast();
     }

@@ -6,7 +6,7 @@ import org.jaxen.ContextSupport;
 
 import org.jaxen.expr.iter.IterableAxis;
 
-class DefaultAllNodeStep extends DefaultStep
+public class DefaultAllNodeStep extends DefaultStep
 {
     public DefaultAllNodeStep(IterableAxis axis)
     {
