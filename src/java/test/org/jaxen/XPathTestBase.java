@@ -230,69 +230,77 @@ public abstract class XPathTestBase extends TestCase
             }
         }
 
-        Element valueOf = test.element( "valueOf" );
+        Iterator valueOfIter = test.elementIterator( "valueOf" );
 
-        if ( valueOf != null )
+        while ( valueOfIter.hasNext() )
         {
-            debugStr = valueOf.attributeValue( "debug" );
-            
-            if ( debugStr != null )
+        
+            //Element valueOf = test.element( "valueOf" );
+            Element valueOf = (Element) valueOfIter.next();
+
+            if ( valueOf != null )
             {
-                if ( "true".equals( debugStr )
-                     ||
-                     "on".equals( debugStr ) )
+                debugStr = valueOf.attributeValue( "debug" );
+                
+                if ( debugStr != null )
                 {
-                    debug = true;
+                    if ( "true".equals( debugStr )
+                         ||
+                         "on".equals( debugStr ) )
+                    {
+                        debug = true;
+                    }
                 }
-            }
-            
-            try
-            {
-                Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
                 
-                log ( debug,
-                      "    New Context :: " + abbreviate( newContext ) );
+                try
+                {
+                    Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
+                    
+                    log ( debug,
+                          "    New Context :: " + abbreviate( newContext ) );
+                    
+                    
+                    String valueOfXPathStr = valueOf.attributeValue( "select" );
+                    
+                    log( debug,
+                         "  Select :: " + valueOfXPathStr );
+                    
+                    this.executionContext.push( valueOfXPathStr );
+                    
+                    JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
+                    
+                    Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
                 
-                
-                String valueOfXPathStr = valueOf.attributeValue( "select" );
-                
-                log( debug,
-                     "  Select :: " + valueOfXPathStr );
+                    String expected = valueOf.getText();
+                    String result =   StringFunction.evaluate( node,
+                                                               getNavigator() );
+                    
+                    log ( debug,
+                          "    Expected :: " + expected );
+                    
+                    log ( debug,
+                          "    Result   :: " + result );
+                    
+                    if ( ! expected.equals( result ) )
+                    {
+                        log ( debug,
+                              "      ## FAILED" );
+                    }
+                    
+                    assertEquals( this.executionContext.toString(),
+                                  expected,
+                                  result );
 
-                this.executionContext.push( valueOfXPathStr );
-                
-                JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
-                
-                Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
-                
-                String expected = valueOf.getText();
-                String result =   StringFunction.evaluate( node,
-                                                           getNavigator() );
-
-                log ( debug,
-                      "    Expected :: " + expected );
-                
-                log ( debug,
-                      "    Result   :: " + result );
-
-                if ( ! expected.equals( result ) )
+                    this.executionContext.pop();
+                }
+                catch (UnsupportedAxisException e)
                 {
                     log ( debug,
-                          "      ## FAILED" );
+                          "      ## SKIPPED -- Unsupported Axis" );
+                    
                 }
                 
-                assertEquals( this.executionContext.toString(),
-                              expected,
-                              result );
             }
-            catch (UnsupportedAxisException e)
-            {
-                log ( debug,
-                      "      ## SKIPPED -- Unsupported Axis" );
-                
-            }
-
-            this.executionContext.pop();
         }
         
         this.executionContext.pop();
@@ -391,7 +399,7 @@ public abstract class XPathTestBase extends TestCase
     {
         if ( obj == null )
         {
-            return null;
+            return "null";
         }
 
         String str = obj.toString();
