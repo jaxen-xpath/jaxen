@@ -12,6 +12,8 @@ class DefaultNameStep extends DefaultStep
 {
     private String prefix;
     private String localName;
+    private boolean matchesAnyName;
+    private boolean matchesAnyNamespace;
 
     public DefaultNameStep(IterableAxis axis,
                            String prefix,
@@ -21,6 +23,8 @@ class DefaultNameStep extends DefaultStep
 
         this.prefix    = prefix;
         this.localName = localName;
+        this.matchesAnyName = "*".equals( localName );
+        this.matchesAnyNamespace = matchesAnyName || prefix.equals( "*" );        
     }
 
     public String getPrefix()
@@ -76,22 +80,9 @@ class DefaultNameStep extends DefaultStep
             return false;
         }
 
-
-        boolean matches = false;
-
-        String myPrefix = getPrefix();
-        String myLocalName = getLocalName();
-
-        if ( "*".equals( myPrefix ) )
+        if ( matchesAnyNamespace )
         {
-            if ( "*".equals( myLocalName ) )
-            {
-                matches = true;
-            }
-            else if ( myLocalName.equals( nodeName ) )
-            {
-                matches = true;
-            }
+            return matchesAnyName || getLocalName().equals( nodeName );
         }
         else
         {
@@ -99,18 +90,11 @@ class DefaultNameStep extends DefaultStep
 
             if ( myUri.equals( nodeUri ) )
             {
-                if ( "*".equals( myLocalName ) )
-                {
-                    matches = true;
-                }
-                else if ( myLocalName.equals( nodeName ) )
-                {
-                    matches = true;
-                }
+                return matchesAnyName || getLocalName().equals( nodeName );
             }
         }
 
-        return matches;
+        return false;
 
         /*
         return ( testUri.equals( nodeUri )
