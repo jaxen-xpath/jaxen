@@ -130,6 +130,21 @@
 
 
 
+  <!-- test other node types-->
+
+  <document url="xml/contents.xml">
+    <context select="/">
+      <test select="processing-instruction()" count="3"/>
+      <test select="/processing-instruction()" count="3"/>
+      <test select="/comment()" count="1"/>
+      <test select="comment()" count="1"/>
+      <test select="/child::node()/comment()" count="2"/>
+      <test select="/*/comment()" count="2"/>
+    </context>
+  </document>
+
+
+
   <!-- test positioning -->
 
   <document url="xml/fibo.xml">
