@@ -227,7 +227,7 @@
              stylesheetfile="${doc.dir}/style/javadoc.css">
 
         <group title="Core" packages="org.jaxen*" />
-        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*" />
+        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*:org.jaxen.exml*" />
     </javadoc>
   </target>
 
@@ -250,7 +250,7 @@
       <link href="http://java.sun.com/products/jdk/1.3/docs/api"/>
       <link href="http://java.sun.com/xml/jaxp-docs-1.1/docs/api"/>
         <group title="Core" packages="org.jaxen*" />
-        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*" />
+        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*:org.jaxen.exml*" />
     </javadoc>
 
     <mkdir dir="${build.apidocs}"/>
@@ -270,7 +270,7 @@
       <link href="http://java.sun.com/xml/jaxp-docs-1.1/docs/api"/>
       <link href="${build.javadocs}"/>
         <group title="Core" packages="org.jaxen*" />
-        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*" />
+        <group title="Object-Model Adaptors" packages="org.jaxen.dom4j*:org.jaxen.jdom*:org.jaxen.exml*" />
     </javadoc>
   </target>
 
@@ -422,6 +422,12 @@
     </antcall>
   </target>
 
+  <target name="test.exml">
+    <antcall target="test.internal">
+       <param name="test.packages" value="org/jaxen/exml/**"/>
+    </antcall>
+  </target>
+
   <target name="test.internal" depends="compile-test">
     <mkdir dir="${build.dir}/test-results"/>
 
@@ -465,6 +471,18 @@
           <pathelement location="${build.dest}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
           <pathelement path="${java.class.path}"/> 
+      </classpath>
+    </java>
+  </target>
+
+  <target name="demo.exml" depends="samples">
+    <java classname="EXMLDemo" fork="true">
+      <arg value="xml/basic.xml"/>
+      <arg value="/foo/bar/baz"/>
+      <classpath>
+          <pathelement location="${build.dest}"/>
+          <pathelement location="${lib.dir}/saxpath.jar"/>
+          <pathelement path="${java.class.path}"/>
       </classpath>
     </java>
   </target>

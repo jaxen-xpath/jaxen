@@ -70,7 +70,7 @@ public class DefaultNameStep extends DefaultStep
             {
                 return true;
             }
-
+            
             return false;
         }
         else if ( nav.isNamespace( node ) )
@@ -98,6 +98,10 @@ public class DefaultNameStep extends DefaultStep
             return false;
         }
 
+        if ( nodeUri == null )
+        {
+            nodeUri = "";
+        }
 
         if ( matchesAnyNamespace )
         {
@@ -120,8 +124,12 @@ public class DefaultNameStep extends DefaultStep
 
             if ( matchesNamespaceURIs( myUri, nodeUri ) )
             {
-                return matchesAnyName || getLocalName().equals( nodeName );
+                boolean result = matchesAnyName || getLocalName().equals( nodeName );
+
+                return result;
+
             }
+
         }
 
         return false;
