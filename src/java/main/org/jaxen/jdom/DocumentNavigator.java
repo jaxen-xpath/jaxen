@@ -20,9 +20,10 @@ import org.jdom.Namespace;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class DocumentNavigator extends DefaultNavigator
 {
@@ -72,7 +73,7 @@ public class DocumentNavigator extends DefaultNavigator
 
     public boolean isNamespace(Object obj)
     {
-        return obj instanceof Namespace;
+        return obj instanceof Namespace || obj instanceof XPathNamespace;
     }
 
     public String getElementName(Object obj)
@@ -126,20 +127,34 @@ public class DocumentNavigator extends DefaultNavigator
 
         Element elem = (Element) contextNode;
 
-        List nsList = new ArrayList();
+        Map nsMap = new HashMap();
 
-        Namespace ns = elem.getNamespace();
+        Element current = elem;
 
-        if ( ns != Namespace.NO_NAMESPACE )
-        {
-            nsList.add( elem.getNamespace() );
+        while ( current != null ) {
+        
+            Namespace ns = current.getNamespace();
+            
+            if ( ns != Namespace.NO_NAMESPACE ) {
+                if ( !nsMap.containsKey(ns.getPrefix()) )
+                    nsMap.put( ns.getPrefix(), new XPathNamespace(elem, ns) );
+            }
+        
+            Iterator additional = current.getAdditionalNamespaces().iterator();
+
+            while ( additional.hasNext() ) {
+
+                ns = (Namespace)additional.next();
+                if ( !nsMap.containsKey(ns.getPrefix()) )
+                    nsMap.put( ns.getPrefix(), new XPathNamespace(elem, ns) );
+            }
+
+            current = current.getParent();
         }
 
-        nsList.addAll( elem.getAdditionalNamespaces() );
+        nsMap.put( "xml", new XPathNamespace(elem, Namespace.XML_NAMESPACE) );
 
-        nsList.add( Namespace.XML_NAMESPACE );
-
-        return nsList.iterator();
+        return nsMap.values().iterator();
     }
 
     public Iterator getParentAxisIterator(Object contextNode)
@@ -165,6 +180,10 @@ public class DocumentNavigator extends DefaultNavigator
         else if ( contextNode instanceof Attribute )
         {
             parent = ((Attribute)contextNode).getParent();
+        }
+        else if ( contextNode instanceof XPathNamespace )
+        {
+            parent = ((XPathNamespace)contextNode).getJDOMElement();
         }
         else if ( contextNode instanceof ProcessingInstruction )
         {
@@ -249,9 +268,29 @@ public class DocumentNavigator extends DefaultNavigator
 
     public String getNamespaceStringValue(Object obj)
     {
-        Namespace ns = (Namespace) obj;
+        if (obj instanceof Namespace) {
 
-        return ns.getURI();
+            Namespace ns = (Namespace) obj;
+            return ns.getURI();
+        } else {
+
+            XPathNamespace ns = (XPathNamespace) obj;
+            return ns.getJDOMNamespace().getURI();
+        }
+        
+    }
+
+    public String getNamespacePrefix(Object obj)
+    {
+        if (obj instanceof Namespace) {
+
+            Namespace ns = (Namespace) obj;
+            return ns.getPrefix();
+        } else {
+
+            XPathNamespace ns = (XPathNamespace) obj;
+            return ns.getJDOMNamespace().getPrefix();
+        }
     }
 
     public String getTextStringValue(Object obj)
@@ -342,6 +381,10 @@ public class DocumentNavigator extends DefaultNavigator
         else if ( context instanceof Attribute )
         {
             element = ((Attribute)context).getParent();
+        }
+        else if ( context instanceof XPathNamespace )
+        {
+            element = ((XPathNamespace)context).getJDOMElement();
         }
         else if ( context instanceof Text )
         {
