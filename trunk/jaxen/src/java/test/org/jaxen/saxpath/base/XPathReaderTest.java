@@ -222,7 +222,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startNameStep( Axis.CHILD,
                                       "",
@@ -246,7 +246,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startNameStep( Axis.PARENT,
                                       "foo",
@@ -269,7 +269,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step();
 
             expected().startAllNodeStep( Axis.PARENT );
 
@@ -291,7 +291,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startProcessingInstructionNodeStep( Axis.PARENT,
                                                            "cheese" );
@@ -314,7 +314,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startProcessingInstructionNodeStep( Axis.PARENT,
                                                            "" );
@@ -337,7 +337,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startAllNodeStep( Axis.PARENT );
 
@@ -359,7 +359,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startTextNodeStep( Axis.PARENT );
 
@@ -381,7 +381,7 @@ public class XPathReaderTest extends TestCase
 
             getReader().setUpParse( getText() );
 
-            getReader().step( true );
+            getReader().step( );
 
             expected().startCommentNodeStep( Axis.PARENT );
 
