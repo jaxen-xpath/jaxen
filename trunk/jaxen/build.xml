@@ -650,6 +650,7 @@
     <mkdir dir="${dist.dir}/src"/>
     <mkdir dir="${dist.dir}/doc"/>
     <mkdir dir="${dist.dir}/doc/apidocs"/>
+    <mkdir dir="${dist.dir}/xml"/>
 
     <copy todir="${dist.dir}">
       <fileset dir="${build.dir}">
@@ -662,15 +663,21 @@
     <copy todir="${dist.dir}/src">
       <fileset dir="./src" includes="**/*.java,**/*.xml,**/*.xsl,**/*.properties,**/*.mf,**/*.css,**/*.gif,**/*.g"/>
     </copy>
+
     <copy todir="${dist.dir}/lib">
       <fileset dir="./lib" />
     </copy>
+
     <copy todir="${dist.dir}/doc">
       <fileset dir="${build.doc}" />
     </copy>
 
+    <copy todir="${dist.dir}/xml">
+      <fileset dir="./xml"/>
+    </copy>
+
     <copy todir="${dist.dir}">
-      <fileset dir="." includes="build.pl, *.xml, *.html" />
+      <fileset dir="." includes="build.pl, *.xml, *.html, INSTALL, LICENSE" />
     </copy>
 
     <chmod perm="+x" file="${dist.dir}/build.pl"/>

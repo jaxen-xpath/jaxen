@@ -1,0 +1,33 @@
+
+To install Jaxen, you need either:
+
+        jaxen-full.jar
+
+Which includes support for all object-models
+
+Or, you need
+
+        jaxen-core.jar
+
+And any additional jaxen-*.jar files for the object-models
+you support.  Currently supported are:
+
+        Model       Required Jar
+        ----------- -------------------
+        dom4j       jaxen-dom4j.jar
+        JDOM        jaxen-jdom.jar
+        DOM         jaxen-dom.jar
+        EXML        jaxen-exml.jar
+
+Jaxen itself depends upon the SAXPath parser, which is
+located in the lib/ directory and is named:
+
+        saxpath.jar
+
+Of course, you'll also need the supporting jars for your 
+object-model, just as jdom.jar, EXML.jar, or similar.
+
+Included in the lib/ directory are the jars compiled
+against for this distribution.  
+
+	bob@werken.com
