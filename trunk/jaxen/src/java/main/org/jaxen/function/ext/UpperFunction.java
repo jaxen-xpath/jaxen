@@ -26,12 +26,12 @@ import java.util.Locale;
  * @author mark wilson (markw@wilsoncom.de)
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
-public class UpperFunction extends LowerFunction
+public class UpperFunction extends LocaleFunctionSupport
 {
-
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
+        Navigator navigator = context.getNavigator();
         int size = args.size();
         if (size > 0)
         {
@@ -39,9 +39,9 @@ public class UpperFunction extends LowerFunction
             Locale locale = null;
             if (size > 1)
             {  
-                locale = getLocale( args.get(1) );
+                locale = getLocale( args.get(1), navigator );
             }
-            return evaluate( text, locale, context.getNavigator() );
+            return evaluate( text, locale, navigator );
         }
         throw new FunctionCallException( "upper-case() requires at least one argument." );
     }

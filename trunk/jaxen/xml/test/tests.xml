@@ -513,6 +513,8 @@
     <context select="/web-app/servlet[1]">
       <valueOf select="upper-case( servlet-class )">SNOOPSERVLET</valueOf>
       <valueOf select="lower-case( servlet-class )">snoopservlet</valueOf>
+      <valueOf select="upper-case( servlet-class, 'FRANCE' )">SNOOPSERVLET</valueOf>
+      <valueOf select="lower-case( servlet-class, 'FRENCH' )">snoopservlet</valueOf>
       <valueOf select="ends-with( servlet-class, 'Servlet' )">true</valueOf>
       <valueOf select="ends-with( servlet-class, 'S' )">false</valueOf>
     </context>
