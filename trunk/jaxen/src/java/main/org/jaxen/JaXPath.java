@@ -17,17 +17,30 @@ class JaXPath
     /** the parsed form of the xpath expression */
     private XPath xpath;
 
-    public JaXPath(String xpathExpr) throws SAXPathException
+    public JaXPath(String xpathExpr) throws JaxenException
     {
-        XPathReader reader = XPathReaderFactory.createReader();
+        try
+        {
+            XPathReader reader = XPathReaderFactory.createReader();
+            
+            JaxenHandler handler = new JaxenHandler();
+            
+            reader.setXPathHandler( handler );
+            
+            reader.parse( xpathExpr );
 
-        JaxenHandler handler = new JaxenHandler();
-
-        reader.setXPathHandler( handler );
-
-        reader.parse( xpathExpr );
-
-        this.xpath = handler.getXPath();
+            this.xpath = handler.getXPath();
+        }
+        catch (org.saxpath.XPathSyntaxException e)
+        {
+            throw new org.jaxen.XPathSyntaxException( e.getXPath(),
+                                                      e.getPosition(),
+                                                      e.getMessage() );
+        }
+        catch (SAXPathException e)
+        {
+            throw new JaxenException( e );
+        }
     }
 
     protected List jaSelectNodes(Context context) throws JaxenException

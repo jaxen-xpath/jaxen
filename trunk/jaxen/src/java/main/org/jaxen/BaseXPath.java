@@ -1,8 +1,6 @@
 
 package org.jaxen;
 
-import org.saxpath.SAXPathException;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +10,7 @@ public abstract class BaseXPath extends JaXPath
     /** the support information and function, namespace and variable contexts */
     private ContextSupport support;
     
-    public BaseXPath(String xpathExpr) throws SAXPathException
+    public BaseXPath(String xpathExpr) throws JaxenException
     {
         super( xpathExpr );
     }

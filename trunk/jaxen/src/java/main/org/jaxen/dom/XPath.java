@@ -2,9 +2,10 @@
 
 package org.jaxen.dom;
 
+import org.jaxen.JaxenException;
+
 import org.jaxen.Navigator;
 import org.jaxen.BaseXPath;
-import org.saxpath.SAXPathException;
 
 /**
  * An XPath implementation for the W3C DOM model
@@ -29,10 +30,10 @@ public class XPath extends BaseXPath
      * Constructor.
      *
      * @param xpathExpr A string containing an XPath expression.
-     * @exception SAXPathException If there is a syntactic error in
+     * @exception JaxenException If there is a syntactic error in
      *            the XPath expression.
      */
-    public XPath(String xpathExpr) throws SAXPathException
+    public XPath(String xpathExpr) throws JaxenException
     {
         super( xpathExpr );
     }

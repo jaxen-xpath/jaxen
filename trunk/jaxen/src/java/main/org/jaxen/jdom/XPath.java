@@ -1,13 +1,14 @@
 
 package org.jaxen.jdom;
 
+import org.jaxen.JaxenException;
+
 import org.jaxen.Navigator;
 import org.jaxen.BaseXPath;
-import org.saxpath.SAXPathException;
 
 public class XPath extends BaseXPath
 {
-    public XPath(String xpathExpr) throws SAXPathException
+    public XPath(String xpathExpr) throws JaxenException
     {
         super( xpathExpr );
     }
