@@ -114,6 +114,7 @@ public class DefaultNameStep extends DefaultStep
         }
         else
         {
+            // * will only match elements on most axis
             return false;
         }
 
