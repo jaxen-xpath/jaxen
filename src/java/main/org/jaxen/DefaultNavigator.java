@@ -120,4 +120,10 @@ public abstract class DefaultNavigator implements Navigator
     {
         return null;
     }
+    
+    public String translateNamespacePrefixToUri(String prefix, Object element)
+    {
+        return null;
+    }
+
 }
