@@ -80,15 +80,14 @@ class NodeComparator implements Comparator {
         
         if (navigator == null) return 0;
         
-        if (navigator.isAttribute(o1) && navigator.isAttribute(o2)) {
+        if (isNonChild(o1) && isNonChild(o2)) {
             try {
                 return compare(navigator.getParentNode(o1), navigator.getParentNode(o2));
             }
             catch (UnsupportedAxisException ex) {
                 return 0;
             }
-        }            
-        // ???? namespaces
+        }
 
         try {
             int depth1 = getDepth(o1);
@@ -120,13 +119,16 @@ class NodeComparator implements Comparator {
                 a2 = p2;
             }
             
-            // FIXME this is going to NullPointerException when nodes come from different documents
         }
         catch (UnsupportedAxisException ex) {
             return 0; // ???? should I throw an exception instead?
         }
     }
     
+
+    private boolean isNonChild(Object o) {
+        return navigator.isAttribute(o) || navigator.isNamespace(o);
+    }
 
     private int compareSiblings(Object parent, Object sib1, Object sib2) 
       throws UnsupportedAxisException {
