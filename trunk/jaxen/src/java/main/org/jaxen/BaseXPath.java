@@ -89,8 +89,8 @@ import org.jaxen.util.SingletonList;
  *  </p>
  *
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
- *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
- *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
+ *  @see org.jaxen.jdom.JDOMXPath   XPath for JDOM
+ *  @see org.jaxen.dom.DOMXPath     XPath for W3C DOM
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
@@ -121,17 +121,14 @@ public class BaseXPath implements XPath, Serializable
         try
         {
             XPathReader reader = XPathReaderFactory.createReader();
-            
             JaxenHandler handler = new JaxenHandler();
-            
             reader.setXPathHandler( handler );
-            
             reader.parse( xpathExpr );
-
             this.xpath = handler.getXPathExpr();
         }
         catch (org.jaxen.saxpath.XPathSyntaxException e)
         {
+            // ???? why are we not throwing je here?
             org.jaxen.XPathSyntaxException je = new org.jaxen.XPathSyntaxException( e.getXPath(),
                                                                   e.getPosition(),
                                                                   e.getMessage() );
@@ -165,7 +162,7 @@ public class BaseXPath implements XPath, Serializable
     /** Evaluate this XPath against a given context.
      *
      *  <p>
-     *  The context of evaluation my be a <i>document</i>,
+     *  The context of evaluation may be a <i>document</i>,
      *  an <i>element</i>, or a set of <i>elements</i>.
      *  </p>
      *
@@ -173,7 +170,7 @@ public class BaseXPath implements XPath, Serializable
      *  If the expression evaluates to a single primitive
      *  (String, Number or Boolean) type, it is returned
      *  directly.  Otherwise, the returned value is a
-     *  List (a <code>node-set</code>, in the terms of the
+     *  list (a node-set in the terms of the
      *  specification) of values.
      *  </p>
      *
@@ -185,8 +182,8 @@ public class BaseXPath implements XPath, Serializable
      *  they will be the actual <code>Document</code>,
      *  <code>Element</code> or <code>Attribute</code> objects
      *  as defined by the concrete XML object-model implementation,
-     *  directly from the context document.  This <b>does not
-     *  return <i>copies</i> of anything</b>, but merely returns
+     *  directly from the context document.  This <strong>does not
+     *  return <em>copies</em> of anything</strong>, but merely returns
      *  references to entities within the source document.
      *  </p>
      *  
@@ -222,16 +219,18 @@ public class BaseXPath implements XPath, Serializable
      *  will be returned.
      *
      *  <p>
-     *  <b>NOTE:</b> In most cases, nodes will be returned
-     *  in document-order, as defined by the XML Canonicalization
+     *  In most cases, nodes will be returned
+     *  in document-order, as defined by the XPath
      *  specification.  The exception occurs when using XPath
      *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character).
+     *  (denoted with the pipe '|' character) over expressions
+     *  that use the XSLT document() function to select nodes
+     *  from multiple documents.
      *  </p>
      *
      *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return the <code>node-set</code> of all items selected
+     *  @return the node-set of all items selected
      *          by this XPath expression
      *
      *  @see #selectSingleNode
@@ -247,16 +246,18 @@ public class BaseXPath implements XPath, Serializable
      *  expression.  If multiple nodes match, only one node will be
      *  returned.
      *
-     *  <b>NOTE:</b> In most cases, the selected node will be the first
-     *  selectable node in document-order, as defined by the XML Canonicalization
+     *  In most cases, the selected node will be the first
+     *  selectable node in document-order, as defined by the XPath
      *  specification.  The exception occurs when using XPath
      *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character).
+     *  (denoted with the pipe '|' character) over expressions
+     *  that use the XSLT document() function to select nodes
+     *  from multiple documents.
      *  </p>
      *
      *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return the <code>node-set</code> of all items selected
+     *  @return the node-set of all items selected
      *          by this XPath expression
      *
      *  @see #selectNodes
@@ -652,7 +653,7 @@ public class BaseXPath implements XPath, Serializable
      */
     public Navigator getNavigator()
     {
-    return navigator;
+        return navigator;
     }
     
     
@@ -665,7 +666,7 @@ public class BaseXPath implements XPath, Serializable
 
     /** Create a default <code>FunctionContext</code>.
      *
-     *  @return the default <code>FunctionContext</code>
+     *  @return a default <code>FunctionContext</code>
      */
     protected FunctionContext createFunctionContext()
     {
@@ -703,34 +704,35 @@ public class BaseXPath implements XPath, Serializable
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param context is the Context which gets evaluated.
+     *  @param context is the Context which gets evaluated
      *
-     *  @return the <code>node-set</code> of all items selected
-     *          by this XPath expression.
+     *  @return the node-set of all items selected
+     *          by this XPath expression
      *
      */
     protected List selectNodesForContext(Context context) throws JaxenException
     {
-        // FIXME This may no longer be in document order
-        // Before returning this we need to resort into
-        // document order
-        return this.xpath.asList( context );
+        List list = this.xpath.asList( context );
+        return list;
+        
     }
-    
+ 
+
     /** Select only the first node that is selectable by this XPath
      *  expression.  If multiple nodes match, only one node will be
      *  returned.
      *
      *  <b>NOTE:</b> In most cases, the selected node will be the first
-     *  selectable node in document-order, as defined by the XML Canonicalization
+     *  selectable node in document-order, as defined by the XPath
      *  specification.  The exception occurs when using XPath
      *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character).
+     *  (denoted with the pipe '|' character) over node-sets from
+     *  multiple documents loaded via the document function.
      *  </p>
      *
-     *  @param context is the Context which gets evaluated.
+     *  @param context is the Context which gets evaluated
      *
-     *  @return the <code>node-set</code> of all items selected
+     *  @return the node-set of all items selected
      *          by this XPath expression
      *
      *  @see #selectNodesForContext
