@@ -146,18 +146,15 @@ public abstract class DefaultStep implements Step
         List interimSet = new ArrayList();
         List newNodeSet = new ArrayList();
 
-        Object eachContextNode = null;
-
-        INNER:
         for ( int i = 0 ; i < contextSize ; ++i )
         {
-            eachContextNode = contextNodeSet.get( i );
+            Object eachContextNode = contextNodeSet.get( i );
 
             Iterator axisNodeIter = axisIterator( eachContextNode,
                                                   context.getContextSupport() );
             if ( axisNodeIter == null )
             {
-                continue INNER;
+                continue;
             }
 
             Object eachAxisNode = null;
