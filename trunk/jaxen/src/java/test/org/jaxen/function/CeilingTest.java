@@ -119,6 +119,12 @@ public class CeilingTest extends TestCase {
         
     }    
 
+    public void testNaNCeilingIsNaN() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("ceiling(1.0 div 0.0 - 2.0 div 0.0)");
+        double result = ((Double) xpath.evaluate(doc)).doubleValue();
+        assertTrue(Double.isNaN(result));
+    }    
+
     public void testCeilingFunctionRequiresAtLeastArgument() 
       throws JaxenException {
         

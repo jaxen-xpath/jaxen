@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -168,6 +168,15 @@ public class BooleanTest extends TestCase {
         List result = xpath.selectNodes(a);
         assertEquals(1, result.size());
         assertEquals(Boolean.FALSE, result.get(0));
+        
+    }    
+
+    public void testNaNIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("boolean(0 div 0)");
+        Object result = xpath.evaluate(null);
+        assertEquals(Boolean.FALSE, result);
         
     }    
 
