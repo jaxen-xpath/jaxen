@@ -25,13 +25,13 @@
 
       <p>
         Since the reference implementation of 
-        <a href="http://developer.java.sun.com/developer/earlyAccess/xml/jaxm/">JAXM</a>
-        is based on <a href="http://dom4j.org">dom4j</a> and Jaxen that means you can use
+        <a href="http://java.sun.com/xml/jaxm/index.jsp">Java API for XML Messaging</a>
+        is based on <a href="http://dom4j.org">dom4j</a> and Jaxen, that means you can use
         Jaxen to query SOAP messages on the Java platform too!
       </p>
 
       <p>
-        Check out Elliotte Rusty Harolds book chapter on XPath and 
+        Check out Elliotte Rusty Harold's book chapter on XPath and 
         <a href="http://cafeconleche.org/books/xmljava/chapters/ch16s06.html">Jaxen</a>
       </p>
 
