@@ -121,7 +121,7 @@ public class DefaultNameStep extends DefaultStep
         
         if ( hasPrefix )
         {
-            myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
+            myUri = contextSupport.translateNamespacePrefixToUri( myPrefix );
         }
         else if ( matchesAnyName )
         {
