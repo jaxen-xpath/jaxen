@@ -3,19 +3,22 @@
 package org.jaxen.dom4j;
 
 import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
 
 import org.jaxen.util.SingleObjectIterator;
 
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Comment;
 import org.dom4j.Attribute;
-import org.dom4j.Text;
-import org.dom4j.CDATA;
-import org.dom4j.ProcessingInstruction;
-import org.dom4j.Namespace;
 import org.dom4j.Branch;
+import org.dom4j.CDATA;
+import org.dom4j.Comment;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.Namespace;
 import org.dom4j.Node;
+import org.dom4j.ProcessingInstruction;
+import org.dom4j.Text;
+import org.dom4j.io.SAXReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +32,7 @@ import java.util.Iterator;
  */
 public class DocumentNavigator extends DefaultNavigator
 {
-    /** Should we just return new namespace declarations in //namespace::** or
-     * return a namespace node for all elements in a namespace
-     */
-    private static final boolean ONLY_RETURN_NAMESPACE_DECLARATIONS = true;
-    
+    private SAXReader reader = new SAXReader();
     
     private static class Singleton
     {
@@ -175,56 +174,19 @@ public class DocumentNavigator extends DefaultNavigator
         }
 
         Element element = (Element) contextNode;
-        if ( ONLY_RETURN_NAMESPACE_DECLARATIONS ) 
-        {
-            List nsList = new ArrayList();
-            Namespace elementNS = element.getNamespace();
-            String uri = elementNS.getURI();
-            if ( uri != null && uri.length() > 0 ) 
-            {
-                // the namespace may have already been declared by a parent element
-                Element parent = element.getParent();
-                if ( parent != null ) 
-                {
-                    if ( parent.getNamespaceForPrefix( elementNS.getPrefix() ) == null )
-                    {
-                        nsList.add( elementNS.asXPathResult( element ) );
-                    }
-                }
-                else 
-                {            
-                    nsList.add( elementNS.asXPathResult( element ) );
-                }
-            }
-
-            List additionalNS = element.additionalNamespaces();
-            for ( Iterator iter = additionalNS.iterator(); iter.hasNext(); )
-            {
-                Namespace namespace = (Namespace) iter.next();            
-                nsList.add( namespace.asXPathResult( element ) );
-            }
-            
-            return nsList.iterator();
+        List nsList = new ArrayList();
+        Namespace ns = element.getNamespace();
+        if ( ns != Namespace.XML_NAMESPACE && ns.getURI().length() > 0 ) {
+            nsList.add( ns.asXPathResult( element ) );
         }
-        else 
+        List declaredNS = element.additionalNamespaces();
+        for ( Iterator iter = declaredNS.iterator(); iter.hasNext(); )
         {
-            List nsList = new ArrayList();
-            List declaredNS = element.declaredNamespaces();
-            for ( Iterator iter = declaredNS.iterator(); iter.hasNext(); )
-            {
-                Namespace namespace = (Namespace) iter.next();
-
-                // the namespace may have already been declared by a parent
-                Element parent = element.getParent();
-                if ( parent == null 
-                    || parent.getNamespaceForURI( namespace.getURI() ) == null )
-                {            
-                    nsList.add( namespace.asXPathResult( element ) );
-                }
-            }
-
-            return nsList.iterator();
+            Namespace namespace = (Namespace) iter.next();
+            nsList.add( namespace.asXPathResult( element ) );
         }
+        nsList.add( Namespace.XML_NAMESPACE.asXPathResult( element ) );
+        return nsList.iterator();
     }
 
     public Object getDocumentNode(Object contextNode)
@@ -326,4 +288,29 @@ public class DocumentNavigator extends DefaultNavigator
         }
         return 0;
     }
+    
+    public Object getDocument(String uri) throws FunctionCallException
+    {
+        try
+        {
+            return reader.read( uri );
+        }
+        catch (DocumentException e)
+        {
+            throw new FunctionCallException("Failed to parse doucment for URI: " + uri, e);
+        }
+    }
+    
+    // Properties
+    //-------------------------------------------------------------------------    
+    public SAXReader getSAXReader()
+    {
+        return reader;
+    }
+    
+    public void setSAXReader(SAXReader reader)
+    {
+        this.reader = reader;
+    }
+    
 }
