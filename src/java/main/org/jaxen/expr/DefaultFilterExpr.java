@@ -304,9 +304,11 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
 
         {
 
-            ArrayList list = new ArrayList(1);
+            List nodeSet = context.getNodeSet();
 
-            list.addAll( context.getNodeSet() );
+            ArrayList list = new ArrayList(nodeSet.size());
+
+            list.addAll( nodeSet );
 
             results = list;
 
