@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,37 +60,47 @@
  */
 
 
+
 package org.jaxen.expr;
 
-import junit.framework.Test;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect Jaxen's expression tests.
+ *  Test for function context.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b4
  *
  */
-public class ExprTests extends TestCase {
+public class ModTest extends TestCase
+{
 
-    
-    public ExprTests(String name) {
-        super(name);   
-    }
-
-    
-    public static Test suite() {
+    public void testModofNonIntegers() 
+      throws JaxenException, ParserConfigurationException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(DefaultXPathExprTest.class));
-        result.addTest(new TestSuite(ModTest.class));
-        return result;
+        DOMXPath xpath = new DOMXPath("5.5 mod 2.5");
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(0.5, result.doubleValue(), 0.000001);
         
     }
-
-    
+ 
 }
