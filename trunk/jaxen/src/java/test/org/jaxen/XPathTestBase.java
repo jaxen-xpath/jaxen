@@ -17,7 +17,7 @@ public abstract class XPathTestBase extends TestCase
 {
     private static final String TESTS_XML = "xml/test/tests.xml";
 
-    private static final boolean        verbose         = false;
+    protected static boolean            verbose         = false;
     private              SAXReader      xmlReader       = new SAXReader();
     private             ContextSupport  contextSupport;
 

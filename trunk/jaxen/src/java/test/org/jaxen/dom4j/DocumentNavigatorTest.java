@@ -2,10 +2,12 @@
 package org.jaxen.dom4j;
 
 import junit.framework.TestCase;
-
-import org.jaxen.XPathTestBase;
+import junit.framework.TestSuite;
+import junit.framework.Test;
+import junit.textui.TestRunner;
 
 import org.jaxen.Navigator;
+import org.jaxen.XPathTestBase;
 
 import org.dom4j.io.SAXReader;
 
@@ -18,6 +20,17 @@ public class DocumentNavigatorTest extends XPathTestBase
         super( name );
     }
 
+    public static void main(String[] args) 
+    {
+        verbose = true;
+        TestRunner.run( suite() );
+    }
+    
+    public static Test suite() 
+    {
+        return new TestSuite( DocumentNavigatorTest.class );
+    }
+    
     public Navigator getNavigator()
     {
         return new DocumentNavigator();
