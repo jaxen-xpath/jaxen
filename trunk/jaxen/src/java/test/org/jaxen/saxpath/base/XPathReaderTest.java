@@ -11,29 +11,29 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions, and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions, and the disclaimer that follows 
- *    these conditions in the documentation and/or other materials 
+ *    notice, this list of conditions, and the disclaimer that follows
+ *    these conditions in the documentation and/or other materials
  *    provided with the distribution.
  *
  * 3. The name "SAXPath" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
  *    written permission, please contact license@saxpath.org.
- * 
+ *
  * 4. Products derived from this software may not be called "SAXPath", nor
  *    may "SAXPath" appear in their name, without prior written permission
  *    from the SAXPath Project Management (pm@saxpath.org).
- * 
- * In addition, we request (but do not require) that you include in the 
- * end-user documentation provided with the redistribution and/or in the 
+ *
+ * In addition, we request (but do not require) that you include in the
+ * end-user documentation provided with the redistribution and/or in the
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
  *      SAXPath Project (http://www.saxpath.org/)."
- * Alternatively, the acknowledgment may be graphical using the logos 
+ * Alternatively, the acknowledgment may be graphical using the logos
  * available at http://www.saxpath.org/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
@@ -50,15 +50,14 @@
  * SUCH DAMAGE.
  *
  * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the SAXPath Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the SAXPath Project and was originally
+ * created by bob mcwhirter <bob@werken.com> and
+ * James Strachan <jstrachan@apache.org>.  For more information on the
  * SAXPath Project, please see <http://www.saxpath.org/>.
- * 
+ *
  * $Id$
  */
-
 
 
 package org.jaxen.saxpath.base;
@@ -76,7 +75,7 @@ public class XPathReaderTest extends TestCase
     private ConformanceXPathHandler actual;
 
     private XPathReader reader;
-    private String      text;
+    private String text;
 
     private String[] paths = {
         "/foo/bar[@a='1' and @b='2']",
@@ -91,7 +90,7 @@ public class XPathReaderTest extends TestCase
         "*:foo",
     };
 
-    public XPathReaderTest(String name)
+    public XPathReaderTest( String name )
     {
         super( name );
     }
@@ -101,9 +100,9 @@ public class XPathReaderTest extends TestCase
         setReader( new XPathReader() );
         setText( null );
 
-        this.actual   = new ConformanceXPathHandler();
+        this.actual = new ConformanceXPathHandler();
         this.expected = new ConformanceXPathHandler();
-        
+
         getReader().setXPathHandler( actual() );
     }
 
@@ -121,23 +120,23 @@ public class XPathReaderTest extends TestCase
     {
         XPathReader reader = new XPathReader();
 
-        System.err.println("Valid Expressions");
+        System.err.println( "Valid Expressions" );
 
-        for ( int i = 0 ; i < paths.length ; ++i )
+        for( int i = 0; i < paths.length; ++i )
         {
-            System.err.println("----------------------------------------");
+            System.err.println( "----------------------------------------" );
             System.err.println( paths[i] );
-            System.err.println("----------------------------------------");
+            System.err.println( "----------------------------------------" );
             try
             {
                 reader.parse( paths[i] );
             }
-            catch (org.jaxen.saxpath.SAXPathException e)
+            catch( org.jaxen.saxpath.SAXPathException e )
             {
                 e.printStackTrace();
                 fail( e.getMessage() );
             }
-            catch (Exception e)
+            catch( Exception e )
             {
                 fail( e.getMessage() );
             }
@@ -148,13 +147,13 @@ public class XPathReaderTest extends TestCase
     {
         XPathReader reader = new XPathReader();
 
-        System.err.println("Bogus Expressions");
+        System.err.println( "Bogus Expressions" );
 
-        for ( int i = 0 ; i < bogusPaths.length ; ++i )
+        for( int i = 0; i < bogusPaths.length; ++i )
         {
-            System.err.println("----------------------------------------");
+            System.err.println( "----------------------------------------" );
             System.err.println( bogusPaths[i] );
-            System.err.println("----------------------------------------");
+            System.err.println( "----------------------------------------" );
 
             try
             {
@@ -162,15 +161,15 @@ public class XPathReaderTest extends TestCase
 
                 fail( "Should have thrown XPathSyntaxException" );
             }
-            catch (XPathSyntaxException e)
+            catch( XPathSyntaxException e )
             {
                 // expected and correct
             }
-            catch (org.jaxen.saxpath.SAXPathException e)
+            catch( org.jaxen.saxpath.SAXPathException e )
             {
                 fail( e.getMessage() );
             }
-            catch (Exception e)
+            catch( Exception e )
             {
                 fail( e.getMessage() );
             }
@@ -185,7 +184,7 @@ public class XPathReaderTest extends TestCase
         {
             reader.parse( "child::foo" );
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -200,15 +199,15 @@ public class XPathReaderTest extends TestCase
             reader.parse( "chyld::foo" );
             fail( "Should have thrown XPathSyntaxException" );
         }
-        catch (XPathSyntaxException e)
+        catch( XPathSyntaxException e )
         {
             // expected and correct
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
-                
+
     }
 
     public void testSimpleNameStep()
@@ -223,12 +222,12 @@ public class XPathReaderTest extends TestCase
 
             expected().startNameStep( Axis.CHILD,
                                       "",
-                                      "foo");
+                                      "foo" );
             expected().endNameStep();
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -247,12 +246,12 @@ public class XPathReaderTest extends TestCase
 
             expected().startNameStep( Axis.PARENT,
                                       "foo",
-                                      "bar");
+                                      "bar" );
             expected().endNameStep();
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -274,7 +273,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -297,7 +296,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -320,7 +319,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -342,7 +341,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -364,7 +363,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -386,7 +385,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -423,7 +422,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -460,7 +459,95 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
+        {
+            fail( e.getMessage() );
+        }
+    }
+
+    public void testOrderOfOperations()
+    {
+        try
+        {
+            setText( "7 - 3 + 1" );
+
+            getReader().setUpParse( getText() );
+
+            getReader().predicate();
+
+ /* What is really. my golly, that looks like a lot of useless stuff.
+
+ startPredicate()
+(1) startOrExpr()
+(2) startAndExpr()
+(3) startEqualityExpr()
+(4) startRelationalExpr()
+(5) startAdditiveExpr()
+(6) startMultiplicativeExpr()
+(7) startUnaryExpr()
+(8) startUnionExpr()
+(9) startPathExpr()
+(10) startFilterExpr()
+(11) number(7)
+(12) endFilterExpr()
+(13) endPathExpr()
+(14) endUnionExpr(false)
+(15) endUnaryExpr(0)
+(16) endMultiplicativeExpr(0)
+(17) startAdditiveExpr()
+(18) startMultiplicativeExpr()
+(19) startUnaryExpr()
+(20) startUnionExpr()
+(21) startPathExpr()
+(22) startFilterExpr()
+(23) number(3)
+(24) endFilterExpr()
+(25) endPathExpr()
+(26) endUnionExpr(false)
+(27) endUnaryExpr(0)
+(28) endMultiplicativeExpr(0)
+(29) startAdditiveExpr()
+(30) startMultiplicativeExpr()
+(31) startUnaryExpr()
+(32) startUnionExpr()
+(33) startPathExpr()
+(34) startFilterExpr()
+(35) number(1)
+(36) endFilterExpr()
+(37) endPathExpr()
+(38) endUnionExpr(false)
+(39) endUnaryExpr(0)
+(40) endMultiplicativeExpr(0)
+(41) endAdditiveExpr(0)
+(42) endAdditiveExpr(7)
+(43) endAdditiveExpr(8)
+(44) endRelationalExpr(0)
+(45) endEqualityExpr(0)
+(46) endAndExpr(false)
+(47) endOrExpr(false)
+(48) endPredicate()
+*/
+            expected().startAdditiveExpr();
+            expected().number( 7 );
+            expected().startAdditiveExpr();
+            expected().number( 3 );
+            expected().number( 1 );
+            expected().endAdditiveExpr( Operator.ADD );
+            expected().endAdditiveExpr( Operator.SUBTRACT );
+
+/*
+            expected().startAdditiveExpr();
+            expected().number( 7 );
+            expected().number( 3 );
+            expected().endAdditiveExpr( Operator.SUBTRACT );
+            expected().startAdditiveExpr();
+            expected().number( 1 );
+            expected().endAdditiveExpr( Operator.ADD );
+*/
+
+            compare();
+        }
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -489,11 +576,11 @@ public class XPathReaderTest extends TestCase
             expected().startPathExpr();
             expected().startFilterExpr();
 
-            expected().number(1);
+            expected().number( 1 );
 
             expected().endFilterExpr();
             expected().endPathExpr();
-            expected().endUnionExpr( false);
+            expected().endUnionExpr( false );
             expected().endUnaryExpr( Operator.NO_OP );
             expected().endMultiplicativeExpr( Operator.NO_OP );
             expected().endAdditiveExpr( Operator.NO_OP );
@@ -506,7 +593,7 @@ public class XPathReaderTest extends TestCase
 
             compare();
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch( org.jaxen.saxpath.SAXPathException e )
         {
             fail( e.getMessage() );
         }
@@ -515,7 +602,7 @@ public class XPathReaderTest extends TestCase
     // --------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------
 
-    private void setText(String text)
+    private void setText( String text )
     {
         this.text = text;
     }
@@ -525,7 +612,7 @@ public class XPathReaderTest extends TestCase
         return this.text;
     }
 
-    private void setReader(XPathReader reader)
+    private void setReader( XPathReader reader )
     {
         this.reader = reader;
     }
