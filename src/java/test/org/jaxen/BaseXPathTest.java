@@ -582,8 +582,8 @@ public class BaseXPathTest extends TestCase {
         
         List result = xpath.selectNodes(x3);
         assertEquals(2, result.size());
-        assertEquals(a2, result.get(0));   
-        assertEquals(a1, result.get(1)); 
+        assertEquals(a1, result.get(0));   
+        assertEquals(a2, result.get(1)); 
         
     }    
     
