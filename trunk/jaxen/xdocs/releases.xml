@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <document>
 
   <properties>
@@ -10,7 +9,7 @@
   <body>
     <section name="Official Builds">
       <p>
-      Release builds can be found <a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/">here</a>.
+      Release builds can be found <a href="http://prdownloads.sourceforge.net/jaxen">here</a>.
       </p>
 
       <p>
@@ -22,15 +21,15 @@
       </p>
 
       <ul>
-        <li><a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/jaxen-1.0-FCS.zip">1.0-FCS in zip format.</a></li>
-        <li><a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/jaxen-1.0-FCS.tar.gz">1.0-FCS in tar/gz format.</a></li>
+        <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.zip">1.0-FCS in zip format.</a></li>
+        <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.tar.gz">1.0-FCS in tar/gz format.</a></li>
       </ul>
     </section>
 
-    <section name="Nighly Builds">
+    <section name="Nightly Builds">
       <p>
       Nighly builds have been temporarily suspended as we ramp up
-      with using <a href="http://jakarta.apache.org/turbine/maven/index.html">maven</a>.
+      with using <a href="http://maven.apache.org/">maven</a>.
       </p>
     </section>
 
