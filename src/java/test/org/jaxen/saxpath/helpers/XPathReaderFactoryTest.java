@@ -130,7 +130,7 @@ public class XPathReaderFactoryTest extends TestCase
 
         try
         {
-            XPathReader reader = XPathReaderFactory.createReader();
+            XPathReaderFactory.createReader();
 
             fail( "Should have thrown SAXPathException" );
         }
@@ -152,7 +152,7 @@ public class XPathReaderFactoryTest extends TestCase
 
         try
         {
-            XPathReader reader = XPathReaderFactory.createReader();
+            XPathReaderFactory.createReader();
 
             fail( "Should have thrown SAXPathException" );
         }
@@ -188,7 +188,7 @@ public class XPathReaderFactoryTest extends TestCase
     {
         try
         {
-            XPathReader reader = XPathReaderFactory.createReader( "java.lang.String" );
+            XPathReaderFactory.createReader( "java.lang.String" );
 
             fail( "Should have thrown SAXPathException" );
         }
@@ -202,9 +202,9 @@ public class XPathReaderFactoryTest extends TestCase
     {
         try
         {
-            XPathReader reader = XPathReaderFactory.createReader( "i.am.a.class.that.does.not.Exist" );
+            XPathReaderFactory.createReader( "i.am.a.class.that.does.not.Exist" );
 
-            fail( "Should havfe thrown SAXPathException" );
+            fail( "Should have thrown SAXPathException" );
         }
         catch (org.jaxen.saxpath.SAXPathException e)
         {
