@@ -27,6 +27,7 @@ package org.jaxen;
  *  @see NamespaceContext
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
 public interface VariableContext
 {

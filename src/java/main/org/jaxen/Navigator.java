@@ -18,6 +18,7 @@ import org.saxpath.SAXPathException;
  *  </p>
  *
  *  @author bob mcwhirter (bob@werken.com)
+ *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
 public interface Navigator extends Serializable
 {
