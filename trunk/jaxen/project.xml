@@ -163,7 +163,9 @@
 
     <dependency>
       <id>jdom</id>
-      <version>1.0b8</version>
+      <version>1.0.b10</version>
+      <url>http://jdom.org</url>
+      <jar>jdom-1.0.b10.jar</jar>
     </dependency>
 
     <dependency>
@@ -212,9 +214,9 @@
       <includes>
         <include>**/*Test.java</include>
       </includes>
-      <excludes>
+      <!--excludes>
         <exclude>org/jaxen/jdom/*</exclude>
-      </excludes>
+      </excludes-->
     </unitTest>
 
 
