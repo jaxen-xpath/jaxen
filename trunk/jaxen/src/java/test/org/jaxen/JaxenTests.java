@@ -64,6 +64,7 @@ package org.jaxen;
 
 import org.jaxen.dom.DOMTests;
 import org.jaxen.dom4j.DOM4JTests;
+import org.jaxen.function.FunctionTests;
 import org.jaxen.javabean.JavaBeanTests;
 import org.jaxen.jdom.JDOMTests;
 import org.jaxen.pattern.PatternTests;
@@ -104,6 +105,7 @@ public class JaxenTests extends TestCase {
         result.addTest(PatternTests.suite());
         result.addTest(BaseTests.suite());
         result.addTest(HelpersTests.suite());
+        result.addTest(FunctionTests.suite());
         return result;
         
     }
