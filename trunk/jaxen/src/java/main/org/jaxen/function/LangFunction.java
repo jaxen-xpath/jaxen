@@ -86,46 +86,26 @@ public class LangFunction implements Function
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
-        if (args.size() == 1)
-        {
-            if(args.get(0) instanceof String)
-            {
-                try
-                {
-                    return evaluate(context.getNodeSet(), 
-                                     (String)args.get(0),
-                                      context.getNavigator() );
-                }
-                catch(UnsupportedAxisException e)
-                {
-                    throw new FunctionCallException("Can't evaluate lang()", 
-                                                     e);
-                }
-            }
-            throw 
-                new FunctionCallException("lang() requires a string argument.");
+        if (args.size() != 1) {
+            throw new FunctionCallException("lang() requires exactly one argument.");   
         }
-
-        throw 
-            new FunctionCallException("lang() requires exactly one argument.");
+        
+        Object arg = args.get(0);
+            
+        try {
+            return evaluate(context.getNodeSet(), arg, context.getNavigator() );
+        }
+        catch(UnsupportedAxisException e) {
+            throw new FunctionCallException("Can't evaluate lang()", 
+                                                 e);
+        }
+       
     }
 
-    public static Boolean evaluate(List contextNodes, String lang,
-                                  Navigator nav)
+    private static Boolean evaluate(List contextNodes, Object lang, Navigator nav)
       throws UnsupportedAxisException
     {
-        // The XPath spec isn't clear what to do when there's more than one
-        // node in the context. I assume that in this case, lang should
-        // return true iff it would return true for every node individually.
-        // FIXME There can only be one context node
-        for(Iterator nodes = contextNodes.iterator(); nodes.hasNext();)
-        {
-            if(!evaluate(nodes.next(), lang, nav))
-            {
-                return Boolean.FALSE;
-            }
-        }
-        return Boolean.TRUE;
+        return new Boolean(evaluate(contextNodes.get(0), StringFunction.evaluate(lang, nav), nav));
     }
 
     private static boolean evaluate(Object node, String lang, 
