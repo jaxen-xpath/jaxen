@@ -97,7 +97,7 @@ public class SimpleFunctionContext implements FunctionContext
      *  <p>
      *  By registering a new function, any XPath expression
      *  that utilizes this <code>FunctionContext</code> may
-     *  refer-to and use the new function.
+     *  refer to and use the new function.
      *  </p>
      *
      *  <p>
@@ -114,7 +114,7 @@ public class SimpleFunctionContext implements FunctionContext
      *  </p>
      *
      *  @param namespaceURI the namespace URI of the function to
-     *         be registered with this context.
+     *         be registered with this context
      *  @param localName the non-prefixed local portion of the
      *         function to be registered with this context
      *  @param function a {@link Function} implementation object
@@ -135,10 +135,12 @@ public class SimpleFunctionContext implements FunctionContext
     {
         Object key = new QualifiedName( namespaceURI, localName );
 
-        if ( this.functions.containsKey(key) )
+        if ( this.functions.containsKey(key) ) {
             return (Function) this.functions.get( key );
-        else
+        }
+        else {
             throw new UnresolvableException( "Function " +
                                              prefix + ":" + localName );
+        }
     }
 }
