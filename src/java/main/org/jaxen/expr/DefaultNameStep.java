@@ -198,11 +198,12 @@ public class DefaultNameStep extends DefaultStep implements NameStep
 
                            String prefix,
 
-                           String localName)
+                           String localName,
+						   PredicateSet predicateSet)
 
     {
 
-        super( axis );
+        super( axis, predicateSet );
 
 
 

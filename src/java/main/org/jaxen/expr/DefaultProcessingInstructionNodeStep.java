@@ -148,11 +148,12 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
 
     public DefaultProcessingInstructionNodeStep(IterableAxis axis,
 
-                                                String name)
+                                                String name,
+												PredicateSet predicateSet)
 
     {
 
-        super( axis );
+        super( axis, predicateSet );
 
 
 
