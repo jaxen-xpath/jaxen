@@ -31,6 +31,8 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr
         Object lhsValue = getLHS().evaluate( context );
         Object rhsValue = getRHS().evaluate( context );
 
+        //System.out.println( "Comparing: " + lhsValue + " and: " + rhsValue );
+        
         Navigator nav = context.getNavigator();
 
         if ( bothAreSets( lhsValue,

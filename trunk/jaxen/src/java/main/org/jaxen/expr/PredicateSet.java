@@ -72,6 +72,7 @@ class PredicateSet
                                       ContextSupport support) throws JaxenException
     {
         evaluatePredicates( contextNodeSet, support );
+        
         return ! contextNodeSet.isEmpty();
     }
     

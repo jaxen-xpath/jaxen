@@ -95,6 +95,11 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
             results = list;
         }
         
+        if ( results instanceof Boolean ) 
+        {
+            Boolean b = (Boolean) results;
+            return b.booleanValue();
+        }
         if ( results instanceof List )
         {
             return getPredicateSet().evaluateAsBoolean( 
