@@ -209,11 +209,55 @@ public class XPathReaderTest extends TestCase
         try
         {
             reader.parse( "1/child::test" );
-            fail( "Should have thrown XPathSyntaxException for count(3)");
+            fail( "Should have thrown XPathSyntaxException for 1/child::test");
         }
         catch( XPathSyntaxException e )
         {
-            assertEquals( "1/child::test", e.getMessage() );
+            assertEquals( "Node-set expected", e.getMessage() );
+        }
+        catch( org.jaxen.saxpath.SAXPathException e )
+        {
+            fail( e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
+        }
+    }
+
+    public void testChildIsNumber()
+    {
+        XPathReader reader = new XPathReader();
+        try
+        {
+            reader.parse( "jane/3" );
+            fail( "Should have thrown XPathSyntaxException for jane/3");
+        }
+        catch( XPathSyntaxException e )
+        {
+            assertEquals( "Expected one of '.', '..', '@', '*', <QName>", e.getMessage() );
+        }
+        catch( org.jaxen.saxpath.SAXPathException e )
+        {
+            fail( e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
+        }
+    }
+
+    public void testNumberOrNumber()
+    {
+        XPathReader reader = new XPathReader();
+        try
+        {
+            reader.parse( " 4 | 5" );
+            fail( "Should have thrown XPathSyntaxException for 4 | 5");
+        }
+        catch( XPathSyntaxException e )
+        {
+            assertEquals( "Node-set expected", e.getMessage() );
         }
         catch( org.jaxen.saxpath.SAXPathException e )
         {
