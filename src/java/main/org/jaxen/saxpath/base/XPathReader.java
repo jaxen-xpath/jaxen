@@ -137,16 +137,14 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
                 if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH )
                 {
-                    locationPath( false );
+                    XPathSyntaxException ex = this.createSyntaxException("Node-set expected");
+                    throw ex;
                 }
 
                 break;
             }
             case IDENTIFIER:
             {
-                // if ( ( ( LA(2) == LEFT_PAREN )
-                  //      &&
-                  //      ( ! isNodeTypeName( LT(1) ) ) ) )
 
                 if ( ( LA(2) == LEFT_PAREN
                      &&
@@ -187,7 +185,6 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             }
             default:
             {
-                //throw new XPathSyntaxException( "Unexpected '" + LT(1).getTokenText() + "'" );
                 throwUnexpected();
             }
         }
@@ -422,7 +419,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                         break;
                     }
                     default:
-                        throw new XPathSyntaxException(lexer.getXPath(), 0, "Location path cannot end with //");
+                        XPathSyntaxException ex = this.createSyntaxException("Location path cannot end with //");
+                        throw ex;
                 }
                 break;
             }
@@ -479,7 +477,6 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             default:
             {
                 throw createSyntaxException( "Expected one of '.', '..', '@', '*', <QName>" );
-                //throw new XPathSyntaxException( "Expected one of '.', '..', '@', '*', <qname>" );
             }
         }
 
@@ -525,7 +522,6 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 default:
                 {
                     throw createSyntaxException( "Expected one of '.', '..', '@', '*', <QName>" );
-                    // throw new XPathSyntaxException( "Expected one of '.', '..', '@', '*', <qname>" );
                 }
             }
 
