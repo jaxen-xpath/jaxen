@@ -10,7 +10,11 @@
   <body>
     <section name="Official Builds">
       <p>
-      Official builds can be found <a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/">here</a>.
+      Release builds can be found <a href="http://unc.dl.sourceforge.net/sourceforge/jaxen/">here</a>.
+      </p>
+
+      <p>
+      Beta builds can be found <a href="http://www.ibiblio.org/maven/jaxen/distributions/">here</a>.
       </p>
 
       <p>
