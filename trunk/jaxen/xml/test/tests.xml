@@ -3,6 +3,24 @@
 
   <!-- test name -->
 
+  <document url="xml/axis.xml">
+
+    <context select="/root/a/a.3">
+      <test select="preceding-sibling::*" count="2"/>
+    </context>
+
+    <context select="/">
+      <valueOf select="name(/root/a/a.3/preceding-sibling::*[1])">a.2</valueOf>
+      <valueOf select="name(/root/a/a.3/preceding-sibling::*[2])">a.1</valueOf>
+    </context>
+
+    <context select="/">
+      <valueOf select="name(/root/a/a.3/following-sibling::*[1])">a.4</valueOf>
+      <valueOf select="name(/root/a/a.3/following-sibling::*[2])">a.5</valueOf>
+    </context>
+
+  </document>
+
   <document url="xml/web.xml">
     <context select="/">
  

@@ -8,6 +8,8 @@ import org.jaxen.util.DescendantOrSelfAxisIterator;
 import org.jaxen.util.AncestorOrSelfAxisIterator;
 import org.jaxen.util.AncestorAxisIterator;
 import org.jaxen.util.DescendantAxisIterator;
+import org.jaxen.util.PrecedingSiblingAxisIterator;
+import org.jaxen.util.FollowingSiblingAxisIterator;
 
 import java.util.Iterator;
 
@@ -62,14 +64,20 @@ public abstract class DefaultNavigator implements Navigator
      */
     public Iterator getFollowingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
-        throw new UnsupportedAxisException("following-sibling");
+        // throw new UnsupportedAxisException("following-sibling");
+
+        return new FollowingSiblingAxisIterator( contextNode,
+                                                 this );
     }
 
     /** Throws <code>UnsupportedAxisException</code>
      */
     public Iterator getPrecedingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
-        throw new UnsupportedAxisException("preceding-sibling");
+        //throw new UnsupportedAxisException("preceding-sibling");
+
+        return new PrecedingSiblingAxisIterator( contextNode,
+                                                 this );
     }
 
     /** Throws <code>UnsupportedAxisException</code>
