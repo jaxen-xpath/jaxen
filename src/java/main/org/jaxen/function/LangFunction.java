@@ -112,12 +112,12 @@ public class LangFunction implements Function
 
     public static Boolean evaluate(List contextNodes, String lang,
                                   Navigator nav)
-    throws
-        UnsupportedAxisException
+      throws UnsupportedAxisException
     {
         // The XPath spec isn't clear what to do when there's more than one
         // node in the context. I assume that in this case, lang should
         // return true iff it would return true for every node individually.
+        // FIXME There can only be one context node
         for(Iterator nodes = contextNodes.iterator(); nodes.hasNext();)
         {
             if(!evaluate(nodes.next(), lang, nav))
@@ -130,26 +130,27 @@ public class LangFunction implements Function
 
     private static boolean evaluate(Object node, String lang, 
                                      Navigator nav)
-    throws
-        UnsupportedAxisException
+      throws UnsupportedAxisException
     {
-        for(Iterator elements = nav.getAncestorOrSelfAxisIterator(node);
-            elements.hasNext();)
+        
+        Object element = node;
+        if (! nav.isElement(element)) {
+            element = nav.getParentNode(node);
+        }
+        while (element != null && nav.isElement(element)) 
         {
-            Iterator attrs = nav.getAttributeAxisIterator(elements.next());
-            if(attrs != null) // Can be null if we reach the document node
+            Iterator attrs = nav.getAttributeAxisIterator(element);
+            while(attrs.hasNext())
             {
-                while(attrs.hasNext())
+                Object attr = attrs.next();
+                if(LANG_LOCALNAME.equals(nav.getAttributeName(attr)) && 
+                   XMLNS_URI.equals(nav.getAttributeNamespaceUri(attr)))
                 {
-                    Object attr = attrs.next();
-                    if(LANG_LOCALNAME.equals(nav.getAttributeName(attr)) && 
-                       XMLNS_URI.equals(nav.getAttributeNamespaceUri(attr)))
-                    {
-                        return 
-                            isSublang(nav.getAttributeStringValue(attr), lang);
-                    }
+                    return 
+                        isSublang(nav.getAttributeStringValue(attr), lang);
                 }
             }
+            element = nav.getParentNode(node);
         }
         return false;
     }

@@ -65,16 +65,14 @@ package org.jaxen.util;
 
 
 import org.jaxen.Navigator;
+import org.jaxen.UnsupportedAxisException;
 
 public class AncestorAxisIterator extends AncestorOrSelfAxisIterator
 {
     public AncestorAxisIterator(Object contextNode,
-                                Navigator navigator)
+                                Navigator navigator) throws UnsupportedAxisException
     {
-        super( contextNode,
+        super( navigator.getParentNode(contextNode),
                navigator );
-        if (hasNext()) {
-            next();
-        }
     }
 }
