@@ -59,4 +59,21 @@ public class NameTest extends NodeTest {
     {
         return nodeType;
     }
+    
+    public String getText() 
+    {
+        if ( nodeType == Pattern.ATTRIBUTE_NODE ) 
+        {
+            return "@" + name;
+        }
+        else 
+        {
+            return name;
+        }
+    }
+    
+    public String toString()
+    {
+        return super.toString() + "[ name: " + name + " type: " + nodeType + " ]";
+    }
 }

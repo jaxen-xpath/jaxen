@@ -7,7 +7,7 @@ import org.jaxen.Navigator;
 
 import org.jaxen.expr.iter.IterableAxis;
 
-class DefaultCommentNodeStep extends DefaultStep
+public class DefaultCommentNodeStep extends DefaultStep
 {
     public DefaultCommentNodeStep(IterableAxis axis)
     {

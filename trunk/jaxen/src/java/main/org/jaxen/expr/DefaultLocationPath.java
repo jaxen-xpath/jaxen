@@ -90,6 +90,11 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
 
         return buf.toString();
     }
+    
+    public boolean isAbsolute() 
+    {
+        return false;
+    }
 
     public Object evaluate(Context context) throws JaxenException
     {

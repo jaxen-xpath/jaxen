@@ -96,6 +96,15 @@ public class UnionPattern extends Pattern {
         return this;
     }
     
+    public String getText() 
+    {
+        return lhs.getText() + " | " + rhs.getText();
+    }
+        
+    public String toString()
+    {
+        return super.toString() + "[ lhs: " + lhs + " rhs: " + rhs + " ]";
+    }
     
     // Implementation methods
     //-------------------------------------------------------------------------    

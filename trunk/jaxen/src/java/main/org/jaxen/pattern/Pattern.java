@@ -118,4 +118,9 @@ public abstract class Pattern {
     {
         return this;
     }
+    
+    /** Returns a textual representation of this pattern
+     */
+    public abstract String getText();
+
 }

@@ -19,6 +19,28 @@ import org.jaxen.Context;
   */
 public class NodeTypeTest extends NodeTest {
     
+    public static final NodeTypeTest DOCUMENT_TEST 
+        = new NodeTypeTest( DOCUMENT_NODE );
+    
+    public static final NodeTypeTest ELEMENT_TEST 
+        = new NodeTypeTest( ELEMENT_NODE );
+    
+    public static final NodeTypeTest ATTRIBUTE_TEST 
+        = new NodeTypeTest( ATTRIBUTE_NODE );
+    
+    public static final NodeTypeTest COMMENT_TEST 
+        = new NodeTypeTest( COMMENT_NODE );
+    
+    public static final NodeTypeTest TEXT_TEST 
+        = new NodeTypeTest( TEXT_NODE );
+    
+    public static final NodeTypeTest PROCESSING_INSTRUCTION_TEST 
+        = new NodeTypeTest( PROCESSING_INSTRUCTION_NODE );
+    
+    public static final NodeTypeTest NAMESPACE_TEST 
+        = new NodeTypeTest( NAMESPACE_NODE );
+    
+    
     private short nodeType;
     
     public NodeTypeTest(short nodeType)   
@@ -42,5 +64,32 @@ public class NodeTypeTest extends NodeTest {
     public short getMatchType() 
     {
         return nodeType;
+    }
+    
+    public String getText() 
+    {
+        switch (nodeType) 
+        {
+            case ELEMENT_NODE:
+                return "child()";
+            case ATTRIBUTE_NODE:
+                return "@*";
+            case NAMESPACE_NODE:
+                return "namespace()";
+            case DOCUMENT_NODE:
+                return "/";
+            case COMMENT_NODE:
+                return "comment()";
+            case TEXT_NODE:
+                return "text()";
+            case PROCESSING_INSTRUCTION_NODE:
+                return "processing-instruction()";
+        }
+        return "";
+    }
+    
+    public String toString()
+    {
+        return super.toString() + "[ type: " + nodeType + " ]";
     }
 }

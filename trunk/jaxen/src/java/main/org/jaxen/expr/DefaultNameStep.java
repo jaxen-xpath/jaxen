@@ -36,6 +36,16 @@ public class DefaultNameStep extends DefaultStep
     {
         return this.localName;
     }
+    
+    public boolean isMatchesAnyName() 
+    {
+        return matchesAnyName;
+    }
+
+    public boolean isMatchesAnyNamespace() 
+    {
+        return matchesAnyNamespace;
+    }
 
     public String getText()
     {

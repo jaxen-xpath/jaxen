@@ -47,4 +47,10 @@ public class AnyChildNodeTest extends NodeTest {
     {
         return ANY_NODE;
     }
+    
+    public String getText() 
+    {
+        return "*";
+    }
+    
 }

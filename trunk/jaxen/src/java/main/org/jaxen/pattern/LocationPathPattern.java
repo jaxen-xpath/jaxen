@@ -39,12 +39,37 @@ public class LocationPathPattern extends Pattern {
         
     /** The filters to match against */
     private List filters;
+
+    /** Whether this lcoation path is absolute or not */
+    private boolean absolute;
     
     
     public LocationPathPattern()   
     {
     }
 
+    public LocationPathPattern(NodeTest nodeTest)   
+    {
+        this.nodeTest = nodeTest;
+    }
+
+    public Pattern simplify()
+    {
+        if ( parentPattern != null )
+        {
+            parentPattern = parentPattern.simplify();
+        }
+        if ( ancestorPattern != null )
+        {
+            ancestorPattern = ancestorPattern.simplify();
+        }
+        if ( parentPattern == null && ancestorPattern == null && filters == null )
+        {
+            return nodeTest;
+        }
+        return this;
+    }
+    
     /** Adds a filter to this pattern
      */
     public void addFilter(FilterExpr filter) 
@@ -72,6 +97,12 @@ public class LocationPathPattern extends Pattern {
         this.ancestorPattern = ancestorPattern;
     }
     
+    /** Allows the NodeTest to be set
+     */
+    public void setNodeTest(NodeTest nodeTest)
+    {
+        this.nodeTest = nodeTest;
+    }
     
     /** @return true if the pattern matches the given node
       */
@@ -79,6 +110,10 @@ public class LocationPathPattern extends Pattern {
     {
         Navigator navigator = context.getNavigator();
         
+        if ( isAbsolute() )
+        {
+            node = navigator.getDocumentNode( node );
+        }
         if (! nodeTest.matches(node, context) )
         {
             return false;
@@ -116,7 +151,8 @@ public class LocationPathPattern extends Pattern {
         if (filters != null) 
         {
             // XXXX: filters aren't positional, so should we clone context?
-            for (Iterator iter = filters.iterator(); iter.hasNext(); ) {
+            for (Iterator iter = filters.iterator(); iter.hasNext(); ) 
+            {
                 FilterExpr filter = (FilterExpr) iter.next();
                 if ( ! filter.asBoolean( context ) )
                 {
@@ -136,5 +172,62 @@ public class LocationPathPattern extends Pattern {
     public short getMatchType() 
     {
         return nodeTest.getMatchType();
+    }
+    
+    public String getText() 
+    {
+        StringBuffer buffer = new StringBuffer();
+        if ( absolute )
+        {
+            buffer.append( "/" );
+        }
+        if (ancestorPattern != null) 
+        {
+            String text = ancestorPattern.getText();
+            if ( text.length() > 0 )
+            {
+                buffer.append( text );
+                buffer.append( "//" );
+            }
+        }
+        if (parentPattern != null) 
+        {
+            String text = parentPattern.getText();
+            if ( text.length() > 0 )
+            {
+                buffer.append( text );
+                buffer.append( "/" );
+            }
+        }
+        buffer.append( nodeTest.getText() );
+        
+        if ( filters != null ) 
+        {
+            buffer.append( "[" );
+            for (Iterator iter = filters.iterator(); iter.hasNext(); ) 
+            {
+                FilterExpr filter = (FilterExpr) iter.next();
+                buffer.append( filter.getText() );
+            }
+            buffer.append( "]" );
+        }        
+        return buffer.toString();
+    }
+    
+    public String toString()
+    {
+        return super.toString() + "[ absolute: " + absolute + " parent: " + parentPattern + " ancestor: " 
+            + ancestorPattern + " filters: " + filters + " nodeTest: " 
+            + nodeTest + " ]";
+    }
+    
+    public boolean isAbsolute()
+    {
+        return absolute;
+    }
+    
+    public void setAbsolute(boolean absolute)
+    {
+        this.absolute = absolute;
     }
 }

@@ -434,6 +434,12 @@
     </antcall>
   </target>
 
+  <target name="test.pattern">
+    <antcall target="test.internal">
+       <param name="test.packages" value="org/jaxen/pattern/**"/>
+    </antcall>
+  </target>
+
   <target name="test.internal" depends="compile-test">
     <mkdir dir="${build.dir}/test-results"/>
 

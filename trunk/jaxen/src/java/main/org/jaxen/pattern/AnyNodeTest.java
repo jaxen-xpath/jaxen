@@ -45,4 +45,9 @@ public class AnyNodeTest extends NodeTest {
     {
         return ANY_NODE;
     }
+    
+    public String getText() 
+    {
+        return "*";
+    }
 }

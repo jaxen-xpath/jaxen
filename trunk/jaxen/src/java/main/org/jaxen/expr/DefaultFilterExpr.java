@@ -9,10 +9,15 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.List;
 
-class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
+public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
 {
     private Expr expr;
     private PredicateSet predicates;
+
+    public DefaultFilterExpr()
+    {
+        this.predicates = new PredicateSet();
+    }
 
     public DefaultFilterExpr(Expr expr)
     {
@@ -42,19 +47,28 @@ class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
 
     public String toString()
     {
-        return "[(DefaultFilterExpr): " + getExpr() + "]";
+        return "[(DefaultFilterExpr): expr: " + expr + " predicates: " + predicates + " ]";
     }
 
     public String getText()
     {
-        return getExpr().getText();
+        String text = "";
+        if ( this.expr != null )
+        {
+            text = this.expr.getText();
+        }
+        text += predicates.getText();
+        return text;
     }
 
     public Expr simplify()
     {
         this.predicates.simplify();
 
-        this.expr = getExpr().simplify();
+        if ( this.expr != null ) 
+        {
+            this.expr = this.expr.simplify();
+        }
 
         if ( this.predicates.getPredicates().size() == 0 )
         {

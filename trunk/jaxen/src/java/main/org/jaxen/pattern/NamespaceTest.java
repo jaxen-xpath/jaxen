@@ -66,6 +66,16 @@ public class NamespaceTest extends NodeTest {
         return nodeType;
     }
     
+    public String getText() 
+    {
+        return prefix + ":";
+    }
+    
+    public String toString()
+    {
+        return super.toString() + "[ prefix: " + prefix + " type: " + nodeType + " ]";
+    }
+    
     /** Returns the URI of the current prefix or "" if no URI can be found
      */
     protected String getURI(Object node, Context context)
