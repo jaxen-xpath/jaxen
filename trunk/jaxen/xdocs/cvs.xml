@@ -16,11 +16,11 @@
       </p>
 
 <p>
-<tt>cvs -d:pserver:anonymous@cvs.werken.com:/cvsroot/jaxen login</tt>
+<tt>cvs -d:pserver:anonymous@cvs.codehaus.org:/cvsroot/jaxen login</tt>
 </p>
 
 <p>
-<tt>cvs -z3 -d:pserver:anonymous@cvs.werken.com:/cvsroot/jaxen co jaxen</tt>
+<tt>cvs -z3 -d:pserver:anonymous@cvs.codehaus.org:/cvsroot/jaxen co jaxen</tt>
 </p>
 
     <p>
@@ -41,7 +41,7 @@
 </p>
 
 <p>
-<tt>cvs -z3 -d:ext:name@cvs.werken.com:/cvsroot/jaxen co jaxen</tt>
+<tt>cvs -z3 -d:ext:name@cvs.codehaus.org:/cvsroot/jaxen co jaxen</tt>
 </p>
 
     </section>

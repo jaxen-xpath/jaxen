@@ -9,11 +9,12 @@
       <item name="The Werken Company" href="http://www.werken.com/"/>
     </links>
     <menu name="jaxen">
-      <item name="Overview"           href="/index.html"/>
-      <item name="FAQ"                href="/faq.html"/>
-      <item name="Releases"           href="/releases.html"/> 
-      <item name="CVS Access"         href="/cvs.html"/>
-      <item name="Status"             href="/status.html"/>
+      <item name="Overview"            href="/index.html"/>
+      <item name="FAQ"                 href="/faq.html"/>
+      <item name="Releases"            href="/releases.html"/> 
+      <item name="CVS Access"          href="/cvs.html"/>
+      <item name="Status"              href="/status.html"/>
+      <item name="Introduction Slides" href="/pdf/intro-slides.pdf"/>
     </menu>
   </body>
 

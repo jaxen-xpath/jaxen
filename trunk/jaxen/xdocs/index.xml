@@ -10,7 +10,11 @@
     
     <section name="News">
       <p>
-      Check out these new <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> comparing dom4j and Jaxen against Xerces and Xalan. 
+	Added the slidedeck from my <a href="/pdf/intro-slides.pdf">SD-West presentation</a>.
+      </p>
+
+      <p>
+      Check out these <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> comparing dom4j and Jaxen against Xerces and Xalan. 
       </p>
 
       <p>
