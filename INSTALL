@@ -19,13 +19,8 @@ you support.  Currently supported are:
         DOM         jaxen-dom.jar
         EXML        jaxen-exml.jar
 
-Jaxen itself depends upon the SAXPath parser, which is
-located in the lib/ directory and is named:
-
-        saxpath.jar
-
 Of course, you'll also need the supporting jars for your 
-object-model, just as jdom.jar, EXML.jar, or similar.
+object-model, just as jdom.jar, xom.jar, or similar.
 
 Included in the lib/ directory are the jars compiled
 against for this distribution.  
