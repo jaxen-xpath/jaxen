@@ -138,9 +138,9 @@
       <test select="/processing-instruction()" count="3"/>
       <test select="/comment()" count="1"/>
       <test select="comment()" count="1"/>
-      <test select="/child::node()/comment()" count="0"/>
-      <test select="/*/comment()" count="0"/>
-      <test select="//comment()" count="1"/>
+      <test select="/child::node()/comment()" count="2"/>
+      <test select="/*/comment()" count="2"/>
+      <test select="//comment()" count="3"/>
     </context>
   </document>
 
