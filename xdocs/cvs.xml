@@ -10,16 +10,18 @@
     <section name="Anonymous CVS Access">
 
       <p>
-      This project's SourceForge CVS repository can be checked out 
-      through anonymous (pserver) CVS with the following instruction set. 
+      This project's CVS repository can be checked out through anonymous (pserver) 
+      CVS with the following instruction set. 
       When prompted for a password for anonymous, simply press the Enter key.
       </p>
 
-<pre>
-    cvs -d:pserver:anonymous@cvs.jaxen.sourceforge.net:/cvsroot/jaxen login
- 
-    cvs -z3 -d:pserver:anonymous@cvs.jaxen.sourceforge.net:/cvsroot/jaxen co jaxen
-</pre>
+<p>
+<tt>cvs -d:pserver:anonymous@cvs.werken.com:/cvsroot/jaxen login</tt>
+</p>
+
+<p>
+<tt>cvs -z3 -d:pserver:anonymous@cvs.werken.com:/cvsroot/jaxen co jaxen</tt>
+</p>
 
     <p>
     Updates from within the module's directory do not need the -d parameter.
@@ -30,16 +32,17 @@
 
     <p>
     Only project developers can access the CVS tree via this method. 
-    SSH1 must be installed on your client machine. Substitute <b>modulename</b> 
-    and <b>developername</b> with the proper values. Enter your site password 
-    when prompted.
+    SSH1 must be installed on your client machine. Substitute <b>name</b> 
+    with the proper value. Enter your site password when prompted.
     </p>
 
-<pre>
-    export CVS_RSH=ssh
- 
-    cvs -z3 -d:ext:developername@cvs.jaxen.sourceforge.net:/cvsroot/jaxen co jaxen
-</pre>
+<p>
+<tt>export CVS_RSH=ssh</tt>
+</p>
+
+<p>
+<tt>cvs -z3 -d:ext:name@cvs.werken.com:/cvsroot/jaxen co jaxen</tt>
+</p>
 
     </section>
   </body>

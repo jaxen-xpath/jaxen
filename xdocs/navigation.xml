@@ -6,7 +6,6 @@
 
   <body>
     <links>
-      <item name="jaxen@SourceForge" href="http://www.sourceforge.net/projects/jaxen"/>
       <item name="The Werken Company" href="http://www.werken.com/"/>
     </links>
     <menu name="jaxen">
@@ -15,7 +14,6 @@
       <item name="Releases"           href="/releases.html"/> 
       <item name="CVS Access"         href="/cvs.html"/>
       <item name="Status"             href="/status.html"/>
-      <item name="jaxen@SourceForge"  href="http://www.sourceforge.net/projects/jaxen/"/>
     </menu>
   </body>
 

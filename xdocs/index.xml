@@ -9,27 +9,33 @@
   <body>
     
     <section name="News">
-      <ul>
-      <li>Check out these new <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> comparing dom4j and Jaxen against Xerces and Xalan. 
-      </li>
-      <li>Sun chooses Jaxen for the XPath engine 
+      <p>
+      Check out these new <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> comparing dom4j and Jaxen against Xerces and Xalan. 
+      </p>
+
+      <p>
+        Sun chooses Jaxen for the XPath engine 
         <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> and 
         <a href="http://java.sun.com/webservices/webservicespack.html">Web Services pack</a>
-      </li>
-      <li>
+      </p>
+
+      <p>
         Since the reference implementation of 
         <a href="http://developer.java.sun.com/developer/earlyAccess/xml/jaxm/">JAXM</a>
         is based on <a href="http://dom4j.org">dom4j</a> and Jaxen that means you can use
         Jaxen to query SOAP messages on the Java platform too!
-      </li>
-      <li>Check out Elliotte Rusty Harolds book chapter on XPath and 
+      </p>
+
+      <p>
+        Check out Elliotte Rusty Harolds book chapter on XPath and 
         <a href="http://cafeconleche.org/books/xmljava/chapters/ch16s06.html">Jaxen</a>
-      </li>
-      <li>Alex Chaffee wrote 
+      </p>
+
+      <p>
+        Alex Chaffee wrote 
         <a href="http://www.purpletech.com/xpe/">XPath Explorer</a> 
         to help visualize results of XPath expressions.
-      </li>
-      </ul>
+      </p>
     </section>
 
     <section name="Getting Started">
@@ -40,11 +46,6 @@
         <a href="faq.html">FAQ</a> or the online 
         <a href="apidocs/index.html">JavaDoc</a>.
       </p>      
-      
-      <p>Contributors are welcome to join this project. 
-        Once you've browsed the <a href="faq.html">FAQ</a> you could try
-        sending an email to one of the mailing lists below or check out the
-        <a href="http://sourceforge.net/projects/jaxen/">project page</a>.</p>
 
     </section>
 

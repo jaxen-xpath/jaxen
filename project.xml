@@ -10,7 +10,7 @@
   <organization>
     <name>The Werken Company</name>
     <url>http://www.werken.com/</url>
-    <logo>/images/werken.gif</logo>
+    <logo>http://images.werken.com/werken_large.gif</logo>
   </organization>
   <inceptionYear>2001</inceptionYear>
   <package>org.jaxen</package>
@@ -20,7 +20,7 @@
   <description>
   Jaxen is universal Java XPath engine.
   </description>
-  <logo>/images/logo.gif</logo>
+  <logo>http://images.werken.com/jaxen.gif</logo>
 
   <url>http://jaxen.org/</url>
 
