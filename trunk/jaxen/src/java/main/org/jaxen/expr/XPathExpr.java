@@ -8,7 +8,7 @@ import org.jaxen.JaxenException;
 import java.io.Serializable;
 import java.util.List;
 
-public interface XPath extends Serializable
+public interface XPathExpr extends Serializable
 {
     Expr getRootExpr();
     void setRootExpr(Expr rootExpr);

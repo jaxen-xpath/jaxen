@@ -10,9 +10,9 @@ import org.saxpath.Axis;
 
 public class DefaultXPathFactory implements XPathFactory
 {
-    public XPath createXPath(Expr rootExpr) throws JaxenException
+    public XPathExpr createXPath(Expr rootExpr) throws JaxenException
     {
-        return new DefaultXPath( rootExpr );
+        return new DefaultXPathExpr( rootExpr );
     }
 
     public PathExpr createPathExpr(FilterExpr filterExpr,

@@ -49,7 +49,7 @@ public class PatternParser
             reader.setXPathHandler( handler );
             reader.parse( text );
 
-            Pattern pattern = convertExpr( handler.getXPath().getRootExpr() );
+            Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
             return pattern.simplify();
         }
     }

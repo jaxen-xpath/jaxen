@@ -8,7 +8,7 @@ import org.saxpath.Operator;
 
 public interface XPathFactory extends Operator
 {
-    XPath createXPath(Expr rootExpr) throws JaxenException;
+    XPathExpr createXPath(Expr rootExpr) throws JaxenException;
 
     PathExpr createPathExpr(FilterExpr filterExpr,
                             LocationPath locationPath) throws JaxenException;

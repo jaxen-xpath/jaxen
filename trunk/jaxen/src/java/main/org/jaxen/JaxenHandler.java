@@ -4,7 +4,7 @@ package org.jaxen;
 
 import org.jaxen.expr.XPathFactory;
 import org.jaxen.expr.DefaultXPathFactory;
-import org.jaxen.expr.XPath;
+import org.jaxen.expr.XPathExpr;
 import org.jaxen.expr.LocationPath;
 import org.jaxen.expr.FilterExpr;
 import org.jaxen.expr.Expr;
@@ -29,8 +29,8 @@ import java.util.Iterator;
 public class JaxenHandler implements XPathHandler
 {
     private XPathFactory xpathFactory;
-    private XPath        xpath;
-    protected boolean    simplified;
+    private XPathExpr xpath;
+    protected boolean simplified;
 
     protected LinkedList stack;
 
@@ -71,9 +71,9 @@ public class JaxenHandler implements XPathHandler
      *
      *  @return The XPath expression tree.
      */
-    public XPath getXPath()
+    public XPathExpr getXPathExpr()
     {
-        return getXPath( true );
+        return getXPathExpr( true );
     }
 
     /** Retrieve the Jaxen XPath expression tree, optionally
@@ -86,7 +86,7 @@ public class JaxenHandler implements XPathHandler
      *
      *  @return The XPath expression tree.
      */
-    public XPath getXPath(boolean shouldSimplify)
+    public XPathExpr getXPathExpr(boolean shouldSimplify)
     {
         if ( shouldSimplify && ! this.simplified )
         {

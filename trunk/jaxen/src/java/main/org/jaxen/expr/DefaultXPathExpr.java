@@ -7,11 +7,11 @@ import org.jaxen.JaxenException;
 
 import java.util.List;
 
-public class DefaultXPath implements XPath
+public class DefaultXPathExpr implements XPathExpr
 {
     private Expr rootExpr;
 
-    public DefaultXPath(Expr rootExpr)
+    public DefaultXPathExpr(Expr rootExpr)
     {
         this.rootExpr = rootExpr;
     }

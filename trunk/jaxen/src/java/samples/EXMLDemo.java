@@ -2,10 +2,11 @@
 import electric.xml.Document;
 import electric.xml.ParseException;
 
-import org.jaxen.exml.XPath;
-
+import org.jaxen.XPath;
 import org.jaxen.XPathSyntaxException;
 import org.jaxen.JaxenException;
+
+import org.jaxen.exml.ElectricXPath;
 
 import java.util.List;
 import java.util.Iterator;
@@ -26,7 +27,7 @@ public class EXMLDemo
         {
             Document doc = new Document( new File( args[0] ) );
             
-            XPath xpath = new XPath( args[1] );
+            XPath xpath = new ElectricXPath( args[1] );
             
             List results = xpath.selectNodes( doc );
             

@@ -1,9 +1,20 @@
 
 package org.jaxen;
 
-import java.util.List;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.XPathExpr;
+import org.jaxen.function.BooleanFunction;
+import org.jaxen.function.StringFunction;
+import org.jaxen.function.NumberFunction;
+
+import org.saxpath.XPathReader;
+import org.saxpath.SAXPathException;
+import org.saxpath.helpers.XPathReaderFactory;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /** Base functionality for all concrete, implementation-specific XPaths.
  *
@@ -27,8 +38,11 @@ import java.util.Collections;
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
-public class BaseXPath extends JaXPath implements XPath
+public class BaseXPath implements XPath
 {
+    /** the parsed form of the xpath expression */
+    private XPathExpr xpath;
+    
     /** the support information and function, namespace and variable contexts */
     private ContextSupport support;
 
@@ -44,7 +58,28 @@ public class BaseXPath extends JaXPath implements XPath
      */
     protected BaseXPath(String xpathExpr) throws JaxenException
     {
-        super( xpathExpr );
+        try
+        {
+            XPathReader reader = XPathReaderFactory.createReader();
+            
+            JaxenHandler handler = new JaxenHandler();
+            
+            reader.setXPathHandler( handler );
+            
+            reader.parse( xpathExpr );
+
+            this.xpath = handler.getXPathExpr();
+        }
+        catch (org.saxpath.XPathSyntaxException e)
+        {
+            throw new org.jaxen.XPathSyntaxException( e.getXPath(),
+                                                      e.getPosition(),
+                                                      e.getMessage() );
+        }
+        catch (SAXPathException e)
+        {
+            throw new JaxenException( e );
+        }
     }
 
     /** Construct given an XPath expression string.
@@ -58,7 +93,7 @@ public class BaseXPath extends JaXPath implements XPath
      */
     public BaseXPath(String xpathExpr, Navigator navigator) throws JaxenException
     {
-        super( xpathExpr );
+        this( xpathExpr );
         this.navigator = navigator;
     }
 
@@ -90,14 +125,14 @@ public class BaseXPath extends JaXPath implements XPath
      *  references to entities within the source document.
      *  </p>
      *  
-     *  @param context The context for evaluation.
+     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
      *
      *  @return The result of evaluating the XPath expression
      *          against the supplied context.
      */
-    public Object evaluate(Object context) throws JaxenException
+    public Object evaluate(Object node) throws JaxenException
     {
-        List answer = selectNodes(context);
+        List answer = selectNodes(node);
 
         if ( answer != null
              &&
@@ -129,16 +164,18 @@ public class BaseXPath extends JaXPath implements XPath
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
      *
      *  @return The <code>node-set</code> of all items selected
      *          by this XPath expression.
      *
      *  @see #selectSingleNode
      */
-    public List selectNodes(Object context) throws JaxenException
+    public List selectNodes(Object node) throws JaxenException
     {
-        return jaSelectNodes( (Context) getContext( context ) );
+        Context context = getContext( node );
+        
+        return selectNodesForContext( context );
     }
 
     /** Select only the first node that is selectable by this XPath
@@ -152,26 +189,43 @@ public class BaseXPath extends JaXPath implements XPath
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
      *
      *  @return The <code>node-set</code> of all items selected
      *          by this XPath expression.
      *
      *  @see #selectNodes
      */
-    public Object selectSingleNode(Object context) throws JaxenException
+    public Object selectSingleNode(Object node) throws JaxenException
     {
-        return jaSelectSingleNode( (Context) getContext( context ) );
+        List results = selectNodes( node );
+
+        if ( results.isEmpty() )
+        {
+            return null;
+        }
+
+        return results.get( 0 );
     }
 
-    public String valueOf(Object context) throws JaxenException
+    public String valueOf(Object node) throws JaxenException
     {
-        return stringValueOf( (Context) getContext( context ) );
+        return stringValueOf( node );
     }
 
-    public String stringValueOf(Object context) throws JaxenException
+    public String stringValueOf(Object node) throws JaxenException
     {
-        return jaValueOf( (Context) getContext( context ) );
+        Context context = getContext( node );
+        
+        Object result = selectSingleNodeForContext( context );
+
+        if ( result == null )
+        {
+            return "";
+        }
+
+        return StringFunction.evaluate( result,
+                                        context.getNavigator() );
     }
 
     /** Retrieve a boolean-value interpretation of this XPath
@@ -186,13 +240,20 @@ public class BaseXPath extends JaXPath implements XPath
      *  return <code>true</code>.
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
      *
      *  @return The boolean-value interpretation of this expression.
      */
-    public boolean booleanValueOf(Object context) throws JaxenException
+    public boolean booleanValueOf(Object node) throws JaxenException
     {
-        return jaBooleanValueOf( (Context) getContext( context ) );
+        Context context = getContext( node );
+        
+        List result = selectNodesForContext( context );
+
+        if ( result == null || result.isEmpty() )
+            return false;
+
+        return BooleanFunction.evaluate( result.get(0), context.getNavigator() ).booleanValue();
     }
 
     /** Retrieve a number-value interpretation of this XPath
@@ -206,13 +267,23 @@ public class BaseXPath extends JaXPath implements XPath
      *  of the first node is returned.
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param node The node, nodeset or Context object for evaluation. This value can be null.
      *
      *  @return The number-value interpretation of this expression.
      */
-    public Number numberValueOf(Object context) throws JaxenException
+    public Number numberValueOf(Object node) throws JaxenException
     {
-        return jaNumberValueOf( (Context) getContext( context ) );
+        Context context = getContext( node );
+        
+        Object result = selectSingleNodeForContext( context );
+
+        if ( result == null )
+        {
+            return null;
+        }
+
+        return NumberFunction.evaluate( result,
+                                        context.getNavigator() );
     }
 
     // Helpers
@@ -406,6 +477,52 @@ public class BaseXPath extends JaXPath implements XPath
     }
     
     
+    /** Retrieve the root expression of the internal
+     *  compiled form of this XPath expression.
+     *
+     *  <p>
+     *  Internally, Jaxen maintains a form of Abstract Syntax
+     *  Tree (AST) to represent the structure of the XPath expression.
+     *  This is normally not required during normal consumer-grade
+     *  usage of Jaxen.  This method is provided for hard-core users
+     *  who wish to manipulate or inspect a tree-based version of
+     *  the expression.
+     *  </p>
+     *
+     *  @return The root of the AST of this expression.
+     */
+    public Expr getRootExpr() 
+    {
+        return xpath.getRootExpr();
+    }
+    
+    /** Return the normalized string of this XPath expression.
+     *
+     *  <p>
+     *  During parsing, the XPath expression is normalized,
+     *  removing abbreviations and other convenience notation.
+     *  This method returns the fully normalized representation
+     *  of the original expression.
+     *  </p>
+     *
+     *  @return The normalized XPath expression string.
+     */
+    public String toString()
+    {
+        return this.xpath.getText();
+    }
+
+    /** Returns the string version of this xpath.
+     *
+     *  @return The normalized XPath expression string.
+     *
+     *  @see #toString
+     */
+    public String debug()
+    {
+        return this.xpath.toString();
+    }
+    
     // ------------------------------------------------------------
     // ------------------------------------------------------------
     //     Implementation methods
@@ -416,29 +533,29 @@ public class BaseXPath extends JaXPath implements XPath
     /** Create a {@link Context} wrapper for the provided
      *  implementation-specific object.
      *
-     *  @param context The implementation-specific object 
+     *  @param node The implementation-specific object 
      *         to be used as the context.
      *
      *  @return A <code>Context</code> wrapper around the object.
      */
-    protected Context getContext(Object context)
+    protected Context getContext(Object node)
     {
-        if ( context instanceof Context )
+        if ( node instanceof Context )
         {
-            return (Context) context;
+            return (Context) node;
         }
 
         Context fullContext = new Context( getContextSupport() );
 
-        if ( context instanceof List )
+        if ( node instanceof List )
         {
-            fullContext.setNodeSet( (List) context );
+            fullContext.setNodeSet( (List) node );
         }
         else
         {
             List list = new ArrayList( 1 );
 
-            list.add( context );
+            list.add( node );
 
             fullContext.setNodeSet( list );
         }
@@ -513,4 +630,57 @@ public class BaseXPath extends JaXPath implements XPath
         return new SimpleVariableContext();
     }
     
+    /** Select all nodes that are selectable by this XPath
+     *  expression on the given Context object. 
+     *  If multiple nodes match, multiple nodes
+     *  will be returned.
+     *
+     *  <p>
+     *  <b>NOTE:</b> In most cases, nodes will be returned
+     *  in document-order, as defined by the XML Canonicalization
+     *  specification.  The exception occurs when using XPath
+     *  expressions involving the <code>union</code> operator
+     *  (denoted with the pipe '|' character).
+     *  </p>
+     *
+     *  @param context is the Context which gets evaluated.
+     *
+     *  @return The <code>node-set</code> of all items selected
+     *          by this XPath expression.
+     *
+     */
+    protected List selectNodesForContext(Context context) throws JaxenException
+    {
+        return this.xpath.asList( context );
+    }
+    
+    /** Select only the first node that is selectable by this XPath
+     *  expression.  If multiple nodes match, only one node will be
+     *  returned.
+     *
+     *  <b>NOTE:</b> In most cases, the selected node will be the first
+     *  selectable node in document-order, as defined by the XML Canonicalization
+     *  specification.  The exception occurs when using XPath
+     *  expressions involving the <code>union</code> operator
+     *  (denoted with the pipe '|' character).
+     *  </p>
+     *
+     *  @param context is the Context which gets evaluated.
+     *
+     *  @return The <code>node-set</code> of all items selected
+     *          by this XPath expression.
+     *
+     *  @see #selectNodesForContext
+     */
+    protected Object selectSingleNodeForContext(Context context) throws JaxenException
+    {
+        List results = selectNodesForContext( context );
+
+        if ( results.isEmpty() )
+        {
+            return null;
+        }
+
+        return results.get( 0 );
+    }
 }

@@ -4,12 +4,10 @@ package org.jaxen;
 /** Indicates an error during parsing of an XPath
  *  expression.
  *
- *  @see org.jaxen.dom4j.XPath XPath for dom4j
- *  @see org.jaxen.jdom.XPath  XPath for JDOM
- *  @see org.jaxen.dom.XPath   XPath for W3C DOM
- *  @see org.jaxen.exml.XPath  XPath for EXML
+ *  @see XPath
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
 public class XPathSyntaxException extends JaxenException
 {

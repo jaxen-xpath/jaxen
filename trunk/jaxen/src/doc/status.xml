@@ -30,6 +30,13 @@ XPath xpath = new ElectricXPath( "//foo" );
 XPath xpath = new JDOMXPath( "//foo" );
 </pre>
         </p>
+        <p>Some auxillary implementation detail changes, which shouldn't affect the public API in any way are as follows
+          <ul>
+            <li>The org.jaxen.JaXPath class has been removed. Now we have an org.jaxen.XPath interface its no longer required.</li>
+            <li>The org.jaxen.expr.XPath class has been renamed to org.jaxen.expr.XPathExpr to avoid confusion and to use a more consistent name.
+            Similarly the DefaultXPath class has been renamed to DefaultXPathExpr as well.</li>
+          </ul>
+        </p>
        </section>
        
       <section title="Jaxen 1.0 beta 8">

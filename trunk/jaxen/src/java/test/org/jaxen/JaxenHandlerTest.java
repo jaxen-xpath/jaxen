@@ -8,7 +8,7 @@ import org.saxpath.helpers.XPathReaderFactory;
 
 import org.jaxen.JaxenHandler;
 import org.jaxen.expr.DefaultXPathFactory;
-import org.jaxen.expr.XPath;
+import org.jaxen.expr.XPathExpr;
 
 
 import junit.framework.TestCase;
@@ -108,14 +108,14 @@ public class JaxenHandlerTest extends TestCase
 
                 reader.parse(path);
 
-                XPath xpath = handler.getXPath(false);
+                XPathExpr xpath = handler.getXPathExpr(false);
 
                 // System.err.println("-----------------");
                 // System.err.println( xpath.toString() );
                 // System.err.println("-----------------");
                 // System.err.println( xpath.getText() );
 
-                xpath = handler.getXPath();
+                xpath = handler.getXPathExpr();
 
                 // System.err.println("-----------------");
                 // System.err.println("-----------------");
@@ -155,7 +155,7 @@ public class JaxenHandlerTest extends TestCase
                 {                    
                     reader.parse(path);
 
-                    XPath xpath = handler.getXPath(false);
+                    XPathExpr xpath = handler.getXPathExpr(false);
 
                     System.err.println( "Parsed as: " + xpath );
                     
