@@ -63,7 +63,6 @@
 package org.jaxen.function;
 
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.jaxen.Context;
 import org.jaxen.Function;
@@ -96,33 +95,33 @@ public class NormalizeSpaceFunction implements Function
         String str = StringFunction.evaluate( strArg,
                                               nav );
 
-        if ( str.length() <= 1 )
+        char[] buffer = str.toCharArray();
+        int write = 0;
+        int lastWrite = 0;
+        boolean wroteOne = false;
+        int read = 0;
+        while (read < buffer.length)
         {
-            if (Character.isWhitespace(str.charAt(0)))
-            	return "";
+            if (Character.isWhitespace(buffer[read]))
+            {
+                if (wroteOne)
+                {
+                    buffer[write++] = ' ';
+                }
+                do
+                {
+                    read++;
+                }
+                while(read < buffer.length && Character.isWhitespace(buffer[read]));
+            }
             else
-            	return str;
+            {
+                buffer[write++] = buffer[read++];
+                wroteOne = true;
+                lastWrite = write;
+            }
         }
 
-        StringBuffer buffer = new StringBuffer();
-        boolean      first = true;
-
-        StringTokenizer tokenizer = new StringTokenizer(str);
-
-        while ( tokenizer.hasMoreTokens() )
-        {
-            if (first)
-            {
-                first = false;
-            }
-            else 
-            {
-                buffer.append(" ");
-            }
-
-            buffer.append(tokenizer.nextToken());
-        }
-
-        return buffer.toString();
+        return new String(buffer, 0, lastWrite);
     }
 }

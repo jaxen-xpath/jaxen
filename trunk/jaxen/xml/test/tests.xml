@@ -521,6 +521,8 @@
 	  <valueOf select="normalize-space(' a &#x0d; b &#x0a;  c  ')">a b c</valueOf>
 	  <!-- Next test case addresses issue JAXEN-22 -->
 	  <valueOf select="normalize-space(' ')"></valueOf>
+	  <!-- Next test case addresses issue JAXEN-29 -->
+	  <valueOf select="normalize-space('')"></valueOf>
 	</context>
   </document>
 
