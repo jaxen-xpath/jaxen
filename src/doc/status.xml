@@ -30,6 +30,8 @@ XPath xpath = new ElectricXPath( "//foo" );
 XPath xpath = new JDOMXPath( "//foo" );
 </pre>
         </p>
+        <p>The XPath.valueOf() method is now deprecated, XPath.stringValueOf() should be used instead.
+        </p>
         <p>Added new extension functions kindly provided by Mark Wilson. They are as follows...
           <ul>
             <li>uppercase() - converts the argument to an upper case string</li>
