@@ -252,7 +252,11 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
                     nsMap.put( ns.getPrefix(), new XPathNamespace(elem, ns) );
             }
 
-            current = current.getParent();
+            if (current.getParent() instanceof Element) {
+                current = (Element)current.getParent();
+            } else {
+                current = null;
+            }
         }
 
         nsMap.put( "xml", new XPathNamespace(elem, Namespace.XML_NAMESPACE) );
@@ -504,7 +508,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         }
         else if ( context instanceof Text )
         {
-            element = ((Text)context).getParent();
+            element = (Element)((Text)context).getParent();
         }
         else if ( context instanceof Attribute )
         {
@@ -516,11 +520,11 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         }
         else if ( context instanceof Comment )
         {
-            element = ((Comment)context).getParent();
+            element = (Element)((Comment)context).getParent();
         }
         else if ( context instanceof ProcessingInstruction )
         {
-            element = ((ProcessingInstruction)context).getParent();
+            element = (Element)((ProcessingInstruction)context).getParent();
         }
 
         if ( element != null )
