@@ -13,7 +13,6 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Comment;
 import org.jdom.Attribute;
-import org.jdom.Text;
 import org.jdom.CDATA;
 import org.jdom.ProcessingInstruction;
 import org.jdom.Namespace;
@@ -50,8 +49,6 @@ public class DocumentNavigator extends DefaultNavigator
     public boolean isText(Object obj)
     {
         return ( obj instanceof String
-                 ||
-                 obj instanceof Text
                  ||
                  obj instanceof CDATA );
     }
@@ -197,10 +194,6 @@ public class DocumentNavigator extends DefaultNavigator
         {
             parent = ((ProcessingInstruction)contextNode).getParent();
         }
-        else if ( contextNode instanceof Text )
-        {
-            parent = ((Text)contextNode).getParent();
-        }
         else if ( contextNode instanceof Comment )
         {
             parent = ((Comment)contextNode).getParent();
@@ -303,9 +296,9 @@ public class DocumentNavigator extends DefaultNavigator
 
     public String getTextStringValue(Object obj)
     {
-        if ( obj instanceof Text )
+        if ( obj instanceof String )
         {
-            return ((Text)obj).getValue();
+            return (String) obj;
         }
 
         if ( obj instanceof CDATA )
@@ -340,10 +333,6 @@ public class DocumentNavigator extends DefaultNavigator
             if ( each instanceof String )
             {
                 buf.append( each );
-            }
-            else if ( each instanceof Text )
-            {
-                buf.append( ((Text)each).getValue() );
             }
             else if ( each instanceof CDATA )
             {
@@ -393,10 +382,6 @@ public class DocumentNavigator extends DefaultNavigator
         else if ( context instanceof XPathNamespace )
         {
             element = ((XPathNamespace)context).getJDOMElement();
-        }
-        else if ( context instanceof Text )
-        {
-            element = ((Text)context).getParent();
         }
         else if ( context instanceof Comment )
         {
