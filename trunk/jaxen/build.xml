@@ -41,13 +41,13 @@
 
     <property name="Name"            value="Jaxen"/>
     <property name="name"            value="jaxen"/>
-    <property name="version"         value="1.0-RC-1"/>
-    <property name="current.version" value="1.0-RC-1"/>
+    <property name="version"         value="1.0-FCS"/>
+    <property name="current.version" value="1.0-FCS"/>
     <!-- <property name="current.version" value="1.0-beta-8"/> -->
     <property name="year"            value="2002"/>
 
     <property name="copyright.owner"  value="bob mcwhirter &amp; James Strachan"/>
-    <property name="copyright.year"   value="2001"/>
+    <property name="copyright.year"   value="2002"/>
     <property name="sourceforge.link" value="&lt;p&gt; &lt;img src='http://sourceforge.net/sflogo.php?group_id=16035' width='88' height='31' border='0' alt='SourceForge Logo' /&gt;"/>
 
     <echo message="----------- ${Name} ${version} [${year}] ------------"/>
