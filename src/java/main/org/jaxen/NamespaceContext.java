@@ -93,13 +93,13 @@ public interface NamespaceContext
      *
      *  <p>
      *  In XPath, there is no such thing as a 'default namespace'.
-     *  The empty prefix <b>always</b> resolves to the empty
+     *  The empty prefix <strong>always</strong> resolves to the empty
      *  namespace URI.
      *  </p>
      *
-     *  @param prefix The namespace prefix to resolve.
+     *  @param prefix the namespace prefix to resolve
      *
-     *  @return The namespace URI matching the prefix.
+     *  @return the namespace URI matching the prefix
      */
     String translateNamespacePrefixToUri(String prefix);
 }
