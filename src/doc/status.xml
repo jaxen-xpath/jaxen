@@ -5,6 +5,11 @@
     
     <section title="Change History">
       <section title="Changes in CVS since last release">
+        <p>Applied Elliotte's suggestions and moved the document() function 
+          into the org.jaxen.function.xslt package
+          to better reflect the fact that it is an XSLT function rather than XPath 1.0
+          as well as adding the lang() function to the list of known problems.
+          </p>
       </section>
       
       <section title="Jaxen 1.0 FCS">
@@ -88,6 +93,8 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
           since it would allow web developers to mix and match any
           all XML models.
         </li>
+        <li>The <code>format-number()</code> XSLT function is not yet implemented but would be useful. Any volunteers?
+        </li>
         <li>While already Jaxen is pretty 
         <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>
         but we are sure it could use some more tuning.
@@ -110,9 +117,9 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
 
     <section title="Known problems">    
       <ul>
-        <li>The <code>format-number()</code> XPath function needs implementing. Any volunteers?
+        <li>The <code>lang()</code> XPath function is not yet implemented. Any volunteers?
         </li>
-        <li><code>id()</code> function not implemented for most models.</li>
+        <li><code>id()</code> function not implemented for most models, though it works fine for W3C DOM.</li>
       </ul>
     </section>
 

@@ -60,15 +60,21 @@
  */
 
 
-package org.jaxen.function;
+package org.jaxen.function.xslt;
 
 import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.Navigator;
 import org.jaxen.FunctionCallException;
+import org.jaxen.function.StringFunction;
 
 import java.util.List;
 
+/**
+ * Implements the XSLT document() function
+ *
+ *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ */
 public class DocumentFunction implements Function
 {
 
