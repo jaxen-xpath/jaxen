@@ -453,8 +453,6 @@ public abstract class XPathTestBase extends TestCase
     {
         if ( this.contextSupport == null )
         {
-            Navigator nav = getNavigator();
-
             this.contextSupport = new ContextSupport( new SimpleNamespaceContext(),
                                                       XPathFunctionContext.getInstance(),
                                                       new SimpleVariableContext(),

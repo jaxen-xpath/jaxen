@@ -236,11 +236,7 @@ public class DefaultAbsoluteLocationPath extends DefaultLocationPath
 
 
 
-        List list = new ArrayList(1);
-
-
-
-        list.add( docNode );
+        List list = Collections.singletonList(docNode);
 
 
 
