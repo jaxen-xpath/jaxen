@@ -3,7 +3,7 @@ package org.jaxen.exml;
 
 import electric.xml.Element;
 
-/** An EXML declaration in the xpath data model.
+/** An EXML namespace declaration in the xpath data model.
  *
  * @author Erwin Bolwidt ( ejb @ klomp.org )
  */
@@ -14,6 +14,12 @@ public class Namespace
     private String prefix;
 
     private String uri;
+
+    public Namespace( String prefix, String uri )
+    {
+        this.prefix = prefix;
+        this.uri = uri;
+    }
 
     public Namespace( Element element, String prefix, String uri )
     {
@@ -30,6 +36,11 @@ public class Namespace
     public String getPrefix()
     {
         return prefix;
+    }
+
+    public void setElement(Element element)
+    {
+        this.element = element;
     }
 
     public Element getElement()
