@@ -37,12 +37,11 @@ public class SimpleNamespaceContext implements NamespaceContext
             Object namespace = namespaceAxis.next();
             String prefix = nav.getNamespacePrefix( namespace );
             String uri = nav.getNamespaceStringValue( namespace );
-            addNamespacePrefixTranslation( prefix, uri );
+            addNamespace( prefix, uri );
         }
-    }
+    }    
 
-    public void addNamespacePrefixTranslation(String prefix,
-                                              String namespaceUri)
+    public void addNamespace(String prefix, String namespaceUri)
     {
         this.namespaces.put( prefix,
                              namespaceUri );
