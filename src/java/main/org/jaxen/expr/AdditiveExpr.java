@@ -118,20 +118,8 @@
 
  */
 
-
-
-
-
-
-
 package org.jaxen.expr;
 
-
-
-public interface NumberExpr extends Expr
-
-{
-    public Number getNumber();
+public interface AdditiveExpr extends BinaryExpr{
+    public String getOperator();
 }
-
-

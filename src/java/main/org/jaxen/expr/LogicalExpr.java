@@ -117,21 +117,9 @@
  * $Id$
 
  */
-
-
-
-
-
-
-
 package org.jaxen.expr;
 
 
-
-public interface NumberExpr extends Expr
-
-{
-    public Number getNumber();
+public interface LogicalExpr extends BinaryExpr{
+    public String getOperator();
 }
-
-

@@ -117,21 +117,11 @@
  * $Id$
 
  */
-
-
-
-
-
-
-
 package org.jaxen.expr;
 
 
 
-public interface NumberExpr extends Expr
-
+public interface ProcessingInstructionNodeStep extends Step
 {
-    public Number getNumber();
+    public String getName();
 }
-
-
