@@ -183,11 +183,11 @@ public class XPathFunctionContext extends SimpleFunctionContext
                           new EvaluateFunction() );
         
         registerFunction( null,  // namespace URI
-                          "lowercase",
+                          "lower-case",
                           new LowerFunction() );
         
         registerFunction( null,  // namespace URI
-                          "uppercase",
+                          "upper-case",
                           new UpperFunction() );
         
         registerFunction( null,  // namespace URI
