@@ -67,6 +67,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 /** Tests the use of priority in the Pattern implementations.
   *
@@ -92,6 +93,8 @@ public class PriorityTest extends TestCase
     
     public void setUp()
     {
+        System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                            "" );
     }
 
     public void tearDown()
