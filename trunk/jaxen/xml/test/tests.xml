@@ -11,6 +11,18 @@
     </context>
   </document>
 
+  <!-- test evaluate() extension function -->
+  <document url="xml/evaluate.xml">
+    <context select="/">
+      <test select="evaluate('//jumps/*')" count="3"/>
+      <test select="evaluate('//jumps/object/dog')" count="1"/>
+      <test select="evaluate('//jumps/object')/evaluate" count="0"/>
+      <test select="evaluate('//jumps/object')/dog" count="1"/>
+      <test select="evaluate('//jumps/*')/dog" count="1"/>
+      <test select="//metatest[ evaluate(@select) = . ]" count="1"/>
+    </context>
+  </document>
+
   <!-- test sibling axes -->
 
   <document url="xml/axis.xml">
