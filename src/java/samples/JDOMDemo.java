@@ -3,10 +3,11 @@ import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import org.jaxen.jdom.XPath;
-
+import org.jaxen.XPath;
 import org.jaxen.XPathSyntaxException;
 import org.jaxen.JaxenException;
+
+import org.jaxen.jdom.JDOMXPath;
 
 import java.util.List;
 import java.util.Iterator;
@@ -27,7 +28,7 @@ public class JDOMDemo
             
             Document doc = builder.build( args[0] );
             
-            XPath xpath = new XPath( args[1] );
+            XPath xpath = new JDOMXPath( args[1] );
             
             List results = xpath.selectNodes( doc );
             

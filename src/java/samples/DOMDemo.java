@@ -5,8 +5,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import org.jaxen.dom.XPath;
+import org.jaxen.dom.DOMXPath;
 
+import org.jaxen.XPath;
 import org.jaxen.XPathSyntaxException;
 import org.jaxen.JaxenException;
 
@@ -31,7 +32,7 @@ public class DOMDemo
         
             Document doc = builder.parse( args[0] );
             
-            XPath xpath = new XPath( args[1] );
+            XPath xpath = new DOMXPath( args[1] );
 
             System.out.println( "XPah:h " + xpath );
             

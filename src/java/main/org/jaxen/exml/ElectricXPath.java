@@ -19,7 +19,7 @@ import org.jaxen.BaseXPath;
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://www.themindelectric.com/">TheMindElectric</a>  website
+ * @see <a href="http://www.themindelectric.com/">TheMindElectric website</a>  
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstachan@apache.org">James Strachan</a>

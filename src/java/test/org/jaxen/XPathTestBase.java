@@ -120,9 +120,9 @@ public abstract class XPathTestBase extends TestCase
 
         this.executionContext.push( xpathStr );
 
-        JaXPath xpath = new JaXPath( xpathStr );
+        BaseXPath xpath = new BaseXPath( xpathStr );
 
-        List list = xpath.jaSelectNodes( getContext( testDoc ) );
+        List list = xpath.selectNodes( getContext( testDoc ) );
 
         Iterator iter = list.iterator();
         Object   contextNode = null;
@@ -197,7 +197,7 @@ public abstract class XPathTestBase extends TestCase
 
         String count = test.attributeValue( "count" );
 
-        JaXPath xpath = new JaXPath( xpathStr );
+        BaseXPath xpath = new BaseXPath( xpathStr );
 
         if ( count != null )
         {
@@ -205,7 +205,7 @@ public abstract class XPathTestBase extends TestCase
 
             try
             {
-                List results = xpath.jaSelectNodes( getContext( context ) );
+                List results = xpath.selectNodes( getContext( context ) );
                 
                 log ( debug,
                       "    Expected Size :: " + expectedSize );
@@ -262,7 +262,7 @@ public abstract class XPathTestBase extends TestCase
                 
                 try
                 {
-                    Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
+                    Object newContext = xpath.selectSingleNode( getContext( context ) );
                     
                     log ( debug,
                           "    New Context :: " + abbreviate( newContext ) );
@@ -275,9 +275,9 @@ public abstract class XPathTestBase extends TestCase
                     
                     this.executionContext.push( valueOfXPathStr );
                     
-                    JaXPath valueOfXPath = new JaXPath( valueOfXPathStr );
+                    BaseXPath valueOfXPath = new BaseXPath( valueOfXPathStr );
                     
-                    Object node = valueOfXPath.jaSelectSingleNode( getContext( newContext ) );
+                    Object node = valueOfXPath.selectSingleNode( getContext( newContext ) );
                 
                     String expected = valueOf.getText();
                     String result =   StringFunction.evaluate( node,
@@ -334,13 +334,13 @@ public abstract class XPathTestBase extends TestCase
             }
         }
 
-        JaXPath xpath = new JaXPath( xpathStr );
+        BaseXPath xpath = new BaseXPath( xpathStr );
 
         this.executionContext.push( xpathStr );
 
         try
         {
-            Object node = xpath.jaSelectSingleNode( getContext( context ) );
+            Object node = xpath.selectSingleNode( getContext( context ) );
             
             String expected = valueOf.getText();
             String result = StringFunction.evaluate( node,

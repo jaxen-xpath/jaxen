@@ -3,10 +3,11 @@ import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import org.jaxen.dom4j.XPath;
-
+import org.jaxen.XPath;
 import org.jaxen.XPathSyntaxException;
 import org.jaxen.JaxenException;
+
+import org.jaxen.dom4j.Dom4jXPath;
 
 import java.util.List;
 import java.util.Iterator;
@@ -27,7 +28,7 @@ public class Dom4jDemo
             
             Document doc = reader.read( args[0] );
             
-            XPath xpath = new XPath( args[1] );
+            XPath xpath = new Dom4jXPath( args[1] );
             
             List results = xpath.selectNodes( doc );
 

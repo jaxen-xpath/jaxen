@@ -9,6 +9,14 @@ import java.util.Collections;
  * Defines the interface to an object which represents an XPath 1.0 expression which
  * can be evaluated against a variety of different XML object models.
  *
+ * <p>
+ *  Most of the evaluation methods take a context object. This is typically a
+ *  node or node set object (which is typically a List of node objects) or 
+ *  a Jaxen Context object.
+ *  A null context is allowed, meaning that 
+ *  there is no XML nodes on which to evaluate.
+ * </p>
+ *
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
  *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
  *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
@@ -47,7 +55,7 @@ public interface XPath {
      *  references to entities within the source document.
      *  </p>
      *  
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The result of evaluating the XPath expression
      *          against the supplied context.
@@ -66,7 +74,7 @@ public interface XPath {
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The <code>node-set</code> of all items selected
      *          by this XPath expression.
@@ -86,7 +94,7 @@ public interface XPath {
      *  (denoted with the pipe '|' character).
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The <code>node-set</code> of all items selected
      *          by this XPath expression.
@@ -108,7 +116,7 @@ public interface XPath {
      *  of the first node in the node set..
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The string-value interpretation of this expression.
      *
@@ -128,7 +136,7 @@ public interface XPath {
      *  of the first node in the node set..
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The string-value interpretation of this expression.
      */
@@ -147,7 +155,7 @@ public interface XPath {
      *  return <code>true</code>.
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The boolean-value interpretation of this expression.
      */
@@ -165,7 +173,7 @@ public interface XPath {
      *  of the first node is returned.
      *  </p>
      *
-     *  @param context The context for evaluation.
+     *  @param The node, nodeset or Context object for evaluation. This value can be null
      *
      *  @return The number-value interpretation of this expression.
      */
