@@ -96,12 +96,14 @@
   <document url="xml/moreover.xml">
     <context select="/">
       <test select="/child::node()" count="1"/>
-
       <test select="/*" count="1"/>
 
+      <test select="/*/article" count="20"/>
+      <test select="//article" count="20"/>
       <test select="/*/*[@code]" count="20"/>
 
       <test select="/moreovernews/article[@code='13563275']" count="1"/>
+
       <test select="/moreovernews/article[@code='13563275']">
         <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
       </test>
