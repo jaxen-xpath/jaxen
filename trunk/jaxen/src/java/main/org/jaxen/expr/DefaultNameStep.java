@@ -95,7 +95,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
     private boolean matchesAnyName;
 
     /** Quick flag denoting if we have a namespace prefix **/
-    boolean hasPrefix;
+    private boolean hasPrefix;
 
     /**
      * Constructor.
