@@ -249,6 +249,16 @@
     </context>
   </document>
 
+  <!-- test document function -->
+  <document url="xml/text.xml">
+    <context select="/">
+      <test select="document('xml/web.xml')" count="1">
+        <valueOf select="/web-app/servlet[1]/servlet-name">snoop</valueOf>
+      </test>
+      <valueOf select="document('xml/web.xml')/web-app/servlet[1]/servlet-name">snoop</valueOf>
+    </context>
+  </document>
+
   <document url="xml/testNamespaces.xml">
     <context select="/">
               <!-- the root is not an element, so no namespaces -->
