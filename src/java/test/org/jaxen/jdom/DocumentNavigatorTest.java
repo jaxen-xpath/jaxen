@@ -62,12 +62,8 @@
 
 package org.jaxen.jdom;
 
-import org.jaxen.XPathTestBase;
-
-import junit.framework.TestCase;
-
 import org.jaxen.Navigator;
-
+import org.jaxen.XPathTestBase;
 import org.jdom.input.SAXBuilder;
 
 public class DocumentNavigatorTest extends XPathTestBase

@@ -62,19 +62,15 @@
 
 package org.jaxen.dom;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import junit.framework.Test;
-import junit.textui.TestRunner;
-
 import org.jaxen.Navigator;
 import org.jaxen.XPathTestBase;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 public class DocumentNavigatorTest extends XPathTestBase
 {    

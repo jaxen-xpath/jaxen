@@ -65,10 +65,7 @@ package org.jaxen.pattern;
 
 import junit.framework.TestCase;
 
-import org.jaxen.pattern.Pattern;
-import org.jaxen.pattern.PatternParser;
-
-import org.saxpath.XPathSyntaxException;
+import org.jaxen.saxpath.XPathSyntaxException;
 
 public class PatternHandlerTest extends TestCase
 {

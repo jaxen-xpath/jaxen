@@ -62,21 +62,19 @@
 
 package org.jaxen;
 
-import org.jaxen.function.StringFunction;
-
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
+
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.Attribute;
 import org.dom4j.Namespace;
 import org.dom4j.io.SAXReader;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Stack;
+import org.jaxen.function.StringFunction;
 
 public abstract class XPathTestBase extends TestCase
 {

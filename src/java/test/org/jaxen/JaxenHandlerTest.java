@@ -63,16 +63,13 @@
 
 package org.jaxen;
 
-import org.saxpath.XPathReader;
-import org.saxpath.XPathSyntaxException;
-import org.saxpath.helpers.XPathReaderFactory;
+import junit.framework.TestCase;
 
-import org.jaxen.JaxenHandler;
 import org.jaxen.expr.DefaultXPathFactory;
 import org.jaxen.expr.XPathExpr;
-
-
-import junit.framework.TestCase;
+import org.jaxen.saxpath.XPathReader;
+import org.jaxen.saxpath.XPathSyntaxException;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 public class JaxenHandlerTest extends TestCase
 {
