@@ -171,6 +171,10 @@
       <test select="../../descendant::ACT" count="5"/>
       <valueOf select="count(ancestor::*)">3</valueOf>
       <valueOf select="count(ancestor::PLAY)">1</valueOf>
+      <valueOf select="count(ancestor-or-self::*)">1</valueOf>
+      <valueOf select="count(ancestor-or-self::PLAY)">1</valueOf>
+      <valueOf select="count(descendant::*)+1">533</valueOf>
+      <valueOf select="count(descendant::SPEAKER)+1">533</valueOf>
       <valueOf select="5+count(ancestor::*)-1">7</valueOf>
     </context>
   </document>
