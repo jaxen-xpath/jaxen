@@ -116,8 +116,9 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
         
         if ( results instanceof List )
         {
-            getPredicateSet().evaluatePredicates( (List) results,
-                                                  context.getContextSupport() );
+            List newresults = getPredicateSet().evaluatePredicates( (List) results,
+								    context.getContextSupport() );
+	    results = newresults;
         }
 
         return results;
