@@ -62,9 +62,6 @@
 
 package org.jaxen.saxpath.base;
 
-import java.util.Iterator;
-import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -78,7 +75,6 @@ import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.XPathSyntaxException;
 import org.jaxen.saxpath.conformance.ConformanceXPathHandler;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 public class XPathReaderTest extends TestCase
 {
@@ -262,7 +258,57 @@ public class XPathReaderTest extends TestCase
         }
     }
 
+    public void testStringOrNumber()
+    {
+
+        try
+        {
+            XPath xpath = new DOMXPath( "\"test\" | 5" );
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+        
+            Document doc = builder.parse( "xml/basic.xml" );
+
+            xpath.selectNodes( doc );
+            fail( "Should have thrown XPathSyntaxException for \"test\" | 5");
+        }
+        catch( JaxenException e )
+        {
+            assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
+        }
+    }    
     
+    public void testStringOrString()
+    {
+
+        try
+        {
+            XPath xpath = new DOMXPath( "\"test\" | \"festival\"" );
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+        
+            Document doc = builder.parse( "xml/basic.xml" );
+
+            xpath.selectNodes( doc );
+            fail( "Should have thrown XPathSyntaxException for \"test\" | 5");
+        }
+        catch( JaxenException e )
+        {
+            assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
+        }
+        catch( Exception e )
+        {
+            fail( e.getMessage() );
+        }
+    }    
     
     public void testValidAxis()
     {
