@@ -167,4 +167,9 @@ public abstract class DefaultNavigator implements Navigator
         }
         return null;
     }
+
+    public Object getDocument(String url)
+    {
+        return null;
+    }
 }
