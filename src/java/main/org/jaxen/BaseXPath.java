@@ -17,6 +17,24 @@ public abstract class BaseXPath extends JaXPath
         super( xpathExpr );
     }
 
+    /** Returns a String or Number or Boolean if this XPath expression
+     * results in a primitive value being returned or a List of Nodes is
+     * returned.
+     */     
+    public Object evaluate(Object context) throws JaxenException
+    {
+        List answer = selectNodes(context);
+        if ( answer != null && answer.size() == 1) {
+            Object first = answer.get(0);
+            if ( first instanceof String || first instanceof Number || first instanceof Boolean ) 
+            {
+                return first;
+            }
+            // should we return first if the expression results in one node?
+        }
+        return answer;
+    }
+    
     public List selectNodes(Object context) throws JaxenException
     {
         return jaSelectNodes( (Context) getContext( context ) );
