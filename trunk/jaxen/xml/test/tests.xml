@@ -7,12 +7,18 @@
       <test exception="true" select="/numbers numbers" count="0"/>
         <!-- invalid xpath, jaxen-34 -->
       <test exception="true" select="/a/b[c > d]efg" count="0"/>
+        <!-- invalid xpath, jaxen-27 -->
+      <test exception="true" select="/inv/child::" count="0"/>
         <!-- invalid xpath, jaxen-26 -->
       <test exception="true" select="/invoice/@test[abcd" count="0"/>
       <test exception="true" select="/invoice/@test[abcd > x" count="0"/>
 
         <!-- unterminated string -->
       <test exception="true" select="string-length('a" count="0"/>
+      <!-- various edge cases where code threw no exception -->
+      <test exception="true" select="/descendant::()" count="0"/>
+      <test exception="true" select="(1 + 1" count="0"/>
+
     </context>
   </document>
 
