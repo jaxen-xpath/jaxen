@@ -84,7 +84,15 @@ public class DocumentNavigator extends DefaultNavigator
         if ( answer == null )
         {
             answer = node.getNodeName();
-        }        
+        }    
+/*        
+        // hack to fix getLocalName() not working
+        int idx = answer.indexOf(':');
+        if ( idx >= 0 ) 
+        {
+            answer = answer.substring(idx+1);
+        }
+*/        
         return answer;
     }
 
@@ -93,7 +101,11 @@ public class DocumentNavigator extends DefaultNavigator
         Node node = (Node) obj;
 
         String answer = node.getNamespaceURI();
-        return ( answer == null ) ? "" : answer;        
+        if ( answer == null )
+        {
+            answer = "";
+        }
+        return answer;        
     }
 
     public String getElementQName(Object obj)
@@ -246,7 +258,7 @@ public class DocumentNavigator extends DefaultNavigator
         {
             answer = "";
         }
-        return "";
+        return answer;
     }
 
     public String getCommentStringValue(Object obj)
@@ -258,9 +270,18 @@ public class DocumentNavigator extends DefaultNavigator
     
     public String translateNamespacePrefixToUri(String prefix, Object context)
     {
+        if ( prefix == null || prefix.length() == 0 )  
+        {
+            prefix = "xmlns";
+        }
+        else 
+        {
+            prefix = "xmlns:" + prefix;
+        }
+            
         if ( context instanceof Element ) 
         {
-            return walkHierachyForURI( "xmlns:" + prefix, (Element) context );
+            return walkHierachyForURI( prefix, (Element) context );
         }
         else if ( context instanceof Node ) 
         {
@@ -268,7 +289,7 @@ public class DocumentNavigator extends DefaultNavigator
             Node parent = node.getParentNode();
             if ( parent instanceof Element )
             {
-                return walkHierachyForURI( "xmlns:" + prefix, (Element) parent);
+                return walkHierachyForURI( prefix, (Element) parent);
             }
         }
         return null;        

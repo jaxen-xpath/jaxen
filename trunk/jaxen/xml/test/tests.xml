@@ -202,6 +202,7 @@
   <document url="xml/namespaces.xml">
     <context select="/">
       <test select="/*" count="1"/>
+      <test select="/foo:a" count="1"/>
       <test select="/foo:a/b" count="1"/>
       <test select="/foo:a/*:f" count="1"/>
       <test select="/foo:a/bar:f" count="1"/>

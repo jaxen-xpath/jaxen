@@ -58,6 +58,8 @@ public abstract class XPathTestBase extends TestCase
 
     public void testXPaths() throws Exception
     {
+        log( "Loading test file: " + TESTS_XML );
+        
         Document doc = xmlReader.read( TESTS_XML );
 
         Element root = doc.getRootElement();
