@@ -76,6 +76,7 @@ import org.jaxen.XPath;
 import org.jaxen.saxpath.SAXPathException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class XPathTest extends TestCase
 {
@@ -113,6 +114,26 @@ public class XPathTest extends TestCase
         
         Number value = xpath.numberValueOf(doc);
         assertEquals(0, value.intValue());
+        
+    }
+
+    // Jaxen-54
+    public void testUpdateDOMNodesReturnedBySelectNodes() 
+      throws ParserConfigurationException, JaxenException {
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        root.appendChild(doc.createComment("data"));
+        
+        DOMXPath xpath = new DOMXPath( "//comment()" );
+        
+        List results = xpath.selectNodes(doc);
+        Node backroot = (Node) results.get(0);
+        backroot.setNodeValue("test");
+        assertEquals("test", backroot.getNodeValue());
         
     }
 
