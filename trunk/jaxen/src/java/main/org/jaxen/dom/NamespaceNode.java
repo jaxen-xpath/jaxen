@@ -78,7 +78,7 @@ public class NamespaceNode implements Node
      * @param parent The DOM node to which the Namespace is attached.
      * @param uri The Namespace URI as a string.
      */
-    NamespaceNode (Node parent, String name, String value)
+    public NamespaceNode (Node parent, String name, String value)
     {
 	this.parent = parent;
 	this.name = name;
