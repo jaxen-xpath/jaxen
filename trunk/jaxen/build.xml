@@ -27,6 +27,10 @@
       <include name="org/jaxen/exml/*"/>
    </patternset>
 
+   <patternset id="jaxen.samples">
+      <include name="*"/>
+   </patternset>
+
   <!-- =================================================================== -->
   <!-- Initialization target                                               -->
   <!-- =================================================================== -->
@@ -74,10 +78,12 @@
     <property name="build.src"      value="./build/src"/>
     <property name="build.src.main" value="./build/src/main"/>
     <property name="build.src.test" value="./build/src/test"/>
+    <property name="build.src.samples" value="./build/src/samples"/>
 
     <property name="build.dest"      value="./build/classes"/>
     <property name="build.dest.main" value="./build/classes/main"/>
     <property name="build.dest.test" value="./build/classes/test"/>
+    <property name="build.dest.samples" value="./build/classes/samples"/>
 
     <property name="build.doc"  value="./build/doc"/>
 
@@ -179,9 +185,11 @@
     <mkdir dir="${build.dest}"/>
     <mkdir dir="${build.dest.main}"/>
     <mkdir dir="${build.dest.test}"/>
+    <mkdir dir="${build.dest.samples}"/>
     <mkdir dir="${build.src}"/>
     <mkdir dir="${build.src.main}"/>
     <mkdir dir="${build.src.test}"/>
+    <mkdir dir="${build.src.samples}"/>
   </target>
 
   <!-- =================================================================== -->
@@ -238,6 +246,18 @@
            deprecation="${deprecation}">
         <src path="${build.src.test}"/>
         <classpath path="${build.dest.test}"/>
+        <classpath path="${build.dest.main}"/>
+        <patternset refid="jaxen.${object.model}"/>
+    </javac>
+  </target>
+
+  <target name="internal.compile.samples">
+    <javac destdir="${build.dest.samples}"
+           debug="${debug}"
+           optimize="${optimize}"
+           deprecation="${deprecation}">
+        <src path="${build.src.samples}"/>
+        <classpath path="${build.dest.samples}"/>
         <classpath path="${build.dest.main}"/>
         <patternset refid="jaxen.${object.model}"/>
     </javac>
@@ -788,13 +808,29 @@
   <!-- Samples targets                                                      -->
   <!-- =================================================================== -->
 
-  <!--
+  <target name="prepare.samples" 
+          depends="prepare">
+    <copy todir="${build.src.samples}">
+      <fileset dir="${samples.dir}">
+         <patternset refid="jaxen.samples"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.samples" 
+          depends="compile.all,prepare.samples">
+    <antcall target="internal.compile.samples">
+      <param name="object.model" value="samples"/> 
+    </antcall>
+  </target>
+
   <target name="demo.jdom" depends="samples">
     <java classname="JDOMDemo" fork="true">
       <arg value="xml/basic.xml"/>
       <arg value="/foo/bar/baz"/>
       <classpath>
-          <pathelement location="${build.dest}"/>
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
           <pathelement path="${java.class.path}"/>
       </classpath>
@@ -806,7 +842,8 @@
       <arg value="xml/basic.xml"/>
       <arg value="/foo/bar/baz"/>
       <classpath>
-          <pathelement location="${build.dest}"/>
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
           <pathelement path="${java.class.path}"/> 
       </classpath>
@@ -818,7 +855,8 @@
       <arg value="xml/basic.xml"/>
       <arg value="/foo/bar/baz"/>
       <classpath>
-          <pathelement location="${build.dest}"/>
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
           <pathelement path="${java.class.path}"/>
       </classpath>
@@ -830,14 +868,13 @@
       <arg value="xml/basic.xml"/>
       <arg value="/foo/bar/baz"/>
       <classpath>
-          <pathelement location="${build.dest}"/>
+          <pathelement location="${build.dest.main}"/>
+          <pathelement location="${build.dest.samples}"/>
           <pathelement location="${lib.dir}/saxpath.jar"/>
           <pathelement path="${java.class.path}"/> 
       </classpath>
     </java>
   </target>
-  -->
-
 
   <!-- =================================================================== -->
   <!-- Helper targets                                                      -->
@@ -863,6 +900,9 @@
 
   <target name="test" 
           depends="test.all"/>
+
+  <target name="samples" 
+          depends="compile.samples"/>
 
   <target name="config" 
           depends="display.config"/>
