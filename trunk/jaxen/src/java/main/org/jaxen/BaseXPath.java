@@ -19,21 +19,39 @@ import java.util.Collections;
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
-public abstract class BaseXPath extends JaXPath
+public class BaseXPath extends JaXPath
 {
     /** the support information and function, namespace and variable contexts */
     private ContextSupport support;
+
+    /** the implementation-specific Navigator for retrieving XML nodes **/
+    private Navigator navigator;
     
-    /** Construct given an XPath expression string.
+    /** Construct given an XPath expression string. 
      *
      *  @param xpathExpr The XPath expression.
      *
      *  @throws JaxenException if there is a syntax error while
      *          parsing the expression.
      */
-    public BaseXPath(String xpathExpr) throws JaxenException
+    protected BaseXPath(String xpathExpr) throws JaxenException
     {
         super( xpathExpr );
+    }
+
+    /** Construct given an XPath expression string.
+     *
+     *  @param xpathExpr The XPath expression.
+     *
+     *  @param navigator the XML navigator to use
+     *
+     *  @throws JaxenException if there is a syntax error while
+     *          parsing the expression.
+     */
+    public BaseXPath(String xpathExpr, Navigator navigator) throws JaxenException
+    {
+        super( xpathExpr );
+        this.navigator = navigator;
     }
 
     /** Evaluate this XPath against a given context.
@@ -442,7 +460,10 @@ public abstract class BaseXPath extends JaXPath
      *
      *  @return The implementation-specific <code>Navigator</code>.
      */
-    public abstract Navigator getNavigator();
+    public Navigator getNavigator()
+    {
+	return navigator;
+    }
     
     
 

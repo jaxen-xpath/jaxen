@@ -36,21 +36,6 @@ public class XPath extends BaseXPath
      */
     public XPath(String xpathExpr) throws JaxenException
     {
-        super( xpathExpr );
-    }
-
-    /** Retrieve the EXML-specific {@link Navigator} 
-     *  for us in evaluating this XPath expression.
-     *
-     * <p>
-     * This method is used internally by the superclass to get
-     * the right kind of navigator.
-     * </p>
-     *
-     *  @return The implementation-specific <code>Navigator</code>.
-     */
-    public Navigator getNavigator()
-    {
-        return DocumentNavigator.getInstance();
+        super( xpathExpr, DocumentNavigator.getInstance() );
     }
 } 
