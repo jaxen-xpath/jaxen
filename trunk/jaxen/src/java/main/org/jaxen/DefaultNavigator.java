@@ -168,7 +168,7 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
 
-    public Object getDocument(String url)
+    public Object getDocument(String url) throws FunctionCallException
     {
         return null;
     }

@@ -161,7 +161,13 @@ public interface Navigator
      */
     Iterator getAncestorOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException;
 
-    Object getDocument(String url);
+    /** Loads a document from the given URI
+     *
+     * @param uri is the URI of the document to load
+     *
+     * @throws FunctionCallException if the document could not be loaded
+     */
+    Object getDocument(String url) throws FunctionCallException;
 
     Object getDocumentNode(Object contextNode);
     

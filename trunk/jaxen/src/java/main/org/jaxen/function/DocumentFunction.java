@@ -29,7 +29,7 @@ public class DocumentFunction implements Function
     }
 
     public static Object evaluate(String url,
-                                  Navigator nav)
+                                  Navigator nav) throws FunctionCallException
     {
         return nav.getDocument( url );
     }
