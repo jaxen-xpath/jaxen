@@ -324,13 +324,24 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         HashSet prefixes = new HashSet();
         for ( Element context = element; context != null; context = context.getParent() ) {
             List declaredNS = context.declaredNamespaces();
+            declaredNS.add(context.getNamespace());
+
+            for ( Iterator iter = context.attributes().iterator(); iter.hasNext(); )
+            {
+                Attribute attr = (Attribute) iter.next();
+                declaredNS.add(attr.getNamespace());
+            }
+
             for ( Iterator iter = declaredNS.iterator(); iter.hasNext(); )
             {
                 Namespace namespace = (Namespace) iter.next();
-                String prefix = namespace.getPrefix();
-                if ( ! prefixes.contains( prefix ) ) {
-                    prefixes.add( prefix );
-                    nsList.add( namespace.asXPathResult( element ) );
+                if (namespace != Namespace.NO_NAMESPACE)
+                {
+                    String prefix = namespace.getPrefix();
+                    if ( ! prefixes.contains( prefix ) ) {
+                        prefixes.add( prefix );
+                        nsList.add( namespace.asXPathResult( element ) );
+                    }
                 }
             }
         }
