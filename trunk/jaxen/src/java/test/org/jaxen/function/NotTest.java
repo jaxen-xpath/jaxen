@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 Elliotte Rusty Harold
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,8 +70,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
+import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
-import org.jaxen.XPath;
+import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -80,7 +81,7 @@ import org.xml.sax.SAXException;
  * @author Elliotte Rusty Harold
  *
  */
-public class LocalNameTest extends TestCase {
+public class NotTest extends TestCase {
 
     private Document doc;
     
@@ -89,46 +90,96 @@ public class LocalNameTest extends TestCase {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
-        doc = builder.parse( "xml/basic.xml" );
+        doc = builder.newDocument();
+        doc.appendChild(doc.createElement("root"));
     }
 
 
-    public LocalNameTest(String name) {
+    public NotTest(String name) {
         super(name);
     }
 
-    public void testLocalNameOfNumber()
-    {
-        try
-        {
-            XPath xpath = new DOMXPath( "local-name(3)" );
-            xpath.selectNodes( doc );
-            fail("local-name of non-node-set");
-       }
-       catch (FunctionCallException e) 
-        {
-           assertEquals("The argument to the local-name function must be a node-set", e.getMessage());
-        }
-       catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
-        }
+    public void testZeroIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not(0)");
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.TRUE, result.get(0));
+        
     }    
 
-    public void testLocalNameNoArguments()
-    {
-        try
-        {
-            XPath xpath = new DOMXPath( "local-name()" );
-            List results = xpath.selectNodes( doc );
-            assertEquals("", results.get(0));
-       }
-       catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
+    public void testOneIsTrue() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not(1)");
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.FALSE, result.get(0));
+        
+    }    
+
+    public void testEmptyStringIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not('')");
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.TRUE, result.get(0));
+        
+    }    
+
+    public void testNaNIsFalse() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not(0 div 0)");
+        Object result = xpath.evaluate(null);
+        assertEquals(Boolean.TRUE, result);
+        
+    }    
+
+    public void testNonEmptyStringIsTrue() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not('false')");
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        assertEquals(Boolean.FALSE, result.get(0));
+        
+    }    
+
+    public void testNotFunctionRequiresOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not()");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed not function with no arguments");
         }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+
+    public void testNotFunctionRequiresExactlyOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("not('', '')");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed boolean function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
     }    
 
 }
