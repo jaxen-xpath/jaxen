@@ -105,9 +105,14 @@ public class DefaultNameStep extends DefaultStep
         }
         else
         {
-            String myPrefix = getPrefix();            
-            String myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
-
+            String myPrefix = getPrefix();         
+            String myUri = null;
+            
+            if ( myPrefix != null && myPrefix.length() > 0 ) 
+            {
+                myUri = nav.translateNamespacePrefixToUri( myPrefix, node );
+            }
+            
             if ( myUri == null ) 
             {
                 myUri = contextSupport.translateNamespacePrefixToUri( myPrefix );
@@ -132,6 +137,8 @@ public class DefaultNameStep extends DefaultStep
      * Note that we may wish to consider null being equal to ""
      */
     protected boolean matchesNamespaceURIs( String u1, String u2 ) {
+        //System.out.println( "Comparing URIs: " + u1 + " and: " + u2 + " for prefix: " + prefix );
+        
         if ( u1 == u2 ) {
             return true;
         }
