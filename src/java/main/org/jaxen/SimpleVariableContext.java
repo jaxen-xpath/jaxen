@@ -13,27 +13,33 @@ public class SimpleVariableContext implements VariableContext
         variables = new HashMap();
     }
 
-    public void setVariableValue(String prefix,
-                                 String localName,
-                                 Object value)
+    public void setVariableValue( String namespaceURI,
+                                  String localName,
+                                  Object value )
     {
-        if ( prefix == null )
-        {
-            prefix = "";
+        if ("".equals(namespaceURI)) {
+            Thread.dumpStack();
+            throw new IllegalArgumentException();
         }
-
-        this.variables.put( prefix + ":" + localName,
+        this.variables.put( new QualifiedName(namespaceURI, localName),
                             value );
     }
 
-    public Object getVariableValue(String prefix,
-                                   String localName)
+    public Object getVariableValue( String namespaceURI,
+                                    String prefix,
+                                    String localName )
+        throws UnresolvableException
     {
-        if ( prefix == null )
-        {
-            prefix = "";
+        if ("".equals(namespaceURI)) {
+            Thread.dumpStack();
+            throw new IllegalArgumentException();
         }
+        Object key = new QualifiedName( namespaceURI, localName );
 
-        return this.variables.get( prefix + ":" + localName );
+        if ( this.variables.containsKey(key) )
+            return this.variables.get( key );
+        else
+            throw new UnresolvableException( "Variable " +
+                                             prefix + ":" + localName );
     }
 }

@@ -116,32 +116,29 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
-        Function func = context.getFunction( getPrefix(),
+        String namespaceURI =
+            context.translateNamespacePrefixToUri( getPrefix() );
+
+        Function func = context.getFunction( namespaceURI,
+                                             getPrefix(),
                                              getFunctionName() );
 
-        if ( func != null )
+        List paramExprs = getParameters();
+        int  paramSize  = paramExprs.size();
+        
+        List paramValues = new ArrayList( paramSize );
+        Expr eachParam   = null;
+        Object eachValue = null;
+        
+        for ( int i = 0 ; i < paramSize ; ++i )
         {
-            List paramExprs = getParameters();
-            int  paramSize  = paramExprs.size();
+            eachParam = (Expr) paramExprs.get( i );
             
-            List paramValues = new ArrayList( paramSize );
-            Expr eachParam   = null;
-            Object eachValue = null;
+            eachValue = eachParam.evaluate( context );
             
-            for ( int i = 0 ; i < paramSize ; ++i )
-            {
-                eachParam = (Expr) paramExprs.get( i );
-                
-                eachValue = eachParam.evaluate( context );
-                
-                paramValues.add( eachValue );
-            }
-            
-            return func.call( context,
-                              paramValues );
+            paramValues.add( eachValue );
         }
-
-        throw new FunctionCallException( "Undefined function " + getPrefix() +
-                                         ':' + getFunctionName() );
+        
+        return func.call( context, paramValues );
     }
 }

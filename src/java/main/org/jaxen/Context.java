@@ -49,17 +49,23 @@ public class Context
         return getContextSupport().translateNamespacePrefixToUri( prefix );
     }
 
-    public Object getVariableValue(String prefix,
-                                   String localName)
+    public Object getVariableValue( String namespaceURI,
+                                    String prefix,
+                                    String localName )
+        throws UnresolvableException
     {
-        return getContextSupport().getVariableValue( prefix,
+        return getContextSupport().getVariableValue( namespaceURI,
+                                                     prefix,
                                                      localName );
     }
 
-    public Function getFunction(String prefix,
-                                String localName)
+    public Function getFunction( String namespaceURI,
+                                 String prefix,
+                                 String localName )
+        throws UnresolvableException
     {
-        return getContextSupport().getFunction( prefix,
+        return getContextSupport().getFunction( namespaceURI,
+                                                prefix,
                                                 localName );
     }
 
