@@ -18,6 +18,11 @@ public class SimpleNamespaceContext implements NamespaceContext
         this.namespaces = new HashMap();
     }
 
+    public SimpleNamespaceContext(Map namespaces)
+    {
+        this.namespaces = namespaces;
+    }
+
     /**
      *  Adds all the namespace declarations that are in scope on the given
      *  element. In the case of an XSLT stylesheet, this would be the element
