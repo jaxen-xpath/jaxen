@@ -137,12 +137,7 @@ public class DocumentNavigator extends DefaultNavigator
 
     public Iterator getChildAxisIterator(Object contextNode)
     {
-        if ( contextNode instanceof Document )
-        {            
-            Document document = (Document) contextNode;
-            return new SingleObjectIterator( document.getDocumentElement() );
-        }
-        else if ( contextNode instanceof Node )
+        if ( contextNode instanceof Node )
         {            
             Node node = (Node) contextNode;
             NodeList children = node.getChildNodes();
