@@ -103,8 +103,8 @@ public class IterableAttributeAxis extends IterableAxis {
     /**
      * Does this axis support named access?
      * 
-     * @param contextSupport  the additional context information
-     * @return true if named access supported. If not iterator() will be used
+     * @param support  the additional context information
+     * @return true if named access supported. If not iterator() will be used.
      */
     public boolean supportsNamedAccess(ContextSupport support) {
         return (support.getNavigator() instanceof NamedAccessNavigator);

@@ -82,7 +82,7 @@ import org.jaxen.BaseXPath;
  * case of attribute names are not modified.
  *
  * <p>You create a compiled XPath object, then match it against
- * one or more context nodes using the {@link #selectNodes}
+ * one or more context nodes using the {@link #selectNodes(Object)}
  * method, as in the following example:</p>
  *
  * <pre>
@@ -91,7 +91,7 @@ import org.jaxen.BaseXPath;
  * </pre>
  *
  * @see BaseXPath
- * @see DOMXPath
+ * @see org.jaxen.dom.DOMXPath
  *
  * @author David Peterson
  *
@@ -102,12 +102,12 @@ public class HTMLXPath extends BaseXPath
     /**
      * Construct given an XPath expression string.
      *
-     *  @param xpathExpr The XPath expression.
-     *  @param toLowerCase If true, all element names will be considered to
+     *  @param xpathExpr the XPath expression
+     *  @param toLowerCase if true, all element names will be considered to
      *         be lower case. Otherwise, they will be upper case.
      *
      *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
+     *          parsing the expression
      */
     public HTMLXPath(String xpathExpr, boolean toLowerCase) throws JaxenException
     {
@@ -117,8 +117,9 @@ public class HTMLXPath extends BaseXPath
     /**
      * Constructs a new XPath, treating all elements as lower case.
      *
-     * @param xpathExpr
-     * @throws JaxenException
+     * @param xpathExpr the XPath expression
+     * @throws JaxenException if there is a syntax error while
+     *          parsing the expression
      */
     public HTMLXPath(String xpathExpr) throws JaxenException
     {

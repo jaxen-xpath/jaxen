@@ -86,8 +86,8 @@ import org.w3c.dom.Node;
  *  @author David Peterson
  *
  *  @see XPath
- *  @see DOMXPath
- *  @see NamespaceNode
+ *  @see org.jaxen.dom.DOMXPath
+ *  @see org.jaxen.dom.NamespaceNode
  */
 public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
 {
@@ -119,6 +119,11 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
         this(true);
     }
 
+    /**
+     * Constructs a new DocumentNavigator that will convert to lowercase.
+     * 
+     * @param toLowerCase whether to convert all names to lowercase
+     */
     public DocumentNavigator(boolean toLowerCase)
     {
         this.toLowerCase = toLowerCase;
@@ -126,7 +131,8 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
 
     /**
      * Returns <code>true</code> if the navigator is converting to lowercase.
-     * @return
+     * 
+     * @return true if the navigator is converting to lowercase; false otherwise
      */
     public boolean isToLowerCase()
     {
@@ -136,7 +142,7 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
     /**
      * Get a singleton DocumentNavigator for efficiency.
      *
-     * @return A singleton instance of a DocumentNavigator.
+     * @return a singleton instance of a DocumentNavigator
      */
     public static Navigator getInstance (boolean toLowerCase)
     {
@@ -160,12 +166,12 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
   /**
    * Get the name of the node in the case specified for the current object
    *
-   * @param node The target node. Used to avoid case modification of node
+   * @param node the target node. Used to avoid case modification of node
    *        names in XML documents.
    * @param name the name of the node, presumably in the case natively
-   *        stored by the DOM.
+   *        stored by the DOM
    * @return the name of the node, case-modified as desired, if the current
-   *         document is HTML and not XML.
+   *         document is HTML and not XML
    */
   protected String getHTMLNodeName(Node node, String name)
   {
@@ -193,7 +199,7 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
   }
 
   /**
-   * Determine if a node is definately an XML node.
+   * Determine if a node is definitely an XML node.
    * Note: This will not work if the XML node has not been namespaced.
    * However, since we are dealing with HTML documents, this is a minimal
    * risk.

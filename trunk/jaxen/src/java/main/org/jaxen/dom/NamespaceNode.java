@@ -135,8 +135,9 @@ public class NamespaceNode implements Node
     /**
      * Constructor.
      *
-     * @param parent The DOM node to which the Namespace is attached.
-     * @param uri The Namespace URI as a string.
+     * @param parent the DOM node to which the Namespace is attached
+     * @param name the namespace prefix
+     * @param value the Namespace URI
      */
     public NamespaceNode (Node parent, String name, String value)
     {
@@ -149,9 +150,9 @@ public class NamespaceNode implements Node
     /**
      * Constructor.
      *
-     * @param parent The DOM node to which the Namespace is attached.
-     * @param attribute The DOM attribute object containing the
-     *        Namespace declaration.
+     * @param parent the DOM node to which the Namespace is attached
+     * @param attribute the DOM attribute object containing the
+     *        namespace declaration
      */
     NamespaceNode (Node parent, Node attribute)
     {
@@ -176,7 +177,7 @@ public class NamespaceNode implements Node
     /**
      * Get the Namespace prefix.
      *
-     * @return The Namespace prefix, or "" for the default Namespace.
+     * @return the Namespace prefix, or "" for the default Namespace.
      */
     public String getNodeName ()
     {
@@ -187,7 +188,7 @@ public class NamespaceNode implements Node
     /**
      * Get the Namespace URI.
      *
-     * @return The Namespace URI.
+     * @return the Namespace URI
      */
     public String getNodeValue ()
     {
@@ -198,8 +199,8 @@ public class NamespaceNode implements Node
     /**
      * Change the Namespace URI (always fails).
      *
-     * @param value The new URI.
-     * @exception DOMException always thrown.
+     * @param value the new URI
+     * @throws DOMException always thrown
      */
     public void setNodeValue (String value)
     throws DOMException
@@ -226,7 +227,7 @@ public class NamespaceNode implements Node
      * in effect, <em>not</em> necessarily the actual element containing
      * the Namespace declaration.</p>
      *
-     * @return The parent node (not null).
+     * @return the parent node (not null)
      */
     public Node getParentNode ()
     {
@@ -237,7 +238,7 @@ public class NamespaceNode implements Node
     /**
      * Get the list of child nodes.
      *
-     * @return An empty node list.
+     * @return an empty node list
      */
     public NodeList getChildNodes ()
     {
@@ -248,7 +249,7 @@ public class NamespaceNode implements Node
     /**
      * Get the first child node.
      *
-     * @return Always null.
+     * @return null
      */
     public Node getFirstChild ()
     {
@@ -259,7 +260,7 @@ public class NamespaceNode implements Node
     /**
      * Get the last child node.
      *
-     * @return Always null.
+     * @return null
      */
     public Node getLastChild ()
     {
@@ -270,7 +271,7 @@ public class NamespaceNode implements Node
     /**
      * Get the previous sibling node.
      *
-     * @return Always null.
+     * @return null
      */
     public Node getPreviousSibling ()
     {
@@ -281,7 +282,7 @@ public class NamespaceNode implements Node
     /**
      * Get the next sibling node.
      *
-     * @return Always null.
+     * @return null
      */
     public Node getNextSibling ()
     {
@@ -292,7 +293,7 @@ public class NamespaceNode implements Node
     /**
      * Get the attribute nodes.
      *
-     * @return Always null.
+     * @return null
      */
     public NamedNodeMap getAttributes ()
     {
@@ -303,7 +304,7 @@ public class NamespaceNode implements Node
     /**
      * Get the owner document.
      *
-     * @return The owner document <em>of the parent node</em>.
+     * @return the owner document <em>of the parent node</em>
      */
     public Document getOwnerDocument ()
     {
@@ -315,7 +316,7 @@ public class NamespaceNode implements Node
     /**
      * Insert a new child node (always fails).
      *
-     * @exception DOMException always thrown.
+     * @throws DOMException always thrown
      * @see Node#insertBefore
      */
     public Node insertBefore (Node newChild, Node refChild)
@@ -329,7 +330,7 @@ public class NamespaceNode implements Node
     /**
      * Replace a child node (always fails).
      *
-     * @exception DOMException always thrown.
+     * @throws DOMException always thrown
      * @see Node#replaceChild
      */
     public Node replaceChild (Node newChild, Node oldChild)
@@ -343,7 +344,7 @@ public class NamespaceNode implements Node
     /**
      * Remove a child node (always fails).
      *
-     * @exception DOMException always thrown.
+     * @throws DOMException always thrown
      * @see Node#removeChild
      */
     public Node removeChild (Node oldChild)
@@ -357,7 +358,7 @@ public class NamespaceNode implements Node
     /**
      * Append a new child node (always fails).
      *
-     * @exception DOMException always thrown.
+     * @throws DOMException always thrown
      * @see Node#appendChild
      */
     public Node appendChild (Node newChild)
@@ -371,7 +372,7 @@ public class NamespaceNode implements Node
     /**
      * Test for child nodes.
      *
-     * @return Always false.
+     * @return false
      */
     public boolean hasChildNodes ()
     {
@@ -384,7 +385,7 @@ public class NamespaceNode implements Node
      *
      * @param deep Make a deep copy (no effect, since Namespace nodes
      *        don't have children).
-     * @return A new copy of this Namespace node.
+     * @return a new copy of this Namespace node
      */
     public Node cloneNode (boolean deep)
     {
@@ -407,9 +408,9 @@ public class NamespaceNode implements Node
     /**
      * Test if a DOM2 feature is supported.
      *
-     * @param feature The feature name.
-     * @param version The feature version.
-     * @return Always false.
+     * @param feature the feature name
+     * @param version the feature version
+     * @return false
      */
     public boolean isSupported (String feature, String version)
     {
@@ -423,7 +424,7 @@ public class NamespaceNode implements Node
      * <p>Namespace declarations are not themselves
      * Namespace-qualified.</p>
      *
-     * @return Always null.
+     * @return null
      */
     public String getNamespaceURI ()
     {
@@ -437,7 +438,7 @@ public class NamespaceNode implements Node
      * <p>Namespace declarations are not themselves
      * Namespace-qualified.</p>
      *
-     * @return Always null.
+     * @return null
      */
     public String getPrefix ()
     {
@@ -448,8 +449,8 @@ public class NamespaceNode implements Node
     /**
      * Change the Namespace prefix for this node (always fails).
      *
-     * @param prefix The new prefix.
-     * @exception DOMException always thrown.
+     * @param prefix the new prefix
+     * @throws DOMException always thrown
      */
     public void setPrefix (String prefix)
     throws DOMException
@@ -461,7 +462,7 @@ public class NamespaceNode implements Node
     /**
      * Get the local name for this node.
      *
-     * @return Always null.
+     * @return null
      */
     public String getLocalName ()
     {
@@ -472,7 +473,7 @@ public class NamespaceNode implements Node
     /**
      * Test if this node has attributes.
      *
-     * @return Always false.
+     * @return false
      */
     public boolean hasAttributes ()
     {
@@ -483,7 +484,7 @@ public class NamespaceNode implements Node
     /**
      * Throw a NO_MODIFICATION_ALLOWED_ERR DOMException.
      *
-     * @exception DOMException always thrown.
+     * @throws DOMException always thrown
      */
     private void no_mods ()
     throws DOMException
@@ -505,7 +506,7 @@ public class NamespaceNode implements Node
      * <p>The hash code is the sum of the hash codes of the parent node,
      * name, and value.</p>
      *
-     * @return A hash code for this node.
+     * @return a hash code for this node
      */
     public int hashCode ()
     {
@@ -543,8 +544,8 @@ public class NamespaceNode implements Node
     /**
      * Helper method for generating a hash code.
      *
-     * @param o The object for generating a hash code (possibly null).
-     * @return The object's hash code, or 0 if the object is null.
+     * @param o the object for generating a hash code (possibly null)
+     * @return the object's hash code, or 0 if the object is null
      * @see java.lang.Object#hashCode
      */
     private int hashCode (Object o)
@@ -556,9 +557,9 @@ public class NamespaceNode implements Node
     /**
      * Helper method for comparing two objects.
      *
-     * @param a The first object to compare (possibly null).
-     * @param b The second object to compare (possibly null).
-     * @return true if the objects are equivalent or are both null.
+     * @param a the first object to compare (possibly null)
+     * @param b the second object to compare (possibly null)
+     * @return true if the objects are equivalent or are both null
      * @see java.lang.Object#equals
      */
     private boolean equals (Object a, Object b)

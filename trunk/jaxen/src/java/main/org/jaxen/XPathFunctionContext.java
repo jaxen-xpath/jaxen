@@ -108,7 +108,7 @@ import org.jaxen.function.xslt.DocumentFunction;
  *  <p>
  *  This class implements a <i>Singleton</i> pattern (see {@link #getInstance}),
  *  as it is perfectly re-entrant and thread-safe.  If using the
- *  singleton, it is inadvisable to call {@link #registerFunction}
+ *  singleton, it is inadvisable to call {@link #registerFunction(String, String, Function)}
  *  as that will extend the global function context, affecting other
  *  users of the singleton.  But that's your call, really, now isn't
  *  it?  That may be what you really want to do.
@@ -139,7 +139,7 @@ public class XPathFunctionContext extends SimpleFunctionContext
 
     /** Retrieve the singleton instance.
      *
-     *  @return The singleton instance.
+     *  @return the singleton instance
      */
     public static FunctionContext getInstance()
     {

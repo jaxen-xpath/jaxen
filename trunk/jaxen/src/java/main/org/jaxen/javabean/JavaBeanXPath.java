@@ -70,11 +70,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-/** An XPath implementation for the JavaBeans.
+/** An XPath implementation for JavaBeans.
  *
  * <p>This is the main entry point for matching an XPath against a JavaBean
  * tree.  You create a compiled XPath object, then match it against
- * one or more context nodes using the {@link #selectNodes}
+ * one or more context nodes using the {@link #selectNodes(Object)}
  * method, as in the following example:</p>
  *
  * <pre>
@@ -96,7 +96,7 @@ public class JavaBeanXPath extends BaseXPath
      *  @param xpathExpr The XPath expression.
      *
      *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression.
+     *          parsing the expression
      */
     public JavaBeanXPath(String xpathExpr) throws JaxenException
     {
