@@ -62,16 +62,15 @@
 
 package org.jaxen.xom;
 
-import junit.framework.TestCase;
-
 import java.util.Iterator;
 import java.util.List;
 
-import org.jaxen.XPath;
-import org.jaxen.saxpath.SAXPathException;
+import junit.framework.TestCase;
+import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
-import nu.xom.Builder;
+import org.jaxen.XPath;
+import org.jaxen.saxpath.SAXPathException;
 
 public class XPathTest extends TestCase
 {
@@ -101,7 +100,7 @@ public class XPathTest extends TestCase
         }
         catch (SAXPathException e)
         {
-//            fail( e.getMessage() );
+            fail( e.getMessage() );
         }
     }
 
@@ -136,7 +135,7 @@ public class XPathTest extends TestCase
         }
         catch (Exception e)
         {
-//            fail( e.getMessage() );
+            fail( e.getMessage() );
         }
     }
 }
