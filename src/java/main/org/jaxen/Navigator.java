@@ -2,6 +2,7 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import org.saxpath.SAXPathException;
@@ -18,7 +19,7 @@ import org.saxpath.SAXPathException;
  *
  *  @author bob mcwhirter (bob@werken.com)
  */
-public interface Navigator
+public interface Navigator extends Serializable
 {
     /** Retrieve an <code>Iterator</code> matching the <code>child</code>
      *  xpath axis.

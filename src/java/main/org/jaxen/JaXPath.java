@@ -11,9 +11,10 @@ import org.saxpath.XPathReader;
 import org.saxpath.SAXPathException;
 import org.saxpath.helpers.XPathReaderFactory;
 
+import java.io.Serializable;
 import java.util.List;
 
-class JaXPath
+class JaXPath implements Serializable
 {
     /** the parsed form of the xpath expression */
     private XPath xpath;

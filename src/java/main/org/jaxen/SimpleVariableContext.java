@@ -1,10 +1,11 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
 
-public class SimpleVariableContext implements VariableContext
+public class SimpleVariableContext implements VariableContext, Serializable
 {
     private Map variables;
 
