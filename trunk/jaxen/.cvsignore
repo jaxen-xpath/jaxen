@@ -9,3 +9,4 @@ maven.log
 *.iws
 velocity.log
 xom-1.1d7.jar
+bin
