@@ -86,6 +86,10 @@ public class LowerFunction implements Function
                 return getLocale( list.get(0) );
             }
         }
+        // #### could maybe detect String values
+        // #### and look for 'FRENCH' or 'FRANCE' etc
+        // #### using reflection to find static Locale
+        // #### constants?
         return null;
     }
 }
