@@ -66,8 +66,7 @@ public class DefaultNameStep extends DefaultStep
 
         if ( nav.isDocument( node ) )
         {
-            //return matchesAnyName;
-            return false;
+            return matchesAnyName;
         }
         else if ( nav.isElement( node ) )
         {

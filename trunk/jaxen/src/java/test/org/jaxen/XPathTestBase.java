@@ -210,7 +210,7 @@ public abstract class XPathTestBase extends TestCase
                 while ( resultIter.hasNext() )
                 {
                     log ( debug,
-                          "      " + resultIter.next() );
+                          "      --> " + resultIter.next() );
                 }
             }
             assertEquals( this.executionContext.toString(),
@@ -237,7 +237,7 @@ public abstract class XPathTestBase extends TestCase
             Object newContext = xpath.jaSelectSingleNode( getContext( context ) );
 
             log ( debug,
-                  "    New Context :: " + newContext );
+                  "    New Context :: " + abbreviate( newContext ) );
 
             
             String valueOfXPathStr = valueOf.attributeValue( "select" );
@@ -354,5 +354,26 @@ public abstract class XPathTestBase extends TestCase
     public abstract Navigator getNavigator();
 
     public abstract Object getDocument(String url) throws Exception;
+
+    private String abbreviate(Object obj)
+    {
+        String str = obj.toString();
+
+        int nl = str.indexOf( "\n" );
+
+        if ( nl >= 0
+             &&
+             nl < 80 )
+        {
+            return str.substring( 0, nl );
+        }
+
+        if ( str.length() < 80 )
+        {
+            return str;
+        }
+
+        return str.substring(0, 80) + "...";
+    }
         
 }
