@@ -2,6 +2,7 @@
 package org.jaxen.exml;
 
 import org.jaxen.DefaultNavigator;
+import org.jaxen.FunctionCallException;
 
 import org.jaxen.util.SingleObjectIterator;
 
@@ -15,12 +16,14 @@ import electric.xml.Instruction;
 import electric.xml.Child;
 import electric.xml.Children;
 import electric.xml.Parent;
-
 import electric.xml.Attributes;
+import electric.xml.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+
+import java.io.File;
 
 public class DocumentNavigator extends DefaultNavigator
 {
@@ -270,5 +273,17 @@ public class DocumentNavigator extends DefaultNavigator
         }
 
         return null;
+    }
+
+    public Object getDocument(String url) throws FunctionCallException
+    {
+        try
+        {
+            return new Document( new File( url ) );
+        }
+        catch (ParseException e)
+        {
+            throw new FunctionCallException( e.getMessage() );
+        }
     }
 }

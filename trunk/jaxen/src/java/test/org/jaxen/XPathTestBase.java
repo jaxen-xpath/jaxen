@@ -389,6 +389,11 @@ public abstract class XPathTestBase extends TestCase
 
     private String abbreviate(Object obj)
     {
+        if ( obj == null )
+        {
+            return null;
+        }
+
         String str = obj.toString();
 
         int nl = str.indexOf( "\n" );
