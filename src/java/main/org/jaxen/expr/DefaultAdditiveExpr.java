@@ -71,7 +71,7 @@ abstract class DefaultAdditiveExpr extends DefaultArithExpr implements AdditiveE
 
     public String toString()
     {
-        return "[(DefaultAdditiveExpr): " + getLHS() + ", " + getRHS() + "]";
+        return "[(" + getClass().getName() + "): " + getLHS() + ", " + getRHS() + "]";
     }
 }
 
