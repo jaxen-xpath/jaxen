@@ -2,20 +2,20 @@
 
 <project name="jaxen" repository="jaxen" href="http://jaxen.org">
 
-  <title>jaxen: universal java xpath engine</title>
+    <title>jaxen: universal java xpath engine</title>
 
-  <body>
-    <links>
-      <item name="The Werken Company" href="http://www.werken.com/"/>
-    </links>
-    <menu name="jaxen">
-      <item name="Overview"            href="/index.html"/>
-      <item name="FAQ"                 href="/faq.html"/>
-      <item name="Releases"            href="/releases.html"/> 
-      <item name="CVS Access"          href="/cvs.html"/>
-      <item name="Status"              href="/status.html"/>
-      <item name="Introduction Slides" href="/pdf/intro-slides.pdf"/>
-    </menu>
-  </body>
+    <body>
+        <links>
+            <item name="The Werken Company" href="http://www.werken.com/"/>
+        </links>
+        <menu name="jaxen">
+            <item name="Overview" href="/index.html"/>
+            <item name="FAQ" href="/faq.html"/>
+            <item name="Releases" href="/releases.html"/>
+            <item name="CVS Access" href="/cvs-usage.html"/>
+            <item name="Status" href="/status.html"/>
+            <!--      <item name="Introduction Slides" href="/pdf/intro-slides.pdf"/> -->
+        </menu>
+    </body>
 
 </project>
