@@ -9,11 +9,11 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 {
-    private Expr                   expr;
+    private Expr expr;
 
     public DefaultUnaryExpr(Expr expr)
     {
-        this.expr     = expr;
+        this.expr = expr;
     }
 
     public Expr getExpr()
@@ -29,6 +29,13 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
     public String getText()
     {
         return "-(" + getExpr().getText() + ")";
+    }
+
+    public Expr simplify()
+    {
+        expr = expr.simplify();
+
+        return this;
     }
 
     public Object evaluate(Context context) throws JaxenException
