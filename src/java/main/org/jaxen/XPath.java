@@ -62,7 +62,6 @@ import java.util.List;
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
  *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
  *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
- *  @see org.jaxen.exml.ElectricXPath  XPath for Electric XML
  *
  *  @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
