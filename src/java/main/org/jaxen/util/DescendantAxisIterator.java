@@ -75,6 +75,7 @@ public class DescendantAxisIterator extends StackedIterator
     {
         super( contextNode,
                navigator );
+        pushIterator( internalCreateIterator( contextNode ) );
     }
 
     protected DescendantAxisIterator()
