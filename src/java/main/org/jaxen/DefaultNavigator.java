@@ -234,7 +234,7 @@ public abstract class DefaultNavigator implements Navigator
         }
         else if ( isProcessingInstruction(node) ) 
         {
-            return Pattern.DOCUMENT_NODE;
+            return Pattern.PROCESSING_INSTRUCTION_NODE;
         }
         else {
             return Pattern.UNKNOWN_NODE;
