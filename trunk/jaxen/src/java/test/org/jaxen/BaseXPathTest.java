@@ -100,6 +100,17 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    public void testEvaluateString() throws JaxenException {
+        
+        BaseXPath xpath = new XOMXPath("string(/*)");
+        
+        Document doc = new Document(new Element("root"));
+        String stringValue = (String) xpath.evaluate(doc);
+        assertEquals("", stringValue);
+        
+    }
+    
+    
     public void testValueOfEmptyListIsEmptyString() throws JaxenException {
         
         BaseXPath xpath = new XOMXPath("/element");
