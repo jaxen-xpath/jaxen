@@ -62,6 +62,7 @@
 
 package org.jaxen;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -71,7 +72,9 @@ import nu.xom.Document;
 import nu.xom.Element;
 
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.NamespaceNode;
 import org.jaxen.xom.XOMXPath;
+import org.w3c.dom.Attr;
 
 import junit.framework.TestCase;
 
@@ -366,6 +369,162 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x2, result.get(1));   
         assertEquals(x3, result.get(2));   
         assertEquals(x4, result.get(3));
+        
+    }    
+    
+    public void testDescendantAxisWithAttributes() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/descendant::x/@*");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        
+        Attr a1 = doc.createAttribute("name");
+        a1.setNodeValue("1");
+        x1.setAttributeNode(a1);
+        Attr a2 = doc.createAttribute("name");
+        a2.setNodeValue("2");
+        x2.setAttributeNode(a2);
+        Attr a3 = doc.createAttribute("name");
+        a3.setNodeValue("3");
+        x3.setAttributeNode(a3);
+        Attr a4 = doc.createAttribute("name");
+        a4.setNodeValue("4");
+        x4.setAttributeNode(a4);
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(4, result.size());
+        assertEquals(a1, result.get(0));   
+        assertEquals(a2, result.get(1));   
+        assertEquals(a3, result.get(2));   
+        assertEquals(a4, result.get(3));
+        
+    }    
+    
+    public void testDescendantAxisWithNamespaceNodes() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/descendant::x/namespace::node()");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        
+        Attr a1 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:a");
+        a1.setNodeValue("http://www.example.org/");
+        x1.setAttributeNode(a1);
+        Attr a2 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:b");
+        a2.setNodeValue("http://www.example.org/");
+        x2.setAttributeNode(a2);
+        Attr a3 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:c");
+        a3.setNodeValue("http://www.example.org/");
+        x3.setAttributeNode(a3);
+        Attr a4 = doc.createAttributeNS("http://www.w3.org/2000/xmlns", "xmlns:d");
+        a4.setNodeValue("http://www.example.org/");
+        x4.setAttributeNode(a4);
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(8, result.size());
+        Iterator iterator = result.iterator();
+        StringBuffer sb = new StringBuffer(4);
+        while (iterator.hasNext()) {
+            NamespaceNode ns = (NamespaceNode) iterator.next();
+            if (ns.getNodeValue().equals("http://www.example.org/")) {
+                String name = ns.getNodeName();
+                sb.append(name);
+            }
+        }
+        assertEquals("abcd", sb.toString());
+        
+    }    
+    
+    public void testMultipleAttributesOnElement() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/descendant::x/@*");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        a.appendChild(x1);
+        a.appendChild(b);
+        
+        Attr a1 = doc.createAttribute("name1");
+        a1.setNodeValue("1");
+        x1.setAttributeNode(a1);
+        Attr a2 = doc.createAttribute("name2");
+        a2.setNodeValue("2");
+        x1.setAttributeNode(a2);
+        Attr a3 = doc.createAttribute("name3");
+        a3.setNodeValue("3");
+        x1.setAttributeNode(a3);
+        Attr a4 = doc.createAttribute("name4");
+        a4.setNodeValue("4");
+        x1.setAttributeNode(a4);
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(4, result.size());
+        assertTrue(result.contains(a1));
+        assertTrue(result.contains(a2));
+        assertTrue(result.contains(a3));
+        assertTrue(result.contains(a4));
+        
+    }    
+    
+    public void testDescendantAxisWithAttributesAndChildren() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/descendant::x/@* | /descendant::x");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        doc.appendChild(a);
+        org.w3c.dom.Element x1 = doc.createElementNS("", "x");
+        a.appendChild(x1);
+        a.appendChild(b);
+        org.w3c.dom.Element x2 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x3 = doc.createElementNS("", "x");
+        org.w3c.dom.Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        
+        Attr a1 = doc.createAttribute("name");
+        a1.setNodeValue("1");
+        x1.setAttributeNode(a1);
+        Attr a2 = doc.createAttribute("name");
+        a2.setNodeValue("2");
+        x2.setAttributeNode(a2);
+        Attr a3 = doc.createAttribute("name");
+        a3.setNodeValue("3");
+        x3.setAttributeNode(a3);
+        Attr a4 = doc.createAttribute("name");
+        a4.setNodeValue("4");
+        x4.setAttributeNode(a4);
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(8, result.size());
+        assertEquals(x1, result.get(0));   
+        assertEquals(a1, result.get(1));   
+        assertEquals(x2, result.get(2));   
+        assertEquals(a2, result.get(3));
+        assertEquals(x3, result.get(4));   
+        assertEquals(a3, result.get(5));   
+        assertEquals(x4, result.get(6));   
+        assertEquals(a4, result.get(7));
         
     }    
     
