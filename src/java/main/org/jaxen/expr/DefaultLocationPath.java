@@ -132,7 +132,9 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                 while ( axisNodeIter.hasNext() )
                 {
                     eachAxisNode = axisNodeIter.next();
-                    
+
+                    // System.err.println( "----> " + eachAxisNode + " // " + eachStep.matches( eachAxisNode, context.getContextSupport()  ) );
+
                     if ( eachStep.matches( eachAxisNode,
                                            context.getContextSupport() ) )
                     {

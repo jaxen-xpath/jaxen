@@ -242,6 +242,13 @@
     </context>
   </document>
 
+  <document url="xml/text.xml">
+    <context select="/">
+      <test select="/foo/bar/text()" count="3"/>
+      <valueOf select="normalize-space(/foo/bar/text())">baz</valueOf>
+    </context>
+  </document>
+
   <document url="xml/testNamespaces.xml">
     <context select="/">
       <test select="namespace::*" count="0" debug="off"/>
@@ -260,4 +267,5 @@
       <test select="//namespace::*" count="4" debug="off"/>
     </context>
   </document>
+
  </tests>

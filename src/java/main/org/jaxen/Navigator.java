@@ -184,6 +184,7 @@ public interface Navigator
     String getElementStringValue(Object element);
     String getAttributeStringValue(Object attr);
     String getNamespaceStringValue(Object ns);
+    String getTextStringValue(Object txt);
     
     String translateNamespacePrefixToUri(String prefix, Object element);
 }

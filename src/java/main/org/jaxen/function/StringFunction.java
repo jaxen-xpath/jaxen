@@ -55,6 +55,10 @@ public class StringFunction implements Function
         {
             return nav.getAttributeStringValue( obj );
         }
+        else if ( nav.isText( obj ) )
+        {
+            return nav.getTextStringValue( obj );
+        }
         else if (obj instanceof List)
         {
             List list = (List) obj;
@@ -63,6 +67,7 @@ public class StringFunction implements Function
             if ( size > 0 ) {
                 // the XPath string() function only returns the
                 // string value of the first node in a nodeset
+
                 return evaluate( list.get(0),
                                  nav );
             }
