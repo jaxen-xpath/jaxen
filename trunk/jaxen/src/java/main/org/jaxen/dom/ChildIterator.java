@@ -15,20 +15,21 @@ import org.w3c.dom.NodeList;
 public class ChildIterator implements Iterator
 {
     private NodeList children;
-    private int index = -1;
-
     private Node next;
+    private int index = -1;
 
 
     public ChildIterator(NodeList children)
     {
         this.children = children;
-        this.next     = null;
-        stepAhead();
     }
 
     public boolean hasNext()
     {
+        if ( index < 0 )
+        {
+            this.next = findNext();
+        }
         return ( this.next != null );
     }
 
@@ -39,40 +40,33 @@ public class ChildIterator implements Iterator
             throw new NoSuchElementException();
         }
 
-        Object obj = this.next;
+        Node obj = this.next;
 
-        this.next = null;
-
-        stepAhead();
-
+        this.next = findNext();
+        
         return obj;
     }
 
-    private void stepAhead()
+    protected Node findNext()
     {
-        if ( this.next != null )
-        {
-            return;
-        }
-
         while ( ++index < children.getLength() )
         {
-            this.next = children.item( index );
+            Node node = children.item( index );
 
-            int  type = this.next.getNodeType();
+            int  type = node.getNodeType();
 
             if ( type == Node.DOCUMENT_TYPE_NODE
                  ||
                  type == Node.NOTATION_NODE )
             {
-                this.next = null;
                 continue;
             }
             else
             {
-                break;
+                return node;
             }
         }
+        return null;
     }
 
     public void remove()

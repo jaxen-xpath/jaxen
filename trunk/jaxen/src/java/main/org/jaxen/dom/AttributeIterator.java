@@ -15,6 +15,7 @@ import org.w3c.dom.Node;
 public class AttributeIterator implements Iterator
 {
     private NamedNodeMap attributes;
+    private Node next;
     private int index = -1;
 
 
@@ -25,24 +26,22 @@ public class AttributeIterator implements Iterator
 
     public boolean hasNext()
     {
-        while ( ++index < attributes.getLength() )
+        if ( index < 0 )
         {
-            Node node = attributes.item(index);
-            if ( validNode( node ) )
-            {
-                return true;
-            }
-        }        
-        return false;
+            this.next = findNext();
+        }
+        return ( this.next != null );
     }
-
+ 
     public Object next() throws NoSuchElementException
     {
-        if ( index >= attributes.getLength() )
+        if ( ! hasNext() ) 
         {
             throw new NoSuchElementException();
         }
-        return attributes.item(index);
+        Node answer = next;
+        next = findNext();
+        return answer;
     }
 
     public void remove()
@@ -56,4 +55,18 @@ public class AttributeIterator implements Iterator
         String name = node.getNodeName();
         return name == null || ! name.startsWith( "xmlns" );
     }
+    
+    public Node findNext()
+    {
+        while ( ++index < attributes.getLength() )
+        {
+            Node node = attributes.item(index);
+            if ( validNode( node ) )
+            {
+                return node;
+            }
+        }        
+        return null;
+    }
+
 }
