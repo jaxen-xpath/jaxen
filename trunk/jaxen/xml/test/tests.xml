@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tests xmlns:ns="http://jaxen.org/test-harness/ns">
+<tests xmlns:var="http://jaxen.org/test-harness/var">
+
+  <document url="xml/id.xml">
+    <context select="/"
+             var:foobar="foobar"
+             var:foo="foo">
+      <valueOf select="$foobar">foobar</valueOf>
+      <test select="/foo[@id=$foobar]" count="1"/>
+      <test select="/foo[@id='$foobar']" count="0"/>
+      <test select="/foo[concat($foo, 'bar')=@id]" count="1"/>
+    </context>
+  </document>
 
   <document url="xml/pi.xml">
     <context select="/">
