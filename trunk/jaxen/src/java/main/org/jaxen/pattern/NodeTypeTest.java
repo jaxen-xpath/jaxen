@@ -11,7 +11,7 @@ package org.jaxen.pattern;
 
 import org.jaxen.Context;
 
-/** <p><code>ElementTypeTest</code> matches if the node is of a certain type 
+/** <p><code>NodeTypeTest</code> matches if the node is of a certain type 
   * such as element, attribute, comment, text, processing instruction and so forth.</p>
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
