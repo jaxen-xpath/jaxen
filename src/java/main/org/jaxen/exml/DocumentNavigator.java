@@ -1,10 +1,13 @@
 
 package org.jaxen.exml;
 
+import org.jaxen.BaseXPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 
 import org.jaxen.util.SingleObjectIterator;
+
+import org.saxpath.SAXPathException;
 
 import electric.xml.Document;
 import electric.xml.Element;
@@ -175,6 +178,14 @@ public class DocumentNavigator extends DefaultNavigator
         Element elem = (Element) contextNode;
 
         return new AttributesIterator( elem.getAttributes() );
+    }
+
+    /** Returns a parsed form of the given xpath string, which will be suitable
+     *  for queries on EXML documents.
+     */
+    public BaseXPath parseXPath (String xpath) throws SAXPathException
+    {
+        return new XPath(xpath);
     }
 
     public Object getDocumentNode(Object contextNode)

@@ -1,10 +1,13 @@
 
 package org.jaxen.jdom;
 
+import org.jaxen.BaseXPath;
 import org.jaxen.DefaultNavigator;
 import org.jaxen.FunctionCallException;
 
 import org.jaxen.util.SingleObjectIterator;
+
+import org.saxpath.SAXPathException;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -194,6 +197,14 @@ public class DocumentNavigator extends DefaultNavigator
         Element elem = (Element) contextNode;
 
         return elem.getAttributes().iterator();
+    }
+
+    /** Returns a parsed form of the given xpath string, which will be suitable
+     *  for queries on JDOM documents.
+     */
+    public BaseXPath parseXPath (String xpath) throws SAXPathException
+    {
+        return new XPath(xpath);
     }
 
     public Object getDocumentNode(Object contextNode)
