@@ -367,7 +367,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
                         }
                     }
                 }
-           		newNodeSet.addAll(eachStep.getPredicateSet().evaluatePredicates(
+                newNodeSet.addAll(eachStep.getPredicateSet().evaluatePredicates(
                                     interimSet,context.getContextSupport() ));
                 interimSet.clear();
             }

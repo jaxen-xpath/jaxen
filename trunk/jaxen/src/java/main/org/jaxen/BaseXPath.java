@@ -654,7 +654,7 @@ public class BaseXPath implements XPath, Serializable
      */
     public Navigator getNavigator()
     {
-	return navigator;
+    return navigator;
     }
     
     

@@ -245,9 +245,9 @@ class DefaultVariableReferenceExpr extends DefaultExpr implements VariableRefere
                                          getVariableName() );
 
     }
-	
+    
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
     }
 }

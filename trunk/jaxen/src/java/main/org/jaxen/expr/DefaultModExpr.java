@@ -192,8 +192,8 @@ class DefaultModExpr extends DefaultMultiplicativeExpr
 
     }
 
-	public void accept(Visitor visitor)
-	{
+    public void accept(Visitor visitor)
+    {
         visitor.visit(this);
     }
 }

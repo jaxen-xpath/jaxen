@@ -173,10 +173,10 @@ public class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
     {
 
         return getAxisName() + "::text()" + super.getText();
-	}
-	
+    }
+    
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
     }
 }

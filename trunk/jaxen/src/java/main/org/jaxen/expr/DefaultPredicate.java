@@ -213,9 +213,9 @@ class DefaultPredicate implements Predicate
     }
 
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
-    }	
+    }   
 
 }
 

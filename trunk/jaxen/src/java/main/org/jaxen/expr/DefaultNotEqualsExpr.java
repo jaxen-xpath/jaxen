@@ -166,23 +166,23 @@ class DefaultNotEqualsExpr extends DefaultEqualityExpr
 
   
 
-	protected boolean evaluateObjectObject( Object lhs, Object rhs )
+    protected boolean evaluateObjectObject( Object lhs, Object rhs )
     {
-		if( eitherIsNumber( lhs, rhs ) )
-	    {
-	
-			if( NumberFunction.isNaN( (Double) lhs ) || NumberFunction.isNaN( (Double) rhs ) )
-	        {
-				return true;
-			}
-	
-		}
-	    return !lhs.equals( rhs );
-	}
+        if( eitherIsNumber( lhs, rhs ) )
+        {
+    
+            if( NumberFunction.isNaN( (Double) lhs ) || NumberFunction.isNaN( (Double) rhs ) )
+            {
+                return true;
+            }
+    
+        }
+        return !lhs.equals( rhs );
+    }
 
 
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
-    }	
+    }   
 }

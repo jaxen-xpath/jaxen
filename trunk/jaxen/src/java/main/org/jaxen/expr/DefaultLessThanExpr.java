@@ -156,8 +156,8 @@ class DefaultLessThanExpr extends DefaultRelationalExpr
 
     }    
 
-	public void accept(Visitor visitor)
-	{
+    public void accept(Visitor visitor)
+    {
         visitor.visit(this);
     }  
 

@@ -109,7 +109,7 @@ public class NamespaceTest extends NodeTest {
     
     public double getPriority() 
     {
-    	return -0.25;
+        return -0.25;
     }
 
 

@@ -543,7 +543,7 @@ public class DefaultXPathFactory implements XPathFactory
                                     prefix,
 
                                     localName,
-									createPredicateSet());
+                                    createPredicateSet());
 
     }
 
@@ -603,7 +603,7 @@ public class DefaultXPathFactory implements XPathFactory
 
         return new DefaultProcessingInstructionNodeStep( iter,
                                                          piName,
-														 createPredicateSet() );
+                                                         createPredicateSet() );
 
     }
 
@@ -769,8 +769,8 @@ public class DefaultXPathFactory implements XPathFactory
 
     }
 
-	public PredicateSet	createPredicateSet() throws JaxenException{
-    	return new PredicateSet();
-	}
+    public PredicateSet createPredicateSet() throws JaxenException{
+        return new PredicateSet();
+    }
 }
 

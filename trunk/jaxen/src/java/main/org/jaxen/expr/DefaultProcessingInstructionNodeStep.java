@@ -149,7 +149,7 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
     public DefaultProcessingInstructionNodeStep(IterableAxis axis,
 
                                                 String name,
-												PredicateSet predicateSet)
+                                                PredicateSet predicateSet)
 
     {
 
@@ -217,9 +217,9 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
 
         return false;
     }
-	
+    
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
     }
 }

@@ -155,7 +155,7 @@ class DefaultGreaterThanExpr extends DefaultRelationalExpr
     return lhs.compareTo( rhs ) > 0;        
 
     }
-	
+    
     public void accept(Visitor visitor)
     {
         visitor.visit(this);

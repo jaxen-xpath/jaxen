@@ -199,7 +199,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep
                            String prefix,
 
                            String localName,
-						   PredicateSet predicateSet)
+                           PredicateSet predicateSet)
 
     {
 
@@ -419,7 +419,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep
     }
 
     public void accept(Visitor visitor)
-	{
+    {
         visitor.visit(this);
     }
 }

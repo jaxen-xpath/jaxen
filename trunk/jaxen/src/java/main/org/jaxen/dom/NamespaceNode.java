@@ -141,9 +141,9 @@ public class NamespaceNode implements Node
      */
     public NamespaceNode (Node parent, String name, String value)
     {
-	this.parent = parent;
-	this.name = name;
-	this.value = value;
+    this.parent = parent;
+    this.name = name;
+    this.value = value;
     }
 
 
@@ -156,15 +156,15 @@ public class NamespaceNode implements Node
      */
     NamespaceNode (Node parent, Node attribute)
     {
-	String name = attribute.getNodeName();
+    String name = attribute.getNodeName();
 
-	if (name.equals("xmlns"))
-	    this.name = "";
-	else
-	    this.name = name.substring(6); // the part after "xmlns:"
+    if (name.equals("xmlns"))
+        this.name = "";
+    else
+        this.name = name.substring(6); // the part after "xmlns:"
 
-	this.parent = parent;
-	this.value = attribute.getNodeValue();
+    this.parent = parent;
+    this.value = attribute.getNodeValue();
     }
 
 
@@ -181,7 +181,7 @@ public class NamespaceNode implements Node
      */
     public String getNodeName ()
     {
-	return name;
+    return name;
     }
 
 
@@ -192,7 +192,7 @@ public class NamespaceNode implements Node
      */
     public String getNodeValue ()
     {
-	return value;
+    return value;
     }
 
 
@@ -203,9 +203,9 @@ public class NamespaceNode implements Node
      * @exception DOMException always thrown.
      */
     public void setNodeValue (String value)
-	throws DOMException
+    throws DOMException
     {
-	no_mods();
+    no_mods();
     }
 
 
@@ -216,7 +216,7 @@ public class NamespaceNode implements Node
      */
     public short getNodeType ()
     {
-	return NAMESPACE_NODE;
+    return NAMESPACE_NODE;
     }
 
 
@@ -231,7 +231,7 @@ public class NamespaceNode implements Node
      */
     public Node getParentNode ()
     {
-	return parent;
+    return parent;
     }
 
 
@@ -242,7 +242,7 @@ public class NamespaceNode implements Node
      */
     public NodeList getChildNodes ()
     {
-	return new EmptyNodeList();
+    return new EmptyNodeList();
     }
 
 
@@ -253,7 +253,7 @@ public class NamespaceNode implements Node
      */
     public Node getFirstChild ()
     {
-	return null;
+    return null;
     }
 
 
@@ -264,7 +264,7 @@ public class NamespaceNode implements Node
      */
     public Node getLastChild ()
     {
-	return null;
+    return null;
     }
 
 
@@ -275,7 +275,7 @@ public class NamespaceNode implements Node
      */
     public Node getPreviousSibling ()
     {
-	return null;
+    return null;
     }
 
 
@@ -286,7 +286,7 @@ public class NamespaceNode implements Node
      */
     public Node getNextSibling ()
     {
-	return null;
+    return null;
     }
 
 
@@ -297,7 +297,7 @@ public class NamespaceNode implements Node
      */
     public NamedNodeMap getAttributes ()
     {
-	return null;
+    return null;
     }
 
 
@@ -308,8 +308,8 @@ public class NamespaceNode implements Node
      */
     public Document getOwnerDocument ()
     {
-				// FIXME: this could cause confusion
-	return (parent == null ? null : parent.getOwnerDocument());
+                // FIXME: this could cause confusion
+    return (parent == null ? null : parent.getOwnerDocument());
     }
 
 
@@ -320,10 +320,10 @@ public class NamespaceNode implements Node
      * @see Node#insertBefore
      */
     public Node insertBefore (Node newChild, Node refChild)
-	throws DOMException
+    throws DOMException
     {
-	no_mods();
-	return null;
+    no_mods();
+    return null;
     }
 
 
@@ -334,10 +334,10 @@ public class NamespaceNode implements Node
      * @see Node#replaceChild
      */
     public Node replaceChild (Node newChild, Node oldChild)
-	throws DOMException
+    throws DOMException
     {
-	no_mods();
-	return null;
+    no_mods();
+    return null;
     }
 
 
@@ -348,10 +348,10 @@ public class NamespaceNode implements Node
      * @see Node#removeChild
      */
     public Node removeChild (Node oldChild)
-	throws DOMException
+    throws DOMException
     {
-	no_mods();
-	return null;
+    no_mods();
+    return null;
     }
 
 
@@ -362,10 +362,10 @@ public class NamespaceNode implements Node
      * @see Node#appendChild
      */
     public Node appendChild (Node newChild)
-	throws DOMException
+    throws DOMException
     {
-	no_mods();
-	return null;
+    no_mods();
+    return null;
     }
 
 
@@ -376,7 +376,7 @@ public class NamespaceNode implements Node
      */
     public boolean hasChildNodes ()
     {
-	return false;
+    return false;
     }
 
 
@@ -389,7 +389,7 @@ public class NamespaceNode implements Node
      */
     public Node cloneNode (boolean deep)
     {
-	return new NamespaceNode(parent, name, value);
+    return new NamespaceNode(parent, name, value);
     }
 
 
@@ -401,7 +401,7 @@ public class NamespaceNode implements Node
      */
     public void normalize ()
     {
-	// no op
+    // no op
     }
 
 
@@ -414,7 +414,7 @@ public class NamespaceNode implements Node
      */
     public boolean isSupported (String feature, String version)
     {
-	return false;
+    return false;
     }
 
 
@@ -428,7 +428,7 @@ public class NamespaceNode implements Node
      */
     public String getNamespaceURI ()
     {
-	return null;
+    return null;
     }
 
 
@@ -442,7 +442,7 @@ public class NamespaceNode implements Node
      */
     public String getPrefix ()
     {
-	return null;
+    return null;
     }
 
 
@@ -453,9 +453,9 @@ public class NamespaceNode implements Node
      * @exception DOMException always thrown.
      */
     public void setPrefix (String prefix)
-	throws DOMException
+    throws DOMException
     {
-	no_mods();
+    no_mods();
     }
 
 
@@ -466,7 +466,7 @@ public class NamespaceNode implements Node
      */
     public String getLocalName ()
     {
-	return name;
+    return name;
     }
 
 
@@ -477,7 +477,7 @@ public class NamespaceNode implements Node
      */
     public boolean hasAttributes ()
     {
-	return false;
+    return false;
     }
 
 
@@ -487,10 +487,10 @@ public class NamespaceNode implements Node
      * @exception DOMException always thrown.
      */
     private void no_mods ()
-	throws DOMException
+    throws DOMException
     {
-	throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR,
-			       "Namespace node may not be modified");
+    throw new DOMException(DOMException.NO_MODIFICATION_ALLOWED_ERR,
+                   "Namespace node may not be modified");
     }
 
 
@@ -510,7 +510,7 @@ public class NamespaceNode implements Node
      */
     public int hashCode ()
     {
-	return hashCode(parent) + hashCode(name) + hashCode(value);
+    return hashCode(parent) + hashCode(name) + hashCode(value);
     }
 
 
@@ -526,18 +526,18 @@ public class NamespaceNode implements Node
      */
     public boolean equals (Object o)
     {
-	if (o == this)
-	    return true;
-	else if (o == null)
-	    return false;
-	else if (o instanceof NamespaceNode) {
-	    NamespaceNode ns = (NamespaceNode)o;
-	    return (equals(parent, ns.getParentNode()) &&
-		    equals(name, ns.getNodeName()) &&
-		    equals(value, ns.getNodeValue()));
-	} else {
-	    return false;
-	}
+    if (o == this)
+        return true;
+    else if (o == null)
+        return false;
+    else if (o instanceof NamespaceNode) {
+        NamespaceNode ns = (NamespaceNode)o;
+        return (equals(parent, ns.getParentNode()) &&
+            equals(name, ns.getNodeName()) &&
+            equals(value, ns.getNodeValue()));
+    } else {
+        return false;
+    }
     }
 
 
@@ -550,7 +550,7 @@ public class NamespaceNode implements Node
      */
     private int hashCode (Object o)
     {
-	return (o == null ? 0 : o.hashCode());
+    return (o == null ? 0 : o.hashCode());
     }
 
 
@@ -564,8 +564,8 @@ public class NamespaceNode implements Node
      */
     private boolean equals (Object a, Object b)
     {
-	return ((a == null && b == null) ||
-		(a != null && a.equals(b)));
+    return ((a == null && b == null) ||
+        (a != null && a.equals(b)));
     }
 
 
@@ -594,22 +594,22 @@ public class NamespaceNode implements Node
     class EmptyNodeList implements NodeList
     {
 
-	/**
-	 * @see NodeList#getLength
-	 */
-	public int getLength ()
-	{
-	    return 0;
-	}
+    /**
+     * @see NodeList#getLength
+     */
+    public int getLength ()
+    {
+        return 0;
+    }
 
 
-	/**
-	 * @see NodeList#item
-	 */
-	public Node item(int index)
-	{
-	    return null;
-	}
+    /**
+     * @see NodeList#item
+     */
+    public Node item(int index)
+    {
+        return null;
+    }
     }
 }
 
