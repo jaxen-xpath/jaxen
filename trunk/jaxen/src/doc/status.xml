@@ -7,6 +7,13 @@
       <section title="Changes in CVS since last release">
       </section>
       
+      <section title="Jaxen 1.0 FCS">
+        <p>Applied patch submitted by Shawn Bayern to fix the booleanValueOf() method.
+        </p>
+        <p>Added licenses to each source file and a proper manifest to the build at last ;-).
+        </p>
+      </section>
+      
       <section title="Jaxen 1.0 RC1">
         <p>There is now an XPath interface in the org.jaxen package to represent any XPath implementation.
           So this means that the XPath API of Jaxen is now polymorphic, the same interface can work with 
