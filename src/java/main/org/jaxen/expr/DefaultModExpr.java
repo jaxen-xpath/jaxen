@@ -85,10 +85,7 @@ class DefaultModExpr extends DefaultMultiplicativeExpr
         Number rhsValue = NumberFunction.evaluate( getRHS().evaluate( context ),
                                                    context.getNavigator() );
 
-        assertInteger( lhsValue );
-        assertInteger( rhsValue );
-
-        int result = lhsValue.intValue() % rhsValue.intValue();
+        double result = lhsValue.doubleValue() % rhsValue.doubleValue();
         return new Double( result );
     }
 
