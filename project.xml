@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <name>jaxen</name>
   <id>jaxen</id>
-  <currentVersion>1.1-beta-2</currentVersion>
+  <currentVersion>1.1-beta-3</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -180,7 +180,12 @@
       <id>junit</id>
       <version>3.8.1</version>
     </dependency>
-    
+
+    <dependency>
+      <id>xom</id>
+      <version>1.0d21</version>
+    </dependency>
+
   </dependencies>
 
   <build>
