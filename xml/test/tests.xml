@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests>
+
+  <!-- test name -->
+
+  <document url="xml/web.xml">
+    <context select="/">
+ 
+      <test select="*" count="1">
+        <valueOf select="name()">web-app</valueOf>
+      </test>
+
+      <!-- NOTE that the child::node() tests only work if the
+           XML document does not comments or PIs
+      -->
+ 
+      <test select="./*" count="1">
+        <valueOf select="name()">web-app</valueOf>
+      </test>
+      <test select="child::*" count="1">
+        <valueOf select="name()">web-app</valueOf>
+      </test>
+      <test select="/*" count="1">
+        <valueOf select="name()">web-app</valueOf>
+      </test>
+      <test select="/child::node()" count="1">
+        <valueOf select="name(.)">web-app</valueOf>
+      </test>
+      <test select="child::node()" count="1">
+        <valueOf select="name(.)">web-app</valueOf>
+      </test>
+
+      <!-- empty names -->
+
+      <valueOf select="name()"></valueOf>
+      <valueOf select="name(.)"></valueOf>
+      <valueOf select="name(parent::*)"></valueOf>
+      <valueOf select="name(/)"></valueOf>
+      <valueOf select="name(/.)"></valueOf>
+      <valueOf select="name(/self::node())"></valueOf>
+
+      <!-- name of root elemet -->
+      <valueOf select="name(node())">web-app</valueOf>
+      <valueOf select="name(/node())">web-app</valueOf>
+      <valueOf select="name(/*)">web-app</valueOf>
+      <valueOf select="name(/child::*)">web-app</valueOf>
+      <valueOf select="name(/child::node())">web-app</valueOf>
+      <valueOf select="name(/child::node())">web-app</valueOf>
+      <valueOf select="name(child::node())">web-app</valueOf>
+      <valueOf select="name(./*)">web-app</valueOf>
+      <valueOf select="name(*)">web-app</valueOf>
+    </context>
+
+    <context select="/*">
+      <!-- empty names -->
+      <valueOf select="name(..)"></valueOf>
+      <valueOf select="name(parent::node())"></valueOf>
+      <valueOf select="name(parent::*)"></valueOf>
+
+      <!-- name of root elemet -->
+      <valueOf select="name()">web-app</valueOf>
+      <valueOf select="name(.)">web-app</valueOf>
+      <valueOf select="name(../*)">web-app</valueOf>
+      <valueOf select="name(../child::node())">web-app</valueOf>
+    </context>
+  </document>
+
+  <document url="xml/much_ado.xml">
+    <context select="/">
+      <valueOf select="/PLAY/TITLE">Much Ado about Nothing</valueOf>
+    </context>
+  </document>
+
+ 
+  
+  <document url="xml/moreover.xml">
+    <context select="/">
+      <test select="/child::node()" count="1"/>
+
+      <test select="/*" count="1"/>
+
+      <test select="/*/*[@id]" count="20"/>
+
+      <test select="/moreovernews/article[@id='_13563275']">
+        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+      </test>
+      <test select="//article[@id='_13563275']">
+        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+      </test>
+      <test select="//*[@id='_13563275']">
+        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+      </test>
+      <test select="/child::node()/child::node()[@id='_13563275']">
+        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+      </test>
+      <test select="/*/*[@id='_13563275']">
+        <valueOf select="url">http://c.moreover.com/click/here.pl?x13563273</valueOf>
+      </test>
+    </context>
+  </document>
+
+
+  <!-- test predicates -->
+
+  <document url="xml/nitf.xml">
+    <context select="/nitf/head/docdata">
+      <test select="doc-id[@regsrc='AP' and @id-string='D76UIMO80']" count="1"/>
+    </context>
+    <context select="/nitf/head">
+      <test select="meta[@name='ap-cycle']" count="1"/>
+      <test select="meta[@content='AP']" count="1"/>
+      <test select="meta[@name and @content]" count="8"/>
+      <test select="meta[@name='ap-cycle' and @content='AP']" count="1"/>
+      <test select="meta[@name != 'ap-cycle']" count="7"/>
+    </context>
+    <context select="/">
+      <test select="/nitf/head/meta[@name='ap-cycle']" count="1"/>
+      <test select="/nitf/head/meta[@content='AP']" count="1"/>
+      <test select="/nitf/head/meta[@name and @content]" count="8"/>
+      <test select="/nitf/head/meta[@name='ap-cycle' and @content='AP']" count="1"/>
+      <test select="/nitf/head/meta[@name != 'ap-cycle']" count="7"/>
+    </context>
+  </document>
+
+  <!-- test namespace -->
+
+  <document url="xml/namespaces.xml">
+    <context select="/">
+      <test select="/foo:a/b" count="1"/>
+      <test select="/foo:a/*:f" count="1"/>
+      <test select="/foo:a/bar:f" count="1"/>
+      <test select="/*[namespace-uri()='fooNamespace' and local-name()='a']" count="1"/>
+      <test select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']" count="1"/>
+      <test select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']/*[local-name()='y' and namespace-uri()='fooNamespace']" count="1"/>
+      <test select="/*" count="1"/>
+    </context>
+    <context select="/">
+      <valueOf select="/foo:a/b/c">Hello</valueOf>
+      <valueOf select="/foo:a/foo:d/foo:e">Hey</valueOf>
+      <valueOf select="/*:a/*:d/*:e">Hey</valueOf>
+      <valueOf select="/foo:a/*:d/*:e">Hey</valueOf>
+      <valueOf select="/foo:a/*:f/*:g">Hey2</valueOf>
+      <valueOf select="/foo:a/*:f/bar:g">Hey2</valueOf>
+      <valueOf select="/foo:a/*:x/*:y">Hey3</valueOf>
+      <valueOf select="/foo:a/*:x/alias:y">Hey3</valueOf>
+      <valueOf select="/foo:a/alias:x/alias:y">Hey3</valueOf>
+      <valueOf select="/foo:a/*:x/foo:y">Hey3</valueOf>
+      <valueOf select="/foo:a/foo:x/foo:y">Hey3</valueOf>
+      <valueOf select="/*[local-name()='a' and namespace-uri()='fooNamespace']/*[local-name()='x' and namespace-uri()='fooNamespace']/*[local-name()='y' and namespace-uri()='fooNamespace']">Hey3</valueOf>
+    </context>
+  </document>
+
+
+  <document url="xml/defaultNamespace.xml">
+    <context select="/">
+       <test select="/*:a/*:b/*:c" count="1"/>
+      <test select="/x:a/x:b/x:c" count="0"/>
+      <test select="/a/b/c" count="0"/>
+    </context>
+  </document>
+
+
+  <!-- test positioning -->
+
+  <document url="xml/fibo.xml">
+    <context select="/">
+      <test select="/*/fibonacci[position() &lt; 10]" count="9"/>
+    </context>
+  </document>
+
+</tests>

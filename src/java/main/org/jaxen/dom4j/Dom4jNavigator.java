@@ -136,9 +136,16 @@ public class Dom4jNavigator extends DefaultNavigator
 
     public Object getDocumentNode(Object contextNode)
     {
-        Element elem = (Element) contextNode;
-
-        return elem.getDocument();
+        if ( contextNode instanceof Document ) 
+        {
+            return contextNode;
+        }
+        else if ( contextNode instanceof Node ) 
+        {
+            Node node = (Node) contextNode;
+            return node.getDocument();
+        }
+        return null;
     }
 
     public String getElementStringValue(Object obj)
