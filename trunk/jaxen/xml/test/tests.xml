@@ -445,4 +445,13 @@
    </context>
   </document>
 
+  <document url="xml/simple.xml">
+      <!-- testing for correct behaviour of AbsoluteLocationPath -->
+   <context select="/root/a">
+    <valueOf select="concat( ., /root/b )">ab</valueOf>
+    <valueOf select="concat( ../b, . )">ba</valueOf>
+    <valueOf select="concat( /root/b, . )">ba</valueOf>
+   </context>
+  </document>
+
  </tests>

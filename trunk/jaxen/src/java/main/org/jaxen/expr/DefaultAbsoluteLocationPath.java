@@ -60,8 +60,8 @@ public class DefaultAbsoluteLocationPath extends DefaultLocationPath
 
         list.add( docNode );
 
-        context.setNodeSet( list );
+        absContext.setNodeSet( list );
 
-        return super.evaluate( context );
+        return super.evaluate( absContext );
     }
 }
