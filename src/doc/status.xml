@@ -5,6 +5,9 @@
     
     <section title="Change History">
       <section title="Changes in CVS since last release">
+      </section>
+      
+      <section title="Jaxen 1.0 RC1">
         <p>There is now an XPath interface in the org.jaxen package to represent any XPath implementation.
           So this means that the XPath API of Jaxen is now polymorphic, the same interface can work with 
           any model.
