@@ -77,9 +77,7 @@ public class AnyNodeTest extends NodeTest {
         return instance;
     }
     
-    public AnyNodeTest() 
-    {
-    }
+    private AnyNodeTest() {}
     
     /** @return true if the pattern matches the given node
       */
