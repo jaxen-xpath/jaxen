@@ -1,163 +1,58 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<project name="jaxen" default="maven:jar" basedir=".">
+<project default="jar" name="jaxen" basedir=".">
 
-    <!-- Give user a chance to override without editing this file
-         (and without typing -D each time they invoke a target) -->
+  <target name="jar" depends="get-deps">
 
-    <!-- Allow any user specific values to override the defaults -->  
-    <property file="${user.home}/build.properties" />
+    <mkdir dir="target/classes"></mkdir>
+
+    <javac destdir="target/classes" deprecation="false" debug="false" optimize="false" excludes="**/package.html">
+      <src>
+        <pathelement location="src/java/main"></pathelement>
+      </src>
+      <classpath>
+        <fileset dir="lib">
+          <include name="*.jar"></include>
+        </fileset>
+      </classpath>
+    </javac>
+
+    <jar jarfile="target/jaxen-1.0-dev.jar" excludes="**/package.html" basedir="target/classes"></jar>
+
+  </target>
+
+  <target name="get-deps">
   
-    <!-- Allow user defaults for this project -->
-    <property file="build.properties" />
+    <mkdir dir="lib"></mkdir>
+    
+    <get dest="lib/saxpath-1.0-FCS.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/saxpath-1.0-FCS.jar"></get>
+    <get dest="lib/dom4j-1.4-dev.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/dom4j-1.4-dev.jar"></get>
+    <get dest="lib/EXML-5.0-b2.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/EXML-5.0-b2.jar"></get>
+    <get dest="lib/jdom-b8.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/jdom-b8.jar"></get>
+    <get dest="lib/xmlParserAPIs-2.0.2.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/xmlParserAPIs-2.0.2.jar"></get>
+    <get dest="lib/xercesImpl-2.0.0.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/xercesImpl-2.0.0.jar"></get>
+    <get dest="lib/junit-3.7.jar" usetimestamp="true" src="http://jakarta.apache.org/turbine/jars/junit-3.7.jar"></get>
   
-    <!-- Set default values for the build -->
-    <property file="project.properties" />
+  </target>
 
-    <!-- maven:start -->
+  
+  
+  
+  
+  
+  
+  
+  
 
-    <!-- ======================================================== -->
-    <!-- D E L E G A T O R S                                      -->
-    <!-- ======================================================== -->
+  <target name="install-maven">
 
-    <target name="maven:gump-descriptor">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="gump-descriptor"/>
-    </target>
+    
 
-    <target name="maven:maven-update">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="maven-update"/>
-    </target>
-
-    <target name="maven:update-jars">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="update-jars"/>
-    </target>
-
-    <target name="maven:jar">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="jar"/>
-    </target>
-
-    <target name="maven:docs-quick">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="docs-quick"/>
-    </target>
-
-    <target name="maven:run-singletest">
-        <ant antfile="${maven.home}/plugins/test/build.xml" target="run-singletest"/>
-    </target>
-
-    <target name="maven:compile">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="compile"/>
-    </target>
-
-    <target name="maven:fo">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="fo"/>
-    </target>
-
-    <target name="maven:cvs-change-log">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="cvs-change-log"/>
-    </target>
-
-    <target name="maven:war">
-        <ant antfile="${maven.home}/plugins/j2ee/build.xml" target="war"/>
-    </target>
-
-    <target name="maven:generate-reactor">
-        <ant antfile="${maven.home}/plugins/reactor/build.xml" target="generate-reactor"/>
-    </target>
-
-    <target name="maven:cross-ref">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="cross-ref"/>
-    </target>
-
-    <target name="maven:deploy-site">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="deploy-site"/>
-    </target>
-
-    <target name="maven:ear">
-        <ant antfile="${maven.home}/plugins/j2ee/build.xml" target="ear"/>
-    </target>
-
-    <target name="maven:install-jar">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="install-jar"/>
-    </target>
-
-    <target name="maven:task-list">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="task-list"/>
-    </target>
-
-    <target name="maven:docs">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="docs"/>
-    </target>
-
-    <target name="maven:site">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="site"/>
-    </target>
-
-    <target name="maven:deploy-dist">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="deploy-dist"/>
-    </target>
-
-    <target name="maven:javadocs">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="javadocs"/>
-    </target>
-
-    <target name="maven:announce">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="announce"/>
-    </target>
-
-    <target name="maven:check-source">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="check-source"/>
-    </target>
-
-    <target name="maven:dist">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="dist"/>
-    </target>
-
-    <target name="maven:dist-build">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="dist-build"/>
-    </target>
-
-    <target name="maven:metrics">
-        <ant antfile="${maven.home}/plugins/metrics/build.xml" target="metrics"/>
-    </target>
-
-    <target name="maven:clean">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="clean"/>
-    </target>
-
-    <target name="maven:env">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="env"/>
-    </target>
-
-    <target name="maven:test">
-        <ant antfile="${maven.home}/plugins/test/build.xml" target="test"/>
-    </target>
-
-    <target name="maven:pdf">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="pdf"/>
-    </target>
-
-    <target name="maven:iutest">
-        <ant antfile="${maven.home}/plugins/iutest/build.xml" target="iutest"/>
-    </target>
-
-    <target name="maven:activity-log">
-        <ant antfile="${maven.home}/plugins/docs/build.xml" target="activity-log"/>
-    </target>
-
-    <target name="maven:verify-project">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="verify-project"/>
-    </target>
-
-    <target name="maven:validate-pom">
-        <ant antfile="${maven.home}/plugins/core/build.xml" target="validate-pom"/>
-    </target>
-
-    <target name="maven:validate-war">
-        <ant antfile="${maven.home}/plugins/j2ee/build.xml" target="validate-war"/>
-    </target>
-
-    <!-- maven:end -->
-
-    <target name="clean" depends="maven:clean"/>
+    <get dest="${user.home}/" usetimestamp="true" src="${maven.repo.remote}maven/"></get>
+    
+    <unjar dest="${maven.home}" src="${user.home}/"></unjar>
+    
+  </target>
 
 </project>
+    

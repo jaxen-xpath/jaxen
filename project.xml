@@ -137,7 +137,7 @@
 
     <dependency>
       <id>EXML</id>
-      <version>4.1</version>
+      <version>5.0-b2</version>
     </dependency>
 
     <dependency>
@@ -146,10 +146,26 @@
     </dependency>
 
     <dependency>
+      <id>xmlParserAPIs</id>
+      <version>2.0.2</version>
+    </dependency>
+
+    <dependency>
+      <id>xercesImpl</id>
+      <version>2.0.0</version>
+    </dependency>
+
+    <dependency>
+      <id>junit</id>
+      <version>3.7</version>
+    </dependency>
+    
+<!--    
+    <dependency>
       <id>jaxp</id>
       <version>1.1</version>
     </dependency>
-
+-->
   </dependencies>
 
   <build>
