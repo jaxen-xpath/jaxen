@@ -553,7 +553,9 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Test if a node is an attribute.
+     * Test if a node is an attribute. <code>xmlns</code> and 
+     * <code>xmlns:pre</code> attributes do not count as attributes
+     * for the purposes of XPath. 
      *
      * @param object the target node
      * @return true if the node is an attribute, false otherwise
@@ -561,7 +563,8 @@ public class DocumentNavigator extends DefaultNavigator
     public boolean isAttribute (Object object)
     {
         return (object instanceof Node) &&
-            (((Node)object).getNodeType() == Node.ATTRIBUTE_NODE);
+            (((Node)object).getNodeType() == Node.ATTRIBUTE_NODE)
+            && ! "http://www.w3.org/2000/xmlns/".equals(((Node) object).getNamespaceURI());
     }
 
 
