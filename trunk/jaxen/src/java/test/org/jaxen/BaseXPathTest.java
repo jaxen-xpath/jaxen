@@ -62,37 +62,34 @@
 
 package org.jaxen;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect the org.jaxen. tests.
+ * Tests for org.jaxen.BaseXPath.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b4
  *
  */
-public class CoreTests extends TestCase {
+public class BaseXPathTest extends TestCase {
 
+
+    public BaseXPathTest(String name) {
+        super(name);
+    }
     
-    public CoreTests(String name) {
-        super(name);   
+    public void testSelectSingleNodeForContext() throws JaxenException {
+        
+        BaseXPath xpath = new BaseXPath("1 + 2");
+        
+        String stringValue = xpath.stringValueOf(xpath);
+        assertEquals("3", stringValue);
+        
+        Number numberValue = xpath.numberValueOf(xpath);
+        assertEquals(3, numberValue.doubleValue(), 0.00001);
+        
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        return result;
-        
-    }
-
-    
 }

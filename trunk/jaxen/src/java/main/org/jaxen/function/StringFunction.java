@@ -118,7 +118,7 @@ public class StringFunction implements Function
                 // do not recurse: only first list should unwrap
                 obj = list.get(0);
             }
-            if (nav.isElement(obj) || nav.isDocument(obj))
+            if (nav != null && (nav.isElement(obj) || nav.isDocument(obj)))
             {
                 Iterator descendantAxisIterator = nav.getDescendantAxisIterator(obj);
                 StringBuffer sb = new StringBuffer();
@@ -132,23 +132,23 @@ public class StringFunction implements Function
                 }
                 retval = sb.toString();
             }
-            else if (nav.isAttribute(obj))
+            else if (nav != null && nav.isAttribute(obj))
             {
                 retval = nav.getAttributeStringValue(obj);
             }
-            else if (nav.isText(obj))
+            else if (nav != null && nav.isText(obj))
             {
                 retval = nav.getTextStringValue(obj);
             }
-            else if (nav.isProcessingInstruction(obj))
+            else if (nav != null && nav.isProcessingInstruction(obj))
             {
                 retval = nav.getProcessingInstructionData(obj);
             }
-            else if (nav.isComment(obj))
+            else if (nav != null && nav.isComment(obj))
             {
                 retval = nav.getCommentStringValue(obj);
             }
-            else if (nav.isNamespace(obj))
+            else if (nav != null && nav.isNamespace(obj))
             {
                 retval = nav.getNamespaceStringValue(obj);
             }
