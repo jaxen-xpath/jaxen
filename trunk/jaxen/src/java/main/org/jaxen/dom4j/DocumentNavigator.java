@@ -21,6 +21,7 @@ import org.dom4j.Text;
 import org.dom4j.io.SAXReader;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Iterator;
 
@@ -175,15 +176,18 @@ public class DocumentNavigator extends DefaultNavigator
 
         Element element = (Element) contextNode;
         List nsList = new ArrayList();
-        Namespace ns = element.getNamespace();
-        if ( ns != Namespace.XML_NAMESPACE && ns.getURI().length() > 0 ) {
-            nsList.add( ns.asXPathResult( element ) );
-        }
-        List declaredNS = element.additionalNamespaces();
-        for ( Iterator iter = declaredNS.iterator(); iter.hasNext(); )
-        {
-            Namespace namespace = (Namespace) iter.next();
-            nsList.add( namespace.asXPathResult( element ) );
+        HashSet prefixes = new HashSet();
+        for ( Element context = element; context != null; context = context.getParent() ) {
+            List declaredNS = context.declaredNamespaces();
+            for ( Iterator iter = declaredNS.iterator(); iter.hasNext(); )
+            {
+                Namespace namespace = (Namespace) iter.next();
+                String prefix = namespace.getPrefix();
+                if ( ! prefixes.contains( prefix ) ) {
+                    prefixes.add( prefix );
+                    nsList.add( namespace.asXPathResult( element ) );
+                }
+            }
         }
         nsList.add( Namespace.XML_NAMESPACE.asXPathResult( element ) );
         return nsList.iterator();
