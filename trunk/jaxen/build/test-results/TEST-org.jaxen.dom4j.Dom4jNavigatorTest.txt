@@ -1,4 +1,0 @@
-Testsuite: org.jaxen.dom4j.Dom4jNavigatorTest
-Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.452 sec
-
-Testcase: testOneStep took 0.45 sec
