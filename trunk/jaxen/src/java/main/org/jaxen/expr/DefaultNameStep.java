@@ -220,8 +220,8 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
         // full case
         Map unique = new IdentityHashMap();
-        List interimSet = new ArrayList();
-        List newNodeSet = new ArrayList();
+        List interimSet = new ArrayList(contextSize);
+        List newNodeSet = new ArrayList(contextSize);
         
         if (namedAccess) {
             String uri = support.translateNamespacePrefixToUri(prefix);
@@ -257,8 +257,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 }
 
                 // ensure only unique matching nodes in the result
-                // XXX This iterator goes in the wrong order for descendant axes
-                // breadth-first instead of depth first; this is where the reshuffling happens
                 while (axisNodeIter.hasNext()) {
                     Object eachAxisNode = axisNodeIter.next();
 
