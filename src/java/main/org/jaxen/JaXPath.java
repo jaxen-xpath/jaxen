@@ -1,6 +1,7 @@
 
 package org.jaxen;
 
+import org.jaxen.expr.Expr;
 import org.jaxen.expr.XPath;
 import org.jaxen.function.BooleanFunction;
 import org.jaxen.function.StringFunction;
@@ -96,6 +97,11 @@ class JaXPath
                                         context.getNavigator() );
     }
 
+    public Expr getRootExpr() 
+    {
+        return xpath.getRootExpr();
+    }
+    
     public String toString()
     {
         return this.xpath.getText();
