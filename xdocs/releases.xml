@@ -10,10 +10,18 @@
     <section name="Official Builds">
       <p>
       Release builds can be found <a href="http://prdownloads.sourceforge.net/jaxen">here</a>.
+The current release version is 1.0.
       </p>
 
       <p>
       Beta builds can be found <a href="http://www.ibiblio.org/maven/jaxen/distributions/">here</a>.
+The current version is 1.1 beta 4. 
+1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. Even though it's still officially a beta, 
+this release
+is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
+With
+a few small exceptions (e.g. the the document() function has moved to the org.jaxen.function.xslt package and the ElectricXML navigator has been deleted) 1.1
+is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <p>
@@ -30,6 +38,8 @@
       <p>
       Nightly builds have been temporarily suspended as we ramp up
       with using <a href="http://maven.apache.org/">Maven</a>.
+      However, you can grab a <a href="http://cvs.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. To build Jaxen, you'll need to have maven installed. Assuming you do you should be able to just type "maven jar" at the command line in the jaxen directory to create
+a JAR archive.
       </p>
     </section>
 
