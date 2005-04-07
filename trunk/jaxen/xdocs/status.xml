@@ -6,18 +6,37 @@
     <title>Status</title>
   </properties>
 
-
   <body>
     
     <section name="Change History">
     <section name="Changes in CVS since last release">
-      <p>Applied Elliotte's suggestions and moved the document() function 
-        into the org.jaxen.function.xslt package
-        to better reflect the fact that it is an XSLT function rather than XPath 1.0
-        as well as adding the lang() function to the list of known problems.
-        </p>
+      <p>
+        Various updates to the web site. 
+      </p>
     </section>
       
+    <section name="Jaxen 1.1 Beta 4">
+    
+      <p>1.1 is a major upgrade that significantly improves jaxen's conformance to the
+         underlying XPath specs. Even though it's officially a beta, it is a vast 
+         improvement over 1.0, and all users are strongly encouraged to upgrade.
+         Witha  few small exceptions (e.g. the the document() function 
+        has moved to  the org.jaxen.function.xslt package and 
+        the ElectricXML navigator has been deleted) it is backwards compatible 
+        with code written to the 1.0 APIs.
+      </p>
+    
+      <p>The lang() function is now supported.</p>
+      
+      <p>All queries return nodes in the correct document order, without exception. </p>
+      <p> ancestor::* and ancestor-or-self::* axes no longer include the document node</p>
+      <p> NaN is handled properly.</p>
+      <p> The mod operator works on floating point numbers.</p>
+      <p>Navigators are now included for <a href="http://www.xom.nu">XOM</a>, HTML DOM, and JavaBeans. These are experimental and may not be included in the final release.
+      </p>
+    </section>   
+    
+    
     <section name="Jaxen 1.0 FCS">
       <p>Applied patch submitted by Shawn Bayern to fix the booleanValueOf() method.
       </p>
@@ -44,9 +63,6 @@ XPath xpath = new DOMXPath( "//foo" );
 
 // for dom4j
 XPath xpath = new Dom4jXPath( "//foo" );
-
-// for Electric XML
-XPath xpath = new ElectricXPath( "//foo" );
 
 // for JDOM
 XPath xpath = new JDOMXPath( "//foo" );
@@ -99,8 +115,8 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
           since it would allow web developers to mix and match any
           all XML models.
         </li>
-        <li>The <code>format-number()</code> XSLT function is not yet implemented but would be useful. Any volunteers?
-        </li>
+<!--        <li>The <code>format-number()</code> XSLT function is not yet implemented but would be useful. Any volunteers?
+        </li> -->
         <li>Jaxen is already pretty 
         <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>,
         but we are sure it could use some more tuning.
@@ -108,12 +124,12 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         <li>selectSingleNode() and possibly the *ValueOf() methods should be return-fast
           as a performance improvement.
           For example selectSingleNode( "//foo" ) on a document with lots of &lt;foo/&gt;
-          elements would actually create a full nodeset of results then extract the first
+          elements would actually create a full node-set of results then extract the first
           element - rather than just returning as soon as the first one is found.
         </li>
         <li>Better user guides and examples!
         </li>
-        <li>Any Locale sepecific functions, such as <code>upper-case()</code> 
+        <li>Any Locale specific functions, such as <code>upper-case()</code> 
           and <code>lowercase-case()</code> could well follow the example of
           <a href="http://www.w3.org/TR/xquery-operators/#func-upper-case">XSLT 2.0</a>
           by using the <a href="http://www.unicode.org/unicode/reports/tr21/">Unicode case mappings</a>
@@ -123,9 +139,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
 
     <section name="Known problems">    
       <ul>
-        <li>The <code>lang()</code> XPath function is not yet implemented. Any volunteers?
-        </li>
-        <li><code>id()</code> function not implemented for most models, though it works fine for W3C DOM.</li>
+        <li><code>id()</code> function is not implemented for most models, though it works fine for W3C DOM.</li>
       </ul>
     </section>
 
