@@ -74,7 +74,6 @@ public class FollowingSiblingAxisIterator implements Iterator
 {
     private Object    contextNode;
     private Navigator navigator;
-
     private Iterator  siblingIter;
 
     public FollowingSiblingAxisIterator(Object contextNode,
@@ -92,12 +91,11 @@ public class FollowingSiblingAxisIterator implements Iterator
         if ( parent != null )
         {
             siblingIter = this.navigator.getChildAxisIterator( parent );
-            Object   eachChild = null;
             
             while ( siblingIter.hasNext() )
             {
-                eachChild = siblingIter.next();
-                if ( eachChild == this.contextNode ) break;
+                Object eachChild = siblingIter.next();
+                if ( eachChild.equals(this.contextNode) ) break;
             }
         }
         else {
