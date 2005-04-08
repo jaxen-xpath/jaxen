@@ -68,6 +68,6 @@ public class DescendantOrSelfAxisIterator extends DescendantAxisIterator
     public DescendantOrSelfAxisIterator(Object contextNode,
                                         Navigator navigator)
     {
-        super(navigator, new SingletonList(contextNode).iterator());
+        super(navigator, new SingleObjectIterator(contextNode));
     }
 }
