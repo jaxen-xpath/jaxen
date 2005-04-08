@@ -70,12 +70,13 @@ import org.jaxen.JaxenRuntimeException;
 
 public class AncestorOrSelfAxisIterator implements Iterator
 {
-    private Object contextNode;
+    private Object    contextNode;
     private Navigator navigator;
 
     public AncestorOrSelfAxisIterator(Object contextNode,
                                       Navigator navigator)
     {
+        // XXX should we throw a NullPointerException here if contextNode is null?
         this.contextNode = contextNode;
         this.navigator = navigator;
     }
@@ -94,7 +95,7 @@ public class AncestorOrSelfAxisIterator implements Iterator
                 contextNode = navigator.getParentNode(contextNode);
                 return result;
             }
-            throw new NoSuchElementException();
+            throw new NoSuchElementException(); // XXX provide exception message
         }
         catch (UnsupportedAxisException e)
         {
