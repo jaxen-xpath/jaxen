@@ -73,8 +73,6 @@ public class AncestorAxisIterator extends AncestorOrSelfAxisIterator
     {
         super( contextNode,
                navigator );
-        if (hasNext()) {
-            next();
-        }
+        next();
     }
 }
