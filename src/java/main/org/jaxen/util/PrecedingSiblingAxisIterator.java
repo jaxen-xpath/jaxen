@@ -86,7 +86,10 @@ public class PrecedingSiblingAxisIterator implements Iterator
         this.navigator   = navigator;
 
         init();
-        stepAhead();
+        if ( siblingIter.hasNext() )
+        {
+            this.nextObj = siblingIter.next();
+        }
     }
 
     private void init() throws UnsupportedAxisException
@@ -102,12 +105,10 @@ public class PrecedingSiblingAxisIterator implements Iterator
             while ( childIter.hasNext() )
             {
                 Object eachChild = childIter.next();
-                
                 if ( eachChild.equals(this.contextNode) )
                 {
                     break;
                 }
-
                 siblings.addFirst( eachChild );
             }
             
@@ -133,8 +134,13 @@ public class PrecedingSiblingAxisIterator implements Iterator
         }
 
         Object obj = this.nextObj;
-        this.nextObj = null;
-        stepAhead();
+        if ( siblingIter.hasNext() )
+        {
+            this.nextObj = siblingIter.next();
+        }
+        else {
+            this.nextObj = null;
+        }
         return obj;
     }
 
@@ -143,12 +149,4 @@ public class PrecedingSiblingAxisIterator implements Iterator
         throw new UnsupportedOperationException();
     }
 
-    private void stepAhead()
-    {
-
-        if ( siblingIter.hasNext() )
-        {
-            this.nextObj = siblingIter.next();
-        }
-    }
 }
