@@ -66,7 +66,6 @@ package org.jaxen.util;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.jaxen.Navigator;
@@ -87,7 +86,6 @@ public class PrecedingSiblingAxisIterator implements Iterator
         this.navigator   = navigator;
 
         init();
-
         stepAhead();
     }
 
@@ -135,11 +133,8 @@ public class PrecedingSiblingAxisIterator implements Iterator
         }
 
         Object obj = this.nextObj;
-
         this.nextObj = null;
-
         stepAhead();
-
         return obj;
     }
 
@@ -155,14 +150,9 @@ public class PrecedingSiblingAxisIterator implements Iterator
             return;
         }
 
-        Object obj = null;
-
-        while ( siblingIter.hasNext() )
+        if ( siblingIter.hasNext() )
         {
-            obj = siblingIter.next();
-
-            this.nextObj = obj;
-            break;     
+            this.nextObj = siblingIter.next();
         }
     }
 }
