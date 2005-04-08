@@ -93,14 +93,13 @@ public class PrecedingSiblingAxisIterator implements Iterator
 
     private void init() throws UnsupportedAxisException
     {
+        
         Object parent = this.navigator.getParentNode( this.contextNode );
-
-        List siblings = Collections.EMPTY_LIST;
 
         if ( parent != null )
         {
             Iterator childIter = this.navigator.getChildAxisIterator( parent );
-            siblings = new LinkedList();
+            LinkedList siblings = new LinkedList();
             
             while ( childIter.hasNext() )
             {
@@ -111,11 +110,16 @@ public class PrecedingSiblingAxisIterator implements Iterator
                     break;
                 }
 
-                ((LinkedList)siblings).addFirst( eachChild );
+                siblings.addFirst( eachChild );
             }
+            
+            this.siblingIter = siblings.iterator();
+            
         }
-
-        this.siblingIter = siblings.iterator();
+        else {
+            this.siblingIter = Collections.EMPTY_LIST.iterator();
+        }
+        
     }
 
     public boolean hasNext()
