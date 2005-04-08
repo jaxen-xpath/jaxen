@@ -145,10 +145,6 @@ public class PrecedingSiblingAxisIterator implements Iterator
 
     private void stepAhead()
     {
-        if ( this.nextObj != null )
-        {
-            return;
-        }
 
         if ( siblingIter.hasNext() )
         {
