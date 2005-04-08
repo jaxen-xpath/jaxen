@@ -68,6 +68,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+import org.jaxen.JaxenConstants;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
@@ -116,7 +117,7 @@ public class PrecedingSiblingAxisIterator implements Iterator
             
         }
         else {
-            this.siblingIter = Collections.EMPTY_LIST.iterator();
+            this.siblingIter = JaxenConstants.EMPTY_ITERATOR;
         }
         
     }
