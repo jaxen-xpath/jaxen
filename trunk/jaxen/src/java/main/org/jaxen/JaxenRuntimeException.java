@@ -62,7 +62,7 @@ package org.jaxen;
 */
 
 /**
- * This class exists to wrap jaxen exceptions that otherwise wouldn't be propogated
+ * This class exists to wrap jaxen exceptions that otherwise wouldn't be propagated
  * up through the axis iterators.
  */
 public class JaxenRuntimeException extends RuntimeException
@@ -73,6 +73,10 @@ public class JaxenRuntimeException extends RuntimeException
     {
         super(jaxenException);
         this.jaxenException = jaxenException;
+    }
+
+    public JaxenRuntimeException(String message) {
+        super(message);
     }
 
     public JaxenException getJaxenException()
