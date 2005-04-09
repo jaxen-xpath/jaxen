@@ -73,7 +73,7 @@ final class Verifier {
      *
      * @param c <code>char</code> to check for XML name compliance.
      * @return <code>boolean</code> true if it's a name character, 
-     *                                false otherwise.
+     *                                false otherwise
      */
      static boolean isXMLNCNameCharacter(char c) {
     
@@ -99,11 +99,11 @@ final class Verifier {
     }
 
     /**
-     * This is a utility function for determining whether a specified character
+     * Determine whether a specified character
      * is a letter according to production 84 of the XML 1.0 specification.
      *
-     * @param c <code>char</code> to check for XML name compliance.
-     * @return <code>String</code> true if it's a letter, false otherwise.
+     * @param c <code>char</code> to check for XML name compliance
+     * @return <code>String</code> true if it's a letter, false otherwise
      */
     public static boolean isXMLLetter(char c) {
         // Note that order is very important here.  The search proceeds 
@@ -309,12 +309,12 @@ final class Verifier {
         if (c < 0x212A) return false;  if (c <= 0x212B) return true;
         if (c == 0x212E) return true;
         if (c < 0x2180) return false;  if (c <= 0x2182) return true;
-        if (c == 0x3007) return true;                          // ideographic
-        if (c < 0x3021) return false;  if (c <= 0x3029) return true;  // ideo
+        if (c == 0x3007) return true;                          
+        if (c < 0x3021) return false;  if (c <= 0x3029) return true;
         if (c < 0x3041) return false;  if (c <= 0x3094) return true;
         if (c < 0x30A1) return false;  if (c <= 0x30FA) return true;
         if (c < 0x3105) return false;  if (c <= 0x312C) return true;
-        if (c < 0x4E00) return false;  if (c <= 0x9FA5) return true;  // ideo
+        if (c < 0x4E00) return false;  if (c <= 0x9FA5) return true;
         if (c < 0xAC00) return false;  if (c <= 0xD7A3) return true;
       
         return false;
@@ -322,13 +322,13 @@ final class Verifier {
     }
 
     /**
-     * This is a utility function for determining whether a specified character
+     * Determine whether a specified character
      * is a combining character according to production 87
      * of the XML 1.0 specification.
      *
-     * @param c <code>char</code> to check.
+     * @param c <code>char</code> to check
      * @return <code>boolean</code> true if it's a combining character,
-     *         false otherwise.
+     *         false otherwise
      */
     public static boolean isXMLCombiningChar(char c) {
         // CombiningChar
@@ -457,12 +457,12 @@ final class Verifier {
     }
     
     /**
-     * This is a utility function for determining whether a specified 
+     * Determine whether a specified 
      * character is an extender according to production 88 of the XML 1.0
      * specification.
      *
-     * @param c <code>char</code> to check.
-     * @return <code>String</code> true if it's an extender, false otherwise.
+     * @param c <code>char</code> to check
+     * @return true if it's an extender, false otherwise
      */
     public static boolean isXMLExtender(char c) {
 
@@ -487,8 +487,7 @@ final class Verifier {
     }
       
     /**
-     * This is a utility function for determining whether a specified 
-     * Unicode character
+     * Determine whether a specified Unicode character
      * is a digit according to production 88 of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check for XML digit compliance
