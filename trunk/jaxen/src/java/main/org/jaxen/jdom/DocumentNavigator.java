@@ -349,7 +349,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
      * @param contextNode  the origin context node
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
-     * @param namespaceURI  the uri of the namespace of the attributes to return
+     * @param namespaceURI  the URI of the namespace of the attributes to return
      * @return an Iterator that traverses the named attributes, not null
      */
     public Iterator getAttributeAxisIterator(
@@ -367,7 +367,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         return JaxenConstants.EMPTY_ITERATOR;
     }
 
-    /** Returns a parsed form of the given xpath string, which will be suitable
+    /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on JDOM documents.
      */
     public XPath parseXPath (String xpath) throws SAXPathException
