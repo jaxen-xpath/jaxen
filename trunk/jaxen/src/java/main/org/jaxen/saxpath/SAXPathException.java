@@ -76,7 +76,7 @@ public class SAXPathException extends Exception
 
     /** Construct with a given message.
      *
-     *  @param msg The error message.
+     *  @param msg the error message
      */
     public SAXPathException(String msg)
     {
@@ -85,7 +85,7 @@ public class SAXPathException extends Exception
 
     /** Construct based on another exception
      *
-     *  @param src The error source.
+     *  @param src the error source
      */
     public SAXPathException(Throwable src)
     {
@@ -101,7 +101,7 @@ public class SAXPathException extends Exception
 	return cause;
     }
 
-    /** Overriden to print this exception's stack, followed by the
+    /** Overridden to print this exception's stack, followed by the
      *	source exception's, if any.
      */
     public void printStackTrace ()
@@ -109,7 +109,7 @@ public class SAXPathException extends Exception
 	printStackTrace ( System.err );
     }
 
-    /** Overriden to print this exception's stack, followed by the
+    /** Overridden to print this exception's stack, followed by the
      *	source exception's, if any.
      */
     public void printStackTrace ( java.io.PrintStream s )
@@ -121,7 +121,7 @@ public class SAXPathException extends Exception
 	}
     }
 
-    /** Overriden to print this exception's stack, followed by the
+    /** Overridden to print this exception's stack, followed by the
      *	source exception's, if any.
      */
     public void printStackTrace (java.io.PrintWriter s)
