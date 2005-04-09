@@ -65,7 +65,7 @@ package org.jaxen.jdom;
 import org.jdom.Element;
 import org.jdom.Namespace;
 
-/** Wrapper for jdom namespace nodes to give them a parent, as required
+/** Wrapper for JDOM namespace nodes to give them a parent, as required
  *  by the XPath data model.
  *
  *  @author Erwin Bolwidt
@@ -85,7 +85,7 @@ public class XPathNamespace
     }
 
     /** Creates a namespace-node wrapper for a namespace node that is assigned
-     *  to the given jdom element.
+     *  to the given JDOM element.
      */
     public XPathNamespace( Element jdomElement, Namespace jdomNamespace )
     {
@@ -93,7 +93,7 @@ public class XPathNamespace
         this.jdomNamespace = jdomNamespace;
     }
 
-    /** Returns the jdom element from which this namespace node has been 
+    /** Returns the JDOM element from which this namespace node has been 
      *  retrieved. The result may be null when the namespace node has not yet
      *  been assigned to an element.
      */
@@ -109,8 +109,8 @@ public class XPathNamespace
         this.jdomElement = jdomElement;
     }
 
-    /** Returns the jdom namespace object of this namespace node; the jdom
-     *  namespace object contains the prefix and uri of the namespace.
+    /** Returns the JDOM namespace object of this namespace node; the JDOM
+     *  namespace object contains the prefix and URI of the namespace.
      */
     public Namespace getJDOMNamespace()
     {
