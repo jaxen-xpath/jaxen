@@ -61,6 +61,8 @@
 
 package org.jaxen.saxpath.base;
 
+import org.jaxen.JaxenRuntimeException;
+
 
 
 class TokenTypes
@@ -190,7 +192,7 @@ class TokenTypes
             case ERROR:
                 return "(error)";
             default:
-                return null;
+                throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
         }
     }
 }
