@@ -64,6 +64,7 @@
 
 package org.jaxen.saxpath.helpers;
 
+import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathReader;
 
 /** Create an {@link org.jaxen.saxpath.XPathReader} from
@@ -92,15 +93,15 @@ public class XPathReaderFactory
     /** Create an <code>XPathReader</code> using the value of
      *  the <code>org.saxpath.driver</code> system property.
      *
-     *  @return An instance of the <code>XPathReader</code> specified
-     *          by the <code>org.saxpath.driver</code> property.
+     *  @return an instance of the <code>XPathReader</code> specified
+     *          by the <code>org.saxpath.driver</code> property
      *
-     *  @throws org.jaxen.saxpath.SAXPathException if the property is unset, or if
-     *          the class can not be instantiated for some reason.,
+     *  @throws SAXPathException if the property is  not set, or if
+     *          the class can not be instantiated for some reason,
      *          or if the class doesn't implement the <code>XPathReader</code>
-     *          interface.
+     *          interface
      */
-    public static XPathReader createReader() throws org.jaxen.saxpath.SAXPathException
+    public static XPathReader createReader() throws SAXPathException
     {
         String className = null;
 
@@ -127,11 +128,11 @@ public class XPathReaderFactory
             {
                 if ( securityException )
                 {
-                    throw new org.jaxen.saxpath.SAXPathException( "Reading of property " + DRIVER_PROPERTY + " disallowed." );
+                    throw new SAXPathException( "Reading of property " + DRIVER_PROPERTY + " disallowed." );
                 }
                 else
                 {
-                    throw new org.jaxen.saxpath.SAXPathException( "Property " + DRIVER_PROPERTY + " not set" );
+                    throw new SAXPathException( "Property " + DRIVER_PROPERTY + " not set" );
                 }
             }
         }
@@ -142,15 +143,15 @@ public class XPathReaderFactory
     /** Create an <code>XPathReader</code> using the passed
      *  in class name.
      *
-     *  @param className The name of the class which implements
+     *  @param className the name of the class that implements
      *         the <code>XPathReader</code> interface.
      *
-     *  @throws org.jaxen.saxpath.SAXPathException if the class can not be
+     *  @throws SAXPathException if the class can not be
      *          instantiated for some reason, or if the
      *          class doesn't implement the <code>XPathReader</code>
-     *          interface.
+     *          interface
      */
-    public static XPathReader createReader(String className) throws org.jaxen.saxpath.SAXPathException
+    public static XPathReader createReader(String className) throws SAXPathException
     {
         Class readerClass  = null;
         XPathReader reader = null;
@@ -159,7 +160,7 @@ public class XPathReaderFactory
         {
             // Use the full version of Class.forName(), so as to
             // work better in sandboxed environments, such as
-            // Servlet contains, and Applets.
+            // Servlet contains, and applets.
 
             readerClass = Class.forName( className,
                                          true,
@@ -170,12 +171,13 @@ public class XPathReaderFactory
             
             if ( ! XPathReader.class.isAssignableFrom( readerClass ) )
             {
-                throw new org.jaxen.saxpath.SAXPathException( "Class [" + className + "] does not implement the org.jaxen.saxpath.XPathReader interface." );
+                throw new SAXPathException( "Class [" + className 
+                  + "] does not implement the org.jaxen.saxpath.XPathReader interface." );
             }
         }
         catch (ClassNotFoundException e)
         {
-            throw new org.jaxen.saxpath.SAXPathException( e.getMessage() );
+            throw new SAXPathException( e );
         }
 
         try
@@ -184,16 +186,16 @@ public class XPathReaderFactory
         }
         catch (IllegalAccessException e)
         {
-            throw new org.jaxen.saxpath.SAXPathException( e.getMessage() );
+            throw new SAXPathException( e );
         }
         catch (InstantiationException e)
         {
-            throw new org.jaxen.saxpath.SAXPathException( e.getMessage() );
+            throw new SAXPathException( e );
         }
 
         if ( reader == null )
         {
-            throw new org.jaxen.saxpath.SAXPathException( "Unable to create XPathReader" );
+            throw new SAXPathException( "Unable to create XPathReader" );
         }
         
         return reader;
