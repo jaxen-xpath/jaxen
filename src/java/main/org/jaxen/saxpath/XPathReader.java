@@ -76,9 +76,9 @@ public interface XPathReader extends SAXPathEventSource
     /** Perform parsing of the textual XPath expression,
      *  and produce event callbacks to an {@link org.jaxen.saxpath.XPathHandler}.
      *
-     *  @param xpath The textual XPath expression to parse.
+     *  @param xpath the textual XPath expression to parse
      *
-     *  @throws org.jaxen.saxpath.SAXPathException In the event an error occurs.
+     *  @throws org.jaxen.saxpath.SAXPathException in the event an error occurs
      */
     void parse(String xpath) throws org.jaxen.saxpath.SAXPathException;
 }

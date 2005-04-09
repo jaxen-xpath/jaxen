@@ -118,10 +118,10 @@ public interface XPathHandler
 
     /** Receive notification of the start of a name step.
      *
-     *  @param axis The axis of this step.
-     *  @param prefix The namespace prefix for the name to test,
-     *         or the empty-string if no prefix is specified.
-     *  @param localName The local part of the name to test.
+     *  @param axis the axis of this step
+     *  @param prefix the namespace prefix for the name to test,
+     *         or the empty string if no prefix is specified
+     *  @param localName the local part of the name to test
      */
     void startNameStep(int axis,
                        String prefix,
@@ -133,7 +133,7 @@ public interface XPathHandler
 
     /** Receive notification of the start of a text() step.
      *
-     *  @param axis The axis of this step. 
+     *  @param axis the axis of this step
      */
     void startTextNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
 
@@ -143,7 +143,7 @@ public interface XPathHandler
 
     /** Receive notification of the start of a comment() step.
      *
-     *  @param axis The axis of this step.
+     *  @param axis the axis of this step
      */
     void startCommentNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
 
@@ -163,9 +163,9 @@ public interface XPathHandler
 
     /** Receive notification of the start of a processing-instruction(...) step.
      *
-     *  @param axis The axis of this step.
-     *  @param name The name of the processing-instruction, of
-     *         the empty-string if none is specified.
+     *  @param axis the axis of this step
+     *  @param name the name of the processing-instruction, or
+     *         the empty string if none is specified
      */
     void startProcessingInstructionNodeStep(int axis,
                                             String name) throws org.jaxen.saxpath.SAXPathException;
@@ -196,7 +196,7 @@ public interface XPathHandler
 
     /** Receive notification of the end of an 'or' expression.
      *
-     *  @param create Flag that indicates if this expression
+     *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions.
      */
@@ -208,7 +208,7 @@ public interface XPathHandler
 
     /** Receive notification of the end of an 'and' expression.
      *
-     *  @param create Flag that indicates if this expression
+     *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions.
      */
@@ -227,13 +227,13 @@ public interface XPathHandler
      */
     void endEqualityExpr(int equalityOperator) throws org.jaxen.saxpath.SAXPathException;
 
-    /** Receive notification of the start of a relational ('<', '>', '<=', or '>=') expression.
+    /** Receive notification of the start of a relational ('&lt;', '>', '&lt;=', or '>=') expression.
      */
     void startRelationalExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a relational ('<', '>', '<=', or '>=') expression.
      *
-     *  @param relationalOperator The operator specific to this particular
+     *  @param relationalOperator the operator specific to this particular
      *         relational expression.  If null, this expression
      *         is only a pass-through, and should not actually
      *         be instantiated.
@@ -246,7 +246,7 @@ public interface XPathHandler
 
     /** Receive notification of the end of an additive ('+' or '-') expression.
      *
-     *  @param additiveOperator The operator specific to this particular
+     *  @param additiveOperator the operator specific to this particular
      *         additive expression.  If null, this expression
      *         is only a pass-through, and should not actually
      *         be instantiated.
@@ -259,7 +259,7 @@ public interface XPathHandler
 
     /** Receive notification of the start of a multiplicative ('*', 'div' or 'mod') expression.
      *
-     *  @param multiplicativeOperator The operator specific to this particular
+     *  @param multiplicativeOperator the operator specific to this particular
      *         multiplicative expression.  If null, this expression
      *         is only a pass-through, and should not actually
      *         be instantiated.
@@ -272,10 +272,11 @@ public interface XPathHandler
 
     /** Receive notification of the end of a unary ('+' or '-') expression.
      *
-     *  @param unaryOperator The operator specific to this particular
+     *  @param unaryOperator the operator specific to this particular
      *         unary expression. If null, this expression is only
      *         a pass-through, and should not actually be instantiated.
-     *         If not {@link org.jaxen.saxpath.Operator#NO_OP}, it'll always be {@link org.jaxen.saxpath.Operator#NEGATIVE}.
+     *         If not {@link org.jaxen.saxpath.Operator#NO_OP}, it will 
+     *         always be {@link org.jaxen.saxpath.Operator#NEGATIVE}.
      */
     void endUnaryExpr(int unaryOperator) throws org.jaxen.saxpath.SAXPathException;
 
@@ -285,47 +286,47 @@ public interface XPathHandler
 
     /** Receive notification of the end of a union ('|') expression.
      *
-     *  @param create Flag that indicates if this expression
+     *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
-     *         a pass-through, based upon the grammar productions.
+     *         a pass-through, based upon the grammar productions
      */
     void endUnionExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a number expression.
      *
-     *  @param number The number value.
+     *  @param number the number value
      */
     void number(int number) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a number expression.
      *
-     *  @param number The number value.
+     *  @param number the number value
      */
     void number(double number) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a literal expression.
      *
-     *  @param literal The string literal value.
+     *  @param literal the string literal value
      */
     void literal(String literal) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a variable-reference expression.
      *
-     *  @param prefix The ns-uri prefix of the variable.
-     *  @param variableName The name of the variable.
+     *  @param prefix the namespace prefix of the variable
+     *  @param variableName the local name of the variable
      */
     void variableReference(String prefix,
                            String variableName) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a function call.
      *
-     *  @param prefix The ns-uri prefix of the function.
-     *  @param functionName The name of the function.
+     *  @param prefix the namespace prefix of the function
+     *  @param functionName the local name of the function
      */
     void startFunction(String prefix,
                        String functionName) throws org.jaxen.saxpath.SAXPathException;
 
-    /** Receive notification of the end of a function call.
+    /** Receive notification of the end of a function call
      */
     void endFunction() throws org.jaxen.saxpath.SAXPathException;
 }

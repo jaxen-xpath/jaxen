@@ -71,7 +71,7 @@ public class SAXPathParseException extends org.jaxen.saxpath.SAXPathException
 {
     /** Construct with the given message.
      *
-     *  @param msg The error message.
+     *  @param msg the error message
      */
     public SAXPathParseException(String msg)
     {
