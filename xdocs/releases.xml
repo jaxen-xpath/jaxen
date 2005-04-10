@@ -25,13 +25,25 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <p>
-      The latest official build is <strong>1.0-FCS</strong>.
+      The latest official build is <strong>1.0-FCS</strong>:
       </p>
 
       <ul>
         <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.zip">1.0-FCS in zip format.</a></li>
         <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.tar.gz">1.0-FCS in tar/gz format.</a></li>
       </ul>
+
+      <p>
+      The recommended build is <strong>1.1-beta4</strong>:
+      </p>
+
+      <ul>
+        <li><a href="http://www.ibiblio.org/maven/jaxen/distributions/jaxen-1.1-beta-4-src.zip">1.1 Beta 4 in zip format.</a></li>
+        <li><a href="http://www.ibiblio.org/maven/jaxen/distributions/jaxen-1.1-beta-4.tar.gz">1.1 Beta 4 in tar/gz format.</a></li>
+      </ul>
+
+
+
     </section>
 
     <section name="Nightly Builds">
