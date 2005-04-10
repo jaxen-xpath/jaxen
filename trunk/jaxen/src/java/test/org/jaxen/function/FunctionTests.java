@@ -86,6 +86,7 @@ public class FunctionTests extends TestCase {
     public static Test suite() {
         
         TestSuite result = new TestSuite();
+        result.addTest(new TestSuite(SubstringBeforeTest.class));
         result.addTest(new TestSuite(LangTest.class));
         result.addTest(new TestSuite(LastTest.class));
         result.addTest(new TestSuite(ContainsTest.class));
