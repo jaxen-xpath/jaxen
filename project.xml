@@ -3,8 +3,8 @@
     xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
 
   <pomVersion>3</pomVersion>
-  <name>jaxen</name>
   <id>jaxen</id>
+  <name>jaxen</name>
   <currentVersion>1.1-beta-5-SNAPSHOT</currentVersion>
 
   <organization>
@@ -15,12 +15,12 @@
   <inceptionYear>2001</inceptionYear>
   <package>org.jaxen</package>
 
-  <shortDescription>Universal Java XPath Engine</shortDescription>
 
+  <logo>http://images.werken.com/jaxen.gif</logo>
   <description>
   Jaxen is a universal Java XPath engine.
   </description>
-  <logo>http://images.werken.com/jaxen.gif</logo>
+  <shortDescription>Universal Java XPath Engine</shortDescription>
 
   <url>http://jaxen.codehaus.org/</url>
 
@@ -159,22 +159,27 @@
   <contributors>
     <contributor>
       <name>David Peterson</name> 
+      <email></email>
     </contributor>
 
     <contributor>
       <name>Mark Wilson</name> 
+      <email></email>
     </contributor>
 
     <contributor>
       <name>David Peterson</name> 
+      <email></email>
     </contributor>
 
     <contributor>
       <name>Jacob Kjome</name> 
+      <email></email>
     </contributor>
 
     <contributor>
       <name>Michael Brennan</name>
+      <email></email>
     </contributor>
 
   </contributors>
@@ -225,6 +230,15 @@
     <!-- Unit test classes -->
 
     <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+      
+      <excludes>
+        <!-- currently broken -->
+        <exclude>org/jaxen/jdom/XPathTest.java</exclude>
+      </excludes>
+
       <resources>
         <resource>
           <directory>src/java/test</directory>
@@ -236,19 +250,7 @@
         </resource>
       </resources>
 
-      <includes>
-        <include>**/*Test.java</include>
-      </includes>
-      <excludes>
-        <!-- currently broken -->
-        <exclude>org/jaxen/jdom/XPathTest.java</exclude>
-      </excludes>
     </unitTest>
-
-    <!-- J A R  R E S O U R C E S -->
-    <!-- Resources that are packaged up inside the JAR file -->
-
-    <jarResources />
 
   </build>
 
