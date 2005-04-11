@@ -220,8 +220,6 @@
     <nagEmailAddress>dev@jaxen.codehaus.org</nagEmailAddress>
     <sourceDirectory>src/java/main</sourceDirectory>
     <unitTestSourceDirectory>src/java/test</unitTestSourceDirectory>
-    <integrationUnitTestSourceDirectory />
-    <aspectSourceDirectory />
 
     <!-- Unit test classes -->
 
@@ -246,20 +244,10 @@
       </excludes>
     </unitTest>
 
-
-    <!-- Integration unit test classes -->
-
-    <integrationUnitTestPatterns>
-    </integrationUnitTestPatterns>
-
     <!-- J A R  R E S O U R C E S -->
     <!-- Resources that are packaged up inside the JAR file -->
 
-    <jarResources>
-    </jarResources>
-
-    <jars>
-    </jars>
+    <jarResources />
 
   </build>
 
