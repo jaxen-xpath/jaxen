@@ -61,9 +61,8 @@
 package org.jaxen.expr;
 
 import org.jaxen.JaxenException;
-import org.jaxen.saxpath.Operator;
 
-public interface XPathFactory extends Operator
+public interface XPathFactory
 {
     XPathExpr createXPath( Expr rootExpr ) throws JaxenException;
 
