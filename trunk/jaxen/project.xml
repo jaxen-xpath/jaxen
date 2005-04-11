@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
 
   <pomVersion>3</pomVersion>
   <name>jaxen</name>
   <id>jaxen</id>
-  <currentVersion>1.1-beta-5</currentVersion>
+  <currentVersion>1.1-beta-5-SNAPSHOT</currentVersion>
 
   <organization>
     <name>Codehaus</name>
