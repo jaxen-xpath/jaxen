@@ -76,6 +76,7 @@ import org.jaxen.expr.iter.IterablePrecedingAxis;
 import org.jaxen.expr.iter.IterablePrecedingSiblingAxis;
 import org.jaxen.expr.iter.IterableSelfAxis;
 import org.jaxen.saxpath.Axis;
+import org.jaxen.saxpath.Operator;
 
 public class DefaultXPathFactory implements XPathFactory
 {
@@ -121,12 +122,12 @@ public class DefaultXPathFactory implements XPathFactory
     {
         switch( equalityOperator )
         {
-            case EQUALS:
+            case Operator.EQUALS:
                 {
                     return new DefaultEqualsExpr( lhs,
                                                   rhs );
                 }
-            case NOT_EQUALS:
+            case Operator.NOT_EQUALS:
                 {
                     return new DefaultNotEqualsExpr( lhs,
                                                      rhs );
@@ -141,22 +142,22 @@ public class DefaultXPathFactory implements XPathFactory
     {
         switch( relationalOperator )
         {
-            case LESS_THAN:
+            case Operator.LESS_THAN:
                 {
                     return new DefaultLessThanExpr( lhs,
                                                     rhs );
                 }
-            case GREATER_THAN:
+            case Operator.GREATER_THAN:
                 {
                     return new DefaultGreaterThanExpr( lhs,
                                                        rhs );
                 }
-            case LESS_THAN_EQUALS:
+            case Operator.LESS_THAN_EQUALS:
                 {
                     return new DefaultLessThanEqualExpr( lhs,
                                                          rhs );
                 }
-            case GREATER_THAN_EQUALS:
+            case Operator.GREATER_THAN_EQUALS:
                 {
                     return new DefaultGreaterThanEqualExpr( lhs,
                                                             rhs );
@@ -171,12 +172,12 @@ public class DefaultXPathFactory implements XPathFactory
     {
         switch( additiveOperator )
         {
-            case ADD:
+            case Operator.ADD:
                 {
                     return new DefaultPlusExpr( lhs,
                                                 rhs );
                 }
-            case SUBTRACT:
+            case Operator.SUBTRACT:
                 {
                     return new DefaultMinusExpr( lhs,
                                                  rhs );
@@ -191,17 +192,17 @@ public class DefaultXPathFactory implements XPathFactory
     {
         switch( multiplicativeOperator )
         {
-            case MULTIPLY:
+            case Operator.MULTIPLY:
                 {
                     return new DefaultMultiplyExpr( lhs,
                                                     rhs );
                 }
-            case DIV:
+            case Operator.DIV:
                 {
                     return new DefaultDivExpr( lhs,
                                                rhs );
                 }
-            case MOD:
+            case Operator.MOD:
                 {
                     return new DefaultModExpr( lhs,
                                                rhs );
@@ -215,7 +216,7 @@ public class DefaultXPathFactory implements XPathFactory
     {
         switch( unaryOperator )
         {
-            case NEGATIVE:
+            case Operator.NEGATIVE:
                 {
                     return new DefaultUnaryExpr( expr );
                 }
