@@ -63,7 +63,6 @@
 
 package org.jaxen.util;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
