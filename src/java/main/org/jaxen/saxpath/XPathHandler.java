@@ -153,7 +153,7 @@ public interface XPathHandler
 
     /** Receive notification of the start of a node() step.
      *
-     *  @param axis The axis of this step.
+     *  @param axis the axis of this step
      */
     void startAllNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
 
@@ -198,7 +198,7 @@ public interface XPathHandler
      *
      *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
-     *         a pass-through, based upon the grammar productions.
+     *         a pass-through, based upon the grammar productions
      */
     void endOrExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
 
@@ -210,7 +210,7 @@ public interface XPathHandler
      *
      *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
-     *         a pass-through, based upon the grammar productions.
+     *         a pass-through, based upon the grammar productions
      */
     void endAndExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
 
@@ -220,7 +220,7 @@ public interface XPathHandler
 
     /** Receive notification of the end of an equality ('=' or '!=') expression.
      *
-     *  @param equalityOperator The operator specific to this particular
+     *  @param equalityOperator the operator specific to this particular
      *         equality expression.  If null, this expression
      *         is only a pass-through, and should not actually
      *         be instantiated.
