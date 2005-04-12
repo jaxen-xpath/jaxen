@@ -104,10 +104,10 @@ public class StringFunction implements Function
     {
         try
         {
-            String retval = "";
             if (obj == null) {
                 return "";
             }
+            
             if (obj instanceof List)
             {
                 List list = (List) obj;
@@ -118,6 +118,7 @@ public class StringFunction implements Function
                 // do not recurse: only first list should unwrap
                 obj = list.get(0);
             }
+            
             if (nav != null && (nav.isElement(obj) || nav.isDocument(obj)))
             {
                 Iterator descendantAxisIterator = nav.getDescendantAxisIterator(obj);
@@ -130,42 +131,41 @@ public class StringFunction implements Function
                         sb.append(nav.getTextStringValue(descendant));
                     }
                 }
-                retval = sb.toString();
+                return sb.toString();
             }
             else if (nav != null && nav.isAttribute(obj))
             {
-                retval = nav.getAttributeStringValue(obj);
+                return nav.getAttributeStringValue(obj);
             }
             else if (nav != null && nav.isText(obj))
             {
-                retval = nav.getTextStringValue(obj);
+                return nav.getTextStringValue(obj);
             }
             else if (nav != null && nav.isProcessingInstruction(obj))
             {
-                retval = nav.getProcessingInstructionData(obj);
+                return nav.getProcessingInstructionData(obj);
             }
             else if (nav != null && nav.isComment(obj))
             {
-                retval = nav.getCommentStringValue(obj);
+                return nav.getCommentStringValue(obj);
             }
             else if (nav != null && nav.isNamespace(obj))
             {
-                retval = nav.getNamespaceStringValue(obj);
+                return nav.getNamespaceStringValue(obj);
             }
             else if (obj instanceof String)
             {
-                retval = (String) obj;
+                return (String) obj;
             }
             else if (obj instanceof Boolean)
             {
-                retval = stringValue(((Boolean) obj).booleanValue());
+                return stringValue(((Boolean) obj).booleanValue());
             }
             else if (obj instanceof Number)
             {
-                retval = stringValue(((Number) obj).doubleValue());
+                return stringValue(((Number) obj).doubleValue());
             }
-            retval = retval == null ? "" : retval;
-            return retval;
+            return "";
         }
         catch (UnsupportedAxisException e)
         {
