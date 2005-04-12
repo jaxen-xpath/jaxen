@@ -267,6 +267,23 @@ public class BaseXPath implements XPath, Serializable
         return stringValueOf( node );
     }
 
+    /** Retrieves the string-value of the result of
+     *  evaluating this XPath expression when evaluated 
+     *  against the specified context.
+     *
+     *  <p>
+     *  The string-value of the expression is determined per
+     *  the <code>string(..)</code> core function defined
+     *  in the XPath specification.  This means that an expression
+     *  that selects zero nodes will return the empty string,
+     *  while an expression that selects one-or-more nodes will
+     *  return the string-value of the first node.
+     *  </p>
+     *
+     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     *
+     *  @return the string-value interpretation of this expression
+     */
     public String stringValueOf(Object node) throws JaxenException
     {
         Context context = getContext( node );
