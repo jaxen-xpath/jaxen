@@ -87,7 +87,7 @@ public class StartsWithFunction implements Function
                              context.getNavigator() );
         }
 
-        throw new FunctionCallException( "starts-with() requires two arugments." );
+        throw new FunctionCallException( "starts-with() requires two arguments." );
     }
 
     public static Boolean evaluate(Object strArg,
