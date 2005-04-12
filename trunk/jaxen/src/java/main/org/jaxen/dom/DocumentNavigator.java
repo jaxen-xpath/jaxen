@@ -285,44 +285,6 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Get an iterator over all preceding nodes, depth-first.
-     *
-     * @param contextNode the context node for the preceding axis
-     * @return a possibly-empty iterator (not null)
-     */
-    public Iterator getPrecedingAxisIterator (Object contextNode)
-    {
-        return new NodeIterator ((Node)contextNode) {
-                protected Node getFirstNode (Node node)
-                {
-                    if (node == null)
-                        return null;
-                    Node sibling = node.getPreviousSibling();
-                    if (sibling == null)
-                            return getFirstNode(node.getParentNode());
-                    while (sibling != null) {
-                            node = sibling;
-                            sibling = node.getLastChild();
-                    }
-                    return node;
-                }
-                protected Node getNextNode (Node node) {
-                    if (node == null)
-                        return null;
-                    else {
-                        Node n = node.getLastChild();
-                        if (n == null)
-                            n = node.getPreviousSibling();
-                        if (n == null)
-                            return getFirstNode(node.getParentNode());
-                        else
-                            return n;
-                    }
-                }
-            };
-    }
-
-    /**
      * Get an iterator over all attributes.
      *
      * @param contextNode the context node for the attribute axis
@@ -805,7 +767,7 @@ public class DocumentNavigator extends DefaultNavigator
         /**
          * Constructor.
          *
-         * @param contextNode the starting node.
+         * @param contextNode the starting node
          */
         public NodeIterator (Node contextNode)
         {
@@ -829,12 +791,12 @@ public class DocumentNavigator extends DefaultNavigator
          */
         public Object next ()
         {
-            if (node == null)
-                throw new NoSuchElementException();
+            if (node == null) throw new NoSuchElementException();
             Node ret = node;
             node = getNextNode(node);
-            while (!isXPathNode(node))
+            while (!isXPathNode(node)) {
                 node = getNextNode(node);
+            }
             return ret;
         }
 
