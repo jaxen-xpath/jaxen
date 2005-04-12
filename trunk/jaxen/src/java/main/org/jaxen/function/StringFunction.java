@@ -108,6 +108,13 @@ public class StringFunction implements Function
                 return "";
             }
             
+            // Workaround because XOM uses lists for Text nodes
+            // so we need to check for that first
+            if (nav != null && nav.isText(obj))
+            {
+                return nav.getTextStringValue(obj);
+            }
+            
             if (obj instanceof List)
             {
                 List list = (List) obj;
