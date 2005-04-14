@@ -68,14 +68,13 @@ import org.jaxen.saxpath.XPathHandler;
 
 class DefaultXPathHandler implements XPathHandler
 {
-    static class Singleton
-    {
-        static final DefaultXPathHandler instance = new DefaultXPathHandler();
-    }
+    private static final DefaultXPathHandler instance = new DefaultXPathHandler();
+    
+    private DefaultXPathHandler() {}
 
     public static XPathHandler getInstance()
     {
-        return Singleton.instance;
+        return instance;
     }
     
     public void startXPath()
