@@ -136,16 +136,10 @@ class NodeComparator implements Comparator {
         Iterator following = navigator.getFollowingSiblingAxisIterator(sib1);
         while (following.hasNext()) {
             Object next = following.next();
-            // XXX problem here that XOM tends not to return the same
-            // object when asked for following siblings with text nodes
-            if (equalsSiblings(next, sib2)) return -1;
+            if (next.equals(sib2)) return -1;
         }
         return 1;
         
-    }
-
-    private boolean equalsSiblings(Object next, Object sib2) {
-        return next.equals(sib2);
     }
 
     private int getDepth(Object o) throws UnsupportedAxisException {
