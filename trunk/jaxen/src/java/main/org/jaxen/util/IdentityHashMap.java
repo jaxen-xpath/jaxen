@@ -71,6 +71,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.jaxen.JaxenConstants;
+
 public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
                                          java.io.Serializable {
     /**
@@ -608,7 +610,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
 
     private Iterator getHashIterator(int type) {
         if (count == 0) {
-            return emptyHashIterator;
+            return JaxenConstants.EMPTY_ITERATOR;
         } else {
             return new HashIterator(type);
         }
@@ -673,29 +675,6 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
     private static final int KEYS = 0;
     private static final int VALUES = 1;
     private static final int ENTRIES = 2;
-
-    private static EmptyHashIterator emptyHashIterator 
-        = new EmptyHashIterator();
-                                             
-    private static class EmptyHashIterator implements Iterator {
-        
-        EmptyHashIterator() {
-            
-        }
-
-        public boolean hasNext() {
-            return false;
-        }
-
-        public Object next() {
-            throw new NoSuchElementException();
-        }
-        
-        public void remove() {
-            throw new IllegalStateException();
-        }
-
-    }                   
                     
     private class HashIterator implements Iterator {
         Entry[] table = IdentityHashMap.this.table;
