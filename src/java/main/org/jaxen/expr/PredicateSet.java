@@ -170,6 +170,7 @@ public class PredicateSet implements Serializable
             tempList.clear();
             tempList.add(contextNode);
             predContext.setNodeSet(tempList);
+            // ????
             predContext.setPosition(i + 1);
             predContext.setSize(nodes2FilterSize);
             Object predResult = predicate.evaluate(predContext);
