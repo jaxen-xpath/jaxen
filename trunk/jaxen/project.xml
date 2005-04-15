@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <id>jaxen</id>
   <name>jaxen</name>
-  <currentVersion>1.1-beta-5-SNAPSHOT</currentVersion>
+  <currentVersion>1.1-beta-5</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -33,7 +33,6 @@
     <connection>scm:cvs:pserver:anonymous@cvs.jaxen.codehaus.org:/home/projects/jaxen/scm:jaxen</connection>
     <url>http://cvs.jaxen.codehaus.org</url>
   </repository>
-  
   
     <mailingLists>
         <mailingList>
