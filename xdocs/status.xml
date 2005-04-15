@@ -14,6 +14,16 @@
         Various updates to the web site. 
       </p>
     </section>
+    
+     <section name="Jaxen 1.1 Beta 5">
+    
+      <p>Beta 5 makes a few small bug fixes and code clean ups, especially
+      in the DOM navigator. It also restires some test files that were inadvertently 
+      left out of the Beta 4 distribution.
+      </p>
+
+    </section>   
+    
       
     <section name="Jaxen 1.1 Beta 4">
     
