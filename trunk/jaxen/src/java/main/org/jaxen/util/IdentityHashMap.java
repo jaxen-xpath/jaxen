@@ -543,7 +543,7 @@ public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
      * It does not support the <code>add</code> or <code>addAll</code> operations.
      *
      * @return a collection view of the mappings contained in this map
-     * @see Map.Entry
+     * @see java.util.Map.Entry
      */
     public Set entrySet() {
         if (entrySet==null) {
