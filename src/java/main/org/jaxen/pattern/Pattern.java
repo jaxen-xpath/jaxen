@@ -119,7 +119,7 @@ public abstract class Pattern {
     
     /** Returns the default resolution policy of the pattern according to the
       * <a href="http://www.w3.org/TR/xslt11/#conflict">
-      * XSLT conflict resolution spec</a>. 
+      * XSLT conflict resolution rules</a>. 
       * 
       */
     public double getPriority() 
