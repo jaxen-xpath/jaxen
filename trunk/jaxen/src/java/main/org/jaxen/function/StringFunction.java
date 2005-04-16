@@ -187,7 +187,7 @@ public class StringFunction implements Function
         {
             return "NaN";
         }
-        if (-0.0 == value || 0.0 == value)
+        if (0.0 == value)
         {
             return "0";
         }
@@ -203,6 +203,7 @@ public class StringFunction implements Function
         {
             return Long.toString((long) value);
         }
+        // ???? what about exponential notation????
         return Double.toString(value);
     }
 
