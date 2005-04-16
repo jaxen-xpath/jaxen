@@ -189,7 +189,7 @@ public class NamespaceNode implements Node
     /**
      * Get the namespace URI.
      *
-     * @return the Namespace URI
+     * @return the namespace URI
      */
     public String getNodeValue ()
     {
@@ -383,7 +383,7 @@ public class NamespaceNode implements Node
     /**
      * Create a copy of this node.
      *
-     * @param deep Make a deep copy (no effect, since Namespace nodes
+     * @param deep make a deep copy (no effect, since Namespace nodes
      *        don't have children).
      * @return a new copy of this Namespace node
      */
@@ -519,9 +519,9 @@ public class NamespaceNode implements Node
      * <p>Two Namespace nodes are considered equivalent if their parents,
      * names, and values are equal.</p>
      *
-     * @param o The object to test for equality.
+     * @param o the object to test for equality
      * @return true if the object is equivalent to this node, false
-     *         otherwise.
+     *         otherwise
      */
     public boolean equals (Object o)
     {
@@ -588,7 +588,7 @@ public class NamespaceNode implements Node
      * method, which must return an empty node list rather than
      * null when there are no children.</p>
      */
-    class EmptyNodeList implements NodeList
+    private static class EmptyNodeList implements NodeList
     {
 
     /**
