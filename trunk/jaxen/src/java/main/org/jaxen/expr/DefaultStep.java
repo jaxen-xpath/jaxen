@@ -63,8 +63,6 @@ package org.jaxen.expr;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.IdentityHashMap;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
@@ -77,8 +75,6 @@ public abstract class DefaultStep implements Step
 {
     private IterableAxis axis;
     private PredicateSet predicates;
-
-    private final static Object PRESENT = new Object();
 
     public DefaultStep(IterableAxis axis, PredicateSet predicates)
     {
@@ -140,7 +136,7 @@ public abstract class DefaultStep implements Step
     public List evaluate(Context context) throws JaxenException
     {
         List contextNodeSet  = context.getNodeSet();
-        Map unique = new IdentityHashMap();
+        IdentitySet unique = new IdentitySet();
         int contextSize = contextNodeSet.size();
 
         List interimSet = new ArrayList();
@@ -163,9 +159,9 @@ public abstract class DefaultStep implements Step
 
                 if ( matches( eachAxisNode, support ) )
                 {
-                    if ( ! unique.containsKey( eachAxisNode ) )
+                    if ( ! unique.contains( eachAxisNode ) )
                     {
-                        unique.put( eachAxisNode, PRESENT );
+                        unique.add( eachAxisNode );
                         interimSet.add( eachAxisNode );
                     }
                 }

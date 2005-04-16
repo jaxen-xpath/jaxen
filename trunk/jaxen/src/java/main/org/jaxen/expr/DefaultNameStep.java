@@ -49,8 +49,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.IdentityHashMap;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
@@ -73,9 +71,6 @@ import org.jaxen.saxpath.Axis;
  * @author Stephen Colebourne
  */
 public class DefaultNameStep extends DefaultStep implements NameStep {
-
-    /** Dummy object used to convert HashMap to HashSet */
-    private final static Object PRESENT = new Object();
     
     /** 
      * Our prefix, bound through the current Context.
@@ -219,7 +214,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
         }
 
         // full case
-        Map unique = new IdentityHashMap();
+        IdentitySet unique = new IdentitySet();
         List interimSet = new ArrayList(contextSize);
         List newNodeSet = new ArrayList(contextSize);
         
@@ -237,7 +232,8 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 // ensure only one of each node in the result
                 while (axisNodeIter.hasNext()) {
                     Object eachAxisNode = axisNodeIter.next();
-                    if (unique.put(eachAxisNode, PRESENT) == null) {
+                    if (! unique.contains(eachAxisNode)) {
+                        unique.add(eachAxisNode);
                         interimSet.add(eachAxisNode);
                     }
                 }
@@ -261,7 +257,8 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                     Object eachAxisNode = axisNodeIter.next();
 
                     if (matches(eachAxisNode, support)) {
-                        if (unique.put(eachAxisNode, PRESENT) == null) {
+                        if (! unique.contains(eachAxisNode)) {
+                            unique.add(eachAxisNode);
                             interimSet.add(eachAxisNode);
                         }
                     }
