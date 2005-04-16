@@ -115,8 +115,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Constant: singleton navigator.
      */
-    private final static DocumentNavigator SINGLETON =
-    new DocumentNavigator();
+    private final static DocumentNavigator SINGLETON = new DocumentNavigator();
 
 
     
@@ -126,7 +125,7 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Default Constructor.
+     * Default constructor.
      */
     public DocumentNavigator ()
     {
@@ -379,10 +378,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Object getDocumentNode (Object contextNode)
     {
-        if (isDocument(contextNode))
-            return contextNode;
-        else
-            return ((Node)contextNode).getOwnerDocument();
+        if (isDocument(contextNode)) return contextNode;
+        else return ((Node)contextNode).getOwnerDocument();
     }
 
 
@@ -425,8 +422,7 @@ public class DocumentNavigator extends DefaultNavigator
     public String getElementQName (Object object)
     {
         String qname = ((Node)object).getNodeName();
-        if (qname == null)
-            qname = ((Node)object).getLocalName();
+        if (qname == null) qname = ((Node)object).getLocalName();
         return qname;
     }
 
@@ -453,8 +449,7 @@ public class DocumentNavigator extends DefaultNavigator
     public String getAttributeName (Object object)
     {
         String name = ((Node)object).getLocalName();
-        if (name == null)
-            name = ((Node)object).getNodeName();
+        if (name == null) name = ((Node)object).getNodeName();
         return name;
     }
 
@@ -469,8 +464,7 @@ public class DocumentNavigator extends DefaultNavigator
     public String getAttributeQName (Object object)
     {
         String qname = ((Node)object).getNodeName();
-        if (qname == null)
-            qname = ((Node)object).getLocalName();
+        if (qname == null) qname = ((Node)object).getLocalName();
         return qname;
     }
 
@@ -586,10 +580,12 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getElementStringValue (Object object)
     {
-        if (isElement(object))
+        if (isElement(object)) {
             return getStringValue((Node)object, new StringBuffer()).toString();
-        else
+        }
+        else {
             return null;
+        }
     }
 
 
@@ -607,8 +603,9 @@ public class DocumentNavigator extends DefaultNavigator
         } else {
             NodeList children = node.getChildNodes();
             int length = children.getLength();
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++) {
                 getStringValue(children.item(i), buffer);
+            }
         }
         return buffer;
     }
@@ -623,10 +620,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeStringValue (Object object)
     {
-        if (isAttribute(object))
-            return ((Node)object).getNodeValue();
-        else
-            return null;
+        if (isAttribute(object)) return ((Node)object).getNodeValue();
+        else return null;
     }
 
 
@@ -638,10 +633,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getTextStringValue (Object object)
     {
-        if (isText(object))
-            return ((Node)object).getNodeValue();
-        else
-            return null;
+        if (isText(object)) return ((Node)object).getNodeValue();
+        else return null;
     }
 
 
@@ -654,10 +647,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getCommentStringValue (Object object)
     {
-        if (isComment(object))
-            return ((Node)object).getNodeValue();
-        else
-            return null;
+        if (isComment(object)) return ((Node)object).getNodeValue();
+        else return null;
     }
 
 
@@ -670,10 +661,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getNamespaceStringValue (Object object)
     {
-        if (isNamespace(object))
-            return ((NamespaceNode)object).getNodeValue();
-        else
-            return null;
+        if (isNamespace(object)) return ((NamespaceNode)object).getNodeValue();
+        else return null;
     }
 
     /**
@@ -685,10 +674,8 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getNamespacePrefix (Object object)
     {
-        if (isNamespace(object))
-            return ((NamespaceNode)object).getLocalName();
-        else
-            return null;
+        if (isNamespace(object)) return ((NamespaceNode)object).getLocalName();
+        else return null;
     }
 
     /**
@@ -699,8 +686,7 @@ public class DocumentNavigator extends DefaultNavigator
         Iterator it = getNamespaceAxisIterator(element);
         while (it.hasNext()) {
             NamespaceNode ns = (NamespaceNode)it.next();
-            if (prefix.equals(ns.getNodeName()))
-                return ns.getNodeValue();
+            if (prefix.equals(ns.getNodeName())) return ns.getNodeValue();
         }
         return null;
     }
@@ -875,13 +861,13 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * An iterator over an attribute list.
      */
-    class AttributeIterator implements Iterator
+    private static class AttributeIterator implements Iterator
     {
 
         /**
          * Constructor.
          *
-         * @param parent The parent DOM element for the attributes.
+         * @param parent the parent DOM element for the attributes.
          */
         AttributeIterator (Node parent)
         {
@@ -905,10 +891,8 @@ public class DocumentNavigator extends DefaultNavigator
         public Object next ()
         {
             Node attr = map.item(pos++);
-            if (attr == null)
-                throw new NoSuchElementException();
-            else
-                return attr;
+            if (attr == null) throw new NoSuchElementException();
+            else return attr;
         }
 
 
@@ -930,7 +914,7 @@ public class DocumentNavigator extends DefaultNavigator
      *  Returns the element whose ID is given by elementId.
      *  If no such element exists, returns null.
      *  Attributes with the name "ID" are not of type ID unless so defined.
-     *  Atribute types are only known if when the parser understands DTD's or
+     *  Attribute types are only known if when the parser understands DTD's or
      *  schemas that declare attributes of type ID. When JAXP is used, you
      *  must call <code>setValidating(true)</code> on the
      *  DocumentBuilderFactory.
@@ -946,10 +930,8 @@ public class DocumentNavigator extends DefaultNavigator
     public Object getElementById(Object object, String elementId)
     {
         Document doc = (Document)getDocumentNode(object);
-        if (doc != null)
-            return doc.getElementById(elementId);
-        else
-            return null;
+        if (doc != null) return doc.getElementById(elementId);
+        else return null;
     }
 
 }
