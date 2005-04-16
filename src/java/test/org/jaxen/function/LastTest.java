@@ -73,7 +73,6 @@ import junit.framework.TestCase;
 import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
-import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
