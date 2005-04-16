@@ -69,8 +69,10 @@ import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 import org.jaxen.JaxenRuntimeException;
 
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Locale;
 
 /**
  * <p><b>4.2</b> <code><i>string</i> string(<i>object</i>)</code>
@@ -80,6 +82,13 @@ import java.util.Iterator;
 public class StringFunction implements Function
 {
     
+    private static NumberFormat format = NumberFormat.getInstance(Locale.ENGLISH);
+    
+    static {
+        format.setGroupingUsed(false);
+        format.setMaximumFractionDigits(32);
+    }
+
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -183,28 +192,7 @@ public class StringFunction implements Function
 
     public static String stringValue(double value)
     {
-        if (Double.isNaN(value))
-        {
-            return "NaN";
-        }
-        if (0.0 == value)
-        {
-            return "0";
-        }
-        if (Double.isInfinite(value) && value < 0)
-        {
-            return "-Infinity";
-        }
-        if (Double.isInfinite(value) && value > 0)
-        {
-            return "Infinity";
-        }
-        if (((long) value) == value)
-        {
-            return Long.toString((long) value);
-        }
-        // ???? what about exponential notation????
-        return Double.toString(value);
+        return format.format(value);
     }
 
     public static String stringValue(boolean bool)
