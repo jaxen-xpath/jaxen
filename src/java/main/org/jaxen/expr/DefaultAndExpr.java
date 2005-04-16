@@ -66,7 +66,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.jaxen.function.BooleanFunction;
 
-class DefaultAndExpr extends DefaultLogicalExpr implements LogicalExpr
+class DefaultAndExpr extends DefaultLogicalExpr
 {
     public DefaultAndExpr(Expr lhs,
                           Expr rhs)

@@ -50,6 +50,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.IdentityHashMap;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
@@ -58,7 +59,6 @@ import org.jaxen.UnresolvableException;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 import org.jaxen.saxpath.Axis;
-import org.jaxen.util.IdentityHashMap;
 
 /** 
  * Expression object that represents any flavor
