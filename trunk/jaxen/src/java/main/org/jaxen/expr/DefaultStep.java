@@ -64,6 +64,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.IdentityHashMap;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
@@ -71,7 +72,6 @@ import org.jaxen.JaxenException;
 import org.jaxen.UnsupportedAxisException;
 import org.jaxen.expr.iter.IterableAxis;
 import org.jaxen.saxpath.Axis;
-import org.jaxen.util.IdentityHashMap;
 
 public abstract class DefaultStep implements Step
 {
