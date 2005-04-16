@@ -92,22 +92,25 @@ class DefaultOrExpr extends DefaultLogicalExpr
         Navigator nav = context.getNavigator();
         Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ), nav );
 
-        if ( lhsValue == Boolean.TRUE )
+        if ( lhsValue.booleanValue() )
         {
             return Boolean.TRUE;
         }
 
+        // ???? short circuit legal in XPath? What if RHS throws exception?
         Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ), nav );
 
-        if ( rhsValue == Boolean.TRUE )
+        if ( rhsValue.booleanValue() )
         {
             return Boolean.TRUE;
         }
 
         return Boolean.FALSE;
     }
+    
     public void accept(Visitor visitor)
     {
         visitor.visit(this);
-    }   
+    }
+    
 }
