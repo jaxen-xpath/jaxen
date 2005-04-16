@@ -66,7 +66,7 @@ package org.jaxen;
  *
  *  <p>
  *  The prefixes used within an XPath expression are
- *  independant of those used within any target document.
+ *  independent of those used within any target document.
  *  When evaluating an XPath against a document, only
  *  the resolved namespace URIs are compared, not their
  *  prefixes.
@@ -94,12 +94,14 @@ public interface NamespaceContext
      *  <p>
      *  In XPath, there is no such thing as a 'default namespace'.
      *  The empty prefix <strong>always</strong> resolves to the empty
-     *  namespace URI.
+     *  namespace URI. Similarly, the prefix "xml" always resolves to
+     *  the URI "http://www.w3.org/XML/1998/namespace".
      *  </p>
      *
      *  @param prefix the namespace prefix to resolve
      *
-     *  @return the namespace URI matching the prefix
+     *  @return the namespace URI bound to the prefix; or null if there
+     *     is no such namespace 
      */
     String translateNamespacePrefixToUri(String prefix);
 }
