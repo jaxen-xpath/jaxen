@@ -123,20 +123,21 @@ public class StringTest extends TestCase {
     }
     
     public void testSmallNumbersDontUseExponentialNotation() throws JaxenException {
-     
         BaseXPath xpath = new DOMXPath("string(0.0000003)");
         String result = (String) xpath.evaluate(null);
         assertEquals("0.0000003", result);
-        
     }
 
     public void testBigNumbersDontUseExponentialNotation() throws JaxenException {
-     
         BaseXPath xpath = new DOMXPath("string(100000000.5)");
         String result = (String) xpath.evaluate(null);
         assertEquals("100000000.5", result);
-        
-        
+    }
+
+    public void testIntegersAreFormattedAsInts() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("string(12)");
+        String result = (String) xpath.evaluate(null);
+        assertEquals("12", result);
     }
 
 }
