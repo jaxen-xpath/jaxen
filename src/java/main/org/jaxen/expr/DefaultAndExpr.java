@@ -90,22 +90,26 @@ class DefaultAndExpr extends DefaultLogicalExpr implements LogicalExpr
         Navigator nav = context.getNavigator();
         Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ), nav );
 
-        if ( lhsValue == Boolean.FALSE )
+        if ( !lhsValue.booleanValue() )
         {
             return Boolean.FALSE;
         }
 
+        // Short circuits are required in XPath. "The right operand is not 
+        // evaluated if the left operand evaluates to false."
         Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ), nav );
 
-        if ( rhsValue == Boolean.FALSE )
+        if ( !rhsValue.booleanValue() )
         {
             return Boolean.FALSE;
         }
 
         return Boolean.TRUE;
     }
+    
     public void accept(Visitor visitor)
     {
         visitor.visit(this);
     }
+    
 }
