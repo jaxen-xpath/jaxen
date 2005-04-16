@@ -60,7 +60,9 @@
  */
 
 package org.jaxen.util;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
@@ -73,8 +75,9 @@ import java.util.Set;
 
 import org.jaxen.JaxenConstants;
 
-public class IdentityHashMap extends AbstractMap implements Map, Cloneable,
-                                         java.io.Serializable {
+public class IdentityHashMap extends AbstractMap 
+  implements Cloneable, Serializable {
+    
     /**
      * The hash table data.
      */

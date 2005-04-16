@@ -97,7 +97,8 @@ class DefaultOrExpr extends DefaultLogicalExpr
             return Boolean.TRUE;
         }
 
-        // ???? short circuit legal in XPath? What if RHS throws exception?
+        // Short circuits are required in XPath. "The right operand is not 
+        // evaluated if the left operand evaluates to true."
         Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ), nav );
 
         if ( rhsValue.booleanValue() )
