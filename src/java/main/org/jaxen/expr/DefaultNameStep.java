@@ -167,15 +167,22 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
             return Collections.EMPTY_LIST;
         }
         ContextSupport support = context.getContextSupport();
-        boolean namedAccess = (!matchesAnyName && getIterableAxis().supportsNamedAccess(support));
+        IterableAxis iterableAxis = getIterableAxis();
+        boolean namedAccess = (!matchesAnyName && iterableAxis.supportsNamedAccess(support));
         
         // optimize for context size 1 (common case, avoids lots of object creation)
         if (contextSize == 1) {
             Object contextNode = contextNodeSet.get(0);
             if (namedAccess) {
                 // get the iterator over the nodes and check it
-                String uri = support.translateNamespacePrefixToUri(prefix);
-                Iterator axisNodeIter = getIterableAxis().namedAccessIterator(
+                String uri = null;
+                if (hasPrefix) {
+                    uri = support.translateNamespacePrefixToUri(prefix);
+                    if (uri == null) {
+                        throw new UnresolvableException("XPath expression uses unbound namespace prefix " + prefix);
+                    }
+                }
+                Iterator axisNodeIter = iterableAxis.namedAccessIterator(
                                 contextNode, support, localName, prefix, uri);
                 if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
                     return Collections.EMPTY_LIST;
@@ -191,16 +198,17 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 // evaluate the predicates
                 return getPredicateSet().evaluatePredicates(newNodeSet, support);
                 
-            } else {
+            } 
+            else {
                 // get the iterator over the nodes and check it
-                Iterator axisNodeIter = axisIterator(contextNode, support);
+                Iterator axisNodeIter = iterableAxis.iterator(contextNode, support);
                 if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
                     return Collections.EMPTY_LIST;
                 }
 
                 // run through iterator, filtering using matches()
                 // adding to list for predicate test
-                List newNodeSet = new ArrayList();
+                List newNodeSet = new ArrayList(contextSize);
                 while (axisNodeIter.hasNext()) {
                     Object eachAxisNode = axisNodeIter.next();
                     if (matches(eachAxisNode, support)) {
@@ -219,11 +227,17 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
         List newNodeSet = new ArrayList(contextSize);
         
         if (namedAccess) {
-            String uri = support.translateNamespacePrefixToUri(prefix);
+            String uri = null;
+            if (hasPrefix) {
+                uri = support.translateNamespacePrefixToUri(prefix);
+                if (uri == null) {
+                    throw new UnresolvableException("XPath expression uses unbound namespace prefix " + prefix);
+                }
+            }
             for (int i = 0; i < contextSize; ++i) {
                 Object eachContextNode = contextNodeSet.get(i);
 
-                Iterator axisNodeIter = getIterableAxis().namedAccessIterator(
+                Iterator axisNodeIter = iterableAxis.namedAccessIterator(
                                 eachContextNode, support, localName, prefix, uri);
                 if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
                     continue;
