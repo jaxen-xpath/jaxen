@@ -148,10 +148,6 @@ public abstract class DefaultStep implements Step
             Object eachContextNode = contextNodeSet.get( i );
 
             Iterator axisNodeIter = axisIterator( eachContextNode, support );
-            if ( axisNodeIter == null )
-            {
-                continue;
-            }
 
             while ( axisNodeIter.hasNext() )
             {
