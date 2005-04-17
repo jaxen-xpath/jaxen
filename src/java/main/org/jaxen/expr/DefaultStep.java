@@ -133,15 +133,15 @@ public abstract class DefaultStep implements Step
         return getIterableAxis().iterator(contextNode, support);
     }
 
-    public List evaluate(Context context) throws JaxenException
+    public List evaluate(final Context context) throws JaxenException
     {
-        List contextNodeSet  = context.getNodeSet();
-        IdentitySet unique = new IdentitySet();
-        int contextSize = contextNodeSet.size();
+        final List contextNodeSet  = context.getNodeSet();
+        final IdentitySet unique = new IdentitySet();
+        final int contextSize = contextNodeSet.size();
 
-        ArrayList interimSet = new ArrayList();
-        ArrayList newNodeSet = new ArrayList();
-        ContextSupport support = context.getContextSupport();
+        final ArrayList interimSet = new ArrayList();
+        final ArrayList newNodeSet = new ArrayList();
+        final ContextSupport support = context.getContextSupport();
             
         for ( int i = 0 ; i < contextSize ; ++i )
         {
