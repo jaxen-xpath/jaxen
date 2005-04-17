@@ -139,15 +139,18 @@ public abstract class DefaultStep implements Step
         final IdentitySet unique = new IdentitySet();
         final int contextSize = contextNodeSet.size();
 
+        // ???? try linked lists instead?
+        // ???? initial size for these?
         final ArrayList interimSet = new ArrayList();
         final ArrayList newNodeSet = new ArrayList();
         final ContextSupport support = context.getContextSupport();
             
+        // ???? use iterator instead????
         for ( int i = 0 ; i < contextSize ; ++i )
         {
             Object eachContextNode = contextNodeSet.get( i );
 
-            Iterator axisNodeIter = axisIterator( eachContextNode, support );
+            Iterator axisNodeIter = axis.iterator(eachContextNode, support);
 
             while ( axisNodeIter.hasNext() )
             {
