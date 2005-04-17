@@ -139,8 +139,8 @@ public abstract class DefaultStep implements Step
         IdentitySet unique = new IdentitySet();
         int contextSize = contextNodeSet.size();
 
-        List interimSet = new ArrayList();
-        List newNodeSet = new ArrayList();
+        ArrayList interimSet = new ArrayList();
+        ArrayList newNodeSet = new ArrayList();
         ContextSupport support = context.getContextSupport();
             
         for ( int i = 0 ; i < contextSize ; ++i )
