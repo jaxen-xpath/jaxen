@@ -100,7 +100,7 @@ public class BaseXPath implements XPath, Serializable
     /** Original expression text. */
     private String exprText;
 
-    /** the parsed form of the xpath expression */
+    /** the parsed form of the XPath expression */
     private XPathExpr xpath;
     
     /** the support information and function, namespace and variable contexts */
@@ -128,11 +128,7 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (org.jaxen.saxpath.XPathSyntaxException e)
         {
-            org.jaxen.XPathSyntaxException je = new org.jaxen.XPathSyntaxException( e.getXPath(),
-                                                                  e.getPosition(),
-                                                                  e.getMessage() );
-            je.initCause(e);
-            throw je;
+            throw new org.jaxen.XPathSyntaxException( e );
         }
         catch (org.jaxen.saxpath.SAXPathException e)
         {
@@ -318,11 +314,8 @@ public class BaseXPath implements XPath, Serializable
     public boolean booleanValueOf(Object node) throws JaxenException
     {
         Context context = getContext( node );
-        
         List result = selectNodesForContext( context );
-
         if ( result == null ) return false;
-            
         return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();
     }
 
@@ -344,9 +337,7 @@ public class BaseXPath implements XPath, Serializable
     public Number numberValueOf(Object node) throws JaxenException
     {
         Context context = getContext( node );
-        
         Object result = selectSingleNodeForContext( context );
-
         return NumberFunction.evaluate( result,
                                         context.getNavigator() );
     }
@@ -380,12 +371,10 @@ public class BaseXPath implements XPath, Serializable
                              String uri) throws JaxenException
     {
         NamespaceContext nsContext = getNamespaceContext();
-
         if ( nsContext instanceof SimpleNamespaceContext )
         {
             ((SimpleNamespaceContext)nsContext).addNamespace( prefix,
                                                               uri );
-
             return;
         }
 
@@ -612,7 +601,6 @@ public class BaseXPath implements XPath, Serializable
         else
         {
             List list = new SingletonList(node);
-
             fullContext.setNodeSet( list );
         }
 
