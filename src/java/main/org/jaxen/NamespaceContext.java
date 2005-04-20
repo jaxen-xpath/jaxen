@@ -94,7 +94,9 @@ public interface NamespaceContext
      *  <p>
      *  In XPath, there is no such thing as a 'default namespace'.
      *  The empty prefix <strong>always</strong> resolves to the empty
-     *  namespace URI. Similarly, the prefix "xml" always resolves to
+     *  namespace URI. This method should return null for the
+     *  empty prefix.
+     *  Similarly, the prefix "xml" always resolves to
      *  the URI "http://www.w3.org/XML/1998/namespace".
      *  </p>
      *
