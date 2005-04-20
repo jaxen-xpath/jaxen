@@ -155,10 +155,9 @@ public abstract class DefaultStep implements Step
             while ( axisNodeIter.hasNext() )
             {
                 Object eachAxisNode = axisNodeIter.next();
-
-                if ( matches( eachAxisNode, support ) )
+                if ( ! unique.contains( eachAxisNode ) )
                 {
-                    if ( ! unique.contains( eachAxisNode ) )
+                    if ( matches( eachAxisNode, support ) )
                     {
                         unique.add( eachAxisNode );
                         interimSet.add( eachAxisNode );
