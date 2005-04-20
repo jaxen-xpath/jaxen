@@ -83,18 +83,13 @@ public class DocumentNavigator
 
     /** Singleton implementation.
      */
-    private static class Singleton
-    {
-        /** Singleton instance.
-         */
-        private static DocumentNavigator instance = new DocumentNavigator();
-    }
+    private static final DocumentNavigator instance = new DocumentNavigator();
 
     /** Retrieve the singleton instance of this <code>DocumentNavigator</code>.
      */
     public static Navigator getInstance()
     {
-        return Singleton.instance;
+        return instance;
     }
 
     public boolean isElement(Object obj)
@@ -174,7 +169,7 @@ public class DocumentNavigator
      * @param contextNode  the origin context node
      * @param localName  the local name of the children to return, always present
      * @param namespacePrefix  the prefix of the namespace of the children to return
-     * @param namespaceURI  the uri of the namespace of the children to return
+     * @param namespaceURI  the namespace URI of the children to return
      * @return an Iterator that traverses the named children, or null if none
      */
     public Iterator getChildAxisIterator(Object contextNode,
@@ -271,7 +266,7 @@ public class DocumentNavigator
      * @param contextNode  the origin context node
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
-     * @param namespaceURI  the uri of the namespace of the attributes to return
+     * @param namespaceURI  the namespace URI of the attributes to return
      * @return an Iterator that traverses the named attributes, not null
      */
     public Iterator getAttributeAxisIterator(Object contextNode,
