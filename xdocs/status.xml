@@ -15,10 +15,25 @@
       </p>
     </section>
     
+     <section name="Jaxen 1.1 Beta 6">
+    
+      <p>Beta 6 makes a few small bug fixes and code clean ups. 
+      Most importantly it removes a file
+      (<code>IdentityHashMap</code>) that we do not have the right to redistribute.
+      All prior betas of Jaxen 1.1 should be considered tainted,
+      and not redistributed in any way. If your project uses 
+      an ealrier version, please remove it 
+      and replace it with beta 6. Jaxen 1.0 is <strong>not</strong>
+      affected by any of this. 
+      </p>
+
+    </section>   
+    
+      
      <section name="Jaxen 1.1 Beta 5">
     
       <p>Beta 5 makes a few small bug fixes and code clean ups, especially
-      in the DOM navigator. It also restires some test files that were inadvertently 
+      in the DOM navigator. It also restores some test files that were inadvertently 
       left out of the Beta 4 distribution.
       </p>
 
