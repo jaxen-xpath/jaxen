@@ -73,6 +73,8 @@ import java.util.Map;
  */
 public class SimpleNamespaceContext implements NamespaceContext, Serializable
 {
+    
+    // XXX should this prebind the xml prefix?
     private Map namespaces;
 
     public SimpleNamespaceContext()
