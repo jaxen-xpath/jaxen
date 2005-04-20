@@ -75,7 +75,8 @@ public class IterableChildAxis extends IterableAxis {
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
      */
-    public Iterator iterator(Object contextNode, ContextSupport support) throws UnsupportedAxisException {
+    public Iterator iterator(Object contextNode, ContextSupport support) 
+      throws UnsupportedAxisException {
         return support.getNavigator().getChildAxisIterator(contextNode);
     }
 
