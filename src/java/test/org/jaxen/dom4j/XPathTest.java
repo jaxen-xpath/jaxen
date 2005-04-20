@@ -81,6 +81,7 @@ import org.dom4j.tree.DefaultDocument;
 import org.dom4j.tree.DefaultElement;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
+import org.jaxen.XPathSyntaxException;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 public class XPathTest extends TestCase
@@ -180,5 +181,19 @@ public class XPathTest extends TestCase
             assertEquals( 4,
                           results.size() );
     }
+    
+    public void testSyntaxException() throws JaxenException {
+        
+        String path = "/row/[some_node='val1']|[some_node='val2']";
+        try {
+            new Dom4jXPath(path);
+            fail("Allowed union of non-node-sets");
+        }
+        catch (XPathSyntaxException success) {
+            assertNotNull(success.getMessage());
+        }
+        
+    }
+    
     
 }
