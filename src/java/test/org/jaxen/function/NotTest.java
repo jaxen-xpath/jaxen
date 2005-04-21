@@ -159,7 +159,7 @@ public class NotTest extends TestCase {
         
         try {
             xpath.selectNodes(doc);
-            fail("Allowed not function with no arguments");
+            fail("Allowed not() function with no arguments");
         }
         catch (FunctionCallException ex) {
             assertNotNull(ex.getMessage());
@@ -174,7 +174,7 @@ public class NotTest extends TestCase {
         
         try {
             xpath.selectNodes(doc);
-            fail("Allowed boolean function with two arguments");
+            fail("Allowed not() function with two arguments");
         }
         catch (FunctionCallException ex) {
             assertNotNull(ex.getMessage());
