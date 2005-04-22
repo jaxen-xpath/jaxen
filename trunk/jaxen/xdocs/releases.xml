@@ -8,13 +8,13 @@
 
   <body>
     <section name="Official Builds">
-      <p>
+ <!--     <p>
       Release builds can be found <a href="http://prdownloads.sourceforge.net/jaxen">here</a>.
 The current release version is 1.0.
-      </p>
+      </p> -->
 
       <p>
-      Beta builds can be found <a href="http://www.ibiblio.org/maven/jaxen/distributions/">here</a>.
+    Builds can be found <a href="http://www.ibiblio.org/maven/jaxen/distributions/">here</a>.
 The current version is 1.1 beta 6. 
 1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. Even though it's still officially a beta, 
 this release
@@ -25,22 +25,22 @@ and the ElectricXML navigator has been deleted) 1.1
 is backwards compatible with code written to the 1.0 APIs.
       </p>
 
-      <p>
+    <!--  <p>
       The latest official build is <strong>1.0-FCS</strong>:
       </p>
 
       <ul>
         <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.zip">1.0-FCS in zip format.</a></li>
         <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.tar.gz">1.0-FCS in tar/gz format.</a></li>
-      </ul>
+      </ul> -->
 
       <p>
       The recommended build is <strong>1.1-beta-6</strong>:
       </p>
 
       <ul>
-        <li><a href="http://www.ibiblio.org/maven/jaxen/distributions/jaxen-1.1-beta-6-src.zip">1.1 Beta 6 in zip format.</a></li>
-        <li><a href="http://www.ibiblio.org/maven/jaxen/distributions/jaxen-1.1-beta-6.tar.gz">1.1 Beta 6 in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-6-src.zip">1.1 Beta 6 in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-6.tar.gz">1.1 Beta 6 in tar/gz format.</a></li>
       </ul>
 
 
