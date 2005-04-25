@@ -78,9 +78,9 @@ import org.w3c.dom.Node;
  *
  * <p>XML is case-sensitive. HTML is not. This navigator is an extension
  * of the DOM DocumentNavigator that automatically
- * changes all element, but not attribute, names to lowercase or uppercase
+ * changes all element, but not attribute, names to lower case or upper case
  * to aid in navigating through HTML documents.  Note that case modification
- * are bypassed for XHTML documents.  XHTML is case sensitive and can be
+ * is bypassed for XHTML documents.  XHTML is case sensitive and can be
  * expected to store all elements and attributes in lower case. Also note that
  * HTML attribute names are stored as lower case in the HTML (and XHTML) DOM
  * already which is why the case of attribute names are not modified.
@@ -98,9 +98,6 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
     // Constants.
     ////////////////////////////////////////////////////////////////////
 
-    /**
-     * Constant: lowercase navigator.
-     */
     private final static DocumentNavigator LOWERCASE =
         new DocumentNavigator(true);
 
@@ -114,7 +111,8 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
     ////////////////////////////////////////////////////////////////////
 
     /**
-     * Constructs a new DocumentNavigator that will convert to lowercase.
+     * Constructs a new DocumentNavigator that converts element names
+     * to lower case.
      */
     public DocumentNavigator ()
     {
@@ -122,9 +120,10 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
     }
 
     /**
-     * Constructs a new DocumentNavigator that will convert to lowercase.
+     * Constructs a new DocumentNavigator that converts all element names
+     * to upper or lower case as specified.
      * 
-     * @param toLowerCase whether to convert all names to lowercase
+     * @param toLowerCase whether to convert all names to lower case
      */
     public DocumentNavigator(boolean toLowerCase)
     {
@@ -132,9 +131,10 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
     }
 
     /**
-     * Returns <code>true</code> if the navigator is converting to lowercase.
+     * Returns <code>true</code> if the navigator is converting to lower case.
      * 
-     * @return true if the navigator is converting to lowercase; false otherwise
+     * @return true if the navigator is converting element names to lower case; 
+     *     false if it's converting element names to upper case
      */
     public boolean isToLowerCase()
     {
@@ -156,7 +156,7 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
     // Implementation of the navigator.
     ////////////////////////////////////////////////////////////////////
 
-    /** Returns a parsed form of the given xpath string, which will be suitable
+    /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on HTML DOM documents.
      */
     public XPath parseXPath (String xpath) throws SAXPathException
@@ -197,9 +197,11 @@ public class DocumentNavigator extends org.jaxen.dom.DocumentNavigator
       return getHTMLNodeName((Node)object, super.getElementQName(object));
   }
 
+  // TODO: Fix this so that it recognizes HTML elements by name; and 
+  // reports all others as case-sensitive XML elements
   /**
    * Determine if a node is definitely an XML node.
-   * Note: This will not work if the XML node has not been namespaced.
+   * Note: This will not work if the XML node is not in a namespace.
    * However, since we are dealing with HTML documents, this is a minimal
    * risk.
    */
