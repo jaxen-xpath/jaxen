@@ -120,6 +120,9 @@ import org.jaxen.function.xslt.DocumentFunction;
  *  <ul>
  *     <li>matrix-concat(..)</li>
  *     <li>evaluate(..)</li>
+ *     <li>upper-case(..)</li>
+ *     <li>lower-case(..)</li>
+ *     <li>ends-with(..)</li>
  *  </ul>
  *
  *  @see FunctionContext
@@ -128,14 +131,7 @@ import org.jaxen.function.xslt.DocumentFunction;
  */
 public class XPathFunctionContext extends SimpleFunctionContext
 {
-   /** Singleton implementation.
-    */
-    private static class Singleton
-    {
-        /** Singleton instance.
-         */
-        private static XPathFunctionContext instance = new XPathFunctionContext();
-    }
+    private static XPathFunctionContext instance = new XPathFunctionContext();
 
     /** Retrieve the singleton instance.
      *
@@ -143,13 +139,13 @@ public class XPathFunctionContext extends SimpleFunctionContext
      */
     public static FunctionContext getInstance()
     {
-        return Singleton.instance;
+        return instance;
     }
 
     /** Construct.
      *
      *  <p>
-     *  Construct with all core XPath functions registered.
+     *  Construct with all core XPath and extension functions registered.
      *  </p>
      */
     public XPathFunctionContext()
