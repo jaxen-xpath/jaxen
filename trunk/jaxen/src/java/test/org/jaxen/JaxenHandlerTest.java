@@ -134,14 +134,6 @@ public class JaxenHandlerTest extends TestCase
         super( name );
     }
 
-    public void setUp()
-    {
-    }
-
-    public void tearDown()
-    {
-    }
-
     public void testValidPaths()
     {
             
