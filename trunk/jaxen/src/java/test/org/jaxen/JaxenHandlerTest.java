@@ -112,11 +112,11 @@ public class JaxenHandlerTest extends TestCase
         "/*/*[@id='123']",
         "/child::node()/child::node()[@id='_13563275']",
         "$foo:bar",
-        //"foo:bar()",
+        "//foo:bar",
         "/foo/bar[@a='1' and @c!='2']",
     };
 
-    String[] bogusPaths = { };
+    String[] bogusPaths = { "//:p" };
     
     String[] ignore_bogusPaths = {        
         // this path is bogus because of a trailing /
@@ -141,12 +141,10 @@ public class JaxenHandlerTest extends TestCase
 
         try
         {
+            // XXX Jiffie solution?
             XPathReader reader = XPathReaderFactory.createReader();
-            
             JaxenHandler handler = new JaxenHandler();
-            
             handler.setXPathFactory( new DefaultXPathFactory() );
-            
             reader.setXPathHandler( handler );
 
             for ( int i = 0; i < paths.length; i++ ) {
@@ -187,11 +185,8 @@ public class JaxenHandlerTest extends TestCase
         try
         {
             XPathReader reader = XPathReaderFactory.createReader();
-            
             JaxenHandler handler = new JaxenHandler();
-            
             handler.setXPathFactory( new DefaultXPathFactory() );
-            
             reader.setXPathHandler( handler );
             
             for ( int i = 0; i < bogusPaths.length; i++ ) {
@@ -204,18 +199,13 @@ public class JaxenHandlerTest extends TestCase
                 try
                 {                    
                     reader.parse(path);
-
                     XPathExpr xpath = handler.getXPathExpr(false);
-
                     System.out.println( "Parsed as: " + xpath );
-                    
                     fail( "Parsed bogus path as: " + xpath );
                 }
                 catch (XPathSyntaxException e)
-                {                    
-                    
+                {
                     System.out.println("-----------------");
-                    //System.err.println( "Exception: " + e.getMessage() );
                     System.out.println( "Exception: ");
                     System.out.println( e.getMultilineMessage() );
                     System.out.println("-----------------");
