@@ -158,30 +158,29 @@ public class BaseXPath implements XPath, Serializable
      *  <p>
      *  The context of evaluation may be a <i>document</i>,
      *  an <i>element</i>, or a set of <i>elements</i>.
+     *  ???? accurate? shouldn't it be any type of node?
      *  </p>
      *
      *  <p>
-     *  If the expression evaluates to a single primitive
-     *  (String, Number or Boolean) type, it is returned
-     *  directly.  Otherwise, the returned value is a
-     *  list (a node-set in the terms of the
-     *  specification) of values.
+     *  The return value is either a <code>String</code>,
+     *  <code>Double</code>, <code>Boolean</code>, or <code>List</code>
+     *  of nodes.
      *  </p>
      *
      *  <p>
      *  When using this method, one must be careful to
-     *  test the class of the returned objects, and of 
-     *  each of the composite members if a <code>List</code>
-     *  is returned.  If the returned members are XML entities,
-     *  they will be the actual <code>Document</code>,
-     *  <code>Element</code> or <code>Attribute</code> objects
+     *  test the class of the returned object.  If the returned 
+     *  object is a list, then the items in this 
+     *  list will be the actual <code>Document</code>,
+     *  <code>Element</code>, <code>Attribute</code>, etc. objects
      *  as defined by the concrete XML object-model implementation,
-     *  directly from the context document.  This <strong>does not
-     *  return <em>copies</em> of anything</strong>, but merely returns
-     *  references to entities within the source document.
+     *  directly from the context document.  This method <strong>does
+     *  not return <em>copies</em> of anything</strong>, but merely 
+     *  returns references to objects within the source document.
      *  </p>
      *  
-     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     *  @param node the node, node-set or Context object for evaluation. 
+     *      This value can be null.
      *
      *  @return the result of evaluating the XPath expression
      *          against the supplied context
@@ -214,6 +213,8 @@ public class BaseXPath implements XPath, Serializable
      *  in document-order, as defined by the XPath
      *  specification.  
      *  </p>
+     * 
+     * ???? what if the expression returna non-node-set?
      *
      *  @param node the node, node-set or Context object for evaluation. This value can be null.
      *
