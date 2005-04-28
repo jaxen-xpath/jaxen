@@ -76,10 +76,6 @@ public class XPathLexerTest extends TestCase
         super( name );
     }
 
-    public void setUp()
-    {
-    }
-
     public void tearDown()
     {
         setLexer( null );
