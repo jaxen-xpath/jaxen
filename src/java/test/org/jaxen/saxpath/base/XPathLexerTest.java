@@ -337,26 +337,7 @@ public class XPathLexerTest extends TestCase
         assertEquals( TokenTypes.EOF,
                       tokenType() );
     }
-
-/*    
-    public void testAttributeWithUnderscore()
-    {
-        setText( "@_foo" );
-
-        nextToken();
-
-        assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
-
-        assertEquals( "_foo",
-                      tokenText() );
-
-        nextToken();
-
-        assertEquals( TokenTypes.EOF,
-                      tokenType() );
-    }
- */
+ 
     public void testWhitespace()
     {
         setText ( " /   \tfoo:bar" );
