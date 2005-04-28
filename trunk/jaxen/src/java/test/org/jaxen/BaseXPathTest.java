@@ -156,7 +156,7 @@ public class BaseXPathTest extends TestCase {
         
     }
 
-    public void testAllNodesQuery() throws JaxenException, ParserConfigurationException {
+    public void testAllNodesQuery() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("//. | /");
         org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
@@ -495,7 +495,7 @@ public class BaseXPathTest extends TestCase {
     }   
     
     public void testXMLNamespaceAttributeOrderOnAncestorAxis() 
-      throws IOException, JaxenException {
+      throws JaxenException {
      
         org.w3c.dom.Element superroot = doc.createElement("superroot");
         doc.appendChild(superroot);

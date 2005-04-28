@@ -104,7 +104,7 @@ public class XPathTest extends TestCase
     }
     
     public void testNamespaceDeclarationsAreNotAttributes() 
-      throws ParserConfigurationException, JaxenException {
+      throws JaxenException {
         
         Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
@@ -119,7 +119,7 @@ public class XPathTest extends TestCase
 
     // Jaxen-54
     public void testUpdateDOMNodesReturnedBySelectNodes() 
-      throws ParserConfigurationException, JaxenException {
+      throws JaxenException {
         
         Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
