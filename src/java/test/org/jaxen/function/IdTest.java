@@ -90,7 +90,7 @@ public class IdTest extends TestCase {
     private Document doc;
     private DocumentBuilder builder;
     
-    public void setUp() throws ParserConfigurationException, SAXException, IOException
+    public void setUp() throws ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);

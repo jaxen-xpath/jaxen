@@ -61,8 +61,6 @@
 
 package org.jaxen.function;
 
-import java.io.IOException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -74,7 +72,6 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  * @author Elliotte Rusty Harold
@@ -84,7 +81,7 @@ public class FalseTest extends TestCase {
 
     private Document doc;
     
-    public void setUp() throws ParserConfigurationException, SAXException, IOException
+    public void setUp() throws ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
