@@ -61,7 +61,6 @@
 
 package org.jaxen.function;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -74,7 +73,6 @@ import org.jaxen.BaseXPath;
 import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  * @author Elliotte Rusty Harold
@@ -84,7 +82,7 @@ public class NumberTest extends TestCase {
 
     private Document doc;
     
-    public void setUp() throws ParserConfigurationException, SAXException, IOException
+    public void setUp() throws ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
