@@ -69,16 +69,32 @@ public class JaxenRuntimeException extends RuntimeException
 {
     private JaxenException jaxenException;
 
+    /**
+     * Create a new JaxenRuntimeException.
+     * 
+     * @param jaxenException the nested <code>JaxenException</code> that's wrapped 
+     *     inside this exception
+     */
     public JaxenRuntimeException(JaxenException jaxenException)
     {
         super(jaxenException);
         this.jaxenException = jaxenException;
     }
 
+    /**
+     * Create a new JaxenRuntimeException.
+     * 
+     * @param message the detail message
+     */
     public JaxenRuntimeException(String message) {
         super(message);
     }
 
+    /**
+     * Return the exception that caused this exception.
+     * 
+     * @return the exception that caused this exception
+     */
     public JaxenException getJaxenException()
     {
         return jaxenException;
