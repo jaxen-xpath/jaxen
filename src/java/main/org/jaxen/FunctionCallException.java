@@ -78,20 +78,38 @@ public class FunctionCallException extends JaxenException
 {
     private Throwable nestedException;
 
+    /**
+     * Create a new FunctionCallException with the specified detail message.
+     * 
+     * @param message the detail message
+     */
     public FunctionCallException(String message) {
         super( message );
     }
 
+    /**
+     * Create a new FunctionCallException with the specified root cause.
+     * 
+     * @param nestedException the cause of this exception
+     */
     public FunctionCallException(Throwable nestedException) {
         super( nestedException.getMessage() );
         this.nestedException = nestedException;
     }
 
+    /**
+     * Create a new FunctionCallException with the specified detail message
+     * and root cause.
+     * 
+     * @param message the detail message
+     * @param nestedException the cause of this exception
+     */
     public FunctionCallException(String message, Exception nestedException) {
-        super( message );
+        super( nestedException );
         this.nestedException = nestedException;
     }
 
+    // should all this nested exception handling be pushed up into JaxenException????
     public void printStackTrace( PrintStream s ) {
         super.printStackTrace( s );
         if ( nestedException != null ) 
@@ -111,12 +129,7 @@ public class FunctionCallException extends JaxenException
     }
     
     public void printStackTrace() {
-        super.printStackTrace();
-        if ( nestedException != null ) 
-        {
-            System.out.println( "Root cause:" );
-            nestedException.printStackTrace();
-        }
+        printStackTrace(System.out);
     }
     
     public Throwable fillInStackTrace() {
