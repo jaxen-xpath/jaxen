@@ -98,7 +98,7 @@ public interface FunctionContext
      *                       name of the function.
      *
      *  @return  a Function implementation object.
-     *  @throws UnresolvableException  when the function cannot be resolved.
+     *  @throws UnresolvableException  when the function cannot be resolved
      */
     Function getFunction( String namespaceURI,
                           String prefix,
