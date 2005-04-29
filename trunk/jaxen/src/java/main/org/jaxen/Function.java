@@ -67,7 +67,7 @@ import java.util.List;
 /** Interface for the extensible function framework.
  *
  *  <p>
- *  <b>NOTE:</b> This class is not typically used directly,
+ *  <strong>NOTE:</strong> This class is not typically used directly,
  *  but is exposed for writers of extended XPath packages.
  *  </p>
  *
@@ -83,11 +83,18 @@ import java.util.List;
  */
 public interface Function
 {
-    /** Call this function.
+    /** Evaluate this function.
      *
-     *  @param context the context at the point in the
+     * @param context the context at the point in the
      *         expression when the function is called
-     *  @param args arguments provided to the function
+     * @param args arguments provided to the function
+     * 
+     * @return the result of evaluating the function; a <code>List</code>
+     *    (node-set), <code>Double</code>, <code>Boolean</code>, or
+     *    <code>String</code>
+     * 
+     * @throws FunctionCallException if an XPath error occurs during evaluation;
+     *     for instance, if the number or type of the arguments is incorrect
      */
     Object call(Context context,
                 List args) throws FunctionCallException;
