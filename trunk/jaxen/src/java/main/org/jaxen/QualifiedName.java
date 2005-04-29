@@ -61,7 +61,7 @@
 
 package org.jaxen;
 
-/** A local name (that matches the XML NCName production) and a namespace uri
+/** A local name (that matches the XML NCName production) and a namespace URI
  *  with which the local name is qualified.
  *
  *  @author Erwin Bolwidt ( ejb @ klomp.org )
@@ -85,12 +85,12 @@ class QualifiedName
         this.localName = localName;
     }
 
-    public String getNamespaceURI()
+    String getNamespaceURI()
     {
         return namespaceURI;
     }
 
-    public String getLocalName()
+    String getLocalName()
     {
         return localName;
     }
@@ -115,5 +115,6 @@ class QualifiedName
             return ( namespaceURI.equals(other.namespaceURI) &&
                      other.localName.equals(localName) );
     }
+    
 }
 
