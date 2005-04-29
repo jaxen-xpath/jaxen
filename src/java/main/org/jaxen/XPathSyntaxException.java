@@ -78,6 +78,12 @@ public class XPathSyntaxException extends JaxenException
     /** The position of the error */
     private int    position;
 
+    /**
+     * Create a new XPathSyntaxException wrapping an existing
+     * <code>org.jaxen.saxpath.XPathSyntaxException</code>.
+     * 
+     * @param e the exception that caused this exception
+     */
     public XPathSyntaxException(org.jaxen.saxpath.XPathSyntaxException e)
     {
         super( e );
@@ -86,7 +92,7 @@ public class XPathSyntaxException extends JaxenException
         this.position = e.getPosition();
     }
 
-    /** Construct.
+    /** Constructor
      *
      *  @param xpath the erroneous XPath expression
      *  @param position the position of the error
