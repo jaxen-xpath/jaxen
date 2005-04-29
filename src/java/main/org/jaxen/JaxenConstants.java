@@ -66,10 +66,22 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 /**
- * Constants used across Jaxen.
+ * Thread-safe constant iterators used to avoid the overhead of creating 
+ * empty lists.
  */
 public class JaxenConstants
 {
+
+    /**
+     * An iterator with no elements. <code>hasNext()</code> always
+     * returns false. This is thread-safe. 
+     */
     public static final Iterator EMPTY_ITERATOR = Collections.EMPTY_LIST.iterator();
+    
+    /**
+     * A list iterator with no elements. <code>hasNext()</code> always
+     * returns false. This is thread-safe. 
+     */
     public static final ListIterator EMPTY_LIST_ITERATOR = Collections.EMPTY_LIST.listIterator();
+    
 }
