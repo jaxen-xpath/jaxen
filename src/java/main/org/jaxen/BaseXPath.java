@@ -179,11 +179,12 @@ public class BaseXPath implements XPath, Serializable
      *  returns references to objects within the source document.
      *  </p>
      *  
-     *  @param node the node, node-set or Context object for evaluation. 
+     * @param node the node, node-set or Context object for evaluation. 
      *      This value can be null.
      *
-     *  @return the result of evaluating the XPath expression
+     * @return the result of evaluating the XPath expression
      *          against the supplied context
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     public Object evaluate(Object node) throws JaxenException
     {
@@ -214,19 +215,19 @@ public class BaseXPath implements XPath, Serializable
      *  specification.  
      *  </p>
      * 
-     * ???? what if the expression returna non-node-set?
+     * ???? what if the expression return a non-node-set?
      *
-     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return the node-set of all items selected
+     * @return the node-set of all items selected
      *          by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      *
-     *  @see #selectSingleNode
+     * @see #selectNodesForContext
      */
     public List selectNodes(Object node) throws JaxenException
     {
         Context context = getContext( node );
-
         return selectNodesForContext( context );
     }
 
@@ -237,12 +238,14 @@ public class BaseXPath implements XPath, Serializable
      *  specification.
      *  </p>
      *
-     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     * @param node the node, node-set or Context object for evaluation. 
+     *     This value can be null.
      *
-     *  @return the node-set of all items selected
+     * @return the node-set of all items selected
      *          by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      *
-     *  @see #selectNodes
+     * @see #selectNodes
      */
     public Object selectSingleNode(Object node) throws JaxenException
     {
@@ -257,7 +260,13 @@ public class BaseXPath implements XPath, Serializable
     }
 
     /**
+     * Returns the XPath string-value of the argument node.
+     * 
+     * @param node the node whose value to take
+     * @return the XPath string value of this node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      * @deprecated
+     * @see #stringValueOf
      */
     public String valueOf(Object node) throws JaxenException
     {
@@ -277,9 +286,10 @@ public class BaseXPath implements XPath, Serializable
      *  return the string-value of the first node.
      *  </p>
      *
-     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return the string-value interpretation of this expression
+     * @return the string-value of the result of evaluating this expression with the specified context node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     public String stringValueOf(Object node) throws JaxenException
     {
@@ -301,16 +311,17 @@ public class BaseXPath implements XPath, Serializable
      *
      *  <p>
      *  The boolean-value of the expression is determined per
-     *  the <code>boolean(..)</code> core function as defined
+     *  the <code>boolean(..)</code> function defined
      *  in the XPath specification.  This means that an expression
      *  that selects zero nodes will return <code>false</code>,
-     *  while an expression that selects one-or-more nodes will
+     *  while an expression that selects one or more nodes will
      *  return <code>true</code>.
      *  </p>
      *
-     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return the boolean-value interpretation of this expression
+     * @return the boolean-value of the result of evaluating this expression with the specified context node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     public boolean booleanValueOf(Object node) throws JaxenException
     {
@@ -331,9 +342,11 @@ public class BaseXPath implements XPath, Serializable
      *  of the first node is returned.
      *  </p>
      *
-     *  @param node the node, node-set or Context object for evaluation. This value can be null.
+     * @param node the node, node-set or Context object for evaluation. This value can be null.
      *
-     *  @return a <code>Double</code> interpretation of this expression
+     * @return a <code>Double</code> indicating the numeric value of
+     *      evaluating this expression against the specified context
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     public Number numberValueOf(Object node) throws JaxenException
     {
@@ -349,7 +362,7 @@ public class BaseXPath implements XPath, Serializable
      *  expression.
      *
      *  <p>
-     *  Namespace prefix-to-URI mappings in an XPath are independant
+     *  Namespace prefix-to-URI mappings in an XPath are independent
      *  of those used within any document.  Only the mapping explicitly
      *  added to this XPath will be available for resolving the
      *  XPath expression.
@@ -363,7 +376,7 @@ public class BaseXPath implements XPath, Serializable
      *  </p>
      *
      *  @param prefix the namespace prefix
-     *  @param uri The namespace URI.
+     *  @param uri the namespace URI
      *
      *  @throws JaxenException if a <code>NamespaceContext</code>
      *          used by this XPath has been explicitly installed
@@ -682,10 +695,11 @@ public class BaseXPath implements XPath, Serializable
      *  specification.
      *  </p>
      *
-     *  @param context is the Context which gets evaluated
+     * @param context the Context which gets evaluated
      *
-     *  @return the node-set of all items selected
+     * @return the node-set of all items selected
      *          by this XPath expression
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      *
      */
     protected List selectNodesForContext(Context context) throws JaxenException
@@ -703,10 +717,11 @@ public class BaseXPath implements XPath, Serializable
      *  specification.  
      *  </p>
      *
-     *  @param context is the Context which gets evaluated
+     * @param context the Context against which this expression is evaluated
      *
-     *  @return the node-set of all items selected
-     *          by this XPath expression
+     * @return the first node in document order of all nodes selected
+     *          by this XPath expression; can this return a non-node????
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      *
      *  @see #selectNodesForContext
      */
