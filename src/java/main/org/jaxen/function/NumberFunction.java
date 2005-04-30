@@ -135,13 +135,28 @@ public class NumberFunction implements Function
     return new Double( Double.NaN );
     }
   
-  public static boolean isNaN( double val )
+  /**
+   * Determines whether the argument is not a number (NaN) as defined
+   * by IEEE 754.
+   * 
+   * @param val the double to test
+   * @return true if the value is NaN, false otherwise
+   */
+    public static boolean isNaN( double val )
     {
     return Double.isNaN(val);
     }
   
-  public static boolean isNaN( Double val )
+  /**
+   * Determines whether the argument is not a number (NaN) as defined
+   * by IEEE 754.
+   * 
+   * @param val the <code>Double</code> to test
+   * @return true if the value is NaN, false otherwise
+   */
+    public static boolean isNaN( Double val )
     {
-    return val.equals( NaN );
-    }    
+        return val.equals( NaN );
+    }  
+  
   }
