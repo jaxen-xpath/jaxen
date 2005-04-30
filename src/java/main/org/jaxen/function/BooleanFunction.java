@@ -77,6 +77,19 @@ import org.jaxen.Navigator;
 public class BooleanFunction implements Function
 {
 
+    /** Convert the argument to a <code>Boolean</code>
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list with exactly one item which will be converted to a 
+     *     <code>Boolean</code>
+     * 
+     * @return the result of evaluating the function; a <code>List</code>
+     *    (node-set), <code>Double</code>, <code>Boolean</code>, or
+     *    <code>String</code>
+     * 
+     * @throws FunctionCallException if there is more or less than one item in args
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -88,6 +101,23 @@ public class BooleanFunction implements Function
         throw new FunctionCallException("boolean() requires one argument");
     }
 
+    /** 
+     * <p>Convert the argument <code>obj</code> to a <code>Boolean</code> 
+     * according to the following rules:</p>
+     *
+     * <ul>
+     * <li>Lists are false if they're empty; true if they're not.</li>
+     * <li>Booleans are false if they're false; true if they're true.</li>
+     * <li>Strings are false if they're empty; true if they're not.</li>
+     * <li>Numbers are false if they're 0; true if they're not.</li>
+     * <li>All other objects are true.</li>
+     * </ul>
+     * 
+     * @param obj the object to convert to a boolean.
+     * @param nav ignored
+     * 
+     * @return <code>Boolean.TRUE</code> or <code>Boolean.FALSE</code>
+     */
     public static Boolean evaluate(Object obj, Navigator nav)
     {
         if ( obj instanceof List )
