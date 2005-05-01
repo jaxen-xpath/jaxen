@@ -75,6 +75,18 @@ import org.jaxen.FunctionCallException;
 public class CountFunction implements Function
 {
 
+    /**
+     * <p>
+     * Returns the number of nodes in the specified node-set.
+     * </p>
+     * @param context ignored
+     * @param args the function arguments
+     * 
+     * @return the integral number of items in the first argument
+     * 
+     * @throws FunctionCallException if args does not have exactly one 
+     *     item; or that item is not a <code>List</code>
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -86,6 +98,15 @@ public class CountFunction implements Function
         throw new FunctionCallException( "count() requires one argument." );
     }
 
+    /**
+     * <p>
+     * Returns the number of nodes in the specified node-set.
+     * </p>
+     * 
+     * @param obj a <code>List</code> of nodes
+     * @return the integral number of items in the list
+     * @throws FunctionCallException if obj is not a <code>List</code>
+     */
     public static Double evaluate(Object obj) throws FunctionCallException
     {
       
@@ -97,4 +118,5 @@ public class CountFunction implements Function
         throw new FunctionCallException("Count function can only be used for node-sets");
         
     }
+    
 }
