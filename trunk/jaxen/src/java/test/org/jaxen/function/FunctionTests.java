@@ -100,7 +100,7 @@ public class FunctionTests extends TestCase {
         result.addTest(new TestSuite(NamespaceURITest.class));
         result.addTest(new TestSuite(SumTest.class));
         result.addTest(new TestSuite(NumberTest.class));
-        result.addTest(new TestSuite(RouundTest.class));
+        result.addTest(new TestSuite(RoundTest.class));
         result.addTest(new TestSuite(StringTest.class));
         result.addTest(new TestSuite(BooleanTest.class));
         result.addTest(new TestSuite(CeilingTest.class));
