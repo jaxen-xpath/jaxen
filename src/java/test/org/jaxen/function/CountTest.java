@@ -69,7 +69,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
+import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
@@ -114,5 +116,45 @@ public class CountTest extends TestCase {
             fail( e.getMessage() );
         }
     }    
+    
+    public void testCountFunctionRequiresAtLeastOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("count()");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed count function with no arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
 
+    public void testCountFunctionRequiresAtMostOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("count(/*, /@*)");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed count function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    } 
+    
+    public void testCountRootElement() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("count(/*)");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(1.0, result.doubleValue(), 0.00001);
+        
+    }  
+    
+    
 }
