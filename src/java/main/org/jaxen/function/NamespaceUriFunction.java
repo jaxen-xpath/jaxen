@@ -136,7 +136,8 @@ public class NamespaceUriFunction implements Function
                 return "";
             }
             else {
-                throw new FunctionCallException("The argument to the name function must be a node-set");   
+                throw new FunctionCallException(
+                  "The argument to the namespace-uri function must be a node-set");   
             }
 
         }
