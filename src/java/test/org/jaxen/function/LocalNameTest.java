@@ -146,6 +146,13 @@ public class LocalNameTest extends TestCase {
         assertEquals("", result);
     }    
 
+    public void testLocalNameOfEmptyNodeSetIsEmptyString() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "local-name(/aaa)" );
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }    
+
     public void testLocalNameOfProcessingInstructionIsTarget() throws JaxenException
     {
         XPath xpath = new DOMXPath( "local-name(/processing-instruction())" );
