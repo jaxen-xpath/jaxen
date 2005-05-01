@@ -160,6 +160,18 @@ public class NamespaceURITest extends TestCase {
         assertEquals("", result);
     }    
 
+    public void testNamespaceURIRequiresAtMostOneArgument() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/*, /*)" );
+        try {
+            xpath.evaluate(doc);
+            fail("Allowed namespace-uri function with no arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }    
+
     public void testNamespaceURIOfNamespaceIsPrefix() throws JaxenException
     {
         XPath xpath = new DOMXPath( "namespace-uri(/*/namespace::node())" );
