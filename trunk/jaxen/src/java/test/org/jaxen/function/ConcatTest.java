@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,58 +59,55 @@
  * $Id$
  */
 
-
 package org.jaxen.function;
 
-import junit.framework.Test;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.jaxen.BaseXPath;
+import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
 
 /**
- * <p>
- *   Suite for Jaxen's function tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
  *
  */
-public class FunctionTests extends TestCase {
+public class ConcatTest extends TestCase {
 
+    private Document doc;
     
-    public FunctionTests(String name) {
-        super(name);   
+    public void setUp() throws ParserConfigurationException
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.newDocument();
+        doc.appendChild(doc.createElement("root"));
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(SubstringBeforeTest.class));
-        result.addTest(new TestSuite(SubstringAfterTest.class));
-        result.addTest(new TestSuite(LangTest.class));
-        result.addTest(new TestSuite(LastTest.class));
-        result.addTest(new TestSuite(ConcatTest.class));
-        result.addTest(new TestSuite(ContainsTest.class));
-        result.addTest(new TestSuite(StringLengthTest.class));
-        result.addTest(new TestSuite(StartsWithTest.class));
-        result.addTest(new TestSuite(CountTest.class));
-        result.addTest(new TestSuite(LocalNameTest.class));
-        result.addTest(new TestSuite(NameTest.class));
-        result.addTest(new TestSuite(NamespaceURITest.class));
-        result.addTest(new TestSuite(SumTest.class));
-        result.addTest(new TestSuite(NumberTest.class));
-        result.addTest(new TestSuite(StringTest.class));
-        result.addTest(new TestSuite(BooleanTest.class));
-        result.addTest(new TestSuite(CeilingTest.class));
-        result.addTest(new TestSuite(FloorTest.class));
-        result.addTest(new TestSuite(IdTest.class));
-        result.addTest(new TestSuite(TrueTest.class));
-        result.addTest(new TestSuite(FalseTest.class));
-        result.addTest(new TestSuite(NotTest.class));
-        return result;
-        
+
+    public ConcatTest(String name) {
+        super(name);
     }
 
-    
+    public void testConcatFunctionRequiresAtLeastTwoArguments() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("concat('a')");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed concat function with one argument");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    } 
+
 }
