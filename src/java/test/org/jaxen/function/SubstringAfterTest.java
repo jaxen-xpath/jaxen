@@ -176,7 +176,7 @@ public class SubstringAfterTest extends TestCase {
         
     }    
 
-    public void testContainsFunctionRequiresAtMostTwoArguments() 
+    public void testSubstringAfterFunctionRequiresAtMostTwoArguments() 
       throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("substring-after('a', 'a', 'a')");
