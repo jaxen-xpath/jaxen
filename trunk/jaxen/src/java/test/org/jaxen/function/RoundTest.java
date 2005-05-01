@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,59 +59,96 @@
  * $Id$
  */
 
-
 package org.jaxen.function;
 
-import junit.framework.Test;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.jaxen.BaseXPath;
+import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
 
 /**
- * <p>
- *   Suite for Jaxen's function tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
  *
  */
-public class FunctionTests extends TestCase {
+public class RoundTest extends TestCase {
 
+    private Document doc;
     
-    public FunctionTests(String name) {
-        super(name);   
+    public void setUp() throws ParserConfigurationException
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.newDocument();
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
+    }
+
+
+    public RoundTest(String name) {
+        super(name);
     }
 
     
-    public static Test suite() {
+    public void testRound() throws JaxenException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(SubstringBeforeTest.class));
-        result.addTest(new TestSuite(SubstringAfterTest.class));
-        result.addTest(new TestSuite(LangTest.class));
-        result.addTest(new TestSuite(LastTest.class));
-        result.addTest(new TestSuite(ConcatTest.class));
-        result.addTest(new TestSuite(ContainsTest.class));
-        result.addTest(new TestSuite(StringLengthTest.class));
-        result.addTest(new TestSuite(StartsWithTest.class));
-        result.addTest(new TestSuite(CountTest.class));
-        result.addTest(new TestSuite(LocalNameTest.class));
-        result.addTest(new TestSuite(NameTest.class));
-        result.addTest(new TestSuite(NamespaceURITest.class));
-        result.addTest(new TestSuite(SumTest.class));
-        result.addTest(new TestSuite(NumberTest.class));
-        result.addTest(new TestSuite(RouundTest.class));
-        result.addTest(new TestSuite(StringTest.class));
-        result.addTest(new TestSuite(BooleanTest.class));
-        result.addTest(new TestSuite(CeilingTest.class));
-        result.addTest(new TestSuite(FloorTest.class));
-        result.addTest(new TestSuite(IdTest.class));
-        result.addTest(new TestSuite(TrueTest.class));
-        result.addTest(new TestSuite(FalseTest.class));
-        result.addTest(new TestSuite(NotTest.class));
-        return result;
+        BaseXPath xpath = new DOMXPath("round(1.5)");
         
-    }
+        Object result = xpath.evaluate(doc);
+        assertEquals(2, ((Double) result).doubleValue(), 0.0001);
+        
+    }    
 
-    
+    public void testNegativeRound() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("round(-1.5)");
+        
+        Object result = xpath.evaluate(doc);
+        assertEquals(-1, ((Double) result).doubleValue(), 0.0001);
+        
+    }    
+
+    public void testNaNRoundIsNaN() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("round(1.0 div 0.0 - 2.0 div 0.0)");
+        double result = ((Double) xpath.evaluate(doc)).doubleValue();
+        assertTrue(Double.isNaN(result));
+    }    
+
+    public void testRoundFunctionRequiresAtLeastOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("round()");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed round function with no arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+
+    public void testRoundFunctionRequiresAtMostOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("round(2.2, 1.2)");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed round function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }    
+
 }
