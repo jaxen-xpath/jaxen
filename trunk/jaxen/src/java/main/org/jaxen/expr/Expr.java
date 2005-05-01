@@ -70,18 +70,6 @@ import org.jaxen.JaxenException;
 public interface Expr extends Serializable, Visitable
 {
     String getText();
-    Expr simplify();
-
-    // ----------------------------------------------------------------------
-    // ----------------------------------------------------------------------
-
-    /*
-    List     asList(Context context);
-    Iterator asIterator(Context context);
-    String   asString(Context context);
-    Boolean  asBoolean(Context context);
-    Number   asNumber(Context context);
-    */
-
-    Object   evaluate(Context context) throws JaxenException;
+    Expr   simplify();
+    Object evaluate(Context context) throws JaxenException;
 }
