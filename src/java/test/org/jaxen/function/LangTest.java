@@ -250,6 +250,56 @@ public class LangTest extends TestCase {
         
     }    
 
+    public void testLangFunctionAppliedToNonElement() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("//text()[lang('fr')]");
+        Element a = doc.createElementNS("", "a");
+        Element b = doc.createElementNS("", "b");
+        b.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "fr-CA");
+        doc.appendChild(a);
+        a.appendChild(b);
+        Element x2 = doc.createElementNS("", "x");
+        Element x3 = doc.createElementNS("", "x");
+        Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        x2.appendChild(doc.createTextNode("fr"));
+        x3.appendChild(doc.createTextNode("3"));
+        x4.appendChild(doc.createTextNode("4"));
+        
+        List result = xpath.selectNodes(doc);
+        assertEquals(2, result.size());
+        assertEquals(x2.getFirstChild(), result.get(0));
+        assertEquals(x3.getFirstChild(), result.get(1));
+        
+    }    
+
+    public void testLangFunctionAppliedToDocument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("lang('fr')");
+        Element a = doc.createElementNS("", "a");
+        Element b = doc.createElementNS("", "b");
+        b.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "fr-CA");
+        doc.appendChild(a);
+        a.appendChild(b);
+        Element x2 = doc.createElementNS("", "x");
+        Element x3 = doc.createElementNS("", "x");
+        Element x4 = doc.createElementNS("", "x");
+        a.appendChild(x4);
+        b.appendChild(x2);
+        b.appendChild(x3);
+        x2.appendChild(doc.createTextNode("fr"));
+        x3.appendChild(doc.createTextNode("3"));
+        x4.appendChild(doc.createTextNode("4"));
+        
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertEquals(Boolean.FALSE, result);
+        
+    }    
+
     public void testLangFunctionSelectsNumber() 
       throws JaxenException {
         
