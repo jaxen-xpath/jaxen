@@ -84,16 +84,22 @@ import junit.framework.TestCase;
 public class FunctionContextTest extends TestCase
 {
 
-    public void testJAXEN50() throws JaxenException, ParserConfigurationException {
-        
-        DOMXPath xpath = new DOMXPath("true()");
+    private Document doc;
+    
+    public void setUp() throws ParserConfigurationException {
         
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-        Document doc = factory.newDocumentBuilder().newDocument();
+        doc = factory.newDocumentBuilder().newDocument();
         Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
         root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.example.org/");
+              
+    }
+    
+    public void testJAXEN50() throws JaxenException {
+        
+        DOMXPath xpath = new DOMXPath("true()");
         
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
         // Add all namespace declarations from the node
@@ -102,6 +108,20 @@ public class FunctionContextTest extends TestCase
         
         boolean result = xpath.booleanValueOf(doc);
         assertTrue(result);
+        
+    }
+ 
+    public void testUnresolvableFunction() throws JaxenException {
+        
+        DOMXPath xpath = new DOMXPath("nonesuch()");
+        
+        try {
+            xpath.evaluate(doc);
+            fail("Evaluated nonexistent function");
+        }
+        catch (UnresolvableException ex) {
+            assertNotNull(ex.getMessage());
+        }
         
     }
  
