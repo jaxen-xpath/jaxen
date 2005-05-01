@@ -92,21 +92,15 @@ public class RoundFunction implements Function
     public static Number evaluate(Object obj,
                                   Navigator nav)
     {
-        Number n = NumberFunction.evaluate( obj,
+        Double d  = NumberFunction.evaluate( obj,
                                             nav );
 
-        if ( n instanceof Double )
+        if (d.isNaN() || d.isInfinite())
         {
-            Double d = (Double) n;
-
-            if (d.isNaN() || d.isInfinite())
-            {
-                return d;
-            }
+            return d;
         }
 
-        double value = n.doubleValue();
-
+        double value = d.doubleValue();
         return new Double( Math.round( value ) );
     }
 }
