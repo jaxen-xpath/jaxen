@@ -81,16 +81,16 @@ public class Context
     //     Instance members
     // ----------------------------------------------------------------------
 
-    /** Context-support. */
+    /** Context-support */
     private ContextSupport contextSupport;
 
-    /** Context node-set. */
+    /** Context node-set */
     private List nodeSet;
 
-    /** Current context size. */
+    /** Current context size */
     private int size;
 
-    /** Current context position. */
+    /** Current context position */
     private int position;
 
     // ----------------------------------------------------------------------
@@ -99,7 +99,7 @@ public class Context
 
     /** Construct.
      *
-     *  @param contextSupport The context-support.
+     *  @param contextSupport the context-support
      */
     public Context(ContextSupport contextSupport)
     {
@@ -113,7 +113,7 @@ public class Context
 
     /** Set the context node-set.
      *
-     *  @param nodeSet The context node-set.
+     *  @param nodeSet the context node-set
      */
     public void setNodeSet(List nodeSet)
     {
@@ -122,7 +122,7 @@ public class Context
 
     /** Retrieve the context node-set.
      *
-     *  @return The context node-set.
+     *  @return the context node-set
      */
     public List getNodeSet()
     {
@@ -131,7 +131,7 @@ public class Context
 
     /** Set the <code>ContextSupport</code>.
      *
-     *  @param contextSupport The context-support.
+     *  @param contextSupport the context-support
      */
     public void setContextSupport(ContextSupport contextSupport)
     {
@@ -140,7 +140,7 @@ public class Context
 
     /** Retrieve the <code>ContextSupport</code>.
      *
-     *  @return The context-support.
+     *  @return the context-support
      */
     public ContextSupport getContextSupport()
     {
@@ -149,7 +149,7 @@ public class Context
 
     /** Retrieve the current <code>Navigator</code>.
      *
-     *  @return The navigator.
+     *  @return the navigator
      */
     public Navigator getNavigator()
     {
@@ -158,9 +158,9 @@ public class Context
 
     /** Translate a namespace prefix to its URI.
      *
-     *  @param prefix The prefix.
+     *  @param prefix the prefix
      *
-     *  @return The naemspace URI mapped to the prefix.
+     *  @return the namespace URI mapped to the prefix
      */
     public String translateNamespacePrefixToUri(String prefix)
     {
@@ -169,13 +169,13 @@ public class Context
 
     /** Retrieve a variable value.
      *
-     *  @param namespaceURI The function namespace URI.
-     *  @param prefix The function prefix.
-     *  @param localName The function name.
+     *  @param namespaceURI the function namespace URI
+     *  @param prefix the function prefix
+     *  @param localName the function name
      *
-     *  @return The variable value.
+     *  @return the variable value
      *
-     *  @throws UnresolvableException If unable to locate a bound variable.
+     *  @throws UnresolvableException if unable to locate a bound variable
      */
     public Object getVariableValue(String namespaceURI,
                                    String prefix,
@@ -189,13 +189,13 @@ public class Context
 
     /** Retrieve a <code>Function</code>.
      *
-     *  @param namespaceURI The function namespace URI.
-     *  @param prefix The function prefix.
-     *  @param localName The function name.
+     *  @param namespaceURI the function namespace URI
+     *  @param prefix the function prefix
+     *  @param localName the function name
      *
-     *  @return The function object.
+     *  @return the function object
      *
-     *  @throws UnresolvableException If unable to locate a bound function.
+     *  @throws UnresolvableException if unable to locate a bound function
      */
     public Function getFunction(String namespaceURI,
                                 String prefix,
@@ -213,7 +213,7 @@ public class Context
 
     /** Set the current size in the context node-set.
      *
-     *  @param size The size.
+     *  @param size the size
      */
     public void setSize(int size)
     {
@@ -222,7 +222,7 @@ public class Context
 
     /** Retrieve the size of the context node-set.
      *
-     *  @return The size.
+     *  @return the size
      */
     public int getSize()
     {
@@ -231,7 +231,7 @@ public class Context
 
     /** Set the current position in the context node-set.
      *
-     *  @param position The position
+     *  @param position the position
      */
     public void setPosition(int position)
     {
@@ -240,7 +240,7 @@ public class Context
 
     /** Retrieve current position in the context node-set.
      *
-     *  @return The current position.
+     *  @return the current position
      */
     public int getPosition()
     {
@@ -253,7 +253,7 @@ public class Context
 
     /** Create a type-safe shallow copy.
      *
-     *  @return The duplicate.
+     *  @return the duplicate
      */
     public Context duplicate()
     {
