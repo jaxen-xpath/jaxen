@@ -82,9 +82,6 @@ import org.jaxen.saxpath.XPathHandler;
 
 public class DefaultXPathHandler implements XPathHandler
 {
-    public DefaultXPathHandler()
-    {
-    }
 
     public void startXPath() throws org.jaxen.saxpath.SAXPathException
     {
