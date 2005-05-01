@@ -122,7 +122,7 @@ public class CeilingTest extends TestCase {
         assertTrue(Double.isNaN(result));
     }    
 
-    public void testCeilingFunctionRequiresAtLeastArgument() 
+    public void testCeilingFunctionRequiresAtLeastOneArgument() 
       throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ceiling()");
@@ -137,7 +137,7 @@ public class CeilingTest extends TestCase {
         
     }    
 
-    public void testBooleanFunctionRequiresExactlyOneArgument() 
+    public void testCeilingFunctionRequiresAtMostOneArgument() 
       throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ceiling(2.2, 1.2)");
