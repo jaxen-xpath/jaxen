@@ -86,12 +86,8 @@ public class CountFunction implements Function
         throw new FunctionCallException( "count() requires one argument." );
     }
 
-    public static Number evaluate(Object obj) throws FunctionCallException
+    public static Double evaluate(Object obj) throws FunctionCallException
     {
-      if( obj == null )
-        {
-        return new Double( 0 );
-        }
       
         if (obj instanceof List)
         {
