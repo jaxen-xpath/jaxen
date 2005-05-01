@@ -113,9 +113,11 @@ public class NamespaceUriFunction implements Function
             }
             else if ( nav.isAttribute( first ) )
             {
-                return nav.getAttributeNamespaceUri( first );
+                String uri = nav.getAttributeNamespaceUri( first );
+                if (uri == null) return "";
+                return uri;
             }
-                        else if ( nav.isProcessingInstruction( first ) )
+            else if ( nav.isProcessingInstruction( first ) )
             {
                 return nav.getProcessingInstructionTarget( first );
             }

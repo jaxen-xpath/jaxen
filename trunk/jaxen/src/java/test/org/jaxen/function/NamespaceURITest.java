@@ -74,7 +74,10 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 /**
@@ -123,5 +126,44 @@ public class NamespaceURITest extends TestCase {
         List results = xpath.selectNodes( doc );
         assertEquals("", results.get(0));
     }    
+    public void testNamespaceURIOfEmptyNodeSetIsEmptyString() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/aaa)" );
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }    
 
+    public void testNamespaceURIOfProcessingInstructionIsTarget() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/processing-instruction())" );
+        ProcessingInstruction pi = doc.createProcessingInstruction("target", "value");
+        doc.appendChild(pi);
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("target", result);
+    }    
+
+    public void testNamespaceURIOfAttribute() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/*/@*)" );
+        Attr a = doc.createAttribute("name");
+        doc.getDocumentElement().setAttributeNode(a);
+        Object result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }    
+
+    public void testNamespaceURIOfTextIsEmptyString() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/*/text())" );
+        Text c = doc.createTextNode("test");
+        doc.getDocumentElement().appendChild(c);
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }    
+
+    public void testNamespaceURIOfNamespaceIsPrefix() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/*/namespace::node())" );
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("http://www.w3.org/XML/1998/namespace", result);
+    }    
 }
