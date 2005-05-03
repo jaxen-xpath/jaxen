@@ -143,7 +143,6 @@ public class XPathReaderTest extends TestCase
 
     public void testPaths() throws SAXPathException
     {
-        XPathReader reader = new XPathReader();
 
         System.out.println( "Valid Expressions" );
 
@@ -158,7 +157,6 @@ public class XPathReaderTest extends TestCase
 
     public void testBogusPaths() throws SAXPathException
     {
-        XPathReader reader = new XPathReader();
 
         System.out.println( "Bogus Expressions" );
 
@@ -183,7 +181,6 @@ public class XPathReaderTest extends TestCase
 
     public void testChildrenOfNumber() throws SAXPathException
     {
-        XPathReader reader = new XPathReader();
         try
         {
             reader.parse( "1/child::test" );
@@ -272,14 +269,11 @@ public class XPathReaderTest extends TestCase
     
     public void testValidAxis() throws SAXPathException
     {
-        XPathReader reader = new XPathReader();
         reader.parse( "child::foo" );
-
     }
 
     public void testInvalidAxis() throws SAXPathException
     {
-        XPathReader reader = new XPathReader();
 
         try
         {
