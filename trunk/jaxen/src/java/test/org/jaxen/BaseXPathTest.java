@@ -783,5 +783,11 @@ public class BaseXPathTest extends TestCase {
         
     }
     
+    public void testArithmeticPrecedence() throws JaxenException {
+        XPath xpath = new DOMXPath("2+1-1+1");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(3, result.intValue());
+    }
+    
     
 }
