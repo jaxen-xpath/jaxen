@@ -130,8 +130,9 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             case INTEGER:
             case DOUBLE:
             case LITERAL:
+            // FIXME parentheses should be allowed when content of parentheses evaluates to a node-set
             case LEFT_PAREN:
-            case DOLLAR:
+            // case DOLLAR:
             {
                 filterExpr();
 
@@ -141,6 +142,16 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                     throw ex;
                 }
 
+                break;
+            }
+            case DOLLAR:
+            {
+                filterExpr();
+                    
+                if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH)
+                {
+                    locationPath( false );
+                }
                 break;
             }
             case IDENTIFIER:
