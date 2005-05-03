@@ -87,6 +87,7 @@ public class XPathReaderTest extends TestCase
     private String[] paths = {
         "/foo/bar[@a='1' and @b='2']",
         "/foo/bar[@a='1' and @b!='2']",
+        "$varname[@a='1']",
         "//attribute::*[.!='crunchy']",
         "'//*[contains(string(text()),\"yada yada\")]'",
     };
@@ -95,6 +96,7 @@ public class XPathReaderTest extends TestCase
         new String[]{"chyld::foo", "Expected valid axis name instead of [chyld]"},
         new String[]{"foo/tacos()", "Expected node-type"},
         new String[]{"foo/tacos()", "Expected node-type"},
+        new String[]{"$varname/foo", "Node-set expected"},
         new String[]{"*:foo", "Unexpected ':'"},
         new String[]{"/foo/bar[baz", "Expected: ]"},
         new String[]{"/cracker/cheese[(mold > 1) and (sense/taste", "Expected: )"},
