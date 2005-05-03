@@ -77,10 +77,6 @@ class XPathLexer
         setXPath( xpath );
     }
 
-    XPathLexer()
-    {
-    }
-
     void setXPath(String xpath)
     {
         this.xpath           = xpath;
