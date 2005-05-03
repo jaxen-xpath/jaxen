@@ -144,13 +144,8 @@ public class XPathReaderTest extends TestCase
     public void testPaths() throws SAXPathException
     {
 
-        System.out.println( "Valid Expressions" );
-
         for( int i = 0; i < paths.length; ++i )
         {
-            System.out.println( "----------------------------------------" );
-            System.out.println( paths[i] );
-            System.out.println( "----------------------------------------" );
             reader.parse( paths[i] );
         }
     }
@@ -158,14 +153,9 @@ public class XPathReaderTest extends TestCase
     public void testBogusPaths() throws SAXPathException
     {
 
-        System.out.println( "Bogus Expressions" );
-
         for( int i = 0; i < bogusPaths.length; ++i )
         {
             final String[] bogusPath = bogusPaths[i];
-            System.out.println( "----------------------------------------" );
-            System.out.println( bogusPath[0] );
-            System.out.println( "----------------------------------------" );
 
             try
             {
