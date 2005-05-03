@@ -85,6 +85,7 @@ public class XPathReaderTest extends TestCase
 {
     private ConformanceXPathHandler expected;
     private ConformanceXPathHandler actual;
+    private Document doc;
 
     private XPathReader reader;
     private String text;
@@ -113,7 +114,7 @@ public class XPathReaderTest extends TestCase
         super( name );
     }
 
-    public void setUp()
+    public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
         setReader( new XPathReader() );
         setText( null );
@@ -122,6 +123,12 @@ public class XPathReaderTest extends TestCase
         this.expected = new ConformanceXPathHandler();
 
         getReader().setXPathHandler( actual() );
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.parse( "xml/basic.xml" );
+
     }
 
     public void tearDown()
@@ -202,19 +209,12 @@ public class XPathReaderTest extends TestCase
         
     }
 
-    public void testNumberOrNumber() throws ParserConfigurationException, SAXException, IOException
+    public void testNumberOrNumber()
     {
 
         try
         {
             XPath xpath = new DOMXPath( "4 | 5" );
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-        
-            Document doc = builder.parse( "xml/basic.xml" );
-
             xpath.selectNodes( doc );
             fail( "Should have thrown XPathSyntaxException for 4 | 5");
         }
@@ -224,19 +224,12 @@ public class XPathReaderTest extends TestCase
         }
     }
 
-    public void testStringOrNumber() throws ParserConfigurationException, SAXException, IOException
+    public void testStringOrNumber()
     {
 
         try
         {
             XPath xpath = new DOMXPath( "\"test\" | 5" );
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-        
-            Document doc = builder.parse( "xml/basic.xml" );
-
             xpath.selectNodes( doc );
             fail( "Should have thrown XPathSyntaxException for \"test\" | 5");
         }
@@ -246,19 +239,12 @@ public class XPathReaderTest extends TestCase
         }
     }    
     
-    public void testStringOrString() throws ParserConfigurationException, SAXException, IOException
+    public void testStringOrString() 
     {
 
         try
         {
             XPath xpath = new DOMXPath( "\"test\" | \"festival\"" );
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-        
-            Document doc = builder.parse( "xml/basic.xml" );
-
             xpath.selectNodes( doc );
             fail( "Should have thrown XPathSyntaxException for \"test\" | 5");
         }
@@ -269,19 +255,12 @@ public class XPathReaderTest extends TestCase
         
     }    
     
-    public void testUnionofNodesAndNonNodes() throws ParserConfigurationException, SAXException, IOException
+    public void testUnionofNodesAndNonNodes() 
     {
 
         try
         {
             XPath xpath = new DOMXPath( "count(//*) | //* " );
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-        
-            Document doc = builder.parse( "xml/basic.xml" );
-
             xpath.selectNodes( doc );
             fail( "Should have thrown XPathSyntaxException for \"count(//*) | //* ");
         }
