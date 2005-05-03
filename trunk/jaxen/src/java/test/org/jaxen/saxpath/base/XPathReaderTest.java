@@ -62,8 +62,11 @@
 
 package org.jaxen.saxpath.base;
 
+import java.io.IOException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
@@ -72,9 +75,11 @@ import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
+import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathSyntaxException;
 import org.jaxen.saxpath.conformance.ConformanceXPathHandler;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 public class XPathReaderTest extends TestCase
 {
@@ -129,7 +134,7 @@ public class XPathReaderTest extends TestCase
     // --------------------------------------------------------------------------------
 
 
-    public void testPaths()
+    public void testPaths() throws SAXPathException
     {
         XPathReader reader = new XPathReader();
 
@@ -140,23 +145,11 @@ public class XPathReaderTest extends TestCase
             System.out.println( "----------------------------------------" );
             System.out.println( paths[i] );
             System.out.println( "----------------------------------------" );
-            try
-            {
-                reader.parse( paths[i] );
-            }
-            catch( org.jaxen.saxpath.SAXPathException e )
-            {
-                e.printStackTrace();
-                fail( e.getMessage() );
-            }
-            catch( Exception e )
-            {
-                fail( e.getMessage() );
-            }
+            reader.parse( paths[i] );
         }
     }
 
-    public void testBogusPaths()
+    public void testBogusPaths() throws SAXPathException
     {
         XPathReader reader = new XPathReader();
 
@@ -172,25 +165,16 @@ public class XPathReaderTest extends TestCase
             try
             {
                 reader.parse( bogusPath[0] );
-
                 fail( "Should have thrown XPathSyntaxException for " + bogusPath[0]);
             }
             catch( XPathSyntaxException e )
             {
                 assertEquals( bogusPath[1], e.getMessage() );
             }
-            catch( org.jaxen.saxpath.SAXPathException e )
-            {
-                fail( e.getMessage() );
-            }
-            catch( Exception e )
-            {
-                fail( e.getMessage() );
-            }
         }
     }
 
-    public void testChildrenOfNumber()
+    public void testChildrenOfNumber() throws SAXPathException
     {
         XPathReader reader = new XPathReader();
         try
@@ -202,19 +186,10 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Node-set expected", e.getMessage() );
         }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testChildIsNumber()
+    public void testChildIsNumber() throws SAXPathException
     {
-        XPathReader reader = new XPathReader();
         try
         {
             reader.parse( "jane/3" );
@@ -224,17 +199,10 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Expected one of '.', '..', '@', '*', <QName>", e.getMessage() );
         }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
+        
     }
 
-    public void testNumberOrNumber()
+    public void testNumberOrNumber() throws ParserConfigurationException, SAXException, IOException
     {
 
         try
@@ -254,13 +222,9 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testStringOrNumber()
+    public void testStringOrNumber() throws ParserConfigurationException, SAXException, IOException
     {
 
         try
@@ -280,13 +244,9 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
     }    
     
-    public void testStringOrString()
+    public void testStringOrString() throws ParserConfigurationException, SAXException, IOException
     {
 
         try
@@ -306,13 +266,10 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
+        
     }    
     
-    public void testUnionofNodesAndNonNodes()
+    public void testUnionofNodesAndNonNodes() throws ParserConfigurationException, SAXException, IOException
     {
 
         try
@@ -332,27 +289,16 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
-        catch( Exception e )
-        {
-            fail( e.getMessage() );
-        }
     }    
     
-    public void testValidAxis()
+    public void testValidAxis() throws SAXPathException
     {
         XPathReader reader = new XPathReader();
+        reader.parse( "child::foo" );
 
-        try
-        {
-            reader.parse( "child::foo" );
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testInvalidAxis()
+    public void testInvalidAxis() throws SAXPathException
     {
         XPathReader reader = new XPathReader();
 
@@ -361,324 +307,202 @@ public class XPathReaderTest extends TestCase
             reader.parse( "chyld::foo" );
             fail( "Should have thrown XPathSyntaxException" );
         }
-        catch( XPathSyntaxException e )
+        catch( XPathSyntaxException ex )
         {
-            // expected and correct
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
+            assertNotNull(ex.getMessage());
         }
 
     }
 
-    public void testSimpleNameStep()
+    public void testSimpleNameStep() throws SAXPathException
     {
-        try
-        {
-            setText( "foo" );
-
-            getReader().setUpParse( getText() );
-
-            getReader().step( );
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "foo" );
-            expected().endNameStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
+        setText( "foo" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "foo" );
+        expected().endNameStep();
+        compare();
 
     }
 
-    public void testNameStepWithAxisAndPrefix()
+    public void testNameStepWithAxisAndPrefix() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::foo:bar" );
+        setText( "parent::foo:bar" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startNameStep( Axis.PARENT,
+                                  "foo",
+                                  "bar" );
+        expected().endNameStep();
+        compare();
 
-            getReader().setUpParse( getText() );
-
-            getReader().step( );
-
-            expected().startNameStep( Axis.PARENT,
-                                      "foo",
-                                      "bar" );
-            expected().endNameStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testNodeStepWithAxis()
+    public void testNodeStepWithAxis() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::node()" );
 
-            getReader().setUpParse( getText() );
+        setText( "parent::node()" );
+        getReader().setUpParse( getText() );
+        getReader().step();
+        expected().startAllNodeStep( Axis.PARENT );
+        expected().endAllNodeStep();
+        compare();
 
-            getReader().step();
-
-            expected().startAllNodeStep( Axis.PARENT );
-
-            expected().endAllNodeStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testProcessingInstructionStepWithName()
+    public void testProcessingInstructionStepWithName() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::processing-instruction('cheese')" );
-
-            getReader().setUpParse( getText() );
-
-            getReader().step( );
-
-            expected().startProcessingInstructionNodeStep( Axis.PARENT,
+        setText( "parent::processing-instruction('cheese')" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startProcessingInstructionNodeStep( Axis.PARENT,
                                                            "cheese" );
-
-            expected().endProcessingInstructionNodeStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
+        expected().endProcessingInstructionNodeStep();
+        compare();
     }
 
-    public void testProcessingInstructionStepNoName()
+    public void testProcessingInstructionStepNoName() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::processing-instruction()" );
+        setText( "parent::processing-instruction()" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startProcessingInstructionNodeStep( Axis.PARENT,
+                                                       "" );
+        expected().endProcessingInstructionNodeStep();
+        compare();
 
-            getReader().setUpParse( getText() );
-
-            getReader().step( );
-
-            expected().startProcessingInstructionNodeStep( Axis.PARENT,
-                                                           "" );
-
-            expected().endProcessingInstructionNodeStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testAllNodeStep()
+    public void testAllNodeStep() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::node()" );
 
-            getReader().setUpParse( getText() );
+        setText( "parent::node()" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startAllNodeStep( Axis.PARENT );
+        expected().endAllNodeStep();
+        compare();
 
-            getReader().step( );
-
-            expected().startAllNodeStep( Axis.PARENT );
-
-            expected().endAllNodeStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testTextNodeStep()
+    public void testTextNodeStep() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::text()" );
 
-            getReader().setUpParse( getText() );
+        setText( "parent::text()" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startTextNodeStep( Axis.PARENT );
+        expected().endTextNodeStep();
+        compare();
 
-            getReader().step( );
-
-            expected().startTextNodeStep( Axis.PARENT );
-
-            expected().endTextNodeStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testCommentNodeStep()
+    public void testCommentNodeStep() throws SAXPathException
     {
-        try
-        {
-            setText( "parent::comment()" );
 
-            getReader().setUpParse( getText() );
+        setText( "parent::comment()" );
+        getReader().setUpParse( getText() );
+        getReader().step( );
+        expected().startCommentNodeStep( Axis.PARENT );
+        expected().endCommentNodeStep();
+        compare();
 
-            getReader().step( );
-
-            expected().startCommentNodeStep( Axis.PARENT );
-
-            expected().endCommentNodeStep();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testRelativeLocationPath()
+    public void testRelativeLocationPath() throws SAXPathException
     {
-        try
-        {
-            setText( "foo/bar/baz" );
 
-            getReader().setUpParse( getText() );
+        setText( "foo/bar/baz" );
+        getReader().setUpParse( getText() );
+        getReader().locationPath( false );
+        expected().startRelativeLocationPath();
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "foo" );
+        expected().endNameStep();
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "bar" );
+        expected().endNameStep();
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "baz" );
+        expected().endNameStep();
+        expected().endRelativeLocationPath();
+        compare();
 
-            getReader().locationPath( false );
-
-            expected().startRelativeLocationPath();
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "foo" );
-            expected().endNameStep();
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "bar" );
-            expected().endNameStep();
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "baz" );
-            expected().endNameStep();
-
-            expected().endRelativeLocationPath();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testAbsoluteLocationPath()
+    public void testAbsoluteLocationPath() throws SAXPathException
     {
-        try
-        {
-            setText( "/foo/bar/baz" );
+        
+        setText( "/foo/bar/baz" );
+        getReader().setUpParse( getText() );
+        getReader().locationPath( true );
+        expected().startAbsoluteLocationPath();
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "foo" );
+        expected().endNameStep();
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "bar" );
+        expected().endNameStep();
+        expected().startNameStep( Axis.CHILD,
+                                  "",
+                                  "baz" );
+        expected().endNameStep();
+        expected().endAbsoluteLocationPath();
+        compare();
 
-            getReader().setUpParse( getText() );
-
-            getReader().locationPath( true );
-
-            expected().startAbsoluteLocationPath();
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "foo" );
-            expected().endNameStep();
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "bar" );
-            expected().endNameStep();
-
-            expected().startNameStep( Axis.CHILD,
-                                      "",
-                                      "baz" );
-            expected().endNameStep();
-
-            expected().endAbsoluteLocationPath();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
-    public void testNumberPredicate()
+    public void testNumberPredicate() throws SAXPathException
     {
-        try
-        {
-            setText( "[1]" );
 
-            getReader().setUpParse( getText() );
+        setText( "[1]" );
+        getReader().setUpParse( getText() );
+        getReader().predicate();
+        expected().startPredicate();
 
-            getReader().predicate();
+        expected().startOrExpr();
+        expected().startAndExpr();
+        expected().startEqualityExpr();
+        expected().startEqualityExpr();
+        expected().startRelationalExpr();
+        expected().startRelationalExpr();
+        expected().startAdditiveExpr();
+        expected().startAdditiveExpr();
+        expected().startMultiplicativeExpr();
+        expected().startMultiplicativeExpr();
+        expected().startUnaryExpr();
+        expected().startUnionExpr();
+        expected().startPathExpr();
+        expected().startFilterExpr();
 
-            expected().startPredicate();
+        expected().number( 1 );
 
-            expected().startOrExpr();
-            expected().startAndExpr();
-            expected().startEqualityExpr();
-            expected().startEqualityExpr();
-            expected().startRelationalExpr();
-            expected().startRelationalExpr();
-            expected().startAdditiveExpr();
-            expected().startAdditiveExpr();
-            expected().startMultiplicativeExpr();
-            expected().startMultiplicativeExpr();
-            expected().startUnaryExpr();
-            expected().startUnionExpr();
-            expected().startPathExpr();
-            expected().startFilterExpr();
+        expected().endFilterExpr();
+        expected().endPathExpr();
+        expected().endUnionExpr( false );
+        expected().endUnaryExpr( Operator.NO_OP );
+        expected().endMultiplicativeExpr( Operator.NO_OP );
+        expected().endMultiplicativeExpr( Operator.NO_OP );
+        expected().endAdditiveExpr( Operator.NO_OP );
+        expected().endAdditiveExpr( Operator.NO_OP );
+        expected().endRelationalExpr( Operator.NO_OP );
+        expected().endRelationalExpr( Operator.NO_OP );
+        expected().endEqualityExpr( Operator.NO_OP );
+        expected().endEqualityExpr( Operator.NO_OP );
+        expected().endAndExpr( false );
+        expected().endOrExpr( false );
 
-            expected().number( 1 );
+        expected().endPredicate();
 
-            expected().endFilterExpr();
-            expected().endPathExpr();
-            expected().endUnionExpr( false );
-            expected().endUnaryExpr( Operator.NO_OP );
-            expected().endMultiplicativeExpr( Operator.NO_OP );
-            expected().endMultiplicativeExpr( Operator.NO_OP );
-            expected().endAdditiveExpr( Operator.NO_OP );
-            expected().endAdditiveExpr( Operator.NO_OP );
-            expected().endRelationalExpr( Operator.NO_OP );
-            expected().endRelationalExpr( Operator.NO_OP );
-            expected().endEqualityExpr( Operator.NO_OP );
-            expected().endEqualityExpr( Operator.NO_OP );
-            expected().endAndExpr( false );
-            expected().endOrExpr( false );
+        compare();
 
-            expected().endPredicate();
-
-            compare();
-        }
-        catch( org.jaxen.saxpath.SAXPathException e )
-        {
-            fail( e.getMessage() );
-        }
     }
 
     // --------------------------------------------------------------------------------
