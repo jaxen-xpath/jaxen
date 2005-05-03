@@ -59,17 +59,26 @@
  * $Id$
  */
 
-
-
-
 package org.jaxen.saxpath;
 
 
+/**
+ * Represents a syntax error in an XPath expression.
+ * This is a compile-time error that is detectable irrespective of 
+ * the context in which the XPath expression is evaluated.
+ */
 public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
 {
     private String xpath;
     private int    position;
 
+    /**
+     * Creates a new XPathSyntaxException
+     * 
+     * @param xpath the incorrect XPath expression 
+     * @param position the index of the character at which the syntax error was detected
+     * @param message the detail message
+     */
     public XPathSyntaxException(String xpath,
                                 int position,
                                 String message)
@@ -79,11 +88,27 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
         this.xpath    = xpath;
     }
 
+    /**
+     * <p>
+     * Returns the index of the character at which the syntax error was detected
+     * in the XPath expression.
+     * </p>
+     * 
+     * @return the character index in the XPath expression  
+     *     at which the syntax error was detected
+     */
     public int getPosition()
     {
         return this.position;
     }
 
+    /**
+     * <p>
+     * Returns the syntactically incorrect XPath expression.
+     * </p>
+     * 
+     * @return the syntactically incorrect XPath expression
+     */
     public String getXPath()
     {
         return this.xpath;
@@ -94,12 +119,19 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
         return getClass() + ": " + getXPath() + ": " + getPosition() + ": " + getMessage();
     }
 
+    /**
+     * <p>
+     * Returns a string in the form <code>"   ^"</code> which, when placed on the line
+     * below the XPath expression in a monospaced font, should point to the
+     * location of the error.
+     * </p>
+     * 
+     * @return the position marker 
+     */
     public String getPositionMarker()
     {
-        StringBuffer buf = new StringBuffer();
-
         int pos = getPosition();
-
+        StringBuffer buf = new StringBuffer(pos+1);
         for ( int i = 0 ; i < pos ; ++i )
         {
             buf.append(" ");
@@ -111,6 +143,14 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
         
     }
 
+    /**
+     * <p>
+     * Returns a long formatted description of the error,
+     * including line breaks.
+     * </p>
+     * 
+     * @return a longer description of the error on multiple lines
+     */
     public String getMultilineMessage()
     {
         StringBuffer buf = new StringBuffer();
