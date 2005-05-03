@@ -62,7 +62,6 @@
 
 package org.jaxen;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -81,7 +80,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b7
  *
  */
 public class BaseXPathTest extends TestCase {
@@ -782,7 +781,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x3, result.get(4));   
         assertEquals(x4, result.get(5));
         
-    }   
+    }
     
     
 }
