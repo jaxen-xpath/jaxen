@@ -102,7 +102,6 @@ public class XPathReaderTest extends TestCase
         new String[]{"chyld::foo", "Expected valid axis name instead of [chyld]"},
         new String[]{"foo/tacos()", "Expected node-type"},
         new String[]{"foo/tacos()", "Expected node-type"},
-        new String[]{"$varname/foo", "Node-set expected"},
         new String[]{"*:foo", "Unexpected ':'"},
         new String[]{"/foo/bar[baz", "Expected: ]"},
         new String[]{"/cracker/cheese[(mold > 1) and (sense/taste", "Expected: )"},
@@ -371,6 +370,15 @@ public class XPathReaderTest extends TestCase
         expected().startCommentNodeStep( Axis.PARENT );
         expected().endCommentNodeStep();
         compare();
+
+    }
+
+    public void testLocationPathStartsWithVariable() throws SAXPathException
+    {
+
+        setText( "$variable/foo" );
+        getReader().setUpParse( getText() );
+        getReader().step();
 
     }
 
