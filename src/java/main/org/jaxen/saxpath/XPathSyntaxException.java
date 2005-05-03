@@ -91,7 +91,7 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
 
     public String toString()
     {
-        return getClass() + ": " + getPosition() + ": " + getMessage();
+        return getClass() + ": " + getXPath() + ": " + getPosition() + ": " + getMessage();
     }
 
     public String getPositionMarker()
@@ -116,6 +116,7 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
         StringBuffer buf = new StringBuffer();
 
         buf.append( getMessage() );
+        // FIXME platform dependent line separator
         buf.append( "\n" );
         buf.append( getXPath() );
         buf.append( "\n" );
