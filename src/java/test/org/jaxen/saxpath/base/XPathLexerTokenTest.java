@@ -67,21 +67,9 @@ import junit.framework.TestCase;
 
 public class XPathLexerTokenTest extends TestCase
 {
-    private XPathLexer lexer;
-
     public XPathLexerTokenTest(String name)
     {
         super( name );
-    }
-
-    public void setUp()
-    {
-        this.lexer = new XPathLexer();
-    }
-
-    public void tearDown()
-    {
-        this.lexer = null;
     }
 
     public void testIdentifier()
@@ -252,7 +240,7 @@ public class XPathLexerTokenTest extends TestCase
     private void runTest(String text,
                          int[] expectedTokens)
     {
-        this.lexer.setXPath( text );
+        XPathLexer lexer = new XPathLexer( text );
 
         int   tokenType = 0;
         Token token     = null;
@@ -260,13 +248,11 @@ public class XPathLexerTokenTest extends TestCase
         for ( int i = 0 ; i < expectedTokens.length ; ++i )
         {
             tokenType = expectedTokens[i];
-
-            token = this.lexer.nextToken();
-
+            token = lexer.nextToken();
             assertNotNull( token );
-
             assertEquals( tokenType,
                           token.getTokenType() );
         }
     }
+    
 }
