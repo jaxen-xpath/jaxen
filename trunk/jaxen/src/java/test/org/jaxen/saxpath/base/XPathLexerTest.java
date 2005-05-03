@@ -87,23 +87,18 @@ public class XPathLexerTest extends TestCase
         setText( "a:b" );
 
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "a",
                       tokenText() );
 
         nextToken();
-
         assertEquals( TokenTypes.COLON,
                       tokenType() );
         
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "b",
                       tokenText() );
     }
@@ -113,20 +108,16 @@ public class XPathLexerTest extends TestCase
         setText( "foo" );
 
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "foo",
                       tokenText() );
 
         setText( "foo.bar" );
 
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "foo.bar",
                       tokenText() );
     }
@@ -141,7 +132,6 @@ public class XPathLexerTest extends TestCase
         setText( "\u1000foo" );
 
         nextToken();
-
         assertEquals( TokenTypes.ERROR,
                       tokenType() );
 
@@ -165,22 +155,17 @@ public class XPathLexerTest extends TestCase
         setText( "foo and bar" );
 
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "foo",
                       tokenText() );
 
         nextToken();
-
         assertEquals( TokenTypes.AND,
                       tokenType() );
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "bar",
                       tokenText() );
     }
@@ -190,22 +175,18 @@ public class XPathLexerTest extends TestCase
         setText( "and and and" );
 
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "and",
                       tokenText() );
 
         nextToken();
-
         assertEquals( TokenTypes.AND,
                       tokenType() );
+        
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "and",
                       tokenText() );
     }
@@ -215,10 +196,8 @@ public class XPathLexerTest extends TestCase
         setText( "1234" );
 
         nextToken();
-
         assertEquals( TokenTypes.INTEGER,
                       tokenType() );
-
         assertEquals( "1234",
                       tokenText() );
     }
@@ -228,10 +207,8 @@ public class XPathLexerTest extends TestCase
         setText( "12.34" );
 
         nextToken();
-
         assertEquals( TokenTypes.DOUBLE,
                       tokenType() );
-
         assertEquals( "12.34",
                       tokenText() );
     }
@@ -241,10 +218,8 @@ public class XPathLexerTest extends TestCase
         setText( ".34" );
 
         nextToken();
-
         assertEquals( TokenTypes.DOUBLE,
                       tokenType() );
-
         assertEquals( ".34",
                       tokenText() );
     }
@@ -254,24 +229,19 @@ public class XPathLexerTest extends TestCase
         setText( "12.34 mod 3" );
 
         nextToken();
-
         assertEquals( TokenTypes.DOUBLE,
                       tokenType() );
-
         assertEquals( "12.34",
                       tokenText() );
 
         nextToken();
-
         assertEquals( TokenTypes.MOD,
                       tokenType() );
 
         nextToken();
-
         assertEquals( TokenTypes.INTEGER,
                       tokenType() );
-
-            
+  
     }
 
     public void testSlash()
@@ -279,7 +249,6 @@ public class XPathLexerTest extends TestCase
         setText( "/" );
 
         nextToken();
-
         assertEquals( TokenTypes.SLASH,
                       tokenType() );
     }
@@ -289,7 +258,6 @@ public class XPathLexerTest extends TestCase
         setText( "//" );
 
         nextToken();
-
         assertEquals( TokenTypes.DOUBLE_SLASH,
                       tokenType() );
     }
@@ -299,23 +267,18 @@ public class XPathLexerTest extends TestCase
         setText ( "foo:bar" );
 
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "foo",
                       tokenText() );
 
         nextToken();
-
         assertEquals( TokenTypes.COLON,
                       tokenType() );
-
+        
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "bar",
                       tokenText() );
     }
@@ -323,17 +286,14 @@ public class XPathLexerTest extends TestCase
     public void testEOF()
     {
         setText( "foo" );
-
+        
         nextToken();
-
         assertEquals( TokenTypes.IDENTIFIER,
                       tokenType() );
-
         assertEquals( "foo",
                       tokenText() );
 
         nextToken();
-
         assertEquals( TokenTypes.EOF,
                       tokenType() );
     }
