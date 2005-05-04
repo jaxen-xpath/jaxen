@@ -82,7 +82,19 @@ public class LangFunction implements Function
     private static final String XMLNS_URI = 
         "http://www.w3.org/XML/1998/namespace";
     
-
+    /**
+     * <p>
+     * Determines whether or not the context node is written in the specified language,
+     * as determined by the nearest <code>xml:lang</code> attribute in scope. 
+     * </p>
+     * 
+     * @param context the context in which to evaluate the <code>lang()</code> function
+     * @param args the arguments to the lang function
+     * @return a <code>Boolean</code> indicating whether the context node is written in
+     *     the specified language
+     * @throws FunctionCallException if <code>args</code> does not have length one
+     * 
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -148,5 +160,6 @@ public class LangFunction implements Function
             sublang.charAt(ll) == '-' && 
             sublang.substring(0, ll).equalsIgnoreCase(lang);
     }
+    
 }
 
