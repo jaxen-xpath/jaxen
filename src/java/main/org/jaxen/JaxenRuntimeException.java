@@ -67,18 +67,18 @@ package org.jaxen;
  */
 public class JaxenRuntimeException extends RuntimeException
 {
-    private JaxenException jaxenException;
+    private Throwable cause;
 
     /**
      * Create a new JaxenRuntimeException.
      * 
-     * @param jaxenException the nested <code>JaxenException</code> that's wrapped 
+     * @param cause the nested exception that's wrapped 
      *     inside this exception
      */
-    public JaxenRuntimeException(JaxenException jaxenException)
+    public JaxenRuntimeException(Throwable cause)
     {
-        super(jaxenException.getMessage());
-        this.jaxenException = jaxenException;
+        super(cause.getMessage());
+        this.cause = cause;
     }
 
     /**
@@ -91,23 +91,14 @@ public class JaxenRuntimeException extends RuntimeException
     }
 
     /**
-     * Return the exception that caused this exception.
-     * 
-     * @return the exception that caused this exception
-     */
-    public JaxenException getJaxenException()
-    {
-        return jaxenException;
-    }
-
-    /**
-     * Implement JDK1.4 chained exception functionality in a JDK1.3-compatible
-     * way.  Returns the same object as getJaxenException().
+     * Returns the exception that caused this exception.
+     * This is necessary to implement Java 1.4 chained exception 
+     * functionality in a Java 1.3-compatible way.
      * 
      * @return the exception that caused this exception
      */
     public Throwable getCause() {
-        return jaxenException;
+        return cause;
     }
 
 }
