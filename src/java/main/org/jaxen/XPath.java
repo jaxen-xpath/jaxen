@@ -53,8 +53,8 @@ import java.util.List;
  *
  *  <p>
  *  Most of the evaluation methods take a context object. This is typically a
- *  node or node set object (which is typically a List of node objects) or 
- *  a Jaxen Context object.
+ *  node or node-set object (which is typically a <code>List</code>
+ *  of node objects) or a Jaxen <code>Context</code> object.
  *  A null context is allowed, meaning that 
  *  there are no XML nodes on which to evaluate.
  *  </p>
@@ -75,15 +75,15 @@ public interface XPath
     /** Evaluate this XPath against a given context.
      *
      *  <p>
-     *  The context of evaluation my be a <i>document</i>,
-     *  an <i>element</i>, or a set of <i>elements</i>.
+     *  The context of evaluation my be a <em>document</em>,
+     *  an <em>element</em>, or a set of <em>elements</em>.
      *  </p>
      *
      *  <p>
      *  If the expression evaluates to a single primitive
      *  (String, Number or Boolean) type, it is returned
      *  directly.  Otherwise, the returned value is a
-     *  List (a <code>node-set</code>, in the terms of the
+     *  List (a <code>node-set</code>, in the terms of the XPath
      *  specification) of values.
      *  </p>
      *
@@ -107,7 +107,7 @@ public interface XPath
      *          against the supplied context
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation
+     *          to evaluate the expression
      */
     Object evaluate(Object context) throws JaxenException;
     
@@ -134,7 +134,7 @@ public interface XPath
      *  @return the string-value of this expression
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation
+     *          to evaluate the expression
      */
     String valueOf(Object context)
         throws JaxenException;
@@ -150,12 +150,13 @@ public interface XPath
      *  of the first node in the node set..
      *  </p>
      *
-     *  @param context the node, node-set or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. 
+     *     This value can be null
      *
      *  @return the string-value interpretation of this expression
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation
+     *          to evaluate the expression
      */
      String stringValueOf(Object context)
         throws JaxenException;
@@ -177,7 +178,7 @@ public interface XPath
      *  @return the boolean-value of this expression
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation.
+     *          to evaluate the expression
      */
     boolean booleanValueOf(Object context)
         throws JaxenException;
@@ -196,10 +197,10 @@ public interface XPath
      *
      *  @param context the node, node-set or Context object for evaluation. This value can be null
      *
-     *  @return the number-value interpretation of this expression.
+     *  @return the number-value interpretation of this expression
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation.
+     *          to evaluate the expression
      */
     Number numberValueOf(Object context)
         throws JaxenException;
@@ -222,38 +223,34 @@ public interface XPath
      *
      *  @see #selectSingleNode
      *
-     *  @param context the node, node-set or Context object for evaluation. This value can be null
+     *  @param context the node, node-set or Context object for evaluation. 
+     *     This value can be null.
      *
      *  @return the <code>node-set</code> of all items selected
      *          by this XPath expression.
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation.
+     *          to evaluate the expression
      */
     List selectNodes(Object context)
         throws JaxenException;
 
-    /** Select only the first node that is selectable by this XPath
-     *  expression.  If multiple nodes match, only one node will be
-     *  returned.
-     *
-     *  <b>NOTE:</b> In most cases, the selected node will be the first
-     *  selectable node in document-order, as defined by the XML Canonicalization
-     *  specification.  The exception occurs when using XPath
-     *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character).
-     *  This is a bug and needs to be fixed.
+    /** 
+     *  <p>
+     *  Return the first node in document order that is selected by this 
+     *  XPath expression.
      *  </p>
      *
      *  @see #selectNodes
      *
-     *  @param context the node, node-set or Context object for evaluation. This value can be null.
+     *  @param context the node, node-set or Context object for evaluation. 
+     *     This value can be null.
      *
      *  @return the <code>node-set</code> of all items selected
      *          by this XPath expression
      *
      *  @throws JaxenException if an error occurs while attempting
-     *          to perform evaluation
+     *          to evaluate the expression
      */
     Object selectSingleNode(Object context)
         throws JaxenException;
@@ -377,7 +374,7 @@ public interface XPath
      *
      *  @see FunctionContext
      *
-     *  @return the <code>FunctionContext</code> used by this expression.
+     *  @return the <code>FunctionContext</code> used by this expression
      */
     FunctionContext getFunctionContext();
 
