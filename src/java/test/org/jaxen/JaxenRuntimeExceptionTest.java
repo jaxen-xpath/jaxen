@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,42 +59,30 @@
  * $Id$
  */
 
-
 package org.jaxen;
 
-import junit.framework.Test;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
 
 /**
- * <p>
- *   Collect the org.jaxen. tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
  *
  */
-public class CoreTests extends TestCase {
+public class JaxenRuntimeExceptionTest extends TestCase {
 
-    
-    public CoreTests(String name) {
-        super(name);   
+    public JaxenRuntimeExceptionTest(String name) {
+        super(name);
     }
 
-    
-    public static Test suite() {
+    public void testMessageIsNonNull() {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        return result;
+        JaxenException ex = new JaxenException("Hello");
+        JaxenRuntimeException rex = new JaxenRuntimeException(ex);
+        assertEquals(ex.getMessage(), rex.getMessage());
+        assertEquals(ex, rex.getCause());
         
-    }
+    }    
+  
 
-    
 }
