@@ -93,6 +93,18 @@ public class SAXPathException extends Exception
     	cause = src;
     }
 
+    /**
+     * Create a new SAXPathException with the specified detail message
+     * and root cause.
+     * 
+     * @param message the detail message
+     * @param cause the cause of this exception
+     */
+    public SAXPathException(String message, Throwable cause) {
+        super( message );
+        this.cause = cause;
+    }
+    
     /** If this exception was originally caused by another exception,
      *  return it; otherwise, return <code>null</code>.
      * 

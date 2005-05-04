@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,90 +59,39 @@
  * $Id$
  */
 
-
 package org.jaxen;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
 
-/** <code>FunctionCallException</code> is thrown if an exception
- * occurs during the evaluation of a function.
- * This exception may include a root exception, such as if the 
- * real exception was failure to load an XML document via the
- * document() function call.
+import junit.framework.TestCase;
+
+
+/**
+ * @author Elliotte Rusty Harold
  *
- * @author bob mcwhirter (bob @ werken.com)
- * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
-public class FunctionCallException extends JaxenException
-{
-    private Throwable nestedException;
+public class FunctionCallExceptionTest extends TestCase {
 
-    /**
-     * Create a new FunctionCallException with the specified detail message.
-     * 
-     * @param message the detail message
-     */
-    public FunctionCallException(String message) {
-        super( message );
+    public FunctionCallExceptionTest(String name) {
+        super(name);
     }
 
-    /**
-     * Create a new FunctionCallException with the specified root cause.
-     * 
-     * @param nestedException the cause of this exception
-     */
-    public FunctionCallException(Throwable nestedException) {
-        super( nestedException.getMessage() );
-        this.nestedException = nestedException;
-    }
+    public void testMessageIsNonNull() {
+        
+        JaxenException ex = new JaxenException("Hello");
+        FunctionCallException rex = new FunctionCallException(ex);
+        assertEquals(ex.getMessage(), rex.getMessage());
+        assertEquals(ex, rex.getNestedException());
+        
+    }    
+  
+    public void testMessageIsSaved() {
+        
+        JaxenException ex = new JaxenException("Hello");
+        FunctionCallException rex = new FunctionCallException("Goodbye", ex);
+        assertEquals("Goodbye", rex.getMessage());
+        assertEquals(ex, rex.getNestedException());
+        
+    }    
+  
 
-    /**
-     * Create a new FunctionCallException with the specified detail message
-     * and root cause.
-     * 
-     * @param message the detail message
-     * @param nestedException the cause of this exception
-     */
-    public FunctionCallException(String message, Exception nestedException) {
-        super( message, nestedException );
-        this.nestedException = nestedException;
-    }
-
-    // should all this nested exception handling be pushed up into JaxenException????
-    public void printStackTrace( PrintStream s ) {
-        super.printStackTrace( s );
-        if ( nestedException != null ) 
-        {
-            s.println( "Root cause:" );
-            nestedException.printStackTrace( s );
-        }
-    }
-    
-    public void printStackTrace( PrintWriter w ) {
-        super.printStackTrace( w );
-        if ( nestedException != null ) 
-        {
-            w.println( "Root cause:" );
-            nestedException.printStackTrace( w );
-        }
-    }
-    
-    public void printStackTrace() {
-        printStackTrace(System.out);
-    }
-    
-    public Throwable fillInStackTrace() {
-        if ( nestedException == null ) {
-            return super.fillInStackTrace(); 
-        } else {
-            return nestedException.fillInStackTrace();
-        }
-    }
-    
-    // Properties
-    //-------------------------------------------------------------------------    
-    public Throwable getNestedException() {
-        return nestedException;
-    }
 }

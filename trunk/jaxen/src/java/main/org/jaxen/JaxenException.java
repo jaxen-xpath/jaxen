@@ -91,5 +91,18 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
     {
         super( rootCause );
     }
+    
+    /**
+     * Create a new JaxenException with the specified detail message
+     * and root cause.
+     * 
+     * @param message the detail message
+     * @param nestedException the cause of this exception
+     */
+    public JaxenException(String message, Throwable nestedException) {
+        super( message, nestedException );
+    }
+    
+    
 }
 
