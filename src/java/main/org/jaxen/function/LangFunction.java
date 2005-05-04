@@ -105,10 +105,9 @@ public class LangFunction implements Function
     private static Boolean evaluate(List contextNodes, Object lang, Navigator nav)
       throws UnsupportedAxisException
     {
-        return Boolean.valueOf(
-          evaluate(contextNodes.get(0), 
-          StringFunction.evaluate(lang, nav), nav)
-        );
+        return evaluate(contextNodes.get(0), 
+            StringFunction.evaluate(lang, nav), nav)
+            ? Boolean.TRUE : Boolean.FALSE;
     }
 
     private static boolean evaluate(Object node, String lang, Navigator nav)
