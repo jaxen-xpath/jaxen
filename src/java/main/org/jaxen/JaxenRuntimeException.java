@@ -77,6 +77,7 @@ public class JaxenRuntimeException extends RuntimeException
      */
     public JaxenRuntimeException(JaxenException jaxenException)
     {
+        super(jaxenException.getMessage());
         this.jaxenException = jaxenException;
     }
 
