@@ -77,7 +77,6 @@ public class JaxenRuntimeException extends RuntimeException
      */
     public JaxenRuntimeException(JaxenException jaxenException)
     {
-        super(jaxenException);
         this.jaxenException = jaxenException;
     }
 
@@ -97,6 +96,16 @@ public class JaxenRuntimeException extends RuntimeException
      */
     public JaxenException getJaxenException()
     {
+        return jaxenException;
+    }
+
+    /**
+     * Implement JDK1.4 chained exception functionality in a JDK1.3-compatible
+     * way.  Returns the same object as getJaxenException().
+     * 
+     * @return the exception that caused this exception
+     */
+    public Throwable getCause() {
         return jaxenException;
     }
 
