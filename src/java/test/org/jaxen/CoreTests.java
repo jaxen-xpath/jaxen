@@ -92,6 +92,7 @@ public class CoreTests extends TestCase {
         result.addTest(new TestSuite(ContextTest.class));
         result.addTest(new TestSuite(JaxenHandlerTest.class));
         result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
+        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
         return result;
         
     }
