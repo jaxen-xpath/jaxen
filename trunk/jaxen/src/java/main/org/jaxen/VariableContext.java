@@ -66,15 +66,16 @@ package org.jaxen;
  *
  *  <p>
  *  Variables within an XPath expression are denoted using
- *  notation such as $varName or $nsPrefix:varName, and may
- *  refer to primitive types (Boolean, Number or String),
- *  <code>node-sets</code> or individual XML nodes.
+ *  notation such as <code>$varName</code> or 
+ *  <code>$nsPrefix:varName</code>, and may
+ *  refer to a <code>Boolean</code>, <code>Double</code>, <code>String</code>,
+ *  node-set (<code>List</code>) or individual XML node.
  *  </p>
  *
  *  <p>
- *  When a variable is bound to a <code>node-set</code>, the
+ *  When a variable is bound to a node-set, the
  *  actual Java object returned should be a <code>java.util.List</code>
- *  containing XML nodes from the object-model (dom4j, JDOM, DOM, EXML)
+ *  containing XML nodes from the object-model (e.g. dom4j, JDOM, DOM, etc.)
  *  being used with the XPath.
  *  </p>
  *
@@ -92,8 +93,8 @@ package org.jaxen;
  */
 public interface VariableContext
 {
-    /** An implementation should return the value of an xpath variable
-     *  based on the namespace uri and local name of the variable-reference
+    /** An implementation should return the value of an XPath variable
+     *  based on the namespace URI and local name of the variable-reference
      *  expression.
      *
      *  <p>
@@ -103,18 +104,18 @@ public interface VariableContext
      *  The prefix may otherwise be ignored.
      *  </p>
      *
-     *  @param namespaceURI  the namespace uri to which the prefix parameter
-     *                       is bound in the xpath expression. If the variable
+     *  @param namespaceURI  the namespace URI to which the prefix parameter
+     *                       is bound in the XPath expression. If the variable
      *                       reference expression had no prefix, the namespace
-     *                       uri is <code>null</code>.
+     *                       URI is <code>null</code>.
      *  @param prefix        the prefix that was used in the variable reference
-     *                       expression.
+     *                       expression
      *  @param localName     the local name of the variable-reference
-     *                       expression; if there is no prefix, then this is
+     *                       expression. If there is no prefix, then this is
      *                       the whole name of the variable.
      *
      *  @return  the variable's value (which can be <code>null</code>)
-     *  @throws UnresolvableException  when the variable cannot be resolved.
+     *  @throws UnresolvableException  when the variable cannot be resolved
      */
     public Object getVariableValue( String namespaceURI,
                                     String prefix,
