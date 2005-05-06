@@ -60,7 +60,7 @@ public interface NamedAccessNavigator extends Navigator {
 
     /**
      * Retrieve an <code>Iterator</code> that returns the <code>child</code>
-     * xpath axis where the names of the children match the supplied name
+     * XPath axis where the names of the children match the supplied name
      * and optional namespace.
      * <p>
      * This method must only return element nodes with the correct name.
@@ -75,7 +75,7 @@ public interface NamedAccessNavigator extends Navigator {
      *
      * @return an Iterator capable of traversing the named children, or null if none
      *
-     * @throws UnsupportedAxisException if the semantics of this axis are
+     * @throws UnsupportedAxisException if the child axis is
      *         not supported by this object model
      */
     Iterator getChildAxisIterator(
@@ -85,7 +85,7 @@ public interface NamedAccessNavigator extends Navigator {
 
     /**
      * Retrieve an <code>Iterator</code> that returns the <code>attribute</code>
-     * xpath axis where the names of the attributes match the supplied name
+     * XPath axis where the names of the attributes match the supplied name
      * and optional namespace.
      * <p>
      * This method must only return attribute nodes with the correct name.
@@ -96,11 +96,11 @@ public interface NamedAccessNavigator extends Navigator {
      * @param contextNode  the origin context node
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
-     * @param namespaceURI  the uri of the namespace of the attributes to return
+     * @param namespaceURI  the URI of the namespace of the attributes to return
      *
      * @return an Iterator capable of traversing the named attributes, or null if none
      *
-     * @throws UnsupportedAxisException is the semantics of this axis are
+     * @throws UnsupportedAxisException if the attribute axis is
      *         not supported by this object model
      */
     Iterator getAttributeAxisIterator(
