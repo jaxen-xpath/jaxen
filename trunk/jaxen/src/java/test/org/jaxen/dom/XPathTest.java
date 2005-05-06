@@ -100,7 +100,14 @@ public class XPathTest extends TestCase
 
     public void testConstruction() throws JaxenException
     {
-        new DOMXPath( "/foo/bar/baz" );
+        DOMXPath xpath = new DOMXPath( "/foo/bar/baz" );
+        assertEquals("/foo/bar/baz", xpath.toString());
+    }
+    
+    public void testConstructionWithNamespacePrefix() throws JaxenException
+    {
+        DOMXPath xpath = new DOMXPath( "/p:foo/p:bar/a:baz" );
+        assertEquals("/p:foo/p:bar/a:baz", xpath.toString());
     }
     
     public void testNamespaceDeclarationsAreNotAttributes() 
