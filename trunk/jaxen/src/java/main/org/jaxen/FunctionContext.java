@@ -62,7 +62,7 @@
 
 package org.jaxen;
 
-/** Implemented by classes that know how to resolve xpath function names and
+/** Implemented by classes that know how to resolve XPath function names and
  *  namespaces to implementations of these functions.
  *
  *  <p>
