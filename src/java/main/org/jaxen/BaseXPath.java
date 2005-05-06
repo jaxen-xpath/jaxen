@@ -464,8 +464,8 @@ public class BaseXPath implements XPath, Serializable
      *  expression.
      *
      *  <p>
-     *  A <code>FunctionContext</code> is responsible for resolving
-     *  all function calls used within the expression.
+     *  A <code>NamespaceContext</code> is responsible for mapping
+     *  prefixes used within the expression to namespace URIs.
      *  </p>
      *
      *  <p>
