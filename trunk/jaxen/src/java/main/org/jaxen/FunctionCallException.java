@@ -142,6 +142,13 @@ public class FunctionCallException extends JaxenException
     
     // Properties
     //-------------------------------------------------------------------------    
+    /**
+     * <p>
+     * Returns the exception that caused this function call to fail.
+     * </p>
+     * 
+     * @return the exception that caused this fucntion call to fail
+     */
     public Throwable getNestedException() {
         return nestedException;
     }
