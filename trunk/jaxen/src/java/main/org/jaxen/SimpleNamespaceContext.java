@@ -103,7 +103,7 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
     /**
      *  Adds all the namespace declarations that are in scope on the given
      *  element. In the case of an XSLT stylesheet, this would be the element
-     *  that has the XPath expression in one of its attributes; i.e.
+     *  that has the XPath expression in one of its attributes; e.g.
      *  <code>&lt;xsl:if test="condition/xpath/expression"&gt;</code>.
      *
      *  @param nav  the navigator for use in conjunction with

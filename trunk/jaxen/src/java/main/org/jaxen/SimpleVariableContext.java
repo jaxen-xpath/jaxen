@@ -84,7 +84,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
     /** Construct.
      *
      *  <p>
-     *  Construct with an empty variable lookup table.
+     *  Create a new empty variable context.
      *  </p>
      */
     public SimpleVariableContext()
@@ -96,7 +96,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
      *
      *  <p>
      *  This method sets a variable that is 
-     *  associated with any particular namespace.
+     *  associated with a particular namespace.
      *  These variables appear such as <code>$prefix:foo</code>
      *  in an XPath expression.  Prefix to URI resolution
      *  is the responsibility of a <code>NamespaceContext</code>.
@@ -122,7 +122,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
      *  <p>
      *  This method sets a variable that is <strong>not</strong>
      *  associated with any particular namespace.
-     *  These variables appear such as <code>$foo</code>
+     *  These variables look like <code>$foo</code>
      *  in an XPath expression.
      *  </p>
      *
