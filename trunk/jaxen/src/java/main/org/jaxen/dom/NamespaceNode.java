@@ -74,12 +74,12 @@ import org.w3c.dom.NodeList;
 
 
 /**
- * Extension DOM2 node type for a namespace declaration.
+ * Extension DOM2 node type for a namespace node.
  *
  * <p>This class implements the DOM2 {@link Node} interface to
- * allow Namespace declarations to be included in the result
+ * allow namespace nodes to be included in the result
  * set of an XPath selectNodes operation, even though DOM2 does
- * not model Namespace declarations as separate nodes.</p>
+ * not model namespaces in scope as separate nodes.</p>
  *
  * <p>While all of the methods are implemented with reasonable
  * defaults, there will be some unexpected surprises, so users are
@@ -94,18 +94,15 @@ import org.w3c.dom.NodeList;
  *
  * <li>The {@link #getOwnerDocument} method returns the owner document
  * of the parent node, but that owner document will know nothing about
- * the Namespace node.</p>
+ * the namespace node.</p>
  *
  * <li>The {@link #isSupported} method always returns false.</li>
  *
  * </ol>
  *
- * <p>All attempts to modify a NamespaceNode will fail with a {@link
+ * <p>All attempts to modify a <code>NamespaceNode</code> will fail with a {@link
  * DOMException} ({@link
  * DOMException#NO_MODIFICATION_ALLOWED_ERR}).</p>
- *
- * <p>This class has only protected constructors, so that it can be
- * instantiated only by {@link DocumentNavigator}.</p>
  *
  * @author David Megginson
  * @see DocumentNavigator
@@ -198,10 +195,10 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Change the Namespace URI (always fails).
+     * Change the namespace URI (always fails).
      *
      * @param value the new URI
-     * @throws DOMException always thrown
+     * @throws DOMException always
      */
     public void setNodeValue (String value) throws DOMException
     {
@@ -212,7 +209,7 @@ public class NamespaceNode implements Node
     /**
      * Get the node type.
      *
-     * @return Always {@link #NAMESPACE_NODE}.
+     * @return always {@link #NAMESPACE_NODE}.
      */
     public short getNodeType ()
     {
@@ -315,8 +312,11 @@ public class NamespaceNode implements Node
 
     /**
      * Insert a new child node (always fails).
-     *
-     * @throws DOMException always thrown
+     * 
+     * @param newChild the node to add
+     * @param oldChild ignored
+     * @return never
+     * @throws DOMException always
      * @see Node#insertBefore
      */
     public Node insertBefore (Node newChild, Node refChild)
@@ -330,7 +330,10 @@ public class NamespaceNode implements Node
     /**
      * Replace a child node (always fails).
      *
-     * @throws DOMException always thrown
+     * @param newChild the node to add
+     * @param oldChild the child node to replace
+     * @return never
+     * @throws DOMException always
      * @see Node#replaceChild
      */
     public Node replaceChild (Node newChild, Node oldChild)
@@ -344,7 +347,9 @@ public class NamespaceNode implements Node
     /**
      * Remove a child node (always fails).
      *
-     * @throws DOMException always thrown
+     * @param oldChild the child node to remove
+     * @return never
+     * @throws DOMException always
      * @see Node#removeChild
      */
     public Node removeChild (Node oldChild)
@@ -358,7 +363,9 @@ public class NamespaceNode implements Node
     /**
      * Append a new child node (always fails).
      *
-     * @throws DOMException always thrown
+     * @param newChild the node to add
+     * @return never
+     * @throws DOMException always
      * @see Node#appendChild
      */
     public Node appendChild (Node newChild)
@@ -383,9 +390,9 @@ public class NamespaceNode implements Node
     /**
      * Create a copy of this node.
      *
-     * @param deep make a deep copy (no effect, since Namespace nodes
+     * @param deep make a deep copy (no effect, since namespace nodes
      *        don't have children).
-     * @return a new copy of this Namespace node
+     * @return a new copy of this namespace node
      */
     public Node cloneNode (boolean deep)
     {
@@ -419,7 +426,7 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Get the Namespace URI for this node.
+     * Get the namespace URI of this node.
      *
      * <p>Namespace declarations are not themselves
      * Namespace-qualified.</p>
@@ -433,12 +440,13 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Get the namespace prefix for this node.
+     * Get the namespace prefix of this node.
      *
      * <p>Namespace declarations are not themselves
-     * Namespace-qualified.</p>
+     * namespace-qualified.</p>
      *
      * @return null
+     * @see #getLocalName
      */
     public String getPrefix ()
     {
@@ -447,7 +455,7 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Change the Namespace prefix for this node (always fails).
+     * Change the namespace prefix of this node (always fails).
      *
      * @param prefix the new prefix
      * @throws DOMException always thrown
@@ -460,9 +468,10 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Get the local name for this node.
+     * Get the XPath name of the namespace node;; i.e. the
+     * namespace prefix.
      *
-     * @return null
+     * @return the namespace prefix
      */
     public String getLocalName ()
     {
@@ -500,10 +509,7 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Generate a hash code for a Namespace node.
-     *
-     * <p>The hash code is the sum of the hash codes of the parent node,
-     * name, and value.</p>
+     * Generate a hash code for a namespace node.
      *
      * @return a hash code for this node
      */
