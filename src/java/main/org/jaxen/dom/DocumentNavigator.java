@@ -86,15 +86,14 @@ import org.w3c.dom.ProcessingInstruction;
  *  used by the Jaxen engine during evaluation.
  *  </p>
  *
- *  <p>This class implements the org.jaxen.DefaultNavigator interface
- *  for the Jaxen XPath library, version 1.0beta3 (it is not guaranteed
- *  to work with subsequent releases).  This adapter allows the Jaxen
+ *  <p>This class implements the {@link org.jaxen.DefaultNavigator} interface
+ *  for the Jaxen XPath library.  This adapter allows the Jaxen
  *  library to be used to execute XPath queries against any object tree
  *  that implements the DOM level 2 interfaces.</p>
  *
- *  <p>Note: DOM level 2 does not include a node representing an XML
- *  Namespace declaration.  This navigator will return Namespace decls
- *  as instantiations of the custom {@link NamespaceNode} class, and
+ *  <p>Note: DOM level 2 does not include a node representing an XPath
+ *  namespace node.  This navigator will return namespace nodes
+ *  as instances of the custom {@link NamespaceNode} class, and
  *  users will have to check result sets to locate and isolate
  *  these.</p>
  *
@@ -113,7 +112,7 @@ public class DocumentNavigator extends DefaultNavigator
     ////////////////////////////////////////////////////////////////////
 
     /**
-     * Constant: singleton navigator.
+     * Constant: navigator.
      */
     private final static DocumentNavigator SINGLETON = new DocumentNavigator();
 
@@ -133,9 +132,9 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Get a singleton DocumentNavigator for efficiency.
+     * Get a constant DocumentNavigator for efficiency.
      *
-     * @return a singleton instance of a DocumentNavigator.
+     * @return a constant instance of a DocumentNavigator.
      */
     public static Navigator getInstance ()
     {
@@ -300,7 +299,7 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Get an iterator over all declared Namespaces.
+     * Get an iterator over all declared namespaces.
      *
      * <p>Note: this iterator is not live: it takes a snapshot
      * and that snapshot remains static during the life of
@@ -322,7 +321,7 @@ public class DocumentNavigator extends DefaultNavigator
             // declarations are in force.
 
             // TODO: deal with empty URI for
-            // canceling Namespace scope
+            // canceling namespace scope
             for (Node n = (Node)contextNode;
                  n != null;
                  n = n.getParentNode()) {
@@ -351,7 +350,7 @@ public class DocumentNavigator extends DefaultNavigator
                                     "xml",
                                     "http://www.w3.org/XML/1998/namespace"));
 
-            // An empty default Namespace cancels
+            // An empty default namespace cancels
             // any previous default.
             NamespaceNode defaultNS = (NamespaceNode)nsMap.get("");
             if (defaultNS != null && defaultNS.getNodeValue().length() == 0)
@@ -384,7 +383,7 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Get the Namespace URI of an element.
+     * Get the namespace URI of an element.
      *
      * @param object the target node
      * @return a string (possibly empty) if the node is an element,
