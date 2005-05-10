@@ -66,14 +66,14 @@ package org.jaxen.dom;
 import org.jaxen.BaseXPath;
 import org.jaxen.JaxenException;
 
-/** An XPath implementation for the W3C DOM model
+/** An XPath implementation for the W3C DOM.
  *
  * <p>This is the main entry point for matching an XPath against a DOM
  * tree.  You create a compiled XPath object, then match it against
  * one or more context nodes using the {@link #selectNodes(Object)}
  * method, as in the following example:</p>
  *
- * <pre>XPath path = new DOMXPath("a/b/c");
+ * <pre> XPath path = new DOMXPath("a/b/c");
  * List results = path.selectNodes(domNode);</pre>
  *
  * @see BaseXPath
@@ -85,12 +85,11 @@ import org.jaxen.JaxenException;
  */
 public class DOMXPath extends BaseXPath
 {
-    /** Construct given an XPath expression string.
+    /** Create a new <code>DOMXPath</code> from an XPath expression string.
      *
      *  @param xpathExpr the XPath expression
      *
-     *  @throws JaxenException if there is a syntax error while
-     *          parsing the expression
+     *  @throws JaxenException if there is a syntax error in the expression
      */
     public DOMXPath(String xpathExpr) throws JaxenException
     {
