@@ -92,7 +92,7 @@ final class Verifier {
      * @param c <code>char</code> to check for XML name start compliance
      * @return true if it's a name start character, false otherwise
      */
-    public static boolean isXMLNCNameStartCharacter(char c) {
+    static boolean isXMLNCNameStartCharacter(char c) {
     
       return (isXMLLetter(c) || c == '_');
     
@@ -105,7 +105,7 @@ final class Verifier {
      * @param c <code>char</code> to check for XML name compliance
      * @return <code>String</code> true if it's a letter, false otherwise
      */
-    public static boolean isXMLLetter(char c) {
+    static boolean isXMLLetter(char c) {
         // Note that order is very important here.  The search proceeds 
         // from lowest to highest values, so that no searching occurs 
         // above the character's value.  BTW, the first line is equivalent to:
@@ -330,7 +330,7 @@ final class Verifier {
      * @return <code>boolean</code> true if it's a combining character,
      *         false otherwise
      */
-    public static boolean isXMLCombiningChar(char c) {
+    static boolean isXMLCombiningChar(char c) {
         // CombiningChar
         if (c < 0x0300) return false;  if (c <= 0x0345) return true;
         if (c < 0x0360) return false;  if (c <= 0x0361) return true;
@@ -464,7 +464,7 @@ final class Verifier {
      * @param c <code>char</code> to check
      * @return true if it's an extender, false otherwise
      */
-    public static boolean isXMLExtender(char c) {
+    static boolean isXMLExtender(char c) {
 
         if (c < 0x00B6) return false;  // quick short circuit
 
@@ -493,7 +493,7 @@ final class Verifier {
      * @param c <code>char</code> to check for XML digit compliance
      * @return <code>boolean</code> true if it's a digit, false otherwise
      */
-    public static boolean isXMLDigit(char c) {
+    static boolean isXMLDigit(char c) {
       
         if (c < 0x0030) return false;  if (c <= 0x0039) return true;
         if (c < 0x0660) return false;  if (c <= 0x0669) return true;
