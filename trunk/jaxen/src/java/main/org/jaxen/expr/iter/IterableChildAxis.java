@@ -74,6 +74,8 @@ public class IterableChildAxis extends IterableAxis {
      * 
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
+     * @return an iterator over the children of the context node
+     * @throws UnsupportedAxisException if the child axis is not supported
      */
     public Iterator iterator(Object contextNode, ContextSupport support) 
       throws UnsupportedAxisException {
@@ -81,13 +83,15 @@ public class IterableChildAxis extends IterableAxis {
     }
 
     /**
-     * Gets the iterator for the child xpath axis that supports named access.
+     * Gets the iterator for the child XPath axis that supports named access.
      * 
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
      * @param localName  the local name of the children to return
      * @param namespacePrefix  the prefix of the namespace of the children to return
      * @param namespaceURI  the URI of the namespace of the children to return
+     * @return an iterator over the children of the context node
+     * @throws UnsupportedAxisException if the child axis is not supported by the model
      */
     public Iterator namedAccessIterator(
         Object contextNode,
