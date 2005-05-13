@@ -68,6 +68,7 @@ import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.XPathHandler;
 import org.jaxen.saxpath.XPathSyntaxException;
+import org.jaxen.saxpath.helpers.DefaultXPathHandler;
 
 /** Implementation of SAXPath's <code>XPathReader</code> which
  *  generates callbacks to an <code>XPathHandler</code>.
@@ -80,6 +81,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     private XPathLexer lexer;
 
     private XPathHandler handler;
+    
+    private static XPathHandler defaultHandler = new DefaultXPathHandler();
 
     /**
      * Create a new <code>XPathReader</code> with a do-nothing
@@ -87,7 +90,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
      */
     public XPathReader()
     {
-        setXPathHandler( DefaultXPathHandler.getInstance() );
+        setXPathHandler( defaultHandler );
     }
 
     public void setXPathHandler(XPathHandler handler)
