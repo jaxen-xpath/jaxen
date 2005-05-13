@@ -307,8 +307,6 @@ class XPathLexer
     {
         Token token = null;
     
-        Token previousToken = getPreviousToken();
-    
         if ( previousToken != null )
         {
             // For some reason, section 3.7, Lexical structure,
