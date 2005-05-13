@@ -81,6 +81,10 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
     private XPathHandler handler;
 
+    /**
+     * Create a new <code>XPathReader</code> with a do-nothing
+     * <code>XPathHandler</code>.
+     */
     public XPathReader()
     {
         setXPathHandler( DefaultXPathHandler.getInstance() );
@@ -855,7 +859,6 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     void equalityExpr() throws org.jaxen.saxpath.SAXPathException
     {
         getXPathHandler().startEqualityExpr();
-        // XXX why call this twice?
         getXPathHandler().startEqualityExpr();
 
         relationalExpr();
@@ -1014,8 +1017,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         getXPathHandler().endAdditiveExpr( operator );
 
-        operator = Operator.NO_OP;
 
+        operator = Operator.NO_OP; 
         switch ( LA(1) )
         {
             case PLUS:
