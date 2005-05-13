@@ -71,10 +71,10 @@ class Token
     private int    tokenBegin;
     private int    tokenEnd;
 
-    public Token(int tokenType,
-                 String parseText,
-                 int tokenBegin,
-                 int tokenEnd)
+    Token(int tokenType,
+          String parseText,
+          int tokenBegin,
+          int tokenEnd)
     {
         setTokenType( tokenType );
         setParseText( parseText );
@@ -87,7 +87,7 @@ class Token
         this.tokenType = tokenType;
     }
 
-    public int getTokenType()
+    int getTokenType()
     {
         return this.tokenType;
     }
@@ -97,7 +97,7 @@ class Token
         this.parseText = parseText;
     }
 
-    public String getTokenText()
+    String getTokenText()
     {
         return this.parseText.substring( getTokenBegin(),
                                          getTokenEnd() );
