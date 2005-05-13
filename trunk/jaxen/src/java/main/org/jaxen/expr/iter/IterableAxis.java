@@ -82,10 +82,12 @@ public abstract class IterableAxis implements Serializable {
     }
 
     /**
-     * Gets the iterator for a specific xpath axis.
+     * Gets the iterator for a specific XPath axis.
      * 
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
+     * @return an iterator for the axis 
+     * @throws UnsupportedAxisException
      */
     public abstract Iterator iterator(Object contextNode, ContextSupport support) throws UnsupportedAxisException;
 
