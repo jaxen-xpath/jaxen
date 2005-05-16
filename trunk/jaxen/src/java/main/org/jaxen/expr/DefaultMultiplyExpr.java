@@ -66,7 +66,7 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultMultiplyExpr extends DefaultMultiplicativeExpr
 {
-    public DefaultMultiplyExpr( Expr lhs,
+    DefaultMultiplyExpr( Expr lhs,
                                 Expr rhs )
     {
         super( lhs,

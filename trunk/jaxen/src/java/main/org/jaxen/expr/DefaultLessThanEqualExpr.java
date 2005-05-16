@@ -63,7 +63,7 @@ package org.jaxen.expr;
 
 class DefaultLessThanEqualExpr extends DefaultRelationalExpr
   {
-  public DefaultLessThanEqualExpr( Expr lhs, Expr rhs )
+  DefaultLessThanEqualExpr( Expr lhs, Expr rhs )
     {
     super( lhs, rhs );
     }

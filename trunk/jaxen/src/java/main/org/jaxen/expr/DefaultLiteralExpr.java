@@ -69,7 +69,7 @@ class DefaultLiteralExpr extends DefaultExpr implements LiteralExpr
 {
     private String literal;
 
-    public DefaultLiteralExpr(String literal)
+    DefaultLiteralExpr(String literal)
     {
         this.literal = literal;
     }

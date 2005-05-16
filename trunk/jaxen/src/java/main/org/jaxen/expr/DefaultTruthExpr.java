@@ -67,7 +67,7 @@ import java.util.List;
 
 abstract class DefaultTruthExpr extends DefaultBinaryExpr 
 {
-    public DefaultTruthExpr(Expr lhs,
+    DefaultTruthExpr(Expr lhs,
                             Expr rhs)
     {
         super( lhs,

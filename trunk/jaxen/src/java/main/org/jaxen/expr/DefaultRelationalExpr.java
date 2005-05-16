@@ -72,7 +72,7 @@ import org.jaxen.function.NumberFunction;
 
 abstract class DefaultRelationalExpr extends DefaultTruthExpr implements RelationalExpr 
   {
-  public DefaultRelationalExpr( Expr lhs, Expr rhs )
+  DefaultRelationalExpr( Expr lhs, Expr rhs )
     {
     super( lhs, rhs );
     }

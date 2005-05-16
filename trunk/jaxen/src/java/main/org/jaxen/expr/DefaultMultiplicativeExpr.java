@@ -66,7 +66,7 @@ package org.jaxen.expr;
 abstract class DefaultMultiplicativeExpr extends DefaultArithExpr 
     implements MultiplicativeExpr
 {
-    public DefaultMultiplicativeExpr(Expr lhs,
+    DefaultMultiplicativeExpr(Expr lhs,
                                      Expr rhs)
     {
         super( lhs,

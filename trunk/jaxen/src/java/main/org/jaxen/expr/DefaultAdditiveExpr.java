@@ -62,7 +62,7 @@ package org.jaxen.expr;
 
 abstract class DefaultAdditiveExpr extends DefaultArithExpr implements AdditiveExpr
 {
-    public DefaultAdditiveExpr( Expr lhs,
+    DefaultAdditiveExpr( Expr lhs,
                                 Expr rhs )
     {
         super( lhs,

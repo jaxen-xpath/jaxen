@@ -77,7 +77,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
     /**
      * Create a new empty location path.
      */
-    public DefaultLocationPath()
+    DefaultLocationPath()
     {
         this.steps = new LinkedList();
     }

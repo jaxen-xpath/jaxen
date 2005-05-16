@@ -68,7 +68,7 @@ import org.jaxen.function.BooleanFunction;
 
 class DefaultAndExpr extends DefaultLogicalExpr
 {
-    public DefaultAndExpr(Expr lhs,
+    DefaultAndExpr(Expr lhs,
                           Expr rhs)
     {
         super( lhs,
