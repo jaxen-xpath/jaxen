@@ -68,7 +68,7 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultDivExpr extends DefaultMultiplicativeExpr
 {
-    public DefaultDivExpr(Expr lhs,
+    DefaultDivExpr(Expr lhs,
                           Expr rhs)
     {
         super( lhs,

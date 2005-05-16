@@ -68,7 +68,7 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
     private Expr lhs;
     private Expr rhs;
 
-    public DefaultBinaryExpr(Expr lhs,
+    DefaultBinaryExpr(Expr lhs,
                              Expr rhs)
     {
         this.lhs = lhs;

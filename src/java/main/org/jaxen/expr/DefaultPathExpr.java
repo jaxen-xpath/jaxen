@@ -71,7 +71,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
     private Expr filterExpr;
     private LocationPath locationPath;
 
-    public DefaultPathExpr(Expr filterExpr,
+    DefaultPathExpr(Expr filterExpr,
                            LocationPath locationPath) {
         this.filterExpr = filterExpr;
         this.locationPath = locationPath;

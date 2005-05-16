@@ -70,7 +70,7 @@ import org.jaxen.function.BooleanFunction;
 
 class DefaultOrExpr extends DefaultLogicalExpr 
 {
-    public DefaultOrExpr(Expr lhs,
+    DefaultOrExpr(Expr lhs,
                          Expr rhs)
     {
         super( lhs,

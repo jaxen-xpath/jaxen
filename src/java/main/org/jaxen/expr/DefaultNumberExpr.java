@@ -69,7 +69,7 @@ class DefaultNumberExpr extends DefaultExpr implements NumberExpr
 {
     private Number number;
 
-    public DefaultNumberExpr( Number number )
+    DefaultNumberExpr( Number number )
     {
         this.number = number;
     }

@@ -68,7 +68,7 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultPlusExpr extends DefaultAdditiveExpr
 {
-    public DefaultPlusExpr(Expr lhs,
+    DefaultPlusExpr(Expr lhs,
                            Expr rhs)
     {
         super( lhs,

@@ -67,7 +67,7 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultEqualsExpr extends DefaultEqualityExpr 
   {
-  public DefaultEqualsExpr( Expr lhs, Expr rhs )
+  DefaultEqualsExpr( Expr lhs, Expr rhs )
     {
     super( lhs, rhs );
     }

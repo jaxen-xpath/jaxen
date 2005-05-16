@@ -71,7 +71,7 @@ class DefaultVariableReferenceExpr extends DefaultExpr implements VariableRefere
     private String prefix;
     private String variableName;
 
-    public DefaultVariableReferenceExpr(String prefix,
+    DefaultVariableReferenceExpr(String prefix,
                                         String variableName)
     {
         this.prefix       = prefix;

@@ -65,7 +65,7 @@ package org.jaxen.expr;
 
 abstract class DefaultArithExpr extends DefaultBinaryExpr 
 {
-    public DefaultArithExpr(Expr lhs,
+    DefaultArithExpr(Expr lhs,
                             Expr rhs)
     {
         super( lhs,

@@ -71,7 +71,7 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 {
     private Expr expr;
 
-    public DefaultUnaryExpr(Expr expr)
+    DefaultUnaryExpr(Expr expr)
     {
         this.expr = expr;
     }

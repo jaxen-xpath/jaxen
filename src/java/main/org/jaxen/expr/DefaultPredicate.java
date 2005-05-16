@@ -70,7 +70,7 @@ class DefaultPredicate implements Predicate
 {
     private Expr expr;
 
-    public DefaultPredicate(Expr expr)
+    DefaultPredicate(Expr expr)
     {
         setExpr( expr );
     }

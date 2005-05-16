@@ -74,7 +74,7 @@ import org.jaxen.function.StringFunction;
 
 abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityExpr 
   {
-  public DefaultEqualityExpr( Expr lhs, Expr rhs )
+  DefaultEqualityExpr( Expr lhs, Expr rhs )
     {
     super( lhs, rhs );
     }
