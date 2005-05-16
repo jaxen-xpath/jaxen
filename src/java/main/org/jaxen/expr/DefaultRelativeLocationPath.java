@@ -65,9 +65,6 @@ package org.jaxen.expr;
 
 public class DefaultRelativeLocationPath extends DefaultLocationPath 
 {
-    public DefaultRelativeLocationPath()
-    {
-    }
 
     public String toString()
     {
