@@ -178,14 +178,12 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                     {
                         locationPath( false );
                     }
-
-                    break;
                 }
                 else
                 {
                     locationPath( false );
-                    break;
                 }
+                break;
             }
             case DOT:
             case DOT_DOT:
