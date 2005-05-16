@@ -127,21 +127,7 @@ abstract class DefaultTruthExpr extends DefaultBinaryExpr
         return ( lhs instanceof Number
                  ||
                  rhs instanceof Number );
-    }
+    } 
 
-    protected boolean isNumber(Object obj)
-    {
-        return ( obj instanceof Number );
-    }
-
-    protected boolean isString(Object obj)
-    {
-        return ( obj instanceof String );
-    }
-
-    protected boolean isBoolean(Object obj)
-    {
-        return ( obj instanceof Boolean );
-    }
 }
 
