@@ -377,9 +377,14 @@ public class XPathReaderTest extends TestCase
     public void testLocationPathStartsWithVariable() throws SAXPathException
     {
 
-        setText( "$variable/foo" );
-        getReader().setUpParse( getText() );
-        getReader().step();
+        reader.parse( "$variable/foo" );
+
+    }
+
+    public void testLocationPathStartsWithParentheses() throws SAXPathException
+    {
+
+        reader.parse( "(//x)/foo" );
 
     }
 

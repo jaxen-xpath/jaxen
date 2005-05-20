@@ -71,6 +71,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.NamespaceNode;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 
 import junit.framework.TestCase;
 
@@ -130,6 +131,20 @@ public class BaseXPathTest extends TestCase {
         doc.appendChild(doc.createElement("root"));
         Double numberValue = (Double) xpath.numberValueOf(doc);
         assertTrue(numberValue.isNaN());
+        
+    }
+    
+    
+    public void testPathWithParentheses() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("(/root)/child");
+        
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElement("child");
+        root.appendChild(child);
+        
+        assertEquals(child, xpath.selectSingleNode(doc));
         
     }
     
