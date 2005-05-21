@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,44 +59,62 @@
  * $Id$
  */
 
-
 package org.jaxen;
 
-import junit.framework.Test;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.dom.DOMXPath;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
 
 /**
- * <p>
- *   Collect the org.jaxen. tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
  *
  */
-public class CoreTests extends TestCase {
+public class UnresolvableExceptionTest extends TestCase {
 
-    
-    public CoreTests(String name) {
-        super(name);   
+    public UnresolvableExceptionTest(String name) {
+        super(name);
     }
 
+    private org.w3c.dom.Document doc;
     
-    public static Test suite() {
+    protected void setUp() throws ParserConfigurationException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
-        result.addTest(new TestSuite(UnresolvableExceptionTest.class));
-        return result;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        doc = factory.newDocumentBuilder().newDocument();
+        doc.appendChild(doc.createElement("foo"));
+    }    
+    
+    public void testUnresolvableVariable() throws JaxenException {
         
-    }
+        try {
+            BaseXPath xpath = new DOMXPath("//foo[bar = $var]");
+            xpath.evaluate(doc);
+            fail("Didn't throw Unresolvable Exception");
+        }
+        catch (UnresolvableException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }    
+ 
+  
+    public void testUnresolvableFunction() throws JaxenException {
+        
+        try {
+            BaseXPath xpath = new DOMXPath("nonesuch()");
+            xpath.evaluate(doc);
+            fail("Didn't throw Unresolvable Exception");
+        }
+        catch (UnresolvableException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }    
+ 
+  
 
-    
 }
