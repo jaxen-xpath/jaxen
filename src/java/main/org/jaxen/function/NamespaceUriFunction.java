@@ -119,7 +119,7 @@ public class NamespaceUriFunction implements Function
             }
             else if ( nav.isProcessingInstruction( first ) )
             {
-                return nav.getProcessingInstructionTarget( first );
+                return "";
             }
             else if ( nav.isNamespace( first ) )
             {
