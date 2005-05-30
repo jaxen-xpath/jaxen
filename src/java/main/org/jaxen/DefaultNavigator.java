@@ -97,13 +97,21 @@ import org.jaxen.util.SelfAxisIterator;
  */
 public abstract class DefaultNavigator implements Navigator
 {
+
     /** Throws <code>UnsupportedAxisException</code>
+     * 
+     * @param contextNode
+     * @return never returns
+     * @throws UnsupportedAxisException always
      */
     public Iterator getChildAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         throw new UnsupportedAxisException("child");
     }
 
+    /* (non-Javadoc)
+     * @see org.jaxen.Navigator#getDescendantAxisIterator(java.lang.Object)
+     */
     public Iterator getDescendantAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new DescendantAxisIterator( contextNode,
@@ -111,6 +119,10 @@ public abstract class DefaultNavigator implements Navigator
     }
 
     /** Throws <code>UnsupportedAxisException</code>
+     * 
+     * @param  contextNode
+     * @return never returns
+     * @throws UnsupportedAxisException
      */
     public Iterator getParentAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -123,24 +135,20 @@ public abstract class DefaultNavigator implements Navigator
                                          this );
     }
 
-    /** Throws <code>UnsupportedAxisException</code>
-     */
+
     public Iterator getFollowingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new FollowingSiblingAxisIterator( contextNode,
                                                  this );
     }
 
-    /** Throws <code>UnsupportedAxisException</code>
-     */
+
     public Iterator getPrecedingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new PrecedingSiblingAxisIterator( contextNode,
                                                  this );
     }
 
-    /** Throws <code>UnsupportedAxisException</code>
-     */
     public Iterator getFollowingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new FollowingAxisIterator( contextNode,
@@ -149,8 +157,7 @@ public abstract class DefaultNavigator implements Navigator
         // throw new UnsupportedAxisException("following");
     }
 
-    /** Throws <code>UnsupportedAxisException</code>
-     */
+
     public Iterator getPrecedingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new PrecedingAxisIterator( contextNode,
@@ -159,14 +166,24 @@ public abstract class DefaultNavigator implements Navigator
         // throw new UnsupportedAxisException("preceding");
     }
 
-    /** Throws <code>UnsupportedAxisException</code>
+    /** Throws <code>UnsupportedAxisException</code>. Subclasses that 
+     * support the attribute axis must override this method.
+     * 
+     * @param contextNode
+     * @return never returns
+     * @throws UnsupportedAxisException
      */
     public Iterator getAttributeAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         throw new UnsupportedAxisException("attribute");
     }
 
-    /** Throws <code>UnsupportedAxisException</code>
+    /** Throws <code>UnsupportedAxisException</code>. Subclasses that 
+     * support the namespace axis must override this method.
+     * 
+     * @param contextNode
+     * @return never returns
+     * @throws UnsupportedAxisException
      */
     public Iterator getNamespaceAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -236,11 +253,23 @@ public abstract class DefaultNavigator implements Navigator
         {
             return Pattern.PROCESSING_INSTRUCTION_NODE;
         }
+        else if ( isNamespace(node) ) 
+        {
+            return Pattern.NAMESPACE_NODE;
+        }
         else {
             return Pattern.UNKNOWN_NODE;
         }
     }
     
+    /**
+     *  Default implementation that cannot find parent. Subclasses for
+     *  models with parent should override this method.
+     *
+     * @param contextNode   the node whose parent to return
+     * @return null
+     * @throws UnsupportedAxisException if the parent axis is not supported
+     */
     public Object getParentNode(Object contextNode) throws UnsupportedAxisException
     {
         Iterator iter = getParentAxisIterator( contextNode );
@@ -251,6 +280,16 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
 
+    /**
+     *  Default implementation that always returns null. Override in subclass
+     *  if the subclass can load documents. 
+     *
+     * @param url the URL of the document to load
+     *
+     * @return null
+     * @throws FunctionCallException if an error occurs while loading the
+     *    URL; e.g. an I/O error or the document is malformed
+     */
     public Object getDocument(String url) throws FunctionCallException
     {
         return null;
@@ -270,4 +309,5 @@ public abstract class DefaultNavigator implements Navigator
     {
         return null;
     }
+    
 }
