@@ -123,7 +123,7 @@ public class NamespaceUriFunction implements Function
             }
             else if ( nav.isNamespace( first ) )
             {
-                return nav.getNamespaceStringValue( first );
+                return "";
             }
             else if ( nav.isDocument( first ) )
             {
