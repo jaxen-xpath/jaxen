@@ -101,7 +101,7 @@ public class NamespaceURITest extends TestCase {
         super(name);
     }
 
-    public void testNamespaceURIOfNumber()
+    public void testNamespaceURIOfNumber() throws JaxenException
     {
         try
         {
@@ -112,11 +112,6 @@ public class NamespaceURITest extends TestCase {
         catch (FunctionCallException e) 
         {
            assertEquals("The argument to the namespace-uri function must be a node-set", e.getMessage());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
         }
     }    
 
@@ -173,10 +168,10 @@ public class NamespaceURITest extends TestCase {
         }
     }    
 
-    public void testNamespaceURIOfNamespaceIsPrefix() throws JaxenException
+    public void testNamespaceURIOfNamespaceIsNull() throws JaxenException
     {
         XPath xpath = new DOMXPath( "namespace-uri(/*/namespace::node())" );
         String result = (String) xpath.evaluate(doc);
-        assertEquals("http://www.w3.org/XML/1998/namespace", result);
+        assertEquals("", result);
     }    
 }
