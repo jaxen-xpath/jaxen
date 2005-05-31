@@ -863,4 +863,19 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    public void testNumberOfNamespaceNodes() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "foo:child");
+        root.appendChild(child);
+        
+        XPath xpath = new DOMXPath("//namespace::node()");
+        List result = xpath.selectNodes(doc);
+        assertEquals(3, result.size());
+        // 1 for xml prefix on root; 1 for foo prefix on child; 1 for xml prefix on child
+   
+    }
+    
+    
 }
