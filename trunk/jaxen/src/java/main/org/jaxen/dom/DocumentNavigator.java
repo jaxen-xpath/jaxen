@@ -331,13 +331,23 @@ public class DocumentNavigator extends DefaultNavigator
                     for (int i = 0; i < length; i++) {
                         Attr att = (Attr) atts.item(i);
                         // work around crimson bug by testing URI rather than name
-                        if ("http://www.w3.org/2000/xmlns/".equals(att.getNamespaceURI())) {
+                        String attributeNamespace = att.getNamespaceURI();
+                        if ("http://www.w3.org/2000/xmlns/".equals(attributeNamespace)) {
                             NamespaceNode ns =
                                 new NamespaceNode((Node)contextNode, att);
                             // Add only if there's not a closer
                             // declaration in force.
                             String name = ns.getNodeName();
                             if (!nsMap.containsKey(name)) nsMap.put(name, ns);
+                        }
+                        else if (attributeNamespace != null) {
+                            String prefix = att.getPrefix();
+                            NamespaceNode ns =
+                                new NamespaceNode((Node)contextNode, prefix, attributeNamespace);
+                            // Add only if there's not a closer
+                            // declaration in force.
+                            if (!nsMap.containsKey(prefix)) nsMap.put(prefix, ns);
+                            
                         }
                     }
                 }
@@ -351,8 +361,6 @@ public class DocumentNavigator extends DefaultNavigator
                         nsMap.put(myPrefix, ns);
                     }
                 }
-                
-                // 3. ???? Look for the namespace of each attribute
                 
             }
             // Section 5.4 of the XPath rec requires
