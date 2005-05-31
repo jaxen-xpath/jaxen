@@ -878,4 +878,23 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    public void testJaxen107() throws JaxenException {
+        
+        org.w3c.dom.Element a = doc.createElementNS("http://www.a.com/", "a:foo");
+        doc.appendChild(a);
+        Element b = doc.createElementNS("http://www.b.com/", "b:bar");
+        a.appendChild(b);
+        
+        XPath xpath = new DOMXPath("/a:foo/b:bar/namespace::*/parent::*");
+        SimpleNamespaceContext context1 = new SimpleNamespaceContext();
+        context1.addNamespace("a", "http://www.a.com/");
+        context1.addNamespace("b", "http://www.b.com/");
+        xpath.setNamespaceContext(context1);
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        assertEquals(b, result.get(0));
+   
+    }
+    
+    
 }
