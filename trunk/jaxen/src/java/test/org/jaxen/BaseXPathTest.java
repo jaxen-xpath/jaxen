@@ -70,8 +70,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.NamespaceNode;
+import org.jaxen.pattern.Pattern;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import junit.framework.TestCase;
 
@@ -802,6 +804,47 @@ public class BaseXPathTest extends TestCase {
         XPath xpath = new DOMXPath("2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(3, result.intValue());
+    }
+    
+    
+    public void testMoreComplexArithmeticPrecedence() throws JaxenException {
+        XPath xpath = new DOMXPath("1+2+1-1+1");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(4, result.intValue());
+    }
+    
+    
+    public void testMostComplexArithmeticPrecedence() throws JaxenException {
+        XPath xpath = new DOMXPath("1+1+2+1-1+1");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(5, result.intValue());
+    }
+    
+    
+    public void testSimplerArithmeticPrecedence() throws JaxenException {
+        XPath xpath = new DOMXPath("1-1+1");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(1, result.intValue());
+    }
+    
+    
+    public void testNamespaceNodesComeBeforeAttributeNodesInDocumentOrder() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org", "pre:b");
+        doc.appendChild(root);
+        root.setAttribute("name", "value");
+        XPath xpath = new DOMXPath("/*/attribute::* | /*/namespace::node()");
+        List result = xpath.selectNodes(doc);
+        assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
+        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Node.ATTRIBUTE_NODE);
+        
+        // now flip the order of the statement and retest
+        xpath = new DOMXPath("/*/namespace::node() | /*/attribute::* ");
+        result = xpath.selectNodes(doc);
+        assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
+        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Node.ATTRIBUTE_NODE);
+        
+        
     }
     
     
