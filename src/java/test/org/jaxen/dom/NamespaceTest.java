@@ -1,11 +1,10 @@
-/*
- * $Header$
+/* $Header$
  * $Revision$
  * $Date$
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,40 +57,76 @@
  * 
  * $Id$
  */
-
-
 package org.jaxen.dom;
 
-import junit.framework.Test;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
+import org.w3c.dom.Element;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
-/**
- * <p>
- *   Collect Jaxen's DOM tests.
- * </p>
- * 
- * @author Elliotte Rusty Harold
- * @version 1.1b7
- *
- */
-public class DOMTests extends TestCase {
+public class NamespaceTest extends TestCase {
 
-    
-    public DOMTests(String name) {
-        super(name);   
+    private org.w3c.dom.Document doc;
+
+    public NamespaceTest(String name) {
+        super(name);
     }
-
     
-    public static Test suite() {
+    protected void setUp() throws ParserConfigurationException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(DocumentNavigatorTest.class));
-        result.addTest(new TestSuite(XPathTest.class));
-        result.addTest(new TestSuite(NamespaceTest.class));
-        return result;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        doc = factory.newDocumentBuilder().newDocument();
         
+    }     
+    
+    public void testNumberOfNamespaceNodes() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "foo:child");
+        root.appendChild(child);
+        
+        XPath xpath = new DOMXPath("//namespace::node()");
+        List result = xpath.selectNodes(doc);
+        assertEquals(3, result.size());
+        // 1 for xml prefix on root; 1 for foo prefix on child; 1 for xml prefix on child
+   
     }
-
+    
+    
+    public void testNamespaceAxis() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "foo:child");
+        root.appendChild(child);
+        
+        XPath xpath = new DOMXPath("namespace::node()");
+        List result = xpath.selectNodes(child);
+        assertEquals(2, result.size());
+   
+    }
+    
+    
+    public void testUnprefixedNamespaceAxis() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "child");
+        root.appendChild(child);
+        
+        XPath xpath = new DOMXPath("namespace::node()");
+        List result = xpath.selectNodes(child);
+        assertEquals(2, result.size());
+   
+    }   
+    
     
 }

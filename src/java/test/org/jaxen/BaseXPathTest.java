@@ -836,13 +836,15 @@ public class BaseXPathTest extends TestCase {
         XPath xpath = new DOMXPath("/*/attribute::* | /*/namespace::node()");
         List result = xpath.selectNodes(doc);
         assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Node.ATTRIBUTE_NODE);
+        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
+        assertTrue(((org.w3c.dom.Node) result.get(2)).getNodeType() == Node.ATTRIBUTE_NODE);
         
         // now flip the order of the statement and retest
         xpath = new DOMXPath("/*/namespace::node() | /*/attribute::* ");
         result = xpath.selectNodes(doc);
         assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Node.ATTRIBUTE_NODE);
+        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
+        assertTrue(((org.w3c.dom.Node) result.get(2)).getNodeType() == Node.ATTRIBUTE_NODE);
    
     }
     
@@ -856,28 +858,12 @@ public class BaseXPathTest extends TestCase {
         
         XPath xpath = new DOMXPath("/*/*/namespace::node() | //attribute::* ");
         List result = xpath.selectNodes(doc);
-        assertEquals(2, result.size());
+        assertEquals(3, result.size());
         assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Node.ATTRIBUTE_NODE);
         assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
    
     }
-    
-    
-    public void testNumberOfNamespaceNodes() throws JaxenException {
-        
-        org.w3c.dom.Element root = doc.createElement("root");
-        doc.appendChild(root);
-        Element child = doc.createElementNS("http://www.example.org", "foo:child");
-        root.appendChild(child);
-        
-        XPath xpath = new DOMXPath("//namespace::node()");
-        List result = xpath.selectNodes(doc);
-        assertEquals(3, result.size());
-        // 1 for xml prefix on root; 1 for foo prefix on child; 1 for xml prefix on child
-   
-    }
-    
-    
+
     public void testJaxen107() throws JaxenException {
         
         org.w3c.dom.Element a = doc.createElementNS("http://www.a.com/", "a:foo");
