@@ -872,6 +872,13 @@ public class DocumentNavigator extends DefaultNavigator
         {
             this.map = parent.getAttributes();
             this.pos = 0;
+            for (int i = this.map.getLength()-1; i >= 0; i--) {
+                Node node = map.item(i);
+                if (! "http://www.w3.org/2000/xmlns/".equals(node.getNamespaceURI())) {
+                    this.lastAttribute  = i;
+                    break;
+                }
+            }
         }
 
 
@@ -880,7 +887,7 @@ public class DocumentNavigator extends DefaultNavigator
          */
         public boolean hasNext ()
         {
-            return pos < map.getLength();
+            return pos <= lastAttribute;
         }
 
 
@@ -891,6 +898,11 @@ public class DocumentNavigator extends DefaultNavigator
         {
             Node attr = map.item(pos++);
             if (attr == null) throw new NoSuchElementException();
+            else if ("http://www.w3.org/2000/xmlns/".equals(attr.getNamespaceURI())) {
+              // XPath doesn't consider namespace declarations to be attributes 
+              // so skip it and go to the next one
+              return next();
+            }
             else return attr;
         }
 
@@ -906,6 +918,7 @@ public class DocumentNavigator extends DefaultNavigator
 
         private NamedNodeMap map;
         private int pos;
+        private int lastAttribute = -1;
 
     }
 
