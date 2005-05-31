@@ -131,7 +131,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
     }
 
     /**
-     * Does this step match any name (xpath of '*').
+     * Does this step match any name? (i.e. Is it '*'?)
      * 
      * @return true if it matches any name
      */
@@ -140,9 +140,9 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
     }
 
     /**
-     * Gets the step as a fully defined xpath.
+     * Gets the step as a fully defined XPath.
      * 
-     * @return the full xpath for this step
+     * @return the full XPath for this step
      */
     public String getText() {
         StringBuffer buf = new StringBuffer(64);
@@ -156,7 +156,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
     /**
      * Evaluate the context node set to find the new node set.
      * <p>
-     * This method overrides the version in DefaultStep for performance.
+     * This method overrides the version in <code>DefaultStep</code> for performance.
      */
     public List evaluate(Context context) throws JaxenException {
 
@@ -293,6 +293,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      * @param node  the node to check
      * @param contextSupport  the context support
      * @return true if matches
+     * @throws JaxenException 
      */
     public boolean matches(Object node, ContextSupport contextSupport) throws JaxenException {
         
@@ -318,10 +319,9 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
         } 
         else if (nav.isDocument(node)) {
             return false;
-            
         } 
         else if (nav.isNamespace(node)) {
-            if (matchesAnyName && getAxis() != Axis.NAMESPACE) {
+            if (getAxis() != Axis.NAMESPACE) {
                 // Only works for namespace::*
                 return false;
             }
