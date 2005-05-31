@@ -1,11 +1,10 @@
-/*
- * $Header$
+/* $Header$
  * $Revision$
  * $Date$
  *
  * ====================================================================
  *
- * Copyright (C) 2005 Elliotte Rusty Harold
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,45 +57,66 @@
  * 
  * $Id$
  */
-
-
 package org.jaxen.util;
 
-import junit.framework.Test;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.UnsupportedAxisException;
+import org.w3c.dom.Document;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
-/**
- * <p>
- *   Collect the org.jaxen.util tests.
- * </p>
- * 
- * @author Elliotte Rusty Harold
- * @version 1.1b7
- *
- */
-public class UtilTests extends TestCase {
+public class FollowingSiblingAxisIteratorTest extends TestCase {
 
-    
-    public UtilTests(String name) {
-        super(name);   
+    private Iterator iterator;
+
+    public FollowingSiblingAxisIteratorTest(String name) {
+        super(name);
     }
-
     
-    public static Test suite() {
+    protected void setUp() throws ParserConfigurationException, UnsupportedAxisException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(SingletonListTest.class));
-        result.addTest(new TestSuite(SingleObjectIteratorTest.class));
-        result.addTest(new TestSuite(AncestorOrSelfAxisIteratorTest.class));
-        result.addTest(new TestSuite(DescendantAxisIteratorTest.class));
-        result.addTest(new TestSuite(FollowingAxisIteratorTest.class));
-        result.addTest(new TestSuite(FollowingSiblingAxisIteratorTest.class));
-        result.addTest(new TestSuite(PrecedingAxisIteratorTest.class));
-        result.addTest(new TestSuite(PrecedingSiblingAxisIteratorTest.class));
-        return result;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        doc.appendChild(doc.createElement("root"));
+        
+        iterator = new FollowingSiblingAxisIterator(doc, new org.jaxen.dom.DocumentNavigator());
         
     }
+    
+    
+    public void testNoInfiniteLoops() {
+     
+        try {
+            iterator.next();
+            fail("Iterated too far");   
+        }
+        catch (NoSuchElementException ex) {
+            pass();
+        }
+        
+    }
+    
+    
+    private void pass() {
+        // Just to make checkstyle and the like happy
+    }
 
+    public void testRemove() {
+        
+        try {
+            iterator.remove();
+            fail("Removed from descendant axis iterator");   
+        }
+        catch (UnsupportedOperationException ex) {
+            pass();
+        }
+        
+    }
     
 }
