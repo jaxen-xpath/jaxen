@@ -81,12 +81,26 @@ class NodeComparator implements Comparator {
         if (navigator == null) return 0;
         
         if (isNonChild(o1) && isNonChild(o2)) {
+            
             try {
-                return compare(navigator.getParentNode(o1), navigator.getParentNode(o2));
+                Object p1 = navigator.getParentNode(o1);
+                Object p2 = navigator.getParentNode(o2);
+            
+                if (p1 == p2) {
+                    if (navigator.isNamespace(o1) && navigator.isAttribute(o2)) {
+                        return -1;
+                    }
+                    else if (navigator.isNamespace(o2) && navigator.isAttribute(o1)) {
+                        return 1;
+                    }
+                }
+
+                return compare(p1, p2);
             }
             catch (UnsupportedAxisException ex) {
                 return 0;
             }
+            
         }
 
         try {
