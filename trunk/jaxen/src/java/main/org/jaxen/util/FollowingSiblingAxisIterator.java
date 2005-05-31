@@ -63,10 +63,10 @@
 
 package org.jaxen.util;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.jaxen.JaxenConstants;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
@@ -99,7 +99,7 @@ public class FollowingSiblingAxisIterator implements Iterator
             }
         }
         else {
-            siblingIter = Collections.EMPTY_LIST.iterator();
+            siblingIter = JaxenConstants.EMPTY_ITERATOR;
         }
 
     }
