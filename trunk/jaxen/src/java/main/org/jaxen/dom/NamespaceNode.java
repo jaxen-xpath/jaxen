@@ -158,8 +158,11 @@ public class NamespaceNode implements Node
         if (name.equals("xmlns")) {
             this.name = "";
         }
-        else {
+        else if (name.startsWith("xmlns:")) {
             this.name = name.substring(6); // the part after "xmlns:"
+        }
+        else { // workaround for Crimson bug; Crimson incorrectly reports the prefix as the node name
+            this.name = name;
         }
         this.parent = parent;
         this.value = attribute.getNodeValue();
