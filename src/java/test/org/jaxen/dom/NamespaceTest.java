@@ -66,6 +66,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
 import junit.framework.TestCase;
@@ -85,6 +86,20 @@ public class NamespaceTest extends TestCase {
         doc = factory.newDocumentBuilder().newDocument();
         
     }     
+    
+    public void testMultipleNamespaceAxis() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "child");
+        child.setAttributeNS("http://www.w3.org/2000/xmlns/" , "pre", "value");
+        root.appendChild(child);
+        
+        XPath xpath = new DOMXPath("namespace::node()");
+        List result = xpath.selectNodes(child);
+        assertEquals(3, result.size());
+   
+    }
     
     public void testNumberOfNamespaceNodes() throws JaxenException {
         
@@ -124,6 +139,22 @@ public class NamespaceTest extends TestCase {
         
         XPath xpath = new DOMXPath("namespace::node()");
         List result = xpath.selectNodes(child);
+        assertEquals(2, result.size());
+   
+    }   
+    
+    
+    public void testNamespaceNodesReadFromAttributes() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Attr a = doc.createAttributeNS("http://www.example.org/", "a");
+        a.setNodeValue("value");
+        root.setAttributeNode(a);
+        
+        XPath xpath = new DOMXPath("namespace::node()");
+        List result = xpath.selectNodes(root);
+        // one for the xml prefix; one from the attribute node
         assertEquals(2, result.size());
    
     }   
