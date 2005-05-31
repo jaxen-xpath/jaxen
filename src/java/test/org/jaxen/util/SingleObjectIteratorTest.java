@@ -1,11 +1,10 @@
-/*
- * $Header$
+/* $Header$
  * $Revision$
  * $Date$
  *
  * ====================================================================
  *
- * Copyright (C) 2005 Elliotte Rusty Harold
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,39 +57,39 @@
  * 
  * $Id$
  */
-
-
 package org.jaxen.util;
 
-import junit.framework.Test;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
-/**
- * <p>
- *   Collect the org.jaxen.util tests.
- * </p>
- * 
- * @author Elliotte Rusty Harold
- * @version 1.1b7
- *
- */
-public class UtilTests extends TestCase {
+public class SingleObjectIteratorTest extends TestCase {
 
+    private Iterator iterator = new SingleObjectIterator(new Object());
     
-    public UtilTests(String name) {
-        super(name);   
-    }
-
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(SingletonListTest.class));
-        result.addTest(new TestSuite(SingleObjectIteratorTest.class));
-        return result;
+    public void testNoInfiniteLoops() {
+     
+        iterator.next();
+        try {
+            iterator.next();
+            fail("Iterated twice");   
+        }
+        catch (NoSuchElementException ex) {
+        }
         
     }
-
+    
+    
+    public void testRemove() {
+        
+        try {
+            iterator.remove();
+            fail("Removed from iterator");   
+        }
+        catch (UnsupportedOperationException ex) {
+        }
+        
+    }
     
 }
