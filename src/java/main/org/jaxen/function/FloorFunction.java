@@ -92,7 +92,7 @@ public class FloorFunction implements Function
     public static Double evaluate(Object obj,
                                   Navigator nav)
     {
-        Number value = NumberFunction.evaluate( obj,
+        Double value = NumberFunction.evaluate( obj,
                                                 nav );
 
         return new Double( Math.floor( value.doubleValue() ) );

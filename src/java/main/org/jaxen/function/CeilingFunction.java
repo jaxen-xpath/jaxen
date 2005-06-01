@@ -92,7 +92,7 @@ public class CeilingFunction implements Function
     public static Double evaluate(Object obj,
                                   Navigator nav)
     {
-        Number value = NumberFunction.evaluate( obj,
+        Double value = NumberFunction.evaluate( obj,
                                                 nav );
 
         return new Double( Math.ceil( value.doubleValue() ) );
