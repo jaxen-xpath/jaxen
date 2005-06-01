@@ -71,6 +71,7 @@ import org.jaxen.jdom.JDOMTests;
 import org.jaxen.pattern.PatternTests;
 import org.jaxen.saxpath.base.BaseTests;
 import org.jaxen.saxpath.helpers.HelpersTests;
+import org.jaxen.util.UtilTests;
 import org.jaxen.xom.XOMTests;
 
 import junit.framework.Test;
@@ -83,7 +84,7 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b7
  *
  */
 public class JaxenTests extends TestCase {
@@ -108,6 +109,7 @@ public class JaxenTests extends TestCase {
         result.addTest(BaseTests.suite());
         result.addTest(HelpersTests.suite());
         result.addTest(ExprTests.suite());
+        result.addTest(UtilTests.suite());
         return result;
         
     }
