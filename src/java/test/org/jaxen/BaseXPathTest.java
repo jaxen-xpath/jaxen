@@ -62,9 +62,12 @@
 
 package org.jaxen;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -74,6 +77,7 @@ import org.jaxen.pattern.Pattern;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import junit.framework.TestCase;
 
@@ -89,6 +93,7 @@ import junit.framework.TestCase;
 public class BaseXPathTest extends TestCase {
 
     private org.w3c.dom.Document doc;
+    private DocumentBuilder builder;
 
     public BaseXPathTest(String name) {
         super(name);
@@ -99,6 +104,7 @@ public class BaseXPathTest extends TestCase {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         doc = factory.newDocumentBuilder().newDocument();
+        builder = factory.newDocumentBuilder();
         
     }
     
@@ -879,6 +885,16 @@ public class BaseXPathTest extends TestCase {
         List result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(b, result.get(0));
+   
+    }
+    
+    
+    public void testJaxen107FromFile() throws JaxenException, SAXException, IOException {
+        
+        doc = builder.parse(new File("xml/testNamespaces.xml"));
+        XPath xpath = new DOMXPath("/Template/Application2/namespace::*/parent::*");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
    
     }
     
