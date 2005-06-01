@@ -55,7 +55,7 @@ import java.util.List;
  *  as the context of an expression evaluation.
  *
  *  <p>
- *  <b>NOTE:</b> This class is not typically used directly,
+ *  <strong>NOTE:</strong> This class is not typically used directly,
  *  but is exposed for writers of implementation-specific
  *  XPath packages.
  *  </p>
@@ -97,7 +97,7 @@ public class Context
     //     Constructors
     // ----------------------------------------------------------------------
 
-    /** Construct.
+    /** Create a new context.
      *
      *  @param contextSupport the context-support
      */
