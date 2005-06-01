@@ -70,7 +70,7 @@ public class IterableChildAxis extends IterableAxis {
     }
 
     /**
-     * Gets the iterator for the child xpath axis.
+     * Gets the iterator for the child axis.
      * 
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
@@ -83,7 +83,7 @@ public class IterableChildAxis extends IterableAxis {
     }
 
     /**
-     * Gets the iterator for the child XPath axis that supports named access.
+     * Gets an iterator for the child XPath axis that supports named access.
      * 
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
