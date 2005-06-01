@@ -63,9 +63,10 @@
 
 package org.jaxen;
 
-/** Indicates attempt to evaluate an XPath axis that
- *  is unsupported by the current object-model. If this is thrown
- * the xpath cannot be evaluated correctly, unless there is a fallback
+/** 
+ * Indicates attempt to evaluate an XPath axis that
+ * is unsupported by the current object-model. If this is thrown
+ * the XPath expressions cannot be evaluated correctly, unless there is a fallback
  * evaluation path. Hence you should <em>not</em> just catch this
  * and ignore it, nor should navigators throw it to indicate that
  * an axis is exhausted: instead return an empty iterator.
@@ -74,9 +75,9 @@ package org.jaxen;
  */
 public class UnsupportedAxisException extends JaxenException
 {
-    /** Construct.
+    /** Create a new UnsupportedAxisException.
      *
-     *  @param msg The error message.
+     *  @param msg the error message
      */
     public UnsupportedAxisException(String msg)
     {
