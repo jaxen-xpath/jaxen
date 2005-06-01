@@ -93,8 +93,7 @@ public class IdFunction implements Function
 
     public static List evaluate (List contextNodes, Object arg, Navigator nav)
     {
-        if (contextNodes.size() == 0)
-            return Collections.EMPTY_LIST;
+        if (contextNodes.size() == 0) return Collections.EMPTY_LIST;
       
         List nodes = new ArrayList();
 
