@@ -68,9 +68,6 @@ import java.io.Serializable;
 public class ContextSupport
     implements Serializable
 {
-    // ----------------------------------------------------------------------
-    //     Instance methods
-    // ----------------------------------------------------------------------
 
     /** Function context. */
     private transient FunctionContext functionContext;
