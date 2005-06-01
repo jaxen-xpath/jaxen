@@ -316,10 +316,9 @@ public class DocumentNavigator extends DefaultNavigator
 
             HashMap nsMap = new HashMap();
 
-            // Start at the current node at walk
-            // up to the root, noting what namespace
-            // declarations are in force.
-
+            // Starting at the current node, walk
+            // up to the root, noting the namespace
+            // declarations in scope.
             for (Node n = (Node)contextNode;
                  n != null;
                  n = n.getParentNode()) {
