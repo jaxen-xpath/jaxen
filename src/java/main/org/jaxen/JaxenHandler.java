@@ -88,12 +88,19 @@ import org.jaxen.saxpath.XPathHandler;
 public class JaxenHandler implements XPathHandler
 {
     private XPathFactory xpathFactory;
-    private XPathExpr xpath;
+    private XPathExpr    xpath;
+    
+    /**
+     * ????
+     */
     protected boolean simplified;
 
+    /**
+     * ????
+     */
     protected LinkedList stack;
 
-    /** Construct.
+    /** Constructor
      */
     public JaxenHandler()
     {
@@ -149,7 +156,6 @@ public class JaxenHandler implements XPathHandler
     {
         if ( shouldSimplify && ! this.simplified )
         {
-            //System.err.println("simplifying....");
             this.xpath.simplify();
             this.simplified = true;
         }
@@ -159,28 +165,23 @@ public class JaxenHandler implements XPathHandler
 
     public void startXPath() throws JaxenException
     {
-        //System.err.println("startXPath()");
         this.simplified = false;
         pushFrame();
     }
     
     public void endXPath() throws JaxenException
     {
-        //System.err.println("endXPath()");
         this.xpath = getXPathFactory().createXPath( (Expr) pop() );
-
         popFrame();
     }
 
     public void startPathExpr() throws JaxenException
     {
-        //System.err.println("startPathExpr()");
         pushFrame();
     }
 
     public void endPathExpr() throws JaxenException
     {
-        //System.err.println("endPathExpr()");
 
         // PathExpr ::=   LocationPath
         //              | FilterExpr
@@ -199,8 +200,6 @@ public class JaxenHandler implements XPathHandler
         LocationPath locationPath;
 
         Object       popped;
-
-        //System.err.println("stackSize() == " + stackSize() );
 
         if ( stackSize() == 2 )
         {
@@ -230,7 +229,6 @@ public class JaxenHandler implements XPathHandler
 
     public void startAbsoluteLocationPath() throws JaxenException
     {
-        //System.err.println("startAbsoluteLocationPath()");
         pushFrame();
 
         push( getXPathFactory().createAbsoluteLocationPath() );
@@ -238,13 +236,11 @@ public class JaxenHandler implements XPathHandler
 
     public void endAbsoluteLocationPath() throws JaxenException
     {
-        //System.err.println("endAbsoluteLocationPath()");
         endLocationPath();
     }
 
     public void startRelativeLocationPath() throws JaxenException
     {
-        //System.err.println("startRelativeLocationPath()");
         pushFrame();
 
         push( getXPathFactory().createRelativeLocationPath() );
@@ -252,7 +248,6 @@ public class JaxenHandler implements XPathHandler
 
     public void endRelativeLocationPath() throws JaxenException
     {
-        //System.err.println("endRelativeLocationPath()");
         endLocationPath();
     }
 
@@ -279,7 +274,6 @@ public class JaxenHandler implements XPathHandler
                               String prefix,
                               String localName) throws JaxenException
     {
-        //System.err.println("startNameStep(" + axis + ", " + prefix + ", " + localName + ")");
         pushFrame();
 
         push( getXPathFactory().createNameStep( axis,
@@ -289,7 +283,6 @@ public class JaxenHandler implements XPathHandler
 
     public void endNameStep() throws JaxenException
     {
-        //System.err.println("endNameStep()");
         endStep();
     }
     
@@ -303,13 +296,11 @@ public class JaxenHandler implements XPathHandler
     
     public void endTextNodeStep() throws JaxenException
     {
-        //System.err.println("endTextNodeStep()");
         endStep();
     }
 
     public void startCommentNodeStep(int axis) throws JaxenException
     {
-        //System.err.println("startCommentNodeStep()");
         pushFrame();
 
         push( getXPathFactory().createCommentNodeStep( axis ) );
@@ -317,13 +308,11 @@ public class JaxenHandler implements XPathHandler
 
     public void endCommentNodeStep() throws JaxenException
     {
-        //System.err.println("endCommentNodeStep()");
         endStep();
     }
         
     public void startAllNodeStep(int axis) throws JaxenException
     {
-        //System.err.println("startAllNodeStep()");
         pushFrame();
 
         push( getXPathFactory().createAllNodeStep( axis ) );
@@ -331,14 +320,12 @@ public class JaxenHandler implements XPathHandler
 
     public void endAllNodeStep() throws JaxenException
     {
-        //System.err.println("endAllNodeStep()");
         endStep();
     }
 
     public void startProcessingInstructionNodeStep(int axis,
                                                    String name) throws JaxenException
     {
-        //System.err.println("startProcessingInstructionStep()");
         pushFrame();
 
         push( getXPathFactory().createProcessingInstructionNodeStep( axis,
@@ -347,7 +334,6 @@ public class JaxenHandler implements XPathHandler
     
     public void endProcessingInstructionNodeStep() throws JaxenException
     {
-        //System.err.println("endProcessingInstructionStep()");
         endStep();
     }
 
@@ -363,13 +349,11 @@ public class JaxenHandler implements XPathHandler
     
     public void startPredicate() throws JaxenException
     {
-        //System.err.println("startPredicate()");
         pushFrame();
     }
     
     public void endPredicate() throws JaxenException
     {
-        //System.err.println("endPredicate()");
         Predicate predicate = getXPathFactory().createPredicate( (Expr) pop() );
 
         popFrame();
@@ -379,13 +363,11 @@ public class JaxenHandler implements XPathHandler
 
     public void startFilterExpr() throws JaxenException
     {
-        //System.err.println("startFilterExpr()");
         pushFrame();
     }
 
     public void endFilterExpr() throws JaxenException
     {
-        //System.err.println("endFilterExpr()");
         Expr expr = (Expr) peekFrame().removeFirst();
         
         FilterExpr filter = getXPathFactory().createFilterExpr( expr );
@@ -416,16 +398,13 @@ public class JaxenHandler implements XPathHandler
 
     public void startOrExpr() throws JaxenException
     {
-        //System.err.println("startOrExpr()");
     }
 
     public void endOrExpr(boolean create) throws JaxenException
     {
-        //System.err.println("endOrExpr()");
 
         if ( create )
         {
-            //System.err.println("makeOrExpr");
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
 
@@ -436,16 +415,13 @@ public class JaxenHandler implements XPathHandler
 
     public void startAndExpr() throws JaxenException
     {
-        //System.err.println("startAndExpr()");
     }
 
     public void endAndExpr(boolean create) throws JaxenException
     {
-        //System.err.println("endAndExpr()");
 
         if ( create )
         {
-            //System.err.println("makeAndExpr");
 
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
@@ -457,16 +433,13 @@ public class JaxenHandler implements XPathHandler
 
     public void startEqualityExpr() throws JaxenException
     {
-        //System.err.println("startEqualityExpr()");
     }
 
     public void endEqualityExpr(int operator) throws JaxenException
     {
-        //System.err.println("endEqualityExpr(" + operator + ")");
 
         if ( operator != Operator.NO_OP )
         {
-            //System.err.println("makeEqualityExpr");
             
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
@@ -479,16 +452,13 @@ public class JaxenHandler implements XPathHandler
 
     public void startRelationalExpr() throws JaxenException
     {
-        //System.err.println("startRelationalExpr()");
     }
 
     public void endRelationalExpr(int operator) throws JaxenException
     {
-        //System.err.println("endRelationalExpr(" + operator + ")");
 
         if ( operator != Operator.NO_OP )
         {
-            //System.err.println("makeRelationalExpr");
 
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
@@ -501,16 +471,13 @@ public class JaxenHandler implements XPathHandler
 
     public void startAdditiveExpr() throws JaxenException
     {
-        //System.err.println("startAdditiveExpr()");
     }
 
     public void endAdditiveExpr(int operator) throws JaxenException
     {
-        //System.err.println("endAdditiveExpr(" + operator + ")");
 
         if ( operator != Operator.NO_OP )
         {
-            //System.err.println("makeAdditiveExpr");
             
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
@@ -523,16 +490,13 @@ public class JaxenHandler implements XPathHandler
 
     public void startMultiplicativeExpr() throws JaxenException
     {
-        //System.err.println("startMultiplicativeExpr()");
     }
 
     public void endMultiplicativeExpr(int operator) throws JaxenException
     {
-        //System.err.println("endMultiplicativeExpr(" + operator + ")");
 
         if ( operator != Operator.NO_OP )
         {
-            //System.err.println("makeMulitiplicativeExpr");
 
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
@@ -545,12 +509,10 @@ public class JaxenHandler implements XPathHandler
 
     public void startUnaryExpr() throws JaxenException
     {
-        //System.err.println("startUnaryExpr()");
-    }
+     }
 
     public void endUnaryExpr(int operator) throws JaxenException
     {
-        //System.err.println("endUnaryExpr(" + operator + ")");
 
         if ( operator != Operator.NO_OP )
         {
@@ -561,7 +523,6 @@ public class JaxenHandler implements XPathHandler
 
     public void startUnionExpr() throws JaxenException
     {
-        //System.err.println("startUnionExpr()");
     }
 
     public void endUnionExpr(boolean create) throws JaxenException
@@ -580,13 +541,11 @@ public class JaxenHandler implements XPathHandler
 
     public void number(int number) throws JaxenException
     {
-        //System.err.println("number(" + number + ")");
         push( getXPathFactory().createNumberExpr( number ) );
     }
 
     public void number(double number) throws JaxenException
     {
-        //System.err.println("number(" + number + ")");
         push( getXPathFactory().createNumberExpr( number ) );
     }
 
@@ -637,13 +596,10 @@ public class JaxenHandler implements XPathHandler
     protected void push(Object obj)
     {
         peekFrame().addLast( obj );
-
-        //System.err.println("push(" + this.stack.size() + "/" + peekFrame().size() + ") == " + obj );
     }
 
     protected Object pop()
     {
-        //System.err.println("pop(" + this.stack.size() + "/" + peekFrame().size() + ")");
         return peekFrame().removeLast();
     }
 
@@ -655,12 +611,10 @@ public class JaxenHandler implements XPathHandler
     protected void pushFrame()
     {
         this.stack.addLast( new LinkedList() );
-        //System.err.println("pushFrame(" + this.stack.size() + ")");
     }
 
     protected LinkedList popFrame()
     {
-        //System.err.println("popFrame(" + this.stack.size() + ")");
         return (LinkedList) this.stack.removeLast();
     }
 
