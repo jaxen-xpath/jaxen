@@ -63,6 +63,9 @@ package org.jaxen.dom;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -78,6 +81,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
+import org.xml.sax.SAXException;
 
 /** Interface for navigating around the W3C DOM Level 2 object model.
  *
@@ -727,10 +731,16 @@ public class DocumentNavigator extends DefaultNavigator
             DocumentBuilder builder = factory.newDocumentBuilder();
             return builder.parse( uri );
         }
-        catch (Exception e)
-        {
-            throw new FunctionCallException("Failed to parse document for URI: " + uri, e);
+        catch (ParserConfigurationException e) {
+            throw new FunctionCallException("JAXP setup error in document() function: " + e.getMessage(), e);
         }
+        catch (SAXException e) {
+           throw new FunctionCallException("XML error in document() function: " + e.getMessage(), e);
+         }
+        catch (IOException e) {
+           throw new FunctionCallException("I/O error in document() function: " + e.getMessage(), e);
+         }
+        
     }
 
     public String getProcessingInstructionTarget(Object obj)
