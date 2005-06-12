@@ -123,6 +123,11 @@ public class DOM3NamespaceTest extends TestCase {
     }
     
     
+    public void testGetFeature() {
+        assertNull(attributeNS.getFeature("name", "value"));
+    }
+    
+    
     // XXX need to distinguish these two cases
     public void testIsEqualNode() {
         assertFalse(rootNS.isEqualNode(xmlNS));
