@@ -71,6 +71,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.UserDataHandler;
 
 
 /**
@@ -618,6 +619,70 @@ public class NamespaceNode implements Node
     }
     
     }
+
+
+
+    public String getBaseURI() {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public short compareDocumentPosition(Node other) throws DOMException {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public String getTextContent() throws DOMException {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+
+    }
+
+
+    public void setTextContent(String textContent) throws DOMException {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public boolean isSameNode(Node other) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public String lookupPrefix(String namespaceURI) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+
+    }
+
+
+    public boolean isDefaultNamespace(String namespaceURI) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public String lookupNamespaceURI(String prefix) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public boolean isEqualNode(Node arg) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public Object getFeature(String feature, String version) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public Object setUserData(String key, Object data, UserDataHandler handler) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+
+
+    public Object getUserData(String key) {
+        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+    }
+    
 }
 
 // end of Namespace.java
