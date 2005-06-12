@@ -1,11 +1,10 @@
-/*
- * $Header$
+/* $Header$
  * $Revision$
  * $Date$
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,41 +57,81 @@
  * 
  * $Id$
  */
-
-
 package org.jaxen.dom;
 
-import junit.framework.Test;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.*;
+import org.w3c.dom.*;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
-/**
- * <p>
- *   Collect Jaxen's DOM tests.
- * </p>
- * 
- * @author Elliotte Rusty Harold
- * @version 1.1b7
- *
- */
-public class DOMTests extends TestCase {
-
+public class DOM3NamespaceTest extends TestCase {
     
-    public DOMTests(String name) {
-        super(name);   
-    }
-
     
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(DocumentNavigatorTest.class));
-        result.addTest(new TestSuite(XPathTest.class));
-        result.addTest(new TestSuite(NamespaceTest.class));
-        result.addTest(new TestSuite(DOM3NamespaceTest.class));
-        return result;
-        
-    }
+    private NamespaceNode xmlNS;
+    private NamespaceNode rootNS;
+    private NamespaceNode attributeNS;
+    
 
+    public DOM3NamespaceTest(String name) {
+        super(name);
+    }
+    
+    protected void setUp() throws ParserConfigurationException, JaxenException {
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().newDocument();
+        org.w3c.dom.Element root = doc.createElementNS("http://www.root.com/", "root");
+        doc.appendChild(root);
+        Attr a = doc.createAttributeNS("http://www.example.org/", "pre:a");
+        a.setNodeValue("value");
+        root.setAttributeNode(a);
+        
+        XPath xpath = new DOMXPath("namespace::node()");
+        List result = xpath.selectNodes(root);
+        
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            NamespaceNode node = (NamespaceNode) iterator.next();
+            if (node.getLocalName() == null) rootNS = node;
+            else if (node.getLocalName().equals("xml")) xmlNS = node;
+            else if (node.getLocalName().equals("pre")) attributeNS = node;
+        }
+        
+    }     
+    
+    
+    public void testGetTextContent() {
+        assertEquals("http://www.w3.org/XML/1998/namespace", xmlNS.getTextContent());
+    }
+    
+    public void testSetTextContent() {
+        
+        try {
+            rootNS.setTextContent("http://www.a.com");
+            fail("set text content");
+        }
+        catch (DOMException ex) {
+            assertEquals(DOMException.NO_MODIFICATION_ALLOWED_ERR, ex.code);
+        }
+    }
+    
+    
+    // XXX need to distinguish these two cases
+    public void testIsEqualNode() {
+        assertFalse(rootNS.isEqualNode(xmlNS));
+        assertTrue(rootNS.isEqualNode(rootNS));
+    }
+    
+    public void testIsSameNode() {
+        assertFalse(rootNS.isSameNode(xmlNS));
+        assertTrue(rootNS.isSameNode(rootNS));
+    }
     
 }
