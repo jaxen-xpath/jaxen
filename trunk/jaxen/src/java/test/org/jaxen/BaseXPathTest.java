@@ -806,28 +806,28 @@ public class BaseXPathTest extends TestCase {
         
     }
     
-    public void testArithmeticPrecedence() throws JaxenException {
+    public void testArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(3, result.intValue());
     }
     
     
-    public void testMoreComplexArithmeticPrecedence() throws JaxenException {
+    public void testMoreComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(4, result.intValue());
     }
     
     
-    public void testMostComplexArithmeticPrecedence() throws JaxenException {
+    public void testMostComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+1+2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(5, result.intValue());
     }
     
     
-    public void testSimplerArithmeticPrecedence() throws JaxenException {
+    public void testSimplerArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(1, result.intValue());
