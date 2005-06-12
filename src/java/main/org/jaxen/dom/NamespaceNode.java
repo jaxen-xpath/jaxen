@@ -684,7 +684,7 @@ public class NamespaceNode implements Node
 
 
     public Object getFeature(String feature, String version) {
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        return null;
     }
 
 
