@@ -854,8 +854,38 @@ public class BaseXPathTest extends TestCase {
         assertFalse(result.booleanValue());
     }
     
+    // This is the same test but with parentheses to make explicit
+    // how the previous test should be evaluated.
     public void testRelationalAssociativity5P() throws JaxenException {
         XPath xpath = new DOMXPath("((((5 > 4) > 3) > 2) > 1)");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
+    public void testInequalityAssociativity5() throws JaxenException {
+        XPath xpath = new DOMXPath("2 != 3 != 1 != 4 != 0");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    // This is the same test but with parentheses to make explicit
+    // how the previous test should be evaluated.
+    public void testInequalityAssociativity5P() throws JaxenException {
+        XPath xpath = new DOMXPath("(((2 != 3) != 1) != 4) != 0");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testInequalityAssociativity5B() throws JaxenException {
+        XPath xpath = new DOMXPath("2 != 3 != 1 != 4 != 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
+    // This is the same test but with parentheses to make explicit
+    // how the previous test should be evaluated.
+    public void testInequalityAssociativity5BP() throws JaxenException {
+        XPath xpath = new DOMXPath("(((2 != 3) != 1) != 4) != 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
@@ -866,6 +896,8 @@ public class BaseXPathTest extends TestCase {
         assertTrue(result.booleanValue());
     }
     
+    // This is the same test but with parentheses to make explicit
+    // how the previous test should be evaluated.
     public void testEqualityAssociativity5P() throws JaxenException {
         XPath xpath = new DOMXPath("(((2 = 3) = 1) = 4) = 0");
         Boolean result = (Boolean) xpath.evaluate(doc);
@@ -878,6 +910,8 @@ public class BaseXPathTest extends TestCase {
         assertFalse(result.booleanValue());
     }
     
+    // This is the same test but with parentheses to make explicit
+    // how the previous test should be evaluated.
     public void testEqaulityAssociativity5BP() throws JaxenException {
         XPath xpath = new DOMXPath("(((2 = 3) = 1) = 4) = 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
