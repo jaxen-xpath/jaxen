@@ -860,6 +860,30 @@ public class BaseXPathTest extends TestCase {
         assertFalse(result.booleanValue());
     }
     
+    public void testEqualityAssociativity5() throws JaxenException {
+        XPath xpath = new DOMXPath("2 = 3 = 1 = 4 = 0");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testEqualityAssociativity5P() throws JaxenException {
+        XPath xpath = new DOMXPath("(((2 = 3) = 1) = 4) = 0");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testEqualityAssociativity5B() throws JaxenException {
+        XPath xpath = new DOMXPath("2 = 3 = 1 = 4 = 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
+    public void testEqaulityAssociativity5BP() throws JaxenException {
+        XPath xpath = new DOMXPath("(((2 = 3) = 1) = 4) = 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
     public void testMoreComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
