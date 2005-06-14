@@ -75,14 +75,14 @@ public interface SAXPathEventSource
     /** Set the {@link org.jaxen.saxpath.XPathHandler} to receive
      *  event callbacks during the parse.
      *
-     *  @param handler The handler to receive callbacks.
+     *  @param handler the handler to receive callbacks
      */
     void setXPathHandler(XPathHandler handler);
     
     /** Retrieve the current {@link org.jaxen.saxpath.XPathHandler}
      *  which receives the event callbacks.
      *
-     *  @return The currently installed  <code>XPathHandler</code>.
+     *  @return the currently installed  <code>XPathHandler</code>
      */
     XPathHandler getXPathHandler();
     
