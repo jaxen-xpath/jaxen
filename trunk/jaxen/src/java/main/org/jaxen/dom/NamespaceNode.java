@@ -65,6 +65,8 @@
 
 package org.jaxen.dom;
 
+import java.util.HashMap;
+
 import org.jaxen.pattern.Pattern;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -630,26 +632,63 @@ public class NamespaceNode implements Node
     // DOM Level 3 methods
     ////////////////////////////////////////////////////////////////////
 
+    /**
+     * Return the base URI of the document containing this node (always fails).
+     *
+     * @return null
+     */
     public String getBaseURI() {
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        // XXX we could use reflection in DOM Level 3 to get this value
+        return null;
     }
 
 
+    /**
+     * Compare relative position of this node to another nbode. (Always fails).
+     *
+     * @return never
+     * @throws DOMException NOT_SUPPORTED_ERR
+     */
     public short compareDocumentPosition(Node other) throws DOMException {
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        DOMException ex = new DOMException(
+          DOMException.NOT_SUPPORTED_ERR,
+          "DOM level 3 interfaces are not fully implemented in Jaxen's NamespaceNode class"
+        );
+        throw ex;
     }
 
 
-    public String getTextContent() throws DOMException {
+    /**
+     * Return the namespace URI.
+     *
+     * @return the namespace URI
+     * @see #getNodeValue
+     */
+    public String getTextContent() {
         return value;
     }
 
 
+    /**
+     * Change the value of this node (always fails).
+     *
+     * @param textContent the new content
+     * @throws DOMException always
+     */
     public void setTextContent(String textContent) throws DOMException {
         disallowModification();
     }
 
 
+    /**
+     * Returns true if and only if this object represents the same XPath namespace node
+     * as the argument; that is, they have the same parent, the same prefix, and the
+     * same URI.
+     * 
+     * @param other the node to compare to
+     * @return true if this object represents the same XPath namespace node
+     *     as other; false otherwise
+     */
     public boolean isSameNode(Node other) {
         return this.isEqualNode(other) 
           // a bit flaky (should really be this.getParentNode().isEqual(other.getParentNode())
@@ -658,21 +697,55 @@ public class NamespaceNode implements Node
     }
 
 
+    /**
+     * Return the prefix bound to this namespace URI within the scope
+     * of this node (always fails).
+     *
+     * @return never
+     * @throws UnsupportedOperationException always
+     */
     public String lookupPrefix(String namespaceURI) {
+        // XXX This could be implemented. See
+        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // It hardly seems worth the effort though.
         throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
     }
 
 
+    /**
+     * Return true if the specified URI is the default namespace in
+     * scope (always fails).
+     *
+     * @return never
+     * @throws UnsupportedOperationException always
+     */
     public boolean isDefaultNamespace(String namespaceURI) {
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        return namespaceURI.equals(this.lookupNamespaceURI(null));
     }
 
 
+    /**
+     * Return the namespace URI mapped to the specified
+     * prefix within the scope of this namespace node (always fails).
+     *
+     * @return never
+     * @throws UnsupportedOperationException always
+     */
     public String lookupNamespaceURI(String prefix) {
+        // XXX This could be implemented. See
+        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // It hardly seems worth the effort though.
         throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
     }
 
 
+    /**
+     * Returns true if this object binds the same prefix to the same URI.
+     * That is, this object has the same prefix and URI as the argument.
+     * 
+     * @param arg the node to compare to
+     * @return true if this object has the same prefix and URI as the argument; false otherwise
+     */
     public boolean isEqualNode(Node arg) {
         if (arg.getNodeType() == this.getNodeType()) {
             NamespaceNode other = (NamespaceNode) arg;
@@ -690,18 +763,43 @@ public class NamespaceNode implements Node
     }
 
 
+    /**
+     * Returns the value of the requested feature. Always returns null.
+     * 
+     * @return null
+     */
     public Object getFeature(String feature, String version) {
         return null;
     }
 
+    
+    // XXX userdata needs testing
+    private HashMap userData = new HashMap();
 
+    /**
+     * Associates an object with a key. 
+     * 
+     * @param key the key by which the data will be retrieved
+     * @param data the object to store with the key
+     * @param handler ignored since nnamespace ndoes cannot be imported, cloned, or renamed
+     * 
+     * @return the value previously associated with this key; or null
+     *     if there isn't any such previous value
+     */
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        Object oldValue = getUserData(key);
+        userData.put(key, data);
+        return oldValue;
     }
 
 
+    /**
+     * Returns the user data associated with the given key. 
+     * 
+     * @return the object associated with the key; or null if no such object is available
+     */
     public Object getUserData(String key) {
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        return userData.get(key);
     }
     
 }
