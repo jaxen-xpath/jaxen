@@ -76,21 +76,21 @@ public class SAXPathException extends Exception
 
     /** Create a new SAXPathException with a given message.
      *
-     *  @param msg the error message
+     *  @param message the error message
      */
-    public SAXPathException(String msg)
+    public SAXPathException(String message)
     {
-        super( msg );
+        super( message );
     }
 
     /** Create a new SAXPathException based on another exception
      *
-     *  @param src the error source
+     *  @param cause the error source
      */
-    public SAXPathException(Throwable src)
+    public SAXPathException(Throwable cause)
     {
-    	super ( src.getMessage() );
-    	cause = src;
+    	super ( cause.getMessage() );
+    	this.cause = cause;
     }
 
     /**
@@ -105,8 +105,8 @@ public class SAXPathException extends Exception
         this.cause = cause;
     }
     
-    /** If this exception was originally caused by another exception,
-     *  return it; otherwise, return <code>null</code>.
+    /** Return the exception that caused this exception,
+     *  or null <code>null</code> if there's no such root exception.
      * 
      * @return the exception that caused this exception
      */
@@ -123,8 +123,8 @@ public class SAXPathException extends Exception
         printStackTrace ( System.err );
     }
 
-    /** Overridden to print this exception's stack, followed by the
-     *	source exception's, if any.
+    /** Print this exception's stack trace, followed by the
+     *	source exception's trace, if any.
      *
      * @param s the stream on which to print the stack trace
      */
@@ -137,8 +137,8 @@ public class SAXPathException extends Exception
     	}
     }
 
-    /** Overridden to print this exception's stack, followed by the
-     *	source exception's, if any.
+    /** Print this exception's stack trace, followed by the
+     *	source exception's stack trace, if any.
      *
      * @param s the writer on which to print the stack trace
      */
