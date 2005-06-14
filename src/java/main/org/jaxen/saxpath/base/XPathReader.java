@@ -66,6 +66,7 @@ import java.util.LinkedList;
 
 import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
+import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathHandler;
 import org.jaxen.saxpath.XPathSyntaxException;
 import org.jaxen.saxpath.helpers.DefaultXPathHandler;
@@ -103,7 +104,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         return this.handler;
     }
 
-    public void parse(String xpath) throws org.jaxen.saxpath.SAXPathException
+    public void parse(String xpath) throws SAXPathException
     {
         setUpParse( xpath );
 
@@ -128,7 +129,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         this.lexer = new XPathLexer( xpath );
     }
 
-    private void pathExpr() throws org.jaxen.saxpath.SAXPathException
+    private void pathExpr() throws SAXPathException
     {
         getXPathHandler().startPathExpr();
 
@@ -206,14 +207,14 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endPathExpr();
     }
 
-    private void numberDouble() throws org.jaxen.saxpath.SAXPathException
+    private void numberDouble() throws SAXPathException
     {
         Token token = match( DOUBLE );
 
         getXPathHandler().number( Double.parseDouble( token.getTokenText() ) );
     }
 
-    private void numberInteger() throws org.jaxen.saxpath.SAXPathException
+    private void numberInteger() throws SAXPathException
     {
         Token token = match( INTEGER );
         
@@ -227,14 +228,14 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         
     }
 
-    private void literal() throws org.jaxen.saxpath.SAXPathException
+    private void literal() throws SAXPathException
     {
         Token token = match( LITERAL );
 
         getXPathHandler().literal( token.getTokenText() );
     }
 
-    private void functionCall() throws org.jaxen.saxpath.SAXPathException
+    private void functionCall() throws SAXPathException
     {
         String prefix       = null;
         String functionName = null;
@@ -263,7 +264,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endFunction();
     }
 
-    private void arguments() throws org.jaxen.saxpath.SAXPathException
+    private void arguments() throws SAXPathException
     {
         while ( LA(1) != RIGHT_PAREN )
         {
@@ -280,7 +281,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
 
-    private void filterExpr() throws org.jaxen.saxpath.SAXPathException
+    private void filterExpr() throws SAXPathException
     {
 
         getXPathHandler().startFilterExpr();
@@ -326,7 +327,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endFilterExpr();
     }
 
-    private void variableReference() throws org.jaxen.saxpath.SAXPathException
+    private void variableReference() throws SAXPathException
     {
         match( DOLLAR );
 
@@ -349,7 +350,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                                              variableName );
     }
 
-    void locationPath(boolean isAbsolute) throws org.jaxen.saxpath.SAXPathException
+    void locationPath(boolean isAbsolute) throws SAXPathException
     {
         switch ( LA(1) )
         {
@@ -383,7 +384,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
 
-    private void absoluteLocationPath() throws org.jaxen.saxpath.SAXPathException
+    private void absoluteLocationPath() throws SAXPathException
     {
         getXPathHandler().startAbsoluteLocationPath();
 
@@ -436,7 +437,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endAbsoluteLocationPath();
     }
 
-    private void relativeLocationPath() throws org.jaxen.saxpath.SAXPathException
+    private void relativeLocationPath() throws SAXPathException
     {
         getXPathHandler().startRelativeLocationPath();
 
@@ -463,7 +464,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endRelativeLocationPath();
     }
 
-    private void steps() throws org.jaxen.saxpath.SAXPathException
+    private void steps() throws SAXPathException
     {
         switch ( LA(1) )
         {
@@ -535,7 +536,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         } while ( true );
     }
 
-    void step() throws org.jaxen.saxpath.SAXPathException
+    void step() throws SAXPathException
     {
         int axis = 0;
 
@@ -574,7 +575,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         nodeTest( axis );
     }
 
-    private int axisSpecifier() throws org.jaxen.saxpath.SAXPathException
+    private int axisSpecifier() throws SAXPathException
     {
         int axis = 0;
 
@@ -607,7 +608,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         return axis;
     }
 
-    private void nodeTest(int axis) throws org.jaxen.saxpath.SAXPathException
+    private void nodeTest(int axis) throws SAXPathException
     {
         switch ( LA(1) )
         {
@@ -638,7 +639,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
 
-    private void nodeTypeTest(int axis) throws org.jaxen.saxpath.SAXPathException
+    private void nodeTypeTest(int axis) throws SAXPathException
     {
         Token  nodeTypeToken = match( IDENTIFIER );
         String nodeType      = nodeTypeToken.getTokenText();
@@ -699,7 +700,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
 
-    private void nameTest(int axis) throws org.jaxen.saxpath.SAXPathException
+    private void nameTest(int axis) throws SAXPathException
     {
         String prefix    = null;
         String localName = null;
@@ -750,7 +751,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endNameStep();
     }
 
-    private void abbrStep() throws org.jaxen.saxpath.SAXPathException
+    private void abbrStep() throws SAXPathException
     {
         switch ( LA(1) )
         {
@@ -773,7 +774,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
 
-    private void predicates() throws org.jaxen.saxpath.SAXPathException
+    private void predicates() throws SAXPathException
     {
         while (true )
         {
@@ -788,7 +789,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
     
-    private void predicate() throws org.jaxen.saxpath.SAXPathException
+    void predicate() throws SAXPathException
     {
         getXPathHandler().startPredicate();
         
@@ -801,17 +802,17 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endPredicate();
     }
 
-    private void predicateExpr() throws org.jaxen.saxpath.SAXPathException
+    private void predicateExpr() throws SAXPathException
     {
         expr();
     }
 
-    private void expr() throws org.jaxen.saxpath.SAXPathException
+    private void expr() throws SAXPathException
     {
         orExpr();
     }
 
-    private void orExpr() throws org.jaxen.saxpath.SAXPathException
+    private void orExpr() throws SAXPathException
     {
         getXPathHandler().startOrExpr();
         
@@ -833,7 +834,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endOrExpr( create );
     }
 
-    private void andExpr() throws org.jaxen.saxpath.SAXPathException
+    private void andExpr() throws SAXPathException
     {
         getXPathHandler().startAndExpr();
 
@@ -855,7 +856,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endAndExpr( create );
     }
 
-    private void equalityExpr() throws org.jaxen.saxpath.SAXPathException
+    private void equalityExpr() throws SAXPathException
     {
         getXPathHandler().startEqualityExpr();
         getXPathHandler().startEqualityExpr();
@@ -907,7 +908,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endEqualityExpr( operator );
     }
 
-    private void relationalExpr() throws org.jaxen.saxpath.SAXPathException
+    private void relationalExpr() throws SAXPathException
     {
         getXPathHandler().startRelationalExpr();
         getXPathHandler().startRelationalExpr();
@@ -987,7 +988,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endRelationalExpr( operator );
     }
 
-    private void additiveExpr() throws org.jaxen.saxpath.SAXPathException
+    private void additiveExpr() throws SAXPathException
     {
         multiplicativeExpr();
 
@@ -1017,7 +1018,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
     }
 
-    private void multiplicativeExpr() throws org.jaxen.saxpath.SAXPathException
+    private void multiplicativeExpr() throws SAXPathException
     {
         unaryExpr();
 
@@ -1056,7 +1057,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
     }
 
-    private void unaryExpr() throws org.jaxen.saxpath.SAXPathException
+    private void unaryExpr() throws SAXPathException
     {
         getXPathHandler().startUnaryExpr();
 
@@ -1081,7 +1082,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         getXPathHandler().endUnaryExpr( operator );
     }
 
-    private void unionExpr() throws org.jaxen.saxpath.SAXPathException
+    private void unionExpr() throws SAXPathException
     {
         getXPathHandler().startUnionExpr();
 
@@ -1164,7 +1165,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                                          message );
     }
 
-    private void throwInvalidAxis(String invalidAxis) throws org.jaxen.saxpath.SAXPathException
+    private void throwInvalidAxis(String invalidAxis) throws SAXPathException
     {
         String xpath    = this.lexer.getXPath();
         int    position = LT(1).getTokenBegin();
@@ -1176,7 +1177,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                                         message );
     }
 
-    private void throwUnexpected() throws org.jaxen.saxpath.SAXPathException
+    private void throwUnexpected() throws SAXPathException
     {
         throw createSyntaxException( "Unexpected '" + LT(1).getTokenText() + "'" );
     }
