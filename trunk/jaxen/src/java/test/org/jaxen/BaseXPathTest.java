@@ -818,7 +818,7 @@ public class BaseXPathTest extends TestCase {
         assertFalse(result.booleanValue());
     }
     
-    public void testRelationalAssociativity() throws JaxenException {
+    public void testRelationalAssociativity3() throws JaxenException {
         XPath xpath = new DOMXPath("3 > 2 > 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
@@ -830,8 +830,26 @@ public class BaseXPathTest extends TestCase {
         assertFalse(result.booleanValue());
     }
     
-    public void testRelationalAssociativity5() throws JaxenException {
+    public void testRelationalGTAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("5 > 4 > 3 > 2 > 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
+    public void testRelationalLTAssociativity5() throws JaxenException {
+        XPath xpath = new DOMXPath("1 < 2 < 3 < 4 < 5");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testRelationalLEAssociativity5() throws JaxenException {
+        XPath xpath = new DOMXPath("1 <= 2 <= 3 <= 4 <= 5");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testRelationalGEAssociativity5() throws JaxenException {
+        XPath xpath = new DOMXPath("5 >= 4 >= 3 >= 2 >= 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
