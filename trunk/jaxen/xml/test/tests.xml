@@ -627,7 +627,7 @@
       <!--
         The following test uses an unbound prefix 'x' and should throw an exception.
         Addresses issue JAXEN-18.
-        Turns out this isn't really tested as the test didnt fail when the exception wasnt thrown.
+        Turns out this isn't really tested as the test didn't fail when the exception wasn't thrown.
       <test select="/x:a/x:b/x:c" count="0" exception="true"/>
       -->
     </context>
