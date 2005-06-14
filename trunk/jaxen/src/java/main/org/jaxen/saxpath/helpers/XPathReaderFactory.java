@@ -86,6 +86,8 @@ public class XPathReaderFactory
     /** The default driver to use if none is configured. */
     protected static final String DEFAULT_DRIVER = "org.jaxen.saxpath.base.XPathReader";
     
+    private XPathReaderFactory() {}
+    
     
     /** Create an <code>XPathReader</code> using the value of
      *  the <code>org.saxpath.driver</code> system property.
@@ -127,9 +129,9 @@ public class XPathReaderFactory
      *  @param className the name of the class that implements
      *         the <code>XPathReader</code> interface.
      * 
-     * @return an XPathReader
+     *  @return an XPathReader
      *
-     *  @throws SAXPathException if the class can not be
+     *  @throws SAXPathException if the class cannot be
      *          instantiated for some reason, or if the
      *          class doesn't implement the <code>XPathReader</code>
      *          interface
@@ -143,7 +145,7 @@ public class XPathReaderFactory
         {
             // Use the full version of Class.forName(), so as to
             // work better in sandboxed environments, such as
-            // Servlet contains, and applets.
+            // servlet containers and applets.
 
             readerClass = Class.forName( className,
                                          true,
