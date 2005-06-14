@@ -69,12 +69,12 @@ package org.jaxen.saxpath;
  */
 public class SAXPathParseException extends org.jaxen.saxpath.SAXPathException
 {
-    /** Construct with the given message.
+    /** Construct a new <code>SAXPathParseException</code> with the given detail message.
      *
-     *  @param msg the error message
+     *  @param message the error message
      */
-    public SAXPathParseException(String msg)
+    public SAXPathParseException(String message)
     {
-        super( msg );
+        super( message );
     }
 }
