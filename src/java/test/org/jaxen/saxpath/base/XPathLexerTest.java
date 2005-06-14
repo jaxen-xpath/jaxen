@@ -78,8 +78,8 @@ public class XPathLexerTest extends TestCase
 
     public void tearDown()
     {
-        setLexer( null );
-        setToken( null );
+        this.lexer = null;
+        this.token = null;
     }
 
     public void testNamespace()
@@ -88,19 +88,19 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "a",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
         assertEquals( TokenTypes.COLON,
-                      tokenType() );
+                      this.token.getTokenType() );
         
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "b",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testIdentifier()
@@ -109,17 +109,17 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "foo",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         setText( "foo.bar" );
 
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "foo.bar",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     
@@ -133,7 +133,7 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.ERROR,
-                      tokenType() );
+                      this.token.getTokenType() );
 
     }
 
@@ -143,10 +143,10 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( "foo",
-                      tokenText() );
+                      this.token.getTokenText() );
         nextToken();
         assertEquals( TokenTypes.ERROR,
-                      tokenType() );
+                      this.token.getTokenType() );
 
     }
 
@@ -156,18 +156,18 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "foo",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
         assertEquals( TokenTypes.AND,
-                      tokenType() );
+                      this.token.getTokenType() );
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "bar",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testTrickyIdentifierAndOperator()
@@ -176,19 +176,19 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "and",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
         assertEquals( TokenTypes.AND,
-                      tokenType() );
+                      this.token.getTokenType() );
         
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "and",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testInteger()
@@ -197,9 +197,9 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.INTEGER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "1234",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testDouble()
@@ -208,9 +208,9 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.DOUBLE,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "12.34",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testDoubleOnlyDecimal()
@@ -219,9 +219,9 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.DOUBLE,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( ".34",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testNumbersAndMode()
@@ -230,17 +230,17 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.DOUBLE,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "12.34",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
         assertEquals( TokenTypes.MOD,
-                      tokenType() );
+                      this.token.getTokenType() );
 
         nextToken();
         assertEquals( TokenTypes.INTEGER,
-                      tokenType() );
+                      this.token.getTokenType() );
   
     }
 
@@ -250,7 +250,7 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.SLASH,
-                      tokenType() );
+                      this.token.getTokenType() );
     }
 
     public void testDoubleSlash()
@@ -259,7 +259,7 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.DOUBLE_SLASH,
-                      tokenType() );
+                      this.token.getTokenType() );
     }
 
     public void testIdentifierWithColon()
@@ -268,19 +268,19 @@ public class XPathLexerTest extends TestCase
 
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "foo",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
         assertEquals( TokenTypes.COLON,
-                      tokenType() );
+                      this.token.getTokenType() );
         
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "bar",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     public void testEOF()
@@ -289,13 +289,13 @@ public class XPathLexerTest extends TestCase
         
         nextToken();
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
         assertEquals( "foo",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
         assertEquals( TokenTypes.EOF,
-                      tokenType() );
+                      this.token.getTokenType() );
     }
  
     public void testWhitespace()
@@ -305,66 +305,36 @@ public class XPathLexerTest extends TestCase
         nextToken();
 
         assertEquals( TokenTypes.SLASH,
-                      tokenType() );
+                      this.token.getTokenType() );
         nextToken();
 
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
 
         assertEquals( "foo",
-                      tokenText() );
+                      this.token.getTokenText() );
 
         nextToken();
 
         assertEquals( TokenTypes.COLON,
-                      tokenType() );
+                      this.token.getTokenType() );
 
         nextToken();
 
         assertEquals( TokenTypes.IDENTIFIER,
-                      tokenType() );
+                      this.token.getTokenType() );
 
         assertEquals( "bar",
-                      tokenText() );
+                      this.token.getTokenText() );
     }
 
     private void nextToken()
     {
-        setToken( getLexer().nextToken() );
-    }
-
-    private int tokenType()
-    {
-        return getToken().getTokenType();
-    }
-
-    private String tokenText()
-    {
-        return getToken().getTokenText();
-    }
-
-    private Token getToken()
-    {
-        return this.token;
-    }
-
-    private void setToken(Token token)
-    {
-        this.token = token;
+        this.token = this.lexer.nextToken();
     }
 
     private void setText(String text)
     {
         this.lexer = new XPathLexer( text );
-    }
-
-    private void setLexer(XPathLexer lexer)
-    {
-        this.lexer = lexer;
-    }
-
-    private XPathLexer getLexer()
-    {
-        return this.lexer;
     }
 }
