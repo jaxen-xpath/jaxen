@@ -67,13 +67,14 @@ package org.jaxen.saxpath;
  * This is a compile-time error that is detectable irrespective of 
  * the context in which the XPath expression is evaluated.
  */
-public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
+public class XPathSyntaxException extends SAXPathException
 {
     private String xpath;
     private int    position;
+    private final static String lineSeparator = System.getProperty("line.separator");
 
     /**
-     * Creates a new XPathSyntaxException
+     * Creates a new XPathSyntaxException.
      * 
      * @param xpath the incorrect XPath expression 
      * @param position the index of the character at which the syntax error was detected
@@ -156,10 +157,9 @@ public class XPathSyntaxException extends org.jaxen.saxpath.SAXPathException
         StringBuffer buf = new StringBuffer();
 
         buf.append( getMessage() );
-        // FIXME platform dependent line separator
-        buf.append( "\n" );
+        buf.append( lineSeparator );
         buf.append( getXPath() );
-        buf.append( "\n" );
+        buf.append( lineSeparator );
 
         buf.append( getPositionMarker() );
 
