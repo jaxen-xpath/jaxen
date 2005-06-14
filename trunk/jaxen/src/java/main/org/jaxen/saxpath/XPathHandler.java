@@ -76,7 +76,7 @@ package org.jaxen.saxpath;
  *  <p>
  *  The callbacks very closely match the productions
  *  listed in the W3C XPath specification.  Gratuitous
- *  productions (ie, Expr/startExpr()/endExpr())are not
+ *  productions (e.g. Expr/startExpr()/endExpr()) are not
  *  included in this API.
  *  </p>
  *
