@@ -812,6 +812,11 @@ public class BaseXPathTest extends TestCase {
         assertEquals(3, result.intValue());
     }
     
+    public void testLogicalAssociativity() throws JaxenException {
+        XPath xpath = new DOMXPath("false() or true() and true() and false()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
     
     public void testMoreComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+2+1-1+1");
