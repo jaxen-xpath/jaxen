@@ -231,10 +231,10 @@ public interface XPathHandler
      */
     void startRelationalExpr() throws org.jaxen.saxpath.SAXPathException;
 
-    /** Receive notification of the start of a relational ('<', '>', '<=', or '>=') expression.
+    /** Receive notification of the start of a relational ('&lt;', '>', '&lt;=', or '>=') expression.
      *
      *  @param relationalOperator the operator specific to this particular
-     *         relational expression.  If null, this expression
+     *         relational expression.  If NO_OP, this expression
      *         is only a pass-through, and should not actually
      *         be instantiated.
      */
@@ -247,7 +247,7 @@ public interface XPathHandler
     /** Receive notification of the end of an additive ('+' or '-') expression.
      *
      *  @param additiveOperator the operator specific to this particular
-     *         additive expression.  If null, this expression
+     *         additive expression.   If NO_OP, this expression
      *         is only a pass-through, and should not actually
      *         be instantiated.
      */
@@ -273,7 +273,7 @@ public interface XPathHandler
     /** Receive notification of the end of a unary ('+' or '-') expression.
      *
      *  @param unaryOperator the operator specific to this particular
-     *         unary expression. If null, this expression is only
+     *         unary expression. If NO_OP, this expression is only
      *         a pass-through, and should not actually be instantiated.
      *         If not {@link org.jaxen.saxpath.Operator#NO_OP}, it will 
      *         always be {@link org.jaxen.saxpath.Operator#NEGATIVE}.
