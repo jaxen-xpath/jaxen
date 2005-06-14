@@ -116,13 +116,13 @@ public class XPathReaderTest extends TestCase
 
     public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
-        setReader( new XPathReader() );
-        setText( null );
+        this.reader = new XPathReader();
+        this.text = null;
 
         this.actual = new ConformanceXPathHandler();
         this.expected = new ConformanceXPathHandler();
 
-        getReader().setXPathHandler( actual() );
+        this.reader.setXPathHandler( this.actual );
         
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -133,8 +133,8 @@ public class XPathReaderTest extends TestCase
 
     public void tearDown()
     {
-        setReader( null );
-        setText( null );
+        this.reader = null;
+        this.text = null;
     }
 
     // --------------------------------------------------------------------------------
@@ -279,98 +279,106 @@ public class XPathReaderTest extends TestCase
 
     public void testSimpleNameStep() throws SAXPathException
     {
-        setText( "foo" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startNameStep( Axis.CHILD,
+        this.text = "foo";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "foo" );
-        expected().endNameStep();
-        compare();
+        this.expected.endNameStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testNameStepWithAxisAndPrefix() throws SAXPathException
     {
-        setText( "parent::foo:bar" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startNameStep( Axis.PARENT,
+        this.text = "parent::foo:bar";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startNameStep( Axis.PARENT,
                                   "foo",
                                   "bar" );
-        expected().endNameStep();
-        compare();
+        this.expected.endNameStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testNodeStepWithAxis() throws SAXPathException
     {
 
-        setText( "parent::node()" );
-        getReader().setUpParse( getText() );
-        getReader().step();
-        expected().startAllNodeStep( Axis.PARENT );
-        expected().endAllNodeStep();
-        compare();
+        this.text = "parent::node()";
+        this.reader.setUpParse( this.text );
+        this.reader.step();
+        this.expected.startAllNodeStep( Axis.PARENT );
+        this.expected.endAllNodeStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testProcessingInstructionStepWithName() throws SAXPathException
     {
-        setText( "parent::processing-instruction('cheese')" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startProcessingInstructionNodeStep( Axis.PARENT,
+        this.text = "parent::processing-instruction('cheese')";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startProcessingInstructionNodeStep( Axis.PARENT,
                                                            "cheese" );
-        expected().endProcessingInstructionNodeStep();
-        compare();
+        this.expected.endProcessingInstructionNodeStep();
+        assertEquals( this.expected,
+          this.actual );
     }
 
     public void testProcessingInstructionStepNoName() throws SAXPathException
     {
-        setText( "parent::processing-instruction()" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startProcessingInstructionNodeStep( Axis.PARENT,
+        this.text = "parent::processing-instruction()";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startProcessingInstructionNodeStep( Axis.PARENT,
                                                        "" );
-        expected().endProcessingInstructionNodeStep();
-        compare();
+        this.expected.endProcessingInstructionNodeStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testAllNodeStep() throws SAXPathException
     {
 
-        setText( "parent::node()" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startAllNodeStep( Axis.PARENT );
-        expected().endAllNodeStep();
-        compare();
+        this.text = "parent::node()";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startAllNodeStep( Axis.PARENT );
+        this.expected.endAllNodeStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testTextNodeStep() throws SAXPathException
     {
 
-        setText( "parent::text()" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startTextNodeStep( Axis.PARENT );
-        expected().endTextNodeStep();
-        compare();
+        this.text = "parent::text()";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startTextNodeStep( Axis.PARENT );
+        this.expected.endTextNodeStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testCommentNodeStep() throws SAXPathException
     {
 
-        setText( "parent::comment()" );
-        getReader().setUpParse( getText() );
-        getReader().step( );
-        expected().startCommentNodeStep( Axis.PARENT );
-        expected().endCommentNodeStep();
-        compare();
+        this.text = "parent::comment()";
+        this.reader.setUpParse( this.text );
+        this.reader.step( );
+        this.expected.startCommentNodeStep( Axis.PARENT );
+        this.expected.endCommentNodeStep();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
@@ -391,133 +399,97 @@ public class XPathReaderTest extends TestCase
     public void testRelativeLocationPath() throws SAXPathException
     {
 
-        setText( "foo/bar/baz" );
-        getReader().setUpParse( getText() );
-        getReader().locationPath( false );
-        expected().startRelativeLocationPath();
-        expected().startNameStep( Axis.CHILD,
+        this.text = "foo/bar/baz";
+        this.reader.setUpParse( this.text );
+        this.reader.locationPath( false );
+        this.expected.startRelativeLocationPath();
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "foo" );
-        expected().endNameStep();
-        expected().startNameStep( Axis.CHILD,
+        this.expected.endNameStep();
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "bar" );
-        expected().endNameStep();
-        expected().startNameStep( Axis.CHILD,
+        this.expected.endNameStep();
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "baz" );
-        expected().endNameStep();
-        expected().endRelativeLocationPath();
-        compare();
+        this.expected.endNameStep();
+        this.expected.endRelativeLocationPath();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testAbsoluteLocationPath() throws SAXPathException
     {
         
-        setText( "/foo/bar/baz" );
-        getReader().setUpParse( getText() );
-        getReader().locationPath( true );
-        expected().startAbsoluteLocationPath();
-        expected().startNameStep( Axis.CHILD,
+        this.text = "/foo/bar/baz";
+        this.reader.setUpParse( this.text );
+        this.reader.locationPath( true );
+        this.expected.startAbsoluteLocationPath();
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "foo" );
-        expected().endNameStep();
-        expected().startNameStep( Axis.CHILD,
+        this.expected.endNameStep();
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "bar" );
-        expected().endNameStep();
-        expected().startNameStep( Axis.CHILD,
+        this.expected.endNameStep();
+        this.expected.startNameStep( Axis.CHILD,
                                   "",
                                   "baz" );
-        expected().endNameStep();
-        expected().endAbsoluteLocationPath();
-        compare();
+        this.expected.endNameStep();
+        this.expected.endAbsoluteLocationPath();
+        assertEquals( this.expected,
+          this.actual );
 
     }
 
     public void testNumberPredicate() throws SAXPathException
     {
 
-        setText( "[1]" );
-        getReader().setUpParse( getText() );
-        getReader().predicate();
-        expected().startPredicate();
+        this.text = "[1]";
+        this.reader.setUpParse( this.text );
+        this.reader.predicate();
+        this.expected.startPredicate();
 
-        expected().startOrExpr();
-        expected().startAndExpr();
-        expected().startEqualityExpr();
-        expected().startEqualityExpr();
-        expected().startRelationalExpr();
-        expected().startRelationalExpr();
-        expected().startAdditiveExpr();
-        expected().startAdditiveExpr();
-        expected().startMultiplicativeExpr();
-        expected().startMultiplicativeExpr();
-        expected().startUnaryExpr();
-        expected().startUnionExpr();
-        expected().startPathExpr();
-        expected().startFilterExpr();
+        this.expected.startOrExpr();
+        this.expected.startAndExpr();
+        this.expected.startEqualityExpr();
+        this.expected.startEqualityExpr();
+        this.expected.startRelationalExpr();
+        this.expected.startRelationalExpr();
+        this.expected.startAdditiveExpr();
+        this.expected.startAdditiveExpr();
+        this.expected.startMultiplicativeExpr();
+        this.expected.startMultiplicativeExpr();
+        this.expected.startUnaryExpr();
+        this.expected.startUnionExpr();
+        this.expected.startPathExpr();
+        this.expected.startFilterExpr();
 
-        expected().number( 1 );
+        this.expected.number( 1 );
 
-        expected().endFilterExpr();
-        expected().endPathExpr();
-        expected().endUnionExpr( false );
-        expected().endUnaryExpr( Operator.NO_OP );
-        expected().endMultiplicativeExpr( Operator.NO_OP );
-        expected().endMultiplicativeExpr( Operator.NO_OP );
-        expected().endAdditiveExpr( Operator.NO_OP );
-        expected().endAdditiveExpr( Operator.NO_OP );
-        expected().endRelationalExpr( Operator.NO_OP );
-        expected().endRelationalExpr( Operator.NO_OP );
-        expected().endEqualityExpr( Operator.NO_OP );
-        expected().endEqualityExpr( Operator.NO_OP );
-        expected().endAndExpr( false );
-        expected().endOrExpr( false );
+        this.expected.endFilterExpr();
+        this.expected.endPathExpr();
+        this.expected.endUnionExpr( false );
+        this.expected.endUnaryExpr( Operator.NO_OP );
+        this.expected.endMultiplicativeExpr( Operator.NO_OP );
+        this.expected.endMultiplicativeExpr( Operator.NO_OP );
+        this.expected.endAdditiveExpr( Operator.NO_OP );
+        this.expected.endAdditiveExpr( Operator.NO_OP );
+        this.expected.endRelationalExpr( Operator.NO_OP );
+        this.expected.endRelationalExpr( Operator.NO_OP );
+        this.expected.endEqualityExpr( Operator.NO_OP );
+        this.expected.endEqualityExpr( Operator.NO_OP );
+        this.expected.endAndExpr( false );
+        this.expected.endOrExpr( false );
 
-        expected().endPredicate();
+        this.expected.endPredicate();
 
-        compare();
+        assertEquals( this.expected,
+          this.actual );
 
-    }
-
-    // --------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------
-
-    private void setText( String text )
-    {
-        this.text = text;
-    }
-
-    private String getText()
-    {
-        return this.text;
-    }
-
-    private void setReader( XPathReader reader )
-    {
-        this.reader = reader;
-    }
-
-    private XPathReader getReader()
-    {
-        return this.reader;
-    }
-
-    private void compare()
-    {
-        assertEquals( expected(),
-                      actual() );
-    }
-
-    private ConformanceXPathHandler expected()
-    {
-        return this.expected;
-    }
-
-    private ConformanceXPathHandler actual()
-    {
-        return this.actual;
     }
 }
