@@ -75,17 +75,19 @@ import org.w3c.dom.UserDataHandler;
 
 
 /**
- * Extension DOM2 node type for a namespace node.
+ * Extension DOM2/DOm3 node type for a namespace node.
  *
- * <p>This class implements the DOM2 {@link Node} interface to
- * allow namespace nodes to be included in the result
- * set of an XPath selectNodes operation, even though DOM2 does
+ * <p>This class implements the DOM2 and DOM3 {@link Node} interface
+ * to allow namespace nodes to be included in the result
+ * set of an XPath selectNodes operation, even though DOM does
  * not model namespaces in scope as separate nodes.</p>
  *
- * <p>While all of the methods are implemented with reasonable
+ * <p>
+ * While all of the DOM2 methods are implemented with reasonable
  * defaults, there will be some unexpected surprises, so users are
  * advised to test for NamespaceNodes and filter them out from the
- * result sets as early as possible:</p>
+ * result sets as early as possible.
+  * </p>
  *
  * <ol>
  *
@@ -99,6 +101,9 @@ import org.w3c.dom.UserDataHandler;
  *
  * <li>The {@link #isSupported} method always returns false.</li>
  *
+ * <li> The DOM3 methods sometimes throw UnsupportedOperationException.
+ *      They're here only to allow this class to be compiled with Java 1.5.
+ *       Do not call or rely on them.</li>
  * </ol>
  *
  * <p>All attempts to modify a <code>NamespaceNode</code> will fail with a {@link
@@ -106,6 +111,7 @@ import org.w3c.dom.UserDataHandler;
  * DOMException#NO_MODIFICATION_ALLOWED_ERR}).</p>
  *
  * @author David Megginson
+ * @author Elliotte Rusty Harold
  * @see DocumentNavigator
  */
 public class NamespaceNode implements Node
@@ -131,7 +137,7 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Constructor.
+     * Create a new NamespaceNode.
      *
      * @param parent the DOM node to which the namespace is attached
      * @param name the namespace prefix
@@ -154,16 +160,16 @@ public class NamespaceNode implements Node
      */
     NamespaceNode (Node parent, Node attribute)
     {
-        String name = attribute.getNodeName();
+        String attributeName = attribute.getNodeName();
     
-        if (name.equals("xmlns")) {
+        if (attributeName.equals("xmlns")) {
             this.name = "";
         }
-        else if (name.startsWith("xmlns:")) {
-            this.name = name.substring(6); // the part after "xmlns:"
+        else if (attributeName.startsWith("xmlns:")) {
+            this.name = attributeName.substring(6); // the part after "xmlns:"
         }
         else { // workaround for Crimson bug; Crimson incorrectly reports the prefix as the node name
-            this.name = name;
+            this.name = attributeName;
         }
         this.parent = parent;
         this.value = attribute.getNodeValue();
@@ -318,7 +324,7 @@ public class NamespaceNode implements Node
      * Insert a new child node (always fails).
      * 
      * @param newChild the node to add
-     * @param oldChild ignored
+     * @param refChild ignored
      * @return never
      * @throws DOMException always
      * @see Node#insertBefore
@@ -407,7 +413,7 @@ public class NamespaceNode implements Node
     /**
      * Normalize the text descendants of this node.
      *
-     * <p>This method has no effect, since Namespace nodes have no
+     * <p>This method has no effect, since namespace nodes have no
      * descendants.</p>
      */
     public void normalize ()
@@ -601,26 +607,28 @@ public class NamespaceNode implements Node
     private static class EmptyNodeList implements NodeList
     {
 
-    /**
-     * @see NodeList#getLength
-     */
-    public int getLength ()
-    {
-        return 0;
-    }
-
-
-    /**
-     * @see NodeList#item
-     */
-    public Node item(int index)
-    {
-        return null;
-    }
+        /**
+         * @see NodeList#getLength
+         */
+        public int getLength ()
+        {
+            return 0;
+        }
+    
+    
+        /**
+         * @see NodeList#item
+         */
+        public Node item(int index)
+        {
+            return null;
+        }
     
     }
 
-
+    ////////////////////////////////////////////////////////////////////
+    // DOM Level 3 methods
+    ////////////////////////////////////////////////////////////////////
 
     public String getBaseURI() {
         throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
@@ -652,7 +660,6 @@ public class NamespaceNode implements Node
 
     public String lookupPrefix(String namespaceURI) {
         throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
-
     }
 
 
