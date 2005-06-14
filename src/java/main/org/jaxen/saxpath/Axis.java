@@ -68,10 +68,14 @@ import org.jaxen.JaxenRuntimeException;
 
 
 /**
- * Internal SAXPath class to avoid a lot of string comparisons. 
+ * 
+ * Internal SAXPath class that contains constants representing 
+ * XPath operators to avoid a lot of string comparisons. 
  */
 public class Axis
 {
+    
+    private Axis() {}
     
     // XXX Ultimately these should use the type-safe enum pattern instead
     /** Marker for an invalid axis */
