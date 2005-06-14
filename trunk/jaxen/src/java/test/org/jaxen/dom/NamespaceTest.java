@@ -92,7 +92,7 @@ public class NamespaceTest extends TestCase {
         org.w3c.dom.Element root = doc.createElement("root");
         doc.appendChild(root);
         Element child = doc.createElementNS("http://www.example.org", "child");
-        child.setAttributeNS("http://www.w3.org/2000/xmlns/" , "pre", "value");
+        child.setAttributeNS("http://www.w3.org/2000/xmlns/" , "xmlns:pre", "value");
         root.appendChild(child);
         
         XPath xpath = new DOMXPath("namespace::node()");
