@@ -59,10 +59,10 @@
  * $Id$
  */
 
-
-
-
 package org.jaxen.saxpath;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
 
 /** Base of all SAXPath exceptions.
  *
@@ -126,9 +126,9 @@ public class SAXPathException extends Exception
     /** Overridden to print this exception's stack, followed by the
      *	source exception's, if any.
      *
-     * @param s the stream on whcih to print the stack trace
+     * @param s the stream on which to print the stack trace
      */
-    public void printStackTrace ( java.io.PrintStream s )
+    public void printStackTrace ( PrintStream s )
     {
     	super.printStackTrace ( s );
     	if (cause != null) {
@@ -140,9 +140,9 @@ public class SAXPathException extends Exception
     /** Overridden to print this exception's stack, followed by the
      *	source exception's, if any.
      *
-     * @param s the writer on whcih to print the stack trace
+     * @param s the writer on which to print the stack trace
      */
-    public void printStackTrace (java.io.PrintWriter s)
+    public void printStackTrace ( PrintWriter s )
     {
     	super.printStackTrace ( s );
     	if (cause != null) {

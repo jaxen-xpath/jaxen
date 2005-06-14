@@ -60,8 +60,6 @@
  */
 
 
-
-
 package org.jaxen.saxpath;
 
 
@@ -73,12 +71,12 @@ package org.jaxen.saxpath;
  */
 public interface XPathReader extends SAXPathEventSource
 {
-    /** Perform parsing of the textual XPath expression,
-     *  and produce event callbacks to an {@link org.jaxen.saxpath.XPathHandler}.
+    /** Parse an XPath expression,
+     *  and send event callbacks to an {@link org.jaxen.saxpath.XPathHandler}.
      *
      *  @param xpath the textual XPath expression to parse
      *
-     *  @throws org.jaxen.saxpath.SAXPathException in the event an error occurs
+     *  @throws SAXPathException if the expression is syntactically incorrect
      */
-    void parse(String xpath) throws org.jaxen.saxpath.SAXPathException;
+    void parse(String xpath) throws SAXPathException;
 }
