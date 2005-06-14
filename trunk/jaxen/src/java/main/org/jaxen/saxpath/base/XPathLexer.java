@@ -77,7 +77,7 @@ class XPathLexer
         setXPath( xpath );
     }
 
-    void setXPath(String xpath)
+    private void setXPath(String xpath)
     {
         this.xpath           = xpath;
         this.currentPosition = 0;
@@ -303,7 +303,7 @@ class XPathLexer
         return token;
     }
 
-    Token identifierOrOperatorName()
+    private Token identifierOrOperatorName()
     {
         Token token = null;
     
@@ -364,7 +364,7 @@ class XPathLexer
         return token;
     }
     
-    Token identifier()
+    private Token identifier()
     {
         Token token = null;
     
@@ -390,7 +390,7 @@ class XPathLexer
         return token;
     }
     
-    Token operatorName()
+    private Token operatorName()
     {
         Token token = null;
     
@@ -424,7 +424,7 @@ class XPathLexer
         return token;
     }
     
-    Token mod()
+    private Token mod()
     {
         Token token = null;
     
@@ -449,7 +449,7 @@ class XPathLexer
         return token;
     }
     
-    Token div()
+    private Token div()
     {
         Token token = null;
     
@@ -474,7 +474,7 @@ class XPathLexer
         return token;
     }
     
-    Token and()
+    private Token and()
     {
         Token token = null;
     
@@ -499,7 +499,7 @@ class XPathLexer
         return token;
     }
     
-    Token or()
+    private Token or()
     {
         Token token = null;
     
@@ -521,7 +521,7 @@ class XPathLexer
         return token;
     }
     
-    Token number()
+    private Token number()
     {
         int     start         = currentPosition();
         boolean periodAllowed = true;
@@ -586,7 +586,7 @@ class XPathLexer
         return token;
     }
     
-    Token whitespace()
+    private Token whitespace()
     {
         consume();
             
@@ -617,7 +617,7 @@ class XPathLexer
                           0 );
     }
     
-    Token comma()
+    private Token comma()
     {
         Token token = new Token( TokenTypes.COMMA,
                                  getXPath(),
@@ -629,7 +629,7 @@ class XPathLexer
         return token;
     }
     
-    Token equals()
+    private Token equals()
     {
         Token token = new Token( TokenTypes.EQUALS,
                                  getXPath(),
@@ -641,7 +641,7 @@ class XPathLexer
         return token;
     }
     
-    Token minus()
+    private Token minus()
     {
         Token token = new Token( TokenTypes.MINUS,
                                  getXPath(),
@@ -652,7 +652,7 @@ class XPathLexer
         return token;
     }
     
-    Token plus()
+    private Token plus()
     {
         Token token = new Token( TokenTypes.PLUS,
                                  getXPath(),
@@ -663,7 +663,7 @@ class XPathLexer
         return token;
     }
     
-    Token dollar()
+    private Token dollar()
     {
         Token token = new Token( TokenTypes.DOLLAR,
                                  getXPath(),
@@ -674,7 +674,7 @@ class XPathLexer
         return token;
     }
     
-    Token pipe()
+    private Token pipe()
     {
         Token token = new Token( TokenTypes.PIPE,
                                  getXPath(),
@@ -686,7 +686,7 @@ class XPathLexer
         return token;
     }
     
-    Token at()
+    private Token at()
     {
         Token token = new Token( TokenTypes.AT,
                                  getXPath(),
@@ -698,7 +698,7 @@ class XPathLexer
         return token;
     }
     
-    Token colon()
+    private Token colon()
     {
         Token token = new Token( TokenTypes.COLON,
                                  getXPath(),
@@ -709,7 +709,7 @@ class XPathLexer
         return token;
     }
     
-    Token doubleColon()
+    private Token doubleColon()
     {
         Token token = new Token( TokenTypes.DOUBLE_COLON,
                                  getXPath(),
@@ -722,7 +722,7 @@ class XPathLexer
         return token;
     }
     
-    Token not()
+    private Token not()
     {
         Token token = new Token( TokenTypes.NOT,
                                  getXPath(),
@@ -734,7 +734,7 @@ class XPathLexer
         return token;
     }
     
-    Token notEquals()
+    private Token notEquals()
     {
         Token token = new Token( TokenTypes.NOT_EQUALS,
                                  getXPath(),
@@ -747,7 +747,7 @@ class XPathLexer
         return token;
     }
     
-    Token relationalOperator()
+    private Token relationalOperator()
     {
         Token token = null;
     
@@ -801,7 +801,7 @@ class XPathLexer
                 
     }
     
-    Token star()
+    private Token star()
     {
         Token token = new Token( TokenTypes.STAR,
                                  getXPath(),
@@ -813,7 +813,7 @@ class XPathLexer
         return token;
     }
     
-    Token literal()
+    private Token literal()
     {
         Token token = null;
     
@@ -840,7 +840,7 @@ class XPathLexer
         return token;
     }
     
-    Token dots()
+    private Token dots()
     {
         Token token = null;
     
@@ -870,7 +870,7 @@ class XPathLexer
         return token;
     }
     
-    Token leftBracket()
+    private Token leftBracket()
     {
         Token token = new Token( TokenTypes.LEFT_BRACKET,
                                  getXPath(),
@@ -882,7 +882,7 @@ class XPathLexer
         return token;
     }
     
-    Token rightBracket()
+    private Token rightBracket()
     {
         Token token = new Token( TokenTypes.RIGHT_BRACKET,
                                  getXPath(),
@@ -894,7 +894,7 @@ class XPathLexer
         return token;
     }
     
-    Token leftParen()
+    private Token leftParen()
     {
         Token token = new Token( TokenTypes.LEFT_PAREN,
                                  getXPath(),
@@ -906,7 +906,7 @@ class XPathLexer
         return token;
     }
     
-    Token rightParen()
+    private Token rightParen()
     {
         Token token = new Token( TokenTypes.RIGHT_PAREN,
                                  getXPath(),
@@ -918,7 +918,7 @@ class XPathLexer
         return token;
     }
     
-    Token slashes()
+    private Token slashes()
     {
         Token token = null;
     
@@ -947,7 +947,7 @@ class XPathLexer
         return token;
     }
     
-    char LA(int i) 
+    private char LA(int i) 
     {
         if ( currentPosition + ( i - 1 ) >= endPosition() )
         {
@@ -957,47 +957,37 @@ class XPathLexer
         return getXPath().charAt( currentPosition() + (i - 1) );
     }
     
-    void consume()
+    private void consume()
     {
         ++this.currentPosition;
     }
     
-    void consume(int i)
-    {
-        this.currentPosition += i;
-    }
-    
-    int currentPosition()
+    private int currentPosition()
     {
         return this.currentPosition;
     }
     
-    int endPosition()
+    private int endPosition()
     {
         return this.endPosition;
     }
     
-    Token getPreviousToken()
-    {
-        return this.previousToken;
-    }
-    
-    void setPreviousToken(Token previousToken)
+    private void setPreviousToken(Token previousToken)
     {
         this.previousToken = previousToken;
     }
     
-    boolean hasMoreChars()
+    private boolean hasMoreChars()
     {
         return currentPosition() < endPosition();
     }
     
-    boolean isIdentifierChar(char c)
+    private boolean isIdentifierChar(char c)
     {
         return Verifier.isXMLNCNameCharacter( c );
     }
     
-    boolean isIdentifierStartChar(char c)
+    private boolean isIdentifierStartChar(char c)
     {
         return Verifier.isXMLNCNameStartCharacter( c );
     }
