@@ -72,12 +72,13 @@ import org.jaxen.saxpath.XPathHandler;
    Default base class for SAXPath event handlers. 
 
    This class is available as a convenience base class for SAXPath
-   applications: it provides a default implementation for all of the
-   callbacks in the core SAXPath handler class, {@link
-   org.jaxen.saxpath.XPathHandler}
+   applications: it provides a default do-nothing implementation 
+   for all of the callbacks in the core SAXPath handler class, {@link
+   org.jaxen.saxpath.XPathHandler}.
 
    Application writers can extend this class when they need to
-   implement only part of an interface; parser writers can instantiate
+   implement only part of the <code>XPathHandler</code>
+   interface. Parser writers can instantiate
    this class to provide default handlers when the application has not
    supplied its own. */
 
