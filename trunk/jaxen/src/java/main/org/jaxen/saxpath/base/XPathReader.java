@@ -885,87 +885,59 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             la = LA(1);
         }
     }
-
+    
     private void relationalExpr() throws SAXPathException
     {
-        getXPathHandler().startRelationalExpr();
-        getXPathHandler().startRelationalExpr();
 
         additiveExpr();
 
-        int operator = Operator.NO_OP;
-
-        switch ( LA(1) )
+        int la = LA(1);
+        // Very important: LESS_THAN != Operator.LESS_THAN
+        //                 GREATER_THAN != Operator.GREATER_THAN
+        //                 GREATER_THAN_EQUALS != Operator.GREATER_THAN_EQUALS
+        //                 LESS_THAN_EQUALS != Operator.LESS_THAN_EQUALS
+        while (la == LESS_THAN || la == GREATER_THAN || la == LESS_THAN_EQUALS || la == GREATER_THAN_EQUALS)
         {
-            case LESS_THAN:
+            switch ( la )
             {
-                match( LESS_THAN );
-                additiveExpr();
-                operator = Operator.LESS_THAN;
-                break;
+                case LESS_THAN:
+                {
+                    match( LESS_THAN );
+                    getXPathHandler().startRelationalExpr();
+                    additiveExpr();
+                    getXPathHandler().endRelationalExpr( Operator.LESS_THAN );
+                    break;
+                }
+                case GREATER_THAN:
+                {
+                    match( GREATER_THAN );
+                    getXPathHandler().startRelationalExpr();
+                    additiveExpr();
+                    getXPathHandler().endRelationalExpr( Operator.GREATER_THAN );
+                    break;
+                }
+                case GREATER_THAN_EQUALS:
+                {
+                    match( GREATER_THAN_EQUALS );
+                    getXPathHandler().startRelationalExpr();
+                    additiveExpr();
+                    getXPathHandler().endRelationalExpr( Operator.GREATER_THAN_EQUALS );
+                    break;
+                }
+                case LESS_THAN_EQUALS:
+                {
+                    match( LESS_THAN_EQUALS );
+                    getXPathHandler().startRelationalExpr();
+                    additiveExpr();
+                    getXPathHandler().endRelationalExpr( Operator.LESS_THAN_EQUALS );
+                    break;
+                }
             }
-            case GREATER_THAN:
-            {
-                match( GREATER_THAN );
-                additiveExpr();
-                operator = Operator.GREATER_THAN;
-                break;
-            }
-            case LESS_THAN_EQUALS:
-            {
-                match( LESS_THAN_EQUALS );
-                additiveExpr();
-                operator = Operator.LESS_THAN_EQUALS;
-                break;
-            }
-            case GREATER_THAN_EQUALS:
-            {
-                match( GREATER_THAN_EQUALS );
-                additiveExpr();
-                operator = Operator.GREATER_THAN_EQUALS;
-                break;
-            }
+            la = LA(1);
         }
+    } 
 
-        getXPathHandler().endRelationalExpr( operator );
-
-        operator = Operator.NO_OP;
-
-        switch ( LA(1) )
-        {
-            case LESS_THAN:
-            {
-                match( LESS_THAN );
-                relationalExpr();
-                operator = Operator.LESS_THAN;
-                break;
-            }
-            case GREATER_THAN:
-            {
-                match( GREATER_THAN );
-                relationalExpr();
-                operator = Operator.GREATER_THAN;
-                break;
-            }
-            case LESS_THAN_EQUALS:
-            {
-                match( LESS_THAN_EQUALS );
-                relationalExpr();
-                operator = Operator.LESS_THAN_EQUALS;
-                break;
-            }
-            case GREATER_THAN_EQUALS:
-            {
-                match( GREATER_THAN_EQUALS );
-                relationalExpr();
-                operator = Operator.GREATER_THAN_EQUALS;
-                break;
-            }
-        }
-
-        getXPathHandler().endRelationalExpr( operator );
-    }
-
+    
     private void additiveExpr() throws SAXPathException
     {
         multiplicativeExpr();
@@ -1003,7 +975,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         int la = LA(1);
         while (la == STAR || la == DIV || la == MOD)
         {
-            switch ( LA(1) )
+            switch ( la )
             {
                 case STAR:
                 {
