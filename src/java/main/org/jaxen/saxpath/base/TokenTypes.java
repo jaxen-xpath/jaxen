@@ -113,7 +113,7 @@ class TokenTypes
 
     static final int COMMA = 32;
 
-    String getTokenText( int tokenType )
+    static String getTokenText( int tokenType )
     {
         switch( tokenType )
         {
