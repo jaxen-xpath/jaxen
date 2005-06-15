@@ -323,7 +323,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         List nsList = new ArrayList();
         HashSet prefixes = new HashSet();
         for ( Element context = element; context != null; context = context.getParent() ) {
-            List declaredNS = context.declaredNamespaces();
+            List declaredNS = new ArrayList(context.declaredNamespaces());
             declaredNS.add(context.getNamespace());
 
             for ( Iterator iter = context.attributes().iterator(); iter.hasNext(); )
