@@ -194,22 +194,22 @@ public class XPathLexerTokenTest extends TestCase
 
     public void testLessThan()
     {
-        runTest( "<", new int[]{ TokenTypes.LESS_THAN, TokenTypes.EOF } );
+        runTest( "<", new int[]{ TokenTypes.LESS_THAN_SIGN, TokenTypes.EOF } );
     }
 
     public void testLessThanEquals()
     {
-        runTest( "<=", new int[]{ TokenTypes.LESS_THAN_EQUALS, TokenTypes.EOF } );
+        runTest( "<=", new int[]{ TokenTypes.LESS_THAN_OR_EQUALS_SIGN, TokenTypes.EOF } );
     }
 
     public void testGreaterThan()
     {
-        runTest( ">", new int[]{ TokenTypes.GREATER_THAN, TokenTypes.EOF } );
+        runTest( ">", new int[]{ TokenTypes.GREATER_THAN_SIGN, TokenTypes.EOF } );
     }
 
     public void testGreaterThanEquals()
     {
-        runTest( ">=", new int[]{ TokenTypes.GREATER_THAN_EQUALS, TokenTypes.EOF } );
+        runTest( ">=", new int[]{ TokenTypes.GREATER_THAN_OR_EQUALS_SIGN, TokenTypes.EOF } );
     }
 
     public void testOperatorAnd()
