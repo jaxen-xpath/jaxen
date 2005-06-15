@@ -976,7 +976,12 @@ public class BaseXPathTest extends TestCase {
         assertTrue(((org.w3c.dom.Node) result.get(2)).getNodeType() == Node.ATTRIBUTE_NODE);
    
     }
-    
+
+    public void testJaxen97() throws JaxenException {
+        // jaxen 97 claims this expression throws an exception.
+        DOMXPath p=new DOMXPath("/aaa:element/text()");
+    }
+
     public void testAttributeNodesOnParentComeBeforeNamespaceNodesInChildInDocumentOrder() throws JaxenException {
         
         org.w3c.dom.Element root = doc.createElement("root");
