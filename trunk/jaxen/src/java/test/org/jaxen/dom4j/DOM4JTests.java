@@ -65,6 +65,11 @@ package org.jaxen.dom4j;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.jaxen.Navigator;
+import org.jaxen.FunctionCallException;
+import org.jaxen.UnsupportedAxisException;
+
+import java.util.Iterator;
 
 /**
  * <p>
@@ -92,5 +97,24 @@ public class DOM4JTests extends TestCase {
         
     }
 
-    
+    /**
+     * reported as JAXEN-104.
+     * @throws FunctionCallException
+     * @throws UnsupportedAxisException
+     */
+    public void testConcurrentModification() throws FunctionCallException, UnsupportedAxisException
+    {
+        Navigator nav = new DocumentNavigator();
+        Object document = nav.getDocument("xml/testNamespaces.xml");
+        Iterator descendantOrSelfAxisIterator = nav.getDescendantOrSelfAxisIterator(document);
+        while (descendantOrSelfAxisIterator.hasNext()) {
+            Object node = descendantOrSelfAxisIterator.next();
+            Iterator namespaceAxisIterator = nav.getNamespaceAxisIterator(node);
+            while (namespaceAxisIterator.hasNext()) {
+                namespaceAxisIterator.next();
+            }
+        }
+    }
+
+
 }
