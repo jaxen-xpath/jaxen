@@ -36,16 +36,16 @@
  * Alternatively, the acknowledgment may be graphical using the logos
  * available at http://www.jaxen.org/
  *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED TokenTypes.OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS OR THE PROJECT
+ * DISCLAIMED.  IN NO EVENT SHALL THE Jaxen AUTHORS TokenTypes.OR THE PROJECT
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * SPECIAL, EXEMPLARY, TokenTypes.OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS TokenTypes.OR SERVICES; LOSS OF
+ * USE, DATA, TokenTypes.OR PROFITS; TokenTypes.OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * TokenTypes.OR TORT (INCLUDING NEGLIGENCE TokenTypes.OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
@@ -76,7 +76,7 @@ import org.jaxen.saxpath.helpers.DefaultXPathHandler;
  *
  *  @author bob mcwhirter (bob@werken.com)
  */
-public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathReader
+public class XPathReader implements org.jaxen.saxpath.XPathReader
 {
     private LinkedList tokens;
     private XPathLexer lexer;
@@ -114,7 +114,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         getXPathHandler().endXPath();
 
-        if ( LA(1) != EOF )
+        if ( LA(1) != TokenTypes.EOF )
         {
             throwUnexpected();
         }
@@ -135,13 +135,13 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case INTEGER:
-            case DOUBLE:
-            case LITERAL:
+            case TokenTypes.INTEGER:
+            case TokenTypes.DOUBLE:
+            case TokenTypes.LITERAL:
             {
                 filterExpr();
 
-                if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH )
+                if ( LA(1) == TokenTypes.SLASH || LA(1) == TokenTypes.DOUBLE_SLASH )
                 {
                     XPathSyntaxException ex = this.createSyntaxException("Node-set expected");
                     throw ex;
@@ -149,31 +149,31 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
                 break;
             }                
-            case LEFT_PAREN:
-            case DOLLAR:
+            case TokenTypes.LEFT_PAREN:
+            case TokenTypes.DOLLAR:
             {
                 filterExpr();
                     
-                if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH)
+                if ( LA(1) == TokenTypes.SLASH || LA(1) == TokenTypes.DOUBLE_SLASH)
                 {
                     locationPath( false );
                 }
                 break;
             }
-            case IDENTIFIER:
+            case TokenTypes.IDENTIFIER:
             {
 
-                if ( ( LA(2) == LEFT_PAREN
+                if ( ( LA(2) == TokenTypes.LEFT_PAREN
                      &&
                        ! isNodeTypeName( LT(1) ) )
                      ||
-                    ( LA(2) == COLON
+                    ( LA(2) == TokenTypes.COLON
                       &&
-                      LA(4) == LEFT_PAREN) ) 
+                      LA(4) == TokenTypes.LEFT_PAREN) ) 
                 {
                     filterExpr();
                     
-                    if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH)
+                    if ( LA(1) == TokenTypes.SLASH || LA(1) == TokenTypes.DOUBLE_SLASH)
                     {
                         locationPath( false );
                     }
@@ -184,16 +184,16 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 }
                 break;
             }
-            case DOT:
-            case DOT_DOT:
-            case STAR:
-            case AT:
+            case TokenTypes.DOT:
+            case TokenTypes.DOT_DOT:
+            case TokenTypes.STAR:
+            case TokenTypes.AT:
             {
                 locationPath( false );
                 break;
             }
-            case SLASH:
-            case DOUBLE_SLASH:
+            case TokenTypes.SLASH:
+            case TokenTypes.DOUBLE_SLASH:
             {
                 locationPath( true );
                 break;
@@ -209,14 +209,14 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
     private void numberDouble() throws SAXPathException
     {
-        Token token = match( DOUBLE );
+        Token token = match( TokenTypes.DOUBLE );
 
         getXPathHandler().number( Double.parseDouble( token.getTokenText() ) );
     }
 
     private void numberInteger() throws SAXPathException
     {
-        Token token = match( INTEGER );
+        Token token = match( TokenTypes.INTEGER );
         
         String text = token.getTokenText();
         try {
@@ -230,7 +230,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
     private void literal() throws SAXPathException
     {
-        Token token = match( LITERAL );
+        Token token = match( TokenTypes.LITERAL );
 
         getXPathHandler().literal( token.getTokenText() );
     }
@@ -240,39 +240,39 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         String prefix       = null;
         String functionName = null;
 
-        if ( LA(2) == COLON )
+        if ( LA(2) == TokenTypes.COLON )
         {
-            prefix = match( IDENTIFIER ).getTokenText();
-            match( COLON );
+            prefix = match( TokenTypes.IDENTIFIER ).getTokenText();
+            match( TokenTypes.COLON );
         }
         else
         {
             prefix = "";
         }
 
-        functionName = match( IDENTIFIER ).getTokenText();
+        functionName = match( TokenTypes.IDENTIFIER ).getTokenText();
 
         getXPathHandler().startFunction( prefix,
                                          functionName );
 
-        match ( LEFT_PAREN );
+        match ( TokenTypes.LEFT_PAREN );
 
         arguments();
 
-        match ( RIGHT_PAREN );
+        match ( TokenTypes.RIGHT_PAREN );
 
         getXPathHandler().endFunction();
     }
 
     private void arguments() throws SAXPathException
     {
-        while ( LA(1) != RIGHT_PAREN )
+        while ( LA(1) != TokenTypes.RIGHT_PAREN )
         {
             expr();
 
-            if ( LA(1) == COMMA )
+            if ( LA(1) == TokenTypes.COMMA )
             {
-                match( COMMA );
+                match( TokenTypes.COMMA );
             }
             else
             {
@@ -288,34 +288,34 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case INTEGER:
+            case TokenTypes.INTEGER:
             {
                 numberInteger();
                 break;
             }
-            case DOUBLE:
+            case TokenTypes.DOUBLE:
             {
                 numberDouble();
                 break;
             }
-            case LITERAL:
+            case TokenTypes.LITERAL:
             {
                 literal();
                 break;
             }
-            case LEFT_PAREN:
+            case TokenTypes.LEFT_PAREN:
             {
-                match( LEFT_PAREN );
+                match( TokenTypes.LEFT_PAREN );
                 expr();
-                match( RIGHT_PAREN );
+                match( TokenTypes.RIGHT_PAREN );
                 break;
             }
-            case IDENTIFIER:
+            case TokenTypes.IDENTIFIER:
             {
                 functionCall();
                 break;
             }
-            case DOLLAR:
+            case TokenTypes.DOLLAR:
             {
                 variableReference();
                 break;
@@ -329,22 +329,22 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
     private void variableReference() throws SAXPathException
     {
-        match( DOLLAR );
+        match( TokenTypes.DOLLAR );
 
         String prefix       = null;
         String variableName = null;
 
-        if ( LA(2) == COLON )
+        if ( LA(2) == TokenTypes.COLON )
         {
-            prefix = match( IDENTIFIER ).getTokenText();
-            match( COLON );
+            prefix = match( TokenTypes.IDENTIFIER ).getTokenText();
+            match( TokenTypes.COLON );
         }
         else
         {
             prefix = "";
         }
 
-        variableName = match( IDENTIFIER ).getTokenText();
+        variableName = match( TokenTypes.IDENTIFIER ).getTokenText();
 
         getXPathHandler().variableReference( prefix,
                                              variableName );
@@ -354,8 +354,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     {
         switch ( LA(1) )
         {
-            case SLASH:
-            case DOUBLE_SLASH:
+            case TokenTypes.SLASH:
+            case TokenTypes.DOUBLE_SLASH:
             {
                 if ( isAbsolute )
                 {
@@ -367,11 +367,11 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 }
                 break;
             }
-            case AT:
-            case IDENTIFIER:
-            case DOT:
-            case DOT_DOT:
-            case STAR:
+            case TokenTypes.AT:
+            case TokenTypes.IDENTIFIER:
+            case TokenTypes.DOT:
+            case TokenTypes.DOT_DOT:
+            case TokenTypes.STAR:
             {
                 relativeLocationPath();
                 break;
@@ -390,18 +390,18 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case SLASH:
+            case TokenTypes.SLASH:
             {
-                match( SLASH );
+                match( TokenTypes.SLASH );
 
                 switch ( LA(1) )
                 {
 
-                    case DOT:
-                    case DOT_DOT:
-                    case AT:
-                    case IDENTIFIER:
-                    case STAR:
+                    case TokenTypes.DOT:
+                    case TokenTypes.DOT_DOT:
+                    case TokenTypes.AT:
+                    case TokenTypes.IDENTIFIER:
+                    case TokenTypes.STAR:
                     {
                         steps();
                         break;
@@ -409,19 +409,19 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 }
                 break;
             }
-            case DOUBLE_SLASH:
+            case TokenTypes.DOUBLE_SLASH:
             {
                 getXPathHandler().startAllNodeStep( Axis.DESCENDANT_OR_SELF );
                 getXPathHandler().endAllNodeStep();
 
-                match( DOUBLE_SLASH );
+                match( TokenTypes.DOUBLE_SLASH );
                 switch ( LA(1) )
                 {
-                    case DOT:
-                    case DOT_DOT:
-                    case AT:
-                    case IDENTIFIER:
-                    case STAR:
+                    case TokenTypes.DOT:
+                    case TokenTypes.DOT_DOT:
+                    case TokenTypes.AT:
+                    case TokenTypes.IDENTIFIER:
+                    case TokenTypes.STAR:
                     {
                         steps();
                         break;
@@ -443,17 +443,17 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case SLASH:
+            case TokenTypes.SLASH:
             {
-                match( SLASH );
+                match( TokenTypes.SLASH );
                 break;
             }
-            case DOUBLE_SLASH:
+            case TokenTypes.DOUBLE_SLASH:
             {
                 getXPathHandler().startAllNodeStep( Axis.DESCENDANT_OR_SELF );
                 getXPathHandler().endAllNodeStep();
 
-                match( DOUBLE_SLASH );
+                match( TokenTypes.DOUBLE_SLASH );
 
                 break;
             }
@@ -469,16 +469,16 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         switch ( LA(1) )
         {
 
-            case DOT:
-            case DOT_DOT:
-            case AT:
-            case IDENTIFIER:
-            case STAR:
+            case TokenTypes.DOT:
+            case TokenTypes.DOT_DOT:
+            case TokenTypes.AT:
+            case TokenTypes.IDENTIFIER:
+            case TokenTypes.STAR:
             {
                 step();
                 break;
             }
-            case EOF:
+            case TokenTypes.EOF:
             {
                 return;
             }
@@ -490,23 +490,23 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         do
         {
-            if ( ( LA(1) == SLASH)
+            if ( ( LA(1) == TokenTypes.SLASH)
                  ||
-                 ( LA(1) == DOUBLE_SLASH ) )
+                 ( LA(1) == TokenTypes.DOUBLE_SLASH ) )
             {
                 switch ( LA(1) )
                 {
-                    case SLASH:
+                    case TokenTypes.SLASH:
                     {
-                        match( SLASH );
+                        match( TokenTypes.SLASH );
                         break;
                     }
-                    case DOUBLE_SLASH:
+                    case TokenTypes.DOUBLE_SLASH:
                     {
                         getXPathHandler().startAllNodeStep( Axis.DESCENDANT_OR_SELF );
                         getXPathHandler().endAllNodeStep();
 
-                        match( DOUBLE_SLASH );
+                        match( TokenTypes.DOUBLE_SLASH );
                         break;
                     }
                 }
@@ -518,11 +518,11 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             
             switch ( LA(1) )
             {
-                case DOT:
-                case DOT_DOT:
-                case AT:
-                case IDENTIFIER:
-                case STAR:
+                case TokenTypes.DOT:
+                case TokenTypes.DOT_DOT:
+                case TokenTypes.AT:
+                case TokenTypes.IDENTIFIER:
+                case TokenTypes.STAR:
                 {
                     step();
                     break;
@@ -542,20 +542,20 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case DOT:
-            case DOT_DOT:
+            case TokenTypes.DOT:
+            case TokenTypes.DOT_DOT:
             {
                 abbrStep();
                 return;
             }
-            case AT:
+            case TokenTypes.AT:
             {
                 axis = axisSpecifier();
                 break;
             }
-            case IDENTIFIER:
+            case TokenTypes.IDENTIFIER:
             {
-                if ( LA(2) == DOUBLE_COLON )
+                if ( LA(2) == TokenTypes.DOUBLE_COLON )
                 {
                     axis = axisSpecifier();
                 }
@@ -565,7 +565,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 }
                 break;
             }
-            case STAR:
+            case TokenTypes.STAR:
             {
                 axis = Axis.CHILD;
                 break;
@@ -581,13 +581,13 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case AT:
+            case TokenTypes.AT:
             {
-                match( AT );
+                match( TokenTypes.AT );
                 axis = Axis.ATTRIBUTE;
                 break;
             }
-            case IDENTIFIER:
+            case TokenTypes.IDENTIFIER:
             {
                 Token token = LT( 1 );
 
@@ -598,8 +598,8 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                     throwInvalidAxis( token.getTokenText() );
                 }
 
-                match( IDENTIFIER );
-                match( DOUBLE_COLON );
+                match( TokenTypes.IDENTIFIER );
+                match( TokenTypes.DOUBLE_COLON );
 
                 break;
             }
@@ -612,11 +612,11 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     {
         switch ( LA(1) )
         {
-            case IDENTIFIER:
+            case TokenTypes.IDENTIFIER:
             {
                 switch ( LA(2) )
                 {
-                    case LEFT_PAREN:
+                    case TokenTypes.LEFT_PAREN:
                     {
                         nodeTypeTest( axis );
                         break;
@@ -629,7 +629,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
                 }
                 break;
             }
-            case STAR:
+            case TokenTypes.STAR:
             {
                 nameTest( axis );
                 break;
@@ -641,21 +641,21 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
     private void nodeTypeTest(int axis) throws SAXPathException
     {
-        Token  nodeTypeToken = match( IDENTIFIER );
+        Token  nodeTypeToken = match( TokenTypes.IDENTIFIER );
         String nodeType      = nodeTypeToken.getTokenText();
 
-        match( LEFT_PAREN );
+        match( TokenTypes.LEFT_PAREN );
 
         if ( "processing-instruction".equals( nodeType ) )
         {
             String piName = "";
 
-            if ( LA(1) == LITERAL )
+            if ( LA(1) == TokenTypes.LITERAL )
             {
-                piName = match( LITERAL ).getTokenText();
+                piName = match( TokenTypes.LITERAL ).getTokenText();
             }
 
-            match( RIGHT_PAREN );
+            match( TokenTypes.RIGHT_PAREN );
 
             getXPathHandler().startProcessingInstructionNodeStep( axis,
                                                                   piName );
@@ -666,7 +666,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
         else if ( "node".equals( nodeType ) )
         {
-            match( RIGHT_PAREN );
+            match( TokenTypes.RIGHT_PAREN );
 
             getXPathHandler().startAllNodeStep( axis );
 
@@ -676,7 +676,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
         else if ( "text".equals( nodeType ) )
         {
-            match( RIGHT_PAREN );
+            match( TokenTypes.RIGHT_PAREN );
 
             getXPathHandler().startTextNodeStep( axis );
 
@@ -686,7 +686,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         }
         else if ( "comment".equals( nodeType ) )
         {
-            match( RIGHT_PAREN );
+            match( TokenTypes.RIGHT_PAREN );
 
             getXPathHandler().startCommentNodeStep( axis );
 
@@ -707,14 +707,14 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(2) )
         {
-            case COLON:
+            case TokenTypes.COLON:
             {
                 switch ( LA(1) )
                 {
-                    case IDENTIFIER:
+                    case TokenTypes.IDENTIFIER:
                     {
-                        prefix = match( IDENTIFIER ).getTokenText();
-                        match( COLON );
+                        prefix = match( TokenTypes.IDENTIFIER ).getTokenText();
+                        match( TokenTypes.COLON );
                         break;
                     }
                 }
@@ -724,14 +724,14 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         
         switch ( LA(1) )
         {
-            case IDENTIFIER:
+            case TokenTypes.IDENTIFIER:
             {
-                localName = match( IDENTIFIER ).getTokenText();
+                localName = match( TokenTypes.IDENTIFIER ).getTokenText();
                 break;
             }
-            case STAR:
+            case TokenTypes.STAR:
             {
-                match( STAR );
+                match( TokenTypes.STAR );
                 localName = "*";
                 break;
             }
@@ -755,17 +755,17 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     {
         switch ( LA(1) )
         {
-            case DOT:
+            case TokenTypes.DOT:
             {
-                match( DOT );
+                match( TokenTypes.DOT );
                 getXPathHandler().startAllNodeStep( Axis.SELF );
                 predicates();
                 getXPathHandler().endAllNodeStep();
                 break;
             }
-            case DOT_DOT:
+            case TokenTypes.DOT_DOT:
             {
-                match( DOT_DOT );
+                match( TokenTypes.DOT_DOT );
                 getXPathHandler().startAllNodeStep( Axis.PARENT );
                 predicates();
                 getXPathHandler().endAllNodeStep();
@@ -778,7 +778,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     {
         while (true )
         {
-            if ( LA(1) == LEFT_BRACKET )
+            if ( LA(1) == TokenTypes.LEFT_BRACKET )
             {
                 predicate();
             }
@@ -793,11 +793,11 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
     {
         getXPathHandler().startPredicate();
         
-        match( LEFT_BRACKET );
+        match( TokenTypes.LEFT_BRACKET );
         
         predicateExpr();
 
-        match( RIGHT_BRACKET );
+        match( TokenTypes.RIGHT_BRACKET );
 
         getXPathHandler().endPredicate();
     }
@@ -822,10 +822,10 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case OR:
+            case TokenTypes.OR:
             {
                 create = true;
-                match( OR );
+                match( TokenTypes.OR );
                 orExpr();
                 break;
             }
@@ -844,10 +844,10 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case AND:
+            case TokenTypes.AND:
             {
                 create = true;
-                match( AND );
+                match( TokenTypes.AND );
                 andExpr();
                 break;
             }
@@ -861,21 +861,21 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         relationalExpr();
 
         int la = LA(1);
-        while (la == EQUALS || la == NOT_EQUALS)
+        while (la == TokenTypes.EQUALS || la == TokenTypes.NOT_EQUALS)
         {
             switch ( la )
             {
-                case EQUALS:
+                case TokenTypes.EQUALS:
                 {
-                    match( EQUALS );
+                    match( TokenTypes.EQUALS );
                     getXPathHandler().startEqualityExpr();
                     relationalExpr();
                     getXPathHandler().endEqualityExpr( Operator.EQUALS );
                     break;
                 }
-                case NOT_EQUALS:
+                case TokenTypes.NOT_EQUALS:
                 {
-                    match( NOT_EQUALS );
+                    match( TokenTypes.NOT_EQUALS );
                     getXPathHandler().startEqualityExpr();
                     relationalExpr();
                     getXPathHandler().endEqualityExpr( Operator.NOT_EQUALS );
@@ -892,43 +892,43 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         additiveExpr();
 
         int la = LA(1);
-        // Very important: LESS_THAN != Operator.LESS_THAN
-        //                 GREATER_THAN != Operator.GREATER_THAN
-        //                 GREATER_THAN_EQUALS != Operator.GREATER_THAN_EQUALS
-        //                 LESS_THAN_EQUALS != Operator.LESS_THAN_EQUALS
-        while (la == LESS_THAN_SIGN 
-            || la == GREATER_THAN_SIGN 
-            || la == LESS_THAN_OR_EQUALS_SIGN 
-            || la == GREATER_THAN_OR_EQUALS_SIGN ) {
+        // Very important: TokenTypes.LESS_THAN != Operator.LESS_THAN
+        //                 TokenTypes.GREATER_THAN != Operator.GREATER_THAN
+        //                 TokenTypes.GREATER_THAN_EQUALS != Operator.GREATER_THAN_EQUALS
+        //                 TokenTypes.LESS_THAN_EQUALS != Operator.LESS_THAN_EQUALS
+        while (la == TokenTypes.LESS_THAN_SIGN 
+            || la == TokenTypes.GREATER_THAN_SIGN 
+            || la == TokenTypes.LESS_THAN_OR_EQUALS_SIGN 
+            || la == TokenTypes.GREATER_THAN_OR_EQUALS_SIGN ) {
             switch ( la )
             {
-                case LESS_THAN_SIGN:
+                case TokenTypes.LESS_THAN_SIGN:
                 {
-                    match( LESS_THAN_SIGN );
+                    match( TokenTypes.LESS_THAN_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.LESS_THAN );
                     break;
                 }
-                case GREATER_THAN_SIGN:
+                case TokenTypes.GREATER_THAN_SIGN:
                 {
-                    match( GREATER_THAN_SIGN );
+                    match( TokenTypes.GREATER_THAN_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.GREATER_THAN );
                     break;
                 }
-                case GREATER_THAN_OR_EQUALS_SIGN:
+                case TokenTypes.GREATER_THAN_OR_EQUALS_SIGN:
                 {
-                    match( GREATER_THAN_OR_EQUALS_SIGN );
+                    match( TokenTypes.GREATER_THAN_OR_EQUALS_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.GREATER_THAN_EQUALS );
                     break;
                 }
-                case LESS_THAN_OR_EQUALS_SIGN:
+                case TokenTypes.LESS_THAN_OR_EQUALS_SIGN:
                 {
-                    match( LESS_THAN_OR_EQUALS_SIGN );
+                    match( TokenTypes.LESS_THAN_OR_EQUALS_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.LESS_THAN_EQUALS );
@@ -945,21 +945,21 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         multiplicativeExpr();
 
         int la = LA(1);
-        while (la == PLUS || la == MINUS)
+        while (la == TokenTypes.PLUS || la == TokenTypes.MINUS)
         {
             switch ( la )
             {
-                case PLUS:
+                case TokenTypes.PLUS:
                 {
-                    match( PLUS );
+                    match( TokenTypes.PLUS );
                     getXPathHandler().startAdditiveExpr();
                     multiplicativeExpr();
                     getXPathHandler().endAdditiveExpr( Operator.ADD );
                     break;
                 }
-                case MINUS:
+                case TokenTypes.MINUS:
                 {
-                    match( MINUS );
+                    match( TokenTypes.MINUS );
                     getXPathHandler().startAdditiveExpr();
                     multiplicativeExpr();
                     getXPathHandler().endAdditiveExpr( Operator.SUBTRACT );
@@ -975,29 +975,29 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         unaryExpr();
 
         int la = LA(1);
-        while (la == STAR || la == DIV || la == MOD)
+        while (la == TokenTypes.STAR || la == TokenTypes.DIV || la == TokenTypes.MOD)
         {
             switch ( la )
             {
-                case STAR:
+                case TokenTypes.STAR:
                 {
-                    match( STAR );
+                    match( TokenTypes.STAR );
                     getXPathHandler().startMultiplicativeExpr();
                     unaryExpr();
                     getXPathHandler().endMultiplicativeExpr( Operator.MULTIPLY );
                     break;
                 }
-                case DIV:
+                case TokenTypes.DIV:
                 {
-                    match( DIV );
+                    match( TokenTypes.DIV );
                     getXPathHandler().startMultiplicativeExpr();
                     unaryExpr();
                     getXPathHandler().endMultiplicativeExpr( Operator.DIV );
                     break;
                 }
-                case MOD:
+                case TokenTypes.MOD:
                 {
-                    match( MOD );
+                    match( TokenTypes.MOD );
                     getXPathHandler().startMultiplicativeExpr();
                     unaryExpr();
                     getXPathHandler().endMultiplicativeExpr( Operator.MOD );
@@ -1017,9 +1017,9 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case MINUS:
+            case TokenTypes.MINUS:
             {
-                match( MINUS );
+                match( TokenTypes.MINUS );
                 operator = Operator.NEGATIVE;
                 unaryExpr();
                 break;
@@ -1044,9 +1044,9 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
 
         switch ( LA(1) )
         {
-            case PIPE:
+            case TokenTypes.PIPE:
             {
-                match( PIPE );
+                match( TokenTypes.PIPE );
                 create = true;
                 expr();
                 break;
@@ -1068,7 +1068,7 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
             return token;
         }
 
-        throw createSyntaxException( "Expected: " + getTokenText( tokenType ) );
+        throw createSyntaxException( "Expected: " + TokenTypes.getTokenText( tokenType ) );
     }
 
     private int LA(int position)
