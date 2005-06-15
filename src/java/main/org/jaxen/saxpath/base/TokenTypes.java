@@ -67,43 +67,44 @@ import org.jaxen.JaxenRuntimeException;
 
 class TokenTypes
 {
-    static final int LEFT_PAREN = 1;
-    static final int RIGHT_PAREN = 2;
+    static final int EOF   = -1;
+    static final int SKIP  = -2;
+    static final int ERROR = -3;
 
-    static final int LEFT_BRACKET = 3;
-    static final int RIGHT_BRACKET = 4;
+    static final int EQUALS = 1;
+    static final int NOT_EQUALS = 2;
+    
+    static final int LESS_THAN_SIGN = 3;
+    static final int LESS_THAN_OR_EQUALS_SIGN = 4;
+    static final int GREATER_THAN_SIGN = 5;
+    static final int GREATER_THAN_OR_EQUALS_SIGN = 6;  
+    
+    static final int PLUS  = 7;
+    static final int MINUS = 8;
+    static final int STAR  = 9;
+    static final int MOD   = 10;
+    static final int DIV   = 11;
+    
+    static final int SLASH = 12;
+    static final int DOUBLE_SLASH = 13;
+    static final int DOT = 14;
+    static final int DOT_DOT = 15;
 
-    static final int PLUS = 5;
-    static final int MINUS = 6;
-    static final int LESS_THAN = 7;
-    static final int LESS_THAN_EQUALS = 8;
-    static final int GREATER_THAN = 9;
-    static final int GREATER_THAN_EQUALS = 10;
+    static final int IDENTIFIER = 16;
 
-    static final int SLASH = 11;
-    static final int DOUBLE_SLASH = 12;
-    static final int DOT = 13;
-    static final int DOT_DOT = 14;
+    static final int AT = 17;
+    static final int PIPE = 18;
+    static final int COLON = 19;
+    static final int DOUBLE_COLON = 20;
+    
+    static final int LEFT_BRACKET = 21;
+    static final int RIGHT_BRACKET = 22;    
+    static final int LEFT_PAREN = 23;
+    static final int RIGHT_PAREN = 24;
 
-    static final int IDENTIFIER = 15;
-
-    static final int AT = 16;
-    static final int PIPE = 17;
-    static final int COLON = 18;
-    static final int DOUBLE_COLON = 19;
-    static final int STAR = 20;
-
-    static final int EQUALS = 21;
-    static final int NOT_EQUALS = 22;
-    static final int NOT = 23;
-
-    static final int DIV = 24;
-    static final int MOD = 25;
-
+    static final int NOT = 25;
     static final int DOLLAR = 26;
-
     static final int LITERAL = 27;
-
     static final int AND = 28;
     static final int OR = 29;
 
@@ -112,36 +113,34 @@ class TokenTypes
 
     static final int COMMA = 32;
 
-    //static final int SKIP = 99;
-    //static final int EOF = 100;
-    static final int SKIP = -2;
-    static final int EOF = -1;
-    static final int ERROR = -3;
-
     String getTokenText( int tokenType )
     {
         switch( tokenType )
         {
-            case LEFT_PAREN:
-                return "(";
-            case RIGHT_PAREN:
-                return ")";
-            case LEFT_BRACKET:
-                return "[";
-            case RIGHT_BRACKET:
-                return "]";
+            case ERROR:
+                return "(error)";
+            case EQUALS:
+                return "=";
+            case NOT_EQUALS:
+                return "!=";
+            case LESS_THAN_SIGN:
+                return "<";
+            case LESS_THAN_OR_EQUALS_SIGN:
+                return "<=";
+            case GREATER_THAN_SIGN:
+                return ">";
+            case GREATER_THAN_OR_EQUALS_SIGN:
+                return ">=";
             case PLUS:
                 return "+";
             case MINUS:
                 return "-";
-            case LESS_THAN:
-                return "<";
-            case LESS_THAN_EQUALS:
-                return "<=";
-            case GREATER_THAN:
-                return ">";
-            case GREATER_THAN_EQUALS:
-                return ">=";
+            case STAR:
+                return "*";
+            case DIV:
+                return "div";
+            case MOD:
+                return "mod";
             case SLASH:
                 return "/";
             case DOUBLE_SLASH:
@@ -160,23 +159,18 @@ class TokenTypes
                 return ":";
             case DOUBLE_COLON:
                 return "::";
-            case STAR:
-                return "*";
-
-            case EQUALS:
-                return "=";
-            case NOT_EQUALS:
-                return "!=";
+            case LEFT_BRACKET:
+                return "[";
+            case RIGHT_BRACKET:
+                return "]";
+            case LEFT_PAREN:
+                return "(";
+            case RIGHT_PAREN:
+                return ")";
             case NOT:
                 return "!";
-            case DIV:
-                return "div";
-            case MOD:
-                return "mod";
-
             case DOLLAR:
                 return "$";
-
             case LITERAL:
                 return "(literal)";
             case AND:
@@ -189,8 +183,6 @@ class TokenTypes
                 return "(double)";
             case COMMA:
                 return ",";
-            case ERROR:
-                return "(error)";
             default:
                 throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
         }
