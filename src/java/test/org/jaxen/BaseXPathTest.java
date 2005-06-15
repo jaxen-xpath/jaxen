@@ -854,6 +854,24 @@ public class BaseXPathTest extends TestCase {
         assertFalse(result.booleanValue());
     }
     
+    public void testRelationalGEAssociativity3() throws JaxenException {
+        XPath xpath = new DOMXPath("3 >= 2 >= 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testRelationalGEAssociativity2() throws JaxenException {
+        XPath xpath = new DOMXPath("2 >= 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testRelationalGEAssociativity4() throws JaxenException {
+        XPath xpath = new DOMXPath("4 >= 3 >= 2 >= 1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
     public void testRelationalAssociativity5P() throws JaxenException {
