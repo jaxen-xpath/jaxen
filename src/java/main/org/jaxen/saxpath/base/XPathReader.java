@@ -896,37 +896,39 @@ public class XPathReader extends TokenTypes implements org.jaxen.saxpath.XPathRe
         //                 GREATER_THAN != Operator.GREATER_THAN
         //                 GREATER_THAN_EQUALS != Operator.GREATER_THAN_EQUALS
         //                 LESS_THAN_EQUALS != Operator.LESS_THAN_EQUALS
-        while (la == LESS_THAN || la == GREATER_THAN || la == LESS_THAN_EQUALS || la == GREATER_THAN_EQUALS)
-        {
+        while (la == LESS_THAN_SIGN 
+            || la == GREATER_THAN_SIGN 
+            || la == LESS_THAN_OR_EQUALS_SIGN 
+            || la == GREATER_THAN_OR_EQUALS_SIGN ) {
             switch ( la )
             {
-                case LESS_THAN:
+                case LESS_THAN_SIGN:
                 {
-                    match( LESS_THAN );
+                    match( LESS_THAN_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.LESS_THAN );
                     break;
                 }
-                case GREATER_THAN:
+                case GREATER_THAN_SIGN:
                 {
-                    match( GREATER_THAN );
+                    match( GREATER_THAN_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.GREATER_THAN );
                     break;
                 }
-                case GREATER_THAN_EQUALS:
+                case GREATER_THAN_OR_EQUALS_SIGN:
                 {
-                    match( GREATER_THAN_EQUALS );
+                    match( GREATER_THAN_OR_EQUALS_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.GREATER_THAN_EQUALS );
                     break;
                 }
-                case LESS_THAN_EQUALS:
+                case LESS_THAN_OR_EQUALS_SIGN:
                 {
-                    match( LESS_THAN_EQUALS );
+                    match( LESS_THAN_OR_EQUALS_SIGN );
                     getXPathHandler().startRelationalExpr();
                     additiveExpr();
                     getXPathHandler().endRelationalExpr( Operator.LESS_THAN_EQUALS );
