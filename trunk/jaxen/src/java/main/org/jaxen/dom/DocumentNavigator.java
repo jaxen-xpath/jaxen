@@ -715,7 +715,7 @@ public class DocumentNavigator extends DefaultNavigator
     }
 
     /**
-     * Use JAXP to load a namespace aware document from a given URI
+     * Use JAXP to load a namespace aware document from a given URI.
      *
      * @param uri is the URI of the document to load
      * @return the new W3C DOM Level 2 Document instance
@@ -736,10 +736,10 @@ public class DocumentNavigator extends DefaultNavigator
         }
         catch (SAXException e) {
            throw new FunctionCallException("XML error in document() function: " + e.getMessage(), e);
-         }
+        }
         catch (IOException e) {
            throw new FunctionCallException("I/O error in document() function: " + e.getMessage(), e);
-         }
+        }
         
     }
 
