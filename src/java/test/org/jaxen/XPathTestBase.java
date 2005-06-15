@@ -76,6 +76,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.function.StringFunction;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
+import org.jaxen.dom4j.DocumentNavigator;
+import org.jaxen.pattern.Pattern;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -459,5 +461,24 @@ public abstract class XPathTestBase extends TestCase
         }
         return result.toString();
     }
-    
+
+
+
+    public void testGetNodeType() throws FunctionCallException, UnsupportedAxisException
+    {
+        Navigator nav = getNavigator();
+        Object document = nav.getDocument("xml/testNamespaces.xml");
+        int count = 0;
+        Iterator descendantOrSelfAxisIterator = nav.getDescendantOrSelfAxisIterator(document);
+        while (descendantOrSelfAxisIterator.hasNext()) {
+            Object node = descendantOrSelfAxisIterator.next();
+            Iterator namespaceAxisIterator = nav.getNamespaceAxisIterator(node);
+            while (namespaceAxisIterator.hasNext()) {
+                count++;
+                assertEquals("Node type mismatch", Pattern.NAMESPACE_NODE, nav.getNodeType(namespaceAxisIterator.next()));
+            }
+        }
+        assertEquals(25, count);
+    }
+
 }
