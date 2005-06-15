@@ -339,10 +339,10 @@ class XPathLexer
                 case TokenTypes.MINUS:
                 case TokenTypes.STAR:
                 case TokenTypes.COMMA:
-                case TokenTypes.LESS_THAN:
-                case TokenTypes.GREATER_THAN:
-                case TokenTypes.LESS_THAN_EQUALS:
-                case TokenTypes.GREATER_THAN_EQUALS:
+                case TokenTypes.LESS_THAN_SIGN:
+                case TokenTypes.GREATER_THAN_SIGN:
+                case TokenTypes.LESS_THAN_OR_EQUALS_SIGN:
+                case TokenTypes.GREATER_THAN_OR_EQUALS_SIGN:
                 case TokenTypes.EQUALS:
                 case TokenTypes.NOT_EQUALS:
                 {
@@ -757,7 +757,7 @@ class XPathLexer
             {
                 if ( LA(2) == '=' )
                 {
-                    token = new Token( TokenTypes.LESS_THAN_EQUALS,
+                    token = new Token( TokenTypes.LESS_THAN_OR_EQUALS_SIGN,
                                        getXPath(),
                                        currentPosition(),
                                        currentPosition() + 2 );
@@ -765,7 +765,7 @@ class XPathLexer
                 }
                 else
                 {
-                    token = new Token( TokenTypes.LESS_THAN,
+                    token = new Token( TokenTypes.LESS_THAN_SIGN,
                                        getXPath(),
                                        currentPosition(),
                                        currentPosition() + 1);
@@ -778,7 +778,7 @@ class XPathLexer
             {
                 if ( LA(2) == '=' )
                 {
-                    token = new Token( TokenTypes.GREATER_THAN_EQUALS,
+                    token = new Token( TokenTypes.GREATER_THAN_OR_EQUALS_SIGN,
                                        getXPath(),
                                        currentPosition(),
                                        currentPosition() + 2 );
@@ -786,7 +786,7 @@ class XPathLexer
                 }
                 else
                 {
-                    token = new Token( TokenTypes.GREATER_THAN,
+                    token = new Token( TokenTypes.GREATER_THAN_SIGN,
                                        getXPath(),
                                        currentPosition(),
                                        currentPosition() + 1 );
