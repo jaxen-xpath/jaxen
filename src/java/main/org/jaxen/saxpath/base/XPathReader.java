@@ -1011,17 +1011,14 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void unaryExpr() throws SAXPathException
     {
-        getXPathHandler().startUnaryExpr();
-
-        int operator = Operator.NO_OP;
-
         switch ( LA(1) )
         {
             case TokenTypes.MINUS:
             {
+                getXPathHandler().startUnaryExpr();
                 match( TokenTypes.MINUS );
-                operator = Operator.NEGATIVE;
                 unaryExpr();
+                getXPathHandler().endUnaryExpr( Operator.NEGATIVE );
                 break;
             }
             default:
@@ -1031,7 +1028,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
         }
 
-        getXPathHandler().endUnaryExpr( operator );
+        
     }
 
     private void unionExpr() throws SAXPathException
