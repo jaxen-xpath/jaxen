@@ -70,8 +70,6 @@ public interface LocationPath extends Expr
     void addStep(Step step);
 
     List getSteps();
-
-    String getText();
     
-    public boolean isAbsolute();
+    boolean isAbsolute();
 }
