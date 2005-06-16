@@ -119,10 +119,10 @@ public abstract class LocaleFunctionSupport implements Function
     
     /** 
      * Tries to find a Locale instance by name using 
-     * <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066</a>
+     * <a href="http://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a>
      * language tags such as 'en', 'en-US', 'en-US-Brooklyn'.
      *
-     * @param localeText the <code>xml:lang</code> encoding of a Locale
+     * @param localeText the RFC 3066 language tag
      * @return the locale for the given text or null if one could not
      *      be found 
      */
