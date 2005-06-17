@@ -65,12 +65,12 @@ package org.jaxen.pattern;
 
 import junit.framework.TestCase;
 
+import org.jaxen.JaxenException;
+import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathSyntaxException;
 
 public class PatternHandlerTest extends TestCase
 {
-    String[] ignore_paths = {
-    };
     
     String[] paths = {
         "foo",
@@ -108,68 +108,27 @@ public class PatternHandlerTest extends TestCase
         super( name );
     }
 
-    public void testValidPaths()
+    public void testValidPaths() throws JaxenException, SAXPathException
     {
-        try
-        {
-            for ( int i = 0; i < paths.length; i++ ) {
-                String path = paths[i];
-                
-                System.out.println("-----------------");
-                System.out.println( "parsing: " + path );
-                System.out.println("-----------------");
-
-                Pattern pattern = PatternParser.parse( path );
-
-                System.out.println("-----------------");
-                System.out.println("-----------------");
-
-                System.out.println( pattern.toString() );
-                System.out.println("-----------------");
-                System.out.println( pattern.getText() );
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
+        for ( int i = 0; i < paths.length; i++ ) {
+            String path = paths[i];
+            PatternParser.parse( path );
         }
     }
 
-    public void testBogusPaths()
+    public void testBogusPaths() throws JaxenException, SAXPathException
     {
-        try
-        {
-            for ( int i = 0; i < bogusPaths.length; i++ ) {
-                String path = bogusPaths[i];
-                
-                System.err.println("-----------------");
-                System.err.println( "parsing bogus path : " + path );
-                System.err.println("-----------------");
-
-                try
-                {                    
-                    Pattern pattern = PatternParser.parse( path );
-
-                    System.err.println( "Parsed as: " + pattern );
-                    
-                    fail( "Parsed bogus path as: " + pattern );
-                }
-                catch (XPathSyntaxException e)
-                {                    
-                    
-                    System.err.println("-----------------");
-                    //System.err.println( "Exception: " + e.getMessage() );
-                    System.err.println( "Exception: ");
-                    System.err.println( e.getMultilineMessage() );
-                    System.err.println("-----------------");
-                }
+        for ( int i = 0; i < bogusPaths.length; i++ ) {
+            String path = bogusPaths[i];
+            try
+            {                    
+                Pattern pattern = PatternParser.parse( path );
+                fail( "Parsed bogus path as: " + pattern );
+            }
+            catch (XPathSyntaxException e)
+            {                    
             }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
-        }
+
     }
 }
