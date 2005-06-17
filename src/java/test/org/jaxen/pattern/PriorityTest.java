@@ -67,6 +67,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+
+import org.jaxen.JaxenException;
+import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 /** Tests the use of priority in the Pattern implementations.
@@ -95,10 +98,6 @@ public class PriorityTest extends TestCase
     {
         System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
                             "" );
-    }
-
-    public void tearDown()
-    {
     }
 
     public void testDocumentNode() throws Exception
@@ -141,16 +140,13 @@ public class PriorityTest extends TestCase
         testPriority( "*", -0.5, Pattern.ELEMENT_NODE );
     }
     
-    protected void testPriority(String expr, double priority, short nodeType) throws Exception 
+    protected void testPriority(String expr, double priority, short nodeType) 
+     throws JaxenException, SAXPathException  
     {
-        System.out.println( "parsing: " + expr );
         
         Pattern pattern = PatternParser.parse( expr );
         double d = pattern.getPriority();
         short nt = pattern.getMatchType();
-        
-        System.out.println( "expr: " + expr + " has priority: " + d + " nodeType: " + nt );
-        System.out.println( "pattern: " + pattern );
         
         assertEquals( "expr: " + expr,
                       new Double( priority ),
