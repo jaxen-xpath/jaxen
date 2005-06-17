@@ -73,36 +73,19 @@ public class AddNamespaceTest extends TestCase
         super( name );
     }
     
-    public void testDefaultContext()
+    public void testDefaultContext() throws SAXPathException
     {
-        try
-        {
-            MockXPath xpath = new MockXPath("foo");
-            
-            xpath.addNamespace("cheese",
-                               "http://cheese.org");
-            
-            xpath.addNamespace("squeeze",
-                               "http://squeeze.org");
+        MockXPath xpath = new MockXPath("foo");
+        xpath.addNamespace("cheese",
+                           "http://cheese.org");
+        xpath.addNamespace("squeeze",
+                           "http://squeeze.org");
+        NamespaceContext nsContext = xpath.getNamespaceContext();
+        assertEquals( "http://cheese.org",
+                      nsContext.translateNamespacePrefixToUri( "cheese" ) );
+        assertEquals( "http://squeeze.org",
+                      nsContext.translateNamespacePrefixToUri( "squeeze" ) );
 
-            NamespaceContext nsContext = xpath.getNamespaceContext();
-
-            assertEquals( "http://cheese.org",
-                          nsContext.translateNamespacePrefixToUri( "cheese" ) );
-
-            assertEquals( "http://squeeze.org",
-                          nsContext.translateNamespacePrefixToUri( "squeeze" ) );
-                          
-
-        }
-        catch (JaxenException e)
-        {
-            fail( e.getMessage() );
-        }
-        catch (SAXPathException e)
-        {
-            fail( e.getMessage() );
-        }
     }
 }
 
