@@ -64,15 +64,18 @@ package org.jaxen;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class ContextTest extends TestCase
 {
@@ -146,26 +149,20 @@ public class ContextTest extends TestCase
                       original.getPosition() );
     }
 
-    public void testXMLPrefixIsAlwaysBound()
+    public void testXMLPrefixIsAlwaysBound() 
+      throws ParserConfigurationException, SAXException, IOException, JaxenException
     {  
-         
-        try
-        {
-           DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-           factory.setNamespaceAware(true);
-           DocumentBuilder builder = factory.newDocumentBuilder();
-           Document doc = builder.parse( "xml/basic.xml" );
-           Element root = doc.getDocumentElement();
-           root.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en");
-           XPath xpath = new DOMXPath( "/*/@xml:lang" );
-           List result = xpath.selectNodes( doc );
-           assertEquals(1, result.size());
-       }
-       catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
-        }
+
+       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+       factory.setNamespaceAware(true);
+       DocumentBuilder builder = factory.newDocumentBuilder();
+       Document doc = builder.parse( "xml/basic.xml" );
+       Element root = doc.getDocumentElement();
+       root.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en");
+       XPath xpath = new DOMXPath( "/*/@xml:lang" );
+       List result = xpath.selectNodes( doc );
+       assertEquals(1, result.size());
+
     }    
 
     
