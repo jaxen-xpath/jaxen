@@ -76,8 +76,8 @@ public abstract class XPathTestBase extends TestCase
     protected static String VAR_URI   = "http://jaxen.org/test-harness/var";
     protected static String TESTS_XML = "xml/test/tests.xml";
 
-    protected static boolean verbose = true;
-    protected static boolean debug = true;
+    protected static boolean verbose = false;
+    protected static boolean debug = false;
     private ContextSupport contextSupport;
 
     public XPathTestBase(String name)
@@ -102,11 +102,7 @@ public abstract class XPathTestBase extends TestCase
     public void log(boolean actualVerbose,
                     String text)
     {
-        if (!actualVerbose)
-        {
-            return;
-        }
-        System.out.println(text);
+        if (actualVerbose) System.out.println(text);
     }
 
     protected void assertCountXPath(int expectedSize, Object context, String xpathStr) throws JaxenException
