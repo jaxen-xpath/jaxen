@@ -67,7 +67,6 @@ import org.jaxen.function.StringFunction;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 import org.jaxen.pattern.Pattern;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -86,7 +85,7 @@ public abstract class XPathTestBase extends TestCase
         super(name);
     }
 
-    public void setUp() throws ParserConfigurationException
+    public void setUp()
     {
         this.contextSupport = null;
         System.setProperty(XPathReaderFactory.DRIVER_PROPERTY,
@@ -156,7 +155,7 @@ public abstract class XPathTestBase extends TestCase
         return null;
     }
 
-    protected void assertInvalidXPath(Object context, String xpathStr) throws JaxenException
+    protected void assertInvalidXPath(Object context, String xpathStr)
     {
         try
         {
@@ -451,7 +450,7 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test cases for the use of = with nodesets
+    /* test cases for the use of = with node-sets
     */
     public void testid53662() throws JaxenException
     {
