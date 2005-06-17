@@ -930,7 +930,7 @@ public class BaseXPathTest extends TestCase {
     
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
-    public void testEqaulityAssociativity5BP() throws JaxenException {
+    public void testEqualityAssociativity5BP() throws JaxenException {
         XPath xpath = new DOMXPath("(((2 = 3) = 1) = 4) = 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
@@ -979,10 +979,11 @@ public class BaseXPathTest extends TestCase {
 
     public void testJaxen97() throws JaxenException {
         // jaxen 97 claims this expression throws an exception.
-        DOMXPath p=new DOMXPath("/aaa:element/text()");
+        new DOMXPath("/aaa:element/text()");
     }
 
-    public void testAttributeNodesOnParentComeBeforeNamespaceNodesInChildInDocumentOrder() throws JaxenException {
+    public void testAttributeNodesOnParentComeBeforeNamespaceNodesInChildInDocumentOrder() 
+     throws JaxenException {
         
         org.w3c.dom.Element root = doc.createElement("root");
         doc.appendChild(root);
