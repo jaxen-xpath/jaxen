@@ -75,7 +75,7 @@ public class AddNamespaceTest extends TestCase
     
     public void testDefaultContext() throws SAXPathException
     {
-        MockXPath xpath = new MockXPath("foo");
+        XPath xpath = new BaseXPath("foo");
         xpath.addNamespace("cheese",
                            "http://cheese.org");
         xpath.addNamespace("squeeze",
@@ -87,18 +87,5 @@ public class AddNamespaceTest extends TestCase
                       nsContext.translateNamespacePrefixToUri( "squeeze" ) );
 
     }
-}
 
-class MockXPath extends BaseXPath
-{
-
-    public MockXPath(String expr) throws SAXPathException
-    {
-        super( expr );
-    }
-
-    public Navigator getNavigator()
-    {
-        return null;
-    }
 }
