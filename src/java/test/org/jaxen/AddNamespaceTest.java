@@ -72,17 +72,7 @@ public class AddNamespaceTest extends TestCase
     {
         super( name );
     }
-
-    public void setUp()
-    {
-
-    }
-
-    public void tearDown()
-    {
-
-    }
-
+    
     public void testDefaultContext()
     {
         try
