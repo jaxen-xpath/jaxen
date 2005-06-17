@@ -108,14 +108,6 @@ public class PatternHandlerTest extends TestCase
         super( name );
     }
 
-    public void setUp()
-    {
-    }
-
-    public void tearDown()
-    {
-    }
-
     public void testValidPaths()
     {
         try
