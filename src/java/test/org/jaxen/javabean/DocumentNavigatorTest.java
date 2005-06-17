@@ -1,6 +1,10 @@
 package org.jaxen.javabean;
 
+import java.util.List;
+
 import junit.framework.TestCase;
+
+import org.jaxen.JaxenException;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 public class DocumentNavigatorTest
@@ -13,9 +17,10 @@ public class DocumentNavigatorTest
                             "" );
     }
 
-    public void testNothing()
-        throws Exception
-    {
+    public void testSomething() throws JaxenException {
+        
+        // XXX Does the position() function really have any meaning for JavaBeans?
+        // How do we know which one comes first? 
         JavaBeanXPath xpath = new JavaBeanXPath( "brother[position()<4]/name" );
 
         Person bob = new Person( "bob", 30 );
@@ -27,7 +32,9 @@ public class DocumentNavigatorTest
         bob.addBrother( new Person( "larry", 42 ) );
         bob.addBrother( new Person( "ted", 22 ) );
 
-        System.out.println( xpath.evaluate( bob ) );
+        List result = (List) xpath.evaluate( bob );
+        assertEquals(3, result.size());
+        
     }
 
 }
