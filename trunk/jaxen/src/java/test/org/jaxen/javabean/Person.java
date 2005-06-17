@@ -3,15 +3,14 @@ package org.jaxen.javabean;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Person
+class Person
 {
     private String name;
     private int age;
 
     private Set brothers;
 
-    public Person(String name,
-                  int age)
+    Person(String name, int age)
     {
         this.name = name;
         this.age  = age;
