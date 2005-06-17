@@ -107,15 +107,7 @@ public abstract class XPathTestBase extends TestCase
 
     protected void assertCountXPath(int expectedSize, Object context, String xpathStr) throws JaxenException
     {
-        try
-        {
-            assertCountXPath2(expectedSize, context, xpathStr);
-        }
-        catch (UnsupportedAxisException e)
-        {
-            log(debug,
-                    "      ## SKIPPED -- Unsupported Axis");
-        }
+        assertCountXPath2(expectedSize, context, xpathStr);
     }
 
     protected Object assertCountXPath2(int expectedSize, Object context, String xpathStr) throws JaxenException
