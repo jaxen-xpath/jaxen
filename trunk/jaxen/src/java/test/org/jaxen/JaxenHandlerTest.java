@@ -74,12 +74,10 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
 public class JaxenHandlerTest extends TestCase
 {
-    String[] ignore_paths = {
+    
+    private String[] paths = {
         "foo[.='bar']",
         "foo[.!='bar']",
-    };
-    
-    String[] paths = {
         "/",
         "*",
         "//foo",
@@ -117,9 +115,7 @@ public class JaxenHandlerTest extends TestCase
         "/foo/bar[@a='1' and @c!='2']",
     };
 
-    String[] bogusPaths = { "//:p" };
-    
-    String[] ignore_bogusPaths = {        
+    private String[] bogusPaths = { "//:p" ,       
         // this path is bogus because of a trailing /
         "/foo/bar/",
         
