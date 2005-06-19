@@ -144,6 +144,12 @@ public class StringTest extends TestCase {
         assertEquals("-Infinity", result);
     }
 
+    public void testStringOfNegativeZero() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("string(-0)");
+        String result = (String) xpath.evaluate(null);
+        assertEquals("0", result);
+    }
+
     public void testIntegersAreFormattedAsInts() throws JaxenException {
         BaseXPath xpath = new DOMXPath("string(12)");
         String result = (String) xpath.evaluate(null);
