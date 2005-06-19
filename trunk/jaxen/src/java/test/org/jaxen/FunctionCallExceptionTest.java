@@ -80,7 +80,7 @@ public class FunctionCallExceptionTest extends TestCase {
         JaxenException ex = new JaxenException("Hello");
         FunctionCallException rex = new FunctionCallException(ex);
         assertEquals(ex.getMessage(), rex.getMessage());
-        assertEquals(ex, rex.getNestedException());
+        assertEquals(ex, rex.getCause());
         
     }    
   
@@ -89,7 +89,7 @@ public class FunctionCallExceptionTest extends TestCase {
         JaxenException ex = new JaxenException("Hello");
         FunctionCallException rex = new FunctionCallException("Goodbye", ex);
         assertEquals("Goodbye", rex.getMessage());
-        assertEquals(ex, rex.getNestedException());
+        assertEquals(ex, rex.getCause());
         
     }    
   
