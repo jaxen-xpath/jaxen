@@ -192,6 +192,7 @@ public class StringFunction implements Function
 
     public static String stringValue(double value)
     {
+        if (Double.isNaN(value)) return "NaN";
         return format.format(value);
     }
 
