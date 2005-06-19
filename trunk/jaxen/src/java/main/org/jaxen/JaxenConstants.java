@@ -71,6 +71,8 @@ import java.util.ListIterator;
  */
 public class JaxenConstants
 {
+    
+    private JaxenConstants() {}
 
     /**
      * An iterator with no elements. <code>hasNext()</code> always
