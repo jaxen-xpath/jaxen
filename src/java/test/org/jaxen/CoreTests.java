@@ -89,6 +89,7 @@ public class CoreTests extends TestCase {
         result.addTest(new TestSuite(AddNamespaceTest.class));
         result.addTest(new TestSuite(BaseXPathTest.class));
         result.addTest(new TestSuite(FunctionContextTest.class));
+        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
         result.addTest(new TestSuite(ContextTest.class));
         result.addTest(new TestSuite(JaxenHandlerTest.class));
         result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));

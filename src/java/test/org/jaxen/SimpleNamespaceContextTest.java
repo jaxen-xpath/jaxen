@@ -63,12 +63,9 @@
 
 package org.jaxen;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.jaxen.dom.DOMXPath;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -81,40 +78,19 @@ import junit.framework.TestCase;
  * @version 1.1b7
  *
  */
-public class VariableContextTest extends TestCase
+public class SimpleNamespaceContextTest extends TestCase
 {
 
-    private Document doc;
-    
-    public void setUp() throws ParserConfigurationException {
-        
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        doc = factory.newDocumentBuilder().newDocument();
-        Element root = doc.createElementNS("http://www.example.org/", "root");
-        doc.appendChild(root);
-        root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.example.org/");
-              
-    }
-    
- 
-    public void testUnresolvableVariable() throws JaxenException {
-        
-        DOMXPath xpath = new DOMXPath("$a/root");
-        
-        try {
-            xpath.evaluate(doc);
-            fail("Evaluated nonexistent variable");
-        }
-        catch (UnresolvableException ex) {
-            assertNotNull(ex.getMessage());
-        }
-        
-    }
- 
-    public void testGetVariableContext() throws JaxenException {      
-        DOMXPath xpath = new DOMXPath("/root/child");
-        assertNotNull(xpath.getVariableContext());
+    /**
+     * Need to make sure that changing the map after it's used to create the 
+     * namespace context does not affect the context. i.e.getCause()getCause()getCause()getCause()getCause()getCause()getCause()getCause() data encapsulation 
+     * is not violated.
+     */
+    public void testMapCopy() {
+        Map map = new HashMap();
+        SimpleNamespaceContext context = new SimpleNamespaceContext(map);
+        map.put("pre", "http://www.example.org/");
+        assertNull(context.translateNamespacePrefixToUri("pre"));
     }
  
 }
