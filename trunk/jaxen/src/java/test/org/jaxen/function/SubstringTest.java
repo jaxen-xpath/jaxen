@@ -215,7 +215,7 @@ public class SubstringTest extends TestCase {
     public void testSubstringFunctionRequiresAtMostThreeArguments() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("substring-after('a', 1, 1, 4)");
+        BaseXPath xpath = new DOMXPath("substring('a', 1, 1, 4)");
         
         try {
             xpath.selectNodes(doc);
@@ -225,10 +225,6 @@ public class SubstringTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
         
-    }    
-    
-    
-    
-    
+    }
 
 }
