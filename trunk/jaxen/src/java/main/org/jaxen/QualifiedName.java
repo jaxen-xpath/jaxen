@@ -92,17 +92,20 @@ class QualifiedName
 
     public boolean equals( Object o )
     {
-        if ( !(o instanceof QualifiedName) )
-            return false;
+        // Because this class is package protected and used in only
+        // two other classes, it's never actually compared to anything 
+        // other than another QualifiedName. No instanceof test is
+        // necessary here.
+        QualifiedName other = (QualifiedName) o;
         
-        QualifiedName other = (QualifiedName)o;
-        
-        if ( namespaceURI == null )
+        if ( namespaceURI == null ) {
             return ( other.namespaceURI == null &&
                      other.localName.equals(localName) );
-        else
+        }
+        else {
             return ( namespaceURI.equals(other.namespaceURI) &&
                      other.localName.equals(localName) );
+        }
     }
     
 }
