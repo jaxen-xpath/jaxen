@@ -199,7 +199,10 @@ public class StringFunction implements Function
 
     public static String stringValue(double value)
     {
-        return format.format(value);
+        // XXX need to clone object for thread-safety
+        // could we use thread locals instead?
+        DecimalFormat copy = (DecimalFormat) format.clone();
+        return copy.format(value);
     }
 
     public static String stringValue(boolean value)
