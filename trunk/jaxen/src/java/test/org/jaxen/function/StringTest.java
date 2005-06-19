@@ -70,6 +70,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import junit.framework.TestCase;
 
 import org.jaxen.BaseXPath;
+import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
@@ -154,6 +155,20 @@ public class StringTest extends TestCase {
         BaseXPath xpath = new DOMXPath("string(12)");
         String result = (String) xpath.evaluate(null);
         assertEquals("12", result);
-    }
+    } 
 
+    public void testStringFunctionRequiresAtMostOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("string('a', 1)");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed string function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }
 }
