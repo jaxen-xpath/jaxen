@@ -109,6 +109,53 @@ public class SubstringTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("234", result);
     }    
+    
+    // Unusual tests from XPath spec
+    
+    public void testUnusualSubstring1() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 1.5, 2.6)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("234", result);
+    }    
+
+
+    public void testUnusualSubstring2() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 0, 3)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("12", result);
+    }    
+
+
+    public void testUnusualSubstring3() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 0 div 0, 3)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+
+    public void testUnusualSubstring4() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 1, 0 div 0)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+
+    public void testUnusualSubstring5() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', -42, 1 div 0)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("12345", result);
+    }    
+
+    public void testUnusualSubstring6() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', -1 div 0, 1 div 0)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+
   
     public void testSubstringOfNaN() throws JaxenException
     {
@@ -147,5 +194,9 @@ public class SubstringTest extends TestCase {
         }
         
     }    
+    
+    
+    
+    
 
 }
