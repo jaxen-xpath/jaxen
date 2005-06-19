@@ -91,13 +91,14 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
      * @param namespaces the initial namespace bindings in scope. The keys in this
      *     must be strings containing the prefixes and the values are strings
      *     containing the namespace URIs.
+     *     
+     * @throws NullPointerException if the argument is null   
      */
     public SimpleNamespaceContext(Map namespaces)
     {
-        // FIXME this is dangerous. The Map is outside the control of this object.
-        // We should copy rather than store a reference. Furthermore we should check that
+        // FIXME this is dangerous. We should check that
         // the contents are strings.
-        this.namespaces = namespaces;
+        this.namespaces = new HashMap(namespaces);
     }
 
     /**
