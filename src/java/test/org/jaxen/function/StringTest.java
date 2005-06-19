@@ -132,6 +132,18 @@ public class StringTest extends TestCase {
         assertEquals("100000000.5", result);
     }
 
+    public void testStringOfInfinity() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("string(1 div 0)");
+        String result = (String) xpath.evaluate(null);
+        assertEquals("Infinity", result);
+    }
+
+    public void testStringOfNegativeInfinity() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("string(-1 div 0)");
+        String result = (String) xpath.evaluate(null);
+        assertEquals("-Infinity", result);
+    }
+
     public void testIntegersAreFormattedAsInts() throws JaxenException {
         BaseXPath xpath = new DOMXPath("string(12)");
         String result = (String) xpath.evaluate(null);
