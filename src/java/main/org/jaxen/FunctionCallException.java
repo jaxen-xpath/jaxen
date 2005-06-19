@@ -62,9 +62,6 @@
 
 package org.jaxen;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
 /** <code>FunctionCallException</code> is thrown if an exception
  * occurs during the evaluation of a function.
  * This exception may include a root exception, such as if the 
@@ -76,7 +73,6 @@ import java.io.PrintWriter;
  */
 public class FunctionCallException extends JaxenException
 {
-    private Throwable nestedException;
 
     /**
      * Create a new FunctionCallException with the specified detail message.
@@ -93,8 +89,7 @@ public class FunctionCallException extends JaxenException
      * @param nestedException the cause of this exception
      */
     public FunctionCallException(Throwable nestedException) {
-        super( nestedException.getMessage() );
-        this.nestedException = nestedException;
+        super( nestedException );
     }
 
     /**
@@ -106,50 +101,20 @@ public class FunctionCallException extends JaxenException
      */
     public FunctionCallException(String message, Exception nestedException) {
         super( message, nestedException );
-        this.nestedException = nestedException;
     }
-
-    // should all this nested exception handling be pushed up into JaxenException????
-    public void printStackTrace( PrintStream s ) {
-        super.printStackTrace( s );
-        if ( nestedException != null ) 
-        {
-            s.println( "Root cause:" );
-            nestedException.printStackTrace( s );
-        }
-    }
-    
-    public void printStackTrace( PrintWriter w ) {
-        super.printStackTrace( w );
-        if ( nestedException != null ) 
-        {
-            w.println( "Root cause:" );
-            nestedException.printStackTrace( w );
-        }
-    }
-    
-    public void printStackTrace() {
-        printStackTrace(System.out);
-    }
-    
-    public Throwable fillInStackTrace() {
-        if ( nestedException == null ) {
-            return super.fillInStackTrace(); 
-        } else {
-            return nestedException.fillInStackTrace();
-        }
-    }
-    
-    // Properties
-    //-------------------------------------------------------------------------    
+       
     /**
      * <p>
      * Returns the exception that caused this function call to fail.
+     * Use getCause() instead.
      * </p>
      * 
      * @return the exception that caused this fucntion call to fail
+     * 
+     * @deprecated
      */
     public Throwable getNestedException() {
-        return nestedException;
+        return getCause();
     }
+    
 }
