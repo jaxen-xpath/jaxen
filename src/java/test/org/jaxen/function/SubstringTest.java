@@ -165,6 +165,30 @@ public class SubstringTest extends TestCase {
     }    
  
   
+    public void testSubstringOfEmptyString() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('', 2)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+ 
+  
+    public void testSubstringWithNegativeLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 2, -3)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+ 
+  
+    public void testSubstringWithNegativeLength2() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 2, -1)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+ 
+  
     public void testSubstringFunctionRequiresAtLeastTwoArguments() 
       throws JaxenException {
         
