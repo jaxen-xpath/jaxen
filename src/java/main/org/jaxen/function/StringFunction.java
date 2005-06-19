@@ -199,6 +199,11 @@ public class StringFunction implements Function
 
     public static String stringValue(double value)
     {
+        
+        // DecimalFormat formats negative zero as "-0".
+        // Therefore we need to test for zero explicitly here.
+        if (value == 0) return "0";
+        
         // XXX need to clone object for thread-safety
         // could we use thread locals instead?
         DecimalFormat copy = (DecimalFormat) format.clone();
