@@ -204,10 +204,13 @@ public class StringFunction implements Function
         // Therefore we need to test for zero explicitly here.
         if (value == 0) return "0";
         
-        // XXX need to clone object for thread-safety
-        // could we use thread locals instead?
-        DecimalFormat copy = (DecimalFormat) format.clone();
-        return copy.format(value);
+        // need to synchronize object for thread-safety
+        String result = null;
+        synchronized (format) {
+            result = format.format(value);
+        }
+        return result;
+        
     }
 
     public static String stringValue(boolean value)
