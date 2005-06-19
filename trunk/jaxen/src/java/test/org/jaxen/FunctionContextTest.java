@@ -125,4 +125,9 @@ public class FunctionContextTest extends TestCase
         
     }
  
+    public void testGetFunctionContext() throws JaxenException {      
+        DOMXPath xpath = new DOMXPath("/root/child");
+        assertNotNull(xpath.getFunctionContext());
+    }
+ 
 }
