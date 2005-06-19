@@ -181,6 +181,14 @@ public class SubstringTest extends TestCase {
     }    
  
   
+    public void testSubstringWithExcessiveLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "substring('12345', 2, 32)" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("2345", result);
+    }    
+ 
+  
     public void testSubstringWithNegativeLength2() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring('12345', 2, -1)" );
