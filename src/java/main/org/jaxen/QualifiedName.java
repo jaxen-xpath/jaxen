@@ -69,30 +69,19 @@ package org.jaxen;
 class QualifiedName
 {
     private String namespaceURI;
-
     private String localName;
 
     /** Constructs a QualifiedName object.
      *
      *  @param namespaceURI namespace URI that qualifies the name, or
-     *                      <code>null</code> for default namespace.
-     *  @param localName    local name that is qualified by the namespace uri.
-     *                      must not be <code>null</code>.
+     *                      <code>null</code> for default namespace
+     *  @param localName    local name that is qualified by the namespace uri;
+     *                      must not be <code>null</code>
      */
     QualifiedName( String namespaceURI, String localName )
     {
         this.namespaceURI = namespaceURI;
         this.localName = localName;
-    }
-
-    String getNamespaceURI()
-    {
-        return namespaceURI;
-    }
-
-    String getLocalName()
-    {
-        return localName;
     }
 
     public int hashCode()
