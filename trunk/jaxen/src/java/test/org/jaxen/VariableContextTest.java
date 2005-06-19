@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright 2005 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,44 +60,61 @@
  */
 
 
+
 package org.jaxen;
 
-import junit.framework.Test;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect the org.jaxen. tests.
+ *  Test for function context.
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
+ * @version 1.1b4
  *
  */
-public class CoreTests extends TestCase {
+public class VariableContextTest extends TestCase
+{
 
+    private Document doc;
     
-    public CoreTests(String name) {
-        super(name);   
-    }
-
-    
-    public static Test suite() {
+    public void setUp() throws ParserConfigurationException {
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
-        result.addTest(new TestSuite(UnresolvableExceptionTest.class));
-        result.addTest(new TestSuite(VariableContextTest.class));
-        return result;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        doc = factory.newDocumentBuilder().newDocument();
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.example.org/");
+              
+    }
+    
+ 
+    public void testUnresolvableVariable() throws JaxenException {
+        
+        DOMXPath xpath = new DOMXPath("$a/root");
+        
+        try {
+            xpath.evaluate(doc);
+            fail("Evaluated nonexistent variable");
+        }
+        catch (UnresolvableException ex) {
+            assertNotNull(ex.getMessage());
+        }
         
     }
-
-    
+ 
+    public void testGetVariableContext() throws JaxenException {      
+        DOMXPath xpath = new DOMXPath("/root/child");
+        assertNotNull(xpath.getVariableContext());
+    }
+ 
 }
