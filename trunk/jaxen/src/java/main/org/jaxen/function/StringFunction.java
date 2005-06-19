@@ -193,12 +193,16 @@ public class StringFunction implements Function
     public static String stringValue(double value)
     {
         if (Double.isNaN(value)) return "NaN";
+        else if (Double.isInfinite(value)) {
+            if (value > 0) return "Infinity";
+            else return "-Infinity";
+        }
         return format.format(value);
     }
 
-    public static String stringValue(boolean bool)
+    public static String stringValue(boolean value)
     {
-        return bool ? "true" : "false";
+        return value ? "true" : "false";
     }
 
 }
