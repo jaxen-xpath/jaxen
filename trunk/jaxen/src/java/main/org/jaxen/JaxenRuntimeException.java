@@ -62,12 +62,13 @@ package org.jaxen;
 */
 
 /**
- * This class exists to wrap jaxen exceptions that otherwise wouldn't be propagated
+ * This class exists to wrap Jaxen exceptions that otherwise wouldn't be propagated
  * up through the axis iterators.
  */
 public class JaxenRuntimeException extends RuntimeException
 {
     private Throwable cause;
+    private boolean causeSet = false;
 
     /**
      * Create a new JaxenRuntimeException.
@@ -78,7 +79,7 @@ public class JaxenRuntimeException extends RuntimeException
     public JaxenRuntimeException(Throwable cause)
     {
         super(cause.getMessage());
-        this.cause = cause;
+        initCause(cause);
     }
 
     /**
@@ -99,6 +100,24 @@ public class JaxenRuntimeException extends RuntimeException
      */
     public Throwable getCause() {
         return cause;
+    }
+    
+
+    /**
+     * Sets the exception that caused this exception.
+     * This is necessary to implement Java 1.4 chained exception 
+     * functionality in a Java 1.3-compatible way.
+     * 
+     * @param cause the exception wrapped in this runtime exception
+     * 
+     * @return this exception
+     */
+    public Throwable initCause(Throwable cause) {
+        if (causeSet) throw new IllegalStateException("Cause cannot be reset");
+        if (cause == this) throw new IllegalArgumentException("Exception cannot be its own cause");
+        causeSet = true;
+        this.cause = cause;
+        return this;
     }
 
 }
