@@ -111,7 +111,7 @@ public class StringFunction implements Function
                              context.getNavigator() );
         }
 
-        throw new FunctionCallException( "string() requires one argument." );
+        throw new FunctionCallException( "string() takes at most argument." );
     }
     
     public static String evaluate(Object obj,
