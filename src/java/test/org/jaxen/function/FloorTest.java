@@ -122,6 +122,20 @@ public class FloorTest extends TestCase {
         assertTrue(Double.isNaN(result));
     }    
 
+    public void testInfFloorIsInf() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("floor(1.0 div 0.0)");
+        double result = ((Double) xpath.evaluate(doc)).doubleValue();
+        assertTrue(Double.isInfinite(result));
+        assertTrue(result > 0);
+    }    
+
+    public void testNegativeInfFloorIsNegativeInf() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("floor(-1.0 div 0.0)");
+        double result = ((Double) xpath.evaluate(doc)).doubleValue();
+        assertTrue(Double.isInfinite(result));
+        assertTrue(result < 0);
+    }    
+
     public void testFloorFunctionRequiresAtLeastArgument() 
       throws JaxenException {
         
