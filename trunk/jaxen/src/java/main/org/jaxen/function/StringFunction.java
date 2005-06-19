@@ -83,8 +83,7 @@ import java.util.Locale;
  */
 public class StringFunction implements Function
 {
-    
-    // XXX This is not thread-safe
+
     private static DecimalFormat format = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
     
     static {
@@ -197,7 +196,7 @@ public class StringFunction implements Function
 
     }
 
-    public static String stringValue(double value)
+    private static String stringValue(double value)
     {
         
         // DecimalFormat formats negative zero as "-0".
@@ -213,7 +212,7 @@ public class StringFunction implements Function
         
     }
 
-    public static String stringValue(boolean value)
+    private static String stringValue(boolean value)
     {
         return value ? "true" : "false";
     }
