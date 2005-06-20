@@ -1027,5 +1027,11 @@ public class BaseXPathTest extends TestCase {
    
     }
     
+    public void testSelectNodesReturnsANonNodeSet() throws JaxenException {
+        XPath xpath = new DOMXPath("1 + 2 + 3");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+    }
+    
     
 }

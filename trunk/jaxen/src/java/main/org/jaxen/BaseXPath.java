@@ -70,6 +70,7 @@ import org.jaxen.expr.XPathExpr;
 import org.jaxen.function.BooleanFunction;
 import org.jaxen.function.NumberFunction;
 import org.jaxen.function.StringFunction;
+import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathReader;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 import org.jaxen.util.SingletonList;
@@ -130,7 +131,7 @@ public class BaseXPath implements XPath, Serializable
         {
             throw new org.jaxen.XPathSyntaxException( e );
         }
-        catch (org.jaxen.saxpath.SAXPathException e)
+        catch (SAXPathException e)
         {
             throw new JaxenException( e );
         }
@@ -212,10 +213,10 @@ public class BaseXPath implements XPath, Serializable
      *  expression. If multiple nodes match, multiple nodes
      *  will be returned. Nodes will be returned
      *  in document-order, as defined by the XPath
-     *  specification.  
+     *  specification. If the expression selects a non-node-set
+     *  (i.e. a number, boolean, or string) then a List
+     *  containing just that one object is returned.
      *  </p>
-     * 
-     * ???? what if the expression return a non-node-set?
      *
      * @param node the node, node-set or Context object for evaluation. This value can be null.
      *
@@ -692,7 +693,9 @@ public class BaseXPath implements XPath, Serializable
      *  expression on the given Context object. 
      *  If multiple nodes match, multiple nodes
      *  will be returned in document-order, as defined by the XPath
-     *  specification.
+     *  specification. If the expression selects a non-node-set
+     *  (i.e. a number, boolean, or string) then a List
+     *  containing just that one object is returned.
      *  </p>
      *
      * @param context the Context which gets evaluated
