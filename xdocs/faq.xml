@@ -31,39 +31,40 @@
       <a href="http://jdom.org">JDOM</a>, and attempting to keep them both in sync, it was
       decided that factoring out the commonality would be a Good Thing.  Thus, <code>jaxen</code>
       provides a single point for XPath expression evaluation, regardless of the target
-      object model, whether its <b>dom4j</b>, <b>JDOM</b>, <b>DOM</b>, <b>JavaBeans</b>,
+      object model, whether its <strong>dom4j</strong>, <strong>JDOM</strong>, <strong>DOM</strong>, 
+      <strong>XOM</strong>, <strong>JavaBeans</strong>,
       or whatnot.
       </p>
     </section>
 
     <section name="Why is jaxen better than [some other xpath technology]">
       <p>
-      <code>jaxen</code> is better than <b>werken.xpath</b> specifically because it better
+      <code>jaxen</code> is better than <code>werken.xpath</code> specifically because it better
       handles XPath expressions, and syntax error reporting.  Additionally, since
       jaxen is a unified code-base, developer effort isn't split between maintaining
-      the <b>dom4j</b> version and the <b>JDOM</b> version.  More hands working on
+      the <strong>dom4j</strong> version and the <strong>JDOM</strong> version.  More hands working on
       the same project reduces bug count.
       </p>
 
       <p>
       <code>jaxen</code> may be perceived to be better than other XPath technologies since it
       provides a single cohesive API for evaluating XPaths against multiple object
-      models.  Learn the <code>jaxen</code> API, and apply it to <b>dom4j</b>, <b>JDOM</b>,
-      <b>XOM</b> or <b>DOM</b> trees in exactly the same way.
+      models.  Learn the <code>jaxen</code> API, and apply it to <strong>dom4j</strong>, <strong>JDOM</strong>,
+      <strong>XOM</strong> or <strong>DOM</strong> trees in exactly the same way.
       </p>
 
       <p>
       Also, since <code>jaxen</code> works against an adaptor which provides InfoSet access
       to arbitrary object models, it should be possible to build even larger
       tools in terms of <code>jaxen</code>, to work with multiple models.  For example, an
-      <b>XQL</b> engine could be developed, which would automagically work with
+      <strong>XQL</strong> engine could be developed, which would automagically work with
       all models already supported by <code>jaxen</code>.
       </p>
     </section>
 
     <section name="What are some related technologies?">
       <p>
-      <code>jaxen</code> itself is based upon <a href="http://saxpath.org/">SAXPath</a>, which is
+      <code>jaxen</code> itself is based upon SAXPath, which is
       an event-based model for parsing XPath expressions.
       </p>
 
@@ -107,8 +108,8 @@
 
     <section name="Who uses jaxen?">
       <p>
-      <code>jaxen</code> has been embedded directly into <b>dom4j</b> and 
-      <a href="http://www.xom.nu/">XOM 1.1</a> to provide
+      <code>jaxen</code> has been embedded directly into <strong>dom4j</strong> and 
+      <strong><a href="http://www.xom.nu/">XOM 1.1</a></strong> to provide
       easy XPath evaluation directly from your documents.  Additionally, it's
       being integrated into David Megginson's 
       <a href="http://sourceforge.net/projects/newsml-toolkit/">NewsML Framework</a>.
