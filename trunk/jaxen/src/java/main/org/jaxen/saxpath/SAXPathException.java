@@ -134,14 +134,6 @@ public class SAXPathException extends Exception
         this.cause = cause;
         return this;
     }
-    
-    /** Overridden to print this exception's stack, followed by the
-     *	source exception's, if any.
-     */
-    public void printStackTrace ()
-    {
-        printStackTrace ( System.err );
-    }
 
     /** Print this exception's stack trace, followed by the
      *	source exception's trace, if any.
