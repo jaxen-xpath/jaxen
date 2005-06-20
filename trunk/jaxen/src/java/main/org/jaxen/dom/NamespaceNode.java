@@ -317,8 +317,8 @@ public class NamespaceNode implements Node
      */
     public Document getOwnerDocument ()
     {
-                    // FIXME: this could cause confusion
-        return (parent == null ? null : parent.getOwnerDocument());
+        if (parent == null) return null;
+        return parent.getOwnerDocument();
     }
 
 
