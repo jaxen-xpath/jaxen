@@ -138,8 +138,6 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
         return this;
     }
 
-
-    // XXX These are not compatible with Java 1.3
     public void printStackTrace( PrintStream s ) {
         super.printStackTrace( s );
         if ( getCause() != null ) 
@@ -157,10 +155,6 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
             getCause().printStackTrace( w );
         }
     }
-    
-    public void printStackTrace() {
-        printStackTrace(System.out);
-    } 
     
 }
 
