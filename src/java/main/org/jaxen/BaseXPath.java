@@ -155,18 +155,11 @@ public class BaseXPath implements XPath, Serializable
     }
 
     /** Evaluate this XPath against a given context.
-     *
-     *  <p>
-     *  The context of evaluation may be a <i>document</i>,
-     *  an <i>element</i>, or a set of <i>elements</i>.
-     *  ???? accurate? shouldn't it be any type of node?
-     *  </p>
-     *
-     *  <p>
+     *  The context of evaluation may be any object type
+     *  the navigator recognizes as a node.
      *  The return value is either a <code>String</code>,
      *  <code>Double</code>, <code>Boolean</code>, or <code>List</code>
      *  of nodes.
-     *  </p>
      *
      *  <p>
      *  When using this method, one must be careful to
@@ -180,16 +173,17 @@ public class BaseXPath implements XPath, Serializable
      *  returns references to objects within the source document.
      *  </p>
      *  
-     * @param node the node, node-set or Context object for evaluation. 
+     * @param context the node, node-set or Context object for evaluation. 
      *      This value can be null.
      *
      * @return the result of evaluating the XPath expression
      *          against the supplied context
      * @throws JaxenException if an XPath error occurs during expression evaluation
+     * @throws ClassCastException if the context is not a node
      */
-    public Object evaluate(Object node) throws JaxenException
+    public Object evaluate(Object context) throws JaxenException
     {
-        List answer = selectNodes(node);
+        List answer = selectNodes(context);
 
         if ( answer != null
              &&
@@ -218,7 +212,8 @@ public class BaseXPath implements XPath, Serializable
      *  containing just that one object is returned.
      *  </p>
      *
-     * @param node the node, node-set or Context object for evaluation. This value can be null.
+     * @param node the node, node-set or Context object for evaluation. 
+     *     This value can be null.
      *
      * @return the node-set of all items selected
      *          by this XPath expression

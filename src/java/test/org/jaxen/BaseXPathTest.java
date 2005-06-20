@@ -77,6 +77,7 @@ import org.jaxen.pattern.Pattern;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import junit.framework.TestCase;
@@ -1032,6 +1033,39 @@ public class BaseXPathTest extends TestCase {
         List result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
     }
+    
+    public void testNonElementContextNode() throws JaxenException {
+        
+        org.w3c.dom.Element a = doc.createElementNS("http://www.a.com/", "a:foo");
+        doc.appendChild(a);
+        Text b = doc.createTextNode("ready");
+        a.appendChild(b);
+        
+        XPath xpath = new DOMXPath("..");
+        List result = (List) xpath.evaluate(b);
+        assertEquals(1, result.size());
+        assertEquals(a, result.get(0));
+   
+    }
+    
+    public void testNonNodeContext() throws JaxenException {
+        
+        org.w3c.dom.Element a = doc.createElementNS("http://www.a.com/", "a:foo");
+        doc.appendChild(a);
+        Text b = doc.createTextNode("ready");
+        a.appendChild(b);
+        
+        XPath xpath = new DOMXPath("..");
+        try {
+            xpath.evaluate("String");
+            fail("Allowed String as context");
+        }
+        catch (ClassCastException ex) {
+            assertNotNull(ex.getMessage());
+        }
+   
+    }
+    
     
     
 }
