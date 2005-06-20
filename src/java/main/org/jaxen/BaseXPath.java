@@ -712,13 +712,14 @@ public class BaseXPath implements XPath, Serializable
      *  expression.  If multiple nodes match, only one node will be
      *  returned. The selected node will be the first
      *  selected node in document-order, as defined by the XPath
-     *  specification.  
+     *  specification. If the XPath expression selects a double,
+     *  String, or boolean, then that object is returned.
      *  </p>
      *
      * @param context the Context against which this expression is evaluated
      *
      * @return the first node in document order of all nodes selected
-     *          by this XPath expression; can this return a non-node????
+     *          by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
      *
      *  @see #selectNodesForContext
