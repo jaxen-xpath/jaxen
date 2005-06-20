@@ -9,20 +9,37 @@
   <body>
     
     <section name="Change History">
-    <section name="Changes in CVS since last release">
+   <!--  <section name="Changes in CVS since last release">
       <p>
         Various updates to the web site. 
       </p>
-    </section>
+    </section> -->
+    
+     <section name="Jaxen 1.1 Beta 7">
+    
+      <p>Beta 7 fixes a number of important bugs, especially 
+      involving operator associativity, the <code>string</code> and <code>substring</code>
+      functions, and the dom4j navigator. The various root exception classes
+      (<code>JaxenException</code>, <code>JaxenRuntimeException</code>, and <code>SAXPathException</code>)
+      and all their subclasses now support Java 1.4 exception chaining even in 1.3 and earlier VMs.
+      The DOM navigator should compile and run in both Java 1.4 and 1.5 (i.e. DOM level 2 and 
+      DOM Level 3). Namespace handling in DOM is more accurate.
+      Paths can be begin with parenthesized steps like (//foo)/x.
+      Beta 7 also features a reorganized, more modular
+      test suite and expanded and improved API documentation.
+      </p>
+
+    </section>   
     
      <section name="Jaxen 1.1 Beta 6">
     
-      <p>Beta 6 makes a few small bug fixes and code clean ups. 
+      <p>Beta 6 makes a few small bug fixes and code clean ups, including 
+      removing an unintended dependence on Java 1.4. 
       Most importantly it removes a file
       (<code>IdentityHashMap</code>) that we do not have the right to redistribute.
       All prior betas of Jaxen 1.1 should be considered tainted,
       and not redistributed in any way. If your project uses 
-      an ealrier version, please remove it 
+      an earlier version, please remove it 
       and replace it with beta 6. Jaxen 1.0 is <strong>not</strong>
       affected by any of this. 
       </p>
@@ -42,7 +59,7 @@
       
     <section name="Jaxen 1.1 Beta 4">
     
-      <p>1.1 is a major upgrade that significantly improves jaxen's conformance to the
+      <p>1.1 is a major upgrade that significantly improves Jaxen's conformance to the
          underlying XPath specs. Even though it's officially a beta, it is a vast 
          improvement over 1.0, and all users are strongly encouraged to upgrade.
          Witha  few small exceptions (e.g. the the document() function 
@@ -140,8 +157,6 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
           since it would allow web developers to mix and match any
           all XML models.
         </li>
-<!--        <li>The <code>format-number()</code> XSLT function is not yet implemented but would be useful. Any volunteers?
-        </li> -->
         <li>Jaxen is already pretty 
         <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>,
         but we are sure it could use some more tuning.
