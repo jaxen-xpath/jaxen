@@ -160,17 +160,7 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
     
     public void printStackTrace() {
         printStackTrace(System.out);
-    }
-    
-    // XXX Is this compatible with Java 1.3?
-    public Throwable fillInStackTrace() {
-        if ( getCause() == null ) {
-            return super.fillInStackTrace(); 
-        } 
-        else {
-            return getCause().fillInStackTrace();
-        }
-    }    
+    } 
     
 }
 
