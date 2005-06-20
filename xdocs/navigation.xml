@@ -10,11 +10,12 @@
         </links>
         <menu name="jaxen">
             <item name="Overview" href="/index.html"/>
+            <item name="Download Jaxen" href="/releases.html"/>
+            <item name="API Documentation" href="/apidocs/index.html"/>
             <item name="FAQ" href="/faq.html"/>
             <item name="Releases" href="/releases.html"/>
             <item name="CVS Access" href="/cvs-usage.html"/>
             <item name="Status" href="/status.html"/>
-            <!--      <item name="Introduction Slides" href="/pdf/intro-slides.pdf"/> -->
         </menu>
     </body>
 
