@@ -52,8 +52,11 @@ is backwards compatible with code written to the 1.0 APIs.
       <p>
       Nightly builds have been temporarily suspended as we ramp up
       with using <a href="http://maven.apache.org/">Maven</a>.
-      However, you can grab a <a href="http://cvs.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. To build Jaxen, you'll need to have maven installed. Assuming you do you should be able to just type "maven jar" at the command line in the jaxen directory to create
-a JAR archive.
+      However, you can grab a <a href="http://cvs.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
+      To build Jaxen, you'll need to have maven installed. Assuming you do you should be able to just type "maven jar" at the command line 
+      in the jaxen directory to create a JAR archive. If any of the tests are currently failing--a couple of 
+      tests are currently picking up JDOM bugs--you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
+      (or fix the bugs that causee the tests to fail).
       </p>
     </section>
 
