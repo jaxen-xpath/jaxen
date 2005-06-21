@@ -146,7 +146,7 @@ public class BooleanFunction implements Function
      * <li>Lists are false if they're empty; true if they're not.</li>
      * <li>Booleans are false if they're false; true if they're true.</li>
      * <li>Strings are false if they're empty; true if they're not.</li>
-     * <li>Numbers are false if they're 0; true if they're not.</li>
+     * <li>Numbers are false if they're 0 or NaN; true if they're not.</li>
      * <li>All other objects are true.</li>
      * </ul>
      * 
