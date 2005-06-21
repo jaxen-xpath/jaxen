@@ -52,7 +52,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-public class Performance {
+class Performance {
     
     public static void main(String[] args) {
         try {
