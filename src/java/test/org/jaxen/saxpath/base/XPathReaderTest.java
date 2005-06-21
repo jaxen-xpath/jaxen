@@ -74,10 +74,8 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.saxpath.Axis;
-import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathSyntaxException;
-import org.jaxen.saxpath.conformance.ConformanceXPathHandler;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
