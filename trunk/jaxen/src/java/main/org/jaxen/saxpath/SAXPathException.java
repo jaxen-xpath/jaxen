@@ -70,7 +70,21 @@ import java.io.PrintWriter;
  */
 public class SAXPathException extends Exception
 {
-
+    
+    static double javaVersion = 1.4;
+    
+    static {
+        try {
+            String versionString = System.getProperty("java.version");
+            versionString = versionString.substring(0, 3);
+            javaVersion = Double.valueOf(versionString).doubleValue();
+        }
+        catch (Exception ex) {
+            // The version string format changed so presumably it's
+            // 1.4 or later.
+        }
+    }
+    
     /** Create a new SAXPathException with a given message.
      *
      *  @param message the error message
@@ -143,9 +157,9 @@ public class SAXPathException extends Exception
     public void printStackTrace ( PrintStream s )
     {
     	super.printStackTrace ( s );
-    	if (getCause() != null) {
-    	    s.println ( "root cause:" );
-    	    getCause().printStackTrace ( s );
+    	if (javaVersion < 1.4 && getCause() != null) {
+    	    s.print( "Caused by: " );
+    	    getCause().printStackTrace( s );
     	}
     }
 
@@ -156,10 +170,10 @@ public class SAXPathException extends Exception
      */
     public void printStackTrace ( PrintWriter s )
     {
-    	super.printStackTrace ( s );
-    	if (getCause() != null) {
-    	    s.println ( "root cause:" );
-    	    getCause().printStackTrace ( s );
+    	super.printStackTrace( s );
+    	if (javaVersion < 1.4 && getCause() != null) {
+    	    s.print( "Caused by: " );
+    	    getCause().printStackTrace( s );
     	}
     }
 
