@@ -62,7 +62,7 @@
 
 
 
-package org.jaxen.saxpath.conformance;
+package org.jaxen.saxpath.base;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -70,11 +70,11 @@ import java.util.List;
 
 import org.jaxen.saxpath.XPathHandler;
 
-public class ConformanceXPathHandler implements XPathHandler
+class ConformanceXPathHandler implements XPathHandler
 {
     private List events;
 
-    public ConformanceXPathHandler()
+    ConformanceXPathHandler()
     {
         this.events = new LinkedList();
     }
