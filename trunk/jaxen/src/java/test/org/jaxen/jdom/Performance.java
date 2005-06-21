@@ -45,7 +45,7 @@
  */
 package org.jaxen.jdom;
 
-import java.io.File;
+import java.net.URL;
 
 import org.jaxen.jdom.JDOMXPath;
 import org.jdom.Document;
@@ -56,7 +56,8 @@ class Performance {
     
     public static void main(String[] args) {
         try {
-            Document doc = new SAXBuilder().build(new File("D:/dev/jaxen/xml/much_ado.xml"));
+            URL u = new URL("http://www.ibiblio.org/xml/examples/shakespeare/much_ado.xml");
+            Document doc = new SAXBuilder().build(u);
             JDOMXPath xpath = new JDOMXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
             
             long start = System.currentTimeMillis();
