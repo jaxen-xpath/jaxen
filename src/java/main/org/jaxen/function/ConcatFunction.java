@@ -71,13 +71,32 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- *  <p><b>4.2</b> <code><i>string</i> concat(<i>string</i>,<i>string</i>,<i>string*</i>)</code> 
+ * <b>4.2</b> <code><i>string</i> concat(<i>string</i>,<i>string</i>,<i>string*</i>)</code> 
+ * <p>
+ * Concatenates its arguments and returns the resulting string.
+ * </p>
  *  
  *  @author bob mcwhirter (bob@werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-concat">Section 4.2 of the XPath Specification</a>
  */
 public class ConcatFunction implements Function
 {
 
+    /** 
+     * Concatenates the arguments and returns the resulting string.
+     * Non-string items are first converted to strings as if by the 
+     * XPath <code>string()<code> function.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args the list of strings to be concatenated
+     * 
+     * @return a <code>String</code> containing the concatenation of the items 
+     *     of <code>args</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> has less than two items
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -90,16 +109,24 @@ public class ConcatFunction implements Function
         throw new FunctionCallException("concat() requires at least two arguments");
     }
 
-    public static String evaluate(List list,
+    /** 
+     * Converts each item in the list to a string and returns the 
+     * concatenation of these strings.
+     * If necessary, each item is first converted to a <code>String</code>
+     * as if by the XPath <code>string()</code> function.
+     * 
+     * @param list the items to be concatenated
+     * @param nav ignored
+     * 
+     * @return the concatenation of the arguments
+     */
+   public static String evaluate(List list,
                                   Navigator nav)
     {
         StringBuffer result = new StringBuffer();
-
         Iterator argIter = list.iterator();
-
         while ( argIter.hasNext() )
         {
-
             result.append( StringFunction.evaluate( argIter.next(),
                                                     nav ) );
         }
