@@ -70,9 +70,47 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- *  <p><b>4.3</b> <code><i>boolean</i> boolean(<i>object</i>)</code> 
- *  
- *  @author bob mcwhirter (bob @ werken.com)
+ * <p>
+ * <b>4.3</b> <code><i>boolean</i> boolean(<i>object</i>)</code>
+ * </p>
+ * 
+ * <blockquote
+ * src="http://www.w3.org/TR/xpath#section-Boolean-Functions">
+ * <p>
+ * The <b><a href="http://www.w3.org/TR/xpath#function-boolean" target="_top">boolean</a></b>
+ * function converts its argument to a boolean as follows:
+ * </p>
+ * 
+ * <ul>
+ * 
+ * <li>
+ * <p>
+ * a number is true if and only if it is neither positive or negative
+ * zero nor NaN
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * a node-set is true if and only if it is non-empty
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * a string is true if and only if its length is non-zero
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * 
+ * <p>
+ * an object of a type other than the four basic types is converted to a
+ * boolean in a way that is dependent on that type
+ * </p></li></ul>
+ * </blockquote>
+ * 
+ * @author bob mcwhirter (bob @ werken.com)
  */
 public class BooleanFunction implements Function
 {
@@ -84,11 +122,10 @@ public class BooleanFunction implements Function
      * @param args a list with exactly one item which will be converted to a 
      *     <code>Boolean</code>
      * 
-     * @return the result of evaluating the function; a <code>List</code>
-     *    (node-set), <code>Double</code>, <code>Boolean</code>, or
-     *    <code>String</code>
+     * @return the result of evaluating the function; 
+     *     <code>Boolean.TRUE</code> or <code>Boolean.FALSE</code>
      * 
-     * @throws FunctionCallException if there is more or less than one item in args
+     * @throws FunctionCallException if <code>args</code> has more or less than one item
      */
     public Object call(Context context,
                        List args) throws FunctionCallException
