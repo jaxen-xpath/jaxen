@@ -67,11 +67,8 @@ import org.jaxen.saxpath.XPathHandler;
 import org.jaxen.saxpath.XPathReader;
 
 
-public class MockXPathReader implements XPathReader
+class MockXPathReader implements XPathReader
 {
-    public MockXPathReader()
-    {
-    }
 
     public void parse(String xpath)
     {

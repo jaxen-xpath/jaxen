@@ -52,7 +52,7 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Builder;
 
-public class Performance {
+class Performance {
     
     public static void main(String[] args) {
         try {
