@@ -47,7 +47,6 @@ package org.jaxen.xom;
 
 import java.io.File;
 
-import org.jaxen.jdom.JDOMXPath;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Builder;
@@ -57,7 +56,7 @@ class Performance {
     public static void main(String[] args) {
         try {
             Document doc = new Builder().build(new File("D:/dev/jaxen/xml/much_ado.xml"));
-            JDOMXPath xpath = new JDOMXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
+            XOMXPath xpath = new XOMXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
             
             long start = System.currentTimeMillis();
             
