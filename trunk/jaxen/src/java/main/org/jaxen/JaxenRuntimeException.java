@@ -1,5 +1,8 @@
 package org.jaxen;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
+
 /*
  * $Header: $
  * $Revision: $
@@ -120,4 +123,32 @@ public class JaxenRuntimeException extends RuntimeException
         return this;
     }
 
+    /** Print this exception's stack trace, followed by the
+     *  source exception's trace, if any.
+     *
+     * @param s the stream on which to print the stack trace
+     */
+    public void printStackTrace ( PrintStream s )
+    {
+        super.printStackTrace ( s );
+        if (JaxenException.javaVersion < 1.4 && getCause() != null) {
+            s.print( "Caused by: " );
+            getCause().printStackTrace( s );
+        }
+    }
+
+    /** Print this exception's stack trace, followed by the
+     *  source exception's stack trace, if any.
+     *
+     * @param s the writer on which to print the stack trace
+     */
+    public void printStackTrace ( PrintWriter s )
+    {
+        super.printStackTrace( s );
+        if (JaxenException.javaVersion < 1.4 && getCause() != null) {
+            s.print( "Caused by: " );
+            getCause().printStackTrace( s );
+        }
+    }
+    
 }
