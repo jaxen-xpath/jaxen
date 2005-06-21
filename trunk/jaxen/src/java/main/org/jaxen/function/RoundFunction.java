@@ -72,12 +72,36 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.4</b> <code><i>number</i> round(<i>number</i>)</code> 
  * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The round function returns the number that is closest to the argument and that is an integer. 
+ * If there are two such numbers, then the one that is closest to positive infinity is returned. 
+ * If the argument is NaN, then NaN is returned. If the argument is positive infinity, then positive infinity is returned. 
+ * If the argument is negative infinity, then negative infinity is returned. 
+ * If the argument is positive zero, then positive zero is returned. 
+ * If the argument is negative zero, then negative zero is returned. 
+ * If the argument is less than zero, but greater than or equal to -0.5, then negative zero is returned.
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-round" target="_top">Section 4.4 of the XPath Specification</a>
  */
 public class RoundFunction implements Function
 {
 
-    public Object call(Context context,
+    /** Returns the nearest integer to the number.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list with exactly one item which will be converted to a 
+     *     <code>Double</code> as if by the XPath <code>number()</code> function
+     * 
+     * @return a <code>Double</code> containing the integer nearest to
+     *     <code>args.get(0)</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> has more or less than one item
+     */    public Object call(Context context,
                        List args) throws FunctionCallException
     {
         if (args.size() == 1)
@@ -89,6 +113,16 @@ public class RoundFunction implements Function
         throw new FunctionCallException( "round() requires one argument." );
     }
 
+    /** 
+     * Returns the integer nearest to the argument.
+     * If necessary, the argument is first converted to a <code>Double</code>
+     * as if by the XPath <code>number()</code> function.
+     * 
+     * @param obj the object to be rounded
+     * @param nav ignored
+     * 
+     * @return a <code>Double</code> containing the integer nearest to <code>obj</code>
+     */
     public static Number evaluate(Object obj,
                                   Navigator nav)
     {
