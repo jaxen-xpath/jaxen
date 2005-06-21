@@ -69,13 +69,27 @@ import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 
 /**
- * <p><b>4.3</b> <code><i>boolean</i> true()</code> 
+ * <p><b>4.3</b> <code><i>boolean</i> true()</code></p>
+ * 
+ * <p>Returns true.</p>
  * 
  * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-true">XPath Specification</a>
  */
 public class TrueFunction implements Function
 {
 
+    /** Returns <code>Boolean.TRUE</code>
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args an empty list
+     * 
+     * @return <code>Boolean.TRUE</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> is not empty
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -90,7 +104,7 @@ public class TrueFunction implements Function
     /**
      * Returns true.
      * 
-     * @return Boolean.TRUE
+     * @return <code>Boolean.TRUE</code>
      */
     public static Boolean evaluate()
     {
