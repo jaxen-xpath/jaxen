@@ -72,11 +72,38 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.4</b> <code><i>number</i> floor(<i>number</i>)</code> 
  * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The floor function returns the largest (closest to positive infinity) 
+ * number that is not greater than the argument and that is an integer....
+ * If the argument is NaN, then NaN is returned. 
+ * If the argument is positive infinity, then positive infinity is returned. 
+ * If the argument is negative infinity, then negative infinity is returned. 
+ * If the argument is positive zero, then positive zero is returned. 
+ * If the argument is negative zero, then negative zero is returned. 
+ * If the argument is greater than zero, but less than 1, then positive zero is returned.
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-floor" target="_top">Section 4.4 of the XPath Specification</a>
+ * @see <a href="http://www.w3.org/1999/11/REC-xpath-19991116-errata/"  target="_top">XPath Errata</a>
  */
 public class FloorFunction implements Function
 {
 
+    /** Returns the largest integer less than or equal to a number.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list with exactly one item which will be converted to a 
+     *     <code>Double</code> as if by the XPath <code>number()</code> function
+     * 
+     * @return a <code>Double</code> containing the largest integer less than or equal
+     *     to <code>args.get(0)</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> has more or less than one item
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -89,6 +116,16 @@ public class FloorFunction implements Function
         throw new FunctionCallException( "floor() requires one argument." );
     }
 
+    /** Returns the largest integer less than or equal to the argument.
+     * If necessary, the argument is first converted to a <code>Double</code>
+     * as if by the XPath <code>number()</code> function.
+     * 
+     * @param obj the object whose floor is returned
+     * @param nav ignored
+     * 
+     * @return a <code>Double</code> containing the largest integer less 
+     *     than or equal to <code>obj</code>
+     */
     public static Double evaluate(Object obj,
                                   Navigator nav)
     {
