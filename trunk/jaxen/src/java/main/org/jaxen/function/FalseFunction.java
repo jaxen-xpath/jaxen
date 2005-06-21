@@ -71,11 +71,25 @@ import org.jaxen.FunctionCallException;
 /**
  * <p><b>4.3</b> <code><i>boolean</i> false()</code> 
  * 
+ * <p>Returns false.</p>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-false">XPath Specification</a>
  */
 public class FalseFunction implements Function
 {
 
+    /** Returns <code>Boolean.FALSE</code>
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args an empty list
+     * 
+     * @return <code>Boolean.FALSE</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> is not empty
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
