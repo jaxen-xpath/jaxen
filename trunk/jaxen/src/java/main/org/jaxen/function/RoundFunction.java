@@ -121,9 +121,9 @@ public class RoundFunction implements Function
      * @param obj the object to be rounded
      * @param nav ignored
      * 
-     * @return a <code>Double</code> containing the integer nearest to <code>obj</code>
+     * @return the integer nearest to <code>obj</code>
      */
-    public static Number evaluate(Object obj,
+    public static Double evaluate(Object obj,
                                   Navigator nav)
     {
         Double d  = NumberFunction.evaluate( obj,
