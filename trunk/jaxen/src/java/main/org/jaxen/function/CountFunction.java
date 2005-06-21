@@ -70,7 +70,11 @@ import org.jaxen.FunctionCallException;
 /**
  *  <p><b>4.1</b> <code><i>number</i> count(<i>node-set</i>)</code> 
  *  
- *  @author bob mcwhirter (bob @ werken.com)
+ * <blockquote src="http://www.w3.org/TR/xpath#function-count">
+ * The <b>count</b> function returns the number of nodes in the argument node-set.
+ * </blockquote>
+ * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-count">Section 4-1 of the XPath Specification</a>
  */
 public class CountFunction implements Function
 {
@@ -82,7 +86,7 @@ public class CountFunction implements Function
      * @param context ignored
      * @param args the function arguments
      * 
-     * @return the integral number of items in the first argument
+     * @return a <code>Double</code> giving the integral number of items in the first argument
      * 
      * @throws FunctionCallException if args does not have exactly one 
      *     item; or that item is not a <code>List</code>
@@ -112,10 +116,10 @@ public class CountFunction implements Function
       
         if (obj instanceof List)
         {
-            return new Double( ((List)obj).size() );
+            return new Double( ((List) obj).size() );
         }
       
-        throw new FunctionCallException("Count function can only be used for node-sets");
+        throw new FunctionCallException("count() function can only be used for node-sets");
         
     }
     
