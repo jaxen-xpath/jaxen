@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,7 +60,7 @@
  */
 
 
-package org.jaxen;
+package org.jaxen.saxpath;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -68,17 +68,17 @@ import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect the org.jaxen. tests.
+ *   Collect the org.jaxen.saxpath.base tests.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b7
  *
  */
-public class CoreTests extends TestCase {
+public class SAXPathTests extends TestCase {
 
     
-    public CoreTests(String name) {
+    public SAXPathTests(String name) {
         super(name);   
     }
 
@@ -86,20 +86,7 @@ public class CoreTests extends TestCase {
     public static Test suite() {
         
         TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
-        result.addTest(new TestSuite(UnresolvableExceptionTest.class));
-        result.addTest(new TestSuite(VariableContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(XPathSyntaxExceptionTest.class));
-        result.addTest(new TestSuite(UnsupportedAxisExceptionTest.class));
-        result.addTest(new TestSuite(JaxenExceptionTest.class));
+        result.addTest(new TestSuite(SAXPathExceptionTest.class));
         return result;
         
     }

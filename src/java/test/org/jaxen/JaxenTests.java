@@ -69,6 +69,7 @@ import org.jaxen.function.FunctionTests;
 import org.jaxen.javabean.JavaBeanTests;
 import org.jaxen.jdom.JDOMTests;
 import org.jaxen.pattern.PatternTests;
+import org.jaxen.saxpath.SAXPathTests;
 import org.jaxen.saxpath.base.BaseTests;
 import org.jaxen.saxpath.helpers.HelpersTests;
 import org.jaxen.util.UtilTests;
@@ -98,6 +99,7 @@ public class JaxenTests extends TestCase {
     public static Test suite() {
         
         TestSuite result = new TestSuite();
+        result.addTest(SAXPathTests.suite());
         result.addTest(FunctionTests.suite());
         result.addTest(CoreTests.suite());
         result.addTest(DOMTests.suite());

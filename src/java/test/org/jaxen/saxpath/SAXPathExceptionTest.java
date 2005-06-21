@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,50 +59,41 @@
  * $Id$
  */
 
+package org.jaxen.saxpath;
 
-package org.jaxen;
 
-import junit.framework.Test;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.jaxen.saxpath.SAXPathException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
 
 /**
- * <p>
- *   Collect the org.jaxen. tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
  *
  */
-public class CoreTests extends TestCase {
+public class SAXPathExceptionTest extends TestCase {
 
-    
-    public CoreTests(String name) {
-        super(name);   
+    public SAXPathExceptionTest(String name) {
+        super(name);
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
-        result.addTest(new TestSuite(UnresolvableExceptionTest.class));
-        result.addTest(new TestSuite(VariableContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(XPathSyntaxExceptionTest.class));
-        result.addTest(new TestSuite(UnsupportedAxisExceptionTest.class));
-        result.addTest(new TestSuite(JaxenExceptionTest.class));
-        return result;
-        
+    public void testMessageIsNonNull() {
+        SAXPathException ex = new SAXPathException("Hello");
+        assertEquals("Hello", ex.getMessage());
+    }    
+  
+    public void testPrintStackTrace() {
+        StringIndexOutOfBoundsException cause = new StringIndexOutOfBoundsException("1234");
+        SAXPathException ex = new SAXPathException(cause);
+        StringWriter out = new StringWriter();
+        PrintWriter pw = new PrintWriter(out);
+        ex.printStackTrace(pw);
+        pw.close();
+        assertTrue(out.toString().indexOf("Caused by: java.lang.StringIndexOutOfBoundsException") > 0);
+        assertTrue(out.toString().indexOf("1234") > 0);
     }
-
     
 }
