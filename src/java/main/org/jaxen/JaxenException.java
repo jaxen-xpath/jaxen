@@ -75,10 +75,25 @@ import java.io.PrintWriter;
  */
 public class JaxenException extends org.jaxen.saxpath.SAXPathException
 {
+    
+    static double javaVersion = 1.4;
+    
+    static {
+        try {
+            String versionString = System.getProperty("java.version");
+            versionString = versionString.substring(0, 3);
+            javaVersion = Double.valueOf(versionString).doubleValue();
+        }
+        catch (Exception ex) {
+            // The version string format changed so presumably it's
+            // 1.4 or later.
+        }
+    }
+    
     /**
-     * Construct with a message.
+     * Create an exception with a detail message.
      *
-     * @param message The error message.
+     * @param message the error message
      */
     public JaxenException( String message )
     {
@@ -86,9 +101,9 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
     }
 
     /**
-     * Construct with a root cause.
+     * Create an exception caused by another exception.
      *
-     * @param rootCause Root cause of the error.
+     * @param rootCause the root cause of this exception
      */
     public JaxenException( Throwable rootCause )
     {
@@ -140,18 +155,19 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
 
     public void printStackTrace( PrintStream s ) {
         super.printStackTrace( s );
-        if ( getCause() != null ) 
+        if ( javaVersion < 1.4 && getCause() != null ) 
         {
-            s.println( "Root cause:" );
+            s.print( "Caused by: " );
             getCause().printStackTrace( s );
         }
     }
     
     public void printStackTrace( PrintWriter w ) {
         super.printStackTrace( w );
-        if ( getCause() != null ) 
+        // Avoid double printing the cause in 1.4 and later
+        if ( javaVersion < 1.4 && getCause() != null ) 
         {
-            w.println( "Root cause:" );
+            w.print( "Caused by: " );
             getCause().printStackTrace( w );
         }
     }
