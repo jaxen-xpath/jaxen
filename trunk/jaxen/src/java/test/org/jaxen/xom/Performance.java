@@ -45,8 +45,6 @@
  */
 package org.jaxen.xom;
 
-import java.io.File;
-
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Builder;
@@ -54,8 +52,9 @@ import nu.xom.Builder;
 class Performance {
     
     public static void main(String[] args) {
+        
         try {
-            Document doc = new Builder().build(new File("D:/dev/jaxen/xml/much_ado.xml"));
+            Document doc = new Builder().build("http://www.ibiblio.org/xml/examples/shakespeare/much_ado.xml");
             XOMXPath xpath = new XOMXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
             
             long start = System.currentTimeMillis();
