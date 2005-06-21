@@ -45,7 +45,7 @@
  */
 package org.jaxen.dom4j;
 
-import java.io.File;
+import java.net.URL;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -55,7 +55,8 @@ class Performance {
     
     public static void main(String[] args) {
         try {
-            Document doc = new SAXReader().read(new File("D:/dev/jaxen/xml/much_ado.xml"));
+            URL u = new URL("http://www.ibiblio.org/xml/examples/shakespeare/much_ado.xml");
+            Document doc = new SAXReader().read(u);
             Dom4jXPath xpath = new Dom4jXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
             
             long start = System.currentTimeMillis();
