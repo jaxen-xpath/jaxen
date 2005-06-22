@@ -247,4 +247,14 @@ public class SubstringTest extends TestCase {
     }
     
     
+    public void testStringLengthIndexesAndCountsUnicodeCharactersNotJavaChars() 
+      throws JaxenException {
+   
+        BaseXPath xpath = new DOMXPath("substring('A\uD834\uDD00123', 3, 2)");
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("12", result);
+        
+    }
+    
+    
 }
