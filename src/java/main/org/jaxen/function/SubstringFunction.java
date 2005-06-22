@@ -68,8 +68,13 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.2</b> <code><i>string</i> substring(<i>string</i>,<i>number</i>,<i>number?</i>)</code>
  *
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ *
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see "http://www.w3.org/TR/xpath#function-substring"
+ * @see <a href="http://www.w3.org/TR/xpath#function-substring" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringFunction implements Function
 {
@@ -85,13 +90,13 @@ public class SubstringFunction implements Function
 
         final String str = StringFunction.evaluate(args.get(0), nav );
         // The spec doesn't really address this case
-        if (str == null){
+        if (str == null) {
             return "";
         }
 
-        final int strlen = str.length();
+        final int stringLength = (StringLengthFunction.evaluate(args.get(0), nav )).intValue();
 
-        if (strlen == 0){
+        if (stringLength == 0) {
             return "";
         }
 
@@ -103,33 +108,57 @@ public class SubstringFunction implements Function
         // Round the value and subtract 1 as Java strings are zero based
         int start = RoundFunction.evaluate(d1, nav).intValue() - 1;
 
-        int length = strlen;
+        int substringLength = stringLength;
         if (argc == 3){
             Double d2 = NumberFunction.evaluate(args.get(2), nav);
 
             if (!d2.isNaN()){
-                length = RoundFunction.evaluate(d2, nav ).intValue();
+                substringLength = RoundFunction.evaluate(d2, nav ).intValue();
             }
             else {
-                length = 0;
+                substringLength = 0;
             }
         }
 
-        if (length < 0) return "";
+        if (substringLength < 0) return "";
         
-        int end = start + length;
+        int end = start + substringLength;
 
         // negative start is treated as 0
         if ( start < 0){
             start = 0;
         }
-        else if (start > strlen){
+        else if (start > stringLength){
             return "";
         }
 
-        if (end > strlen){
-            end = strlen;
+        if (end > stringLength){
+            end = stringLength;
         }
-        return str.substring(start, end);
+        
+        if (stringLength == str.length()) {
+            // easy case; no surrogate pairs
+            return str.substring(start, end);
+        }
+        else {
+            return unicodeSubstring(str, start, end);
+        }
+        
+    }
+
+    private static String unicodeSubstring(String s, int start, int end) {
+
+        StringBuffer result = new StringBuffer(s.length());
+        for (int jChar = 0, uChar=0; uChar < end; jChar++, uChar++) {
+            char c = s.charAt(jChar);
+            if (uChar >= start) result.append(c);
+            if (c >= 0xD800) { // get the low surrogate
+                // ???? we could check here that this is indeed a low surroagte
+                // we could also catch StringIndexOutOfBoundsException
+                jChar++;
+                if (uChar >= start) result.append(s.charAt(jChar));
+            }
+        }
+        return result.toString();
     }
 }
