@@ -67,6 +67,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
+import nu.xom.Attribute;
+import nu.xom.Element;
+
 import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
@@ -123,6 +126,29 @@ public class StringLengthTest extends TestCase {
         BaseXPath xpath = new DOMXPath("string-length()");
         Double result = (Double) xpath.evaluate( doc );
         assertEquals(0, result.intValue());
+        
+    }    
+
+    public void testStringLengthFunctionCountsUnicodeCharactersNotJavaChars() 
+      throws JaxenException {
+   
+        BaseXPath xpath = new DOMXPath("string-length('\uD834\uDD00')");
+        Double result = (Double) xpath.evaluate( doc );
+        assertEquals(1, result.intValue());
+        
+    }    
+
+    public void testStringLengthFunctionWithMalformedString() 
+      throws JaxenException {
+   
+        BaseXPath xpath = new DOMXPath("string-length('\uD834A\uDD00')");
+        try {
+            xpath.evaluate( doc );
+            fail("Allowed Malformed string");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
         
     }    
 
