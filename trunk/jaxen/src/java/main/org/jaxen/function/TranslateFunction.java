@@ -72,18 +72,63 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.2</b> <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code> 
+ * <p>
+ * <b>4.2</b>
+ * <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code>
  * 
- * The translation is done thru a HashMap.
- * Performance tip (for anyone who needs to improve the performance of this particular function):
- *   Cache the HashMaps, once they are constructed.
+ * <blockquote src="http://www.w3.org/TR/xpath#function-translate">
+ * <p>
+ * The <b><a href="http://www.w3.org/TR/xpath#function-translate">translate</a></b> function
+ * returns the first argument string with occurrences of characters in
+ * the second argument string replaced by the character at the
+ * corresponding position in the third argument string. For example,
+ * <code>translate("bar","abc","ABC")</code> returns the string
+ * <code>BAr</code>. If there is a character in the second argument
+ * string with no character at a corresponding position in the third
+ * argument string (because the second argument string is longer than
+ * the third argument string), then occurrences of that character in the
+ * first argument string are removed. For example,
+ * <code>translate("--aaa--","abc-","ABC")</code> returns
+ * <code>"AAA"</code>. If a character occurs more than once in the
+ * second argument string, then the first occurrence determines the
+ * replacement character. If the third argument string is longer than
+ * the second argument string, then excess characters are ignored.
+ * </p>
+ * 
+ * <blockquote> <b>NOTE: </b>The <b>translate</b> function is not a
+ * sufficient solution for case conversion in all languages. A future
+ * version of XPath may provide additional functions for case
+ * conversion.</blockquote>
+ * 
+ * </blockquote>
  * 
  * @author Jan Dvorak ( jan.dvorak @ mathan.cz )
  * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-translate"
+ *      target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class TranslateFunction implements Function
 {
 
+     /* The translation is done thru a HashMap. Performance tip (for anyone
+      * who needs to improve the performance of this particular function):
+      * Cache the HashMaps, once they are constructed. */
+    
+    
+    /** Returns a copy of the first argument in which
+     * characters found in the second argument are replaced by
+     * correpsonding characters from the third argument.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list that contains exactly three items
+     * 
+     * @return a <code>String</code> built from <code>args.get(0)</code> 
+     *     in which occurrences of characters in<code>args.get(1)</code> 
+     *     are replaced by the correpsonding characters in <code>args.get(2)</code> 
+     * 
+     * @throws FunctionCallException if <code>args</code> does not have exactly three items
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -98,7 +143,22 @@ public class TranslateFunction implements Function
         throw new FunctionCallException( "translate() requires three arguments." );
     }
 
-    public static String evaluate(Object strArg,
+    /** Returns a copy of <code>strArg</code> in which
+     * characters found in <code>fromArg</code> are replaced by
+     * corresponding characters from <code>toArg</code>.
+     * If necessary each argument is first converted to it string-value
+     * as if by the XPath string() function.
+     * 
+     * @param strArg the base string
+     * @param fromArg the characters to be replaced
+     * @param toArg the characters they will be replaced by
+     * @param nav the <code>Navigator</code> used to calculate the string-values of the arguments.
+     * 
+     * @return a copy of <code>strArg</code> in which
+     *  characters found in <code>fromArg</code> are replaced by
+     *  corresponding characters from <code>toArg</code>
+     * 
+     */    public static String evaluate(Object strArg,
                                   Object fromArg,
                                   Object toArg,
                                   Navigator nav)
@@ -107,42 +167,45 @@ public class TranslateFunction implements Function
         String fromStr = StringFunction.evaluate( fromArg, nav );
         String toStr = StringFunction.evaluate( toArg, nav );
     
-    // Initialize the mapping in a HashMap
-    Map charMap = new HashMap();
-    int fromLen = fromStr.length();
-    int toLen = toStr.length();
-    for ( int i = 0; i < fromLen; ++i ) {
-        String cFrom = fromStr.substring( i, i+1 ).intern();
-        if ( charMap.containsKey( cFrom ) ) {
-        // We've seen the character before, ignore
-        continue;
+        // Initialize the mapping in a HashMap
+        Map charMap = new HashMap();
+        int fromLen = fromStr.length();
+        int toLen = toStr.length();
+        for ( int i = 0; i < fromLen; ++i ) {
+            String cFrom = fromStr.substring( i, i+1 ).intern();
+            if ( charMap.containsKey( cFrom ) ) {
+                // We've seen the character before, ignore
+                continue;
+            }
+            if ( i < toLen ) {
+                Character cTo = new Character( toStr.charAt( i ) );
+                // Will change
+                charMap.put( cFrom, cTo );
+            } 
+            else {
+                // Will delete
+                charMap.put( cFrom, null );
+            }
         }
-        if ( i < toLen ) {
-        Character cTo = new Character( toStr.charAt( i ) );
-        // Will change
-        charMap.put( cFrom, cTo );
-        } else {
-        // Will delete
-        charMap.put( cFrom, null );
-        }
-    }
 
-    // Process the input string thru the map
-    StringBuffer outStr = new StringBuffer( inStr.length() );
-    int inLen = inStr.length();
-    for ( int i = 0; i < inLen; ++i ) {
-        String cIn = inStr.substring( i, i+1 );
-        if ( charMap.containsKey( cIn ) ) {
-        Character cTo = (Character) charMap.get( cIn );
-        if ( cTo != null ) {
-            outStr.append( cTo.charValue() );
+        // Process the input string thru the map
+        StringBuffer outStr = new StringBuffer( inStr.length() );
+        int inLen = inStr.length();
+        for ( int i = 0; i < inLen; ++i ) {
+            String cIn = inStr.substring( i, i+1 );
+            if ( charMap.containsKey( cIn ) ) {
+                Character cTo = (Character) charMap.get( cIn );
+                if ( cTo != null ) {
+                    outStr.append( cTo.charValue() );
+                }
+            } 
+            else {
+                outStr.append( cIn );
+            }
         }
-        } else {
-        outStr.append( cIn );
-        }
+    
+        return new String( outStr );
     }
-
-    return new String( outStr );
-    }
+     
 }
 
