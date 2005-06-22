@@ -49,12 +49,15 @@ import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Builder;
 
+import java.io.File;
+
 class Performance {
     
     public static void main(String[] args) {
         
         try {
-            Document doc = new Builder().build("http://www.ibiblio.org/xml/examples/shakespeare/much_ado.xml");
+            File u = new File("xml/examples/shakespeare/much_ado.xml");
+            Document doc = new Builder().build(u);
             XOMXPath xpath = new XOMXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
             
             long start = System.currentTimeMillis();
