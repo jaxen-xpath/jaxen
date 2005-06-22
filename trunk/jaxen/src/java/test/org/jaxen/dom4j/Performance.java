@@ -45,17 +45,17 @@
  */
 package org.jaxen.dom4j;
 
-import java.net.URL;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import java.io.File;
 
 class Performance {
     
     public static void main(String[] args) {
         try {
-            URL u = new URL("http://www.ibiblio.org/xml/examples/shakespeare/much_ado.xml");
+            File u = new File("xml/examples/shakespeare/much_ado.xml");
             Document doc = new SAXReader().read(u);
             Dom4jXPath xpath = new Dom4jXPath("PLAY/ACT/SCENE/SPEECH/SPEAKER");
             
