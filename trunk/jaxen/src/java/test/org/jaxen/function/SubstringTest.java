@@ -67,7 +67,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
-import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
@@ -200,7 +199,7 @@ public class SubstringTest extends TestCase {
     public void testSubstringFunctionRequiresAtLeastTwoArguments() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("substring('a')");
+        XPath xpath = new DOMXPath("substring('a')");
         
         try {
             xpath.selectNodes(doc);
@@ -212,10 +211,19 @@ public class SubstringTest extends TestCase {
         
     }    
 
+    public void testNegativeStartNoLength() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("substring('Hello', -50)");
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("Hello", result);
+        
+    }    
+
     public void testSubstringFunctionRequiresAtMostThreeArguments() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("substring('a', 1, 1, 4)");
+        XPath xpath = new DOMXPath("substring('a', 1, 1, 4)");
         
         try {
             xpath.selectNodes(doc);
@@ -230,7 +238,7 @@ public class SubstringTest extends TestCase {
     public void testStringLengthCountsUnicodeCharactersNotJavaChars() 
       throws JaxenException {
    
-        BaseXPath xpath = new DOMXPath("substring('A\uD834\uDD00', 1, 2)");
+        XPath xpath = new DOMXPath("substring('A\uD834\uDD00', 1, 2)");
         String result = (String) xpath.evaluate( doc );
         assertEquals("A\uD834\uDD00", result);
         
@@ -240,7 +248,7 @@ public class SubstringTest extends TestCase {
     public void testStringLengthIndexesUnicodeCharactersNotJavaChars() 
       throws JaxenException {
    
-        BaseXPath xpath = new DOMXPath("substring('A\uD834\uDD00', 3, 1)");
+        XPath xpath = new DOMXPath("substring('A\uD834\uDD00', 3, 1)");
         String result = (String) xpath.evaluate( doc );
         assertEquals("", result);
         
@@ -250,7 +258,7 @@ public class SubstringTest extends TestCase {
     public void testStringLengthIndexesAndCountsUnicodeCharactersNotJavaChars() 
       throws JaxenException {
    
-        BaseXPath xpath = new DOMXPath("substring('A\uD834\uDD00123', 3, 2)");
+        XPath xpath = new DOMXPath("substring('A\uD834\uDD00123', 3, 2)");
         String result = (String) xpath.evaluate( doc );
         assertEquals("12", result);
         
