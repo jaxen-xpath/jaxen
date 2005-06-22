@@ -122,7 +122,6 @@ public class SubstringFunction implements Function
 
         if (substringLength < 0) return "";
         
-        int end = start + substringLength;
 
         // negative start is treated as 0
         if ( start < 0){
@@ -131,6 +130,8 @@ public class SubstringFunction implements Function
         else if (start > stringLength){
             return "";
         }
+
+        int end = start + substringLength;
 
         if (end > stringLength){
             end = stringLength;
