@@ -72,11 +72,36 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.2</b> <code><i>string</i> substring-after(<i>string</i>,<i>string</i>)</code> 
  * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The <b>substring-after</b> function returns the substring of the first argument string 
+ * that follows the first occurrence of the second argument string in the first 
+ * argument string, or the empty string if the first argument string does not contain the second argument string. 
+ * For example, substring-after("1999/04/01","/") returns 04/01, 
+ * and substring-after("1999/04/01","19") returns 99/04/01.
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-substring-after" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringAfterFunction implements Function
 {
 
+    /** 
+     * Returns the part of the string-value of the first item in <code>args</code>
+     * that follows the string-value of the second item in <code>args</code>;
+     * or the empty string if the second string is not a substring of the first string.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list that contains two items
+     * 
+     * @return a <code>String</code> containing that 
+     *     part of the string-value of the first item in <code>args</code>
+     *     that comes before the string-value of the second item in <code>args</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> does not have length two
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -90,6 +115,21 @@ public class SubstringAfterFunction implements Function
         throw new FunctionCallException( "substring-after() requires two arguments." );
     }
 
+
+    /** 
+     * Returns the part of <code>strArg</code> that follows the first occurence 
+     * of <code>matchArg</code>; or the empty string if the 
+     * <code>strArg</code> does not contain <code>matchArg</code>
+     * 
+     * @param strArg the string from which the substring is extracted
+     * @param matchArg the string that marks the boundary of the substring
+     * @param nav the <code>Navigator</code> used to calculate the string-values of
+     *     the first two arguments
+     * 
+     * @return a <code>String</code> the part of <code>strArg</code> that precedes the first occurence 
+     * of <code>matchArg</code>
+     * 
+     */
     public static String evaluate(Object strArg,
                                   Object matchArg,
                                   Navigator nav)
