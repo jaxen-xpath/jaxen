@@ -68,13 +68,32 @@ import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 
 /**
- * <p><b>4.1</b> <code><i>number</i> last()</code> 
+ * <p><b>4.1</b> <code><i>number</i> last()</code> </p>
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The last function returns a number equal to 
+ * the context size from the expression evaluation context.
+ * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-last" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class LastFunction implements Function
 {
 
+    /**
+     * Returns the number of nodes in the context node-set.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args an empty list
+     * 
+     * @return a <code>Double</code> containing the context size
+     * 
+     * @throws FunctionCallException if <code>args</code> is not empty
+     * 
+     * @see Context#getSize()
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -86,8 +105,19 @@ public class LastFunction implements Function
         throw new FunctionCallException( "last() requires no arguments." );
     }
 
+    /**
+     * Returns the number of nodes in the context node-set.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * 
+     * @return the context size
+     * 
+     * @see Context#getSize()
+     */
     public static Double evaluate(Context context)
     {
         return new Double( context.getSize() );
     }
+    
 }
