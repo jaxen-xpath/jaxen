@@ -70,13 +70,35 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- *   <p><b>4.1</b> <code><i>string</i> local-name(<i>node-set?</i>)</code> 
+ *   <p><b>4.1</b> <code><i>string</i> local-name(<i>node-set?</i>)</code></p> 
  *  
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The <b>local-name</b> function returns the local part of the 
+ * expanded-name of the node in the argument node-set that is first in document order. 
+ * If the argument node-set is empty or the first node has no expanded-name, an 
+ * empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.
+ *
+ * </blockquote>
+ * 
  *  @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-local-name" target="_top">XPath Specification</a>
  */
 public class LocalNameFunction implements Function
 {
 
+    /**
+     * Returns the local-name of the specified node or the context node if 
+     * no arguments are provided.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args a <code>List</code> containing zero or one items
+     * 
+     * @return a <code>String</code> containing the local-name
+     * 
+     * @throws FunctionCallException if <code>args</code> has more than one item
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -95,6 +117,16 @@ public class LocalNameFunction implements Function
         throw new FunctionCallException( "local-name() requires zero or one argument." );
     }
 
+    /**
+     * Returns the local-name of <code>list.get(0)</code>
+     * 
+     * @param list a list of nodes
+     * @param nav the <code>Navigator</code> used to retirve the local name
+     * 
+     * @return the local-name of <code>list.get(0)</code>
+     * 
+     * @throws FunctionCallException if <code>list.get(0)</code> is not a node
+     */
     public static String evaluate(List list,
                                   Navigator nav) throws FunctionCallException
     {
@@ -142,5 +174,6 @@ public class LocalNameFunction implements Function
 
         return "";
     }
+    
 }
 
