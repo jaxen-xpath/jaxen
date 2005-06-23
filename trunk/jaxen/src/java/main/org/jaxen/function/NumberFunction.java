@@ -70,9 +70,73 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.4</b> <code><i>number</i> number(<i>object</i>)</code> 
+ * <p>
+ * <b>4.4</b> <code><i>number</i> number(<i>object</i>)</code>
+ * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath#function-number">
+ * <p>
+ * The <b>number</b> function converts
+ * its argument to a number as follows:
+ * </p>
+ * 
+ * <ul>
+ * 
+ * <li>
+ * <p>
+ * a string that consists of optional whitespace followed by an optional
+ * minus sign followed by a <a href="#NT-Number">Number</a> followed by
+ * whitespace is converted to the IEEE 754 number that is nearest
+ * (according to the IEEE 754 round-to-nearest rule) to the mathematical
+ * value represented by the string; any other string is converted to NaN
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * boolean true is converted to 1; boolean false is converted to 0
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * 
+ * <p>
+ * a node-set is first converted to a string as if by a call to the <b><a
+ * href="http://www.w3.org/TR/xpath#function-string" target="_top">string</a></b> function and then converted
+ * in the same way as a string argument
+ * </p>
+ * 
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * an object of a type other than the four basic types is converted to a
+ * number in a way that is dependent on that type
+ * </p>
+ * </li>
+ * 
+ * </ul>
+ * 
+ * <p>
+ * If the argument is omitted, it defaults to a node-set with the
+ * context node as its only member.
+ * </p>
+ * 
+ * <blockquote> <b>NOTE: </b>The <b>number</b>
+ * function should not be used for conversion of numeric data occurring
+ * in an element in an XML document unless the element is of a type that
+ * represents numeric data in a language-neutral format (which would
+ * typically be transformed into a language-specific format for
+ * presentation to a user). In addition, the <b>number</b> function cannot be used
+ * unless the language-neutral format used by the element is consistent
+ * with the XPath syntax for a <a href="http://www.w3.org/TR/xpath#NT-Number">Number</a>.</blockquote>
+ * 
+ * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-number"
+ *      target="_top">XPath Specification</a>
  */
 public class NumberFunction implements Function
 {
