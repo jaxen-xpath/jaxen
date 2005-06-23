@@ -72,9 +72,44 @@ import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
 /**
- * <p><b>4.3</b> <code><i>boolean</i> lang(<i>string</i>)</code> 
+ * <p>
+ * <b>4.3</b> <code><i>boolean</i> lang(<i>string</i>)</code>
+ * </p>
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath#function-lang">
+ * <p>
+ * The <b>lang</b> function returns true or false depending on whether
+ * the language of the context node as specified by
+ * <code>xml:lang</code> attributes is the same as or is a sublanguage
+ * of the language specified by the argument string. The language of the
+ * context node is determined by the value of the <code>xml:lang</code>
+ * 
+ * attribute on the context node, or, if the context node has no
+ * <code>xml:lang</code> attribute, by the value of the
+ * <code>xml:lang</code> attribute on the nearest ancestor of the
+ * context node that has an <code>xml:lang</code> attribute. If there
+ * is no such attribute, then <b><a href="#function-lang">lang</a></b>
+ * returns false. If there is such an attribute, then <b><a
+ * href="#function-lang">lang</a></b> returns true if the attribute
+ * value is equal to the argument ignoring case, or if there is some
+ * suffix starting with <code>-</code> such that the attribute value
+ * is equal to the argument ignoring that suffix of the attribute value
+ * and ignoring case. For example, <code>lang("en")</code> would
+ * return true if the context node is any of these five elements:
+ * </p>
+ * 
+ * <pre>
+ * &lt;para xml:lang=&quot;en&quot;/&gt;
+ *  &lt;div xml:lang=&quot;en&quot;&gt;&lt;para/&gt;&lt;/div&gt;
+ *  &lt;para xml:lang=&quot;EN&quot;/&gt;
+ *  &lt;para xml:lang=&quot;en-us&quot;/&gt;
+ * </pre>
+ * 
+ * </blockquote>
  * 
  * @author Attila Szegedi (szegedia @ freemail.hu)
+ * @see <a href="http://www.w3.org/TR/xpath#function-lang"
+ *      target="_top">XPath Specification</a>
  */
 public class LangFunction implements Function
 {
@@ -84,7 +119,8 @@ public class LangFunction implements Function
     
     /**
      * <p>
-     * Determines whether or not the context node is written in the specified language,
+     * Determines whether or not the context node is written in the language specified
+     * by the XPath string-value of <code>args.get(0)</code>,
      * as determined by the nearest <code>xml:lang</code> attribute in scope. 
      * </p>
      * 
