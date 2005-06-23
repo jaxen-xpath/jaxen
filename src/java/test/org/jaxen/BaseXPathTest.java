@@ -122,6 +122,41 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    public void testParentOfSelection() throws JaxenException {
+        /*
+        html
+            a
+                img
+            a        <- return that node
+                img   <- select this node
+        */
+        XPath xpath = new DOMXPath("(/html/a/img[contains(@src,'gif')])[2]/..");
+        org.w3c.dom.Element html = doc.createElementNS("", "html");
+        org.w3c.dom.Element a1 = doc.createElementNS("", "a");
+        org.w3c.dom.Element a2 = doc.createElementNS("", "a");
+        org.w3c.dom.Element img1 = doc.createElementNS("", "img");
+          org.w3c.dom.Attr img1_src = doc.createAttributeNS("", "src");
+        img1_src.setValue("1.gif");
+        org.w3c.dom.Element img2 = doc.createElementNS("", "img");
+        org.w3c.dom.Attr img2_src = doc.createAttributeNS("", "src");
+        img2_src.setValue("2.gif");
+
+        img1.setAttributeNode(img1_src);
+        img2.setAttributeNode(img2_src);
+        a1.appendChild(img1);
+        a2.appendChild(img2);
+        html.appendChild(a1);
+        html.appendChild(a2);
+        doc.appendChild(html);
+
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        assertEquals(a2, result.get(0));
+    }
+
+
+    
+    
     public void testEvaluateString() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("string(/*)");
@@ -1061,7 +1096,7 @@ public class BaseXPathTest extends TestCase {
             fail("Allowed String as context");
         }
         catch (ClassCastException ex) {
-            assertNotNull(ex.getMessage());
+            // success
         }
    
     }
