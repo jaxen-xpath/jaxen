@@ -72,11 +72,33 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.2</b> <code><i>boolean</i> starts-with(<i>string</i>,<i>string</i>)</code> 
  * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The <b>starts-with</b> function returns true if the first argument string starts 
+ * with the second argument string, and otherwise returns false.
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-starts-with" target="_top">XPath Specification</a>
  */
 public class StartsWithFunction implements Function
 {
 
+    /** 
+     * Returns true if the string-value of the first item in <code>args</code>
+     * starts with the string-value of the second item in <code>args</code>. 
+     * Otherwise it returns false.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list that contains two items
+     * 
+     * @return <code>Boolean.TRUE</code> if the first item in <code>args</code>
+     *     starts with the string-value of the second item in <code>args</code>;
+     *     otherwise <code>Boolean.FALSE</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> does not have length two
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -90,7 +112,20 @@ public class StartsWithFunction implements Function
         throw new FunctionCallException( "starts-with() requires two arguments." );
     }
 
-    public static Boolean evaluate(Object strArg,
+    /** 
+     * Returns true if the string-value of <code>strArg</code>
+     * starts with the string-value of <code>matchArg</code>. 
+     * Otherwise it returns false.
+     * 
+     * @param strArg the object whose string-value searched for the prefix
+     * @param matchArg the object whose string-value becomes the prefix string to compare against
+     * @param nav the navigator used to calculate the string-values of the arguments
+     * 
+     * @return <code>Boolean.TRUE</code> if the string-value of <code>strArg</code>
+     *     starts with the string-value of <code>matchArg</code>;
+     *     otherwise <code>Boolean.FALSE</code>
+     * 
+     */    public static Boolean evaluate(Object strArg,
                                    Object matchArg,
                                    Navigator nav)
     {
@@ -105,4 +140,5 @@ public class StartsWithFunction implements Function
                  : Boolean.FALSE
                  );
     }
+     
 }
