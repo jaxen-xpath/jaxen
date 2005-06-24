@@ -77,9 +77,122 @@ import java.util.Iterator;
 import java.util.Locale;
 
 /**
- * <p><b>4.2</b> <code><i>string</i> string(<i>object</i>)</code>
- *
+ * <p>
+ * <b>4.2</b> <code><i>string</i> string(<i>object</i>)</code>
+ * </p>
+ * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * <p>
+ * The <b>string</b> function converts
+ * an object to a string as follows:
+ * </p>
+ * 
+ * <ul>
+ * 
+ * <li>
+ * <p>
+ * A node-set is converted to a string by returning the <a
+ * href="http://www.w3.org/TR/xpath#dt-string-value" target="_top">string-value</a> of the node in the node-set
+ * that is first in <a href="http://www.w3.org/TR/xpath#dt-document-order" target="_top">document order</a>. If
+ * the node-set is empty, an empty string is returned.
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * A number is converted to a string as follows
+ * </p>
+ * 
+ * <ul>
+ * 
+ * <li>
+ * <p>
+ * NaN is converted to the string <code>NaN</code>
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * positive zero is converted to the string <code>0</code>
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * 
+ * <p>
+ * negative zero is converted to the string <code>0</code>
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * positive infinity is converted to the string <code>Infinity</code>
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * negative infinity is converted to the string <code>-Infinity</code>
+ * 
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * if the number is an integer, the number is represented in decimal
+ * form as a <a href="http://www.w3.org/TR/xpath#NT-Number" target="_top">Number</a> with no decimal point and
+ * no leading zeros, preceded by a minus sign (<code>-</code>) if
+ * the number is negative
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * otherwise, the number is represented in decimal form as a Number including a decimal point with at least
+ * one digit before the decimal point and at least one digit after the
+ * decimal point, preceded by a minus sign (<code>-</code>) if the
+ * number is negative; there must be no leading zeros before the decimal
+ * point apart possibly from the one required digit immediately before
+ * the decimal point; beyond the one required digit after the decimal
+ * point there must be as many, but only as many, more digits as are
+ * needed to uniquely distinguish the number from all other IEEE 754
+ * numeric values.
+ * </p>
+ * 
+ * </li>
+ * 
+ * </ul>
+ * 
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * The boolean false value is converted to the string <code>false</code>.
+ * The boolean true value is converted to the string <code>true</code>.
+ * </p>
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * An object of a type other than the four basic types is converted to a
+ * string in a way that is dependent on that type.
+ * </p>
+ * 
+ * </li>
+ * 
+ * </ul>
+ * 
+ * <p>
+ * If the argument is omitted, it defaults to a node-set with the
+ * context node as its only member.
+ * </p>
+ * 
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-string"
+ *      target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class StringFunction implements Function
 {
@@ -95,6 +208,18 @@ public class StringFunction implements Function
         format.setDecimalFormatSymbols(symbols);
     }
 
+    /**
+     * Returns the string-value of  
+     * <code>args.get(0)</code> or of the context node if ,code>args</code> is empty.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args list with zero or one element
+     * 
+     * @return a <code>String</code> 
+     * 
+     * @throws FunctionCallException if <code>args</code> has more than one item
+     */    
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -114,6 +239,14 @@ public class StringFunction implements Function
         throw new FunctionCallException( "string() takes at most argument." );
     }
     
+    /**
+     * Returns the string-value of <code>obj</code>.
+     * 
+     * @param obj the object whose string-value is calculated
+     * @param nav the navigator used to calculate the string-value
+     * 
+     * @return a <code>String</code>. May be empty but is never null.
+     */    
     public static String evaluate(Object obj,
                                   Navigator nav)
     {
