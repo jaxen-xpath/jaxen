@@ -70,13 +70,49 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.1</b> <code><i>string</i> namespace-uri(<i>node-set?</i>)</code> 
+ * <p>
+ * <b>4.1</b>
+ * <code><i>string</i> namespace-uri(<i>node-set?</i>)</code>
+ * </p>
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * <p>
+ * The <b>namespace-uri</b>
+ * function returns the namespace URI of the <a
+ * href="http://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a> of the node in the
+ * argument node-set that is first in <a
+ * href="http://www.w3.org/TR/xpath#dt-document-order" target="_top">document order</a>. If the argument
+ * node-set is empty, the first node has no <a
+ * href="http://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a>, or the namespace URI of
+ * the <a href="http://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a> is null, an empty
+ * string is returned. If the argument is omitted, it defaults to a
+ * node-set with the context node as its only member.
+ * </p>
+ * 
+ * <blockquote> <b>NOTE: </b>The string returned by the <b>namespace-uri</b> function will
+ * be empty except for element nodes and attribute nodes.</blockquote>
+ * 
+ * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-namespace-uri"
+ *      target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class NamespaceUriFunction implements Function
 {
 
+    /**
+     * Returns the namespace URI of the specified node or the namespace URI of the context node if 
+     * no arguments are provided.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args a <code>List</code> containing zero or one items
+     * 
+     * @return a <code>String</code> containing the namespace URI
+     * 
+     * @throws FunctionCallException if <code>args</code> has more than one item
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -95,6 +131,16 @@ public class NamespaceUriFunction implements Function
         throw new FunctionCallException( "namespace-uri() requires zero or one argument." );
     }
 
+    /**
+     * Returns the namespace URI of <code>list.get(0)</code>
+     * 
+     * @param list a list of nodes
+     * @param nav the <code>Navigator</code> used to retrieve the namespace
+     * 
+     * @return the namespace URI of <code>list.get(0)</code>
+     * 
+     * @throws FunctionCallException if <code>list.get(0)</code> is not a node
+     */
     public static String evaluate(List list,
                                   Navigator nav) throws FunctionCallException
     {
