@@ -69,13 +69,34 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.3</b> <code><i>boolean</i> not(<i>boolean</i>)</code> 
+ * <p><b>4.3</b> <code><i>boolean</i> not(<i>boolean</i>)</code> </p>
+ * 
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath#function-not">
+ * The <b>not</b> function returns true if its argument is false, and false otherwise.
+ * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-not" target="_top">Section 4.3 of the XPath Specification</a>
  */
 public class NotFunction implements Function
 {
 
+    /**
+     * Returns <code>Boolean.TRUE</code> if the boolean value of 
+     * <code>args.get(0)</code> is false, and <code>Boolean.FALSE</code> otherwise.
+     * The boolean value is calculated as if by the XPath <code>boolean</code>
+     * function. 
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args a single element list
+     * 
+     * @return <code>Boolean.TRUE</code> if the boolean value of 
+     * <code>obj</code> is false, and <code>Boolean.FALSE</code> otherwise
+     * 
+     * @throws FunctionCallException if <code>args</code> does not have exactly one argument
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -87,6 +108,18 @@ public class NotFunction implements Function
         throw new FunctionCallException( "not() requires one argument." );
     }
 
+    /**
+     * Returns <code>Boolean.TRUE</code> if the boolean value of 
+     * <code>obj</code> is false, and <code>Boolean.FALSE</code> otherwise.
+     * The boolean value is calculated as if by the XPath <code>boolean</code>
+     * function. 
+     * 
+     * @param obj the object whose boolean value is inverted
+     * @param nav the <code>Navigator</code> used to calculate the boolean value of <code>obj</code>
+     * 
+     * @return <code>Boolean.TRUE</code> if the boolean value of 
+     * <code>obj</code> is false, and <code>Boolean.FALSE</code> otherwise
+     */
     public static Boolean evaluate(Object obj, Navigator nav)
     {
         return ( ( BooleanFunction.evaluate( obj, nav ).booleanValue() )
@@ -94,4 +127,5 @@ public class NotFunction implements Function
                  : Boolean.TRUE
                  );
     }
+    
 }
