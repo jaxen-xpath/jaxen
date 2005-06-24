@@ -70,13 +70,39 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.1</b> <code><i>string</i> name(<i>node-set?</i>)</code> 
+ * <p><b>4.1</b> <code><i>string</i> name(<i>node-set?</i>)</code> </p>
  *  
+ * 
+ * <blockquote src="http://www.w3.org/TR/xpath">
+ * The <b>name</b> function returns a string containing a QName representing 
+ * the expanded-name of the node in the argument node-set that is first in document order. 
+ * The QName must represent the expanded-name with respect to the namespace declarations 
+ * in effect on the node whose expanded-name is being represented. Typically, this will 
+ * be the QName that occurred in the XML source....If 
+ * the argument node-set is empty or the first node has 
+ * no expanded-name, an empty string is returned. 
+ * If the argument it omitted, it defaults to a node-set with the context node as its only member.
+ * </blockquote>
+ * 
  * @author bob mcwhirter (bob @ werken.com)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-name" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class NameFunction implements Function
 {
-
+    
+    /**
+     * Returns the name of the specified node or the name of the context node if 
+     * no arguments are provided.
+     * 
+     * @param context the context at the point in the
+     *         expression where the function is called
+     * @param args a <code>List</code> containing zero or one items
+     * 
+     * @return a <code>String</code> containing the name
+     * 
+     * @throws FunctionCallException if <code>args</code> has more than one item
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
@@ -95,6 +121,16 @@ public class NameFunction implements Function
         throw new FunctionCallException( "name() requires zero or one argument." );
     }
 
+    /**
+     * Returns the name of <code>list.get(0)</code>
+     * 
+     * @param list a list of nodes
+     * @param nav the <code>Navigator</code> used to retrieve the name
+     * 
+     * @return the name of <code>list.get(0)</code>
+     * 
+     * @throws FunctionCallException if <code>list.get(0)</code> is not a node
+     */
     public static String evaluate(List list,
                                   Navigator nav) throws FunctionCallException
     {
