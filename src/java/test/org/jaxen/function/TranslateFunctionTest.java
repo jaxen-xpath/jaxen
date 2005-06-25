@@ -97,7 +97,14 @@ public class TranslateFunctionTest extends TestCase {
         assertEquals("adc", result);
     }    
   
-    public void testSubstringAfterFunctionRequiresAtLeastThreeArguments() 
+    public void testTranslateIgnoresExtraArguments() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('abc', 'b', 'dghf')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("adc", result);
+    }    
+  
+    public void testTranslateFunctionRequiresAtLeastThreeArguments() 
       throws JaxenException {
         
         XPath xpath = new DOMXPath("translate('a', 'b')");
@@ -112,7 +119,7 @@ public class TranslateFunctionTest extends TestCase {
         
     }    
 
-    public void testSubstringAfterFunctionRequiresAtMostThreeArguments() 
+    public void testTranslateRequiresAtMostThreeArguments() 
       throws JaxenException {
         
         XPath xpath = new DOMXPath("substring-after('a', 'a', 'a', 'a')");
@@ -125,6 +132,30 @@ public class TranslateFunctionTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
         
-    }    
+    }   
+    
+    public void testTranslateStringThatContainsNonBMPChars() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('ab\uD834\uDD00b', 'b', 'd')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("ad\uD834\uDD00d", result);
+    }   
+    
+
+    public void testTranslateNonBMPChars() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('ab\uD834\uDD00b', '\uD834\uDD00', 'd')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("abdb", result);
+    }   
+    
+
+    public void testTranslateNonBMPChars2() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('ab\uD834\uDD00b', '\uD834\uDD00', 'da')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("abdb", result);
+    }   
+    
 
 }
