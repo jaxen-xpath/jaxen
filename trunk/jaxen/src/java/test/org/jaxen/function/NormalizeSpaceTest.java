@@ -105,6 +105,13 @@ public class NormalizeSpaceTest extends TestCase {
         assertEquals(data, result);
     }    
   
+    public void testNormalizeSpaceInContextNode() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "normalize-space()" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+    }    
+  
     public void testNormalizeSpaceRequiresAtMostOneArguments() 
       throws JaxenException {
         

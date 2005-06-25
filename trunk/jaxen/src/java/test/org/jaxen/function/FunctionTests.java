@@ -110,6 +110,7 @@ public class FunctionTests extends TestCase {
         result.addTest(new TestSuite(TrueTest.class));
         result.addTest(new TestSuite(FalseTest.class));
         result.addTest(new TestSuite(NotTest.class));
+        result.addTest(new TestSuite(NormalizeSpaceTest.class));
         return result;
         
     }
