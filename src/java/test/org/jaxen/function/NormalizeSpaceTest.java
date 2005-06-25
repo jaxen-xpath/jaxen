@@ -98,9 +98,18 @@ public class NormalizeSpaceTest extends TestCase {
 
     public void testNormalizeSpaceUsesXMLSpaceRulesNotJavaRules() throws JaxenException
     {
-        // em space count as whitespace in Java but not XML
+        // em space counts as whitespace in Java but not XML
         String data = "\u2003X\u2003";
         XPath xpath = new DOMXPath( "normalize-space('" + data + "')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals(data, result);
+    }    
+  
+    public void testNormalizeSpaceUsesXMLSpaceRulesNotJavaRules2() throws JaxenException
+    {
+        // em space counts as whitespace in Java but not XML
+        String data = "\u2003X\u2003";
+        XPath xpath = new DOMXPath( "normalize-space(' " + data + " ')" );
         String result = (String) xpath.evaluate( doc );
         assertEquals(data, result);
     }    
