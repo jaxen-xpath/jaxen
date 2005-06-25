@@ -136,7 +136,7 @@ public class NormalizeSpaceFunction implements Function
      * @param nav the context at the point in the
      *         expression when the function is called
      * 
-     * @return a normalized <code>String</code>
+     * @return the normalized string-value
      */
     public static String evaluate(Object strArg,
                                   Navigator nav) 
