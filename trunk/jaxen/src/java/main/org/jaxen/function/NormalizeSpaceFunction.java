@@ -93,10 +93,25 @@ import org.jaxen.Navigator;
 public class NormalizeSpaceFunction implements Function
 {
 
+    /** 
+     * Returns the string-value of the first item in <code>args</code>
+     * after removing all leading and trailing white space, and 
+     * replacing each other sequence of whitespace by a single space.
+     * Whitespace consists of the characters space (0x32), carriage return (0x0D),
+     * linefeed (0x0A), and tab (0x09).
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list that contains exactly one item
+     * 
+     * @return a normalized <code>String</code>
+     * 
+     * @throws FunctionCallException if <code>args</code> does not have length one
+     */
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
-        if (args.size() >= 1)
+        if (args.size() >= 1) // != 1 ????
         {
             return evaluate( args.get(0),
                              context.getNavigator() );
@@ -105,6 +120,19 @@ public class NormalizeSpaceFunction implements Function
         throw new FunctionCallException( "normalize-space() requires one argument" );
     }
 
+    /** 
+     * Returns the string-value of <code>strArg</code> after removing
+     * all leading and trailing white space, and 
+     * replacing each other sequence of whitespace by a single space.
+     * Whitespace consists of the characters space (0x32), carriage return (0x0D),
+     * linefeed (0x0A), and tab (0x09).
+     *
+     * @param strArg the object whose string-value is normalized
+     * @param nav the context at the point in the
+     *         expression when the function is called
+     * 
+     * @return a normalized <code>String</code>
+     */
     public static String evaluate(Object strArg,
                                   Navigator nav) 
     {
@@ -118,6 +146,7 @@ public class NormalizeSpaceFunction implements Function
         int read = 0;
         while (read < buffer.length)
         {
+            // legal per XML????
             if (Character.isWhitespace(buffer[read]))
             {
                 if (wroteOne)
@@ -140,4 +169,5 @@ public class NormalizeSpaceFunction implements Function
 
         return new String(buffer, 0, lastWrite);
     }
+    
 }
