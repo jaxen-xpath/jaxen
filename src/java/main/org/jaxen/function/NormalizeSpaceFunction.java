@@ -111,7 +111,12 @@ public class NormalizeSpaceFunction implements Function
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
-        if (args.size() >= 1) // != 1 ????
+        
+        if (args.size() == 0) {
+            return evaluate( context.getNodeSet(),
+                             context.getNavigator() );
+        }
+        else if (args.size() == 1)
         {
             return evaluate( args.get(0),
                              context.getNavigator() );
