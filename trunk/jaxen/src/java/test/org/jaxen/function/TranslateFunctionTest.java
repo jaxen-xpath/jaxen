@@ -158,4 +158,12 @@ public class TranslateFunctionTest extends TestCase {
     }   
     
 
+    public void testTranslateWithNonBMPChars() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('abc', 'c', '\uD834\uDD00b')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("ab\uD834\uDD00b", result);
+    }   
+    
+
 }
