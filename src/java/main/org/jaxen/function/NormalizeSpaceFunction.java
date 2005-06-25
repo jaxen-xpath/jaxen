@@ -151,8 +151,7 @@ public class NormalizeSpaceFunction implements Function
         int read = 0;
         while (read < buffer.length)
         {
-            // legal per XML????
-            if (Character.isWhitespace(buffer[read]))
+            if (isXMLSpace(buffer[read]))
             {
                 if (wroteOne)
                 {
@@ -173,6 +172,11 @@ public class NormalizeSpaceFunction implements Function
         }
 
         return new String(buffer, 0, lastWrite);
+    }
+    
+    
+    private static boolean isXMLSpace(char c) {
+        return c == ' ' || c == '\n' || c == '\r' || c == '\t';
     }
     
 }
