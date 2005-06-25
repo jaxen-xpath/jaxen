@@ -73,15 +73,37 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.1</b> <code><i>node-set</i> id(<i>object</i>)</code> 
+ * <p><b>4.1</b> <code><i>node-set</i> id(<i>object</i>)</code> </p>
  *  
+ * <p>The <b>id</b> function returns a <code>List</code>
+ * of all the elements in the context document that have an ID
+ * matching one of a specified list of IDs. How an attribute is determined
+ * to be of type ID depends on the navigator, but it normally requires that
+ * the attribute be declared to have type ID in the DTD. 
+ * </p>
+ * 
  * @author Erwin Bolwidt (ejb @ klomp.org)
  * @author J\u00e9r\u00f4me N\u00e8gre (jerome.negre @ e-xmlmedia.fr)
+ * 
+ * @see <a href="http://www.w3.org/TR/xpath#function-id" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class IdFunction implements Function
 {
 
-    public Object call (Context context, List args) throws FunctionCallException
+    /** 
+     * Returns the node with the specified ID.
+     *
+     * @param context the context at the point in the
+     *         expression when the function is called
+     * @param args a list with exactly one item which is either a string
+     *     a node-set
+     * 
+     * @return a <code>List</code> containing the node with the specified ID; or 
+     *     an empty list if there is no such node
+     * 
+     * @throws FunctionCallException if <code>args</code> has more or less than one item
+     */
+    public Object call(Context context, List args) throws FunctionCallException
     {
         if ( args.size() == 1 ) {
             return evaluate( context.getNodeSet(),
@@ -91,7 +113,19 @@ public class IdFunction implements Function
         throw new FunctionCallException( "id() requires one argument" );
     }
 
-    public static List evaluate (List contextNodes, Object arg, Navigator nav)
+    /** 
+     * Returns the node with the specified ID.
+     * @param contextNodes the context-node-set. The first item in this list
+     *     determines the document in which the search is performed.
+     * @param arg the ID or IDs to search for
+     * @param nav the navigator used to calculate string-values and search
+     *     by ID
+     * 
+     * @return a <code>List</code> containing the node with the specified ID; or 
+     *     an empty list if there is no such node
+     * 
+     */
+    public static List evaluate(List contextNodes, Object arg, Navigator nav)
     {
         if (contextNodes.size() == 0) return Collections.EMPTY_LIST;
       
@@ -105,7 +139,8 @@ public class IdFunction implements Function
                 String id = StringFunction.evaluate(iter.next(), nav);
                 nodes.addAll( evaluate( contextNodes, id, nav ) );
             }
-        } else {
+        } 
+        else {
             String ids = StringFunction.evaluate(arg, nav);
             StringTokenizer tok = new StringTokenizer(ids, " \t\n\r");
             while (tok.hasMoreTokens()) {
@@ -118,5 +153,6 @@ public class IdFunction implements Function
         }
         return nodes;
     }
+    
 }
 
