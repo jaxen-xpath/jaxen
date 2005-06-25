@@ -122,7 +122,7 @@ public class NormalizeSpaceFunction implements Function
                              context.getNavigator() );
         }
     
-        throw new FunctionCallException( "normalize-space() requires one argument" );
+        throw new FunctionCallException( "normalize-space() cannot have more than one argument" );
     }
 
     /** 
