@@ -161,7 +161,7 @@ public class NormalizeSpaceFunction implements Function
                 {
                     read++;
                 }
-                while(read < buffer.length && Character.isWhitespace(buffer[read]));
+                while(read < buffer.length && isXMLSpace(buffer[read]));
             }
             else
             {
