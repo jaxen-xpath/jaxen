@@ -108,7 +108,7 @@ public class CountTest extends TestCase {
        }
        catch (FunctionCallException e) 
         {
-           assertEquals("Count function can only be used for node-sets", e.getMessage());
+           assertEquals("count() function can only be used for node-sets", e.getMessage());
         }
        catch (Exception e)
         {
