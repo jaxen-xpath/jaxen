@@ -70,11 +70,11 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.4</b> <code><i>number</i> round(<i>number</i>)</code> 
+ * <p><b>4.4</b> <code><i>number</i> round(<i>number</i>)</code> </p>
  * 
  * 
  * <blockquote src="http://www.w3.org/TR/xpath">
- * The round function returns the number that is closest to the argument and that is an integer. 
+ * The <b>round</b> function returns the number that is closest to the argument and that is an integer. 
  * If there are two such numbers, then the one that is closest to positive infinity is returned. 
  * If the argument is NaN, then NaN is returned. If the argument is positive infinity, then positive infinity is returned. 
  * If the argument is negative infinity, then negative infinity is returned. 
@@ -101,7 +101,8 @@ public class RoundFunction implements Function
      *     <code>args.get(0)</code>
      * 
      * @throws FunctionCallException if <code>args</code> has more or less than one item
-     */    public Object call(Context context,
+     */
+    public Object call(Context context,
                        List args) throws FunctionCallException
     {
         if (args.size() == 1)

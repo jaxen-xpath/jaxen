@@ -118,15 +118,15 @@ public class TranslateFunction implements Function
     
     /** Returns a copy of the first argument in which
      * characters found in the second argument are replaced by
-     * correpsonding characters from the third argument.
+     * corresponding characters from the third argument.
      *
      * @param context the context at the point in the
      *         expression when the function is called
      * @param args a list that contains exactly three items
      * 
      * @return a <code>String</code> built from <code>args.get(0)</code> 
-     *     in which occurrences of characters in<code>args.get(1)</code> 
-     *     are replaced by the correpsonding characters in <code>args.get(2)</code> 
+     *     in which occurrences of characters in <code>args.get(1)</code> 
+     *     are replaced by the corresponding characters in <code>args.get(2)</code> 
      * 
      * @throws FunctionCallException if <code>args</code> does not have exactly three items
      */

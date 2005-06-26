@@ -70,8 +70,8 @@ import org.jaxen.FunctionCallException;
 /**
  * <p><b>4.1</b> <code><i>number</i> last()</code> </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
- * The last function returns a number equal to 
+ * <blockquote src="http://www.w3.org/TR/xpath#function-last">
+ * The <b>last</b> function returns a number equal to 
  * the context size from the expression evaluation context.
  * </blockquote>
  * 

@@ -83,7 +83,7 @@ import org.jaxen.Navigator;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-substring-before" target="_top">XPath Specification</a>
+ * @see <a href="http://www.w3.org/TR/xpath#function-substring-before" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringBeforeFunction implements Function
 {
@@ -126,7 +126,7 @@ public class SubstringBeforeFunction implements Function
      * @param nav the <code>Navigator</code> used to calculate the string-values of
      *     the first two arguments
      * 
-     * @return a <code>String</code> the part of <code>strArg</code> that precedes the first occurence 
+     * @return a <code>String</code> containing the part of <code>strArg</code> that precedes the first occurence 
      * of <code>matchArg</code>
      * 
      */

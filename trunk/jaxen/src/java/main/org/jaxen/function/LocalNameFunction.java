@@ -81,8 +81,8 @@ import org.jaxen.Navigator;
  *
  * </blockquote>
  * 
- *  @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-local-name" target="_top">XPath Specification</a>
+ * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-local-name" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class LocalNameFunction implements Function
 {
@@ -121,7 +121,7 @@ public class LocalNameFunction implements Function
      * Returns the local-name of <code>list.get(0)</code>
      * 
      * @param list a list of nodes
-     * @param nav the <code>Navigator</code> used to retirve the local name
+     * @param nav the <code>Navigator</code> used to retrieve the local name
      * 
      * @return the local-name of <code>list.get(0)</code>
      * 

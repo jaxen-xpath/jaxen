@@ -75,7 +75,7 @@ import org.jaxen.FunctionCallException;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-false">XPath Specification</a>
+ * @see <a href="http://www.w3.org/TR/xpath#function-false">Section 4.3 of the XPath Specification</a>
  */
 public class FalseFunction implements Function
 {
@@ -104,7 +104,7 @@ public class FalseFunction implements Function
     /**
      * Returns false.
      * 
-     * @return Boolean.FALSE
+     * @return <code>Boolean.FALSE</code>
      */
     public static Boolean evaluate()
     {

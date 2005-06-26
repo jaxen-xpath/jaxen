@@ -71,7 +71,7 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.4</b> <code><i>number</i> sum(<i>node-set</i>)</code> 
+ * <p><b>4.4</b> <code><i>number</i> sum(<i>node-set</i>)</code> </p>
  * 
  * 
  * <blockquote src="http://www.w3.org/TR/xpath">
@@ -85,7 +85,7 @@ import org.jaxen.Navigator;
 public class SumFunction implements Function
 {
 
-    /** Returns the nearest integer to the number.
+    /** Returns the sum of its arguments.
      *
      * @param context the context at the point in the
      *         expression when the function is called
@@ -143,4 +143,5 @@ public class SumFunction implements Function
 
         return new Double(sum);
     }
+    
 }

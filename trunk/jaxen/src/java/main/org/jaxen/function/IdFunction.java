@@ -115,7 +115,7 @@ public class IdFunction implements Function
 
     /** 
      * Returns the node with the specified ID.
-     * @param contextNodes the context-node-set. The first item in this list
+     * @param contextNodes the context node-set. The first item in this list
      *     determines the document in which the search is performed.
      * @param arg the ID or IDs to search for
      * @param nav the navigator used to calculate string-values and search
