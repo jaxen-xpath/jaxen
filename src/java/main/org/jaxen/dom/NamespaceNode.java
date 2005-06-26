@@ -131,7 +131,8 @@ public class NamespaceNode implements Node
      */
     public final static short NAMESPACE_NODE = Pattern.NAMESPACE_NODE;
 
-
+    // FIXME "Note: Numeric codes up to 200 are reserved to W3C for possible future use."
+    // Ww should be using higher codes.
 
     ////////////////////////////////////////////////////////////////////
     // Protected Constructors.
