@@ -182,6 +182,8 @@ public abstract class Pattern {
     }
     
     /** Returns a textual representation of this pattern
+     * 
+     * @return the usual string form of this XSLT pattern
      */
     public abstract String getText();
 
