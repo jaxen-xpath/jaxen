@@ -78,7 +78,7 @@ import org.jaxen.Navigator;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-contains">XPath Specification</a>
+ * @see <a href="http://www.w3.org/TR/xpath#function-contains">Section 4.2 of the XPath Specification</a>
  */
 public class ContainsFunction implements Function
 {
@@ -86,7 +86,7 @@ public class ContainsFunction implements Function
     /** 
      * <p>
      *  Returns true if the string-value of the 
-     *  first item in <code>args<code> contains string-value of the second 
+     *  first item in <code>args</code> contains string-value of the second 
      *  item; false otherwise.
      *  If necessary one or both items are converted to a string as if by the XPath
      *  <code>string()</code> function.
@@ -122,7 +122,7 @@ public class ContainsFunction implements Function
      * 
      * @param strArg the containing string
      * @param matchArg the contained string
-     * @param nav ignored
+     * @param nav used to calculate the string-values of the first two arguments
      * 
      * @return <code>Boolean.TRUE</code> if true if the first string contains 
      *     the second string; <code>Boolean.FALSE</code> otherwise.

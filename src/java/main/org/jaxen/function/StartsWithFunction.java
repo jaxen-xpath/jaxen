@@ -125,7 +125,8 @@ public class StartsWithFunction implements Function
      *     starts with the string-value of <code>matchArg</code>;
      *     otherwise <code>Boolean.FALSE</code>
      * 
-     */    public static Boolean evaluate(Object strArg,
+     */
+    public static Boolean evaluate(Object strArg,
                                    Object matchArg,
                                    Navigator nav)
     {

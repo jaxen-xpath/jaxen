@@ -99,7 +99,7 @@ import org.jaxen.UnsupportedAxisException;
  * </p>
  * 
  * <pre>
- * &lt;para xml:lang=&quot;en&quot;/&gt;
+ *  &lt;para xml:lang=&quot;en&quot;/&gt;
  *  &lt;div xml:lang=&quot;en&quot;&gt;&lt;para/&gt;&lt;/div&gt;
  *  &lt;para xml:lang=&quot;EN&quot;/&gt;
  *  &lt;para xml:lang=&quot;en-us&quot;/&gt;

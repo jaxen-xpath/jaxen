@@ -111,6 +111,7 @@ import org.jaxen.Navigator;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
+ * @see <a href="http://www.w3.org/TR/xpath#function-boolean">Section 4.3 of the XPath Specification</a>
  */
 public class BooleanFunction implements Function
 {
@@ -150,7 +151,7 @@ public class BooleanFunction implements Function
      * <li>All other objects are true.</li>
      * </ul>
      * 
-     * @param obj the object to convert to a boolean.
+     * @param obj the object to convert to a boolean
      * @param nav ignored
      * 
      * @return <code>Boolean.TRUE</code> or <code>Boolean.FALSE</code>

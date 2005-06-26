@@ -94,7 +94,8 @@ public class PositionFunction implements Function
      * @throws FunctionCallException if <code>args</code> is not empty
      * 
      * @see Context#getSize()
-     */    public Object call(Context context, List args) throws FunctionCallException 
+     */
+    public Object call(Context context, List args) throws FunctionCallException 
     {
         if ( args.size() == 0 )
         {

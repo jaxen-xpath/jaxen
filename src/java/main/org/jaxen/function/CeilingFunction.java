@@ -88,7 +88,7 @@ import org.jaxen.Navigator;
  * 
  *  @author bob mcwhirter (bob @ werken.com)
  *  
- *  @see <a href="http://www.w3.org/TR/xpath#function-ceiling">XPath Specification</a>
+ *  @see <a href="http://www.w3.org/TR/xpath#function-ceiling">Section 4.4 of the XPath Specification</a>
  *  @see <a href="http://www.w3.org/1999/11/REC-xpath-19991116-errata/">XPath Specification Errata</a>
  *  
  */
@@ -126,8 +126,8 @@ public class CeilingFunction implements Function
      * @param obj the object whose ceiling is returned
      * @param nav ignored
      * 
-     * @return a <code>Double</code> containing the smallest integer greater than or equal
-     *     <code>obj</code>
+     * @return a <code>Double</code> containing the smallest integer 
+     *     greater than or equal to <code>obj</code>
      */
     public static Double evaluate(Object obj,
                                   Navigator nav)

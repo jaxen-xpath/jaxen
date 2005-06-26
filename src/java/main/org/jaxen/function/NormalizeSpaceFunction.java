@@ -72,7 +72,7 @@ import org.jaxen.Navigator;
 /**
  * <p>
  * <b>4.2</b> <code><i>string</i> normalize-space(<i>string</i>)</code>
- * 
+ * </p>
  * 
  * <blockquote src="http://www.w3.org/TR/xpath#function-normalize-space"> 
  * The <b>normalize-space</b> function

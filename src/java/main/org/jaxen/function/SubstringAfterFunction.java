@@ -126,8 +126,9 @@ public class SubstringAfterFunction implements Function
      * @param nav the <code>Navigator</code> used to calculate the string-values of
      *     the first two arguments
      * 
-     * @return a <code>String</code> the part of <code>strArg</code> that precedes the first occurence 
-     * of <code>matchArg</code>
+     * @return a <code>String</code> containing
+     *     the part of <code>strArg</code> that precedes the first occurence 
+     *     of <code>matchArg</code>
      * 
      */
     public static String evaluate(Object strArg,
