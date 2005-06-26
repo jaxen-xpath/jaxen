@@ -220,6 +220,15 @@ public class SubstringTest extends TestCase {
         
     }    
 
+    public void testNegativeStartWithLength() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("substring('Hello', -50, 20)");
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("", result);
+        
+    }    
+
     public void testSubstringFunctionRequiresAtMostThreeArguments() 
       throws JaxenException {
         
