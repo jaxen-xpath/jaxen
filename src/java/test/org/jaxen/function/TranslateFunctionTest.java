@@ -139,7 +139,7 @@ public class TranslateFunctionTest extends TestCase {
         XPath xpath = new DOMXPath( "translate('ab\uD834\uDD00b', 'b', 'd')" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("ad\uD834\uDD00d", result);
-    }   
+    }
     
 
     public void testTranslateNonBMPChars() throws JaxenException
@@ -160,9 +160,51 @@ public class TranslateFunctionTest extends TestCase {
 
     public void testTranslateWithNonBMPChars() throws JaxenException
     {
+        XPath xpath = new DOMXPath( "translate('abc', 'c', '\uD834\uDD00')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("ab\uD834\uDD00", result);
+    }   
+    
+
+    public void testTranslateWithNonBMPChars2() throws JaxenException
+    {
         XPath xpath = new DOMXPath( "translate('abc', 'c', '\uD834\uDD00b')" );
         String result = (String) xpath.evaluate( doc );
-        assertEquals("ab\uD834\uDD00b", result);
+        assertEquals("ab\uD834\uDD00", result);
+    }   
+    
+
+    public void testTranslateWithMalformedSurrogatePair() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('abc', 'c', '\uD834X\uDD00b')" );
+        try {
+            xpath.evaluate( doc );
+            fail("Allowed malformed surrogate pair");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }   
+    
+
+    public void testTranslateWithMissingLowSurrogate() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('abc', 'c', 'AB\uD834X')" );
+        try {
+            xpath.evaluate( doc );
+            fail("Allowed malformed surrogate pair");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }   
+    
+
+    public void testTranslateWithExtraCharsInReplacementString() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('abc', 'c', 'def')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("abd", result);
     }   
     
 

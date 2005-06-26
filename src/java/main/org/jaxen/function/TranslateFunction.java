@@ -75,6 +75,7 @@ import org.jaxen.Navigator;
  * <p>
  * <b>4.2</b>
  * <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code>
+ * </p>
  * 
  * <blockquote src="http://www.w3.org/TR/xpath#function-translate">
  * <p>
@@ -132,8 +133,7 @@ public class TranslateFunction implements Function
     public Object call(Context context,
                        List args) throws FunctionCallException
     {
-    if (args.size() == 3)
-        {
+        if (args.size() == 3) {
             return evaluate( args.get(0),
                              args.get(1),
                              args.get(2),
@@ -143,11 +143,12 @@ public class TranslateFunction implements Function
         throw new FunctionCallException( "translate() requires three arguments." );
     }
 
-    /** Returns a copy of <code>strArg</code> in which
+    /** 
+     * Returns a copy of <code>strArg</code> in which
      * characters found in <code>fromArg</code> are replaced by
      * corresponding characters from <code>toArg</code>.
      * If necessary each argument is first converted to it string-value
-     * as if by the XPath string() function.
+     * as if by the XPath <code>string()</code> function.
      * 
      * @param strArg the base string
      * @param fromArg the characters to be replaced
@@ -157,46 +158,53 @@ public class TranslateFunction implements Function
      * @return a copy of <code>strArg</code> in which
      *  characters found in <code>fromArg</code> are replaced by
      *  corresponding characters from <code>toArg</code>
+     *  
+     * @throws FunctionCallException if one of the arguments is a malformed Unicode string;
+     *     that is, if surrogate characters don't line up properly
      * 
-     */    public static String evaluate(Object strArg,
+     */
+    public static String evaluate(Object strArg,
                                   Object fromArg,
                                   Object toArg,
-                                  Navigator nav)
+                                  Navigator nav) throws FunctionCallException
     {
         String inStr = StringFunction.evaluate( strArg, nav );
         String fromStr = StringFunction.evaluate( fromArg, nav );
         String toStr = StringFunction.evaluate( toArg, nav );
     
         // Initialize the mapping in a HashMap
-        Map charMap = new HashMap();
-        int fromLen = fromStr.length();
-        int toLen = toStr.length();
-        for ( int i = 0; i < fromLen; ++i ) {
-            String cFrom = fromStr.substring( i, i+1 ).intern();
-            if ( charMap.containsKey( cFrom ) ) {
+        Map characterMap = new HashMap();
+        String[] fromCharacters = toUnicodeCharacters(fromStr);
+        String[] toCharacters = toUnicodeCharacters(toStr);
+        int fromLen = fromCharacters.length;
+        int toLen = toCharacters.length;
+        for ( int i = 0; i < fromLen; i++ ) {
+            String cFrom = fromCharacters[i];
+            if ( characterMap.containsKey( cFrom ) ) {
                 // We've seen the character before, ignore
                 continue;
             }
+            
             if ( i < toLen ) {
-                Character cTo = new Character( toStr.charAt( i ) );
                 // Will change
-                charMap.put( cFrom, cTo );
+                characterMap.put( cFrom, toCharacters[i] );
             } 
             else {
                 // Will delete
-                charMap.put( cFrom, null );
+                characterMap.put( cFrom, null );
             }
         }
 
         // Process the input string thru the map
         StringBuffer outStr = new StringBuffer( inStr.length() );
-        int inLen = inStr.length();
-        for ( int i = 0; i < inLen; ++i ) {
-            String cIn = inStr.substring( i, i+1 );
-            if ( charMap.containsKey( cIn ) ) {
-                Character cTo = (Character) charMap.get( cIn );
+        String[] inCharacters = toUnicodeCharacters(inStr);
+        int inLen = inCharacters.length;
+        for ( int i = 0; i < inLen; i++ ) {
+            String cIn = inCharacters[i];
+            if ( characterMap.containsKey( cIn ) ) {
+                String cTo = (String) characterMap.get( cIn );
                 if ( cTo != null ) {
-                    outStr.append( cTo.charValue() );
+                    outStr.append( cTo );
                 }
             } 
             else {
@@ -204,8 +212,51 @@ public class TranslateFunction implements Function
             }
         }
     
-        return new String( outStr );
+        return outStr.toString();
+    }
+
+    private static String[] toUnicodeCharacters(String s) throws FunctionCallException {
+
+        String[] result = new String[s.length()];
+        int stringLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c1 = s.charAt(i);
+            if (isHighSurrogate(c1)) {
+                try {
+                    char c2 = s.charAt(i+1);
+                    if (isLowSurrogate(c2)) {
+                        result[stringLength] = (c1 + "" + c2).intern();
+                        i++;
+                    }
+                    else {
+                        throw new FunctionCallException("Mismatched surrogate pair in translate function");
+                    }
+                }
+                catch (StringIndexOutOfBoundsException ex) {
+                    throw new FunctionCallException("High surrogate without low surrogate at end of string passed to translate function");
+                }
+            }
+            else {
+                result[stringLength]=String.valueOf(c1).intern();
+            }
+            stringLength++;
+        }
+        
+        if (stringLength == result.length) return result;
+        
+        // trim array
+        String[] trimmed = new String[stringLength];
+        System.arraycopy(result, 0, trimmed, 0, stringLength);
+        return trimmed;
+        
+    }
+
+    private static boolean isHighSurrogate(char c) {
+        return c >= 0xD800 && c <= 0xDBFF;
+    }
+     
+    private static boolean isLowSurrogate(char c) {
+        return c >= 0xDC00 && c <= 0xDFFF;
     }
      
 }
-
