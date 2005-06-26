@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -69,8 +69,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
-import org.jaxen.BaseXPath;
 import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
 
@@ -99,7 +99,7 @@ public class NumberTest extends TestCase {
     public void testNumberFunctionOperatesOnFirstNodeInDocumentOrder() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("number(//x)");
+        XPath xpath = new DOMXPath("number(//x)");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
         doc.appendChild(a);
@@ -117,6 +117,19 @@ public class NumberTest extends TestCase {
         List result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Double.valueOf("2.0"), result.get(0));
+        
+    }    
+
+    public void testNumberFunctionOperatesOnContextNode() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number()");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
+        a.appendChild(doc.createTextNode("2"));
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(2, result.intValue());
         
     }    
 
