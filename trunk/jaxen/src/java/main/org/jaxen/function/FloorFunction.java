@@ -92,6 +92,11 @@ import org.jaxen.Navigator;
 public class FloorFunction implements Function
 {
 
+    /**
+     * Create a new <code>FloorFunction</code> object.
+     */
+    public FloorFunction() {}
+    
     /** Returns the largest integer less than or equal to a number.
      *
      * @param context the context at the point in the

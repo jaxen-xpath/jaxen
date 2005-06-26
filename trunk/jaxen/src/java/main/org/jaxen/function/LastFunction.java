@@ -82,6 +82,11 @@ public class LastFunction implements Function
 {
 
     /**
+     * Create a new <code>LastFunction</code> object.
+     */
+    public LastFunction() {}
+    
+    /**
      * Returns the number of nodes in the context node-set.
      * 
      * @param context the context at the point in the

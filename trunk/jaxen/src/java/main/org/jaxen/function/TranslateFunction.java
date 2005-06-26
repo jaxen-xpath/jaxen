@@ -115,6 +115,11 @@ public class TranslateFunction implements Function
       * who needs to improve the performance of this particular function):
       * Cache the HashMaps, once they are constructed. */
     
+    /**
+     * Create a new <code>TranslateFunction</code> object.
+     */
+    public TranslateFunction() {}
+    
     
     /** Returns a copy of the first argument in which
      * characters found in the second argument are replaced by

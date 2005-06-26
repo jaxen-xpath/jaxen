@@ -83,6 +83,11 @@ import org.jaxen.Navigator;
 public class ConcatFunction implements Function
 {
 
+    /**
+     * Create a new <code>ConcatFunction</code> object.
+     */
+    public ConcatFunction() {}
+    
     /** 
      * Concatenates the arguments and returns the resulting string.
      * Non-string items are first converted to strings as if by the 

@@ -70,7 +70,7 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- * <p><b>4.2</b> <code><i>string</i> substring-before(<i>string</i>,<i>string</i>)</code> 
+ * <p><b>4.2</b> <code><i>string</i> substring-before(<i>string</i>,<i>string</i>)</code></p>
  * 
  * 
  * <blockquote src="http://www.w3.org/TR/xpath#function-substring-before">
@@ -88,6 +88,13 @@ import org.jaxen.Navigator;
 public class SubstringBeforeFunction implements Function
 {
 
+    
+    /**
+     * Create a new <code>SubstringBeforeFunction</code> object.
+     */
+    public SubstringBeforeFunction() {}
+    
+    
     /** 
      * Returns the part of the string-value of the first item in <code>args</code>
      * that comes before the string-value of the second item in <code>args</code>;

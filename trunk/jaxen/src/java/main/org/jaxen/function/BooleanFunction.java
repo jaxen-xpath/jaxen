@@ -116,6 +116,12 @@ import org.jaxen.Navigator;
 public class BooleanFunction implements Function
 {
 
+
+    /**
+     * Create a new <code>BooleanFunction</code> object.
+     */
+    public BooleanFunction() {}
+    
     /** Convert the argument to a <code>Boolean</code>
      *
      * @param context the context at the point in the

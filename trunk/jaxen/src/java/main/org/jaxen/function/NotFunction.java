@@ -83,6 +83,11 @@ public class NotFunction implements Function
 {
 
     /**
+     * Create a new <code>NotFunction</code> object.
+     */
+    public NotFunction() {}
+    
+    /**
      * Returns <code>Boolean.TRUE</code> if the boolean value of 
      * <code>args.get(0)</code> is false, and <code>Boolean.FALSE</code> otherwise.
      * The boolean value is calculated as if by the XPath <code>boolean</code>

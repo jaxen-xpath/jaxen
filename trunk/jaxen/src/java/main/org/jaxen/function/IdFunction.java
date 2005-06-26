@@ -90,6 +90,11 @@ import org.jaxen.Navigator;
 public class IdFunction implements Function
 {
 
+    /**
+     * Create a new <code>IdFunction</code> object.
+     */
+    public IdFunction() {}
+    
     /** 
      * Returns the node with the specified ID.
      *

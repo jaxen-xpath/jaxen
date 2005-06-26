@@ -86,7 +86,12 @@ import org.jaxen.Navigator;
  */
 public class LocalNameFunction implements Function
 {
-
+    
+    /**
+     * Create a new <code>LocalNameFunction</code> object.
+     */
+    public LocalNameFunction() {}
+    
     /**
      * Returns the local-name of the specified node or the context node if 
      * no arguments are provided.

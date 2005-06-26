@@ -69,7 +69,7 @@ import org.jaxen.Navigator;
  * <p>
  * <b>4.2</b>
  * <code><i>string</i> substring(<i>string</i>,<i>number</i>,<i>number?</i>)</code>
- * 
+ * </p>
  * 
  * <blockquote src="http://www.w3.org/TR/xpath"> 
  * <p>The <b>substring</b> function returns the
@@ -156,8 +156,13 @@ import org.jaxen.Navigator;
  */
 public class SubstringFunction implements Function
 {
-    
 
+    /**
+     * Create a new <code>SubstringFunction</code> object.
+     */
+    public SubstringFunction() {}
+
+    
     /** Returns a substring of an XPath string-value by character index.
      *
      * @param context the context at the point in the

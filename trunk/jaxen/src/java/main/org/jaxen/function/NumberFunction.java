@@ -136,7 +136,7 @@ import org.jaxen.Navigator;
  * @author bob mcwhirter (bob @ werken.com)
  * 
  * @see <a href="http://www.w3.org/TR/xpath#function-number"
- *      target="_top">XPath Specification</a>
+ *      target="_top">Section 4.4 of the XPath Specification</a>
  */
 public class NumberFunction implements Function
 {
@@ -144,6 +144,11 @@ public class NumberFunction implements Function
     private final static Double NaN = new Double( Double.NaN );
     
     
+    /**
+     * Create a new <code>NumberFunction</code> object.
+     */
+    public NumberFunction() {}
+
     /** 
      * Returns the number value of <code>args.get(0)</code>,
      * or the number value of the context node if <code>args</code>

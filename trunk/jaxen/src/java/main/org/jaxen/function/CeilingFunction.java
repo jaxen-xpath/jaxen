@@ -95,6 +95,11 @@ import org.jaxen.Navigator;
 public class CeilingFunction implements Function
 {
 
+    /**
+     * Create a new <code>CeilingFunction</code> object.
+     */
+    public CeilingFunction() {}
+    
     /** Returns the smallest integer greater than or equal to a number.
      *
      * @param context the context at the point in the

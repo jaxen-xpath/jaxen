@@ -80,6 +80,11 @@ import org.jaxen.FunctionCallException;
 public class FalseFunction implements Function
 {
 
+    /**
+     * Create a new <code>FalseFunction</code> object.
+     */
+    public FalseFunction() {}
+    
     /** Returns <code>Boolean.FALSE</code>
      *
      * @param context the context at the point in the

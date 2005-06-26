@@ -209,6 +209,11 @@ public class StringFunction implements Function
     }
 
     /**
+     * Create a new <code>StringFunction</code> object.
+     */
+    public StringFunction() {}
+    
+    /**
      * Returns the string-value of  
      * <code>args.get(0)</code> or of the context node if ,code>args</code> is empty.
      * 

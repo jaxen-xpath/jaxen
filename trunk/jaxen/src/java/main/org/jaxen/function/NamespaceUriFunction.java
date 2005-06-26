@@ -102,6 +102,11 @@ public class NamespaceUriFunction implements Function
 {
 
     /**
+     * Create a new <code>NamespaceUriFunction</code> object.
+     */
+    public NamespaceUriFunction() {}
+
+    /**
      * Returns the namespace URI of the specified node or the namespace URI of the context node if 
      * no arguments are provided.
      * 
