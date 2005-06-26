@@ -89,6 +89,13 @@ import org.jaxen.Navigator;
 public class StringLengthFunction implements Function
 {
 
+    
+    /**
+     * Create a new <code>StringLengthFunction</code> object.
+     */
+    public StringLengthFunction() {}
+    
+    
     /**
      * <p>
      * Returns the number of Unicode characters in the string-value of the argument.

@@ -89,7 +89,13 @@ import org.jaxen.Navigator;
  */
 public class RoundFunction implements Function
 {
-
+ 
+    /**
+     * Create a new <code>RoundFunction</code> object.
+     */
+    public RoundFunction() {}
+    
+    
     /** Returns the nearest integer to the number.
      *
      * @param context the context at the point in the

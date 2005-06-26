@@ -117,6 +117,13 @@ public class LangFunction implements Function
     private static final String XMLNS_URI = 
         "http://www.w3.org/XML/1998/namespace";
     
+
+    /**
+     * Create a new <code>LangFunction</code> object.
+     */
+    public LangFunction() {}
+    
+    
     /**
      * <p>
      * Determines whether or not the context node is written in the language specified

@@ -83,6 +83,11 @@ import org.jaxen.Navigator;
 public class ContainsFunction implements Function
 {
 
+    /**
+     * Create a new <code>ContainsFunction</code> object.
+     */
+    public ContainsFunction() {}
+    
     /** 
      * <p>
      *  Returns true if the string-value of the 

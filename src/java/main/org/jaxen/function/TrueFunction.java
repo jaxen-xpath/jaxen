@@ -80,10 +80,15 @@ import org.jaxen.FunctionCallException;
 public class TrueFunction implements Function
 {
 
+    /**
+     * Create a new <code>TrueFunction</code> object.
+     */
+    public TrueFunction() {}
+
+    
     /** Returns <code>Boolean.TRUE</code>
      *
-     * @param context the context at the point in the
-     *         expression when the function is called
+     * @param context ignored
      * @param args an empty list
      * 
      * @return <code>Boolean.TRUE</code>

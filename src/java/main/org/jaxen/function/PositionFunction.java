@@ -83,6 +83,11 @@ public class PositionFunction implements Function
 {
     
     /**
+     * Create a new <code>PositionFunction</code> object.
+     */
+    public PositionFunction() {}
+    
+    /**
      * Returns the position of the context node in the context node-set.
      * 
      * @param context the context at the point in the

@@ -79,11 +79,16 @@ import org.jaxen.Navigator;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-starts-with" target="_top">XPath Specification</a>
+ * @see <a href="http://www.w3.org/TR/xpath#function-starts-with" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class StartsWithFunction implements Function
 {
-
+    
+    /**
+     * Create a new <code>StartsWithFunction</code> object.
+     */
+    public StartsWithFunction() {}
+    
     /** 
      * Returns true if the string-value of the first item in <code>args</code>
      * starts with the string-value of the second item in <code>args</code>. 

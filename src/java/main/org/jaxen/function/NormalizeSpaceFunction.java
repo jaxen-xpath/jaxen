@@ -93,6 +93,12 @@ import org.jaxen.Navigator;
 public class NormalizeSpaceFunction implements Function
 {
 
+
+    /**
+     * Create a new <code>NormalizeSpaceFunction</code> object.
+     */
+    public NormalizeSpaceFunction() {}
+    
     /** 
      * Returns the string-value of the first item in <code>args</code>
      * after removing all leading and trailing white space, and 

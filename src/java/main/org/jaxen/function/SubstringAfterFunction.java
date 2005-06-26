@@ -87,6 +87,12 @@ import org.jaxen.Navigator;
 public class SubstringAfterFunction implements Function
 {
 
+    /**
+     * Create a new <code>SubstringAfterFunction</code> object.
+     */
+    public SubstringAfterFunction() {}
+
+
     /** 
      * Returns the part of the string-value of the first item in <code>args</code>
      * that follows the string-value of the second item in <code>args</code>;

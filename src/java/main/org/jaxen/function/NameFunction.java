@@ -91,6 +91,12 @@ import org.jaxen.Navigator;
 public class NameFunction implements Function
 {
     
+    
+    /**
+     * Create a new <code>NameFunction</code> object.
+     */
+    public NameFunction() {}
+    
     /**
      * Returns the name of the specified node or the name of the context node if 
      * no arguments are provided.
