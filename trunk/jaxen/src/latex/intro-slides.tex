@@ -1124,8 +1124,8 @@ catch (JaxenException e)
 
 \subslide{The XPath Classes - Evaluation - selectSingleNode}
 
-The \emph{selectSingleNodes(...)} operates similar to
-\emph{selectNodes(...)} but only returns the first members
+The \emph{selectSingleNode(...)} method operates similar to
+\emph{selectNodes(...)} but only returns the first member
 of the selected list as an \emph{Object}.  Depending on the
 expression, calling code must cast to a class appropriate to
 the object-model being used.
@@ -1272,7 +1272,7 @@ Using the prefix namespace mapping functionality with a different
 prefix:
 
 \begin{codelisting}
-<frobnovich:journal frobnovich:xmlns="http://werken.com/werken-journal/">
+<frobnovich:journal xmlns:frobnovich="http://werken.com/werken-journal/">
 </frobnovich:journal>
 \end{codelisting}
 
@@ -2384,7 +2384,7 @@ Adapting models for XPath
 
 \slide{Navigation}
 
-Since XPath expressions steps are evaluated in relation to a context
+Since XPath expression steps are evaluated in relation to a context
 node across a particular axis of `travel', the main aspects of
 navigating an object-model involves iterating over members of an axis.
 
