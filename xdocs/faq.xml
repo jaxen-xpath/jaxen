@@ -14,7 +14,7 @@
       The <code>jaxen</code> project is a Java XPath Engine.
       <code>jaxen</code> is a universal object model walker, capable of evaluating
       XPath expressions across multiple models.  Currently supported
-      are <a href="http://dom4j.org">dom4j</a> and <a href="http://jdom.org">JDOM</a>.
+      are <a href="http://dom4j.org">dom4j</a>, <a href="http://jdom.org">JDOM</a>, and DOM.
       </p>
     </section>
 
@@ -33,7 +33,7 @@
       provides a single point for XPath expression evaluation, regardless of the target
       object model, whether its <strong>dom4j</strong>, <strong>JDOM</strong>, <strong>DOM</strong>, 
       <strong>XOM</strong>, <strong>JavaBeans</strong>,
-      or whatnot.
+      or what not.
       </p>
     </section>
 
