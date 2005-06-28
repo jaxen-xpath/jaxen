@@ -68,7 +68,7 @@ import org.jaxen.Function;
 import org.jaxen.FunctionCallException;
 
 /**
- *  <p><b>4.1</b> <code><i>number</i> count(<i>node-set</i>)</code> 
+ *  <p><b>4.1</b> <code><i>number</i> count(<i>node-set</i>)</code></p> 
  *  
  * <blockquote src="http://www.w3.org/TR/xpath#function-count">
  * The <b>count</b> function returns the number of nodes in the argument node-set.

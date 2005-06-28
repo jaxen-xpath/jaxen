@@ -69,7 +69,7 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- *  <p><b>4.2</b> <code><i>boolean</i> contains(<i>string</i>,<i>string</i>)</code> 
+ *  <p><b>4.2</b> <code><i>boolean</i> contains(<i>string</i>,<i>string</i>)</code></p>
  *  
  * <blockquote src="http://www.w3.org/TR/xpath">
  * The <b>contains</b> function returns true if the first argument 
