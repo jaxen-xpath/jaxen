@@ -161,4 +161,8 @@ public class NumberTest extends TestCase {
         
     }     
     
+    public void testIsNan() {
+        assertTrue(NumberFunction.isNaN(0.0 / 0.0));
+    }     
+    
 }
