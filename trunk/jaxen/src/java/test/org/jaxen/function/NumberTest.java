@@ -69,6 +69,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
+import org.jaxen.BaseXPath;
+import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
@@ -133,4 +135,20 @@ public class NumberTest extends TestCase {
         
     }    
 
+
+    public void testNumberFunctionRequiresAtMostOneArgument() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("number('2.2', '1.2')");
+        
+        try {
+            xpath.selectNodes(doc);
+            fail("Allowed number function with two arguments");
+        }
+        catch (FunctionCallException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    }     
+    
 }
