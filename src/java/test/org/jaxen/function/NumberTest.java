@@ -150,4 +150,15 @@ public class NumberTest extends TestCase {
         
     }     
     
+    
+    public void testNumberFunctionAppliedToNonNumericString() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('Marx')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(new Double(Double.NaN), result);
+        
+    }     
+    
 }
