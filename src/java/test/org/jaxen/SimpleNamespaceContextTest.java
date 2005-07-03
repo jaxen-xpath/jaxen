@@ -67,15 +67,22 @@ package org.jaxen;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import junit.framework.TestCase;
 
 /**
  * <p>
- *  Test for function context.
+ *  Test for namespace context.
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
+ * @version 1.1b8
  *
  */
 public class SimpleNamespaceContextTest extends TestCase
@@ -83,7 +90,8 @@ public class SimpleNamespaceContextTest extends TestCase
 
     /**
      * Need to make sure that changing the map after it's used to create the 
-     * namespace context does not affect the context. i.e.getCause()getCause()getCause()getCause()getCause()getCause()getCause()getCause() data encapsulation 
+     * namespace context does not affect the context. i.e.
+     * getCause()getCause()getCause()getCause() data encapsulation 
      * is not violated.
      */
     public void testMapCopy() {
@@ -91,6 +99,19 @@ public class SimpleNamespaceContextTest extends TestCase
         SimpleNamespaceContext context = new SimpleNamespaceContext(map);
         map.put("pre", "http://www.example.org/");
         assertNull(context.translateNamespacePrefixToUri("pre"));
+    }
+ 
+    public void testContextFromElement() throws ParserConfigurationException, UnsupportedAxisException { 
+        SimpleNamespaceContext context = new SimpleNamespaceContext();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element root = doc.createElementNS("http://www.example.org/", "pre:root");
+        doc.appendChild(root);
+        context.addElementNamespaces(new org.jaxen.dom.DocumentNavigator(), root);
+        
+        assertEquals("http://www.example.org/", context.translateNamespacePrefixToUri("pre"));
     }
  
 }
