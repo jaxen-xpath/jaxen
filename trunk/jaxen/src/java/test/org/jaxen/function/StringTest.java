@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -69,9 +69,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
-import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
 
@@ -100,7 +100,7 @@ public class StringTest extends TestCase {
     public void testStringFunctionOperatesOnFirstNodeInDocumentOrder() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("string(//x)");
+        XPath xpath = new DOMXPath("string(//x)");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
         doc.appendChild(a);
@@ -121,38 +121,63 @@ public class StringTest extends TestCase {
         
     }
     
+    public void testStringValueOfComment() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("string(/a/comment())");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
+        a.appendChild(doc.createComment("data"));
+        
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("data", result);
+        
+    }
+    
+    public void testStringValueOfNamespaceNode() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("string(/a/namespace::node())");
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
+        
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("http://www.w3.org/XML/1998/namespace", result);
+        
+    }
+    
     public void testSmallNumbersDontUseExponentialNotation() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("string(0.0000003)");
+        XPath xpath = new DOMXPath("string(0.0000003)");
         String result = (String) xpath.evaluate(null);
         assertEquals("0.0000003", result);
     }
 
     public void testBigNumbersDontUseExponentialNotation() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("string(100000000.5)");
+        XPath xpath = new DOMXPath("string(100000000.5)");
         String result = (String) xpath.evaluate(null);
         assertEquals("100000000.5", result);
     }
 
     public void testStringOfInfinity() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("string(1 div 0)");
+        XPath xpath = new DOMXPath("string(1 div 0)");
         String result = (String) xpath.evaluate(null);
         assertEquals("Infinity", result);
     }
 
     public void testStringOfNegativeInfinity() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("string(-1 div 0)");
+        XPath xpath = new DOMXPath("string(-1 div 0)");
         String result = (String) xpath.evaluate(null);
         assertEquals("-Infinity", result);
     }
 
     public void testStringOfNegativeZero() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("string(-0)");
+        XPath xpath = new DOMXPath("string(-0)");
         String result = (String) xpath.evaluate(null);
         assertEquals("0", result);
     }
 
     public void testIntegersAreFormattedAsInts() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("string(12)");
+        XPath xpath = new DOMXPath("string(12)");
         String result = (String) xpath.evaluate(null);
         assertEquals("12", result);
     } 
@@ -160,7 +185,7 @@ public class StringTest extends TestCase {
     public void testStringFunctionRequiresAtMostOneArgument() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("string('a', 1)");
+        XPath xpath = new DOMXPath("string('a', 1)");
         
         try {
             xpath.selectNodes(doc);
