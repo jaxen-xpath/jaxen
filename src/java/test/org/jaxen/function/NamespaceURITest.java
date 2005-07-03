@@ -147,6 +147,15 @@ public class NamespaceURITest extends TestCase {
         assertEquals("", result);
     }    
 
+    public void testNamespaceURIOfAttributeInNamespace() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "namespace-uri(/*/@*)" );
+        Attr a = doc.createAttributeNS("http://www.w3.org/", "pre:name");
+        doc.getDocumentElement().setAttributeNode(a);
+        Object result = (String) xpath.evaluate(doc);
+        assertEquals("http://www.w3.org/", result);
+    }    
+
     public void testNamespaceURIOfTextIsEmptyString() throws JaxenException
     {
         XPath xpath = new DOMXPath( "namespace-uri(/*/text())" );
@@ -173,5 +182,19 @@ public class NamespaceURITest extends TestCase {
         XPath xpath = new DOMXPath( "namespace-uri(/*/namespace::node())" );
         String result = (String) xpath.evaluate(doc);
         assertEquals("", result);
-    }    
+    }
+    
+    public void testNamespaceURIOfComment() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("namespace-uri(/a/comment())");
+        org.w3c.dom.Element a = doc.createElementNS("http://www.example.org/", "a");
+        doc.appendChild(a);
+        a.appendChild(doc.createComment("data"));
+        
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+        
+    }
+
 }
