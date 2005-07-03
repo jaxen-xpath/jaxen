@@ -67,9 +67,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
-import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
 
@@ -99,7 +99,7 @@ public class RoundTest extends TestCase {
     
     public void testRound() throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("round(1.5)");
+        XPath xpath = new DOMXPath("round(1.5)");
         
         Object result = xpath.evaluate(doc);
         assertEquals(2, ((Double) result).doubleValue(), 0.0001);
@@ -108,7 +108,7 @@ public class RoundTest extends TestCase {
 
     public void testNegativeRound() throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("round(-1.5)");
+        XPath xpath = new DOMXPath("round(-1.5)");
         
         Object result = xpath.evaluate(doc);
         assertEquals(-1, ((Double) result).doubleValue(), 0.0001);
@@ -116,7 +116,7 @@ public class RoundTest extends TestCase {
     }    
 
     public void testNaNRoundIsNaN() throws JaxenException {
-        BaseXPath xpath = new DOMXPath("round(1.0 div 0.0 - 2.0 div 0.0)");
+        XPath xpath = new DOMXPath("round(1.0 div 0.0 - 2.0 div 0.0)");
         double result = ((Double) xpath.evaluate(doc)).doubleValue();
         assertTrue(Double.isNaN(result));
     }    
@@ -124,7 +124,7 @@ public class RoundTest extends TestCase {
     public void testRoundFunctionRequiresAtLeastOneArgument() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("round()");
+        XPath xpath = new DOMXPath("round()");
         
         try {
             xpath.selectNodes(doc);
@@ -139,7 +139,7 @@ public class RoundTest extends TestCase {
     public void testRoundFunctionRequiresAtMostOneArgument() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("round(2.2, 1.2)");
+        XPath xpath = new DOMXPath("round(2.2, 1.2)");
         
         try {
             xpath.selectNodes(doc);

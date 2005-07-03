@@ -69,7 +69,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import junit.framework.TestCase;
 
-import org.jaxen.BaseXPath;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
@@ -139,7 +138,7 @@ public class NumberTest extends TestCase {
     public void testNumberFunctionRequiresAtMostOneArgument() 
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("number('2.2', '1.2')");
+        XPath xpath = new DOMXPath("number('2.2', '1.2')");
         
         try {
             xpath.selectNodes(doc);
