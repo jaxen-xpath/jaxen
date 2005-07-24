@@ -67,12 +67,12 @@ import org.jaxen.JaxenRuntimeException;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class DescendantAxisIterator implements Iterator
 {
 
-    private Stack stack = new Stack();
+    private ArrayList stack = new ArrayList();
     private Iterator children;
     private Navigator navigator;
 
@@ -97,7 +97,7 @@ public class DescendantAxisIterator implements Iterator
             {
                 return false;
             }
-            children = (Iterator) stack.pop();
+            children = (Iterator) stack.remove(stack.size()-1);
         }
         return true;
     }
@@ -109,7 +109,7 @@ public class DescendantAxisIterator implements Iterator
             if (hasNext())
             {
                 Object node = children.next();
-                stack.push(children);
+                stack.add(children);
                 children = navigator.getChildAxisIterator(node);
                 return node;
             }
