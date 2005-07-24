@@ -259,27 +259,28 @@ public class DocumentNavigator extends DefaultNavigator
         return new NodeIterator ((Node)contextNode) {
                 protected Node getFirstNode (Node node)
                 {
-                    if (node == null)
+                    if (node == null) {
                         return null;
+                    }
                     else {
                         Node sibling = node.getNextSibling();
-                        if (sibling == null)
+                        if (sibling == null) {
                             return getFirstNode(node.getParentNode());
-                        else
+                        }
+                        else {
                             return sibling;
+                        }
                     }
                 }
                 protected Node getNextNode (Node node) {
-                    if (node == null)
+                    if (node == null) {
                         return null;
+                    }
                     else {
                         Node n = node.getFirstChild();
-                        if (n == null)
-                            n = node.getNextSibling();
-                        if (n == null)
-                            return getFirstNode(node.getParentNode());
-                        else
-                            return n;
+                        if (n == null) n = node.getNextSibling();
+                        if (n == null) return getFirstNode(node.getParentNode());
+                        else return n;
                     }
                 }
             };
@@ -296,7 +297,8 @@ public class DocumentNavigator extends DefaultNavigator
     {
         if (isElement(contextNode)) {
             return new AttributeIterator((Node)contextNode);
-        } else {
+        } 
+        else {
             return JaxenConstants.EMPTY_ITERATOR;
         }
     }
@@ -377,16 +379,22 @@ public class DocumentNavigator extends DefaultNavigator
             // An empty default namespace cancels
             // any previous default.
             NamespaceNode defaultNS = (NamespaceNode)nsMap.get("");
-            if (defaultNS != null && defaultNS.getNodeValue().length() == 0)
+            if (defaultNS != null && defaultNS.getNodeValue().length() == 0) {
                 nsMap.remove("");
+            }
             return nsMap.values().iterator();
-        } else {
+        } 
+        else {
             return JaxenConstants.EMPTY_ITERATOR;
         }
     }
 
     /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on DOM documents.
+     *  
+     * @param xpath the XPath expression
+     * @return a parsed form of the given XPath string
+     * @throws org.jaxen.saxpath.SAXPathException if the string is syntactically incorrect
      */
     public XPath parseXPath (String xpath) throws org.jaxen.saxpath.SAXPathException
     {
@@ -405,17 +413,18 @@ public class DocumentNavigator extends DefaultNavigator
         else return ((Node)contextNode).getOwnerDocument();
     }
 
-
+    // Why are there separate methods for getElementNamespaceURI and 
+    // getAttributeNamespaceUR when they do exaclty the same thing?
     /**
      * Get the namespace URI of an element.
      *
-     * @param object the target node
+     * @param element the target node
      * @return a string (possibly empty) if the node is an element,
      * and null otherwise
      */
-    public String getElementNamespaceUri (Object object)
+    public String getElementNamespaceUri (Object element)
     {
-        String uri = ((Node)object).getNamespaceURI();
+        String uri = ((Node)element).getNamespaceURI();
         return uri;
     }
 
@@ -423,14 +432,14 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the local name of an element.
      *
-     * @param object the target node
+     * @param element the target node
      * @return a string representing the unqualified local name
      * if the node is an element, or null otherwise
      */
-    public String getElementName (Object object)
+    public String getElementName (Object element)
     {
-        String name = ((Node)object).getLocalName();
-        if (name == null) name = ((Node)object).getNodeName();
+        String name = ((Node)element).getLocalName();
+        if (name == null) name = ((Node)element).getNodeName();
         return name;
     }
 
@@ -438,26 +447,30 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the qualified name of an element.
      *
-     * @param object the target node
+     * @param element the target node
      * @return a string representing the qualified (i.e. possibly
-     * prefixed) name if the node is an element, or null otherwise
+     *   prefixed) name if the node is an element, or null otherwise
      */
-    public String getElementQName (Object object)
+    public String getElementQName (Object element)
     {
-        String qname = ((Node)object).getNodeName();
-        if (qname == null) qname = ((Node)object).getLocalName();
+        // XXX doesn't this work on an attribute too?
+        String qname = ((Node)element).getNodeName();
+        if (qname == null) qname = ((Node)element).getLocalName();
         return qname;
     }
 
 
     /**
-     * Get the Namespace URI of an attribute.
+     * Get the namespace URI of an attribute.
      *
-     * @param object the target node
+     * @param attribute the target node
+     * 
+     * @return the namespace name of the specified node
+     * 
      */
-    public String getAttributeNamespaceUri (Object object)
+    public String getAttributeNamespaceUri (Object attribute)
     {
-        String uri = ((Node)object).getNamespaceURI();
+        String uri = ((Node)attribute).getNamespaceURI();
         return uri;
     }
 
@@ -465,14 +478,14 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the local name of an attribute.
      *
-     * @param object the target node
+     * @param attribute the target node
      * @return a string representing the unqualified local name
      * if the node is an attribute, or null otherwise
      */
-    public String getAttributeName (Object object)
+    public String getAttributeName (Object attribute)
     {
-        String name = ((Node)object).getLocalName();
-        if (name == null) name = ((Node)object).getNodeName();
+        String name = ((Node)attribute).getLocalName();
+        if (name == null) name = ((Node)attribute).getNodeName();
         return name;
     }
 
@@ -480,14 +493,15 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Get the qualified name of an attribute.
      *
-     * @param object the target node
+     * @param attribute the target node
      * @return a string representing the qualified (i.e. possibly
      * prefixed) name if the node is an attribute, or null otherwise
      */
-    public String getAttributeQName (Object object)
+    public String getAttributeQName (Object attribute)
     {
-        String qname = ((Node)object).getNodeName();
-        if (qname == null) qname = ((Node)object).getLocalName();
+        // XXX wouldn't this work on an element too?
+        String qname = ((Node)attribute).getNodeName();
+        if (qname == null) qname = ((Node)attribute).getLocalName();
         return qname;
     }
 
@@ -613,7 +627,7 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Construct an element's string value recursively.
+     * Construct a node's string value recursively.
      *
      * @param node the current node
      * @param buffer the buffer for building the text
@@ -702,7 +716,12 @@ public class DocumentNavigator extends DefaultNavigator
     }
 
     /**
-     * Translate a Namespace prefix to a URI.
+     * Translate a namespace prefix to a URI.
+     * 
+     * @param prefix the namespace prefix
+     * @param element the namespace context
+     * @return the namesapce URI bound to the prefix in the scope of <code>element</code>;
+     *     null if the porefix is not bound
      */
     public String translateNamespacePrefixToUri (String prefix, Object element)
     {
@@ -726,6 +745,8 @@ public class DocumentNavigator extends DefaultNavigator
     {
         try
         {
+            // XXX Do we really need to constrcut a new factory here each time?
+            // Isn't that thread safe? Couldn't we make this static?
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -743,6 +764,16 @@ public class DocumentNavigator extends DefaultNavigator
         
     }
 
+    // XXX What should these two methods return if the argument is not a 
+    // processign instruction?
+    
+    /**
+     * Get the target of a processing instruction node.
+     * 
+     * @param obj the processing instruction
+     * @return the target of the processing instruction
+     * 
+     */
     public String getProcessingInstructionTarget(Object obj)
     {
         ProcessingInstruction pi = (ProcessingInstruction) obj;
@@ -750,6 +781,14 @@ public class DocumentNavigator extends DefaultNavigator
         return pi.getTarget();
     }
 
+    /**
+     * Get the data of a processing instruction node.
+     * 
+     * @param obj the processing instruction
+     * @return the target of the processing instruction
+     * 
+     * 
+     */
     public String getProcessingInstructionData(Object obj)
     {
         ProcessingInstruction pi = (ProcessingInstruction) obj;
@@ -787,23 +826,16 @@ public class DocumentNavigator extends DefaultNavigator
         public NodeIterator (Node contextNode)
         {
             node = getFirstNode(contextNode);
-            while (!isXPathNode(node))
+            while (!isXPathNode(node)) {
                 node = getNextNode(node);
+            }
         }
 
-
-        /**
-         * @see Iterator#hasNext
-         */
         public boolean hasNext ()
         {
             return (node != null);
         }
 
-
-        /**
-         * @see Iterator#next
-         */
         public Object next ()
         {
             if (node == null) throw new NoSuchElementException();
@@ -815,10 +847,6 @@ public class DocumentNavigator extends DefaultNavigator
             return ret;
         }
 
-
-        /**
-         * @see Iterator#remove
-         */
         public void remove ()
         {
             throw new UnsupportedOperationException();
@@ -862,8 +890,7 @@ public class DocumentNavigator extends DefaultNavigator
         private boolean isXPathNode (Node node)
         {
             // null is usable, because it means end
-            if (node == null)
-                return true;
+            if (node == null) return true;
 
             switch (node.getNodeType()) {
                 case Node.DOCUMENT_FRAGMENT_NODE:
@@ -911,19 +938,11 @@ public class DocumentNavigator extends DefaultNavigator
             }
         }
 
-
-        /**
-         * @see Iterator#hasNext
-         */
         public boolean hasNext ()
         {
             return pos <= lastAttribute;
         }
 
-
-        /**
-         * @see Iterator#next
-         */
         public Object next ()
         {
             Node attr = map.item(pos++);
@@ -936,10 +955,6 @@ public class DocumentNavigator extends DefaultNavigator
             else return attr;
         }
 
-
-        /**
-         * @see Iterator#remove
-         */
         public void remove ()
         {
             throw new UnsupportedOperationException();
