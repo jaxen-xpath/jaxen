@@ -233,6 +233,13 @@
       <version>1.0b3</version>
     </dependency>
 
+    <dependency>
+      <groupId>maven-plugins</groupId>
+      <artifactId>maven-cobertura-plugin</artifactId>
+      <version>1.1</version>
+      <type>plugin</type>
+    </dependency>
+
   </dependencies>
 
   <build>
