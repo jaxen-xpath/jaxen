@@ -77,11 +77,10 @@ import java.util.Iterator;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b8
  *
  */
 public class DOM4JTests extends TestCase {
-
     
     public DOM4JTests(String name) {
         super(name);   
@@ -96,25 +95,5 @@ public class DOM4JTests extends TestCase {
         return result;
         
     }
-
-    /**
-     * reported as JAXEN-104.
-     * @throws FunctionCallException
-     * @throws UnsupportedAxisException
-     */
-    public void testConcurrentModification() throws FunctionCallException, UnsupportedAxisException
-    {
-        Navigator nav = new DocumentNavigator();
-        Object document = nav.getDocument("xml/testNamespaces.xml");
-        Iterator descendantOrSelfAxisIterator = nav.getDescendantOrSelfAxisIterator(document);
-        while (descendantOrSelfAxisIterator.hasNext()) {
-            Object node = descendantOrSelfAxisIterator.next();
-            Iterator namespaceAxisIterator = nav.getNamespaceAxisIterator(node);
-            while (namespaceAxisIterator.hasNext()) {
-                namespaceAxisIterator.next();
-            }
-        }
-    }
-
 
 }

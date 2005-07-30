@@ -62,12 +62,16 @@
 
 package org.jaxen.dom4j;
 
+import java.util.Iterator;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 import org.dom4j.io.SAXReader;
+import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
+import org.jaxen.UnsupportedAxisException;
 import org.jaxen.XPathTestBase;
 
 public class DocumentNavigatorTest extends XPathTestBase
@@ -77,9 +81,7 @@ public class DocumentNavigatorTest extends XPathTestBase
     public DocumentNavigatorTest(String name)
     {
         super( name );
-
         this.reader = new SAXReader();
-
         this.reader.setMergeAdjacentText( true );
     }
 
@@ -107,4 +109,24 @@ public class DocumentNavigatorTest extends XPathTestBase
     {
         return reader.read( url );
     }
+    
+    /**
+     * reported as JAXEN-104.
+     * @throws FunctionCallException
+     * @throws UnsupportedAxisException
+     */
+    public void testConcurrentModification() throws FunctionCallException, UnsupportedAxisException
+    {
+        Navigator nav = new DocumentNavigator();
+        Object document = nav.getDocument("xml/testNamespaces.xml");
+        Iterator descendantOrSelfAxisIterator = nav.getDescendantOrSelfAxisIterator(document);
+        while (descendantOrSelfAxisIterator.hasNext()) {
+            Object node = descendantOrSelfAxisIterator.next();
+            Iterator namespaceAxisIterator = nav.getNamespaceAxisIterator(node);
+            while (namespaceAxisIterator.hasNext()) {
+                namespaceAxisIterator.next();
+            }
+        }
+    }
+    
 }
