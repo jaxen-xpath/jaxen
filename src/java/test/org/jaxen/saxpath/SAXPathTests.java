@@ -72,16 +72,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
+ * @version 1.1b8
  *
  */
-public class SAXPathTests extends TestCase {
-
-    
-    public SAXPathTests(String name) {
-        super(name);   
-    }
-
+public class SAXPathTests {
     
     public static Test suite() {
         
@@ -90,6 +84,5 @@ public class SAXPathTests extends TestCase {
         return result;
         
     }
-
     
 }

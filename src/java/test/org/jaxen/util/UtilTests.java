@@ -63,7 +63,6 @@
 package org.jaxen.util;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -72,16 +71,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
+ * @version 1.1b8
  *
  */
-public class UtilTests extends TestCase {
-
-    
-    public UtilTests(String name) {
-        super(name);   
-    }
-
+public class UtilTests {
     
     public static Test suite() {
         
@@ -97,6 +90,5 @@ public class UtilTests extends TestCase {
         return result;
         
     }
-
     
 }

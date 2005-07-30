@@ -63,7 +63,6 @@
 package org.jaxen.expr;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -72,15 +71,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b8
  *
  */
-public class ExprTests extends TestCase {
-
-    
-    public ExprTests(String name) {
-        super(name);   
-    }
+public class ExprTests {
 
     
     public static Test suite() {

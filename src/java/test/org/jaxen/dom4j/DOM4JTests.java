@@ -63,13 +63,7 @@
 package org.jaxen.dom4j;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.jaxen.Navigator;
-import org.jaxen.FunctionCallException;
-import org.jaxen.UnsupportedAxisException;
-
-import java.util.Iterator;
 
 /**
  * <p>
@@ -80,11 +74,7 @@ import java.util.Iterator;
  * @version 1.1b8
  *
  */
-public class DOM4JTests extends TestCase {
-    
-    public DOM4JTests(String name) {
-        super(name);   
-    }
+public class DOM4JTests {
 
     
     public static Test suite() {
