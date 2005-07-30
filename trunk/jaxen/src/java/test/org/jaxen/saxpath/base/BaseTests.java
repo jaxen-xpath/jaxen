@@ -63,7 +63,6 @@
 package org.jaxen.saxpath.base;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -72,16 +71,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b8
  *
  */
-public class BaseTests extends TestCase {
-
-    
-    public BaseTests(String name) {
-        super(name);   
-    }
-
+public class BaseTests {
     
     public static Test suite() {
         
@@ -92,6 +85,5 @@ public class BaseTests extends TestCase {
         return result;
         
     }
-
     
 }

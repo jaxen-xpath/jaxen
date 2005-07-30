@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,6 @@ import org.jaxen.util.UtilTests;
 import org.jaxen.xom.XOMTests;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -85,15 +84,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b7
+ * @version 1.1b8
  *
  */
-public class JaxenTests extends TestCase {
-
-    
-    public JaxenTests(String name) {
-        super(name);   
-    }
+public class JaxenTests {
 
     
     public static Test suite() {

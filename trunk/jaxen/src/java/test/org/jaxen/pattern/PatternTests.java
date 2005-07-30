@@ -63,7 +63,6 @@
 package org.jaxen.pattern;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -72,17 +71,11 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b8
  *
  */
-public class PatternTests extends TestCase {
+public class PatternTests {
 
-    
-    public PatternTests(String name) {
-        super(name);   
-    }
-
-    
     public static Test suite() {
         
         TestSuite result = new TestSuite();
@@ -90,6 +83,5 @@ public class PatternTests extends TestCase {
         return result;
         
     }
-
     
 }

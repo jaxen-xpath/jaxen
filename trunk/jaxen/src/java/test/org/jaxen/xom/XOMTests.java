@@ -63,7 +63,6 @@
 package org.jaxen.xom;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -72,16 +71,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b8
  *
  */
-public class XOMTests extends TestCase {
-
-    
-    public XOMTests(String name) {
-        super(name);   
-    }
-
+public class XOMTests {
     
     public static Test suite() {
         
@@ -91,6 +84,5 @@ public class XOMTests extends TestCase {
         return result;
         
     }
-
     
 }

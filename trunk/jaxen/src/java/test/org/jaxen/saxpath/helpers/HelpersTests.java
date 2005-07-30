@@ -63,7 +63,6 @@
 package org.jaxen.saxpath.helpers;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -72,16 +71,10 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b4
+ * @version 1.1b8
  *
  */
-public class HelpersTests extends TestCase {
-
-    
-    public HelpersTests(String name) {
-        super(name);   
-    }
-
+public class HelpersTests {
     
     public static Test suite() {
         
@@ -90,6 +83,5 @@ public class HelpersTests extends TestCase {
         return result;
         
     }
-
     
 }
