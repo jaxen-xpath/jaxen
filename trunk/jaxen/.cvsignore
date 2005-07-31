@@ -11,3 +11,8 @@ velocity.log
 xom-1.1d7.jar
 bin
 cobertura
+lib
+jaxen.fb
+jester.xml
+cobertura.ser
+cobertura.jar
