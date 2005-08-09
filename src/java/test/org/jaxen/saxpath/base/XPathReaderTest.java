@@ -444,4 +444,27 @@ public class XPathReaderTest extends TestCase
 
     }
 
+    public void testNoSpaceAfterDiv() throws JaxenException 
+    {
+        XPath xpath = new DOMXPath( "105 div10" );
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(10.5, result.doubleValue(), 0.000001);
+    }
+
+
+    public void testNoSpaceAfterMod() throws JaxenException 
+    {
+        XPath xpath = new DOMXPath( "105 mod10" );
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(5, result.intValue());
+    }
+
+
+    public void testNoSpaceAfterPlus() throws JaxenException 
+    {
+        XPath xpath = new DOMXPath( "105 +10" );
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(115, result.intValue());
+    }
+    
 }
