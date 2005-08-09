@@ -80,7 +80,7 @@ public abstract class XPathTestBase extends TestCase
     protected static boolean debug = false;
     private ContextSupport contextSupport;
 
-    public XPathTestBase(String name)
+    protected XPathTestBase(String name)
     {
         super(name);
     }
@@ -99,18 +99,18 @@ public abstract class XPathTestBase extends TestCase
                 text);
     }
 
-    public void log(boolean actualVerbose,
+    private void log(boolean actualVerbose,
                     String text)
     {
         if (actualVerbose) System.out.println(text);
     }
 
-    protected void assertCountXPath(int expectedSize, Object context, String xpathStr) throws JaxenException
+    private void assertCountXPath(int expectedSize, Object context, String xpathStr) throws JaxenException
     {
         assertCountXPath2(expectedSize, context, xpathStr);
     }
 
-    protected Object assertCountXPath2(int expectedSize, Object context, String xpathStr) throws JaxenException
+    private Object assertCountXPath2(int expectedSize, Object context, String xpathStr) throws JaxenException
     {
         log(debug,
                 "  Select :: " + xpathStr);
@@ -143,7 +143,7 @@ public abstract class XPathTestBase extends TestCase
         return null;
     }
 
-    protected void assertInvalidXPath(Object context, String xpathStr)
+    private void assertInvalidXPath(Object context, String xpathStr)
     {
         try
         {
@@ -161,31 +161,31 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    protected void assertValueOfXPath(String expected, Object context, String xpathStr) throws JaxenException
+    private void assertValueOfXPath(String expected, Object context, String xpathStr) throws JaxenException
     {
-        BaseXPath xpath = new BaseXPath(xpathStr);
-        Object node = xpath.evaluate(getContext(context));
-        String result = StringFunction.evaluate(node,
-                getNavigator());
-        log(debug,
-                "  Select :: " + xpathStr);
-        log(debug,
-                "    Expected :: " + expected);
-        log(debug,
-                "    Result   :: " + result);
-        if (!expected.equals(result))
-        {
+            BaseXPath xpath = new BaseXPath(xpathStr);
+            Object node = xpath.evaluate(getContext(context));
+            String result = StringFunction.evaluate(node,
+                    getNavigator());
             log(debug,
-                    "      ## FAILED");
+                    "  Select :: " + xpathStr);
             log(debug,
-                    "      ## xpath: " + xpath + " = " + xpath.debug());
+                    "    Expected :: " + expected);
+            log(debug,
+                    "    Result   :: " + result);
+            if (!expected.equals(result))
+            {
+                log(debug,
+                        "      ## FAILED");
+                log(debug,
+                        "      ## xpath: " + xpath + " = " + xpath.debug());
+            }
+            assertEquals(xpathStr,
+                    expected,
+                    result);
         }
-        assertEquals(xpathStr,
-                expected,
-                result);
-    }
 
-    protected Context getContext(Object contextNode)
+    private Context getContext(Object contextNode)
     {
         Context context = new Context(getContextSupport());
         List list = new ArrayList(1);
@@ -194,7 +194,7 @@ public abstract class XPathTestBase extends TestCase
         return context;
     }
 
-    public ContextSupport getContextSupport()
+    private ContextSupport getContextSupport()
     {
         if (this.contextSupport == null)
         {
@@ -206,9 +206,9 @@ public abstract class XPathTestBase extends TestCase
         return this.contextSupport;
     }
 
-    public abstract Navigator getNavigator();
+    protected abstract Navigator getNavigator();
 
-    public abstract Object getDocument(String url) throws Exception;
+    protected abstract Object getDocument(String url) throws Exception;
 
     public void testGetNodeType() throws FunctionCallException, UnsupportedAxisException
     {
@@ -622,10 +622,10 @@ public abstract class XPathTestBase extends TestCase
             Object context = iter.next();
             assertCountXPath(3, context, "//processing-instruction()");
             assertCountXPath(2, context, "//processing-instruction('cheese')");
-            Object result = assertCountXPath2(1, context, "//processing-instruction('toast')");
-            assertValueOfXPath("is tasty", result, "string()");
-        }
-    }
+                Object result = assertCountXPath2(1, context, "//processing-instruction('toast')");
+                assertValueOfXPath("is tasty", result, "string()");
+            }
+            }
 
     /* test evaluate() extension function
     */
@@ -861,22 +861,22 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            Object result = assertCountXPath2(1, context, "*");
-            assertValueOfXPath("web-app", result, "name()");
+                Object result = assertCountXPath2(1, context, "*");
+                assertValueOfXPath("web-app", result, "name()");
             /* NOTE that the child::node() tests only work if the
               XML document does not comments or PIs
 
             */
             result = assertCountXPath2(1, context, "./*");
-            assertValueOfXPath("web-app", result, "name()");
+                assertValueOfXPath("web-app", result, "name()");
             result = assertCountXPath2(1, context, "child::*");
-            assertValueOfXPath("web-app", result, "name()");
+                assertValueOfXPath("web-app", result, "name()");
             result = assertCountXPath2(1, context, "/*");
-            assertValueOfXPath("web-app", result, "name()");
+                assertValueOfXPath("web-app", result, "name()");
             result = assertCountXPath2(1, context, "/child::node()");
-            assertValueOfXPath("web-app", result, "name(.)");
+                assertValueOfXPath("web-app", result, "name(.)");
             result = assertCountXPath2(1, context, "child::node()");
-            assertValueOfXPath("web-app", result, "name(.)");
+                assertValueOfXPath("web-app", result, "name(.)");
             /* empty names
             */
             assertValueOfXPath("", context, "name()");
@@ -1008,32 +1008,32 @@ public abstract class XPathTestBase extends TestCase
             assertCountXPath(20, context, "//article");
             assertCountXPath(20, context, "/*/*[@code]");
             assertCountXPath(1, context, "/moreovernews/article[@code='13563275']");
-            BaseXPath xpath = new BaseXPath("/moreovernews/article[@code='13563275']");
-            List results = xpath.selectNodes(getContext(context));
-            Object result = results.get(0);
-            assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
+                BaseXPath xpath = new BaseXPath("/moreovernews/article[@code='13563275']");
+                List results = xpath.selectNodes(getContext(context));
+                Object result = results.get(0);
+                assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
             xpath = new BaseXPath("/*/article[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
-            assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
+                assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
             xpath = new BaseXPath("//article[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
-            assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
+                assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
             xpath = new BaseXPath("//*[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
-            assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
+                assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
             xpath = new BaseXPath("/child::node()/child::node()[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
-            assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
+                assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
             xpath = new BaseXPath("/*/*[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
-            assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
-        }
-    }
+                assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
+            }
+            }
 
     /* test other node types
     */
@@ -1244,9 +1244,9 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            Object result = assertCountXPath2(1, context, "document('xml/web.xml')");
-            assertValueOfXPath("snoop", result, "/web-app/servlet[1]/servlet-name");
-            assertValueOfXPath("snoop", result, "/web-app/servlet[1]/servlet-name/text()");
+                Object result = assertCountXPath2(1, context, "document('xml/web.xml')");
+                assertValueOfXPath("snoop", result, "/web-app/servlet[1]/servlet-name");
+                assertValueOfXPath("snoop", result, "/web-app/servlet[1]/servlet-name/text()");
             assertValueOfXPath("snoop", context, "document('xml/web.xml')/web-app/servlet[1]/servlet-name");
         }
     }
@@ -1680,5 +1680,4 @@ public abstract class XPathTestBase extends TestCase
             assertCountXPath(1, context, "parent::Template");
         }
     }
-}            
-        
+}
