@@ -467,4 +467,18 @@ public class XPathReaderTest extends TestCase
         assertEquals(115, result.intValue());
     }
     
+    public void testNoSpaceAfterAnd() throws JaxenException 
+    {
+        XPath xpath = new DOMXPath("true() andfalse()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    }
+    
+    public void testNoSpaceAfterOr() throws JaxenException 
+    {
+        XPath xpath = new DOMXPath("true() orfalse()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
 }
