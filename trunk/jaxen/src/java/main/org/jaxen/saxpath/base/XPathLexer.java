@@ -432,9 +432,8 @@ class XPathLexer
              &&
              ( LA(2) == 'o' )
              &&
-             ( LA(3) == 'd' ) 
-             &&
-             ( ! isIdentifierChar( LA(4) ) ) )
+             ( LA(3) == 'd' )
+           )
         {
             token = new Token( TokenTypes.MOD,
                                getXPath(),
@@ -457,9 +456,8 @@ class XPathLexer
              &&
              ( LA(2) == 'i' )
              &&
-             ( LA(3) == 'v' ) 
-             &&
-             ( ! isIdentifierChar( LA(4) ) ) )
+             ( LA(3) == 'v' )
+            )
         {
             token = new Token( TokenTypes.DIV,
                                getXPath(),
@@ -483,8 +481,7 @@ class XPathLexer
              ( LA(2) == 'n' )
              &&
              ( LA(3) == 'd' )
-             &&
-             ( ! isIdentifierChar( LA(4) ) ) )
+           )
         {
             token = new Token( TokenTypes.AND,
                                getXPath(),
@@ -505,9 +502,8 @@ class XPathLexer
     
         if ( ( LA(1) == 'o' )
              &&
-             ( LA(2) == 'r' ) 
-             &&
-             ( ! isIdentifierChar( LA(3) ) ) )
+             ( LA(2) == 'r' )
+           )
         {
             token = new Token( TokenTypes.OR,
                                getXPath(),
