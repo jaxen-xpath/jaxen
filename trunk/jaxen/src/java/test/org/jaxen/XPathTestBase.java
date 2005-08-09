@@ -208,6 +208,7 @@ public abstract class XPathTestBase extends TestCase
 
     protected abstract Navigator getNavigator();
 
+    // be more specific; throws Exception????
     protected abstract Object getDocument(String url) throws Exception;
 
     public void testGetNodeType() throws FunctionCallException, UnsupportedAxisException
