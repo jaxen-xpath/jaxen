@@ -260,17 +260,6 @@
         <exclude>org/jaxen/jdom/XPathTest.java</exclude>
       </excludes>
 
-      <resources>
-        <resource>
-          <directory>src/java/test</directory>
-          <includes>
-            <include>**/*.werk</include>
-            <include>**/*.xml</include>
-            <include>**/*.properties</include>
-          </includes>
-        </resource>
-      </resources>
-
     </unitTest>
 
   </build>
