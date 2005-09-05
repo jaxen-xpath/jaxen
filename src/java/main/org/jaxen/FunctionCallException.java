@@ -111,7 +111,7 @@ public class FunctionCallException extends JaxenException
      * 
      * @return the exception that caused this fucntion call to fail
      * 
-     * @deprecated
+     * @deprecated replaced by {@link #getCause()}
      */
     public Throwable getNestedException() {
         return getCause();
