@@ -69,6 +69,10 @@ import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.jaxen.util.SingletonList;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public class DefaultAbsoluteLocationPath extends DefaultLocationPath 
 {
     public DefaultAbsoluteLocationPath()

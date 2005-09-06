@@ -69,6 +69,8 @@ import org.jaxen.saxpath.Axis;
  *
  * @author bob mcwhirter (bob@werken.com)
  * @author Stephen Colebourne
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
  */
 public class DefaultNameStep extends DefaultStep implements NameStep {
     

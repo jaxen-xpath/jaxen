@@ -69,6 +69,10 @@ import java.util.List;
 import org.jaxen.util.SingleObjectIterator;
 import org.jaxen.util.SingletonList;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public abstract class DefaultExpr implements Expr
 {
     public Expr simplify()
