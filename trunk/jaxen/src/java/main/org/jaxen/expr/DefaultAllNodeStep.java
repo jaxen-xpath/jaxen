@@ -66,6 +66,10 @@ package org.jaxen.expr;
 import org.jaxen.ContextSupport;
 import org.jaxen.expr.iter.IterableAxis;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
 {
     public DefaultAllNodeStep(IterableAxis axis, PredicateSet predicateSet)

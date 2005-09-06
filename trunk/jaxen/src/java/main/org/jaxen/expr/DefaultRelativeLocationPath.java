@@ -63,6 +63,10 @@
 
 package org.jaxen.expr;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public class DefaultRelativeLocationPath extends DefaultLocationPath 
 {
 

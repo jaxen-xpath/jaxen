@@ -67,6 +67,10 @@ import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public class DefaultProcessingInstructionNodeStep extends DefaultStep
     implements ProcessingInstructionNodeStep
 {

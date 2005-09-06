@@ -71,6 +71,10 @@ import org.jaxen.UnsupportedAxisException;
 import org.jaxen.expr.iter.IterableAxis;
 import org.jaxen.saxpath.Axis;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public abstract class DefaultStep implements Step
 {
     private IterableAxis axis;

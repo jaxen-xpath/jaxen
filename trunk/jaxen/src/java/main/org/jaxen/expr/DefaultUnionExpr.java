@@ -73,6 +73,10 @@ import org.jaxen.Context;
 import org.jaxen.JaxenException;
 import org.jaxen.XPathSyntaxException;
 
+/**
+ * @deprecated this class will become non-public in the future;
+ *     use the interface instead
+ */
 public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 {
     public DefaultUnionExpr(Expr lhs,
