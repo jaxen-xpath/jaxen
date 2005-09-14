@@ -481,4 +481,11 @@ public class XPathReaderTest extends TestCase
         assertTrue(result.booleanValue());
     }
     
+    public void testAndImmediatelyFollowedByRelativeLocationPath() throws JaxenException  
+    {
+        XPath xpath = new DOMXPath("true() andfoo");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
 }
