@@ -139,8 +139,13 @@ public class SimpleFunctionContext implements FunctionContext
             return (Function) this.functions.get( key );
         }
         else {
-            throw new UnresolvableException( "Function " +
-                                             prefix + ":" + localName );
+            String name;
+            if (prefix != null && ! "".equals(prefix)) {
+                name = ':' + prefix;
+            }
+            else name = "";
+            name += localName;
+            throw new UnresolvableException( "No Such Function " + name );
         }
     }
 }
