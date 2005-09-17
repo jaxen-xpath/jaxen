@@ -97,8 +97,7 @@ public class ExtensionFunctionTest extends TestCase {
     
     class MinFunction implements Function {
 
-        public Object call(Context context, List args) 
-          throws FunctionCallException {
+        public Object call(Context context, List args) {
             
             if (args.isEmpty()) return Double.valueOf(Double.NaN);
             
