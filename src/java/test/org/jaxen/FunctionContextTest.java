@@ -63,6 +63,11 @@
 
 package org.jaxen;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectOutputStream;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -142,6 +147,22 @@ public class FunctionContextTest extends TestCase
     public void testGetFunctionContext() throws JaxenException {      
         DOMXPath xpath = new DOMXPath("/root/child");
         assertNotNull(xpath.getFunctionContext());
+    }
+ 
+    public void testSerializeFunctionContext() throws JaxenException, IOException { 
+        
+        DOMXPath xpath = new DOMXPath("/root/child");
+        FunctionContext context = xpath.getFunctionContext();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream oout = new ObjectOutputStream(out);
+        try {
+            oout.writeObject(context);
+            fail("serialized function context");
+        }
+        catch (NotSerializableException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
     }
  
 }
