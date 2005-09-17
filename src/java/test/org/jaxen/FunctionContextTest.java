@@ -125,6 +125,20 @@ public class FunctionContextTest extends TestCase
         
     }
  
+    public void testUnresolvableFunctionExceptionMessage() throws JaxenException {
+        
+        DOMXPath xpath = new DOMXPath("nonesuch()");
+        
+        try {
+            xpath.evaluate(doc);
+            fail("Evaluated nonexistent function");
+        }
+        catch (UnresolvableException ex) {
+            assertEquals(-1, ex.getMessage().indexOf(':'));
+        }
+        
+    }
+ 
     public void testGetFunctionContext() throws JaxenException {      
         DOMXPath xpath = new DOMXPath("/root/child");
         assertNotNull(xpath.getFunctionContext());
