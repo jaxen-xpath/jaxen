@@ -15,7 +15,16 @@
       </p>
     </section> -->
     
-     <section name="Jaxen 1.1 Beta 7">
+     <section name="Jaxen 1.1 Beta 8">
+    
+      <p>Beta 8 fixes a couple of bugs in XPath evaluation
+         and optimizes the code in several places. 
+         The test suite has been expanded. 
+      </p>
+
+    </section>   
+    
+    <section name="Jaxen 1.1 Beta 7">
     
       <p>Beta 7 fixes a number of important bugs, especially 
       involving operator associativity, the <code>string</code> and <code>substring</code>
