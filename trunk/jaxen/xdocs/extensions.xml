@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<document url="http://jaxen.org/extensions.xml">
+
+  <properties>
+    <author>Elliotte Rusty Harold</author>
+    <title>Writing Jaxen Extension Functions</title>
+  </properties>
+
+  <body>
+    <title>Writing Jaxen Extension Functions</title>
+    
+    <section name="What is an extension function?">
+      <p>
+      An extension function is any function used in an XPath expression that
+      is not included in the standard XPath 1.0 library. 
+      </p>      
+
+      <p>
+      Whereas standard functions have unqualified names (string(), count(), boolean(), etc.), extension functions generally belong to  a namespace and have prefixed names like 
+       saxon:evaluate or exslt:tokenize. (the bundled Jaxen extension functions in 
+       org.jaxen.function.ext do not yet have a namespace. This is a bug.
+      Please don't emulate it with your own extension functions.) 
+      </p>
+    </section>
+
+    <section name="Writing an extension function">
+      <p>Let's suppose you want to write an 
+        extension function that finds the minimum of a set of numeric values. 
+        We'll call this extension function min() and put it in the 
+       http://exslt.org/math namespace. (This is actually an extension function defined by the EXSLT library at http://www.exslt.org/math/functions/min/math.min.html) We'll use the prefix math in this document but the prefix can change as long as the URI is correct.
+      </p>
+
+      <p>
+This function has the following signature:
+      </p>
+
+<source>number math:min(node-set)</source>
+
+
+ <p>
+In Jaxen terms a number is a java.lang.Double and a node-set is a java.util.List. 
+</p>
+
+<p>
+Each extension function is implemented by a single class. 
+This class can belong to any package. It must have a no-args constructor and implement the org.jaxen.Function interface. This interface declares a single method,
+call:
+</p>
+
+<source>package org.jaxen;
+
+public interface Function {
+    Object call(Context context, List args) throws FunctionCallException;
+}</source>
+
+<p>.
+For the math:min function we'll need to iterate through the list, convert each one to 
+a numeric value, and then finds the minimum. Some casting is required;
+but mostly we just iterate through the list while comparing each member of 
+the list to  the current minimum value. If the next value is smaller, then we replace the old minimum value with the new minimum value. Finally we return a new
+Double object containing the minimum value. 
+Here's the code:
+</p>
+
+<source>    class MinFunction implements Function {
+
+        public Object call(Context context, List args) 
+          throws FunctionCallException {
+            
+            if (args.isEmpty()) return Double.valueOf(Double.NaN);
+            
+            Navigator navigator = context.getNavigator();
+            double min = Double.MAX_VALUE;
+            Iterator iterator = args.iterator();
+            while (iterator.hasNext()) {
+                double next = NumberFunction.evaluate(iterator.next(), navigator).doubleValue();
+                min = Math.min(min, next);
+            }
+            return new Double(min);
+        }
+        
+    }</source>
+
+<p>
+Notice the use of Jaxen's implementation of the XPath
+ number() function to convert each value in the node-set to a double. 
+</p>
+
+      <p>
+        Extension functions should be side effect free.
+        They should not write files, change fields, or modify the state of anything.
+        Extension functions may be called at any time, and not necessarily in the order
+        you expect them to be. Furthermore, extension functions may be called more or less
+        often than you expect. Each invocation of an extension function should be completely self-contained. 
+      </p>
+
+    </section>
+
+
+    <section name="Installing an extension function into Jaxen">
+      <p>
+         You may have noticed the name and namespace of the extension function showed up nowhere in the extension function class. To bind it to a name it must be registered with the function context. You can either register it with the default global function context (XPathFunctionContext.INSTANCE) or register it with a custom function 
+         context for the XPath expression 
+      </p>
+
+<p>
+Let's assume you want to register it with a custom function context.
+Simply pass the namespace URI, local name, and a MinFunction object to the
+XPathFunctionContext constructor:
+</p>
+
+<source>        SimpleFunctionContext fc = new XPathFunctionContext();
+        fc.registerFunction("http://exslt.org/math", "min", new MinFunction());</source>
+        
+
+<p>
+You'll also need a namespace context that can map the prefix math to the URI
+http://exslt.org/math:
+</p>
+
+<source>        SimpleNamespaceContext nc = new SimpleNamespaceContext();
+        nc.addNamespace("math", "http://exslt.org/math");</source>
+        
+<p>
+Finally when evaluating the function you'll need to set your custom 
+XPath function and namespace contexts for the expression:
+</p>
+
+<source>        BaseXPath xpath = new DOMXPath("math:min(//x)");
+        xpath.setFunctionContext(fc);
+        xpath.setNamespaceContext(nc);</source>
+
+
+     <p>
+Otherwise, evaluating the expression will throw a JaxenException.
+     </p>
+
+     <p>
+You can add the function to the default function context 
+by registering it with the constant XPathFunctionContext.INSTANCE instead:
+     </p>
+
+<source>XPathFunctionContext.INSTANCE.registerFunction("http://exslt.org/math", "min", new MinFunction());</source>
+
+    </section>
+
+
+  </body>
+</document>
+
+
+
+
+
+
+
+
+
