@@ -99,7 +99,7 @@ public class ExtensionFunctionTest extends TestCase {
 
         public Object call(Context context, List args) {
             
-            if (args.isEmpty()) return Double.valueOf(Double.NaN);
+            if (args.isEmpty()) return new Double(Double.NaN);
             
             Navigator navigator = context.getNavigator();
             double min = Double.MAX_VALUE;
