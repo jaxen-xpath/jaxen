@@ -195,7 +195,8 @@
      <report>maven-junit-report-plugin</report>
      <report>maven-linkcheck-plugin</report>
      <report>maven-tasklist-plugin</report>
-     <report>maven-pmd-plugin</report> 
+    <report>maven-pmd-plugin</report> 
+    <report>maven-findbugs-plugin</report> 
   </reports>
 
   <!-- Need to mark these as compile-time/run-time -->
@@ -239,7 +240,13 @@
       <version>1.1.1</version>
       <type>plugin</type>
     </dependency>
-
+    
+    <dependency>
+      <groupId>maven-plugins</groupId>
+      <artifactId>maven-findbugs-plugin</artifactId>
+      <version>0.9.2</version>
+      <type>plugin</type>
+    </dependency> 
   </dependencies>
 
   <build>
