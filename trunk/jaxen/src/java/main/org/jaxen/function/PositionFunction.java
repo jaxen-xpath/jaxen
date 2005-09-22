@@ -107,7 +107,7 @@ public class PositionFunction implements Function
             return evaluate( context );
         }
         
-        throw new FunctionCallException( "position() requires no arguments." );
+        throw new FunctionCallException( "position() does not take any arguments." );
     }
     
     /**
