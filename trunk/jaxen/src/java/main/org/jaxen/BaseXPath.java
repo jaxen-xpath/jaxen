@@ -475,12 +475,7 @@ public class BaseXPath implements XPath, Serializable
      */
     public NamespaceContext getNamespaceContext()
     {
-        NamespaceContext answer = getContextSupport().getNamespaceContext();
-        if ( answer == null ) {
-            answer = createNamespaceContext();
-            getContextSupport().setNamespaceContext( answer );
-        }
-        return answer;
+        return getContextSupport().getNamespaceContext();
     }
 
     /** Retrieve the <code>FunctionContext</code> used by this XPath
@@ -503,12 +498,7 @@ public class BaseXPath implements XPath, Serializable
      */
     public FunctionContext getFunctionContext()
     {
-        FunctionContext answer = getContextSupport().getFunctionContext();
-        if ( answer == null ) {
-            answer = createFunctionContext();
-            getContextSupport().setFunctionContext( answer );
-        }
-        return answer;
+        return getContextSupport().getFunctionContext();
     }
 
     /** Retrieve the <code>VariableContext</code> used by this XPath
@@ -531,12 +521,7 @@ public class BaseXPath implements XPath, Serializable
      */
     public VariableContext getVariableContext()
     {
-        VariableContext answer = getContextSupport().getVariableContext();
-        if ( answer == null ) {
-            answer = createVariableContext();
-            getContextSupport().setVariableContext( answer );
-        }
-        return answer;
+        return getContextSupport().getVariableContext();
     }
     
     
