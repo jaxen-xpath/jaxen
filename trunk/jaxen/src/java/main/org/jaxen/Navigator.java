@@ -216,7 +216,7 @@ public interface Navigator extends Serializable
     Iterator getNamespaceAxisIterator(Object contextNode)
         throws UnsupportedAxisException;
 
-    /** Retrieve an <code>Iterator</code> matching the <code>self</code> xpath
+    /** Retrieve an <code>Iterator</code> matching the <code>self</code> XPath
      *  axis.
      *
      *  @param contextNode the original context node
@@ -369,7 +369,7 @@ public interface Navigator extends Serializable
     // ----------------------------------------------------------------------
 
     /** Returns whether the given object is a document node. A document node
-     *  is the node that is selected by the xpath expression <code>/</code>.
+     *  is the node that is selected by the XPath expression <code>/</code>.
      *
      *  @param object the object to test
      *
@@ -518,7 +518,7 @@ public interface Navigator extends Serializable
     String translateNamespacePrefixToUri(String prefix,
                                          Object element);
 
-    /** Returns a parsed form of the given xpath string, which will be suitable
+    /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on documents that use the same navigator as this one.
      *
      *  @see XPath
