@@ -175,6 +175,23 @@ public class IdTest extends TestCase {
         
     }    
 
+    public void testFindMultipleElementsByMultipleIDs() 
+      throws JaxenException, SAXException, IOException {
+        
+        BaseXPath xpath = new DOMXPath("id(//id)");
+        String text = "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]><root><id>p1</id><id>p2</id><id>p3</id><a id='p1'/><a id='p2'/></root>";
+        StringReader reader = new StringReader(text);
+        InputSource in = new InputSource(reader);
+        Document doc = builder.parse(in);
+        List result = xpath.selectNodes(doc);
+        assertEquals(2, result.size());
+        Element a1 = (Element) result.get(0);
+        Element a2 = (Element) result.get(1);
+        assertEquals("a", a1.getNodeName());
+        assertEquals("a", a2.getNodeName());
+        
+    }    
+
     public void testIdReturnsFirstElementWithMatchingId() 
       throws JaxenException, SAXException, IOException {
         
