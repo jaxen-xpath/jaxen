@@ -856,6 +856,11 @@ public class BaseXPathTest extends TestCase {
         
     } 
     
+    public void testGetRootExpr() throws JaxenException {
+        BaseXPath xpath = new DOMXPath("/b/c");
+        assertTrue(xpath.getRootExpr() instanceof org.jaxen.expr.LocationPath);
+    } 
+    
     public void testUnionUsesDocumentOrder() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("/descendant::x | /a | /a/b");
