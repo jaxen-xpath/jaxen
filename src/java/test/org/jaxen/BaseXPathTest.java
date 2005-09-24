@@ -74,6 +74,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.NamespaceNode;
 import org.jaxen.pattern.Pattern;
+import org.jaxen.saxpath.helpers.XPathReaderFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -797,8 +798,25 @@ public class BaseXPathTest extends TestCase {
         Object result = xpath.selectSingleNode(doc);
         assertNull(result);
         
-    } 
+    }  
     
+    public void testSAXPathExceptionThrownFromConstructor() {
+        
+        System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                            "java.lang.String" );
+        
+        try {
+            new DOMXPath("id('p1')");
+        }
+        catch (JaxenException e) {
+            assertNotNull(e.getMessage());
+        }
+        finally {
+            System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
+                            "" );
+        }
+        
+    }  
     
     public void testBooleanValueOfEmptyNodeSetIsFalse() 
       throws JaxenException {
