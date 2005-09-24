@@ -554,11 +554,9 @@ public class BaseXPath implements XPath, Serializable
         return this.exprText;
     }
 
-    /** Returns the string version of this xpath.
+    /** Returns a string representation of the parse tree.
      *
-     *  @return the normalized XPath expression string
-     *
-     *  @see #toString
+     *  @return a string representation of the parse tree.
      */
     public String debug()
     {
