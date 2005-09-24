@@ -71,7 +71,7 @@ import java.io.PrintWriter;
 public class SAXPathException extends Exception
 {
     
-    static double javaVersion = 1.4;
+    private static double javaVersion = 1.4;
     
     static {
         try {
