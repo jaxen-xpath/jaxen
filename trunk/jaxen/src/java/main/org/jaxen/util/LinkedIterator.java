@@ -67,6 +67,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * @deprecated elharo this class is undocumented and untested.
+ *     It will be removed in a future release.
+ */
 public class LinkedIterator implements Iterator
 {
     private List iterators;
