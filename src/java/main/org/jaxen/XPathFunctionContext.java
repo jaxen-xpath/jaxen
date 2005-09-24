@@ -151,10 +151,7 @@ public class XPathFunctionContext extends SimpleFunctionContext
      */
     public XPathFunctionContext()
     {
-        registerXPathFunctions();
-        registerXSLTFunctions();
-        registerExtensionFunctions();
-        
+        this(true);
     }
 
     /** Create a new XPath function context.
