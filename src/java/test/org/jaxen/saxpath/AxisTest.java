@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 Elliotte Rusty Harold
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,30 +59,30 @@
  * $Id$
  */
 
-
 package org.jaxen.saxpath;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.jaxen.JaxenRuntimeException;
+import junit.framework.TestCase;
+
 
 /**
- * <p>
- *   Collect the org.jaxen.saxpath.base tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b8
  *
  */
-public class SAXPathTests {
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTestSuite(SAXPathExceptionTest.class);
-        result.addTestSuite(AxisTest.class);
-        return result;
-        
+public class AxisTest extends TestCase {
+
+    public AxisTest(String name) {
+        super(name);
     }
+
+    public void testIllegalAxisNumber() {
+        try {
+            Axis.lookup(-10009);
+            fail("Looked up negative number");
+        }
+        catch (JaxenRuntimeException ex) {
+            assertEquals("Illegal Axis Number", ex.getMessage());
+        }
+    }    
     
 }
