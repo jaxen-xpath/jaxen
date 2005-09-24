@@ -129,7 +129,7 @@ public class XPathSyntaxException extends SAXPathException
      * 
      * @return the position marker 
      */
-    public String getPositionMarker()
+    private String getPositionMarker()
     {
         int pos = getPosition();
         StringBuffer buf = new StringBuffer(pos+1);
