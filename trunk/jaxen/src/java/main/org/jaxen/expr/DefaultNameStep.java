@@ -412,7 +412,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      * @return a debugging string
      */
     public String toString() {
-        return "[(DefaultNameStep): " + getPrefix() + ":" + getLocalName() + "[" + super.toString() + "]]";
+        return "[(DefaultNameStep): " + getPrefix() + ":" + getLocalName() + "]";
     }
 
 }
