@@ -366,15 +366,16 @@ public class BaseXPath implements XPath, Serializable
      *  <p>
      *  This is a convenience method for adding mappings to the
      *  default {@link NamespaceContext} in place for this XPath.
-     *  If you have installed a specific custom <code>NamespaceContext</code>,
+     *  If you have installed a custom <code>NamespaceContext</code>
+     *  that is not a <code>SimpleNamespaceContext</code>,
      *  then this method will throw a <code>JaxenException</code>.
      *  </p>
      *
      *  @param prefix the namespace prefix
      *  @param uri the namespace URI
      *
-     *  @throws JaxenException if a <code>NamespaceContext</code>
-     *          used by this XPath has been explicitly installed
+     *  @throws JaxenException if the <code>NamespaceContext</code>
+     *          used by this XPath is not a <code>SimpleNamespaceContext</code>
      */
     public void addNamespace(String prefix,
                              String uri) throws JaxenException
@@ -387,7 +388,7 @@ public class BaseXPath implements XPath, Serializable
             return;
         }
 
-        throw new JaxenException("Operation not permitted while using a custom namespace context.");
+        throw new JaxenException("Operation not permitted while using a non-simple namespace context.");
     }
 
 
