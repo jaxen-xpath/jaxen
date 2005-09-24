@@ -829,6 +829,26 @@ public class BaseXPathTest extends TestCase {
         
     } 
     
+    public void testAddNamespaceWithNonSimpleNamespaceContext() throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("/b/c");
+        xpath.setNamespaceContext(new NamespaceContext() {
+
+            public String translateNamespacePrefixToUri(String prefix) {
+                return prefix;
+            }
+            
+        });
+        try {
+            xpath.addNamespace("pre", "foo");            
+            fail("Added namespace");
+        }
+        catch (JaxenException ex) {
+            assertNotNull(ex.getMessage());
+        }
+        
+    } 
+    
     public void testUnionUsesDocumentOrder() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("/descendant::x | /a | /a/b");
