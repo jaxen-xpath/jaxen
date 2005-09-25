@@ -765,7 +765,7 @@ public class DocumentNavigator extends DefaultNavigator
     }
 
     // XXX What should these two methods return if the argument is not a 
-    // processign instruction?
+    // processing instruction?
     
     /**
      * Get the target of a processing instruction node.
