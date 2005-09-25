@@ -283,7 +283,7 @@ public class PatternParser
         List predicates = step.getPredicates();
         if ( ! predicates.isEmpty() ) 
         {
-            DefaultFilterExpr filter = new DefaultFilterExpr(new PredicateSet());
+            FilterExpr filter = new DefaultFilterExpr(new PredicateSet());
             for ( Iterator iter = predicates.iterator(); iter.hasNext(); )
             {
                 filter.addPredicate( (Predicate) iter.next() );
