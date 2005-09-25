@@ -206,6 +206,25 @@ public class DocumentNavigator extends DefaultNavigator
                 };
         }
     }
+    
+    
+    /** 
+     * Return the XPath parent of this DOM node.
+     * XPath has slightly different definition of parent than DOM does.
+     * In particular, the parent of an attribute is not null.
+     * 
+     * @param o 
+     * 
+     * @return the parent of the specified node; or null if
+     *     the node does not have a parent
+     */
+    public Object getParentNode(Object o) {
+        Node node = (Node) o;
+        if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
+            return ((Attr) node).getOwnerElement();
+        }
+        return node.getParentNode();
+    }
 
 
     /**
