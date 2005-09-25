@@ -175,6 +175,21 @@ public class IdTest extends TestCase {
         
     }    
 
+    /* public void testFindElementByXMLId() 
+      throws JaxenException, SAXException, IOException {
+        
+        BaseXPath xpath = new DOMXPath("id('p1')");
+        String text = "<root><a xml:id='p1'/></root>";
+        StringReader reader = new StringReader(text);
+        InputSource in = new InputSource(reader);
+        Document doc = builder.parse(in);
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        Element a = (Element) result.get(0);
+        assertEquals("a", a.getNodeName());
+        
+    }    */
+
     public void testFindMultipleElementsByMultipleIDs() 
       throws JaxenException, SAXException, IOException {
         
