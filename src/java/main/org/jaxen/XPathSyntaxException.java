@@ -62,10 +62,7 @@
 
 package org.jaxen;
 
-/** Indicates an error during parsing of an XPath
- *  expression.
- *
- *  @see XPath
+/** Indicates an error during parsing of an XPath expression.
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
