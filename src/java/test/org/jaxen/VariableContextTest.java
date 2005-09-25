@@ -107,7 +107,7 @@ public class VariableContextTest extends TestCase
             fail("Evaluated nonexistent variable");
         }
         catch (UnresolvableException ex) {
-            assertNotNull(ex.getMessage());
+            assertEquals("Variable a", ex.getMessage());
         }
         
     }
@@ -115,6 +115,12 @@ public class VariableContextTest extends TestCase
     public void testGetVariableContext() throws JaxenException {      
         DOMXPath xpath = new DOMXPath("/root/child");
         assertNotNull(xpath.getVariableContext());
+    }
+ 
+    public void testSetNamespacelessVariable() throws JaxenException { 
+        SimpleVariableContext context = new SimpleVariableContext();
+        context.setVariableValue("foo", "bar");
+        assertEquals("bar", context.getVariableValue("", "", "foo"));
     }
  
 }

@@ -80,14 +80,14 @@ class QualifiedName
      */
     QualifiedName( String namespaceURI, String localName )
     {
+        if (namespaceURI == null) namespaceURI = "";
         this.namespaceURI = namespaceURI;
         this.localName = localName;
     }
 
     public int hashCode()
     {
-        return ( localName.hashCode() ^
-                 ( namespaceURI == null ? 0 : namespaceURI.hashCode() ) );
+        return ( localName.hashCode() ^ namespaceURI.hashCode() );
     }
 
     public boolean equals( Object o )
@@ -97,15 +97,16 @@ class QualifiedName
         // other than another QualifiedName. No instanceof test is
         // necessary here.
         QualifiedName other = (QualifiedName) o;
-        
-        if ( namespaceURI == null ) {
-            return ( other.namespaceURI == null &&
-                     other.localName.equals(localName) );
-        }
-        else {
-            return ( namespaceURI.equals(other.namespaceURI) &&
-                     other.localName.equals(localName) );
-        }
+        return ( namespaceURI.equals(other.namespaceURI) &&
+                 other.localName.equals(localName) );
+    }
+    
+    /**
+     * @return James Clark's namespace form
+     */
+    String getClarkForm() {
+        if ("".equals(namespaceURI)) return localName;
+        return "{" + namespaceURI + "}" + localName;
     }
     
 }
