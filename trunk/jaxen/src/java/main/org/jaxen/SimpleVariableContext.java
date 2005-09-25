@@ -140,7 +140,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
                                     String localName )
         throws UnresolvableException
     {
-        Object key = new QualifiedName( namespaceURI, localName );
+        QualifiedName key = new QualifiedName( namespaceURI, localName );
 
         if ( this.variables.containsKey(key) )
         {
@@ -148,8 +148,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
         }
         else
         {
-            throw new UnresolvableException( "Variable {" + namespaceURI +
-                                             "}" + prefix + ":" + localName );
+            throw new UnresolvableException( "Variable " + key.getClarkForm() );
         }
     }
 }
