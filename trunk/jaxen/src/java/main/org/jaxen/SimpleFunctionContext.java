@@ -81,10 +81,9 @@ public class SimpleFunctionContext implements FunctionContext
     /** Table of functions. */
     private HashMap functions;
 
-    /** Construct.
-     *
+    /** 
      *  <p>
-     *  Construct with an empty function lookup table.
+     *  Construct an empty function context.
      *  </p>
      */
     public SimpleFunctionContext()
@@ -101,10 +100,10 @@ public class SimpleFunctionContext implements FunctionContext
      *  </p>
      *
      *  <p>
-     *  Functions may exist either in an namespace or not.
+     *  Functions may exist either in a namespace or not.
      *  Namespace prefix-to-URI resolution is the responsibility
      *  of a {@link NamespaceContext}.  Within this <code>FunctionContext</code>
-     *  functions are only referenced using the URI, <b>not</b>
+     *  functions are only referenced using the URI, <strong>not</strong>
      *  the prefix.
      *  </p>
      *
@@ -124,7 +123,7 @@ public class SimpleFunctionContext implements FunctionContext
                                  String localName,
                                  Function function )
     {
-        this.functions.put( new QualifiedName(namespaceURI, localName),
+        this.functions.put( new QualifiedName(namespaceURI, null, localName),
                             function );
     }
 
@@ -133,19 +132,13 @@ public class SimpleFunctionContext implements FunctionContext
                                 String localName )
         throws UnresolvableException
     {
-        Object key = new QualifiedName( namespaceURI, localName );
+        QualifiedName key = new QualifiedName( namespaceURI, prefix, localName );
 
         if ( this.functions.containsKey(key) ) {
             return (Function) this.functions.get( key );
         }
         else {
-            String name;
-            if (prefix != null && ! "".equals(prefix)) {
-                name = ':' + prefix;
-            }
-            else name = "";
-            name += localName;
-            throw new UnresolvableException( "No Such Function " + name );
+            throw new UnresolvableException( "No Such Function " + key.getClarkForm() );
         }
     }
 }
