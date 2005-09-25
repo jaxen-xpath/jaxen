@@ -109,7 +109,7 @@ public interface VariableContext
      *                       reference expression had no prefix, the namespace
      *                       URI is <code>null</code>.
      *  @param prefix        the prefix that was used in the variable reference
-     *                       expression
+     *                       expression; this value is ignored and has no effect
      *  @param localName     the local name of the variable-reference
      *                       expression. If there is no prefix, then this is
      *                       the whole name of the variable.
