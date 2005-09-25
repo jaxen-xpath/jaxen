@@ -53,8 +53,7 @@ public interface Function {
     Object call(Context context, List args) throws FunctionCallException;
 }</source>
 
-<p>.
-For the math:min function we'll need to iterate through the list, convert each one to 
+<p>For the math:min function we'll need to iterate through the list, convert each one to 
 a numeric value, and then finds the minimum. Some casting is required;
 but mostly we just iterate through the list while comparing each member of 
 the list to  the current minimum value. If the next value is smaller, then we replace the old minimum value with the new minimum value. Finally we return a new
