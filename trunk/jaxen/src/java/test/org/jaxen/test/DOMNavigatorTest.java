@@ -131,5 +131,31 @@ public class DOMNavigatorTest extends XPathTestBase
         assertNull(qname);
     }
     
+    public void testGetTargetOfNonPI() {
+        Navigator nav = getNavigator();
+        Document doc = builder.newDocument();
+        Attr a = doc.createAttributeNS("http://www.element.org/", "a");
+        try {
+            nav.getProcessingInstructionTarget(a);
+            fail("got target of non processing instruction");
+        }
+        catch (ClassCastException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }
+    
+    public void testGetDataOfNonPI() {
+        Navigator nav = getNavigator();
+        Document doc = builder.newDocument();
+        Attr a = doc.createAttributeNS("http://www.element.org/", "a");
+        try {
+            nav.getProcessingInstructionData(a);
+            fail("got data of non processing instruction");
+        }
+        catch (ClassCastException ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }
+    
     
 }

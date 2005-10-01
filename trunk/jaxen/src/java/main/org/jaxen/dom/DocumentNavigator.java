@@ -818,13 +818,16 @@ public class DocumentNavigator extends DefaultNavigator
      * 
      * @param obj the processing instruction
      * @return the target of the processing instruction
+     * @throws ClassCastException if obj is not a processing instruxtion
      * 
      */
     public String getProcessingInstructionTarget(Object obj)
-    {
-        ProcessingInstruction pi = (ProcessingInstruction) obj;
-
-        return pi.getTarget();
+    {      
+        if (isProcessingInstruction(obj)) {
+            ProcessingInstruction pi = (ProcessingInstruction) obj;
+            return pi.getTarget();
+        }
+        throw new ClassCastException(obj + " is not a processing instruction");
     }
 
     /**
@@ -832,14 +835,16 @@ public class DocumentNavigator extends DefaultNavigator
      * 
      * @param obj the processing instruction
      * @return the target of the processing instruction
-     * 
+     * @throws ClassCastException if obj is not a processing instruxtion
      * 
      */
     public String getProcessingInstructionData(Object obj)
     {
-        ProcessingInstruction pi = (ProcessingInstruction) obj;
-
-        return pi.getData();
+        if (isProcessingInstruction(obj)) {
+            ProcessingInstruction pi = (ProcessingInstruction) obj;
+            return pi.getData();
+        }
+        throw new ClassCastException(obj + " is not a processing instruction");
     }
 
     
