@@ -524,7 +524,6 @@ class XPathLexer
             switch ( LA(1) )
             {
                 case '.':
-                {
                     if ( periodAllowed )
                     {
                         periodAllowed = false;
@@ -535,8 +534,6 @@ class XPathLexer
                         break loop;
                     }
                     break;
-                }
-                
                 case '0':
                 case '1':
                 case '2':
@@ -547,14 +544,10 @@ class XPathLexer
                 case '7':
                 case '8':
                 case '9':
-                {
                     consume();
                     break;
-                }
                 default:
-                {
                     break loop;
-                }
             }
         }
     
