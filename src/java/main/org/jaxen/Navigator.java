@@ -308,19 +308,19 @@ public interface Navigator extends Serializable
      */
     String getElementNamespaceUri(Object element);    
 
-    /** Retrieve the name of the given element node.
+    /** Retrieve the local name of the given element node.
      *
      *  @param element the context element node
      *
-     *  @return the name of the element node
+     *  @return the local name of the element node
      */
     String getElementName(Object element);    
 
-    /** Retrieve the QName of the given element node.
+    /** Retrieve the qualified name of the given element node.
      *
      *  @param element the context element node
      *
-     *  @return the QName of the element node
+     *  @return the qualified name of the element node
      */
     String getElementQName(Object element);
 
@@ -332,15 +332,15 @@ public interface Navigator extends Serializable
      */
     String getAttributeNamespaceUri(Object attr);    
 
-    /** Retrieve the name of the given attribute node.
+    /** Retrieve the local name of the given attribute node.
      *
      *  @param attr the context attribute node
      *
-     *  @return the name of the attribute node
+     *  @return the local name of the attribute node
      */
     String getAttributeName(Object attr);
 
-    /** Retrieve the QName of the given attribute node.
+    /** Retrieve the qualified name of the given attribute node.
      *
      *  @param attr the context attribute node
      *
