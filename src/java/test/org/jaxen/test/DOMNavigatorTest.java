@@ -64,7 +64,6 @@ package org.jaxen.test;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -77,16 +76,6 @@ public class DOMNavigatorTest extends XPathTestBase
     public DOMNavigatorTest(String name)
     {
         super( name );
-    }
-
-    public static void main(String[] args) 
-    {
-        verbose = true;
-        if ( args.length > 0 ) 
-        {
-            TESTS_XML = args[0];
-        }
-        TestRunner.run( suite() );
     }
     
     public static Test suite() 
