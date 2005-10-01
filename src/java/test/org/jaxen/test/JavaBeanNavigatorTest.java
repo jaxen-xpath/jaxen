@@ -20,8 +20,9 @@ public class JavaBeanNavigatorTest
 
     public void testSomething() throws JaxenException {
         
-        // XXX Does the position() function really have any meaning for JavaBeans?
-        // How do we know which one comes first? 
+        // The position() function does not really have any meaning 
+        // for JavaBeans, but we know three of them will come before the fourth,
+        // even if we don't know which ones.
         JavaBeanXPath xpath = new JavaBeanXPath( "brother[position()<4]/name" );
 
         Person bob = new Person( "bob", 30 );
