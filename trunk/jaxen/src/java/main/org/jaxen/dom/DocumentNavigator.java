@@ -433,7 +433,8 @@ public class DocumentNavigator extends DefaultNavigator
     }
 
     // Why are there separate methods for getElementNamespaceURI and 
-    // getAttributeNamespaceUR when they do exaclty the same thing?
+    // getAttributeNamespaceURI when they do exactly the same thing?
+    // This should be combined in a future version.
     /**
      * Get the namespace URI of an element.
      *
@@ -750,8 +751,8 @@ public class DocumentNavigator extends DefaultNavigator
      * Get the prefix value of a Namespace node.
      *
      * @param object the target node
-     * @return the Namespace prefix a (possibly empty) string if the
-     * node is a namespace node, null otherwise
+     * @return the namespace prefix a (possibly empty) string if the
+     *     node is a namespace node, null otherwise
      */
     public String getNamespacePrefix (Object object)
     {
@@ -764,8 +765,8 @@ public class DocumentNavigator extends DefaultNavigator
      * 
      * @param prefix the namespace prefix
      * @param element the namespace context
-     * @return the namesapce URI bound to the prefix in the scope of <code>element</code>;
-     *     null if the porefix is not bound
+     * @return the namespace URI bound to the prefix in the scope of <code>element</code>;
+     *     null if the prefix is not bound
      */
     public String translateNamespacePrefixToUri (String prefix, Object element)
     {
@@ -780,7 +781,7 @@ public class DocumentNavigator extends DefaultNavigator
     /**
      * Use JAXP to load a namespace aware document from a given URI.
      *
-     * @param uri is the URI of the document to load
+     * @param uri the URI of the document to load
      * @return the new W3C DOM Level 2 Document instance
      * @throws FunctionCallException containing a nested exception
      *      if a problem occurs trying to parse the given document
@@ -789,8 +790,9 @@ public class DocumentNavigator extends DefaultNavigator
     {
         try
         {
-            // XXX Do we really need to constrcut a new factory here each time?
-            // Isn't that thread safe? Couldn't we make this static?
+            // We really do need to construct a new factory here each time.
+            // DocumentBuilderFactory is not guaranteed to be thread safe? 
+            // Possibly we could make this a thread local.????
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -928,8 +930,7 @@ public class DocumentNavigator extends DefaultNavigator
          * Test whether a DOM node is usable by XPath.
          *
          * @param node the DOM node to test
-         * @return true if the node is usable, false if it should be
-         * skipped
+         * @return true if the node is usable, false if it should be skipped
          */
         private boolean isXPathNode (Node node)
         {
@@ -1027,6 +1028,9 @@ public class DocumentNavigator extends DefaultNavigator
      *            element exists in the document or if the implementation
      *            does not know about attribute types
      *  @see   javax.xml.parsers.DocumentBuilderFactory
+     *  
+     *  @throws ClassCastException if object is not an org.w3c.dom.Node object
+     *  
      */
     public Object getElementById(Object object, String elementId)
     {
