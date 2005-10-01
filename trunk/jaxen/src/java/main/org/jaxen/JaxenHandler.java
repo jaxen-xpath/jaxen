@@ -108,8 +108,8 @@ public class JaxenHandler implements XPathHandler
         this.xpathFactory = new DefaultXPathFactory();
     }
     
-    /** Set the Jaxen <code>XPathFactory</code> to use
-     *  during the parse to construct the XPath expression tree.
+    /** Set the Jaxen <code>XPathFactory</code> that constructs
+     *  the XPath expression tree during the parse.
      *
      *  @param xpathFactory the factory to use during the parse
      */
@@ -149,6 +149,8 @@ public class JaxenHandler implements XPathHandler
      *  This method is only valid once <code>XPathReader.parse(...)</code>
      *  successfully returned.
      *  </p>
+     *  
+     *  @param shouldSimplify ????
      *
      *  @return the XPath expression tree
      */
@@ -163,7 +165,7 @@ public class JaxenHandler implements XPathHandler
         return this.xpath;
     }
 
-    public void startXPath() throws JaxenException
+    public void startXPath()
     {
         this.simplified = false;
         pushFrame();
@@ -175,7 +177,7 @@ public class JaxenHandler implements XPathHandler
         popFrame();
     }
 
-    public void startPathExpr() throws JaxenException
+    public void startPathExpr()
     {
         pushFrame();
     }
@@ -234,7 +236,7 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createAbsoluteLocationPath() );
     }
 
-    public void endAbsoluteLocationPath() throws JaxenException
+    public void endAbsoluteLocationPath()
     {
         endLocationPath();
     }
@@ -246,12 +248,12 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createRelativeLocationPath() );
     }
 
-    public void endRelativeLocationPath() throws JaxenException
+    public void endRelativeLocationPath()
     {
         endLocationPath();
     }
 
-    protected void endLocationPath() throws JaxenException
+    protected void endLocationPath() 
     {
         LocationPath path = (LocationPath) peekFrame().removeFirst();
 
@@ -281,7 +283,7 @@ public class JaxenHandler implements XPathHandler
                                                localName ) );
     }
 
-    public void endNameStep() throws JaxenException
+    public void endNameStep() 
     {
         endStep();
     }
@@ -294,7 +296,7 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createTextNodeStep( axis ) );
     }
     
-    public void endTextNodeStep() throws JaxenException
+    public void endTextNodeStep()
     {
         endStep();
     }
@@ -306,7 +308,7 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createCommentNodeStep( axis ) );
     }
 
-    public void endCommentNodeStep() throws JaxenException
+    public void endCommentNodeStep()
     {
         endStep();
     }
@@ -318,7 +320,7 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createAllNodeStep( axis ) );
     }
 
-    public void endAllNodeStep() throws JaxenException
+    public void endAllNodeStep()
     {
         endStep();
     }
@@ -332,7 +334,7 @@ public class JaxenHandler implements XPathHandler
                                                                     name ) );
     }
     
-    public void endProcessingInstructionNodeStep() throws JaxenException
+    public void endProcessingInstructionNodeStep()
     {
         endStep();
     }
@@ -347,7 +349,7 @@ public class JaxenHandler implements XPathHandler
         push( step );
     }
     
-    public void startPredicate() throws JaxenException
+    public void startPredicate()
     {
         pushFrame();
     }
@@ -361,7 +363,7 @@ public class JaxenHandler implements XPathHandler
         push( predicate );
     }
 
-    public void startFilterExpr() throws JaxenException
+    public void startFilterExpr() 
     {
         pushFrame();
     }
@@ -396,7 +398,7 @@ public class JaxenHandler implements XPathHandler
         push( expr );
     }
 
-    public void startOrExpr() throws JaxenException
+    public void startOrExpr()
     {
     }
 
@@ -413,7 +415,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startAndExpr() throws JaxenException
+    public void startAndExpr()
     {
     }
 
@@ -431,7 +433,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startEqualityExpr() throws JaxenException
+    public void startEqualityExpr()
     {
     }
 
@@ -450,7 +452,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startRelationalExpr() throws JaxenException
+    public void startRelationalExpr()
     {
     }
 
@@ -469,7 +471,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startAdditiveExpr() throws JaxenException
+    public void startAdditiveExpr()
     {
     }
 
@@ -488,7 +490,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startMultiplicativeExpr() throws JaxenException
+    public void startMultiplicativeExpr()
     {
     }
 
@@ -507,7 +509,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startUnaryExpr() throws JaxenException
+    public void startUnaryExpr()
     {
      }
 
@@ -521,7 +523,7 @@ public class JaxenHandler implements XPathHandler
         }
     }
 
-    public void startUnionExpr() throws JaxenException
+    public void startUnionExpr() 
     {
     }
 
@@ -569,7 +571,7 @@ public class JaxenHandler implements XPathHandler
                                                         functionName ) );
     }
 
-    public void endFunction() throws JaxenException
+    public void endFunction()
     {
         FunctionCallExpr function = (FunctionCallExpr) peekFrame().removeFirst();
 
