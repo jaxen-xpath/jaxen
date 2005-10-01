@@ -541,34 +541,14 @@ public abstract class XPathTestBase extends TestCase
             assertValueOfXPath("true", context, "(1.00 + 8.5 * 2) = 18.0");
             assertValueOfXPath("true", context, "(7.1 - 7.1 + 1.5) = 1.5");
             assertValueOfXPath("true", context, "(8.000 - 4.0 + 5 - 6.00) = 3");
-            /* left-assoc tests, comments show WRONG evaluation
-            */
-            /* 3 - 2 - 1 != 2
-            */
             assertValueOfXPath("0", context, "3.5 - 2.5 - 1.0");
-            /* 8 div 4 div 2 != 4
-            */
             assertValueOfXPath("1", context, "8.0 div 4.0 div 2.0");
-            /* 3 mod 5 mod 7 != 1
-            */
             assertValueOfXPath("3", context, "3.0 mod 7.0 mod 5.0");
-            /* 1=(2=2) is true
-            */
             assertValueOfXPath("false", context, "1.5 = 2.3 = 2.3");
-            /*  2!=(3!=1) => 2!=1 => true, (2!=3)!=1 => 1!=1 => false
-            */
             assertValueOfXPath("false", context, "2.1 != 3.2 != 1.9");
-            /* 3 > (2 > 1) is true
-            */
             assertValueOfXPath("false", context, "3.8 > 2.7 > 1.6");
-            /* 3 >= (2 >= 2) is true
-            */
             assertValueOfXPath("false", context, "3.4 >= 2.5 >= 2.5");
-            /* 1 < (2 < 3) is false
-            */
             assertValueOfXPath("true", context, "1.4 < 2.3 < 3.2");
-            /* 0 <= (2 <= 3) is true
-            */
             assertValueOfXPath("true", context, "2.5 <= 2.5 <= 3.5");
         }
     }
