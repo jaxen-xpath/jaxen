@@ -468,14 +468,19 @@ public class DocumentNavigator extends DefaultNavigator
      *
      * @param element the target node
      * @return a string representing the qualified (i.e. possibly
-     *   prefixed) name if the node is an element, or null otherwise
+     *   prefixed) name if the argument is an element, or null otherwise
      */
     public String getElementQName (Object element)
     {
-        // XXX doesn't this work on an attribute too?
-        String qname = ((Node)element).getNodeName();
-        if (qname == null) qname = ((Node)element).getLocalName();
-        return qname;
+        try {
+            Node node = (Node) element;
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                return node.getNodeName();
+            }
+        }
+        catch (ClassCastException ex) {
+        }
+        return null;
     }
 
 
@@ -513,15 +518,21 @@ public class DocumentNavigator extends DefaultNavigator
      * Get the qualified name of an attribute.
      *
      * @param attribute the target node
+     * 
      * @return a string representing the qualified (i.e. possibly
-     * prefixed) name if the node is an attribute, or null otherwise
+     * prefixed) name if the argument is an attribute, or null otherwise
      */
     public String getAttributeQName (Object attribute)
     {
-        // XXX wouldn't this work on an element too?
-        String qname = ((Node)attribute).getNodeName();
-        if (qname == null) qname = ((Node)attribute).getLocalName();
-        return qname;
+        try {
+            Node node = (Node) attribute;
+            if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
+                return node.getNodeName();
+            }
+        }
+        catch (ClassCastException ex) {
+        }
+        return null;
     }
 
 
