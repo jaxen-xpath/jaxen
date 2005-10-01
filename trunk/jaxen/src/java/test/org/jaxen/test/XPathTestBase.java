@@ -400,6 +400,8 @@ public abstract class XPathTestBase extends TestCase
             */
             assertInvalidXPath(context, "/descendant::()");
             assertInvalidXPath(context, "(1 + 1");
+            // no ! operator
+            assertInvalidXPath(context, "!false()");
         }
     }
 

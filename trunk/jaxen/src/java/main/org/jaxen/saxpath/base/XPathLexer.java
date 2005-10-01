@@ -181,7 +181,7 @@ class XPathLexer
                     }
                     else
                     {
-                        token = not();
+                        token = null;
                     }
                     break;
                 }
@@ -713,18 +713,6 @@ class XPathLexer
                                  currentPosition()+2 );
     
         consume();
-        consume();
-    
-        return token;
-    }
-    
-    private Token not()
-    {
-        Token token = new Token( TokenTypes.NOT,
-                                 getXPath(),
-                                 currentPosition(),
-                                 currentPosition() + 1 );
-    
         consume();
     
         return token;
