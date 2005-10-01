@@ -103,25 +103,28 @@ class TokenTypes
     static final int RIGHT_PAREN = 24;
 
     // 25 was NOT but there is no such token in XPath
-    static final int DOLLAR = 26;
-    static final int LITERAL = 27;
-    static final int AND = 28;
-    static final int OR = 29;
+    static final int DOLLAR = 25;
+    static final int LITERAL = 26;
+    static final int AND = 27;
+    static final int OR = 28;
 
-    // No need for an integer token type. Alll numbers
+    // No need for an integer token type. All numbers
     // in XPath are doubles.
-    // static final int INTEGER = 30;
-    static final int DOUBLE = 31;
-
-    static final int COMMA = 32;
+    static final int DOUBLE = 29;
+    static final int COMMA = 30;
 
     static String getTokenText( int tokenType )
     {
         switch( tokenType )
         {
-            // XXX what aboput skip eof and 0?
             case ERROR:
                 return "(error)";
+            case SKIP:
+                return "(skip)";
+            case EOF:
+                return "(eof)";
+            case 0:
+                throw new JaxenRuntimeException("Unrecognized token type: 0");
             case EQUALS:
                 return "=";
             case NOT_EQUALS:
@@ -170,9 +173,6 @@ class TokenTypes
                 return "(";
             case RIGHT_PAREN:
                 return ")";
-            case 25: // include solely for alignment
-                // should this be an exception or a return????
-                throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
             case DOLLAR:
                 return "$";
             case LITERAL:
@@ -181,9 +181,6 @@ class TokenTypes
                 return "and";
             case OR:
                 return "or";
-            case 30: // include solely for alignment
-                // should this be an exception or a return????
-                throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
             case DOUBLE:
                 return "(double)";
             case COMMA:
