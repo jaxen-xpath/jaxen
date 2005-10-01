@@ -136,7 +136,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
         switch ( LA(1) )
         {
-            case TokenTypes.INTEGER:
             case TokenTypes.DOUBLE:
             case TokenTypes.LITERAL:
             {
@@ -216,20 +215,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
         getXPathHandler().number( Double.parseDouble( token.getTokenText() ) );
     }
 
-    private void numberInteger() throws SAXPathException
-    {
-        Token token = match( TokenTypes.INTEGER );
-        
-        String text = token.getTokenText();
-        try {
-            getXPathHandler().number( Integer.parseInt( text ) );
-        }
-        catch (NumberFormatException ex) {
-            getXPathHandler().number( Double.parseDouble( text ) );
-        }
-        
-    }
-
     private void literal() throws SAXPathException
     {
         Token token = match( TokenTypes.LITERAL );
@@ -290,11 +275,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
         switch ( LA(1) )
         {
-            case TokenTypes.INTEGER:
-            {
-                numberInteger();
-                break;
-            }
             case TokenTypes.DOUBLE:
             {
                 numberDouble();
