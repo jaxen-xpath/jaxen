@@ -93,11 +93,18 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
      *     containing the namespace URIs.
      *     
      * @throws NullPointerException if the argument is null   
+     * @throws ClassCastException if any keys or values in the map are not strings   
      */
     public SimpleNamespaceContext(Map namespaces)
     {
-        // FIXME this is dangerous. We should check that
-        // the contents are strings.
+        Iterator entries = namespaces.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry entry = (Map.Entry) entries.next();
+            if (! (entry.getKey() instanceof String)
+              || ! (entry.getValue() instanceof String)) {
+                throw new ClassCastException("Non-string namespace binding");
+            }
+        }
         this.namespaces = new HashMap(namespaces);
     }
 
