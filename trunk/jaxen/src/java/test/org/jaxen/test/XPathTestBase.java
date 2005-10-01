@@ -65,9 +65,9 @@ package org.jaxen.test;
 import junit.framework.TestCase;
 
 import org.jaxen.*;
+import org.jaxen.dom.DOMXPath;
 import org.jaxen.function.StringFunction;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
-import org.jaxen.xom.XOMXPath;
 import org.jaxen.pattern.Pattern;
 
 import java.util.ArrayList;
@@ -117,7 +117,7 @@ public abstract class XPathTestBase extends TestCase
     {
         log(debug,
                 "  Select :: " + xpathStr);
-        XOMXPath xpath = new XOMXPath(xpathStr);
+        DOMXPath xpath = new DOMXPath(xpathStr);
         List results = xpath.selectNodes(getContext(context));
         log(debug,
                 "    Expected Size :: " + expectedSize);
@@ -152,7 +152,7 @@ public abstract class XPathTestBase extends TestCase
         {
             log(debug,
                     "  Select :: " + xpathStr);
-            XOMXPath xpath = new XOMXPath(xpathStr);
+            DOMXPath xpath = new DOMXPath(xpathStr);
             List results = xpath.selectNodes(getContext(context));
             log(debug,
                     "    Result Size   :: " + results.size());
@@ -166,7 +166,7 @@ public abstract class XPathTestBase extends TestCase
 
     private void assertValueOfXPath(String expected, Object context, String xpathStr) throws JaxenException
     {
-            XOMXPath xpath = new XOMXPath(xpathStr);
+            DOMXPath xpath = new DOMXPath(xpathStr);
             Object node = xpath.evaluate(getContext(context));
             String result = StringFunction.evaluate(node,
                     getNavigator());
@@ -1012,27 +1012,27 @@ public abstract class XPathTestBase extends TestCase
             assertCountXPath(20, context, "//article");
             assertCountXPath(20, context, "/*/*[@code]");
             assertCountXPath(1, context, "/moreovernews/article[@code='13563275']");
-                XOMXPath xpath = new XOMXPath("/moreovernews/article[@code='13563275']");
+                DOMXPath xpath = new DOMXPath("/moreovernews/article[@code='13563275']");
                 List results = xpath.selectNodes(getContext(context));
                 Object result = results.get(0);
                 assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
-            xpath = new XOMXPath("/*/article[@code='13563275']");
+            xpath = new DOMXPath("/*/article[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
                 assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
-            xpath = new XOMXPath("//article[@code='13563275']");
+            xpath = new DOMXPath("//article[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
                 assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
-            xpath = new XOMXPath("//*[@code='13563275']");
+            xpath = new DOMXPath("//*[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
                 assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
-            xpath = new XOMXPath("/child::node()/child::node()[@code='13563275']");
+            xpath = new DOMXPath("/child::node()/child::node()[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
                 assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
-            xpath = new XOMXPath("/*/*[@code='13563275']");
+            xpath = new DOMXPath("/*/*[@code='13563275']");
             results = xpath.selectNodes(getContext(context));
             result = results.get(0);
                 assertValueOfXPath("http://c.moreover.com/click/here.pl?x13563273", result, "url");
