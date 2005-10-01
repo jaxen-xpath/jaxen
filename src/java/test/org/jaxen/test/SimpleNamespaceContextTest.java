@@ -93,14 +93,37 @@ public class SimpleNamespaceContextTest extends TestCase
     /**
      * Need to make sure that changing the map after it's used to create the 
      * namespace context does not affect the context. i.e.
-     * getCause()getCause()getCause()getCause() data encapsulation 
-     * is not violated.
+     * data encapsulation is not violated.
      */
     public void testMapCopy() {
         Map map = new HashMap();
         SimpleNamespaceContext context = new SimpleNamespaceContext(map);
         map.put("pre", "http://www.example.org/");
         assertNull(context.translateNamespacePrefixToUri("pre"));
+    }
+ 
+    public void testCantUseNonStringsAsValues() {
+        Map map = new HashMap();
+        map.put("key", new Object());
+        try {
+            new SimpleNamespaceContext(map);
+            fail("added non String value to namespace context");
+        }
+        catch (Exception ex) {
+            assertNotNull(ex.getMessage());
+        }
+    }
+ 
+    public void testCantUseNonStringsAsKeys() {
+        Map map = new HashMap();
+        map.put(new Object(), "value");
+        try {
+            new SimpleNamespaceContext(map);
+            fail("added non String key to namespace context");
+        }
+        catch (Exception ex) {
+            assertNotNull(ex.getMessage());
+        }
     }
  
     public void testContextFromElement() throws ParserConfigurationException, UnsupportedAxisException { 
