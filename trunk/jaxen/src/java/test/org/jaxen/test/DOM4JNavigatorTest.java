@@ -64,10 +64,6 @@ package org.jaxen.test;
 
 import java.util.Iterator;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
-
 import org.dom4j.io.SAXReader;
 import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
@@ -83,21 +79,6 @@ public class DOM4JNavigatorTest extends XPathTestBase
         super( name );
         this.reader = new SAXReader();
         this.reader.setMergeAdjacentText( true );
-    }
-
-    public static void main(String[] args) 
-    {
-        verbose = true;
-        if ( args.length > 0 ) 
-        {
-            TESTS_XML = args[0];
-        }
-        TestRunner.run( suite() );
-    }
-    
-    public static Test suite() 
-    {
-        return new TestSuite( DOM4JNavigatorTest.class );
     }
     
     public Navigator getNavigator()
