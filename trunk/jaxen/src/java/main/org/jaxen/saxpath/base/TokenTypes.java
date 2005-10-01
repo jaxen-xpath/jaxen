@@ -102,13 +102,15 @@ class TokenTypes
     static final int LEFT_PAREN = 23;
     static final int RIGHT_PAREN = 24;
 
-    static final int NOT = 25;
+    // 25 was NOT but there is no such token in XPath
     static final int DOLLAR = 26;
     static final int LITERAL = 27;
     static final int AND = 28;
     static final int OR = 29;
 
-    static final int INTEGER = 30;
+    // No need for an integer token type. Alll numbers
+    // in XPath are doubles.
+    // static final int INTEGER = 30;
     static final int DOUBLE = 31;
 
     static final int COMMA = 32;
@@ -117,6 +119,7 @@ class TokenTypes
     {
         switch( tokenType )
         {
+            // XXX what aboput skip eof and 0?
             case ERROR:
                 return "(error)";
             case EQUALS:
@@ -167,8 +170,9 @@ class TokenTypes
                 return "(";
             case RIGHT_PAREN:
                 return ")";
-            case NOT:
-                return "!";
+            case 25: // include solely for alignment
+                // should this be an exception or a return????
+                throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
             case DOLLAR:
                 return "$";
             case LITERAL:
@@ -177,13 +181,15 @@ class TokenTypes
                 return "and";
             case OR:
                 return "or";
-            case INTEGER:
-                return "(integer)";
+            case 30: // include solely for alignment
+                // should this be an exception or a return????
+                throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
             case DOUBLE:
                 return "(double)";
             case COMMA:
                 return ",";
             default:
+                // should this be an exception or a return????
                 throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
         }
     }

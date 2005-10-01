@@ -551,24 +551,10 @@ class XPathLexer
             }
         }
     
-        Token token = null;
-    
-        if ( periodAllowed )
-        {
-            token = new Token( TokenTypes.INTEGER,
+        return new Token( TokenTypes.DOUBLE,
                                getXPath(),
                                start,
                                currentPosition() );
-        }
-        else
-        {
-            token = new Token( TokenTypes.DOUBLE,
-                               getXPath(),
-                               start,
-                               currentPosition() );
-        }
-    
-        return token;
     }
     
     private Token whitespace()
