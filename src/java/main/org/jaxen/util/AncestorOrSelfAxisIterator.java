@@ -95,7 +95,7 @@ public class AncestorOrSelfAxisIterator implements Iterator
                 contextNode = navigator.getParentNode(contextNode);
                 return result;
             }
-            throw new NoSuchElementException(); // XXX provide exception message
+            throw new NoSuchElementException("Exhausted ancestor or self axis");
         }
         catch (UnsupportedAxisException e)
         {
