@@ -179,10 +179,6 @@ class XPathLexer
                     {
                         token = notEquals();
                     }
-                    else
-                    {
-                        token = null;
-                    }
                     break;
                 }
                     
