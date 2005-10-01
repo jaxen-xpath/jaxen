@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright (C) 2005 bob mcwhirter & James Strachan.
+ * Copyright (C) 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,51 +59,69 @@
  * $Id$
  */
 
-
 package org.jaxen.test;
 
-import junit.framework.Test;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.jaxen.JaxenException;
+import org.jaxen.XPath;
+import org.jaxen.dom.DOMXPath;
+import org.w3c.dom.Document;
 
 /**
- * <p>
- *   Collect the org.jaxen. tests.
- * </p>
- * 
  * @author Elliotte Rusty Harold
- * @version 1.1b9
  *
  */
-public class CoreTests extends TestCase {
+public class ArithmeticTest extends TestCase {
 
+    private Document doc;
     
-    public CoreTests(String name) {
-        super(name);   
+    public void setUp() throws ParserConfigurationException
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        doc = builder.newDocument();
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        doc.appendChild(a);
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
-        result.addTest(new TestSuite(UnresolvableExceptionTest.class));
-        result.addTest(new TestSuite(VariableContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(XPathSyntaxExceptionTest.class));
-        result.addTest(new TestSuite(UnsupportedAxisExceptionTest.class));
-        result.addTest(new TestSuite(JaxenExceptionTest.class));
-        result.addTest(new TestSuite(ArithmeticTest.class));
-        return result;
-        
+
+    public ArithmeticTest(String name) {
+        super(name);
     }
+
+    public void testNumbersThatBeginWithADecimalPoint() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath(".5 > .4");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+        
+    }    
+
+    
+   public void testNumbersThatBeginWithADecimalPoint2() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath(".3 <= .4 <= 1.1");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+        
+    }    
+
+   public void testLeftAssociativityOfLessThanOrEqual() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath(".3 <= .4 <= 0.9");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+        
+    }    
 
     
 }
