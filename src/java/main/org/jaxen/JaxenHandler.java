@@ -236,7 +236,7 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createAbsoluteLocationPath() );
     }
 
-    public void endAbsoluteLocationPath()
+    public void endAbsoluteLocationPath() throws JaxenException
     {
         endLocationPath();
     }
@@ -248,12 +248,12 @@ public class JaxenHandler implements XPathHandler
         push( getXPathFactory().createRelativeLocationPath() );
     }
 
-    public void endRelativeLocationPath()
+    public void endRelativeLocationPath() throws JaxenException
     {
         endLocationPath();
     }
 
-    protected void endLocationPath() 
+    protected void endLocationPath() throws JaxenException 
     {
         LocationPath path = (LocationPath) peekFrame().removeFirst();
 
