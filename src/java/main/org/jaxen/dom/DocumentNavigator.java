@@ -443,8 +443,15 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getElementNamespaceUri (Object element)
     {
-        String uri = ((Node)element).getNamespaceURI();
-        return uri;
+        try {
+            Node node = (Node) element;
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                return node.getNamespaceURI();
+            }
+        }
+        catch (ClassCastException ex) {
+        }
+        return null;
     }
 
 
@@ -494,8 +501,15 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeNamespaceUri (Object attribute)
     {
-        String uri = ((Node)attribute).getNamespaceURI();
-        return uri;
+        try {
+            Node node = (Node) attribute;
+            if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
+                return node.getNamespaceURI();
+            }
+        }
+        catch (ClassCastException ex) {
+        }
+        return null;
     }
 
 
