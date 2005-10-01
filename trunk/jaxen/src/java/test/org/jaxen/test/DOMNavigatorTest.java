@@ -115,6 +115,22 @@ public class DOMNavigatorTest extends XPathTestBase
         assertNull(qname);
     }
     
+    public void testGetAttributeLocalNameOnElement() {
+        Navigator nav = getNavigator();
+        Document doc = builder.newDocument();
+        Element a = doc.createElementNS("http://www.ex.com", "pre:a");
+        String name = nav.getAttributeName(a);
+        assertNull(name);
+    }
+    
+    public void testGetElementLocalNameOnAttr() {
+        Navigator nav = getNavigator();
+        Document doc = builder.newDocument();
+        Attr a = doc.createAttributeNS("http://www.ex.com", "a");
+        String name = nav.getElementName(a);
+        assertNull(name);
+    }
+    
     public void testGetAttributeNamespaceURIOnElement() {
         Navigator nav = getNavigator();
         Document doc = builder.newDocument();
