@@ -62,9 +62,7 @@
 
 package org.jaxen.test;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import java.util.Iterator;
 import java.util.List;
@@ -88,11 +86,6 @@ public class DOM4JXPathTest extends TestCase
 {
 
     private static final String BASIC_XML = "xml/basic.xml";
-    
-    public static Test suite() 
-    {
-        return new TestSuite( DOM4JXPathTest.class );
-    }
     
     public DOM4JXPathTest(String name)
     {
