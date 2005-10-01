@@ -62,41 +62,58 @@
 
 package org.jaxen.test;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.jaxen.Navigator;
 import org.jaxen.dom.DocumentNavigator;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class DOMNavigatorTest extends XPathTestBase
 {    
+    
+    private DocumentBuilder builder;
+    
+    
     public DOMNavigatorTest(String name)
     {
         super( name );
-    }
-    
-    public static Test suite() 
-    {
-        return new TestSuite( DOMNavigatorTest.class );
     }
     
     public Navigator getNavigator()
     {
         return new DocumentNavigator();
     }
+    
+    protected void setUp() throws Exception {
+        super.setUp();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        builder = factory.newDocumentBuilder();
+    }
 
     public Object getDocument(String url) throws Exception
     {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        DocumentBuilder builder = factory.newDocumentBuilder();
-
         return builder.parse( url );
     }
     
+    public void testGetAttributeQNameOnElement() {
+        Navigator nav = getNavigator();
+        Document doc = builder.newDocument();
+        Element a = doc.createElement("a");
+        String qname = nav.getAttributeQName(a);
+        assertNull(qname);
+    }
+    
+    public void testGetElementQNameOnAttr() {
+        Navigator nav = getNavigator();
+        Document doc = builder.newDocument();
+        Attr a = doc.createAttribute("a");
+        String qname = nav.getElementQName(a);
+        assertNull(qname);
+    }
     
     
 }
