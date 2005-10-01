@@ -461,13 +461,16 @@ public class DocumentNavigator extends DefaultNavigator
      *
      * @param element the target node
      * @return a string representing the unqualified local name
-     * if the node is an element, or null otherwise
+     *     if the node is an element, or null otherwise
      */
     public String getElementName (Object element)
     {
-        String name = ((Node)element).getLocalName();
-        if (name == null) name = ((Node)element).getNodeName();
-        return name;
+        if (isElement(element)) {
+            String name = ((Node)element).getLocalName();
+            if (name == null) name = ((Node)element).getNodeName();
+            return name;
+        }
+        return null;
     }
 
 
@@ -523,9 +526,12 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public String getAttributeName (Object attribute)
     {
-        String name = ((Node)attribute).getLocalName();
-        if (name == null) name = ((Node)attribute).getNodeName();
-        return name;
+        if (isAttribute(attribute)) {
+            String name = ((Node)attribute).getLocalName();
+            if (name == null) name = ((Node)attribute).getNodeName();
+            return name;
+        }
+        return null;
     }
 
 
@@ -698,7 +704,7 @@ public class DocumentNavigator extends DefaultNavigator
      *
      * @param object the target node
      * @return the text of the attribute value if the node is an
-     * attribute, null otherwise
+     *     attribute, null otherwise
      */
     public String getAttributeStringValue (Object object)
     {
@@ -724,8 +730,7 @@ public class DocumentNavigator extends DefaultNavigator
      * Get the string value of a comment node.
      *
      * @param object the target node
-     * @return the text of the comment if the node is a comment,
-     * null otherwise
+     * @return the text of the comment if the node is a comment, null otherwise
      */
     public String getCommentStringValue (Object object)
     {
@@ -739,7 +744,7 @@ public class DocumentNavigator extends DefaultNavigator
      *
      * @param object the target node
      * @return the namespace URI as a (possibly empty) string if the
-     * node is a namespace node, null otherwise
+     *     node is a namespace node, null otherwise
      */
     public String getNamespaceStringValue (Object object)
     {
@@ -748,7 +753,7 @@ public class DocumentNavigator extends DefaultNavigator
     }
 
     /**
-     * Get the prefix value of a Namespace node.
+     * Get the prefix value of a namespace node.
      *
      * @param object the target node
      * @return the namespace prefix a (possibly empty) string if the
@@ -809,9 +814,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
         
     }
-
-    // XXX What should these two methods return if the argument is not a 
-    // processing instruction?
     
     /**
      * Get the target of a processing instruction node.
