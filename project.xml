@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <id>jaxen</id>
   <name>jaxen</name>
-  <currentVersion>1.1-beta-8</currentVersion>
+  <currentVersion>1.1-beta-9-SNAPSHOT</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -165,13 +165,8 @@
     </contributor>
 
     <contributor>
-      <name>David Peterson</name> 
-      <email></email>
-    </contributor>
-
-    <contributor>
       <name>Jacob Kjome</name> 
-      <email></email>
+      <email>hoju@visi.com</email>
     </contributor>
 
     <contributor>
@@ -272,7 +267,7 @@
       
       <excludes>
         <!-- currently broken -->
-        <exclude>org/jaxen/jdom/XPathTest.java</exclude>
+        <exclude>org/jaxen/test/JDOMXPathTest.java</exclude>
       </excludes>
 
     </unitTest>
