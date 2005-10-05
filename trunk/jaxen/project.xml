@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+`<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="http://maven.apache.org/xsd/maven-project-3.0.0.xsd">
 
@@ -156,12 +156,12 @@
   <contributors>
     <contributor>
       <name>David Peterson</name> 
-      <email></email>
+      <email>david@randombits.org</email>
     </contributor>
 
     <contributor>
       <name>Mark Wilson</name> 
-      <email></email>
+      <email>mark.wilson@wilsoncom.de</email>
     </contributor>
 
     <contributor>
@@ -171,7 +171,17 @@
 
     <contributor>
       <name>Michael Brennan</name>
-      <email></email>
+      <email>mpbrennan@earthlink.net</email>
+    </contributor>
+
+    <contributor>
+      <name>Jason Hunter</name>
+      <email>jhunter@xquery.com</email>
+    </contributor>
+
+    <contributor>
+      <name>Bradley S. Huffmann</name>
+      <email>hip@cs.okstate.edu</email>
     </contributor>
 
   </contributors>
