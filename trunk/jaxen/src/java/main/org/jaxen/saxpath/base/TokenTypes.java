@@ -61,9 +61,6 @@
 
 package org.jaxen.saxpath.base;
 
-import org.jaxen.JaxenRuntimeException;
-
-
 
 class TokenTypes
 {
@@ -124,7 +121,7 @@ class TokenTypes
             case EOF:
                 return "(eof)";
             case 0:
-                throw new JaxenRuntimeException("Unrecognized token type: 0");
+                return "Unrecognized token type: 0";
             case EQUALS:
                 return "=";
             case NOT_EQUALS:
@@ -186,8 +183,14 @@ class TokenTypes
             case COMMA:
                 return ",";
             default:
-                // should this be an exception or a return????
-                throw new JaxenRuntimeException("Unrecognized token type: " + tokenType);
+                // This method is only called from an error handler, and only
+                // to provide an exception message. In other words, the string
+                // returned by this method is only used in an exception message.
+                // Something has already gone wrong, and is being reported.
+                // Thus there's no real reason to throw another exception here.
+                // Just return a string and this message will be reported in an
+                // exception anyway.
+                return("Unrecognized token type: " + tokenType);
         }
     }
 }
