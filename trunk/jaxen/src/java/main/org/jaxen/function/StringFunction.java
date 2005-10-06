@@ -257,10 +257,6 @@ public class StringFunction implements Function
     {
         try
         {
-            if (obj == null) {
-                return "";
-            }
-            
             // Workaround because XOM uses lists for Text nodes
             // so we need to check for that first
             if (nav != null && nav.isText(obj))
@@ -281,7 +277,7 @@ public class StringFunction implements Function
             
             if (nav != null) {
                 // This stack of instanceof really suggests there's 
-                // a failure to take adavantage of polymorphism here
+                // a failure to take advantage of polymorphism here
                 if (nav.isElement(obj))
                 {
                     return nav.getElementStringValue(obj);
