@@ -73,6 +73,8 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DocumentNavigator;
+import org.jaxen.function.StringFunction;
 import org.w3c.dom.Document;
 
 /**
@@ -132,6 +134,14 @@ public class StringTest extends TestCase {
         String result = (String) xpath.evaluate(doc);
         assertEquals("data", result);
         
+    }
+    
+    public void testStringValueOfNull() {
+        assertEquals("", StringFunction.evaluate(null, null));
+    }
+    
+    public void testStringValueOfNullWithNonNullNavigator() {
+        assertEquals("", StringFunction.evaluate(null, new DocumentNavigator()));
     }
     
     public void testStringValueOfNamespaceNode() 
