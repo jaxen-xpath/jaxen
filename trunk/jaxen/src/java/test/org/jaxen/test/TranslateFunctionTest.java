@@ -81,7 +81,7 @@ public class TranslateFunctionTest extends TestCase {
 
     private Document doc;
     
-    public void setUp() throws ParserConfigurationException
+    protected void setUp() throws ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
