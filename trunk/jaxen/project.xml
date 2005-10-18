@@ -180,7 +180,7 @@
     </contributor>
 
     <contributor>
-      <name>Bradley S. Huffmann</name>
+      <name>Bradley S. Huffman</name>
       <email>hip@cs.okstate.edu</email>
     </contributor>
 
@@ -202,6 +202,7 @@
      <report>maven-tasklist-plugin</report>
      <report>maven-pmd-plugin</report> 
      <report>maven-findbugs-plugin</report> 
+     <report>jutils-lint4j-plugin</report>
    <!--  <report>maven-hammurapi-plugin</report> -->
   </reports>
 
@@ -251,6 +252,13 @@
       <groupId>maven-plugins</groupId>
       <artifactId>maven-findbugs-plugin</artifactId>
       <version>0.9.2</version>
+      <type>plugin</type>
+    </dependency>
+
+    <dependency>
+      <groupId>lint4j</groupId>
+      <artifactId>jutils-lint4j-plugin</artifactId>
+      <version>1.1</version>
       <type>plugin</type>
     </dependency>
 
