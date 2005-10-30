@@ -88,7 +88,7 @@ public abstract class XPathTestBase extends TestCase
         super(name);
     }
 
-    public void setUp()
+    protected void setUp() throws Exception
     {
         this.contextSupport = null;
         System.setProperty(XPathReaderFactory.DRIVER_PROPERTY,
@@ -210,8 +210,6 @@ public abstract class XPathTestBase extends TestCase
     }
 
     protected abstract Navigator getNavigator();
-
-    // be more specific; throws Exception????
     protected abstract Object getDocument(String url) throws Exception;
 
     public void testGetNodeType() throws FunctionCallException, UnsupportedAxisException
