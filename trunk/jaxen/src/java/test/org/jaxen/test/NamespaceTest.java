@@ -65,6 +65,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.JaxenException;
+import org.jaxen.UnresolvableException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Attr;
@@ -157,6 +158,22 @@ public class NamespaceTest extends TestCase {
         List result = xpath.selectNodes(root);
         // one for the xml prefix; one from the attribute node
         assertEquals(2, result.size());
+   
+    }   
+    
+    
+    public void testUnboundNamespaceUsedInXPathExpression() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("/pre:root");
+        try {
+            xpath.selectNodes(root);
+            fail("Used unresolvable prefix");
+        }
+        catch (UnresolvableException ex) {
+            assertNotNull(ex.getMessage());
+        }
    
     }   
     
