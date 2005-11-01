@@ -65,6 +65,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.JaxenException;
+import org.jaxen.NamespaceContext;
+import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.UnresolvableException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
@@ -174,6 +176,32 @@ public class NamespaceTest extends TestCase {
         catch (UnresolvableException ex) {
             assertNotNull(ex.getMessage());
         }
+   
+    }   
+    
+    
+    public void testQueryDefaultNamespace() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("/pre:root");
+        xpath.addNamespace("pre", "http://www.example.org/");
+        List result = xpath.selectNodes(root);
+        assertEquals(1, result.size());
+   
+    }   
+    
+    
+    public void testQueryDefaultNamespaceWithContext() throws JaxenException {
+        
+        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("/pre:root");
+        SimpleNamespaceContext context = new SimpleNamespaceContext();
+        context.addNamespace("pre", "http://www.example.org/");
+        xpath.setNamespaceContext(context);
+        List result = xpath.selectNodes(root);
+        assertEquals(1, result.size());
    
     }   
     
