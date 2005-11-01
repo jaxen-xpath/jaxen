@@ -116,6 +116,85 @@
       </p>
     </section>
 
+    <section name="How do I write a query for namespace qualified elements/attributes in Jaxen?">
+      <p>
+      The XPath expression that selects elements or attributes in a namespace 
+      looks exactly the same as it does in any other XPath context; that is, use prefixed names where the
+      prefixes are bound to the namespace URIs. For example,
+      </p>
+      
+      <p><code>/pre:bar/@xlink:href</code></p>
+      
+      <p>
+      However, because a Java program is not an XML document, it is also necessary to
+      bind the prefixes to the appropriate namespace URIs through a <code>NamespaceContext</code> object.
+      For example, this code sets up and then executes the above query:
+      </p>
+      
+      <pre>  XPath xpath = new DOMXPath("/foo:bar/@xlink:href", nav);
+  SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
+  nsContext.addNamespace("pre", "http://www.foo.org/");
+  nsContext.addNamespace("xlink", "http://www.w3.org/1999/xlink");
+  xpath.setNamespaceContext(nsContext);
+  List result = contextpath.selectNodes(document);</pre>
+        
+        <p>
+        As a shortcut, you can simply add a namespace binding
+        to the XPath expression's current context using the 
+        <code>addNamespace</code> method: 
+        </p>
+        
+        <pre>  XPath xpath = new DOMXPath("/pre:root");
+  xpath.addNamespace("pre", "http://www.example.org/");
+  List result = xpath.selectNodes(root);</pre>
+        
+        
+       <p>
+         If the namespace context does not contain a binding for a prefix that is used in
+         the XPath expression, an <code>UnresolvableException</code> 
+         (a subclass of <code>JaxenException</code>
+         is thrown when you attempt
+         to evaluate it.
+       </p>
+      
+    </section>
+
+    <section name="How do I write a query for namespace qualified elements/attributes in the default namespace?">
+      <p>
+      The same way you do for elements and attributes that
+      are in prefixed namespaces. That is, you use a prefix in the XPath expression and bind 
+      the prefix to the namespace URI. You do this even if the document you're querying
+      uses unprefixed namespaced qualified names. In XPath 1.0, all unprefixed names are unqualified. 
+      There is no requirement that the prefixes used in the XPath expression are the same as the prefixes used in the
+      document being queried. Only the namespace URIs need to match, not the prefixes. 
+      </p>
+      
+      <p>For example, this code fragment queries the document 
+      <code><![CDATA[[<root xmlns="http://www.example.org/"/>]]></code> using the XPath expression
+      <code>/pre:root</code>:
+      
+      </p>
+      
+      <pre>        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("/pre:root");
+        SimpleNamespaceContext context = new SimpleNamespaceContext();
+        context.addNamespace("pre", "http://www.example.org/");
+        xpath.setNamespaceContext(context);
+        List result = xpath.selectNodes(root);</pre>
+
+     <p>Alternately, using the shortcut:
+      </p>
+      
+      <pre>        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("/pre:root");
+        xpath.addNamespace("pre", "http://www.example.org/");
+        List result = xpath.selectNodes(root);</pre>
+
+      
+    </section>
+
   </body>
 </document>
 
