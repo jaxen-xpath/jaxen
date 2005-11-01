@@ -2,7 +2,7 @@
 
 <project name="jaxen" repository="jaxen" href="http://jaxen.org">
 
-    <title>jaxen: universal java xpath engine</title>
+    <title>jaxen: universal Java XPath engine</title>
 
     <body>
         <links>
