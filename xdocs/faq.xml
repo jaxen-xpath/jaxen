@@ -76,6 +76,24 @@
       </p>
     </section>
 
+    <section name="Which version of XPath does jaxen support? Does jaxen support XPath 2?">
+      <p>
+      <code>jaxen</code> supports XPath 1.0. It does not support XPath 2.0. 
+      XPath 2.0 is a very different spec with many things to recommend it and a
+      few things not to like as well. However XPath 2.0 is not compatible with XPath 1.0.
+      It is far from a simple upgrade from XPath 1.0. It has a very different data model,
+      that might well require significant revisions to <code>jaxen</code>'s internal data structures,
+      and possibly a very different API as well. 
+      </p>
+      <p>
+      The current release plan focuses exclusively on XPath 1.0 compatibility. 
+      Perhaps one day someone will make a branch or fork of <code>jaxen</code>
+      that supports XPath 2. However, this would be a  significant undertaking,
+      and so far little interest in this has been shown. 
+      </p>
+
+    </section>
+
     <section name="How do I support a different object model?">
       <p>
       The only thing required is an implementation of the interface 
