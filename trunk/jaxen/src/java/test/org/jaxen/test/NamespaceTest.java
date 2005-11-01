@@ -65,7 +65,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.JaxenException;
-import org.jaxen.NamespaceContext;
 import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.UnresolvableException;
 import org.jaxen.XPath;
@@ -93,7 +92,7 @@ public class NamespaceTest extends TestCase {
     
     public void testMultipleNamespaceAxis() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElement("root");
+        Element root = doc.createElement("root");
         doc.appendChild(root);
         Element child = doc.createElementNS("http://www.example.org", "child");
         child.setAttributeNS("http://www.w3.org/2000/xmlns/" , "xmlns:pre", "value");
@@ -107,7 +106,7 @@ public class NamespaceTest extends TestCase {
     
     public void testNumberOfNamespaceNodes() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElement("root");
+        Element root = doc.createElement("root");
         doc.appendChild(root);
         Element child = doc.createElementNS("http://www.example.org", "foo:child");
         root.appendChild(child);
@@ -122,7 +121,7 @@ public class NamespaceTest extends TestCase {
     
     public void testNamespaceAxis() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElement("root");
+        Element root = doc.createElement("root");
         doc.appendChild(root);
         Element child = doc.createElementNS("http://www.example.org", "foo:child");
         root.appendChild(child);
@@ -136,7 +135,7 @@ public class NamespaceTest extends TestCase {
     
     public void testUnprefixedNamespaceAxis() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElement("root");
+        Element root = doc.createElement("root");
         doc.appendChild(root);
         Element child = doc.createElementNS("http://www.example.org", "child");
         root.appendChild(child);
@@ -150,7 +149,7 @@ public class NamespaceTest extends TestCase {
     
     public void testNamespaceNodesReadFromAttributes() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElement("root");
+        Element root = doc.createElement("root");
         doc.appendChild(root);
         Attr a = doc.createAttributeNS("http://www.example.org/", "a");
         a.setNodeValue("value");
@@ -166,7 +165,7 @@ public class NamespaceTest extends TestCase {
     
     public void testUnboundNamespaceUsedInXPathExpression() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
         XPath xpath = new DOMXPath("/pre:root");
         try {
@@ -182,7 +181,7 @@ public class NamespaceTest extends TestCase {
     
     public void testQueryDefaultNamespace() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
         XPath xpath = new DOMXPath("/pre:root");
         xpath.addNamespace("pre", "http://www.example.org/");
@@ -194,7 +193,7 @@ public class NamespaceTest extends TestCase {
     
     public void testQueryDefaultNamespaceWithContext() throws JaxenException {
         
-        org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
+        Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
         XPath xpath = new DOMXPath("/pre:root");
         SimpleNamespaceContext context = new SimpleNamespaceContext();
