@@ -263,11 +263,11 @@ public abstract class DefaultNavigator implements Navigator
     }
     
     /**
-     *  Default implementation that cannot find parent. Subclasses for
-     *  models with parent should override this method.
+     * Default inefficient implementation. Subclasses 
+     * should override this method.
      *
      * @param contextNode   the node whose parent to return
-     * @return null
+     * @return the parent node
      * @throws UnsupportedAxisException if the parent axis is not supported
      */
     public Object getParentNode(Object contextNode) throws UnsupportedAxisException
