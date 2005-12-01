@@ -142,8 +142,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
     public Object evaluate(Context context) throws JaxenException
     {
         List nodeSet = context.getNodeSet();
-        List contextNodeSet = new ArrayList(nodeSet.size());
-        contextNodeSet.addAll(nodeSet);
+        List contextNodeSet = new ArrayList(nodeSet);
         ContextSupport support = context.getContextSupport();
         Context stepContext = new Context(support);
         Iterator stepIter = getSteps().iterator();
