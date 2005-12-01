@@ -142,8 +142,6 @@ public class StringLengthFunction implements Function
      */
     public static Double evaluate(Object obj, Navigator nav) throws FunctionCallException
     {
-        
-        // could/should I push the mismnatching checks into StringFunction.evaluate()????
         String str = StringFunction.evaluate( obj, nav );
         // String.length() counts UTF-16 code points; not Unicode characters
         char[] data = str.toCharArray();
