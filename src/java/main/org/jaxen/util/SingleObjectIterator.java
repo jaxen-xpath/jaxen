@@ -65,6 +65,11 @@ package org.jaxen.util;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Simple utility class that wraps an iterator around one object.
+ * This is a little more efficent than creating a one-object list.
+ *
+ */
 public class SingleObjectIterator implements Iterator
 {
     private Object  object;
