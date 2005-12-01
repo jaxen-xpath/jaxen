@@ -77,7 +77,7 @@ import org.w3c.dom.UserDataHandler;
 
 
 /**
- * Extension DOM2/DOm3 node type for a namespace node.
+ * Extension DOM2/DOM3 node type for a namespace node.
  *
  * <p>This class implements the DOM2 and DOM3 {@link Node} interface
  * to allow namespace nodes to be included in the result
@@ -119,11 +119,6 @@ import org.w3c.dom.UserDataHandler;
 public class NamespaceNode implements Node
 {
 
-
-    ////////////////////////////////////////////////////////////////////
-    // Constants.
-    ////////////////////////////////////////////////////////////////////
-
     /**
      * Constant: this is a NamespaceNode.
      *
@@ -132,12 +127,8 @@ public class NamespaceNode implements Node
     public final static short NAMESPACE_NODE = Pattern.NAMESPACE_NODE;
 
     // FIXME "Note: Numeric codes up to 200 are reserved to W3C for possible future use."
-    // Ww should be using higher codes.
-
-    ////////////////////////////////////////////////////////////////////
-    // Protected Constructors.
-    ////////////////////////////////////////////////////////////////////
-
+    // We should be using higher codes. Here we're using 13, the same as DOM 3's type for XPathNamespace.
+    // However, that's only a note not a recommendation.
 
     /**
      * Create a new NamespaceNode.
@@ -349,8 +340,7 @@ public class NamespaceNode implements Node
      * @throws DOMException always
      * @see Node#replaceChild
      */
-    public Node replaceChild (Node newChild, Node oldChild)
-    throws DOMException
+    public Node replaceChild (Node newChild, Node oldChild) throws DOMException
     {
         disallowModification();
         return null;
@@ -365,8 +355,7 @@ public class NamespaceNode implements Node
      * @throws DOMException always
      * @see Node#removeChild
      */
-    public Node removeChild (Node oldChild)
-    throws DOMException
+    public Node removeChild(Node oldChild) throws DOMException
     {
         disallowModification();
         return null;
@@ -381,8 +370,7 @@ public class NamespaceNode implements Node
      * @throws DOMException always
      * @see Node#appendChild
      */
-    public Node appendChild (Node newChild)
-    throws DOMException
+    public Node appendChild(Node newChild) throws DOMException
     {
         disallowModification();
         return null;
@@ -394,7 +382,7 @@ public class NamespaceNode implements Node
      *
      * @return false
      */
-    public boolean hasChildNodes ()
+    public boolean hasChildNodes()
     {
         return false;
     }
@@ -426,13 +414,13 @@ public class NamespaceNode implements Node
 
 
     /**
-     * Test if a DOM2 feature is supported.
+     * Test if a DOM2 feature is supported. (None are.)
      *
      * @param feature the feature name
      * @param version the feature version
      * @return false
      */
-    public boolean isSupported (String feature, String version)
+    public boolean isSupported(String feature, String version)
     {
         return false;
     }
@@ -446,7 +434,7 @@ public class NamespaceNode implements Node
      *
      * @return null
      */
-    public String getNamespaceURI ()
+    public String getNamespaceURI()
     {
        return null;
     }
@@ -461,7 +449,7 @@ public class NamespaceNode implements Node
      * @return null
      * @see #getLocalName
      */
-    public String getPrefix ()
+    public String getPrefix()
     {
         return null;
     }
@@ -473,7 +461,7 @@ public class NamespaceNode implements Node
      * @param prefix the new prefix
      * @throws DOMException always thrown
      */
-    public void setPrefix (String prefix)
+    public void setPrefix(String prefix)
     throws DOMException
     {
         disallowModification();
@@ -646,6 +634,9 @@ public class NamespaceNode implements Node
 
     /**
      * Compare relative position of this node to another nbode. (Always fails).
+     * This method is included solely for compatibility with the superclass.
+     * 
+     * @param other the node to compare to
      *
      * @return never
      * @throws DOMException NOT_SUPPORTED_ERR
@@ -672,6 +663,7 @@ public class NamespaceNode implements Node
 
     /**
      * Change the value of this node (always fails).
+     * This method is included solely for compatibility with the superclass.
      *
      * @param textContent the new content
      * @throws DOMException always
@@ -700,7 +692,10 @@ public class NamespaceNode implements Node
 
     /**
      * Return the prefix bound to this namespace URI within the scope
-     * of this node (always fails).
+     * of this node (always fails). This method is included solely 
+     * for compatibility with the superclass.
+     * 
+     * @param namespaceURI the URI to find a prefix binding for
      *
      * @return never
      * @throws UnsupportedOperationException always
@@ -715,7 +710,10 @@ public class NamespaceNode implements Node
 
     /**
      * Return true if the specified URI is the default namespace in
-     * scope (always fails).
+     * scope (always fails). This method is included solely for 
+     * compatibility with the superclass.
+     * 
+     * @param namespaceURI the URI to check
      *
      * @return never
      * @throws UnsupportedOperationException always
@@ -728,6 +726,9 @@ public class NamespaceNode implements Node
     /**
      * Return the namespace URI mapped to the specified
      * prefix within the scope of this namespace node (always fails).
+     * This method is included solely for compatibility with the superclass.
+     * 
+     * @param prefix the prefix to search for
      *
      * @return never
      * @throws UnsupportedOperationException always
@@ -782,7 +783,7 @@ public class NamespaceNode implements Node
      * 
      * @param key the key by which the data will be retrieved
      * @param data the object to store with the key
-     * @param handler ignored since nnamespace ndoes cannot be imported, cloned, or renamed
+     * @param handler ignored since namespace nodes cannot be imported, cloned, or renamed
      * 
      * @return the value previously associated with this key; or null
      *     if there isn't any such previous value
@@ -797,6 +798,8 @@ public class NamespaceNode implements Node
     /**
      * Returns the user data associated with the given key. 
      * 
+     * @param key the lookup key
+     * 
      * @return the object associated with the key; or null if no such object is available
      */
     public Object getUserData(String key) {
@@ -805,4 +808,4 @@ public class NamespaceNode implements Node
     
 }
 
-// end of Namespace.java
+// end of NamespaceNode.java
