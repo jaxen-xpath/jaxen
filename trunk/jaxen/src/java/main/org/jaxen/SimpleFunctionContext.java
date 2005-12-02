@@ -123,7 +123,7 @@ public class SimpleFunctionContext implements FunctionContext
                                  String localName,
                                  Function function )
     {
-        this.functions.put( new QualifiedName(namespaceURI, null, localName),
+        this.functions.put( new QualifiedName(namespaceURI, localName),
                             function );
     }
 
@@ -132,7 +132,7 @@ public class SimpleFunctionContext implements FunctionContext
                                 String localName )
         throws UnresolvableException
     {
-        QualifiedName key = new QualifiedName( namespaceURI, prefix, localName );
+        QualifiedName key = new QualifiedName( namespaceURI, localName );
 
         if ( this.functions.containsKey(key) ) {
             return (Function) this.functions.get( key );
