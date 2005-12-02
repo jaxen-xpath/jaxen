@@ -70,7 +70,6 @@ class QualifiedName
 {
     private String namespaceURI;
     private String localName;
-    private String prefix;
 
     /** Constructs a QualifiedName object.
      *
@@ -79,10 +78,9 @@ class QualifiedName
      *  @param localName    local name that is qualified by the namespace uri;
      *                      must not be <code>null</code>
      */
-    QualifiedName( String namespaceURI, String prefix, String localName )
+    QualifiedName( String namespaceURI, String localName )
     {
         if (namespaceURI == null) namespaceURI = "";
-        if (prefix == null) prefix = "";
         this.namespaceURI = namespaceURI;
         this.localName = localName;
     }
@@ -108,8 +106,7 @@ class QualifiedName
      */
     String getClarkForm() {
         if ("".equals(namespaceURI)) return localName;
-        else if ("".equals(prefix)) return "{" + namespaceURI + "}" + localName;
-        else return "{" + namespaceURI + "}" + prefix + ":" + localName;
+        else return "{" + namespaceURI + "}" + ":" + localName;
     }
     
 }

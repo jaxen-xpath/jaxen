@@ -113,7 +113,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
                                   String localName,
                                   Object value )
     {
-        this.variables.put( new QualifiedName(namespaceURI, null, localName),
+        this.variables.put( new QualifiedName(namespaceURI, localName),
                             value );
     }
 
@@ -132,7 +132,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
     public void setVariableValue( String localName,
                                   Object value )
     {
-        this.variables.put( new QualifiedName(null, null, localName), value );
+        this.variables.put( new QualifiedName(null, localName), value );
     }
 
     public Object getVariableValue( String namespaceURI,
@@ -140,7 +140,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
                                     String localName )
         throws UnresolvableException
     {
-        QualifiedName key = new QualifiedName( namespaceURI, prefix, localName );
+        QualifiedName key = new QualifiedName( namespaceURI, localName );
 
         if ( this.variables.containsKey(key) )
         {
