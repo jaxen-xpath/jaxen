@@ -131,6 +131,7 @@
       easy XPath evaluation directly from your documents.  Additionally, it's
       being integrated into David Megginson's 
       <a href="http://newsml-toolkit.sourceforge.net/">NewsML Framework</a>.
+      Tom Copeland's <a href="http://pmd.sourceforge.net/">PMD</a> static code analyzer uses jaxen to query Java code structures using XPath.  
       </p>
     </section>
 
