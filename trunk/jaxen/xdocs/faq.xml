@@ -37,7 +37,7 @@
       </p>
     </section>
 
-    <section name="Why is jaxen better than [some other xpath technology]">
+    <section name="Why is jaxen better than [some other XPath technology]">
       <p>
       <code>jaxen</code> is better than <code>werken.xpath</code> specifically because it better
       handles XPath expressions, and syntax error reporting.  Additionally, since
