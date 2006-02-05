@@ -1,6 +1,6 @@
 /** This is a W3C interface we include here so that NamespaceNode can compile in both
- *  Java 1.4 and 1.5. It's owned by the W3C, and avaialble under their usual 
- *  extremely liberal license so this shoudln't bother anyone. (XPath itself
+ *  Java 1.4 and 1.5. It's owned by the W3C, and available under their usual 
+ *  extremely liberal license so this shoudldn't bother anyone. (XPath itself
  *  is under the same license after all.)
  */
 
