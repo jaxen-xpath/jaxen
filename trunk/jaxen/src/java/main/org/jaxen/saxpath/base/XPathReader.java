@@ -208,13 +208,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
         getXPathHandler().endPathExpr();
     }
 
-    private void numberDouble() throws SAXPathException
-    {
-        Token token = match( TokenTypes.DOUBLE );
-
-        getXPathHandler().number( Double.parseDouble( token.getTokenText() ) );
-    }
-
     private void literal() throws SAXPathException
     {
         Token token = match( TokenTypes.LITERAL );
@@ -277,7 +270,9 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
         {
             case TokenTypes.DOUBLE:
             {
-                numberDouble();
+                Token token = match( TokenTypes.DOUBLE );
+                
+                getXPathHandler().number( Double.parseDouble( token.getTokenText() ) );
                 break;
             }
             case TokenTypes.LITERAL:
