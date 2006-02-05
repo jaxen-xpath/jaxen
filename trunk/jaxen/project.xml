@@ -99,7 +99,8 @@
 
     <developer>
       <name>Christian Nentwich</name>
-      <id>xcut</id>
+      <!-- <id>xcut</id> -->
+      <id>cnentwich</id>
       <email>xcut@users.sourceforge.net</email>
     </developer>
 
@@ -150,6 +151,19 @@
       <organization>Cafe au Lait</organization>
       <url>http://www.elharo.com/</url>
     </developer>
+
+    <!-- found next two in CVS-->
+    <contributor>
+      <id>emcgreal</id>
+      <name>Eddie McGreal</name>
+      <email>emcgreal@BlackPearl.com</email>
+    </contributor>
+
+    <contributor>
+      <id>slehmann</id>
+      <name>Steen Lehmann</name>
+      <email>slehmann@users.sourceforge.net</email>
+    </contributor>
     
   </developers>
 
@@ -183,6 +197,31 @@
       <name>Bradley S. Huffman</name>
       <email>hip@cs.okstate.edu</email>
     </contributor>
+
+    <!-- found him on sourceforge http://sourceforge.net/project/memberlist.php?group_id=26014 -->
+    <contributor>
+      <name>K. Ari Krupnikov</name>
+      <email>ari@lib.aero</email>
+    </contributor>
+
+    <!-- found him on sourceforge http://sourceforge.net/project/memberlist.php?group_id=31447 -->
+    <contributor>
+      <name>Paul R. Brown</name>
+      <email>prb@fivesight.com</email>
+    </contributor>
+
+
+    <!-- next two found on http://lists.debian.org/debian-mentors/2003/09/msg00217.html -->
+    <contributor>
+      <name>Guoliang Cao</name>
+      <email>cao@ispsoft.com</email>
+    </contributor>
+
+   <contributor>
+      <name>Jérôme Nègre</name>
+      <email>jerome.negre@e-xmlmedia.fr</email>
+    </contributor>
+
 
   </contributors>
 
