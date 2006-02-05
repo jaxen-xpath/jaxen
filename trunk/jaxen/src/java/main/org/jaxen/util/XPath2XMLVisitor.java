@@ -29,6 +29,7 @@ import org.jaxen.expr.VariableReferenceExpr;
 import org.jaxen.expr.Visitor;
 
 public class XPath2XMLVisitor implements Visitor {
+    
     protected PrintWriter printer;
     protected int tabIndex;
 
@@ -50,6 +51,7 @@ public class XPath2XMLVisitor implements Visitor {
         }
         printLn("</PathExpr>");
     }
+    
     public void visit(LocationPath expr) {
         printLn("<LocationPath absolute=\"" + expr.isAbsolute() + "\">");
         Iterator steps = expr.getSteps().iterator();
@@ -60,6 +62,7 @@ public class XPath2XMLVisitor implements Visitor {
         }
         printLn("</LocationPath>");
     }
+    
     public void visit(LogicalExpr expr) {
         printLn("<LogicalExpr operator=\""+ expr.getOperator() + "\">");
         printLhsRhs(expr.getLHS(), expr.getRHS());
@@ -76,11 +79,13 @@ public class XPath2XMLVisitor implements Visitor {
         printLn("</rhsExpr>");
         tabIndex--;
     }
+    
     public void visit(EqualityExpr expr) {
         printLn("<EqualityExpr operator=\""+ expr.getOperator() + "\">");
         printLhsRhs(expr.getLHS(), expr.getRHS());
         printLn("</EqualityExpr>");
     }
+    
     public void visit(FilterExpr expr) {
         printLn("<FilterExpr>");
         tabIndex++;
@@ -94,35 +99,43 @@ public class XPath2XMLVisitor implements Visitor {
         tabIndex--;
         printLn("</FilterExpr>");
     }
+    
     public void visit(RelationalExpr expr) {
         printLn("<RelationalExpr operator=\""+ expr.getOperator() + "\">");
         printLhsRhs(expr.getLHS(), expr.getRHS());
         printLn("</RelationalExpr>");
     }
+    
     public void visit(AdditiveExpr expr) {
         printLn("<AdditiveExpr operator=\""+ expr.getOperator() + "\">");
         printLhsRhs(expr.getLHS(), expr.getRHS());
         printLn("</AdditiveExpr>");
     }
+    
     public void visit(MultiplicativeExpr expr) {
         printLn("<MultiplicativeExpr operator=\""+ expr.getOperator() + "\">");
         printLhsRhs(expr.getLHS(), expr.getRHS());
         printLn("</MultiplicativeExpr>");
     }
+    
     public void visit(UnaryExpr expr) {
         printLn("<UnaryExpr>");
         expr.getExpr().accept(this);
         printLn("</UnaryExpr>");
     }
+    
     public void visit(UnionExpr expr) {
         printLn("<UnionExpr>");
         printLhsRhs(expr.getLHS(), expr.getRHS());
         printLn("</UnionExpr>");
     }
+    
     public void visit(NumberExpr expr) {
         printLn("<NumberExpr>");
+        printLn(expr.getNumber().toString());
         printLn("</NumberExpr>");
     }
+    
     public void visit(LiteralExpr expr) {
         printLn("<LiteralExpr literal=\"" + expr.getLiteral() + "\"/>");
     }
@@ -130,6 +143,7 @@ public class XPath2XMLVisitor implements Visitor {
     public void visit(VariableReferenceExpr expr) {
         printLn("<VariableReferenceExpr name=\"" + expr.getVariableName() + "\"/>");
     }
+    
     public void visit(FunctionCallExpr expr){
         printLn("<FunctionCallExpr prefix=\"" + expr.getPrefix() +
         "\" functionName=\"" + expr.getFunctionName() + "\">");
@@ -157,6 +171,7 @@ public class XPath2XMLVisitor implements Visitor {
         tabIndex--;
         printLn("</NameStep>");
     }
+    
     public void visit(ProcessingInstructionNodeStep step){
         printLn("<ProcessingInstructionNodeStep name=\"" + step.getName() +
             "\" axis=\"" + step.getAxis() + ">");
@@ -166,6 +181,7 @@ public class XPath2XMLVisitor implements Visitor {
         tabIndex--;
         printLn("</ProcessingInstructionNodeStep>");
     }
+    
     public void visit(AllNodeStep step){
         printLn("<AllNodeStep>");
         tabIndex++;
@@ -173,6 +189,7 @@ public class XPath2XMLVisitor implements Visitor {
         tabIndex--;
         printLn("</AllNodeStep>");
     }
+    
     public void visit(TextNodeStep step){
         printLn("<TextNodeStep>");
         tabIndex++;
@@ -180,6 +197,7 @@ public class XPath2XMLVisitor implements Visitor {
         tabIndex--;
         printLn("</TextNodeStep>");
     }
+    
     public void visit(CommentNodeStep step){
         printLn("<CommentNodeStep>");
         tabIndex++;
@@ -187,6 +205,7 @@ public class XPath2XMLVisitor implements Visitor {
         tabIndex--;
         printLn("</CommentNodeStep>");
     }
+    
     public void visit(Predicate predicate){
         printLn("<Predicate>");
         tabIndex++;
@@ -214,4 +233,5 @@ public class XPath2XMLVisitor implements Visitor {
             }
         }
     }
+    
 }
