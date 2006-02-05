@@ -1531,6 +1531,19 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
+    /* Jaxen-67, affects Jelly and Maven */
+    public void testCDATASectionsAreIncludedInTextNodes() throws JaxenException
+    {
+        Navigator nav = getNavigator();
+        String url = "xml/cdata.xml";
+        log("Document [" + url + "]");
+        Object document = nav.getDocument(url);
+        XPath contextPath = new BaseXPath("/p/text()", nav);
+        log("Initial Context :: " + contextPath);
+        List list = contextPath.selectNodes(document);
+        assertEquals("whatever", StringFunction.evaluate(list.get(1), nav));
+    }
+
     public void testNamespaces() throws JaxenException
     {
         Navigator nav = getNavigator();
