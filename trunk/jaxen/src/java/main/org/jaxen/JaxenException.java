@@ -67,7 +67,7 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
             versionString = versionString.substring(0, 3);
             javaVersion = Double.valueOf(versionString).doubleValue();
         }
-        catch (Exception ex) {
+        catch (RuntimeException ex) {
             // The version string format changed so presumably it's
             // 1.4 or later.
         }
