@@ -73,12 +73,13 @@ import org.xml.sax.SAXException;
 public class NamespaceURITest extends TestCase {
 
     private Document doc;
+    private DocumentBuilder builder;
     
     public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-        DocumentBuilder builder = factory.newDocumentBuilder();
+        builder = factory.newDocumentBuilder();
         doc = builder.parse( "xml/basic.xml" );
     }
 
@@ -174,9 +175,8 @@ public class NamespaceURITest extends TestCase {
       throws JaxenException {
         
         XPath xpath = new DOMXPath("namespace-uri(/a/comment())");
-        org.w3c.dom.Element a = doc.createElementNS("http://www.example.org/", "a");
-        doc.appendChild(a);
-        a.appendChild(doc.createComment("data"));
+        Document doc = builder.getDOMImplementation().createDocument(null, "a", null);
+        doc.getDocumentElement().appendChild(doc.createComment("data"));
         
         String result = (String) xpath.evaluate(doc);
         assertEquals("", result);
