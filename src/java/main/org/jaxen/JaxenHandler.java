@@ -82,7 +82,10 @@ public class JaxenHandler implements XPathHandler
     protected boolean simplified;
 
     /**
-     * ????
+     * This may be changed to an ArrayList in the future (i.e. version &gt;= 1.2). 
+     * You really shouldn't be accessing this field directly, but
+     * if you are please try to use it as a generic List. Don't use the 
+     * methods that are only available in LinkedList.
      */
     protected LinkedList stack;
 
