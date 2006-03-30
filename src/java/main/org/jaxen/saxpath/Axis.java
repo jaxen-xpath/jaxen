@@ -174,6 +174,9 @@ public class Axis
      */
     public static int lookup(String axisName)
     {
+        
+        // XXX All these equals calls are a small HotSpot;
+        // Need to replace this with a static HashMap
         if ( "child".equals( axisName ) )
         {
             return CHILD;
