@@ -49,7 +49,7 @@
 
 package org.jaxen.saxpath.base;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
@@ -65,7 +65,7 @@ import org.jaxen.saxpath.helpers.DefaultXPathHandler;
  */
 public class XPathReader implements org.jaxen.saxpath.XPathReader
 {
-    private LinkedList tokens;
+    private ArrayList  tokens;
     private XPathLexer lexer;
 
     private XPathHandler handler;
@@ -113,7 +113,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     void setUpParse(String xpath)
     {
-        this.tokens = new LinkedList();
+        this.tokens = new ArrayList();
         this.lexer = new XPathLexer( xpath );
     }
 
@@ -1029,7 +1029,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
         if ( token.getTokenType() == tokenType )
         {
-            tokens.removeFirst();
+            tokens.remove(0);
             return token;
         }
 
