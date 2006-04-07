@@ -109,7 +109,7 @@ public abstract class Pattern {
     public abstract boolean matches( Object node, Context context ) throws JaxenException;
     
     /** Returns the default resolution policy of the pattern according to the
-      * <a href="http://www.w3.org/TR/xslt11/#conflict">
+      * <a href="http://www.w3.org/TR/xslt#conflict">
       * XSLT conflict resolution rules</a>.
       *  
      * @return 0.5; the default priority defined in XSLT
