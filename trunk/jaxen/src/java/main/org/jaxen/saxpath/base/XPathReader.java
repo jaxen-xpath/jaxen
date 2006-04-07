@@ -1043,6 +1043,8 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
         return LT(position).getTokenType();
     }
 
+    
+    // XXX This method's a HotSpot; could we improve it?
     private Token LT(int position)
     {
         if ( tokens.size() <= ( position - 1 ) )
