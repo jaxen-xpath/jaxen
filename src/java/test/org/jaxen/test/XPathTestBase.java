@@ -1527,8 +1527,8 @@ public abstract class XPathTestBase extends TestCase
         XPath contextPath = new BaseXPath("/p/text()", nav);
         log("Initial Context :: " + contextPath);
         List list = contextPath.selectNodes(document);
-        // Depending on the object model there can be anywhere from 
-        // 1 to 3 nodes returend here
+        // Depending on the object model, there can be anywhere from 
+        // 1 to 3 nodes returned here.
         StringBuffer buffer = new StringBuffer(10);
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
