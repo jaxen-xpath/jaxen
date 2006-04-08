@@ -8,19 +8,14 @@
 
   <body>
     <section name="Official Builds">
- <!--     <p>
-      Release builds can be found <a href="http://prdownloads.sourceforge.net/jaxen">here</a>.
-The current release version is 1.0.
-      </p> -->
 
       <p>
     Builds can be found <a href="http://www.ibiblio.org/maven/jaxen/distributions/">here</a>.
-The current version is 1.1 beta 8. 
-1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. Even though it's still officially a beta, 
-this release
+The current version is 1.1 beta 9. 
+1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. 
+Even though it's still officially a beta, this release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
-With
-a few small exceptions (e.g. the the <code>document()</code> function has moved to the 
+With a few small exceptions (e.g. the the <code>document()</code> function has moved to the 
 <code>org.jaxen.function.xslt</code> package, the <code>IdentityHashMap</code> class has been deleted,
 and the ElectricXML navigator has been deleted) 1.1
 is backwards compatible with code written to the 1.0 APIs.
@@ -36,12 +31,12 @@ is backwards compatible with code written to the 1.0 APIs.
       </ul> -->
 
       <p>
-      The recommended build is <strong>1.1-beta-8</strong>:
+      The recommended build is <strong>1.1-beta-9</strong>:
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-8-src.zip">1.1 Beta 8 in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-8.tar.gz">1.1 Beta 8 in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9-src.zip">1.1 Beta 9 in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9.tar.gz">1.1 Beta 9 in tar/gz format.</a></li>
       </ul>
 
 
