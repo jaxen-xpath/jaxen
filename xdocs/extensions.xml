@@ -16,7 +16,8 @@
       </p>      
 
       <p>
-      Whereas standard functions have unqualified names (string(), count(), boolean(), etc.), extension functions generally belong to  a namespace and have prefixed names like 
+      Whereas standard functions have unqualified names (string(), count(), boolean(), etc.), 
+      extension functions generally belong to  a namespace and have prefixed names like 
        saxon:evaluate or exslt:tokenize. (the bundled Jaxen extension functions in 
        org.jaxen.function.ext do not yet have a namespace. This is a bug.
       Please don't emulate it with your own extension functions.) 
@@ -56,29 +57,30 @@ public interface Function {
 <p>For the math:min function we'll need to iterate through the list, convert each one to 
 a numeric value, and then finds the minimum. Some casting is required;
 but mostly we just iterate through the list while comparing each member of 
-the list to  the current minimum value. If the next value is smaller, then we replace the old minimum value with the new minimum value. Finally we return a new
+the list to  the current minimum value. If the next value is smaller, then 
+we replace the old minimum value with the new minimum value. Finally we return a new
 Double object containing the minimum value. 
 Here's the code:
 </p>
 
-<source>    class MinFunction implements Function {
+<source>public class MinFunction implements Function {
 
-        public Object call(Context context, List args) 
-          throws FunctionCallException {
-            
-            if (args.isEmpty()) return Double.valueOf(Double.NaN);
-            
-            Navigator navigator = context.getNavigator();
-            double min = Double.MAX_VALUE;
-            Iterator iterator = args.iterator();
-            while (iterator.hasNext()) {
-                double next = NumberFunction.evaluate(iterator.next(), navigator).doubleValue();
-                min = Math.min(min, next);
-            }
-            return new Double(min);
-        }
+    public Object call(Context context, List args) 
+      throws FunctionCallException {
         
-    }</source>
+        if (args.isEmpty()) return Double.valueOf(Double.NaN);
+        
+        Navigator navigator = context.getNavigator();
+        double min = Double.MAX_VALUE;
+        Iterator iterator = args.iterator();
+        while (iterator.hasNext()) {
+            double next = NumberFunction.evaluate(iterator.next(), navigator).doubleValue();
+            min = Math.min(min, next);
+        }
+        return new Double(min);
+    }
+    
+}</source>
 
 <p>
 Notice the use of Jaxen's implementation of the XPath
@@ -98,7 +100,10 @@ Notice the use of Jaxen's implementation of the XPath
 
     <section name="Installing an extension function into Jaxen">
       <p>
-         You may have noticed the name and namespace of the extension function showed up nowhere in the extension function class. To bind it to a name it must be registered with the function context. You can either register it with the default global function context (XPathFunctionContext.INSTANCE) or register it with a custom function 
+         You may have noticed the name and namespace of the extension function 
+         showed up nowhere in the extension function class. To bind it to a name 
+         it must be registered with the function context. You can either register 
+         it with the default global function context (XPathFunctionContext.INSTANCE) or register it with a custom function 
          context for the XPath expression 
       </p>
 
