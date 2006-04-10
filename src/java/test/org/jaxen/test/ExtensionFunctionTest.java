@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2005 Elliotte Rusty Harold.
+ * Copyright 2005, 2006 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,6 +59,7 @@ import junit.framework.TestCase;
 import org.jaxen.*;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.function.NumberFunction;
+import org.jaxen.saxpath.SAXPathException;
 import org.w3c.dom.Document;
 
 /**
@@ -134,5 +135,9 @@ public class ExtensionFunctionTest extends TestCase {
         
     }
     
-
+    
+    public void testJaxen47() throws SAXPathException {
+       org.jaxen.dom.DocumentNavigator.getInstance().parseXPath("a:b()");
+    }
+    
 }
