@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2005, 2006 Elliotte Rusty Harold
+ * Copyright 2006 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,21 +52,14 @@ package org.jaxen.test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.jaxen.SimpleNamespaceContext;
-import org.jaxen.UnsupportedAxisException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jaxen.SimpleVariableContext;
+import org.jaxen.UnresolvableException;
 
 import junit.framework.TestCase;
 
@@ -79,64 +72,17 @@ import junit.framework.TestCase;
  * @version 1.1b10
  *
  */
-public class SimpleNamespaceContextTest extends TestCase
+public class SimpleVariableContextTest extends TestCase
 {
 
-    /**
-     * Need to make sure that changing the map after it's used to create the 
-     * namespace context does not affect the context. i.e.
-     * data encapsulation is not violated.
-     */
-    public void testMapCopy() {
-        Map map = new HashMap();
-        SimpleNamespaceContext context = new SimpleNamespaceContext(map);
-        map.put("pre", "http://www.example.org/");
-        assertNull(context.translateNamespacePrefixToUri("pre"));
-    }
- 
-    public void testCantUseNonStringsAsValues() {
-        Map map = new HashMap();
-        map.put("key", new Object());
-        try {
-            new SimpleNamespaceContext(map);
-            fail("added non String value to namespace context");
-        }
-        catch (Exception ex) {
-            assertNotNull(ex.getMessage());
-        }
-    }
- 
-    public void testCantUseNonStringsAsKeys() {
-        Map map = new HashMap();
-        map.put(new Object(), "value");
-        try {
-            new SimpleNamespaceContext(map);
-            fail("added non String key to namespace context");
-        }
-        catch (Exception ex) {
-            assertNotNull(ex.getMessage());
-        }
-    }
- 
-    public void testContextFromElement() throws ParserConfigurationException, UnsupportedAxisException { 
-        SimpleNamespaceContext context = new SimpleNamespaceContext();
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.newDocument();
-        Element root = doc.createElementNS("http://www.example.org/", "pre:root");
-        doc.appendChild(root);
-        context.addElementNamespaces(new org.jaxen.dom.DocumentNavigator(), root);
-        
-        assertEquals("http://www.example.org/", context.translateNamespacePrefixToUri("pre"));
-    }
- 
-    public void testSerialization() throws IOException, ClassNotFoundException {
+    public void testRoundTripSerialization() 
+      throws IOException, ClassNotFoundException, UnresolvableException {
         
         // construct test object
-        SimpleNamespaceContext original = new SimpleNamespaceContext();
-        original.addNamespace("a", "http://www.a.com");
-        original.addNamespace("b", "http://www.b.com");
+        SimpleVariableContext original = new SimpleVariableContext();
+        original.setVariableValue("s", "String Value");
+        original.setVariableValue("x", new Double(3.1415292));
+        original.setVariableValue("b", Boolean.TRUE);
         
         // serialize
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -149,11 +95,29 @@ public class SimpleNamespaceContextTest extends TestCase
         InputStream in = new ByteArrayInputStream(pickled);
         ObjectInputStream ois = new ObjectInputStream(in);
         Object o = ois.readObject();
-        SimpleNamespaceContext copy = (SimpleNamespaceContext) o;
+        SimpleVariableContext copy = (SimpleVariableContext) o;
         
         // test the result
-        assertEquals("http://www.a.com", copy.translateNamespacePrefixToUri("a"));
-        assertEquals("http://www.b.com", copy.translateNamespacePrefixToUri("b"));
+        assertEquals("String Value", copy.getVariableValue("", "", "s"));
+        assertEquals(Double.valueOf(3.1415292), copy.getVariableValue("", "", "x"));
+        assertEquals(Boolean.TRUE, copy.getVariableValue("", "", "b"));
+        assertEquals("", "");
+        
+    }
+    
+    public void testSerializationFormatHasNotChanged() 
+      throws IOException, ClassNotFoundException, UnresolvableException {
+        
+        //deserialize
+        InputStream in = new FileInputStream("xml/simplevariablecontext.ser");
+        ObjectInputStream ois = new ObjectInputStream(in);
+        Object o = ois.readObject();
+        SimpleVariableContext context = (SimpleVariableContext) o;
+        
+        // test the result
+        assertEquals("String Value", context.getVariableValue("", "", "s"));
+        assertEquals(Double.valueOf(3.1415292), context.getVariableValue("", "", "x"));
+        assertEquals(Boolean.TRUE, context.getVariableValue("", "", "b"));
         assertEquals("", "");
         
     }

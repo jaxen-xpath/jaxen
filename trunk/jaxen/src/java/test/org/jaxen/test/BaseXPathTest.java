@@ -48,8 +48,10 @@
 
 package org.jaxen.test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,6 +65,7 @@ import org.jaxen.NamespaceContext;
 import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DocumentNavigator;
 import org.jaxen.dom.NamespaceNode;
 import org.jaxen.pattern.Pattern;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
@@ -80,7 +83,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b9
+ * @version 1.1b10
  *
  */
 public class BaseXPathTest extends TestCase {
@@ -1140,6 +1143,17 @@ public class BaseXPathTest extends TestCase {
             // success
         }
    
+    }
+    
+    public void testIsSerializable() throws JaxenException, IOException {
+        
+        BaseXPath path = new BaseXPath("//foo", new DocumentNavigator());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(out);
+        oos.writeObject(path);
+        oos.close();
+        assertTrue(out.toByteArray().length > 0);
+        
     }
     
     
