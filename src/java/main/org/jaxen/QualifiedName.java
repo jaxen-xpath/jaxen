@@ -47,13 +47,18 @@
 
 package org.jaxen;
 
+import java.io.Serializable;
+
 /** A local name (that matches the XML NCName production) and a namespace URI
  *  with which the local name is qualified.
  *
- *  @author Erwin Bolwidt ( ejb @ klomp.org )
+ *  @author Erwin Bolwidt ( ejb@klomp.org )
  */
-class QualifiedName
+class QualifiedName implements Serializable
 {
+
+    private static final long serialVersionUID = 2734958615642751535L;
+    
     private String namespaceURI;
     private String localName;
 
