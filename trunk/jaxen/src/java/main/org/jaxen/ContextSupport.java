@@ -57,6 +57,11 @@ public class ContextSupport
     implements Serializable
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4494082174713652559L;
+
     /** Function context. */
     private transient FunctionContext functionContext;
     
@@ -80,7 +85,7 @@ public class ContextSupport
         // intentionally left blank
     }
 
-    /** Construct.
+    /** Create a new ContextSupport object.
      *
      *  @param namespaceContext the NamespaceContext
      *  @param functionContext the FunctionContext
