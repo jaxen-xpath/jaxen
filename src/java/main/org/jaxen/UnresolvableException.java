@@ -57,6 +57,11 @@ public class UnresolvableException extends JaxenException
 {
     
     /**
+     * 
+     */
+    private static final long serialVersionUID = 953578478331961473L;
+
+    /**
      * Create a new UnresolvableException.
      * 
      * @param message the detail message

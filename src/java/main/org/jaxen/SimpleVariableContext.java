@@ -64,6 +64,10 @@ import java.util.Map;
  */
 public class SimpleVariableContext implements VariableContext, Serializable
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 961322093794516518L;
     /** Table of variable bindings. */
     private Map variables;
 
