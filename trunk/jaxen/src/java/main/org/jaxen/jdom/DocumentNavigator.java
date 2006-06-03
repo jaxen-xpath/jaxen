@@ -86,6 +86,11 @@ import org.jdom.input.SAXBuilder;
  */
 public class DocumentNavigator extends DefaultNavigator implements NamedAccessNavigator
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1636727587303584165L;
+
     /** Singleton implementation.
      */
     private static class Singleton

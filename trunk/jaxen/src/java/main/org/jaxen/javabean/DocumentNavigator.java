@@ -63,6 +63,11 @@ public class DocumentNavigator
     implements NamedAccessNavigator
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1768605107626726499L;
+
     /** Empty Class array. */
     private static final Class[] EMPTY_CLASS_ARRAY = new Class[0];
 

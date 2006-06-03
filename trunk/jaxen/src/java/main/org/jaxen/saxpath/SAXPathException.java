@@ -58,6 +58,11 @@ import java.io.PrintWriter;
 public class SAXPathException extends Exception
 {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4826444568928720706L;
+    
     private static double javaVersion = 1.4;
     
     static {
@@ -87,8 +92,8 @@ public class SAXPathException extends Exception
      */
     public SAXPathException(Throwable cause)
     {
-    	super ( cause.getMessage() );
-    	initCause(cause);
+        super ( cause.getMessage() );
+        initCause(cause);
     }
 
     /**
@@ -137,31 +142,31 @@ public class SAXPathException extends Exception
     }
 
     /** Print this exception's stack trace, followed by the
-     *	source exception's trace, if any.
+     *  source exception's trace, if any.
      *
      * @param s the stream on which to print the stack trace
      */
     public void printStackTrace ( PrintStream s )
     {
-    	super.printStackTrace ( s );
-    	if (javaVersion < 1.4 && getCause() != null) {
-    	    s.print( "Caused by: " );
-    	    getCause().printStackTrace( s );
-    	}
+        super.printStackTrace ( s );
+        if (javaVersion < 1.4 && getCause() != null) {
+            s.print( "Caused by: " );
+            getCause().printStackTrace( s );
+        }
     }
 
     /** Print this exception's stack trace, followed by the
-     *	source exception's stack trace, if any.
+     *  source exception's stack trace, if any.
      *
      * @param s the writer on which to print the stack trace
      */
     public void printStackTrace ( PrintWriter s )
     {
-    	super.printStackTrace( s );
-    	if (javaVersion < 1.4 && getCause() != null) {
-    	    s.print( "Caused by: " );
-    	    getCause().printStackTrace( s );
-    	}
+        super.printStackTrace( s );
+        if (javaVersion < 1.4 && getCause() != null) {
+            s.print( "Caused by: " );
+            getCause().printStackTrace( s );
+        }
     }
 
 }
