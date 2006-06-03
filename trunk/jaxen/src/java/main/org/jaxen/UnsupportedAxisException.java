@@ -61,6 +61,11 @@ package org.jaxen;
  */
 public class UnsupportedAxisException extends JaxenException
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3385500112257420949L;
+
     /** Create a new UnsupportedAxisException.
      *
      *  @param msg the error message
