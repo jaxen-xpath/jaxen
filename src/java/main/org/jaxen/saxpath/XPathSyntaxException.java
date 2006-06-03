@@ -56,6 +56,10 @@ package org.jaxen.saxpath;
  */
 public class XPathSyntaxException extends SAXPathException
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3567675610742422397L;
     private String xpath;
     private int    position;
     private final static String lineSeparator = System.getProperty("line.separator");

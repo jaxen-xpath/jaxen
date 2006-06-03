@@ -74,6 +74,11 @@ import org.jaxen.JaxenException;
  */
 public class JDOMXPath extends BaseXPath
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6426091824802286928L;
+
     /** Construct given an XPath expression string.
      *
      *  @param xpathExpr the XPath expression.

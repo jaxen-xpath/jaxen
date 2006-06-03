@@ -55,6 +55,11 @@ package org.jaxen;
  */
 public class XPathSyntaxException extends JaxenException
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1980601567207604059L;
+
     /** The textual XPath expression */
     private String xpath;
 
