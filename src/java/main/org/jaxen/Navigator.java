@@ -486,7 +486,7 @@ public interface Navigator extends Serializable
     String getNamespacePrefix(Object ns);
 
     
-    /** Translate a namespace prefix to a namespace URI, <b>possibly</b>
+    /** Translate a namespace prefix to a namespace URI, <strong>possibly</strong>
      *  considering a particular element node.
      *
      *  <p>
