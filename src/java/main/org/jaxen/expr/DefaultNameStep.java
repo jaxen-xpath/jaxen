@@ -62,6 +62,11 @@ import org.jaxen.saxpath.Axis;
  */
 public class DefaultNameStep extends DefaultStep implements NameStep {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 428414912247718390L;
+
     /** 
      * Our prefix, bound through the current Context.
      * The empty-string ("") if no prefix was specified.

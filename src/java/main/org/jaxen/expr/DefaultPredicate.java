@@ -54,6 +54,10 @@ import org.jaxen.JaxenException;
 
 class DefaultPredicate implements Predicate
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4140068594075364971L;
     private Expr expr;
 
     DefaultPredicate(Expr expr)

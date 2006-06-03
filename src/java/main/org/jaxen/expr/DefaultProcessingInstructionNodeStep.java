@@ -60,6 +60,10 @@ import org.jaxen.expr.iter.IterableAxis;
 public class DefaultProcessingInstructionNodeStep extends DefaultStep
     implements ProcessingInstructionNodeStep
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4825000697808126927L;
     private String name;
 
     public DefaultProcessingInstructionNodeStep(IterableAxis axis,

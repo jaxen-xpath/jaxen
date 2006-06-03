@@ -52,6 +52,10 @@ import org.jaxen.UnresolvableException;
 
 class DefaultVariableReferenceExpr extends DefaultExpr implements VariableReferenceExpr
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8832095437149358674L;
     private String prefix;
     private String localName;
 

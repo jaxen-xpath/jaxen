@@ -53,7 +53,12 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultNotEqualsExpr extends DefaultEqualityExpr 
   {
-  DefaultNotEqualsExpr( Expr lhs, Expr rhs )
+  /**
+     * 
+     */
+    private static final long serialVersionUID = -8001267398136979152L;
+
+DefaultNotEqualsExpr( Expr lhs, Expr rhs )
     {
     super( lhs, rhs );
     }

@@ -60,6 +60,10 @@ import org.jaxen.JaxenException;
  */
 public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -549640659288005735L;
     private Expr expr;
     private PredicateSet predicates;
 

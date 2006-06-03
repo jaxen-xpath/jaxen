@@ -58,6 +58,11 @@ import org.jaxen.expr.iter.IterableAxis;
  */
 public class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 292886316770123856L;
+    
     public DefaultAllNodeStep(IterableAxis axis, PredicateSet predicateSet)
     {
         super( axis, predicateSet );
@@ -78,6 +83,7 @@ public class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
     {
         return true;
     }
+    
     public void accept(Visitor visitor)
     {
         visitor.visit(this);

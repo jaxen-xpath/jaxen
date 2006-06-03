@@ -55,6 +55,10 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2303714238683092334L;
     private Expr expr;
 
     DefaultUnaryExpr(Expr expr)

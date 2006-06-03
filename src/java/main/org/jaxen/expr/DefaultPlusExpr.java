@@ -54,6 +54,10 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultPlusExpr extends DefaultAdditiveExpr
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1426954461146769374L;
     DefaultPlusExpr(Expr lhs,
                            Expr rhs)
     {

@@ -103,8 +103,10 @@ public class DocumentNavigator extends DefaultNavigator
     ////////////////////////////////////////////////////////////////////
 
     /**
-     * Constant: navigator.
+     * 
      */
+    private static final long serialVersionUID = 8460943068889528115L; 
+    
     private final static DocumentNavigator SINGLETON = new DocumentNavigator();
 
 
@@ -174,7 +176,8 @@ public class DocumentNavigator extends DefaultNavigator
             return new NodeIterator (node) {
                     protected Node getFirstNode (Node n)
                     {
-                        // FIXME: assumes castability.
+                        // We can assume castability here because we've already
+                        // tested the node type.
                         return ((Attr)n).getOwnerElement();
                     }
                     protected Node getNextNode (Node n) {
