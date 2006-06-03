@@ -68,10 +68,10 @@ public class UnsupportedAxisException extends JaxenException
 
     /** Create a new UnsupportedAxisException.
      *
-     *  @param msg the error message
+     *  @param message the error message
      */
-    public UnsupportedAxisException(String msg)
+    public UnsupportedAxisException(String message)
     {
-        super( msg );
+        super( message );
     }
 }
