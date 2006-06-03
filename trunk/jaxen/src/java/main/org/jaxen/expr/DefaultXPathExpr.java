@@ -60,6 +60,10 @@ import org.jaxen.JaxenException;
  */
 public class DefaultXPathExpr implements XPathExpr
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3007613096320896040L;
     private Expr rootExpr;
 
     public DefaultXPathExpr(Expr rootExpr)

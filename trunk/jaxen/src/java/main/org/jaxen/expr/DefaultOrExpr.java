@@ -56,6 +56,11 @@ import org.jaxen.function.BooleanFunction;
 
 class DefaultOrExpr extends DefaultLogicalExpr 
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4894552680753026730L;
+
     DefaultOrExpr(Expr lhs,
                          Expr rhs)
     {

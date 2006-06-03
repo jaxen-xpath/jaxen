@@ -53,6 +53,11 @@ import org.jaxen.function.NumberFunction;
 
 class DefaultMultiplyExpr extends DefaultMultiplicativeExpr
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2760053878102260365L;
+
     DefaultMultiplyExpr( Expr lhs,
                                 Expr rhs )
     {

@@ -49,6 +49,11 @@ import org.jaxen.UnsupportedAxisException;
 public class IterableChildAxis extends IterableAxis {
     
     /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Constructor.
      * 
      * @param value the axis value

@@ -91,6 +91,10 @@ import org.jaxen.util.SingleObjectIterator;
 public class DocumentNavigator extends DefaultNavigator implements NamedAccessNavigator
 {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5582300797286535936L;
     private transient SAXReader reader;
 
     /** Singleton implementation.
@@ -350,7 +354,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         return null;
     }
 
-    /** Returns a parsed form of the given xpath string, which will be suitable
+    /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on DOM4J documents.
      */
     public XPath parseXPath (String xpath) throws SAXPathException

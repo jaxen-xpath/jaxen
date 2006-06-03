@@ -71,6 +71,11 @@ import org.jaxen.JaxenException;
  */
 public class DOMXPath extends BaseXPath
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5551221776001439091L;
+
     /** Create a new <code>DOMXPath</code> from an XPath expression string.
      *
      *  @param xpathExpr the XPath expression

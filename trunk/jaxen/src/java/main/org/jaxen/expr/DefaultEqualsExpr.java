@@ -51,8 +51,13 @@ package org.jaxen.expr;
 
 import org.jaxen.function.NumberFunction;
 
-class DefaultEqualsExpr extends DefaultEqualityExpr 
-  {
+class DefaultEqualsExpr extends DefaultEqualityExpr {
+    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8327599812627931648L;
+    
   DefaultEqualsExpr( Expr lhs, Expr rhs )
     {
     super( lhs, rhs );
@@ -80,6 +85,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr
     
     return lhs.equals( rhs );
     }
+  
     public void accept(Visitor visitor)
     {
         visitor.visit(this);

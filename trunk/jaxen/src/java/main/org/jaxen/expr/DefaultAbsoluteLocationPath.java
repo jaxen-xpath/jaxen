@@ -62,6 +62,11 @@ import org.jaxen.util.SingletonList;
  */
 public class DefaultAbsoluteLocationPath extends DefaultLocationPath 
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2174836928310146874L;
+
     public DefaultAbsoluteLocationPath()
     {
     }
