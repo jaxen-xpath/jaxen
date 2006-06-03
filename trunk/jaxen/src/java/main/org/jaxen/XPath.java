@@ -206,7 +206,7 @@ public interface XPath
      *  will be returned.
      *
      *  <p>
-     *  <b>NOTE:</b> In most cases, nodes will be returned
+     *  <strong>NOTE:</strong> In most cases, nodes will be returned
      *  in document-order, as defined by the XML Canonicalization
      *  specification.  The exception occurs when using XPath
      *  expressions involving the <code>union</code> operator

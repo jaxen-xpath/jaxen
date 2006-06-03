@@ -40,22 +40,20 @@ import java.io.Serializable;
  *  namespace prefixes, functions, and variables.
  * 
  *  <p>
- *  <b>NOTE:</b> This class is not typically used directly,
+ *  <strong>NOTE:</strong> This class is not typically used directly,
  *  but is exposed for writers of implementation-specific
  *  XPath packages.
  *  </p>
  *
  *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
- *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
- *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
+ *  @see org.jaxen.jdom.JDOMXPath   XPath for JDOM
+ *  @see org.jaxen.dom.DOMXPath     XPath for W3C DOM
  *
  *  @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  *
  *  @version $Id$
  */
-public class ContextSupport
-    implements Serializable
-{
+public class ContextSupport implements Serializable {
 
     /**
      * 
@@ -248,4 +246,5 @@ public class ContextSupport
             throw new UnresolvableException( "No function context installed" );
         }
     }
+    
 }
