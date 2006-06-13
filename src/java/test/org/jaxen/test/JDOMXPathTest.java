@@ -65,6 +65,7 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.Text;
 import org.jdom.input.SAXBuilder;
+import org.xml.sax.InputSource;
 
 public class JDOMXPathTest extends TestCase
 {
@@ -128,6 +129,22 @@ public class JDOMXPathTest extends TestCase
         assertEquals( doc, iter.next());
 
     }
+    
+    public void testJaxen148() throws JaxenException, JDOMException, IOException  {
+        String xml = "<xml-document><nodes><node>" +
+        "\ntest\n" + 
+        "</node></nodes></xml-document>";
+
+        SAXBuilder builder = new SAXBuilder();
+        Document document = builder.build( new InputSource( new StringReader(xml) ) );
+        
+        JDOMXPath x = new JDOMXPath("/xml-document/nodes/node/text()");
+        Text t = (Text) x.selectSingleNode(document);
+        
+        assertEquals( "\ntest\n" , t.getText() );
+        
+    }
+    
     
     public void testJaxen53Text() throws JaxenException, JDOMException, IOException
     {
