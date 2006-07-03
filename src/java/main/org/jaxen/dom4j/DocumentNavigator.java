@@ -218,10 +218,11 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
      * Retrieves an <code>Iterator</code> over the child elements that
      * match the supplied name.
      *
-     * @param contextNode  the origin context node
-     * @param localName  the local name of the children to return, always present
+     * @param contextNode      the origin context node
+     * @param localName        the local name of the children to return, always present
      * @param namespacePrefix  the prefix of the namespace of the children to return
-     * @param namespaceURI  the uri of the namespace of the children to return
+     * @param namespaceURI     the uri of the namespace of the children to return
+     * 
      * @return an Iterator that traverses the named children, or null if none
      */
     public Iterator getChildAxisIterator(
@@ -234,7 +235,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         if ( contextNode instanceof Document ) {
             Document node = (Document) contextNode;
             Element el = node.getRootElement();
-            if (el.getName().equals(localName) == false) {
+            if (el == null || el.getName().equals(localName) == false) {
                 return JaxenConstants.EMPTY_ITERATOR;
             }
             if (namespaceURI != null) {
