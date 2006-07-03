@@ -10,7 +10,6 @@
     <section name="Official Builds">
 
       <p>
-    Builds can be found <a href="http://www.ibiblio.org/maven/jaxen/distributions/">here</a>.
 The current version is 1.1 beta 9. 
 1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. 
 Even though it's still officially a beta, this release
@@ -35,8 +34,10 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9-src.zip">1.1 Beta 9 in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9.tar.gz">1.1 Beta 9 in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9.zip">1.1 Beta 9 binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9.tar.gz">1.1 Beta 9 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9-src.zip">1.1 Beta 9 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-9-src.tar.gz">1.1 Beta 9 sources in tar/gz format.</a></li>
       </ul>
 
 
