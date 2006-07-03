@@ -681,8 +681,11 @@ public class NamespaceNode implements Node
      */
     public boolean isSameNode(Node other)  {
         boolean a = this.isEqualNode(other);
-        // a bit flaky (should really be this.getParentNode().isEqual(other.getParentNode())
+        // a bit flaky (should really be 
+        // this.getParentNode().isEqual(other.getParentNode())
         // but we want this to compile in Java 1.4 without problems
+        // Note that this will mess up code coverage since you can't cover both
+        // branches in the same VM
         boolean b;
         Node thisParent = this.getParentNode();
         Node thatParent = other.getParentNode();
@@ -712,19 +715,36 @@ public class NamespaceNode implements Node
 
     /**
      * Return the prefix bound to this namespace URI within the scope
-     * of this node (always fails). This method is included solely 
-     * for compatibility with the superclass.
+     * of this node. 
      * 
      * @param namespaceURI the URI to find a prefix binding for
      *
-     * @return never
-     * @throws UnsupportedOperationException always
+     * @return a prefix matching this namespace URI
+     * @throws UnsupportedOperationException in DOM 2
      */
     public String lookupPrefix(String namespaceURI) {
-        // XXX This could be implemented. See
+        // This could be fully implemented even in Java 1.4. See
         // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
         // It hardly seems worth the effort though.
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        
+        try {
+            Class clazz = Node.class;
+            Class[] argTypes = {String.class};
+            Method lookupPrefix = clazz.getMethod("lookupPrefix", argTypes);
+            String[] args = {namespaceURI};
+            String result = (String) lookupPrefix.invoke(parent, args);
+            return result;
+        }
+        catch (NoSuchMethodException ex) {
+            throw new UnsupportedOperationException("Cannot lookup prefixes in DOM 2");
+        }
+        catch (InvocationTargetException ex) {
+            throw new UnsupportedOperationException("Cannot lookup prefixes in DOM 2");
+        }
+        catch (IllegalAccessException ex) {
+            throw new UnsupportedOperationException("Cannot lookup prefixes in DOM 2");
+        }
+        
     }
 
 
@@ -745,19 +765,35 @@ public class NamespaceNode implements Node
 
     /**
      * Return the namespace URI mapped to the specified
-     * prefix within the scope of this namespace node (always fails).
-     * This method is included solely for compatibility with the superclass.
+     * prefix within the scope of this namespace node.
      * 
      * @param prefix the prefix to search for
      *
-     * @return never
-     * @throws UnsupportedOperationException always
+     * @return the namespace URI mapped to this prefix
+     * @throws UnsupportedOperationException in DOM 2
      */
     public String lookupNamespaceURI(String prefix) {
-        // XXX This could be implemented. See
+        // This could be fully implemented even in Java 1.4. See
         // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
         // It hardly seems worth the effort though.
-        throw new UnsupportedOperationException("Changing interfaces in a JDK blows chunks!");
+        
+        try {
+            Class clazz = Node.class;
+            Class[] argTypes = {String.class};
+            Method lookupNamespaceURI = clazz.getMethod("lookupNamespaceURI", argTypes);
+            String[] args = {prefix};
+            String result = (String) lookupNamespaceURI.invoke(parent, args);
+            return result;
+        }
+        catch (NoSuchMethodException ex) {
+            throw new UnsupportedOperationException("Cannot lookup namespace URIs in DOM 2");
+        }
+        catch (InvocationTargetException ex) {
+            throw new UnsupportedOperationException("Cannot lookup namespace URIs in DOM 2");
+        }
+        catch (IllegalAccessException ex) {
+            throw new UnsupportedOperationException("Cannot lookup namespace URIs in DOM 2");
+        }
     }
 
 
