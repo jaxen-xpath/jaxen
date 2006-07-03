@@ -51,6 +51,7 @@
 
 package org.jaxen.dom;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import org.jaxen.pattern.Pattern;
@@ -502,7 +503,7 @@ public class NamespaceNode implements Node
      */
     public int hashCode ()
     {
-    return hashCode(parent) + hashCode(name) + hashCode(value);
+        return hashCode(parent) + hashCode(name) + hashCode(value);
     }
 
 
@@ -540,7 +541,7 @@ public class NamespaceNode implements Node
      */
     private int hashCode (Object o)
     {
-    return (o == null ? 0 : o.hashCode());
+        return (o == null ? 0 : o.hashCode());
     }
 
 
@@ -608,13 +609,22 @@ public class NamespaceNode implements Node
     ////////////////////////////////////////////////////////////////////
 
     /**
-     * Return the base URI of the document containing this node (always fails).
+     * Return the base URI of the document containing this node. 
+     * This only works in DOM 3.
      *
      * @return null
      */
     public String getBaseURI() {
-        // XXX we could use reflection in DOM Level 3 to get this value
-        return null;
+        Class clazz = Node.class;
+        try {
+            Class[] args = new Class[0];
+            Method getBaseURI = clazz.getMethod("getBaseURI", args);
+            String base = (String) getBaseURI.invoke(this.getParentNode(), args);
+            return base;
+        }
+        catch (Exception ex) {
+            return null;
+        }
     }
 
 
@@ -672,6 +682,7 @@ public class NamespaceNode implements Node
         return this.isEqualNode(other) 
           // a bit flaky (should really be this.getParentNode().isEqual(other.getParentNode())
           // but we want this to compile in Java 1.4 without problems
+          // XXX could use reflection
           && this.getParentNode() == other.getParentNode();
     }
 
