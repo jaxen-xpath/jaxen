@@ -50,6 +50,7 @@ package org.jaxen.test;
 
 import junit.framework.TestCase;
 
+import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
@@ -133,6 +134,19 @@ public class DOM4JXPathTest extends TestCase
         XPath xpath = new Dom4jXPath( "//namespace::node()" );
         List results = xpath.selectNodes( doc );
         assertEquals( 3, results.size() );
+
+    }
+    
+    public void testJaxen16() throws JaxenException, DocumentException
+    {
+
+        String document = "<a xmlns:b=\"...\"/>";
+        SAXReader reader = new SAXReader();
+        Document doc = reader.read( new StringReader(document) );
+        
+        XPath xpath = new Dom4jXPath( "/a/b" );
+        List results = xpath.selectNodes( doc );
+        assertEquals( 0, results.size() );
 
     }
     
