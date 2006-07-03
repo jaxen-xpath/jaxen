@@ -261,6 +261,20 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
                     nsMap.put( ns.getPrefix(), new XPathNamespace(elem, ns) );
             }
 
+            Iterator attributes = current.getAttributes().iterator();
+
+            while ( attributes.hasNext() ) {
+
+                Attribute attribute = (Attribute)attributes.next();
+
+                Namespace attrNS = attribute.getNamespace();
+            
+                if ( attrNS != Namespace.NO_NAMESPACE ) {
+                    if ( !nsMap.containsKey(attrNS.getPrefix()) )
+                        nsMap.put( attrNS.getPrefix(), new XPathNamespace(elem, attrNS) );
+                }
+            }
+
             if (current.getParent() instanceof Element) {
                 current = (Element)current.getParent();
             } else {
