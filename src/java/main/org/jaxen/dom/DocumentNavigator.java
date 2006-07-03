@@ -320,6 +320,21 @@ public class DocumentNavigator extends DefaultNavigator
      * and that snapshot remains static during the life of
      * the iterator (i.e. it won't reflect subsequent changes
      * to the DOM).</p>
+     * 
+     * <p>
+     * In the event that the DOM is inconsistent; for instance a 
+     * <code>pre:foo</code> element is declared by DOM to be in the 
+     * http://www.a.com/ namespace but also has an 
+     * <code>xmlns:pre="http://www.b.com"</code> attribute; then only 
+     * one of the namespaces will be counted. This will be the intrinsic
+     * namespace of the <code>Element</code> or <code>Attr</code> object
+     * rather than the one provide by the contradictory namespace 
+     * declaration attribute. In the event of a contradiction between two
+     * attributes on the same element--e.g. <code>pre:foo</code> in the
+     * http://www.a.com/ namespace and <code>pre:bar</code> in the 
+     * http://www.b.com/ namespace--it is undefined which namespace
+     * will be returned. 
+     * </p>
      *
      * @param contextNode the context node for the namespace axis
      * @return a possibly-empty iterator (not null)
@@ -334,39 +349,11 @@ public class DocumentNavigator extends DefaultNavigator
             // Starting at the current node, walk
             // up to the root, noting the namespace
             // declarations in scope.
-            for (Node n = (Node)contextNode;
+            for (Node n = (Node) contextNode;
                  n != null;
                  n = n.getParentNode()) {
                 
-                // 1. Look for namespace attributes
-                if (n.hasAttributes()) {
-                    NamedNodeMap atts = n.getAttributes();
-                    int length = atts.getLength();
-                    for (int i = 0; i < length; i++) {
-                        Attr att = (Attr) atts.item(i);
-                        // work around crimson bug by testing URI rather than name
-                        String attributeNamespace = att.getNamespaceURI();
-                        if ("http://www.w3.org/2000/xmlns/".equals(attributeNamespace)) {
-                            NamespaceNode ns =
-                                new NamespaceNode((Node)contextNode, att);
-                            // Add only if there's not a closer
-                            // declaration in force.
-                            String name = ns.getNodeName();
-                            if (!nsMap.containsKey(name)) nsMap.put(name, ns);
-                        }
-                        else if (attributeNamespace != null) {
-                            String prefix = att.getPrefix();
-                            NamespaceNode ns =
-                                new NamespaceNode((Node)contextNode, prefix, attributeNamespace);
-                            // Add only if there's not a closer
-                            // declaration in force.
-                            if (!nsMap.containsKey(prefix)) nsMap.put(prefix, ns);
-                            
-                        }
-                    }
-                }
-                
-                // 2. Look for the namespace of the element itself
+                // 1. Look for the namespace of the element itself
                 String myNamespace = n.getNamespaceURI();
                 if (myNamespace != null && ! "".equals(myNamespace)) {
                     String myPrefix = n.getPrefix();
@@ -374,6 +361,42 @@ public class DocumentNavigator extends DefaultNavigator
                         NamespaceNode ns = new NamespaceNode((Node) contextNode, myPrefix, myNamespace);
                         nsMap.put(myPrefix, ns);
                     }
+                }
+
+                if (n.hasAttributes()) {
+                    NamedNodeMap atts = n.getAttributes();
+                    int length = atts.getLength();
+                    // 2. Look for namespaces of attributes
+                    for (int i = 0; i < length; i++) {
+                        Attr att = (Attr) atts.item(i);
+                        // Work around Crimson bug by testing URI rather than name
+                        String attributeNamespace = att.getNamespaceURI();
+                        if ("http://www.w3.org/2000/xmlns/".equals(attributeNamespace)) {
+                        }
+                        else if (attributeNamespace != null) {
+                            String prefix = att.getPrefix();
+                            NamespaceNode ns =
+                                new NamespaceNode((Node)contextNode, prefix, attributeNamespace);
+                            // Add only if there's not a closer declaration in force.
+                            if (!nsMap.containsKey(prefix)) nsMap.put(prefix, ns);
+                            
+                        }
+                    }
+                    
+                    // 3. Look for namespace declaration attributes
+                    for (int i = 0; i < length; i++) {
+                        Attr att = (Attr) atts.item(i);
+                        // work around crimson bug by testing URI rather than name
+                        String attributeNamespace = att.getNamespaceURI();
+                        if ("http://www.w3.org/2000/xmlns/".equals(attributeNamespace)) {
+                            NamespaceNode ns =
+                              new NamespaceNode( (Node)contextNode, att);
+                            // Add only if there's not a closer declaration in force.
+                            String name = ns.getNodeName();
+                            if (!nsMap.containsKey(name)) nsMap.put(name, ns);
+                        }
+                    }
+                    
                 }
                 
             }
