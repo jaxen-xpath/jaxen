@@ -51,6 +51,7 @@
 
 package org.jaxen.dom;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
@@ -678,12 +679,34 @@ public class NamespaceNode implements Node
      * @return true if this object represents the same XPath namespace node
      *     as other; false otherwise
      */
-    public boolean isSameNode(Node other) {
-        return this.isEqualNode(other) 
-          // a bit flaky (should really be this.getParentNode().isEqual(other.getParentNode())
-          // but we want this to compile in Java 1.4 without problems
-          // XXX could use reflection
-          && this.getParentNode() == other.getParentNode();
+    public boolean isSameNode(Node other)  {
+        boolean a = this.isEqualNode(other);
+        // a bit flaky (should really be this.getParentNode().isEqual(other.getParentNode())
+        // but we want this to compile in Java 1.4 without problems
+        boolean b;
+        Node thisParent = this.getParentNode();
+        Node thatParent = other.getParentNode();
+        try {
+            Class clazz = Node.class;
+            Class[] args = {clazz};
+            Method isEqual = clazz.getMethod("isEqual", args);
+            Object[] args2 = new Object[1];
+            args2[0] = thatParent;
+            Boolean result = (Boolean) isEqual.invoke(thisParent, args2);
+            b = result.booleanValue();
+        }
+        catch (NoSuchMethodException ex) {
+            b = thisParent.equals(thatParent);
+        }
+        catch (InvocationTargetException ex) {
+            b = thisParent.equals(thatParent);
+        }
+        catch (IllegalAccessException ex) {
+            b = thisParent.equals(thatParent);
+        }
+        
+        return a && b;
+        
     }
 
 
