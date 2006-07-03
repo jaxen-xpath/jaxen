@@ -111,6 +111,95 @@ public class DOMXPathTest extends TestCase
         
     }
 
+    
+    // see JAXEN-105
+    public void testConsistentNamespaceDeclarations() 
+      throws JaxenException {
+        
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "foo:child");
+        root.appendChild(child);
+        // different prefix
+        child.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo2", "http://www.contradictory.org");
+        
+        XPath xpath = new DOMXPath("//namespace::node()");
+        List result = xpath.selectNodes(doc);
+        assertEquals(4, result.size());
+        
+    }
+
+    // see JAXEN-105
+    public void testInconsistentNamespaceDeclarations() 
+      throws JaxenException {
+        
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "foo:child");
+        root.appendChild(child);
+        // same prefix
+        child.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo", "http://www.contradictory.org");
+        
+        XPath xpath = new DOMXPath("//namespace::node()");
+        List result = xpath.selectNodes(doc);
+        assertEquals(3, result.size());
+        
+    }
+
+    // see JAXEN-105
+    public void testIntrinsicNamespaceDeclarationOfElementBeatsContradictoryXmlnsPreAttr() 
+      throws JaxenException {
+        
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element child = doc.createElementNS("http://www.example.org", "foo:child");
+        root.appendChild(child);
+        // same prefix
+        child.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo", "http://www.contradictory.org");
+        
+        XPath xpath = new DOMXPath("//namespace::node()[name(.)='foo']");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        Node node = (Node) result.get(0);
+        assertEquals("http://www.example.org", node.getNodeValue());
+        
+    }    
+    
+    // see JAXEN-105
+    public void testIntrinsicNamespaceDeclarationOfAttrBeatsContradictoryXmlnsPreAttr() 
+      throws JaxenException {
+        
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        root.setAttributeNS("http://www.example.org/", "foo:a", "value");
+        // same prefix, different namespace
+        root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo", "http://www.contradictory.org");
+        
+        XPath xpath = new DOMXPath("//namespace::node()[name(.)='foo']");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        Node node = (Node) result.get(0);
+        assertEquals("http://www.example.org/", node.getNodeValue());
+        
+    }    
+    
+    // see JAXEN-105
+    public void testIntrinsicNamespaceDeclarationOfElementBeatsContradictoryIntrinsicNamespaceOfAttr() 
+      throws JaxenException {
+        
+        Element root = doc.createElementNS("http://www.example.org", "pre:root");
+        doc.appendChild(root);
+        // same prefix
+        root.setAttributeNS("http://www.contradictory.org", "pre:foo", "value");
+        
+        XPath xpath = new DOMXPath("//namespace::node()[name(.)='pre']");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+        Node node = (Node) result.get(0);
+        assertEquals("http://www.example.org", node.getNodeValue());
+        
+    }    
+    
     // Jaxen-54
     public void testUpdateDOMNodesReturnedBySelectNodes() 
       throws JaxenException {
@@ -128,15 +217,15 @@ public class DOMXPathTest extends TestCase
         
     }
 
-    public void testSelection() throws JaxenException, ParserConfigurationException, SAXException, IOException
-    {
+    public void testSelection() 
+      throws JaxenException, ParserConfigurationException, SAXException, IOException {
         XPath xpath = new DOMXPath( "/foo/bar/baz" );
 
         DocumentBuilder builder = factory.newDocumentBuilder();
     
-        Document doc = builder.parse( BASIC_XML );
+        Document document = builder.parse( BASIC_XML );
 
-        List results = xpath.selectNodes( doc );
+        List results = xpath.selectNodes( document );
 
         assertEquals( 3,
                       results.size() );
@@ -163,8 +252,8 @@ public class DOMXPathTest extends TestCase
         XPath xpath = new DOMXPath( "//c/preceding::*[1][name()='d']" );
         DocumentBuilder builder = factory.newDocumentBuilder();
     
-        Document doc = builder.parse( "xml/web2.xml" );
-        List result = xpath.selectNodes(doc);
+        Document document = builder.parse( "xml/web2.xml" );
+        List result = xpath.selectNodes(document);
         assertEquals(1, result.size());
         
     }
