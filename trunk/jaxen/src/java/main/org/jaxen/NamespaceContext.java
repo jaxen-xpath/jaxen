@@ -65,6 +65,10 @@ package org.jaxen;
  *  resolved internal to the document based upon its own
  *  namespace nodes.
  *  </p>
+ *  
+ *  <p>
+ *  Implementations of this interface should implement <code>Serializable</code>.
+ *  </p>
  *
  *  @see BaseXPath
  *  @see Navigator#getElementNamespaceUri

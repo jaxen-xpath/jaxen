@@ -70,6 +70,10 @@ package org.jaxen;
  *  but an unbound variable (one that this context does not know about)
  *  should cause an {@link UnresolvableException} to be thrown.
  *  </p>
+ *  
+ *  <p>
+ *  Implementations of this interface should implement <code>Serializable</code>.
+ *  </p>
  *
  *  @see SimpleVariableContext
  *  @see NamespaceContext
