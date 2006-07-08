@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <id>jaxen</id>
   <name>jaxen</name>
-  <currentVersion>1.1-beta-9</currentVersion>
+  <currentVersion>1.1-beta-10-SNAPSHOT</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -16,7 +16,7 @@
   <package>org.jaxen</package>
 
 
-  <logo>http://images.werken.com/jaxen.gif</logo>
+  <logo>./jaxen.gif</logo>
   <description>
   Jaxen is a universal Java XPath engine.
   </description>
@@ -152,19 +152,6 @@
       <url>http://www.elharo.com/</url>
     </developer>
 
-    <!-- found next two in CVS-->
-    <contributor>
-      <id>emcgreal</id>
-      <name>Eddie McGreal</name>
-      <email>emcgreal@BlackPearl.com</email>
-    </contributor>
-
-    <contributor>
-      <id>slehmann</id>
-      <name>Steen Lehmann</name>
-      <email>slehmann@users.sourceforge.net</email>
-    </contributor>
-    
   </developers>
 
   <contributors>
@@ -227,6 +214,16 @@
       <email>jerome.negre@e-xmlmedia.fr</email>
     </contributor>
 
+    <!-- found next two in CVS-->
+    <contributor>
+      <name>Eddie McGreal</name>
+      <email>emcgreal@BlackPearl.com</email>
+    </contributor>
+
+    <contributor>
+      <name>Steen Lehmann</name>
+      <email>slehmann@users.sourceforge.net</email>
+    </contributor>
 
   </contributors>
 
@@ -234,7 +231,6 @@
      <report>maven-jdepend-plugin</report>
      <report>maven-checkstyle-plugin</report>
      <report>maven-cobertura-plugin</report>
-     <report>maven-changes-plugin</report>
      <report>maven-changelog-plugin</report>
      <report>maven-developer-activity-plugin</report>
      <report>maven-file-activity-plugin</report>
@@ -268,9 +264,9 @@
     </dependency>
 
     <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xmlParserAPIs</artifactId>
-      <version>2.6.2</version>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.3.02</version>
     </dependency>
 
     <dependency>
@@ -326,12 +322,6 @@
       <includes>
         <include>**/*Test.java</include>
       </includes>
-      
-      <excludes>
-        <!-- currently broken -->
-        <exclude>org/jaxen/test/JDOMXPathTest.java</exclude>
-      </excludes>
-
     </unitTest>
 
   </build>
