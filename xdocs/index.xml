@@ -33,8 +33,8 @@
       </p>
 
       <p>
-        Sun chooses Jaxen for the XPath engine 
-        <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> and 
+        Sun chose Jaxen for the XPath engine for the 
+        <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html"><acronym title="Java Server Pages">JSP</acronym> Standard Tag Library (<acronym>JSTL</acronym>)</a> and the 
         <a href="http://java.sun.com/webservices/webservicespack.html">Web Services pack</a>
       </p>
 
