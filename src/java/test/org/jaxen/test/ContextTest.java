@@ -50,7 +50,9 @@ package org.jaxen.test;
 
 import junit.framework.TestCase;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,6 +157,17 @@ public class ContextTest extends TestCase
 
     }    
 
+    
+    public void testIsSerializable() throws IOException {
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(out);
+        oos.writeObject(support);
+        oos.close();
+        assertTrue(out.toByteArray().length > 0);
+        
+    }    
+    
     
 }
 
