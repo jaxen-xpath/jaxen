@@ -50,11 +50,16 @@ package org.jaxen.test;
 
 import java.util.Iterator;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.io.SAXReader;
 import org.jaxen.FunctionCallException;
+import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
+import org.jaxen.XPath;
 import org.jaxen.dom4j.DocumentNavigator;
+import org.jaxen.dom4j.Dom4jXPath;
 
 public class DOM4JNavigatorTest extends XPathTestBase
 {
@@ -95,5 +100,12 @@ public class DOM4JNavigatorTest extends XPathTestBase
             }
         }
     }
+    
+    public void testNullPointerException() throws JaxenException {
+        Document doc = DocumentHelper.createDocument();
+        XPath xpath = new Dom4jXPath("/foo");
+        xpath.selectSingleNode(doc);
+    }    
+    
     
 }
