@@ -130,7 +130,7 @@ public class NamespaceURITest extends TestCase {
         XPath xpath = new DOMXPath( "namespace-uri(/*/@*)" );
         Attr a = doc.createAttribute("name");
         doc.getDocumentElement().setAttributeNode(a);
-        Object result = (String) xpath.evaluate(doc);
+        Object result = xpath.evaluate(doc);
         assertEquals("", result);
     }    
 
@@ -139,7 +139,7 @@ public class NamespaceURITest extends TestCase {
         XPath xpath = new DOMXPath( "namespace-uri(/*/@*)" );
         Attr a = doc.createAttributeNS("http://www.w3.org/", "pre:name");
         doc.getDocumentElement().setAttributeNode(a);
-        Object result = (String) xpath.evaluate(doc);
+        Object result = xpath.evaluate(doc);
         assertEquals("http://www.w3.org/", result);
     }    
 
