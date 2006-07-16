@@ -67,12 +67,10 @@ import org.xml.sax.SAXException;
 
 public class XPathReaderTest extends TestCase
 {
-    private ConformanceXPathHandler expected;
     private ConformanceXPathHandler actual;
     private Document doc;
 
     private XPathReader reader;
-    private String text;
 
     private String[] paths = {
         "/foo/bar[@a='1' and @b='2']",
@@ -101,10 +99,8 @@ public class XPathReaderTest extends TestCase
     public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
         this.reader = new XPathReader();
-        this.text = null;
 
         this.actual = new ConformanceXPathHandler();
-        this.expected = new ConformanceXPathHandler();
 
         this.reader.setXPathHandler( this.actual );
         
@@ -118,7 +114,6 @@ public class XPathReaderTest extends TestCase
     public void tearDown()
     {
         this.reader = null;
-        this.text = null;
     }
 
     // --------------------------------------------------------------------------------
