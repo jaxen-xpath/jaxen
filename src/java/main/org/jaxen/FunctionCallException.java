@@ -48,17 +48,22 @@
 
 package org.jaxen;
 
-/** <code>FunctionCallException</code> is thrown if an exception
- * occurs during the evaluation of a function.
- * This exception may include a root exception, such as if the 
- * real exception was failure to load an XML document via the
- * document() function call.
+/** 
+ * Thrown if an exception occurs during the evaluation of a function.
+ * This exception may include a root exception--for instance an 
+ * <code>IOException</code> if the real problem was failure to 
+ * load an XML document via the XSLT <code>document()</code> function.
  *
  * @author bob mcwhirter (bob @ werken.com)
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
  */
 public class FunctionCallException extends JaxenException
 {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7908649612495640943L;
 
     /**
      * Create a new FunctionCallException with the specified detail message.
@@ -92,10 +97,10 @@ public class FunctionCallException extends JaxenException
     /**
      * <p>
      * Returns the exception that caused this function call to fail.
-     * Use getCause() instead.
+     * Use <code>getCause</code> instead.
      * </p>
      * 
-     * @return the exception that caused this fucntion call to fail
+     * @return the exception that caused this function call to fail
      * 
      * @deprecated replaced by {@link #getCause()}
      */
