@@ -175,10 +175,10 @@ public class NamespaceURITest extends TestCase {
       throws JaxenException {
         
         XPath xpath = new DOMXPath("namespace-uri(/a/comment())");
-        Document doc = builder.getDOMImplementation().createDocument(null, "a", null);
-        doc.getDocumentElement().appendChild(doc.createComment("data"));
+        Document document = builder.getDOMImplementation().createDocument(null, "a", null);
+        document.getDocumentElement().appendChild(document.createComment("data"));
         
-        String result = (String) xpath.evaluate(doc);
+        String result = (String) xpath.evaluate(document);
         assertEquals("", result);
         
     }
