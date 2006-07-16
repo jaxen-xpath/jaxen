@@ -288,12 +288,12 @@
       <type>plugin</type>
     </dependency>
     
-    <dependency>
+<!--    <dependency>
       <groupId>maven-plugins</groupId>
       <artifactId>maven-latex-plugin</artifactId>
       <version>1.5</version>
       <type>plugin</type>
-    </dependency>
+    </dependency> -->
     
     <dependency>
       <groupId>maven-plugins</groupId>
