@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <id>jaxen</id>
   <name>jaxen</name>
-  <currentVersion>1.1-beta-10-SNAPSHOT</currentVersion>
+  <currentVersion>1.1-beta-10</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -285,6 +285,13 @@
       <groupId>maven-plugins</groupId>
       <artifactId>maven-cobertura-plugin</artifactId>
       <version>1.1.1</version>
+      <type>plugin</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>maven-plugins</groupId>
+      <artifactId>maven-latex-plugin</artifactId>
+      <version>1.5</version>
       <type>plugin</type>
     </dependency>
     
