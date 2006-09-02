@@ -1,11 +1,11 @@
 
 To install Jaxen, you need to place:
 
-        jaxen-1.1-beta-7.jar
+        jaxen-1.1-beta-10.jar
 
 In your CLASSPATH or your jre/lib/ext directory.
 This includes support for all object-models.
 Of course, you'll also need the supporting jars for your 
-object-model, just as jdom.jar, xom.jar, or similar.
+object-model, such as jdom.jar, xom.jar, or similar.
 
 	bob@werken.com
