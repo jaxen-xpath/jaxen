@@ -34,6 +34,7 @@
     <url>http://cvs.jaxen.codehaus.org</url>
   </repository>
   
+    <!-- the archive URLs are broken ???? -->
     <mailingLists>
         <mailingList>
             <name>Jaxen Users List</name>
