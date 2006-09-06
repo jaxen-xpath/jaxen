@@ -34,10 +34,10 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10.zip">1.1 Beta 9 binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10.tar.gz">1.1 Beta 9 binaries in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10-src.zip">1.1 Beta 9 sources in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10-src.tar.gz">1.1 Beta 9 sources in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10.zip">1.1 Beta 10 binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10.tar.gz">1.1 Beta 10 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10-src.zip">1.1 Beta 10 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-10-src.tar.gz">1.1 Beta 10 sources in tar/gz format.</a></li>
       </ul>
 
 
@@ -50,9 +50,9 @@ is backwards compatible with code written to the 1.0 APIs.
       with using <a href="http://maven.apache.org/">Maven</a>.
       However, you can grab a <a href="http://cvs.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
       To build Jaxen, you'll need to have maven installed. Assuming you do you should be able to just type "maven jar" at the command line 
-      in the jaxen directory to create a JAR archive. If any of the tests are currently failing--a couple of 
-      tests are currently picking up JDOM bugs--you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
-      (or fix the bugs that cause the tests to fail).
+      in the jaxen directory to create a JAR archive. <!-- If any of the tests are currently failing- -a couple of 
+      tests are currently picking up JDOM bugs- -you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
+      (or fix the bugs that cause the tests to fail). -->
       </p>
     </section>
 
