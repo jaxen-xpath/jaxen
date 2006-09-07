@@ -51,7 +51,8 @@ import java.util.List;
  *  <p>
  *  The <code>Context</code> bundles utilities together
  *  for evaluation of the expression.  It wraps the provided
- *  objects for ease-of-passage through the expression AST.
+ *  objects for ease-of-passage through the expression 
+ *  <acronym title="Abstract Syntax Tree">AST</acronym>.
  *  </p>
  *
  *  @see ContextSupport
@@ -98,22 +99,28 @@ public class Context
     {
         this.contextSupport = contextSupport;
         this.nodeSet        = Collections.EMPTY_LIST;
+        this.size = 0;
+        // XXX What should position be?
     }
     
     // ----------------------------------------------------------------------
     //     Instance methods
     // ----------------------------------------------------------------------
 
-    /** Set the context node-set.
+    /** Set the context node-set, and sets the current context size to the size 
+     * of this node-set. The actual list is stored in this object. A copy
+     * is not made.
      *
      *  @param nodeSet the context node-set
      */
     public void setNodeSet(List nodeSet)
     {
         this.nodeSet = nodeSet;
+        this.size    = nodeSet.size();
+        // XXX How should we set position?
     }
 
-    /** Retrieve the context node-set.
+    /** Retrieve the context node-set. This is a live list. It is not a copy.
      *
      *  @return the context node-set
      */
@@ -213,7 +220,7 @@ public class Context
         this.size = size;
     }
 
-    /** Retrieve the size of the context node-set.
+    /** Retrieve the size of the current context node-set.
      *
      *  @return the size
      */
@@ -259,6 +266,7 @@ public class Context
             List dupeNodeSet = new ArrayList( thisNodeSet.size() );
             dupeNodeSet.addAll( thisNodeSet );
             dupe.setNodeSet( dupeNodeSet );
+            // XXX should set the size of the duplicate
         }
 
         return dupe;
