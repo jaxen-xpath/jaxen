@@ -62,6 +62,9 @@ import org.jaxen.function.BooleanFunction;
 
 public class PredicateSet implements Serializable
 {
+
+    private static final long serialVersionUID = -7166491740228977853L;
+    
     private List predicates;
 
     public PredicateSet()
