@@ -220,8 +220,8 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
                 return JaxenConstants.EMPTY_ITERATOR;
             }
             if (namespaceURI != null) {
-                // TODO Verify that JDOM's equals method does not consider the prefix
-                if (Namespace.getNamespace(namespacePrefix, namespaceURI).equals(el.getNamespace()) == false) {
+                // JDOM's equals method does not consider the prefix when comparing namespace objects
+                if (!Namespace.getNamespace(namespacePrefix, namespaceURI).equals(el.getNamespace())) {
                     return JaxenConstants.EMPTY_ITERATOR;
                 }
             }
