@@ -198,7 +198,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
      *
      * @param contextNode      the origin context node
      * @param localName        the local name of the children to return, always present
-     * @param namespacePrefix  the prefix of the namespace of the children to return
+     * @param namespacePrefix  ignored; prefixes are not used when matching in XPath
      * @param namespaceURI     the URI of the namespace of the children to return
      * @return an Iterator     that traverses the named children, or null if none
      */
@@ -220,6 +220,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
                 return JaxenConstants.EMPTY_ITERATOR;
             }
             if (namespaceURI != null) {
+                // TODO Verify that JDOM's equals method does not consider the prefix
                 if (Namespace.getNamespace(namespacePrefix, namespaceURI).equals(el.getNamespace()) == false) {
                     return JaxenConstants.EMPTY_ITERATOR;
                 }
