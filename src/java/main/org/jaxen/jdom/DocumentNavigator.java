@@ -194,7 +194,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
 
     /**
      * Retrieves an <code>Iterator</code> over the child elements that
-     * match the supplied name.
+     * match the supplied local name and namespace URI.
      *
      * @param contextNode      the origin context node
      * @param localName        the local name of the children to return, always present
@@ -225,6 +225,10 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
                     return JaxenConstants.EMPTY_ITERATOR;
                 }
             }
+            else if(el.getNamespace() != Namespace.NO_NAMESPACE) { 
+                return JaxenConstants.EMPTY_ITERATOR; 
+            }
+            
             return new SingleObjectIterator(el);
         }
 
