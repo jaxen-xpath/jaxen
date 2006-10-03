@@ -56,6 +56,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.PathExpr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -73,6 +75,8 @@ import junit.framework.TestCase;
 public class DefaultXPathExprTest extends TestCase
 {
 
+    
+    http://jira.codehaus.org/browse/JAXEN-40
     public void testJAXEN40() throws JaxenException, ParserConfigurationException {
         
         DOMXPath xpath = new DOMXPath("root/child1/grandchild1 | root/child2/grandchild2");
@@ -96,6 +100,17 @@ public class DefaultXPathExprTest extends TestCase
         assertEquals(2, results.size());
         assertTrue(results.indexOf(grandchild1) >= 0);
         assertTrue(results.indexOf(grandchild2) >= 0);
+        
+    }
+
+    
+    // http://jira.codehaus.org/browse/JAXEN-160
+    public void testJAXEN160()
+      throws JaxenException, ParserConfigurationException {
+        
+        DOMXPath xpath = new DOMXPath("$var1/foo");
+        Expr expr = xpath.getRootExpr();
+        assertEquals("$var1/child::foo", expr.getText());
         
     }
  
