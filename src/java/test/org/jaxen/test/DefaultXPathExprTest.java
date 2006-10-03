@@ -69,14 +69,14 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b9
+ * @version 1.1b11
  *
  */
 public class DefaultXPathExprTest extends TestCase
 {
 
     
-    http://jira.codehaus.org/browse/JAXEN-40
+    // http://jira.codehaus.org/browse/JAXEN-40
     public void testJAXEN40() throws JaxenException, ParserConfigurationException {
         
         DOMXPath xpath = new DOMXPath("root/child1/grandchild1 | root/child2/grandchild2");
