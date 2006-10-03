@@ -55,9 +55,6 @@ import org.jaxen.JaxenException;
 
 class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -6593934674727004281L;
     private Expr filterExpr;
     private LocationPath locationPath;
@@ -100,6 +97,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         }
 
         if (getLocationPath() != null) {
+            if (!getLocationPath().getSteps().isEmpty()) buf.append("/");
             buf.append(getLocationPath().getText());
         }
 
