@@ -90,7 +90,7 @@ class DefaultVariableReferenceExpr extends DefaultExpr implements VariableRefere
     public String getText()
     {
 
-        if ( prefix == null )
+        if ( "".equals(prefix) )
         {
             return "$" + localName;
         }
