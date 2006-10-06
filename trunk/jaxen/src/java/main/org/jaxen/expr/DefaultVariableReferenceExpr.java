@@ -78,24 +78,20 @@ class DefaultVariableReferenceExpr extends DefaultExpr implements VariableRefere
 
     public String toString()
     {
-
-        if ( prefix == null )
+        return "[(DefaultVariableReferenceExpr): " + getQName() + "]";
+    }
+    
+    private String getQName() {
+        if ( "".equals(prefix) )
         {
-            return "[(DefaultVariableReferenceExpr): " + localName + "]";
+            return localName;
         }
-
-        return "[(DefaultVariableReferenceExpr): " + prefix + ":" + localName + "]";
+        return prefix + ":" + localName;
     }
 
     public String getText()
     {
-
-        if ( "".equals(prefix) )
-        {
-            return "$" + localName;
-        }
-
-        return "$" + prefix + ":" + localName;
+        return "$" + getQName();
     }
 
     public Object evaluate(Context context)
