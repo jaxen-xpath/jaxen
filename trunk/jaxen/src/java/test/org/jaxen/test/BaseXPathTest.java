@@ -844,9 +844,11 @@ public class BaseXPathTest extends TestCase {
     } 
     
     public void testDebug() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/b/c");
-        assertEquals("[(DefaultXPath): [(DefaultAbsoluteLocationPath): [(DefaultNameStep): :b]/[(DefaultNameStep): :c]]]", xpath.debug());
+        assertEquals(
+          "[(DefaultXPath): [(DefaultAbsoluteLocationPath): [(DefaultNameStep): b]/[(DefaultNameStep): c]]]", 
+          xpath.debug()
+        );
         
     } 
     
