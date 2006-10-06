@@ -105,13 +105,24 @@ public class DefaultXPathExprTest extends TestCase
 
     
     // http://jira.codehaus.org/browse/JAXEN-160
-    public void testJAXEN160()
-      throws JaxenException, ParserConfigurationException {
-        
-        DOMXPath xpath = new DOMXPath("$var1/foo");
-        Expr expr = xpath.getRootExpr();
-        assertEquals("$var1/child::foo", expr.getText());
-        
+    public void testJAXEN160GetText()
+    throws JaxenException, ParserConfigurationException {
+      
+      DOMXPath xpath = new DOMXPath("$var1/foo");
+      Expr expr = xpath.getRootExpr();
+      assertEquals("$var1/child::foo", expr.getText());
+      
+  }
+
+    public void testJAXEN160ToString()
+    throws JaxenException, ParserConfigurationException {
+      
+      DOMXPath xpath = new DOMXPath("$var1/foo");
+      Expr expr = xpath.getRootExpr();
+      assertEquals(
+        "[(DefaultPathExpr): [(DefaultVariableReferenceExpr): var1], [(DefaultRelativeLocationPath): [(DefaultNameStep): foo]]]", 
+        expr.toString()
+      );
     }
- 
+
 }
