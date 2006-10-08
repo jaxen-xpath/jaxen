@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:ant="jelly:ant">
 
+    <preGoal name="dist:build-bin">
+      <attainGoal name="dist:build-src" />
+    </preGoal>
+
     <postGoal name="dist:prepare-bin-filesystem">
         <ant:copy todir="${maven.dist.bin.assembly.dir}">
             <fileset dir=".">
