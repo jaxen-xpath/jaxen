@@ -34,33 +34,32 @@
     <url>http://cvs.jaxen.codehaus.org</url>
   </repository>
   
-    <!-- the archive URLs are broken ???? -->
-    <mailingLists>
-        <mailingList>
-            <name>Jaxen Users List</name>
-            <subscribe>user-subscribe@jaxen.codehaus.org</subscribe>
-            <unsubscribe>user-unsubscribe@jaxen.codehaus.org</unsubscribe>
-            <!--<archive>http://archive.jaxen.codehaus.org/user/</archive> -->
-        </mailingList>
-        <mailingList>
-            <name>Jaxen Developers List</name>
-            <subscribe>dev-subscribe@jaxen.codehaus.org</subscribe>
-            <unsubscribe>dev-unsubscribe@jaxen.codehaus.org</unsubscribe>
-         <!--   <archive>http://archive.jaxen.codehaus.org/dev/</archive> -->
-        </mailingList>
-        <mailingList>
-            <name>Jaxen CVS Commits List</name>
-            <subscribe>scm-subscribe@jaxen.codehaus.org</subscribe>
-            <unsubscribe>scm-unsubscribe@jaxen.codehaus.org</unsubscribe>
-       <!--     <archive>http://archive.jaxen.codehaus.org/scm/</archive> -->
-        </mailingList>
-        <mailingList>
-            <name>Jaxen Announcement List</name>
-            <subscribe>announce-subscribe@jaxen.codehaus.org</subscribe>
-            <unsubscribe>announce-unsubscribe@jaxen.codehaus.org</unsubscribe>
-       <!--     <archive>http://archive.jaxen.codehaus.org/announce/</archive> -->
-        </mailingList>
-    </mailingLists>
+  <mailingLists>
+    <mailingList>
+        <name>Jaxen Users List</name>
+        <subscribe>user-subscribe@jaxen.codehaus.org</subscribe>
+        <unsubscribe>user-unsubscribe@jaxen.codehaus.org</unsubscribe>
+        <archive>http://archive.jaxen.codehaus.org/user/</archive>
+    </mailingList>
+    <mailingList>
+        <name>Jaxen Developers List</name>
+        <subscribe>dev-subscribe@jaxen.codehaus.org</subscribe>
+        <unsubscribe>dev-unsubscribe@jaxen.codehaus.org</unsubscribe>
+        <archive>http://archive.jaxen.codehaus.org/dev/</archive>
+    </mailingList>
+    <mailingList>
+        <name>Jaxen CVS Commits List</name>
+        <subscribe>scm-subscribe@jaxen.codehaus.org</subscribe>
+        <unsubscribe>scm-unsubscribe@jaxen.codehaus.org</unsubscribe>
+        <archive>http://archive.jaxen.codehaus.org/scm/</archive>
+    </mailingList>
+    <!-- <mailingList>
+        <name>Jaxen Announcement List</name>
+        <subscribe>announce-subscribe@jaxen.codehaus.org</subscribe>
+        <unsubscribe>announce-unsubscribe@jaxen.codehaus.org</unsubscribe>
+        <archive>http://archive.jaxen.codehaus.org/announce/</archive>
+    </mailingList> -->
+  </mailingLists>
 
 
   <developers>
