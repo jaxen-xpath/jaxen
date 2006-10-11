@@ -209,9 +209,15 @@
       <email>cao@ispsoft.com</email>
     </contributor>
 
-   <contributor>
+    <contributor>
       <name>Jérôme Nègre</name>
       <email>jerome.negre@e-xmlmedia.fr</email>
+    </contributor>
+
+    <!-- org.jaxen.ext.MatrixConcat function -->
+    <contributor>
+      <name>James Pereira</name>
+      <email>JPereira@CT.BBD.CO.ZA</email>
     </contributor>
 
     <!-- found next two in CVS-->
