@@ -130,6 +130,9 @@ public class ContextTest extends TestCase
 
         Context dupe = original.duplicate();
 
+        assertEquals(2, dupe.getPosition());
+        assertEquals(4, dupe.getSize());
+        
         assertTrue( original != dupe );
 
         List dupeNodeSet = dupe.getNodeSet();

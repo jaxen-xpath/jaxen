@@ -278,6 +278,7 @@ public class Context
             List dupeNodeSet = new ArrayList( thisNodeSet.size() );
             dupeNodeSet.addAll( thisNodeSet );
             dupe.setNodeSet( dupeNodeSet );
+            dupe.setPosition(this.position);
         }
 
         return dupe;
