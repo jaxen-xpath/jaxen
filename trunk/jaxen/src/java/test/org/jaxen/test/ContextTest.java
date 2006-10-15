@@ -96,6 +96,29 @@ public class ContextTest extends TestCase
         this.nodeSet = null;
     }
 
+    public void testSetNodeSet()
+    {
+        Context original = new Context( this.support );
+        assertEquals(0, original.getNodeSet().size() );
+        original.setNodeSet( this.nodeSet );
+        assertEquals(4, original.getNodeSet().size() );
+    }
+    
+    public void testShrinkNodeSet()
+    {
+        
+        Context original = new Context( this.support );
+        original.setNodeSet( this.nodeSet );
+        original.setPosition(3);
+        ArrayList list = new ArrayList();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        original.setNodeSet(list);
+        assertEquals(0, original.getPosition());
+        
+    }
+    
     public void testDuplicate()
     {
         Context original = new Context( this.support );
@@ -139,7 +162,8 @@ public class ContextTest extends TestCase
 
         assertEquals( 2,
                       original.getPosition() );
-    }
+    }    
+    
 
     public void testXMLPrefixIsAlwaysBound() 
       throws ParserConfigurationException, SAXException, IOException, JaxenException
