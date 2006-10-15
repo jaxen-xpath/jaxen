@@ -63,9 +63,8 @@ import java.util.List;
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
-public class Context
-    implements Serializable
-{
+public class Context implements Serializable {
+    
     /**
      * 
      */
@@ -99,8 +98,8 @@ public class Context
     {
         this.contextSupport = contextSupport;
         this.nodeSet        = Collections.EMPTY_LIST;
-        this.size = 0;
-        // XXX What should position be?
+        this.size           = 0;
+        this.position       = 0;
     }
     
     // ----------------------------------------------------------------------
