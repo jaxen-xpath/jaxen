@@ -107,9 +107,19 @@ public class Context
     //     Instance methods
     // ----------------------------------------------------------------------
 
-    /** Set the context node-set, and sets the current context size to the size 
-     * of this node-set. The actual list is stored in this object. A copy
-     * is not made.
+    /** 
+     * <p>
+     * Set the context node-set, and sets the current context size to the size 
+     * of this node-set. </p>
+     * 
+     * <p>The actual list is stored in this object. A copy
+     * is not made. This list should not be modified in other code after
+     * calling this method.</p>
+     *  
+     * <p>
+     * After invoking this method, the client should immediately call 
+     * {@link #setSize(int) setSize} and {@link #setPosition(int) setPosition}.
+     *</p>
      *
      *  @param nodeSet the context node-set
      */
@@ -117,10 +127,12 @@ public class Context
     {
         this.nodeSet = nodeSet;
         this.size    = nodeSet.size();
-        // XXX How should we set position?
+        if (position >= size) this.position = 0;
     }
 
-    /** Retrieve the context node-set. This is a live list. It is not a copy.
+    /** Retrieve the context node-set.
+     *  This is a live list. It is not a copy.
+     *  Do not modify it.
      *
      *  @return the context node-set
      */
@@ -266,7 +278,6 @@ public class Context
             List dupeNodeSet = new ArrayList( thisNodeSet.size() );
             dupeNodeSet.addAll( thisNodeSet );
             dupe.setNodeSet( dupeNodeSet );
-            // XXX should set the size of the duplicate
         }
 
         return dupe;
