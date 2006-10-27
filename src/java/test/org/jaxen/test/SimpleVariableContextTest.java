@@ -69,7 +69,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b10
+ * @version 1.1b12
  *
  */
 public class SimpleVariableContextTest extends TestCase
@@ -99,7 +99,7 @@ public class SimpleVariableContextTest extends TestCase
         
         // test the result
         assertEquals("String Value", copy.getVariableValue("", "", "s"));
-        assertEquals(Double.valueOf(3.1415292), copy.getVariableValue("", "", "x"));
+        assertEquals(new Double(3.1415292), copy.getVariableValue("", "", "x"));
         assertEquals(Boolean.TRUE, copy.getVariableValue("", "", "b"));
         assertEquals("", "");
         
@@ -116,7 +116,7 @@ public class SimpleVariableContextTest extends TestCase
         
         // test the result
         assertEquals("String Value", context.getVariableValue("", "", "s"));
-        assertEquals(Double.valueOf(3.1415292), context.getVariableValue("", "", "x"));
+        assertEquals(new Double(3.1415292), context.getVariableValue("", "", "x"));
         assertEquals(Boolean.TRUE, context.getVariableValue("", "", "b"));
         assertEquals("", "");
         
