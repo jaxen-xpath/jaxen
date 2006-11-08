@@ -45,6 +45,26 @@
  * $Id$
  */
 package org.jaxen.expr; 
+
+/**
+ * Represents an XPath relational expression such as 
+ * <code>count(//p) > count(//div)</code>. 
+ * This is production 24 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">XPath 1.0 specification</a>:
+ *
+ *<table><tr valign="baseline"><td><a name="NT-RelationalExpr"></a>[24]&nbsp;&nbsp;&nbsp;</td><td>RelationalExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>
+ *</tr><tr valign="baseline">
+ *<td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&lt;' <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>
+ *</tr><tr valign="baseline">
+ *<td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&gt;' <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>
+ *</tr>
+ *<tr valign="baseline">
+ *<td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&lt;=' <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>
+ * </tr>
+ * <tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&gt;=' <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>v * </tr></table>
+ * 
+ */
 public interface RelationalExpr extends BinaryExpr{
     public String getOperator();
 }
