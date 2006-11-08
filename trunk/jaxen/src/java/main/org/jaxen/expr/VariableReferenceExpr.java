@@ -49,8 +49,28 @@
 
 package org.jaxen.expr;
 
+/**
+ * Represents an XPath variable reference. This is production 36 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-VariableReference">XPath 1.0 specification</a>:
+ * 
+ * <pre>[36] VariableReference ::= '$' QName</pre>
+ * 
+ */
 public interface VariableReferenceExpr extends Expr
 {
+    /**
+     * Returns the namespace prefix of the variable. This is the empty
+     * string for variables with no namespace prefix. 
+     * 
+     * @return the namespace prefix of the variable
+     */
     public String getPrefix();
+    
+    /**
+     * Returns the local name of the variable. 
+     * 
+     * @return the local name of the variable
+     */
     public String getVariableName();
+
 }
