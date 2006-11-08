@@ -49,10 +49,40 @@
 
 package org.jaxen.expr;
 
+/**
+ * Represents an XPath path expression.
+ * This is production 19 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-PathExpr">XPath 1.0 specification</a>:
+ * 
+ * <pre>[19] PathExpr ::= LocationPath    
+ *                | FilterExpr    
+ *                | FilterExpr '/' RelativeLocationPath   
+ *                | FilterExpr '//' RelativeLocationPath  </pre>
+ * 
+ */
 public interface PathExpr extends Expr
 {
+    
+    /**
+     * Returns the filter expression that starts the path expression.
+     * 
+     * @return the filter expression that starts the path expression
+     */
     Expr getFilterExpr();
+    
+    
+    /**
+     * Changes thes expression's filter expression.
+     * 
+     * @param the new filter expression
+     */
     void setFilterExpr(Expr filterExpr);
 
+    /**
+     * Returns the location path part of this path expression.
+     * 
+     * @return the location path part of this expression
+     */
     LocationPath getLocationPath();
+    
 }
