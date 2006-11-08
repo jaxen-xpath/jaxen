@@ -47,7 +47,22 @@
  */
 package org.jaxen.expr;
 
+/**
+ * Represents an XPath floating point literal. This is production 30 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-Number">XPath 1.0 specification</a>:
+ * 
+ * <pre>[30] Number ::=  Digits ('.' Digits?)?   
+ *              | '.' Digits</pre>
+ * 
+ */
 public interface NumberExpr extends Expr
 {
+    
+    
+    /**
+     * Returns a <code>java.lang.Double</code> representing the number.
+     * 
+     * @return a <code>java.lang.Double</code> representing the number
+     */
     public Number getNumber();
 }
