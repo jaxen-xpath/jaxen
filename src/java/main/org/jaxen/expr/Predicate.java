@@ -53,15 +53,61 @@ import java.io.Serializable;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
+
+/**
+ * Represents an XPath predicate such as <code>[position() = last()]</code>.
+ * This is production 8 and 9 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-Predicate">XPath 1.0 specification</a>:
+ * 
+ * <pre> [8] Predicate     ::= '[' PredicateExpr ']'   
+ * [9] PredicateExpr ::= Expr</pre>
+ * 
+ */
 public interface Predicate extends Serializable, Visitable
 {
+    /**
+     * Returns the expression in this predicate..
+     * 
+     * @return the expression between the brackets
+     */
     Expr getExpr();
+    
+    /**
+     * Change the expression used by this predicate.
+     * 
+     * @param the new expression
+     */
     void setExpr(Expr expr);
 
+    /**
+     * Simplify the expression in this predicate.
+     * 
+     * @see Expr#simplify()
+     */
     void simplify();
 
+    /**
+     * Returns the string form of the predicate, 
+     * including the square brackets.
+     * 
+     * @return the bracketed form of this predicate
+     */
     String getText();
 
+    /**
+     * Evaluates this predicate's expression and returns the result.
+     * The result will be a <code>java.lang.Double</code> for expressions that 
+     * return a number, a <code>java.lang.String</code> for expressions that 
+     * return a string, a <code>java.lang.Boolean</code> for expressions that 
+     * return a boolean, and a <code>java.util.List</code> for expressions that
+     * return a node-set. In the latter case, the elements of the list are 
+     * the actual objects from the source document model. Copies are not made.
+     *
+     * @param context the context in which the expression is evaluated
+     * @return an object representing the result of the evaluation
+     * @throws JaxenException
+     * @see Expr#evaluate(Context)
+     */
     Object evaluate(Context context) throws JaxenException;
 
 }

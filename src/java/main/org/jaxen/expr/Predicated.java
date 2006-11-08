@@ -52,9 +52,32 @@ package org.jaxen.expr;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Interface for objects which can have one or more predicates.
+ *
+ */
 public interface Predicated extends Serializable
 {
+    /**
+     * Add an additional predicate to this object.
+     * 
+     * @param predicate the predicate to add
+     */
     void addPredicate(Predicate predicate);
+    
+    
+    /**
+     * Returns a possibly empty list of predicates.
+     * 
+     * @return the list of predicates
+     */
     List getPredicates();
+    
+    
+    /**
+     * Returns a possibly empty set of predicates.
+     * 
+     * @return the set of predicates
+     */
     PredicateSet getPredicateSet();
 }
