@@ -45,6 +45,21 @@
  * $Id$
  */
 package org.jaxen.expr;
+
+/**
+ * Represents an XPath equality expression. This is production 23 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">XPath 1.0 specification</a>:
+ * 
+ * <table><tr valign="baseline">
+ * <td><a name="NT-EqualityExpr"></a>[23]&nbsp;&nbsp;&nbsp;</td><td>EqualityExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a></td><td></td></tr>
+ * <tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">EqualityExpr</a> '=' <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a></td><td></td>
+ * </tr>
+ * <tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">EqualityExpr</a> '!=' <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a></td><td></td></tr>
+ * </table>
+ * 
+ */
 public interface EqualityExpr extends BinaryExpr{
     public String getOperator();
 }
