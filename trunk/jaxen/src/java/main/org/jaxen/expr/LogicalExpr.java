@@ -46,6 +46,25 @@
  */
 package org.jaxen.expr;
 
+/**
+ * Represents an XPath logical expression. This represents productions
+ * <a href="http://www.w3.org/TR/xpath#NT-OrExpr">21   OrExpr</a> and 
+ * <a href="http://www.w3.org/TR/xpath#NT-AndExpr">22 AndExpr</a> in the XPath specification.
+ * 
+ * <table><tr valign="baseline">
+ * <td><a name="NT-OrExpr"></a>[21]&nbsp;&nbsp;&nbsp;</td><td>OrExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-AndExpr">AndExpr</a></td><td></td>
+ * </tr>
+ * <tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-OrExpr">OrExpr</a> 'or' <a href="http://www.w3.org/TR/xpath#NT-AndExpr">AndExpr</a></td><td></td>
+ * </tr>
+ * <tr valign="baseline">
+ * <td><a name="NT-AndExpr"></a>[22]&nbsp;&nbsp;&nbsp;</td><td>AndExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">EqualityExpr</a></td><td></td>
+ * </tr>
+ * <tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-AndExpr">AndExpr</a> 'and' <a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">EqualityExpr</a></td><td></td>
+ * </tr></table>
+ * 
+ */
 public interface LogicalExpr extends BinaryExpr{
     public String getOperator();
 }
