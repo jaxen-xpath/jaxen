@@ -49,7 +49,22 @@
 
 package org.jaxen.expr;
 
+/**
+ * Represents an XPath unary expression such as <code>-78</code>.
+ * This is production 27 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-UnaryExpr">XPath 1.0 specification</a>:
+ * 
+ * <pre>[27] UnaryExpr ::= UnionExpr | '-' UnaryExpr</pre>
+ * 
+ */
 public interface UnaryExpr extends Expr
 {
+    
+    /**
+     * Returns the expression following the minus sign.
+     * 
+     * @return the expression following the minus sign
+     */
     Expr getExpr();
+    
 }
