@@ -65,6 +65,12 @@ import org.jaxen.expr.iter.IterableSelfAxis;
 import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
 
+/**
+ * The concrete implementation of the XPathFactory anstract factory.
+ *
+ *
+ * @see XPathFactory
+ */
 public class DefaultXPathFactory implements XPathFactory
 {
     public XPathExpr createXPath( Expr rootExpr ) throws JaxenException
