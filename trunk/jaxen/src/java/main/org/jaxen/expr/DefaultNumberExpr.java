@@ -58,9 +58,9 @@ class DefaultNumberExpr extends DefaultExpr implements NumberExpr
      * 
      */
     private static final long serialVersionUID = -6021898973386269611L;
-    private Number number;
+    private Double number;
 
-    DefaultNumberExpr( Number number )
+    DefaultNumberExpr( Double number )
     {
         this.number = number;
     }
