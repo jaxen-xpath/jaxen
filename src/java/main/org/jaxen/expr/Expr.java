@@ -77,7 +77,7 @@ public interface Expr extends Serializable, Visitable
      * <code>//para</code>. In practice, this is usually a noop.
      * Jaxen does not currently perform any simplification.
      * 
-     * @return the text form of this XPath expression
+     * @return the simplified expression
      */
     Expr   simplify();
     
