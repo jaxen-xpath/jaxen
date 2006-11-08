@@ -49,6 +49,17 @@
 
 package org.jaxen.expr;
 
+/**
+ * Represents an XPath union expression. This is production 18 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">XPath 1.0 specification</a>:
+ * 
+ * <table><tr valign="baseline">
+ * <td><a name="NT-UnionExpr"></a>[18]&nbsp;&nbsp;&nbsp;</td><td>UnionExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-PathExpr">PathExpr</a></td><td></td>
+ * </tr><tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-UnionExpr">UnionExpr</a> '|' <a href="http://www.w3.org/TR/xpath#NT-PathExpr">PathExpr</a>
+ * </tr></table>
+ * 
+ */
 public interface UnionExpr extends BinaryExpr
 {
 }
