@@ -52,15 +52,32 @@ package org.jaxen.expr;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
+/**
+ * Represents an XPath filter expression. This is production 20 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">XPath 1.0 specification</a>:
+ * 
+ * <table><tr valign="baseline">
+ * <td><a name="NT-FilterExpr"></a>[20]&nbsp;&nbsp;&nbsp;</td><td>FilterExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-PrimaryExpr">PrimaryExpr</a></td><td></td>
+ * </tr>
+ * <tr valign="baseline">
+ * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-FilterExpr">FilterExpr</a> <a href="http://www.w3.org/TR/xpath#NT-Predicate">Predicate</a></td><td></td>
+ * </tr> 
+ * </table>
+ * 
+ */
 public interface FilterExpr extends Expr, Predicated
 {
 
-    /** Evaluates the filter expression on the current context
+    /** 
+     * Evaluates the filter expression on the current context
      * and returns true if at least one node matches.
+     * 
+     * @return true if a node matches; false if no node matches
      */
     public boolean asBoolean(Context context) throws JaxenException;
+    
     /** 
-     * @return underlying filter expression
+     * @return the underlying filter expression
      */
     public Expr getExpr();
 }
