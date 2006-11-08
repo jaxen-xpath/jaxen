@@ -59,8 +59,35 @@ import java.util.List;
  */
 public interface FunctionCallExpr extends Expr
 {
+    
+    /**
+     * Returns the namespace prefix of the function. This is the empty
+     * string for XPath's built-in functions. 
+     * 
+     * @return the namespace prefix of the function
+     */
     public String getPrefix();
+    
+    /**
+     * Returns the local name of the function. 
+     * 
+     * @return the local name of the function
+     */
     public String getFunctionName();
-    public void   addParameter(Expr parameter);
-    public List   getParameters();
+    
+    /**
+     * Add the next argument to the function. 
+     * 
+     * @param parameter a function argument 
+     */
+    public void addParameter(Expr parameter);
+    
+    /**
+     * Returns the the ordered list of function arguments.
+     * Each member of the list is an <code>Expr</code> object.
+     * 
+     * @return the ordered list of function arguments
+     */
+    public List getParameters();
+    
 }
