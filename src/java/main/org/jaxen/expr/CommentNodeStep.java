@@ -46,6 +46,10 @@
  */
 package org.jaxen.expr;
 
+/**
+ * Represents the XPath node-test <code>comment()</code>.
+ * 
+ */
 public interface CommentNodeStep extends Step
 {
 }
