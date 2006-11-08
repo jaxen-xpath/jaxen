@@ -72,7 +72,7 @@ public interface PathExpr extends Expr
     
     
     /**
-     * Changes thes expression's filter expression.
+     * Changes the expression's filter expression.
      * 
      * @param the new filter expression
      */
