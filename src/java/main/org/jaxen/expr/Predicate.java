@@ -66,7 +66,7 @@ import org.jaxen.JaxenException;
 public interface Predicate extends Serializable, Visitable
 {
     /**
-     * Returns the expression in this predicate..
+     * Returns the expression in this predicate.
      * 
      * @return the expression between the brackets
      */
