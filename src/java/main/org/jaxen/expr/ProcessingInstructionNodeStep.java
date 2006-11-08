@@ -46,7 +46,16 @@
  */
 package org.jaxen.expr;
 
+/**
+ * Represents the XPath node-test <code>processing-instruction()</code>.
+ * 
+ */
 public interface ProcessingInstructionNodeStep extends Step
 {
+    /**
+     * Returns the target matched by this processing instruction node-step. 
+     * 
+     * @return the target of the processing instruction
+     */
     public String getName();
 }

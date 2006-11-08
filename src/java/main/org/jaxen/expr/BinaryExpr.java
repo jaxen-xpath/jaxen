@@ -49,8 +49,29 @@
 
 package org.jaxen.expr;
 
+
+/**
+ * Represents a binary expression. 
+ * This does not match anything in the XPath 1.0 grammar, but in jaxen
+ * it includes the usual binary operations such as addition, multiplication,
+ * logical and, loginal or, and so forth.
+ * 
+ */
 public interface BinaryExpr extends Expr
 {
+    
+    /**
+     * Returns the left-hand side of the binary expression.
+     * 
+     * @return the left hand side expression
+     */
     Expr getLHS();
+
+    
+    /**
+     * Returns the right-hand side of the binary expression.
+     * 
+     * @return the right-hand side expression
+     */
     Expr getRHS();
 }
