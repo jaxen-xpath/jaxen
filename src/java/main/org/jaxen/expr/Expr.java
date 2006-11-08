@@ -53,9 +53,48 @@ import java.io.Serializable;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
+/**
+ * Represents an XPath expression. This is production 14 in the 
+ * <a href="http://www.w3.org/TR/xpath#NT-Expr">XPath 1.0 specification</a>:
+ * 
+ * <pre>[14]      Expr       ::=      OrExpr</pre>
+ * 
+ */
 public interface Expr extends Serializable, Visitable
 {
+    
+    
+    /**
+     * Returns a String containing the XPath expression.
+     * 
+     * @return the text form of this XPath expression
+     */
     String getText();
+    
+    /**
+     * Simplifies the XPath expression. For example, the expression
+     * <code>//para[1 = 1]</code> could be simplified to 
+     * <code>//para</code>. In practice, this is usually a noop.
+     * Jaxen does not currently perform any simplification.
+     * 
+     * @return the text form of this XPath expression
+     */
     Expr   simplify();
+    
+    
+    /**
+     * Evaluate the expression in the given context, and return the result.
+     * The result will be a <code>java.lang.Double</code> for expressions that 
+     * return a number, a <code>java.lang.String</code> for expressions that 
+     * return a string, a <code>java.lang.Boolean</code> for expressions that 
+     * return a boolean, and a <code>java.util.List</code> for expressions that
+     * return a node-set. In the latter case, the elements of the list are 
+     * the actual objects from the source document model. Copies are not made.
+     * 
+     * @param context the context in which the expression is evaluated
+     * @return an object representing the result of the evaluation
+     * @throws JaxenException
+     */
     Object evaluate(Context context) throws JaxenException;
+    
 }
