@@ -61,7 +61,7 @@ package org.jaxen.expr;
  * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr#NT-AdditiveExpr">AdditiveExpr</a> '-' <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr#NT-MultiplicativeExpr">MultiplicativeExpr</a>
  * </tr></table>
  * 
- */public interface AdditiveExpr extends BinaryExpr
+ */
+public interface AdditiveExpr extends BinaryExpr
 {
-    String getOperator();
 }

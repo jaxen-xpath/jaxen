@@ -65,6 +65,5 @@ package org.jaxen.expr;
  * </tr></table>
  * 
  */
-public interface LogicalExpr extends BinaryExpr{
-    public String getOperator();
+public interface LogicalExpr extends BinaryExpr {
 }
