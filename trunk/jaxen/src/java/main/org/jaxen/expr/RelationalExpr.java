@@ -65,6 +65,5 @@ package org.jaxen.expr;
  * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&gt;=' <a href="http://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>v * </tr></table>
  * 
  */
-public interface RelationalExpr extends BinaryExpr{
-    public String getOperator();
+public interface RelationalExpr extends BinaryExpr {
 }
