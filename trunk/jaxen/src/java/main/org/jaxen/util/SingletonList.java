@@ -53,25 +53,49 @@ import java.util.AbstractList;
 
 /**
  * A utility class that implements singleton lists
- * (to avoid dependency on JDK 1.3).
- * @version $Id$
+ * (to avoid dependency on JDK 1.3). Many operations 
+ * including <code>add()</code> and <code>remove()</code> throw
+ * UnsupportedOperationExceptions. 
+ * 
+ * @version 1.2b12
  * @author Attila Szegedi
+ * 
  */
 public class SingletonList extends AbstractList {
+    
     private final Object element;
     
+    /**
+     * Creates a new singleton list. 
+     * 
+     * @param element the single member of the list
+     */
     public SingletonList(Object element) {
         this.element = element;
     }
     
+    /** 
+     * Returns 1.
+     * 
+     * @return 1
+     */
     public int size() {
         return 1;
     }
 
+    /**
+     * Returns the single element in the list.
+     * 
+     * @return the only element in the list
+     * 
+     * @throws IndexOutOfBoundsException if index is not 0
+     * 
+     */
     public Object get(int index) {
         if(index == 0) {
             return element;
         }
         throw new IndexOutOfBoundsException(index + " != 0");
     }
+    
 }
