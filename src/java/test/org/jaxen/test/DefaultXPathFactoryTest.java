@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2005 bob mcwhirter & James Strachan.
+ * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,52 +46,35 @@
  */
 
 
+
 package org.jaxen.test;
 
-import junit.framework.Test;
+import org.jaxen.JaxenException;
+import org.jaxen.expr.*;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * <p>
- *   Collect the org.jaxen. tests.
+ *  Test for function context.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1b12
  *
  */
-public class CoreTests extends TestCase {
+public class DefaultXPathFactoryTest extends TestCase {
 
-    
-    public CoreTests(String name) {
-        super(name);   
+    public void testBadAxis() throws JaxenException {
+      
+      DefaultXPathFactory factory = new DefaultXPathFactory();
+      try {
+        factory.createAllNodeStep(123434);
+        fail("Allowed bad axis");
+      }
+      catch (JaxenException ex) {
+        assertNotNull(ex.getMessage());
+      }
     }
 
-    
-    public static Test suite() {
-        
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(AddNamespaceTest.class));
-        result.addTest(new TestSuite(BaseXPathTest.class));
-        result.addTest(new TestSuite(FunctionContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(ContextTest.class));
-        result.addTest(new TestSuite(JaxenHandlerTest.class));
-        result.addTest(new TestSuite(JaxenRuntimeExceptionTest.class));
-        result.addTest(new TestSuite(FunctionCallExceptionTest.class));
-        result.addTest(new TestSuite(UnresolvableExceptionTest.class));
-        result.addTest(new TestSuite(VariableContextTest.class));
-        result.addTest(new TestSuite(SimpleNamespaceContextTest.class));
-        result.addTest(new TestSuite(XPathSyntaxExceptionTest.class));
-        result.addTest(new TestSuite(UnsupportedAxisExceptionTest.class));
-        result.addTest(new TestSuite(JaxenExceptionTest.class));
-        result.addTest(new TestSuite(ArithmeticTest.class));
-        result.addTest(new TestSuite(IterableAxisTest.class));
-        result.addTest(new TestSuite(DefaultXPathFactoryTest.class));
-        return result;
-        
-    }
-
-    
 }
