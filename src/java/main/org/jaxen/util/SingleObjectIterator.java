@@ -110,7 +110,7 @@ public class SingleObjectIterator implements Iterator
     /**
      * This operation is not supported.
      * 
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException always
      */
     public void remove()
     {

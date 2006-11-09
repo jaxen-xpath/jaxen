@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * @deprecated elharo this class is undocumented and untested.
+ * @deprecated This class is undocumented and untested.
  *     It will be removed in a future release.
  */
 public class LinkedIterator implements Iterator
@@ -107,6 +107,11 @@ public class LinkedIterator implements Iterator
         return ((Iterator)this.iterators.get( this.cur )).next();
     }
 
+    /**
+     * This operation is not supported.
+     * 
+     * @throws UnsupportedOperationException
+     */
     public void remove()
     {
         throw new UnsupportedOperationException();

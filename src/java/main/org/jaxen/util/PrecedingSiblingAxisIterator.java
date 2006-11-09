@@ -57,6 +57,17 @@ import org.jaxen.JaxenConstants;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
+/**
+ * 
+ * Represents the XPath preceding-sibling axis. 
+ * The "<code>preceding-sibling</code> axis contains all the
+ * preceding siblings of the context node; if the context node is an
+ * attribute node or namespace node, the <code>preceding-sibling</code>
+ * axis is empty."
+ * 
+ * @version 1.2b12
+ *
+ */
 public class PrecedingSiblingAxisIterator implements Iterator
 {
     private Object    contextNode;
@@ -65,6 +76,12 @@ public class PrecedingSiblingAxisIterator implements Iterator
     private Iterator  siblingIter;
     private Object    nextObj;
 
+    /**
+     * Create a new <code>preceding-sibling</code> axis iterator.
+     * 
+     * @param contextNode the node to start from
+     * @param navigator the object model specific navigator
+     */
     public PrecedingSiblingAxisIterator(Object contextNode,
                                         Navigator navigator) throws UnsupportedAxisException
     {
@@ -107,11 +124,27 @@ public class PrecedingSiblingAxisIterator implements Iterator
         
     }
 
+    /**
+     * Returns true if there are any preceding siblings remaining; false otherwise.
+     * 
+     * @return true if any preceding siblings remain; false otherwise
+     * 
+     * @see java.util.Iterator#hasNext()
+     */
     public boolean hasNext()
     {
         return ( this.nextObj != null );
     }
 
+    /**
+     * Returns the next preceding sibling.
+     * 
+     * @return the next preceding sibling
+     * 
+     * @throws NoSuchElementException if no preceding siblings remain
+     * 
+     * @see java.util.Iterator#next()
+     */
     public Object next() throws NoSuchElementException
     {
         if ( ! hasNext() )
@@ -130,6 +163,11 @@ public class PrecedingSiblingAxisIterator implements Iterator
         return obj;
     }
 
+    /**
+     * This operation is not supported.
+     * 
+     * @throws UnsupportedOperationException
+     */
     public void remove() throws UnsupportedOperationException
     {
         throw new UnsupportedOperationException();

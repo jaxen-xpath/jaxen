@@ -52,8 +52,24 @@ package org.jaxen.util;
 
 import org.jaxen.Navigator;
 
+/**
+ * Represents the XPath <code>ancestor</code> axis. 
+ * The "<code>ancestor</code> axis contains the ancestors of the context node; 
+ * the ancestors of the context node consist of the parent of context node and 
+ * the parent's parent and so on; thus, the ancestor axis will always include 
+ * the root node, unless the context node is the root node."
+ * 
+ * @version 1.2b12
+ */
 public class AncestorAxisIterator extends AncestorOrSelfAxisIterator
 {
+
+    /**
+     * Create a new ancestor axis iterator.
+     * 
+     * @param contextNode the node to start from
+     * @param navigator the object model specific navigator
+     */
     public AncestorAxisIterator(Object contextNode,
                                 Navigator navigator)
     {
@@ -61,4 +77,5 @@ public class AncestorAxisIterator extends AncestorOrSelfAxisIterator
                navigator );
         next();
     }
+    
 }
