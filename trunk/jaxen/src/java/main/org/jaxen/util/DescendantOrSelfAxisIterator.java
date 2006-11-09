@@ -50,11 +50,26 @@ package org.jaxen.util;
 
 import org.jaxen.Navigator;
 
+/**
+ * Represents the XPath <code>descendant-or-self</code> axis. 
+ * The "<code>descendant-or-self</code> axis contains the context node
+ * and the descendants of the context node."
+ * 
+ * @version 1.2b12
+ */
 public class DescendantOrSelfAxisIterator extends DescendantAxisIterator
 {
+
+    /**
+     * Create a new <code>desscendant-or-self</code> axis iterator.
+     * 
+     * @param contextNode the node to start from
+     * @param navigator the object model specific navigator
+     */
     public DescendantOrSelfAxisIterator(Object contextNode,
                                         Navigator navigator)
     {
         super(navigator, new SingleObjectIterator(contextNode));
     }
+    
 }

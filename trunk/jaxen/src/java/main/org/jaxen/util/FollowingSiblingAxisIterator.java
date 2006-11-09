@@ -56,12 +56,29 @@ import org.jaxen.JaxenConstants;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
+/**
+ * 
+ * Represents the XPath <code>following-sibling</code> axis. 
+ * The "<code>following-sibling</code> axis contains all the
+ * folowing siblings of the context node; if the context node is an
+ * attribute node or namespace node, the <code>following-sibling</code>
+ * axis is empty."
+ * 
+ * @version 1.2b12
+ *
+ */
 public class FollowingSiblingAxisIterator implements Iterator
 {
     private Object    contextNode;
     private Navigator navigator;
     private Iterator  siblingIter;
 
+    /**
+     * Create a new <code>following-sibling</code> axis iterator.
+     * 
+     * @param contextNode the node to start from
+     * @param navigator the object model specific navigator
+     */
     public FollowingSiblingAxisIterator(Object contextNode,
                                         Navigator navigator) throws UnsupportedAxisException
     {
@@ -89,17 +106,38 @@ public class FollowingSiblingAxisIterator implements Iterator
         }
 
     }
-
+    
+    /**
+     * Returns true if there are any following siblings remain; false otherwise.
+     * 
+     * @return true if any following siblings remain; false otherwise
+     * 
+     * @see java.util.Iterator#hasNext()
+     */
     public boolean hasNext()
     {
         return siblingIter.hasNext();
     }
 
+    /**
+     * Returns the next following sibling.
+     * 
+     * @return the next following sibling
+     * 
+     * @throws NoSuchElementException if no following siblings remain
+     * 
+     * @see java.util.Iterator#next()
+     */
     public Object next() throws NoSuchElementException
     {
         return siblingIter.next();
     }
 
+    /**
+     * This operation is not supported.
+     * 
+     * @throws UnsupportedOperationException always
+     */
     public void remove() throws UnsupportedOperationException
     {
         throw new UnsupportedOperationException();

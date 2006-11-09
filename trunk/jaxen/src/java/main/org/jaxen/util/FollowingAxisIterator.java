@@ -56,6 +56,14 @@ import org.jaxen.UnsupportedAxisException;
 import org.jaxen.JaxenRuntimeException;
 import org.jaxen.JaxenConstants;
 
+/**
+ * Represents the XPath <code>following</code> axis. 
+ * The "<code>following</code> axis contains all nodes in the same document as the context 
+ * node that are after the context node in document order, excluding any descendants 
+ * and excluding attribute nodes and namespace nodes."
+ * 
+ * @version 1.2b12
+ */
 public class FollowingAxisIterator implements Iterator
 {
     private Object contextNode;
@@ -66,6 +74,12 @@ public class FollowingAxisIterator implements Iterator
 
     private Iterator currentSibling;
 
+    /**
+     * Create a new <code>following</code> axis iterator.
+     * 
+     * @param contextNode the node to start from
+     * @param navigator the object model specific navigator
+     */
     public FollowingAxisIterator(Object contextNode,
                                  Navigator navigator) throws UnsupportedAxisException
     {
@@ -123,6 +137,14 @@ public class FollowingAxisIterator implements Iterator
         }
     }
 
+    /**
+     * Returns true if there are any following nodes remaining; 
+     * false otherwise.
+     * 
+     * @return true if any following nodes remain
+     * 
+     * @see java.util.Iterator#hasNext()
+     */
     public boolean hasNext()
     {
         while ( ! currentSibling.hasNext() )
@@ -136,6 +158,15 @@ public class FollowingAxisIterator implements Iterator
         return true;
     }
 
+    /**
+     * Returns the next following node.
+     * 
+     * @return the next following node
+     * 
+     * @throws NoSuchElementException if no following nodes remain
+     * 
+     * @see java.util.Iterator#next()
+     */
     public Object next() throws NoSuchElementException
     {
         if ( ! hasNext() )
@@ -146,6 +177,11 @@ public class FollowingAxisIterator implements Iterator
         return currentSibling.next();
     }
 
+    /**
+     * This operation is not supported.
+     * 
+     * @throws UnsupportedOperationException always
+     */
     public void remove() throws UnsupportedOperationException
     {
         throw new UnsupportedOperationException();
