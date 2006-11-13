@@ -51,7 +51,7 @@ package org.jaxen.util;
 
 /**
  * 
- * Represents the XPath self axis. The "<code>self</code> axis contains 
+ * Represents the XPath <code>self</code> axis. The "<code>self</code> axis contains 
  * just the context node itself."
  * 
  * @version 1.2b12

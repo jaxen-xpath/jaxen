@@ -59,7 +59,7 @@ import org.jaxen.UnsupportedAxisException;
 
 /**
  * 
- * Represents the XPath preceding-sibling axis. 
+ * Represents the XPath <code>preceding-sibling</code> axis. 
  * The "<code>preceding-sibling</code> axis contains all the
  * preceding siblings of the context node; if the context node is an
  * attribute node or namespace node, the <code>preceding-sibling</code>
