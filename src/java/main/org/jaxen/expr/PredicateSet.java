@@ -60,6 +60,19 @@ import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
 import org.jaxen.function.BooleanFunction;
 
+/**
+ * <p>
+ * Represents the collection of predicates that follow the node-test in a
+ * location path. 
+ * </p>
+ * 
+ * <p>
+ * There is no rule that the same predicate may not 
+ * appear twice in an XPath expression, nor does this class enforce any such rule.
+ * This is implemented more as a list than a set. However, adding the swme predicate 
+ * twice should have no effect on the final result other than slowing it down.
+ * </p>
+ */
 public class PredicateSet implements Serializable
 {
 
@@ -67,11 +80,19 @@ public class PredicateSet implements Serializable
     
     private List predicates;
 
+    /**
+     * Create a new empty predicate set.
+     */
     public PredicateSet()
     {
         this.predicates = Collections.EMPTY_LIST;
     }
 
+    /**
+     * Add a predicate to the set.
+     * 
+     * @param predicate the predicate to be inserted
+     */
     public void addPredicate(Predicate predicate)
     {
         if ( this.predicates == Collections.EMPTY_LIST )
@@ -82,11 +103,20 @@ public class PredicateSet implements Serializable
         this.predicates.add( predicate );
     }
 
+    /**
+     * Returns the list containing the predicates.
+     * This list is live, not a copy.
+     * 
+     * @return a live list of predicates
+     */
     public List getPredicates()
     {
         return this.predicates;
     }
 
+    /**
+     * Simplify each of the predicates in the list.
+     */
     public void simplify()
     {
         Iterator  predIter = this.predicates.iterator();
@@ -99,6 +129,11 @@ public class PredicateSet implements Serializable
         }
     }
 
+    /**
+     * Returns the XPath string containing each of the predicates.
+     * 
+     * @return the XPath string containing each of the predicates
+     */
     public String getText()
     {
         StringBuffer buf = new StringBuffer();
@@ -115,6 +150,17 @@ public class PredicateSet implements Serializable
         return buf.toString();
     }
 
+    /**
+     * <p>Returns true if any of the supplied nodes satisfy 
+     * all the predicates in the set. Returns false if none of the supplied
+     * nodes matches all the predicates in the set. Returns false if the 
+     * node-set is empty.</p>
+     * 
+     * @param contextNodeSet the nodes to test against these predicates
+     * @param support ????
+     * @return true if any node in the contextNodeSet matches all the predicates
+     * @throws JaxenException
+     */
     protected boolean evaluateAsBoolean(List contextNodeSet,
                                       ContextSupport support) throws JaxenException
     {
@@ -174,6 +220,15 @@ public class PredicateSet implements Serializable
     
     
     
+   /**
+    * <p>Returns all of the supplied nodes that satisfy 
+    * all the predicates in the set. </p>
+    * 
+    * @param contextNodeSet the nodes to test against these predicates
+    * @param support ????
+    * @return all the nodes that match each of the predicates
+    * @throws JaxenException
+    */
    protected List evaluatePredicates(List contextNodeSet, ContextSupport support)
             throws JaxenException {
         // Easy way out (necessary)
@@ -231,4 +286,5 @@ public class PredicateSet implements Serializable
         }
         return filteredNodes;
     }
+    
 }
