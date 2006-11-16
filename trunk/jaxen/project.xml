@@ -215,10 +215,10 @@
     </contributor>
 
     <!-- org.jaxen.ext.MatrixConcat function -->
-    <contributor>
+    <!-- <contributor>
       <name>James Pereira</name>
       <email>JPereira@CT.BBD.CO.ZA</email>
-    </contributor>
+    </contributor> -->
 
     <!-- found next two in CVS-->
     <contributor>
@@ -284,13 +284,13 @@
     <dependency>
       <groupId>xom</groupId>
       <artifactId>xom</artifactId>
-      <version>1.0b3</version>
+      <version>1.0</version>
     </dependency>
 
     <dependency>
       <groupId>maven-plugins</groupId>
       <artifactId>maven-cobertura-plugin</artifactId>
-      <version>1.1.1</version>
+      <version>1.2</version>
       <type>plugin</type>
     </dependency>
     
