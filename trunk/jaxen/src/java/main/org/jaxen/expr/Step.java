@@ -65,7 +65,7 @@ import org.jaxen.UnsupportedAxisException;
  * context node specified by the axis, and having the node type and expanded-name 
  * specified by the node test.
  */
-public interface Step extends Predicated, Visitable
+public interface Step extends Predicated
 {
 
     /**

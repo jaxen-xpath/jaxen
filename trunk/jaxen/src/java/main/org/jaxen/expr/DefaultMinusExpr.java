@@ -83,8 +83,4 @@ class DefaultMinusExpr extends DefaultAdditiveExpr
         return new Double( result );
     }
 
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
 }

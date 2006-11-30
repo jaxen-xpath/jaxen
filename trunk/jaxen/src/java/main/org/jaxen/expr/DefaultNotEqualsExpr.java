@@ -86,9 +86,5 @@ DefaultNotEqualsExpr( Expr lhs, Expr rhs )
         }
         return !lhs.equals( rhs );
     }
-
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }   
+    
 }

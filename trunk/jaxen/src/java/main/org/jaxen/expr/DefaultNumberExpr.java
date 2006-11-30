@@ -84,9 +84,5 @@ class DefaultNumberExpr extends DefaultExpr implements NumberExpr
     {
         return getNumber();
     }
-
-    public void accept( Visitor visitor )
-    {
-        visitor.visit( this );
-    }
+    
 }

@@ -195,9 +195,5 @@ public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCall
         return paramValues;
     }
 
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
 }
 

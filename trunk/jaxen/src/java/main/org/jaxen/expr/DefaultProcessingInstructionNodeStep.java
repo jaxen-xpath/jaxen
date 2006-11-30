@@ -104,8 +104,4 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
         return false;
     }
     
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
 }

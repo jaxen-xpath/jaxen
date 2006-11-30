@@ -67,9 +67,5 @@ DefaultLessThanEqualExpr( Expr lhs, Expr rhs )
     {
     return lhs.compareTo( rhs ) <= 0;        
     }
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
 
 }

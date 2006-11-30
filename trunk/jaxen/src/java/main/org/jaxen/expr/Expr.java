@@ -60,7 +60,7 @@ import org.jaxen.JaxenException;
  * <pre>[14]      Expr       ::=      OrExpr</pre>
  * 
  */
-public interface Expr extends Serializable, Visitable
+public interface Expr extends Serializable
 {
     
     

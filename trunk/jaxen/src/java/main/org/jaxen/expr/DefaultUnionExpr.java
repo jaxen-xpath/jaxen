@@ -122,10 +122,5 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         }
     }
     
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
-    
 }
 
