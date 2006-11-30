@@ -176,8 +176,5 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
 
         return results;
     }
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
+
 }

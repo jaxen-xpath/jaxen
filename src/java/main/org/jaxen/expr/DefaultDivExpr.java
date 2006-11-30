@@ -58,6 +58,7 @@ class DefaultDivExpr extends DefaultMultiplicativeExpr
      * 
      */
     private static final long serialVersionUID = 6318739386201615441L;
+    
     DefaultDivExpr(Expr lhs,
                           Expr rhs)
     {
@@ -81,8 +82,5 @@ class DefaultDivExpr extends DefaultMultiplicativeExpr
 
         return new Double( result );
     }
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
+
 }

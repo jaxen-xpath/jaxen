@@ -85,9 +85,5 @@ class DefaultEqualsExpr extends DefaultEqualityExpr {
     
     return lhs.equals( rhs );
     }
-  
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
+
 }

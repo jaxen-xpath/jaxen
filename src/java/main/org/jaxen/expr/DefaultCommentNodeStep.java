@@ -85,8 +85,5 @@ public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeSt
 
         return nav.isComment( node );
     }
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
+
 }

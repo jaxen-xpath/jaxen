@@ -63,7 +63,7 @@ import org.jaxen.JaxenException;
  * [9] PredicateExpr ::= Expr</pre>
  * 
  */
-public interface Predicate extends Serializable, Visitable
+public interface Predicate extends Serializable
 {
     /**
      * Returns the expression in this predicate.

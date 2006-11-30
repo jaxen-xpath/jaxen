@@ -95,8 +95,5 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 
         return new Double( number.doubleValue() * -1 );
     }
-    public void accept(Visitor visitor)
-    {
-        visitor.visit(this);
-    }
+    
 }
