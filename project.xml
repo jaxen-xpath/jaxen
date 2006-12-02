@@ -30,7 +30,7 @@
   <distributionDirectory>/dist</distributionDirectory>
   
   <repository>
-    <connection>scm:cvs:pserver:anonymous@cvs.jaxen.codehaus.org:/home/projects/jaxen/scm:jaxen</connection>
+    <connection>scm:cvs:pserver:anonymous@cvs.jaxen.codehaus.org:/cvs/jaxen:jaxen</connection>
     <url>http://cvs.jaxen.codehaus.org</url>
   </repository>
   
