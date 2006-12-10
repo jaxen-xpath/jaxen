@@ -14,7 +14,49 @@
         Various updates to the web site. 
       </p>
     </section> -->
+
+     <section name="Jaxen 1.1 Beta 12">
+
+      <p>
+         Beta 12 contains a few small bug fixes including the removal of
+         an unintentional Java 5 dependence, some more API documentation,
+         a few small API changes (<code>getIterableAxis</code> now throws
+         an exception rather than returning null on a bad axis constant;
+         <code>getOperator</code> has been pulled up into <code>BinaryExpr</code>
+         rather than its subclasses) and two major API changes:
+      </p>
+      
+      <ul>
+      <li>
+         The <code>Visitor</code> interface, <code>VisitorSupport</code> class, 
+         <code>XPath2XMLVisitor</code> class, and associated methods
+         have been deleted because they were undocumented, untested, and 
+         were tightly coupled to the underlying implementation. 
+         They may return in the future if there's demand and
+         <em>if someone volunteers to do or pay for the necessary work</em>
+         to bring them up to the standards of the rest of the code base. 
+      </li>
+      <li>
+         The <code>matrix-concat</code> extension function has been removed 
+         because its license staus was unclear, the originator could not be contacted,
+         and it was undocumented and untested. If someone cares to reimplement it,
+         it could be restored in the future. 
+      </li>
+      
+      </ul>
+
+    </section>
     
+     <section name="Jaxen 1.1 Beta 9">
+
+      <p>
+         Beta 9 contains some small optimizations,
+         improvements to the documentation, and minor bug fixes.
+         The license should now be the same across all the files.
+      </p>
+
+    </section>
+
      <section name="Jaxen 1.1 Beta 8">
     
       <p>Beta 8 fixes a couple of bugs in XPath evaluation
