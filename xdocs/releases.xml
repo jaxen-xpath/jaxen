@@ -10,8 +10,10 @@
     <section name="Official Builds">
 
       <p>
-The current version is 1.1 beta 11. 
+The current version is 1.1 beta 12. 
 1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. 
+This is the first release candidate. If no major problems are found, this is likely what will become the final
+version of jaxen 1.1. 
 Even though it's still officially a beta, this release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
 With a few small exceptions (e.g. the the <code>document()</code> function has moved to the 
@@ -30,14 +32,14 @@ is backwards compatible with code written to the 1.0 APIs.
       </ul> -->
 
       <p>
-      The recommended build is <strong>1.1-beta-11</strong>:
+      The recommended build is <strong>1.1-beta-12</strong>:
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-11.zip">1.1 Beta 11 binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-11.tar.gz">1.1 Beta 11 binaries in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-11-src.zip">1.1 Beta 11 sources in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-11-src.tar.gz">1.1 Beta 11 sources in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12.zip">1.1 Beta 12 binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12.tar.gz">1.1 Beta 12 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12-src.zip">1.1 Beta 12 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12-src.tar.gz">1.1 Beta 12 sources in tar/gz format.</a></li>
       </ul>
 
 
@@ -49,7 +51,7 @@ is backwards compatible with code written to the 1.0 APIs.
       Nightly builds have been temporarily suspended as we ramp up
       with using <a href="http://maven.apache.org/">Maven</a>.
       However, you can grab a <a href="http://cvs.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
-      To build Jaxen, you'll need to have maven installed. Assuming you do you should be able to just type "maven jar" at the command line 
+      To build Jaxen, you'll need to have maven installed. Assuming you do, you should be able to just type "maven jar" at the command line 
       in the jaxen directory to create a JAR archive. <!-- If any of the tests are currently failing- -a couple of 
       tests are currently picking up JDOM bugs- -you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
       (or fix the bugs that cause the tests to fail). -->
