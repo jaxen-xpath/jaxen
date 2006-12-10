@@ -56,14 +56,15 @@ import org.jaxen.JaxenException;
 import org.jaxen.UnsupportedAxisException;
 
 /**
- * A Step represents a location step in a LocationPath. The node-set selected by 
+ * <p>Represents a location step in a LocationPath. The node-set selected by 
  * the location step is the node-set that results from generating an initial 
  * node-set from the axis and node-test, and then filtering that node-set by 
- * each of the predicates in turn.
+ * each of the predicates in turn.</p>
  * 
+ * <p>
  * The initial node-set consists of the nodes having the relationship to the 
  * context node specified by the axis, and having the node type and expanded-name 
- * specified by the node test.
+ * specified by the node test.</p>
  */
 public interface Step extends Predicated
 {
