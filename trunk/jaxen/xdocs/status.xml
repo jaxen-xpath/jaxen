@@ -47,6 +47,24 @@
 
     </section>
     
+     <section name="Jaxen 1.1 Beta 11">
+
+      <p>
+         The primary impetus for beta 11 was fixing the build process so it once again generates source bundles. 
+         A couple of small, almost cosmetic, bugs were also fixed. 
+         If you haven't noticed any problems with beta 10, you can safely skip this iteration.
+      </p>
+
+    </section>
+
+     <section name="Jaxen 1.1 Beta 10">
+
+      <p>
+         Beta 10 fixes an assortment of small issues.
+      </p>
+
+    </section>
+
      <section name="Jaxen 1.1 Beta 9">
 
       <p>
