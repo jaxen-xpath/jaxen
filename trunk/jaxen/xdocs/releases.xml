@@ -10,11 +10,9 @@
     <section name="Official Builds">
 
       <p>
-The current version is 1.1 beta 12. 
+The current version is 1.1. 
 1.1 is a major upgrade that significantly improves jaxen's conformance to the underlying XPath specs. 
-This is the first release candidate. If no major problems are found, this is likely what will become the final
-version of jaxen 1.1. 
-Even though it's still officially a beta, this release
+This release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
 With a few small exceptions (e.g. the the <code>document()</code> function has moved to the 
 <code>org.jaxen.function.xslt</code> package, the <code>IdentityHashMap</code> class has been deleted,
@@ -22,24 +20,15 @@ and the ElectricXML navigator has been deleted) 1.1
 is backwards compatible with code written to the 1.0 APIs.
       </p>
 
-    <!--  <p>
-      The latest official build is <strong>1.0-FCS</strong>:
-      </p>
-
-      <ul>
-        <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.zip">1.0-FCS in zip format.</a></li>
-        <li><a href="http://prdownloads.sourceforge.net/jaxen/jaxen-1.0-FCS.tar.gz">1.0-FCS in tar/gz format.</a></li>
-      </ul> -->
-
       <p>
-      The recommended build is <strong>1.1-beta-12</strong>:
+      The recommended build is <strong>1.1</strong>:
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12.zip">1.1 Beta 12 binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12.tar.gz">1.1 Beta 12 binaries in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12-src.zip">1.1 Beta 12 sources in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-beta-12-src.tar.gz">1.1 Beta 12 sources in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.zip">1.1  binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.tar.gz">1.1 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-src.zip">1.1 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1-src.tar.gz">1.1 sources in tar/gz format.</a></li>
       </ul>
 
 
