@@ -76,7 +76,14 @@ class DefaultLiteralExpr extends DefaultExpr implements LiteralExpr
 
     public String getText()
     {
-        return "\"" + getLiteral() + "\"";
+        
+        if (literal.indexOf('"') == -1 ) {
+            return "\"" + getLiteral() + "\"";
+        }
+        else { // Not possible for string literal to contain both " and '
+            return "'" + getLiteral() + "'";
+        }
+            
     }
 
     public Object evaluate(Context context)
