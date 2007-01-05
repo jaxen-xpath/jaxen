@@ -51,7 +51,6 @@ package org.jaxen.test;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jaxen.BaseXPath;
 import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
 
@@ -84,7 +83,7 @@ public class BinaryExprTest extends TestCase
         DOMXPath xpath3 = new DOMXPath(expr);
         Boolean result3 = (Boolean) xpath3.evaluate(null);
         assertEquals(expr, result1, result3);
-        assertTrue(expr, result3.booleanValue());
+        assertFalse(expr, result3.booleanValue());
       
     }
 
