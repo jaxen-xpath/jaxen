@@ -84,7 +84,7 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
 
     public String getText()
     {
-        return getLHS().getText() + " " + getOperator() + " " + getRHS().getText();
+        return "(" + getLHS().getText() + " " + getOperator() + " " + getRHS().getText() +")";
     }
 
     public String toString()
