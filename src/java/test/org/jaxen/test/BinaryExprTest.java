@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2005 bob mcwhirter & James Strachan.
+ * Copyright 2007 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,34 +46,46 @@
  */
 
 
+
 package org.jaxen.test;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.jaxen.BaseXPath;
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
+
+import junit.framework.TestCase;
 
 /**
  * <p>
- *   Collect Jaxen's expression tests.
+ *  Test for various kinds of binary expressions.
  * </p>
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1.1
  *
  */
-public class ExprTests {
+public class BinaryExprTest extends TestCase
+{
 
-    
-    public static Test suite() {
+    public void testBooleanPrecedence() 
+     throws JaxenException, ParserConfigurationException {
+      
+        // Note how the parentheses change the precedence and the result
+        DOMXPath xpath1 = new DOMXPath("false() and (false() or true())");
+        Boolean result1 = (Boolean) xpath1.evaluate(null);
+        assertFalse(result1.booleanValue());
+        DOMXPath xpath2 = new DOMXPath("false() and false() or true()");
+        Boolean result2 = (Boolean) xpath2.evaluate(null);
+        assertTrue(result2.booleanValue());
         
-        TestSuite result = new TestSuite();
-        result.addTest(new TestSuite(DefaultXPathExprTest.class));
-        result.addTest(new TestSuite(ModTest.class));
-        result.addTest(new TestSuite(EqualsTest.class));
-        result.addTest(new TestSuite(LiteralExprTest.class));
-        result.addTest(new TestSuite(BinaryExprTest.class));
-        return result;
-        
+        String expr = xpath1.getRootExpr().getText();
+        DOMXPath xpath3 = new DOMXPath(expr);
+        Boolean result3 = (Boolean) xpath3.evaluate(null);
+        assertEquals(expr, result1, result3);
+        assertTrue(expr, result3.booleanValue());
+      
     }
 
-    
 }
