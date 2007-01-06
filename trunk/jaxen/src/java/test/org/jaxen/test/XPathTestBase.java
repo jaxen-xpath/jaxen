@@ -125,6 +125,7 @@ public abstract class XPathTestBase extends TestCase
         assertEquals(xpathStr,
                 expectedSize,
                 results.size());
+        assertExprGetTextIdempotent(xpath);
         if (expectedSize > 0)
         {
             return results.get(0);
@@ -172,8 +173,15 @@ public abstract class XPathTestBase extends TestCase
             assertEquals(xpathStr,
                     expected,
                     result);
+            assertExprGetTextIdempotent(xpath);
         }
 
+    private void assertExprGetTextIdempotent(BaseXPath xpath) throws JaxenException
+    {
+    	assertEquals(0, ExprComparator.EXPR_COMPARATOR.compare(xpath.getRootExpr(), 
+          new BaseXPath(xpath.getRootExpr().getText(), null).getRootExpr()));
+    }
+    
     private Context getContext(Object contextNode)
     {
         Context context = new Context(getContextSupport());
