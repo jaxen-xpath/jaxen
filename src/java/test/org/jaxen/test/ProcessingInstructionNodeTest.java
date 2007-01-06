@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2006 Elliotte Rusty Harold
+ * Copyright 2007 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -65,25 +65,33 @@ import junit.framework.TestCase;
  * @version 1.1.1
  *
  */
-public class ProcessingInstructionNodeTest extends TestCase
-{
+public class ProcessingInstructionNodeTest extends TestCase {
 
     public void testGetText() 
-    throws JaxenException, ParserConfigurationException {
+      throws JaxenException, ParserConfigurationException {
      
-       DOMXPath xpath = new DOMXPath("processing-instruction()");
-       String expr = xpath.getRootExpr().getText();
-       assertEquals("child::processing-instruction()", expr);
+         DOMXPath xpath = new DOMXPath("processing-instruction()");
+         String expr = xpath.getRootExpr().getText();
+         assertEquals("child::processing-instruction()", expr);
      
    }
 
     public void testGetTextWithName() 
-    throws JaxenException, ParserConfigurationException {
+      throws JaxenException, ParserConfigurationException {
      
-       DOMXPath xpath = new DOMXPath("processing-instruction('foo')");
-       String expr = xpath.getRootExpr().getText();
-       assertEquals("child::processing-instruction('foo')", expr);
+        DOMXPath xpath = new DOMXPath("processing-instruction('foo')");
+        String expr = xpath.getRootExpr().getText();
+        assertEquals("child::processing-instruction('foo')", expr);
      
    }
-
+    
+   public void testGetTextWithPredicate() 
+     throws JaxenException, ParserConfigurationException {
+   
+       DOMXPath xpath = new DOMXPath("processing-instruction('foo')[1 = 1]");
+       String expr = xpath.getRootExpr().getText();
+       assertEquals("child::processing-instruction('foo')[(1.0 = 1.0)]", expr);
+   
+   } 
+    
 }
