@@ -71,6 +71,7 @@ public class ExprTests {
         result.addTest(new TestSuite(EqualsTest.class));
         result.addTest(new TestSuite(LiteralExprTest.class));
         result.addTest(new TestSuite(BinaryExprTest.class));
+        result.addTest(new TestSuite(ProcessingInstructionNodeTest.class));
         return result;
         
     }
