@@ -80,17 +80,31 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
         return this.name;
     }
 
+    public String getText()
+    {
+        StringBuffer buf = new StringBuffer();
+        buf.append(getAxisName());
+        buf.append("::processing-instruction(");
+        String name = getName();
+        if (name != null && name.length() != 0)
+        {
+            buf.append("'");
+            buf.append(name);
+            buf.append("'");
+        }
+        buf.append(")");
+        buf.append(super.getText());
+        return buf.toString();
+    }
+
     public boolean matches(Object node,
                            ContextSupport support)
     {
+        
         Navigator nav = support.getNavigator();
-
-        boolean isPi = nav.isProcessingInstruction( node );
-
-        if ( isPi )
+        if ( nav.isProcessingInstruction( node ) )
         {
             String name = getName();
-
             if ( name == null || name.length() == 0 )
             {
                 return true;
@@ -102,6 +116,7 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
         }
 
         return false;
+        
     }
     
 }
