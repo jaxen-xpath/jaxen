@@ -8,6 +8,14 @@
 
   <body>
 
+      <p>
+	Jaxen is an open source XPath library written in Java.
+	It is adaptable to many different object models, including
+	DOM, XOM, dom4j, and JDOM. Is it also possible to write
+	adapters that treat non-XML trees such as compiled Java byte code or Java beans 
+	as XML, thus enabling you to query these trees with XPath too.
+      </p>
+
     <section name="Getting Started">
       <p>You can download Jaxen
         via the <a href="releases.html">releases page</a>.</p>
@@ -24,12 +32,14 @@
 	<a href="http://www.xom.nu/unstable.html">XOM 1.1</a> bundles Jaxen 1.1.
       </p>
 
-     <p>
-	Bob McWhirter  <a href="/pdf/intro-slides.pdf">talked about Jaxen</a> at Software Development 2003 West.
+      <p>
+	    Bob McWhirter  <a href="/pdf/intro-slides.pdf">talked about Jaxen</a> 
+	    at Software Development 2003 West.
       </p>
 
       <p>
-      Check out these <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> comparing dom4j and Jaxen against Xerces and Xalan. 
+      Check out these <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> 
+      comparing dom4j and Jaxen against Xerces and Xalan. 
       </p>
 
       <p>
