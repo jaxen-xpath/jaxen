@@ -85,10 +85,10 @@ import org.jaxen.util.SingletonList;
 public class BaseXPath implements XPath, Serializable
 {
     /** Original expression text. */
-    private String exprText;
+    private final String exprText;
 
     /** the parsed form of the XPath expression */
-    private XPathExpr xpath;
+    private final XPathExpr xpath;
     
     /** the support information and function, namespace and variable contexts */
     private ContextSupport support;
