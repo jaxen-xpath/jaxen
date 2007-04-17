@@ -179,7 +179,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 }
                 Iterator axisNodeIter = iterableAxis.namedAccessIterator(
                                 contextNode, support, localName, prefix, uri);
-                if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
+                if (axisNodeIter == null || !axisNodeIter.hasNext()) {
                     return Collections.EMPTY_LIST;
                 }
 
@@ -197,7 +197,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
             else {
                 // get the iterator over the nodes and check it
                 Iterator axisNodeIter = iterableAxis.iterator(contextNode, support);
-                if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
+                if (axisNodeIter == null || !axisNodeIter.hasNext()) {
                     return Collections.EMPTY_LIST;
                 }
 
@@ -234,7 +234,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
                 Iterator axisNodeIter = iterableAxis.namedAccessIterator(
                                 eachContextNode, support, localName, prefix, uri);
-                if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
+                if (axisNodeIter == null || !axisNodeIter.hasNext()) {
                     continue;
                 }
 
@@ -266,7 +266,7 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                 Object eachContextNode = contextNodeSet.get(i);
 
                 Iterator axisNodeIter = axisIterator(eachContextNode, support);
-                if (axisNodeIter == null || axisNodeIter.hasNext() == false) {
+                if (axisNodeIter == null || !axisNodeIter.hasNext()) {
                     continue;
                 }
 
