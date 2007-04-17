@@ -238,19 +238,28 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                     continue;
                 }
 
-                // ensure only one of each node in the result
-                while (axisNodeIter.hasNext()) {
-                    Object eachAxisNode = axisNodeIter.next();
-                    if (! unique.contains(eachAxisNode)) {
-                        unique.add(eachAxisNode);
-                        interimSet.add(eachAxisNode);
-                    }
-                }
+				while (axisNodeIter.hasNext())
+				{
+					Object eachAxisNode = axisNodeIter.next();
+					interimSet.add(eachAxisNode);
+				}
 
-                // evaluate the predicates
-                newNodeSet.addAll(getPredicateSet().evaluatePredicates(interimSet, support));
-                interimSet.clear();
-            }
+				// evaluate the predicates
+				List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);
+
+				// ensure only one of each node in the result
+				Iterator predicateNodeIter = predicateNodes.iterator();
+				while (predicateNodeIter.hasNext())
+				{
+					Object eachPredicateNode = predicateNodeIter.next();
+					if (! unique.contains(eachPredicateNode))
+					{
+						unique.add(eachPredicateNode);
+						newNodeSet.add(eachPredicateNode);
+					}
+				}
+				interimSet.clear();
+			}
             
         } else {
             for (int i = 0; i < contextSize; ++i) {
@@ -274,15 +283,24 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
                     Object eachAxisNode = axisNodeIter.next();
 
                     if (matches(eachAxisNode, support)) {
-                        if (! unique.contains(eachAxisNode)) {
-                            unique.add(eachAxisNode);
-                            interimSet.add(eachAxisNode);
-                        }
+						interimSet.add(eachAxisNode);
                     }
                 }
 
                 // evaluate the predicates
-                newNodeSet.addAll(getPredicateSet().evaluatePredicates(interimSet, support));
+				List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);
+
+				// ensure only one of each node in the result
+				Iterator predicateNodeIter = predicateNodes.iterator();
+				while (predicateNodeIter.hasNext())
+				{
+					Object eachPredicateNode = predicateNodeIter.next();
+					if (! unique.contains(eachPredicateNode))
+					{
+						unique.add(eachPredicateNode);
+						newNodeSet.add(eachPredicateNode);
+					}
+				}
                 interimSet.clear();
             }
         }
