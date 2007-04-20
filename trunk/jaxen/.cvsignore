@@ -18,3 +18,4 @@ cobertura.ser
 cobertura.jar
 locallib
 .classpath
+.settings
