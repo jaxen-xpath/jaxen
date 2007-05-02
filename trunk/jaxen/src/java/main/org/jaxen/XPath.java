@@ -36,7 +36,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import java.util.List;
 
-/** Defines the interface to an object which represents an XPath 1.0 expression which
+/** Represents an XPath 1.0 expression which
  *  can be evaluated against a variety of different XML object models.
  *
  *  <p>
