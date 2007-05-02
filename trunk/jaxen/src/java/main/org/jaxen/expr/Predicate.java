@@ -75,7 +75,7 @@ public interface Predicate extends Serializable
     /**
      * Change the expression used by this predicate.
      * 
-     * @param the new expression
+     * @param expr the new expression
      */
     void setExpr(Expr expr);
 

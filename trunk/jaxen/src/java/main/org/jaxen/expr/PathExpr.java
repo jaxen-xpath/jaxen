@@ -74,7 +74,7 @@ public interface PathExpr extends Expr
     /**
      * Changes the expression's filter expression.
      * 
-     * @param the new filter expression
+     * @param filterExpr the new filter expression
      */
     void setFilterExpr(Expr filterExpr);
 
