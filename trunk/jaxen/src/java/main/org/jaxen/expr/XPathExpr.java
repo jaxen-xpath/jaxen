@@ -74,7 +74,7 @@ public interface XPathExpr extends Serializable
     /**
      * Changes the wrapped expression object.
      * 
-     * @param the new expression object to wrap
+     * @param rootExpr the new expression object to wrap
      */
     void setRootExpr(Expr rootExpr);
     
