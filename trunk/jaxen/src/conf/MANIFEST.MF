@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Extension-Name: org.jaxen
-Specification-Title: jaxen
-Specification-Version: 1.0 FCS
-Specification-Vendor: bob mcwhirter & James Strachan.
-Created-By: Ant 1.4.1
-Implementation-Vendor:  bob mcwhirter & James Strachan.
-Implementation-Version: 1.0 FCS
-Implementation-Title: jaxen
