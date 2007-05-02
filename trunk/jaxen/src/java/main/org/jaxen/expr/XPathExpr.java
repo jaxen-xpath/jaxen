@@ -90,8 +90,6 @@ public interface XPathExpr extends Serializable
      * <code>//para[1 = 1]</code> could be simplified to 
      * <code>//para</code>. In practice, this is usually a noop.
      * Jaxen does not currently perform any simplification.
-     * 
-     * @return the simplified expression
      */
     void   simplify();
     
