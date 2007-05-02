@@ -250,7 +250,6 @@
      <report>maven-jxr-plugin</report>
      <report>maven-junit-report-plugin</report>
      <report>maven-linkcheck-plugin</report>
-     <report>maven-tasklist-plugin</report>
      <report>maven-pmd-plugin</report> 
      <report>maven-findbugs-plugin</report> 
    <!-- commenting out until they fix their repository  <report>jutils-lint4j-plugin</report> -->
