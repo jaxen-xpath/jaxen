@@ -236,7 +236,7 @@ public interface XPathFactory
     /**
      * Create a string literal expression.
      * 
-     * @param number the value
+     * @param literal the value
      * @return a literal expression wrapping that value
      * @throws JaxenException
      */
@@ -246,7 +246,7 @@ public interface XPathFactory
      * Create a new variable reference expression.
      * 
      * @param prefix the namespace prefix of the variable
-     * @param functionName the local name of the variable 
+     * @param variableName the local name of the variable 
      * @return a variable expression
      * @throws JaxenException
      */
@@ -307,7 +307,7 @@ public interface XPathFactory
     /**
      * Create from the supplied expression.
      * 
-     * @param the expression to evaluate in the predicate
+     * @param predicateExpr the expression to evaluate in the predicate
      * @return a predicate
      * @throws JaxenException
      */
