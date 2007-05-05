@@ -44,8 +44,9 @@
 
       <p>
         Sun chose Jaxen for the XPath engine for the 
-        <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html"><acronym title="Java Server Pages">JSP</acronym> Standard Tag Library (<acronym>JSTL</acronym>)</a> and the 
-        <a href="http://java.sun.com/webservices/webservicespack.html">Web Services pack</a>
+        <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html"><acronym title="Java Server Pages">JSP</acronym> 
+        Standard Tag Library (<acronym>JSTL</acronym>)</a> and the 
+        <a href="http://java.sun.com/webservices/downloads/previous/webservicespack.jsp">Java Web Services Developer Pack 1.0 and 1.1</a>.
       </p>
 
       <p>
