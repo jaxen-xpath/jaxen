@@ -5,9 +5,6 @@
     <title>jaxen: universal Java XPath engine</title>
 
     <body>
-        <links>
-            <item name="The Werken Company" href="http://www.werken.com/"/>
-        </links>
         <menu name="jaxen">
             <item name="Overview" href="/index.html"/>
             <item name="Download Jaxen" href="/releases.html"/>
