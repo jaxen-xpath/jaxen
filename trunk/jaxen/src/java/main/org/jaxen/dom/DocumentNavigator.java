@@ -199,17 +199,17 @@ public class DocumentNavigator extends DefaultNavigator
     
     
     /** 
-     * Return the XPath parent of this DOM node.
+     * Return the XPath parent of the supplied DOM node.
      * XPath has slightly different definition of parent than DOM does.
      * In particular, the parent of an attribute is not null.
      * 
-     * @param o 
+     * @param child the child node
      * 
      * @return the parent of the specified node; or null if
      *     the node does not have a parent
      */
-    public Object getParentNode(Object o) {
-        Node node = (Node) o;
+    public Object getParentNode(Object child) {
+        Node node = (Node) child;
         if (node.getNodeType() == Node.ATTRIBUTE_NODE) {
             return ((Attr) node).getOwnerElement();
         }
@@ -803,6 +803,8 @@ public class DocumentNavigator extends DefaultNavigator
      * @return the new W3C DOM Level 2 Document instance
      * @throws FunctionCallException containing a nested exception
      *      if a problem occurs trying to parse the given document
+     *
+     * @todo Possibly we could make the factory a thread local.
      */
     public Object getDocument(String uri) throws FunctionCallException
     {
@@ -810,7 +812,6 @@ public class DocumentNavigator extends DefaultNavigator
         {
             // We really do need to construct a new factory here each time.
             // DocumentBuilderFactory is not guaranteed to be thread safe? 
-            // Possibly we could make this a thread local.????
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -1049,7 +1050,7 @@ public class DocumentNavigator extends DefaultNavigator
      *            does not know about attribute types
      *  @see   javax.xml.parsers.DocumentBuilderFactory
      *  
-     *  @throws ClassCastException if object is not an org.w3c.dom.Node object
+     *  @throws ClassCastException if object is not an <code>org.w3c.dom.Node</code> object
      *  
      */
     public Object getElementById(Object object, String elementId)
