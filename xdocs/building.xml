@@ -84,7 +84,13 @@
           (In the Mac OS X Finder, this is Go/Connect to Server...) 
         </li>
         <li>
-          Copy the <tt>.zip</tt>, <tt>.pom</tt>, and <tt>.tar.gz</tt> files from target/distributions to this directory. 
+          Copy the <tt>.zip</tt> and <tt>.tar.gz</tt> files from target/distributions to https://dav.codehaus.org/dist/jaxen/distributions. 
+        </li>
+         <li>
+          Copy the <tt>.jar</tt>  file from target to https://dav.codehaus.org/dist/jaxen/jars/. 
+        </li>
+        <li>
+          Copy the <tt>.pom</tt>  file from target to https://dav.codehaus.org/dist/jaxen/poms/. 
         </li>
         <li>
           Using the Mac Finder, or another WebDAV client, open https://dav.codehaus.org/jaxen/.
