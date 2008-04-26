@@ -834,7 +834,7 @@ public class DocumentNavigator extends DefaultNavigator
      * 
      * @param obj the processing instruction
      * @return the target of the processing instruction
-     * @throws ClassCastException if obj is not a processing instruxtion
+     * @throws ClassCastException if obj is not a processing instruction
      * 
      */
     public String getProcessingInstructionTarget(Object obj)
@@ -851,7 +851,7 @@ public class DocumentNavigator extends DefaultNavigator
      * 
      * @param obj the processing instruction
      * @return the target of the processing instruction
-     * @throws ClassCastException if obj is not a processing instruxtion
+     * @throws ClassCastException if obj is not a processing instruction
      * 
      */
     public String getProcessingInstructionData(Object obj)
