@@ -137,7 +137,7 @@ public class StringLengthFunction implements Function
             length++;
             // if this is a high surrogate; assume the next character is
             // is a low surrogate and skip it
-            if (c >= 0xD800) {
+            if (c >= 0xD800 && c <= 0xDFFF) {
                 try {
                     char low = data[i+1];
                     if (low < 0xDC00 || low > 0xDFFF) {
