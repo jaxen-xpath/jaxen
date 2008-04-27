@@ -127,7 +127,13 @@ public class TranslateFunctionTest extends TestCase {
         assertEquals("ad\uD834\uDD00d", result);
     }
     
-
+    public void testTranslateStringThatContainsPrivateUseChars() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "translate('ab\uE000\uE001', '\uE000', '\uE001')" );
+        String result = (String) xpath.evaluate( doc );
+        assertEquals("ab\uE001\uE001", result);
+    }
+    
     public void testTranslateNonBMPChars() throws JaxenException
     {
         XPath xpath = new DOMXPath( "translate('ab\uD834\uDD00b', '\uD834\uDD00', 'd')" );
