@@ -112,6 +112,13 @@ public class StringLengthTest extends TestCase {
         
     }    
 
+    public void testStringLengthWithPrivateUseChars() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "string-length('ab\uE000\uE001')" );
+        Double result = (Double) xpath.evaluate( doc );
+        assertEquals(4, result.intValue());
+    }
+    
     public void testStringLengthFunctionCountsUnicodeCharactersNotJavaChars() 
       throws JaxenException {
    
