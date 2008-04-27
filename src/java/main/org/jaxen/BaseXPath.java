@@ -84,6 +84,9 @@ import org.jaxen.util.SingletonList;
  */
 public class BaseXPath implements XPath, Serializable
 {
+
+    private static final long serialVersionUID = -1993731281300293168L;
+
     /** Original expression text. */
     private final String exprText;
 
