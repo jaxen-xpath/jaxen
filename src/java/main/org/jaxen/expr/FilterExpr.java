@@ -53,8 +53,9 @@ import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
 /**
- * Represents an XPath filter expression. This is production 20 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-EqualityExpr">XPath 1.0 specification</a>:
+ * Represents an XPath filter expression. This is 
+ * <a href='http://www.w3.org/TR/xpath#NT-FilterExpr'>production 20</a> in the 
+ * <a href="http://www.w3.org/TR/xpath">XPath 1.0 specification</a>:
  * 
  * <table><tr valign="baseline">
  * <td><a name="NT-FilterExpr"></a>[20]&nbsp;&nbsp;&nbsp;</td><td>FilterExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-PrimaryExpr">PrimaryExpr</a></td><td></td>
