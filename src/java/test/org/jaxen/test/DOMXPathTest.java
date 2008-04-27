@@ -91,6 +91,18 @@ public class DOMXPathTest extends TestCase
         assertEquals("/foo/bar/baz", xpath.toString());
     }
     
+    public void testJaxen193() throws JaxenException
+    {
+        DOMXPath xpath = new DOMXPath( "/*[ * or processing-instruction() ]" );
+        assertEquals("/*[ * or processing-instruction() ]", xpath.toString());
+    }
+    
+    public void testJaxen193InReverse() throws JaxenException
+    {
+        DOMXPath xpath = new DOMXPath( "/*[ processing-instruction() or *]" );
+        assertEquals("/*[ processing-instruction() or *]", xpath.toString());
+    }
+    
     public void testConstructionWithNamespacePrefix() throws JaxenException
     {
         DOMXPath xpath = new DOMXPath( "/p:foo/p:bar/a:baz" );
