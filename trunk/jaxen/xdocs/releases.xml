@@ -17,7 +17,7 @@ The current version is 1.1.1. 1.1.1 is a minor upgrades that fixes assorted smal
 1.1 is a major upgrade that significantly improved jaxen's conformance to the underlying XPath 1.0 specification. 
 This release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
-With a few small exceptions (e.g. the the <code>document()</code> function has moved to the 
+With a few small exceptions (e.g. the <code>document()</code> function has moved to the 
 <code>org.jaxen.function.xslt</code> package, the <code>IdentityHashMap</code> class has been deleted,
 and the ElectricXML navigator has been deleted) 1.1.1
 is backwards compatible with code written to the 1.0 APIs.
