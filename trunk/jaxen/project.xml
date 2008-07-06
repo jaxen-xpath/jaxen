@@ -30,8 +30,8 @@
   <distributionDirectory>/dist</distributionDirectory>
   
   <repository>
-    <connection>scm:cvs:pserver:anonymous@cvs.jaxen.codehaus.org:/cvs/jaxen:jaxen</connection>
-    <url>http://cvs.jaxen.codehaus.org</url>
+    <connection>scm:svn:https://svn.codehaus.org/jaxen/trunk/jaxen/</connection>
+    <url>https://svn.codehaus.org/jaxen/trunk/jaxen/</url>
   </repository>
   
   <mailingLists>
@@ -244,7 +244,9 @@
      <report>maven-cobertura-plugin</report>
      <report>maven-changelog-plugin</report>
      <report>maven-developer-activity-plugin</report>
-     <report>maven-file-activity-plugin</report>
+     <!-- file activity seems broken by move to subversion; links still
+          point to CVS; I don't know why -->
+     <!-- <report>maven-file-activity-plugin</report> -->
      <report>maven-license-plugin</report>
      <report>maven-javadoc-plugin</report>
      <report>maven-jxr-plugin</report>
