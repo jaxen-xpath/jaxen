@@ -14,7 +14,7 @@ The current version is 1.1.1. 1.1.1 is a minor upgrades that fixes assorted smal
 </p>
 
 <p>
-1.1 is a major upgrade that significantly improved jaxen's conformance to the underlying XPath specs. 
+1.1 is a major upgrade that significantly improved jaxen's conformance to the underlying XPath 1.0 specification. 
 This release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
 With a few small exceptions (e.g. the the <code>document()</code> function has moved to the 
@@ -34,15 +34,13 @@ is backwards compatible with code written to the 1.0 APIs.
         <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.1-src.tar.gz">1.1.1 sources in tar/gz format.</a></li>
       </ul>
 
-
-
     </section>
 
     <section name="Nightly Builds">
       <p>
       Nightly builds have been temporarily suspended as we ramp up
       with using <a href="http://maven.apache.org/">Maven</a>.
-      However, you can grab a <a href="http://cvs.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
+      However, you can grab a <a href="http://svn.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
       To build Jaxen, you'll need to have maven installed. Assuming you do, you should be able to just type "maven jar" at the command line 
       in the jaxen directory to create a JAR archive. <!-- If any of the tests are currently failing- -a couple of 
       tests are currently picking up JDOM bugs- -you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
