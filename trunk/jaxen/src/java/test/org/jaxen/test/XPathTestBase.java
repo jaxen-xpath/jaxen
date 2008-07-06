@@ -968,7 +968,7 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            assertCountXPath(1, context, "doc-id[@regsrc='AP' and @id-string='D76UIMO80']");
+            assertCountXPath(1, context, "doc-id[@regsrc='FAKE' and @id-string='YYY']");
         }
     }
 
@@ -985,11 +985,11 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            assertCountXPath(1, context, "meta[@name='ap-cycle']");
-            assertCountXPath(1, context, "meta[@content='AP']");
+            assertCountXPath(1, context, "meta[@name='fake-cycle']");
+            assertCountXPath(1, context, "meta[@content='FAKE']");
             assertCountXPath(8, context, "meta[@name and @content]");
-            assertCountXPath(1, context, "meta[@name='ap-cycle' and @content='AP']");
-            assertCountXPath(7, context, "meta[@name != 'ap-cycle']");
+            assertCountXPath(1, context, "meta[@name='fake-cycle' and @content='FAKE']");
+            assertCountXPath(7, context, "meta[@name != 'fake-cycle']");
         }
     }
 
@@ -1006,11 +1006,11 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            assertCountXPath(1, context, "/nitf/head/meta[@name='ap-cycle']");
-            assertCountXPath(1, context, "/nitf/head/meta[@content='AP']");
+            assertCountXPath(1, context, "/nitf/head/meta[@name='fake-cycle']");
+            assertCountXPath(1, context, "/nitf/head/meta[@content='FAKE']");
             assertCountXPath(8, context, "/nitf/head/meta[@name and @content]");
-            assertCountXPath(1, context, "/nitf/head/meta[@name='ap-cycle' and @content='AP']");
-            assertCountXPath(7, context, "/nitf/head/meta[@name != 'ap-cycle']");
+            assertCountXPath(1, context, "/nitf/head/meta[@name='fake-cycle' and @content='FAKE']");
+            assertCountXPath(7, context, "/nitf/head/meta[@name != 'fake-cycle']");
         }
     }
 
