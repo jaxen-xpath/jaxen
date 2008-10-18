@@ -45,8 +45,6 @@
  * $Id$
  */
 
-
-
 package org.jaxen.expr;
 
 import java.util.Iterator;
@@ -75,39 +73,46 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityE
     Object lhsValue = getLHS().evaluate( context );
     Object rhsValue = getRHS().evaluate( context );
     
-    if( lhsValue == null || rhsValue == null )
-      {
+    if( lhsValue == null || rhsValue == null ) {
       return Boolean.FALSE;
-      }
+    }
     
     Navigator nav = context.getNavigator();
 
-    if( bothAreSets( lhsValue, rhsValue ) )
-      {
+    if( bothAreSets(lhsValue, rhsValue) ) {
       return evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
-      }
-    else if ( eitherIsSet( lhsValue, rhsValue ) )
-      {
-      if ( isSet( lhsValue ) )
-        {
-        return evaluateSetSet( (List) lhsValue, convertToList( rhsValue ), nav );                
-        }
-      else
-        {
-        return evaluateSetSet( convertToList( lhsValue ), (List) rhsValue, nav );                                
-        }
-      }  
-    else
-      {
-      return evaluateObjectObject( lhsValue, rhsValue, nav ) ? Boolean.TRUE : Boolean.FALSE;
-      }    
     }
+    else if (isSet(lhsValue ) && isBoolean(rhsValue)) {
+        Boolean lhsBoolean = ((List) lhsValue).isEmpty() ? Boolean.FALSE : Boolean.TRUE;
+        Boolean rhsBoolean = (Boolean) rhsValue;
+        return Boolean.valueOf(evaluateObjectObject( lhsBoolean, rhsBoolean, nav ) );
+    }
+    else if (isBoolean(lhsValue ) && isSet(rhsValue)) {
+        Boolean lhsBoolean = (Boolean) lhsValue;
+        Boolean rhsBoolean = ((List) rhsValue).isEmpty() ? Boolean.FALSE : Boolean.TRUE;
+        return Boolean.valueOf(evaluateObjectObject( lhsBoolean, rhsBoolean, nav ) );
+    }
+    else if (eitherIsSet(lhsValue, rhsValue) ) {
+      if (isSet(lhsValue)) {
+        return evaluateSetSet( (List) lhsValue, convertToList(rhsValue), nav );                
+      }
+      else {
+        return evaluateSetSet( convertToList(lhsValue), (List) rhsValue, nav );                                
+      }
+    }  
+    else {
+      return Boolean.valueOf(evaluateObjectObject( lhsValue, rhsValue, nav ) );
+    }    
+  }
   
   private Boolean evaluateSetSet( List lhsSet, List rhsSet, Navigator nav )
     {
-    if( setIsEmpty( lhsSet ) || setIsEmpty( rhsSet ) )
-      {
-      return Boolean.FALSE;
+      /* If both objects to be compared are node-sets, then the comparison will be 
+       * true if and only if there is a node in the first node-set and a node in 
+       * the second node-set such that the result of performing the comparison on 
+       * the string-values of the two nodes is true */
+      if( setIsEmpty( lhsSet ) || setIsEmpty( rhsSet ) ) {
+            return Boolean.FALSE;
       }
     
     for( Iterator lhsIterator = lhsSet.iterator(); lhsIterator.hasNext(); )
