@@ -62,10 +62,8 @@ import junit.framework.TestSuite;
  *
  */
 public class JaxenTests {
-
     
     public static Test suite() {
-        
         TestSuite result = new TestSuite();
         result.addTest(SAXPathTests.suite());
         result.addTest(FunctionTests.suite());

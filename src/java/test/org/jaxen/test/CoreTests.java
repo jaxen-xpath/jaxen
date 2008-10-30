@@ -58,7 +58,7 @@ import junit.framework.TestSuite;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b12
+ * @version 1.1.2
  *
  */
 public class CoreTests extends TestCase {
@@ -89,6 +89,7 @@ public class CoreTests extends TestCase {
         result.addTest(new TestSuite(ArithmeticTest.class));
         result.addTest(new TestSuite(IterableAxisTest.class));
         result.addTest(new TestSuite(DefaultXPathFactoryTest.class));
+        result.addTest(new TestSuite(NodesetEqualityTest.class));
         return result;
         
     }
