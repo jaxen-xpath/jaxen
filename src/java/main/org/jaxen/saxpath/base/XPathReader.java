@@ -941,15 +941,16 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     private void multiplicativeExpr() throws SAXPathException
     {
         unaryExpr();
-
+       
         int la = LA(1);
-        while (la == TokenTypes.STAR || la == TokenTypes.DIV || la == TokenTypes.MOD)
+        while (la == TokenTypes.STAR_OPERATOR || la == TokenTypes.DIV || la == TokenTypes.MOD)
         {
             switch ( la )
             {
                 case TokenTypes.STAR:
+                case TokenTypes.STAR_OPERATOR:
                 {
-                    match( TokenTypes.STAR );
+                    match( TokenTypes.STAR_OPERATOR );
                     getXPathHandler().startMultiplicativeExpr();
                     unaryExpr();
                     getXPathHandler().endMultiplicativeExpr( Operator.MULTIPLY );

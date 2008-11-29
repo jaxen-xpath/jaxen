@@ -46,9 +46,6 @@
  * $Id$
  */
 
-
-
-
 package org.jaxen.saxpath.base;
 
 class XPathLexer
@@ -56,8 +53,7 @@ class XPathLexer
     private String xpath;
     private int    currentPosition;
     private int    endPosition;
-
-    private Token  previousToken;
+    private boolean expectOperator = false;
 
     XPathLexer(String xpath)
     {
@@ -253,7 +249,7 @@ class XPathLexer
                     
                 default:
                 {
-                    if ( isIdentifierStartChar( LA(1) ) )
+                    if ( Verifier.isXMLNCNameStartCharacter( LA(1) ) )
                     {
                         token = identifierOrOperatorName();
                     }
@@ -266,84 +262,79 @@ class XPathLexer
                 {
                     token = new Token( TokenTypes.EOF,
                                    getXPath(),
-                                   currentPosition(),
-                                   endPosition() );
+                                   this.currentPosition,
+                                   this.endPosition );
             }
                 else
                 {
                     token = new Token( TokenTypes.ERROR,
                                    getXPath(),
-                                   currentPosition(),
-                                   endPosition() );
+                                   this.currentPosition,
+                                   this.endPosition );
                 }
             }
 
         }
-        while ( token.getTokenType() == TokenTypes.SKIP );
-
-        setPreviousToken( token );
+        while (token.getTokenType() == TokenTypes.SKIP );
         
-        return token;
-    }
+        // For some reason, section 3.7, Lexical structure,
+        // doesn't seem to feel like it needs to mention the
+        // SLASH, DOUBLE_SLASH, and COLON tokens for the test
+        // if an NCName is an operator or not.
+        //
+        // According to section 3.7, "/foo" should be considered
+        // as a SLASH following by an OperatorName being 'foo'.
+        // Which is just simply, clearly, wrong, in my mind.
+        //
+        //     -bob
+
+        switch ( token.getTokenType() )
+        {
+            case TokenTypes.AT:
+            case TokenTypes.DOUBLE_COLON:
+            case TokenTypes.LEFT_PAREN:
+            case TokenTypes.LEFT_BRACKET:
+            case TokenTypes.AND:
+            case TokenTypes.OR:
+            case TokenTypes.MOD:
+            case TokenTypes.DIV:
+            case TokenTypes.COLON:
+            case TokenTypes.SLASH:
+            case TokenTypes.DOUBLE_SLASH:
+            case TokenTypes.PIPE:
+            case TokenTypes.DOLLAR:
+            case TokenTypes.PLUS:
+            case TokenTypes.MINUS:
+            case TokenTypes.STAR_OPERATOR:
+            case TokenTypes.COMMA:
+            case TokenTypes.LESS_THAN_SIGN:
+            case TokenTypes.GREATER_THAN_SIGN:
+            case TokenTypes.LESS_THAN_OR_EQUALS_SIGN:
+            case TokenTypes.GREATER_THAN_OR_EQUALS_SIGN:
+            case TokenTypes.EQUALS:
+            case TokenTypes.NOT_EQUALS:
+            {
+                expectOperator = false;
+                break;
+            }
+            default:
+            {
+                expectOperator = true;
+                break;
+            }
+        }
+
+         return token;
+     }
 
     private Token identifierOrOperatorName()
     {
         Token token = null;
-    
-        if ( previousToken != null )
-        {
-            // For some reason, section 3.7, Lexical structure,
-            // doesn't seem to feel like it needs to mention the
-            // SLASH, DOUBLE_SLASH, and COLON tokens for the test
-            // if an NCName is an operator or not.
-            //
-            // According to section 3.7, "/foo" should be considered
-            // as a SLASH following by an OperatorName being 'foo'.
-            // Which is just simply, clearly, wrong, in my mind.
-            //
-            //     -bob
-            
-            switch ( previousToken.getTokenType() )
-            {
-                case TokenTypes.AT:
-                case TokenTypes.DOUBLE_COLON:
-                case TokenTypes.LEFT_PAREN:
-                case TokenTypes.LEFT_BRACKET:
-                case TokenTypes.AND:
-                case TokenTypes.OR:
-                case TokenTypes.MOD:
-                case TokenTypes.DIV:
-                case TokenTypes.COLON:
-                case TokenTypes.SLASH:
-                case TokenTypes.DOUBLE_SLASH:
-                case TokenTypes.PIPE:
-                case TokenTypes.DOLLAR:
-                case TokenTypes.PLUS:
-                case TokenTypes.MINUS:
-                case TokenTypes.STAR:
-                case TokenTypes.COMMA:
-                case TokenTypes.LESS_THAN_SIGN:
-                case TokenTypes.GREATER_THAN_SIGN:
-                case TokenTypes.LESS_THAN_OR_EQUALS_SIGN:
-                case TokenTypes.GREATER_THAN_OR_EQUALS_SIGN:
-                case TokenTypes.EQUALS:
-                case TokenTypes.NOT_EQUALS:
-                {
-                    token = identifier();
-                    break;
-                }
-                default:
-                {
-                    token = operatorName();
-                    break;
-                }
-            }
-        }
-        else
-        {
+        if ( expectOperator ) {
+            token = operatorName();
+        } else {
             token = identifier();
         }
-    
         return token;
     }
     
@@ -351,11 +342,11 @@ class XPathLexer
     {
         Token token = null;
     
-        int start = currentPosition();
+        int start = this.currentPosition;
     
         while ( hasMoreChars() )
         {
-            if ( isIdentifierChar( LA(1) ) )
+            if ( Verifier.isXMLNCNameCharacter( LA(1) ) )
             {
                 consume();
             }
@@ -368,7 +359,7 @@ class XPathLexer
         token = new Token( TokenTypes.IDENTIFIER,
                            getXPath(),
                            start,
-                           currentPosition() );
+                           this.currentPosition );
     
         return token;
     }
@@ -420,8 +411,8 @@ class XPathLexer
         {
             token = new Token( TokenTypes.MOD,
                                getXPath(),
-                               currentPosition(),
-                               currentPosition()+3 );
+                               this.currentPosition,
+                               this.currentPosition+3 );
     
             consume();
             consume();
@@ -444,8 +435,8 @@ class XPathLexer
         {
             token = new Token( TokenTypes.DIV,
                                getXPath(),
-                               currentPosition(),
-                               currentPosition()+3 );
+                               this.currentPosition,
+                               this.currentPosition+3 );
     
             consume();
             consume();
@@ -468,8 +459,8 @@ class XPathLexer
         {
             token = new Token( TokenTypes.AND,
                                getXPath(),
-                               currentPosition(),
-                               currentPosition()+3 );
+                               this.currentPosition,
+                               this.currentPosition+3 );
     
             consume();
             consume();
@@ -490,8 +481,8 @@ class XPathLexer
         {
             token = new Token( TokenTypes.OR,
                                getXPath(),
-                               currentPosition(),
-                               currentPosition()+2 );
+                               this.currentPosition,
+                               this.currentPosition+2 );
     
             consume();
             consume();
@@ -502,7 +493,7 @@ class XPathLexer
     
     private Token number()
     {
-        int     start         = currentPosition();
+        int     start         = this.currentPosition;
         boolean periodAllowed = true;
     
       loop:
@@ -541,7 +532,7 @@ class XPathLexer
         return new Token( TokenTypes.DOUBLE,
                                getXPath(),
                                start,
-                               currentPosition() );
+                               this.currentPosition );
     }
     
     private Token whitespace()
@@ -579,8 +570,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.COMMA,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -591,8 +582,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.EQUALS,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -603,8 +594,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.MINUS,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
         consume();
             
         return token;
@@ -614,8 +605,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.PLUS,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
         consume();
     
         return token;
@@ -625,8 +616,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.DOLLAR,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
         consume();
     
         return token;
@@ -636,8 +627,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.PIPE,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -648,8 +639,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.AT,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -660,8 +651,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.COLON,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
         consume();
     
         return token;
@@ -671,8 +662,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.DOUBLE_COLON,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+2 );
+                                 this.currentPosition,
+                                 this.currentPosition+2 );
     
         consume();
         consume();
@@ -684,8 +675,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.NOT_EQUALS,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition() + 2 );
+                                 this.currentPosition,
+                                 this.currentPosition + 2 );
     
         consume();
         consume();
@@ -705,16 +696,16 @@ class XPathLexer
                 {
                     token = new Token( TokenTypes.LESS_THAN_OR_EQUALS_SIGN,
                                        getXPath(),
-                                       currentPosition(),
-                                       currentPosition() + 2 );
+                                       this.currentPosition,
+                                       this.currentPosition + 2 );
                     consume();
                 }
                 else
                 {
                     token = new Token( TokenTypes.LESS_THAN_SIGN,
                                        getXPath(),
-                                       currentPosition(),
-                                       currentPosition() + 1);
+                                       this.currentPosition,
+                                       this.currentPosition + 1);
                 }
     
                 consume();
@@ -726,16 +717,16 @@ class XPathLexer
                 {
                     token = new Token( TokenTypes.GREATER_THAN_OR_EQUALS_SIGN,
                                        getXPath(),
-                                       currentPosition(),
-                                       currentPosition() + 2 );
+                                       this.currentPosition,
+                                       this.currentPosition + 2 );
                     consume();
                 }
                 else
                 {
                     token = new Token( TokenTypes.GREATER_THAN_SIGN,
                                        getXPath(),
-                                       currentPosition(),
-                                       currentPosition() + 1 );
+                                       this.currentPosition,
+                                       this.currentPosition + 1 );
                 }
     
                 consume();
@@ -747,12 +738,14 @@ class XPathLexer
                 
     }
     
+    // ????
     private Token star()
     {
-        Token token = new Token( TokenTypes.STAR,
-                                 getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+        int tokenType = expectOperator ? TokenTypes.STAR_OPERATOR : TokenTypes.STAR;
+         Token token = new Token( tokenType,
+                         getXPath(),
+                         this.currentPosition,
+                         this.currentPosition+1 );
     
         consume();
             
@@ -767,7 +760,7 @@ class XPathLexer
     
         consume();
     
-        int start = currentPosition();
+        int start = this.currentPosition;
             
         while ( ( token == null )
                 &&
@@ -778,7 +771,7 @@ class XPathLexer
                 token = new Token( TokenTypes.LITERAL,
                                    getXPath(),
                                    start,
-                                   currentPosition() );
+                                   this.currentPosition );
             }
             consume();
         }
@@ -796,8 +789,8 @@ class XPathLexer
             {
                 token = new Token( TokenTypes.DOT_DOT,
                                    getXPath(),
-                                   currentPosition(),
-                                   currentPosition()+2 ) ;
+                                   this.currentPosition,
+                                   this.currentPosition+2 ) ;
                 consume();
                 consume();
                 break;
@@ -806,8 +799,8 @@ class XPathLexer
             {
                 token = new Token( TokenTypes.DOT,
                                    getXPath(),
-                                   currentPosition(),
-                                   currentPosition()+1 );
+                                   this.currentPosition,
+                                   this.currentPosition+1 );
                 consume();
                 break;
             }
@@ -820,8 +813,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.LEFT_BRACKET,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -832,8 +825,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.RIGHT_BRACKET,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -844,8 +837,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.LEFT_PAREN,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -856,8 +849,8 @@ class XPathLexer
     {
         Token token = new Token( TokenTypes.RIGHT_PAREN,
                                  getXPath(),
-                                 currentPosition(),
-                                 currentPosition()+1 );
+                                 this.currentPosition,
+                                 this.currentPosition+1 );
     
         consume();
     
@@ -874,8 +867,8 @@ class XPathLexer
             {
                 token = new Token( TokenTypes.DOUBLE_SLASH,
                                    getXPath(),
-                                   currentPosition(),
-                                   currentPosition()+2 );
+                                   this.currentPosition,
+                                   this.currentPosition+2 );
                 consume();
                 consume();
                 break;
@@ -884,8 +877,8 @@ class XPathLexer
             {
                 token = new Token( TokenTypes.SLASH,
                                    getXPath(),
-                                   currentPosition(),
-                                   currentPosition()+1 );
+                                   this.currentPosition,
+                                   this.currentPosition+1 );
                 consume();
             }
         }
@@ -895,12 +888,12 @@ class XPathLexer
     
     private char LA(int i) 
     {
-        if ( currentPosition + ( i - 1 ) >= endPosition() )
+        if ( currentPosition + ( i - 1 ) >= this.endPosition )
         {
             return (char) -1;
         }
     
-        return getXPath().charAt( currentPosition() + (i - 1) );
+        return getXPath().charAt( this.currentPosition + (i - 1) );
     }
     
     private void consume()
@@ -908,34 +901,9 @@ class XPathLexer
         ++this.currentPosition;
     }
     
-    private int currentPosition()
-    {
-        return this.currentPosition;
-    }
-    
-    private int endPosition()
-    {
-        return this.endPosition;
-    }
-    
-    private void setPreviousToken(Token previousToken)
-    {
-        this.previousToken = previousToken;
-    }
-    
     private boolean hasMoreChars()
     {
-        return currentPosition() < endPosition();
-    }
-    
-    private boolean isIdentifierChar(char c)
-    {
-        return Verifier.isXMLNCNameCharacter( c );
-    }
-    
-    private boolean isIdentifierStartChar(char c)
-    {
-        return Verifier.isXMLNCNameStartCharacter( c );
+        return this.currentPosition < this.endPosition;
     }
 
 }

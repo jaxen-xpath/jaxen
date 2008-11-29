@@ -96,6 +96,8 @@ class TokenTypes
     // in XPath are doubles.
     static final int DOUBLE = 29;
     static final int COMMA = 30;
+    // split star into two token types
+    static final int STAR_OPERATOR = 31;
 
     static String getTokenText( int tokenType )
     {
@@ -127,6 +129,8 @@ class TokenTypes
                 return "-";
             case STAR:
                 return "*";
+            case STAR_OPERATOR:
+                    return "*";
             case DIV:
                 return "div";
             case MOD:
