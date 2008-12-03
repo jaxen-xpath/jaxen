@@ -48,7 +48,6 @@
 package org.jaxen.expr;
 
 import org.jaxen.JaxenException;
-import org.jaxen.saxpath.Operator;
 
 /**
  * An abstract factory used to create individual path component objects.
@@ -60,7 +59,7 @@ public interface XPathFactory
     /**
      * Create a new <code>XPathExpr</code> from an <code>Expr</code>.
      * 
-     * @param rootExpr the expression wrapped by the resuolting XPathExpr
+     * @param rootExpr the expression wrapped by the resulting XPathExpr
      * @return an XPathExpr wrapping the root expression
      * @throws JaxenException
      */
