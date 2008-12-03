@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:ant="jelly:ant">
+
+    <preGoal name="dist:build-bin">
+      <attainGoal name="dist:build-src" />
+    </preGoal>
+
+    <postGoal name="dist:build-bin">
+        <ant:copy 
+          tofile="${maven.build.dir}/distributions/jaxen-${pom.currentVersion}.pom" 
+          file="project.xml" />
+    </postGoal>
+
+    <postGoal name="dist:prepare-bin-filesystem">
+        <ant:copy todir="${maven.dist.bin.assembly.dir}">
+            <fileset dir=".">
+                <include name="xml/**" />
+            </fileset>
+        </ant:copy>
+    </postGoal>
+
+    <postGoal name="dist:prepare-src-filesystem">
+        <ant:copy todir="${maven.dist.src.assembly.dir}">
+            <fileset dir=".">
+                <include name="xml/**" />
+            </fileset>
+        </ant:copy>
+    </postGoal>
+
+</project>
+
+

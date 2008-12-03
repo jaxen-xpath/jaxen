@@ -1,0 +1,2676 @@
+\documentclass[20pt,landscape,headrule,footrule]{foils}
+
+\usepackage{alltt}
+\usepackage{color}
+\usepackage{pstricks}
+\usepackage{graphicx}
+\usepackage{verbatim}
+
+\setlength{\fboxsep}{0pt}
+\setlength{\foilheadskip}{-30pt}
+
+\begin{document}
+
+\definecolor{highlight}{rgb}{0.6,0.0,0.0}
+\definecolor{grey}{rgb}{0.3,0.3,0.3}
+\definecolor{higreen}{rgb}{0.0,0.6,0.0}
+\definecolor{hipurple}{rgb}{0.6,0.0,0.6}
+
+\renewcommand{\emph}[1]{\textcolor{highlight}{#1}}
+\newcommand{\bemph}[1]{\textbf{\emph{#1}}}
+\newcommand{\hired}[1]{\textcolor{red}{#1}}
+\newcommand{\hipurple}[1]{\textcolor{hipurple}{#1}}
+\newcommand{\hiblue}[1]{\textcolor{blue}{#1}}
+\newcommand{\higreen}[1]{\textcolor{higreen}{#1}}
+\newcommand{\hifade}[1]{\textcolor{grey}{#1}}
+\newcommand{\slide}[1]{\foilhead{\bemph{#1}}}
+\newcommand{\subslide}[1]{\foilhead{\bemph{\small{(#1)}}}}
+\newcommand{\breakslide}[1]{\foilhead{}\vspace{1in}\begin{center}\Huge{\textcolor{highlight}{ #1}}\end{center}}
+\newcommand{\egxpath}[1]{\begin{center}\texttt{#1}\end{center}}
+\newcommand{\egcode}[1]{\begin{center}\texttt{#1}\end{center}}
+\newcommand{\at}[0]{\texttt{\@@}}
+\newcommand{\tag}[1]{\texttt{<#1>}}
+
+\newenvironment{codelisting}%
+        {\begin{minipage}{\textwidth}\tiny\begin{alltt}}%
+        {\end{alltt}\end{minipage}}
+
+\newcommand{\diagram}[1]{
+  \begin{minipage}{\textwidth}
+    \begin{center}
+      \includegraphics[scale=0.5]{#1}
+    \end{center}
+  \end{minipage}
+}
+
+\title{\emph{Introduction to XPath\\
+       in Java using Jaxen}\\
+       \small{SD West 2003}}
+
+\author{Bob McWhirter\\
+        \tiny{\emph{The Werken Company}}\\
+        \tiny{\texttt{bob@werken.com}}}
+
+\MyLogo{\emph{http://jaxen.org/}}
+
+\leftheader{\emph{Jaxen}}
+
+\maketitle
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Quickest Intro}
+
+\begin{itemize}
+  \item Open-Source.
+  \item Business-friendly license (ASF/BSD).
+  \item Works with most XML object-models.
+\end{itemize}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Open-Source}
+
+Being open-source, \emph{jaxen} has numerous developers working
+on various aspects of the project, from supporting
+additional object-models to seeking out optimization
+opportunities.
+
+Jaxen has existed for about two years, and has over a dozen
+committers, with 2-to-3 active at any point in time.  Some
+committers are simply users of \emph{jaxen}, others have created
+custom model adapters, while still others are implementors
+of other open-source XML object-models.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Business-friendly License}
+
+Since \emph{jaxen} uses a license similar to the one used by
+the Apache Software Foundation, there are few restrictions
+on its usage.  It may be used in other open-source projects
+or in closed-source commercial products.  The only requirement
+is that the code maintains its copyrights.  
+
+\begin{center}
+\bemph{That's it!}
+\end{center}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Works with Most XML Object-Models}
+
+\begin{itemize}
+  \item \bemph{dom4j}
+    James Strachan's dom4j includes direct support\\ 
+    for XPath by using the Jaxen library.
+  \item \bemph{JDOM}
+    Jason Hunter's JDOM includes optional support\\ 
+    for XPath by using the Jaxen library.
+  \item \bemph{W3C DOM}
+    Jaxen supports DOM documents.
+  \item \bemph{EXML}
+    The Mind Electric's EXML 6.0 includes direct \\
+    support for XPath by using the Jaxen library.
+\end{itemize}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{History}
+
+The first XPath engine Bob created was \emph{werken.xpath}, and it
+worked only with JDOM.  It was based upon an \emph{ANTLR} parser-generator grammar
+and contained numerous bugs.  \emph{James Strachan} started the
+\emph{dom4j} project.  Initially, we worked with porting
+werken.xpath to dom4j, but maintaining separate codebases proved 
+difficult.
+
+And thus, the concept for jaxen was born\dots
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{History - The Beginnings}
+
+Due to issues with the ANTLR-based grammar, \emph{SAXPath}, a
+hand-rolled expression lexer and parser was written.   SAXPath parses
+and reports XPath expressions in a manner similar to how SAX works
+for XML content.
+
+Bob McWhirter and James Strachan designed the \emph{Navigator}
+object-model adapter and implemented the core engine.  James 
+wrote the binding to dom4j while Bob wrote the bindings for
+JDOM and EXML.  James Strachan and David Megginson created the
+W3C DOM binding.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{History - Contributors}
+
+Many others contributed patches, optimizations and improvements:
+
+\begin{tabular}{ll}
+\begin{minipage}{4in}
+\small
+\begin{itemize}
+  \item \emph{Erwin Boldwidt}
+  \item \emph{Eddie McGreal}
+  \item \emph{Jan Dvorak}
+  \item \emph{Mark A. Belonga}
+  \item \emph{Michael Brennan}
+  \item \emph{Stephen Colebourne}
+%% \end{itemize}
+%% \end{minipage}
+%% &
+%% \begin{minipage}{4in}
+%% \small
+%% \begin{itemize}
+  \item \emph{Paul R. Brown}
+  \item \emph{Alex Chaffee}
+  \item \emph{Steen Lehmann}
+  \item \emph{Attila Szegedi}
+  \item \emph{Christian Nentwich}
+  \item \emph{Pete Kazmier}
+  \item \emph{Jeffrey Brekke}
+\end{itemize}
+\end{minipage}
+\end{tabular}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Jaxen and the XML-InfoSet}
+
+\emph{jaxen}'s flexibility comes from the fact that it works purely
+in terms of the \emph{XML InfoSet} instead of any concrete XML
+representation.  This flexibility actually allows jaxen to work with
+non-XML models.  The only requirement is that a \emph{Navigator}
+adapter be written to satisfy the subset of the InfoSet required
+by jaxen.  
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{XML-InfoSet}
+
+The \emph{XML-InfoSet} defines the semantics of XML instead
+of the textual serialization as the original \emph{XML 1.0} spec
+does.  The InfoSet recognizes that the true structure is a tree
+with various types of nodes which the spec refers to as ``information
+items''.
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \emph{Document Information Item}
+  \item \emph{Element Information Items}
+  \item \emph{Attribute Information Items}
+  \item \emph{Processing Instruction Information Items}
+  \item \emph{Character Information Items}
+  \item \emph{Comment Information Items}
+  \item \emph{Namespace Information Items}
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Document Info Item}
+
+The \emph{Document} information item is typically modeled in
+XML object-model frameworks by an explicit class such as  
+\emph{org.dom4j.Document} or \emph{org.jdom.Document}.
+
+The document information item most importantly contains children,
+including the root element and any comments or processing-instructions
+outside of the root element.
+
+\diagram{infoset-doc}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Element Info Items}
+
+Each tag in an XML document is an element and is represented by the
+Info-Set as an \emph{Element} information item.  Once again,
+most XML object-model frameworks represent each element with an
+instance of an element class, such as \emph{org.dom4j.Element}
+or \emph{org.jdom.Element}.
+
+An element information item contains several types of children,
+including attributes, comments, namespace declarations, text context 
+and other elements.  It also contains information regarding its own
+name and namespace.
+
+\begin{codelisting}
+\hifade{<\hiblue{article} id="mcw03"
+         \hiblue{xmlns="http://jaxen.org/example-ns/"}>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Element Info Items - Diagram}
+
+\diagram{infoset-elem}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Attribute Info Items}
+
+Each attribute that does not begin with \emph{xmlns} is represented
+by an \emph{Attribute} information item.  Most object-models represent them
+with an explicit attribute class such as \emph{org.dom4j.Attribute}
+or \emph{org.jdom.Attribute}.  It contains information regarding
+its own name and namespace.
+
+\begin{codelisting}
+\hifade{<article \hiblue{id="mcw03"} 
+         xmlns="http://jaxen.org/example-ns/">}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Processing-Instruction Info Items}
+
+Processing-instructions, while not widely used, embody their target
+and the text associated with them.  Different object-models represent
+PIs differently, so no generalized statement may be made.
+
+\begin{codelisting}
+\hifade{<?\hiblue{mycompany:insert-random-bugs true}?>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Character Info Items}
+
+The InfoSet defines a \emph{Character} information item for each individual
+text character.  The \emph{Navigator} of jaxen works with
+consecutive spans of uninterrupted characters.
+
+\begin{codelisting}
+\hifade{<text>
+    \hiblue{jaxen is a fun and exciting way to drive your coworkers insane..}
+</text>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Comment Info Items}
+
+\emph{Comment} information items appear as children of either
+\emph{Document} or \emph{Element} items and contain the textual
+content of the comments themselves.
+
+\begin{codelisting}
+\hifade{
+\hiblue{<!--
+  || Comment on the Document information item
+  -->}
+<journal xmlns=\"http://jaxen.org/example-ns/\">
+    \hiblue{<!-- 
+      || Comment on the Element information item for <journal>
+      -->}
+</journal>
+}
+\end{codelisting}
+
+\emph{NOTE:} Due to how the specifications are written, there is no
+guarantee that XML parsed from a file will ever contain comment
+items.  Parsers are allowed to discard the comments and so they
+may not be included in your model of choice.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{InfoSet - Namespace Info Items}
+
+The \emph{Namespace} information items contained by \emph{Element}
+items represent all XML namespace bindings in effect at the scope of
+the element.
+
+\begin{codelisting}
+\hifade{<journal \hiblue{xmlns="http://jaxen.org/example-ns-1/"}>
+    <art:article \hiblue{xmlns:art="http://jaxen.org/example-ns-2"}>
+}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{What is XPath?}
+
+XPath is a node-addressing expression language for the XML InfoSet.
+
+XPath expressions are used to traverse the graph provided by the
+InfoSet in order to locate any node contained therein.  
+
+\begin{itemize}
+  \item \emph{Full expression language.}
+  \item \emph{Multiple `directions' of traversal.}
+  \item \emph{Predicate evaluation for filtering.}
+  \item \emph{Extremely extensible.}
+\end{itemize}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Compared to XQuery}
+
+XPath and XQuery vaguely overlap in functionality.  XPath 2.0 overlaps
+even more so with XQuery.
+
+In general, XQuery is more rigorously defined, more type-safe, much
+larger, and not finished.
+
+XPath is strictly an addressing language, not a full query language,
+but most people find that it satisfies the 80/20 rule where it
+provides 80\% of the solution for 20\% of the effort.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\breakslide{Simple Expressions}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Math!}
+
+Since XPath is a full expression language, arbitrary arithmetic
+constitutes valid expressions.
+
+\egxpath{42 + 84.2}
+
+\egxpath{10 div 3}
+
+\egxpath{(1 + 3) * 42}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Location Paths}
+
+\emph{Location paths} are the core of the XPath expression
+language with regards to XML documents.  A location path is comprised
+of a series of \emph{steps}.
+
+Each step is evaluated, in order, against the results of the previous
+step.  The result of each step is a possibly empty set of some nodes
+from the document.
+
+\egxpath{/journal/article/author}
+
+What that means\dots
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic}
+
+An XPath is evaluated in relation to some initial context which typically is a
+\emph{Document} node from an object-model.
+
+Examples of common initial context classes:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \emph{org.dom4j.Document}
+  \item \emph{org.jdom.Document}
+  \item \emph{org.w3c.dom.Document}
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Example Document}
+Given a document with the structure:
+
+\begin{codelisting}
+<journal>
+    <article id="article.1">
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    </article>
+    <article id="article.2">
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    </article>
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Example XPath}
+Given an XPath expression: 
+
+\egxpath{/journal/article/author/last}
+
+Let's walk through how it is evaluated to select all \tag{last}
+elements which are children of \tag{author} elements which in
+turn are children of \tag{article} elements that have a parent 
+\tag{journal} element that is the root element of a document.
+
+\dots{}whew\dots
+
+The initial slash character (``\texttt{/}'') indicates that regardless
+of the initial context, the path is an \emph{absolute location path}
+and thus starts at the very top of the document.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Journal }
+
+\egxpath{/\hiblue{journal}/article/author/last}
+
+\begin{codelisting}
+\hifade{\hiblue{<journal>}
+    <article id="article.1">
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    </article>
+    <article id="article.2">
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    </article>
+\hiblue{</journal>}}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Article }
+
+\egxpath{/journal/\hiblue{article}/author/last}
+
+\begin{codelisting}
+\hifade{<journal>
+    \hiblue{<article id="article.1">}
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+    \hiblue{<article id="article.2">}
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+</journal>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Author }
+
+\egxpath{/journal/article/\hiblue{author}/last}
+
+\begin{codelisting}
+\hifade{<journal>
+    <article id="article.1">
+        <title>...</title>
+        \hiblue{<author>}
+          <first>Bob</first>
+          <last>McWhirter</last>
+        \hiblue{</author>}
+        <text>
+        </text>
+    </article>
+    <article id="article.2">
+        <title>...</title>
+        \hiblue{<author>}
+          <first>James</first>
+          <last>Strachan</last>
+        \hiblue{</author>}
+        <text>
+        </text>
+    </article>
+</journal>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Last }
+
+\egxpath{/journal/article/author/\hiblue{last}}
+
+\begin{codelisting}
+\hifade{<journal>
+    <article id="article.1">
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          \hiblue{<last>McWhirter</last>}
+        </author>
+        <text>
+        </text>
+    </article>
+    <article id="article.2">
+        <title>...</title>
+        <author>
+          <first>James</first>
+          \hiblue{<last>Strachan</last>}
+        /author>
+        <text>
+        </text>
+    </article>
+</journal>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Processing Logic - Results }
+
+The result of evaluating the XPath against the document is a
+\emph{node-set} that contains nodes directly from the original
+object-model.  The results are \emph{not copies}.
+
+In this case, the results are two \emph{element} nodes, being
+instances of classes such as:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \emph{org.dom4j.Element}
+  \item \emph{org.jdom.Element}
+  \item \emph{org.w3c.dom.Element}
+\end{itemize}
+\end{minipage}
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Attributes}
+
+The previous example demonstrated some of the simplest location
+path expressions possible.  Not only can a location path select 
+elements, they can also select attributes amongst other items.
+
+A step that begins with the ``\at'' character selects an attribute
+with the given name instead of an element.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Attributes}
+\egxpath{/journal/article/\hiblue{@id}}
+
+This path would select the \texttt{id} attribute node from 
+each of the \tag{article} tags.  Once again, it selects instances
+of the actual corresponding classes for attributes in the
+target object-model, such as:
+
+\begin{itemize}
+  \item \bemph{org.dom4j.Attribute}
+  \item \bemph{org.jdom.Attribute}
+  \item \bemph{org.w3c.dom.Attr}
+\end{itemize}
+
+The path does \emph{not} select the values of the attributes.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Attributes - Example}
+
+\egxpath{/journal/article/\hiblue{@id}}
+
+\begin{codelisting}
+<journal>
+    <article \hiblue{id="article.1"}>
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    </article>
+    <article \hiblue{id="article.2"}>
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    </article>
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates}
+
+Sometimes it is desirable to narrow the results of a particular
+step of a location path.  This narrowing is the job of a
+\emph{predicate}.  Multiple predicates can be chained together
+to further and further constrain the result node set.
+
+\egxpath{/journal/article\hiblue{[@id='article.2']}}
+
+After a step has been evaluated, if a predicate follows, then the
+predicate is evaluated in relation to each member of the node set.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - Base}
+
+\egxpath{\hiblue{/journal/article}[@id='article.2']}
+
+\begin{codelisting}
+<journal>
+    \hiblue{<article id="article.1">}
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+    \hiblue{<article id="article.2">}
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - 1st article}
+
+\egxpath{/journal/article[\hiblue{@id='article.2'}]}
+
+\begin{codelisting}
+<journal>
+    \hiblue{<article \hired{id="article.1"}>}
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+    <article id="article.2">
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    </article>
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - 2nd article}
+
+\egxpath{/journal/article[\hiblue{@id='article.2'}]}
+
+\begin{codelisting}
+<journal>
+    <article id="article.1">
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    </article>
+    \hiblue{<article \higreen{id="article.2"}>}
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - Proximity}
+
+The previous predicate was based upon some \emph{content} as opposed
+to \emph{position} within the document.  XPath defines the concept
+of a \emph{proximity predicate} that allows selection of specific
+elements by their location using roughly array notation.  
+
+\egxpath{/journal/article[2]}
+
+Selects the second \tag{article} under the \tag{journal} tag.  Since
+proximity predicates rely only on the positions of nodes, they are
+\emph{fragile} and do not survive large-scale editing of the
+document.
+
+\emph{NOTE:} Unlike Java, XPath indices begin at \texttt{1} instead
+of \texttt{0}.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - Proximity}
+
+\egxpath{/journal/article[2]}
+
+\begin{codelisting}
+<journal>
+    <article id="article.1">
+        <title>...</title>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    </article>
+    \hiblue{<article id="article.2">}
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - Multiple}
+
+Predicates can be chained together to recursively refine the
+selection.
+
+\egxpath{/journal/article\hiblue{[author/last='Strachan'][1]}}
+
+This path would only select the first \tag{article} that was
+written by an author with the last name \texttt{Strachan}.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - Nested}
+
+Predicates contain any arbitrary XPath expression which can
+include other location paths and predicates.
+
+\egxpath{/journal/article\hiblue{[author[1]/last='Strachan']}}
+
+This path would select all \tag{article} elements whose first
+\tag{author} has the \tag{last} name of \texttt{Strachan}.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Location Paths - Predicates - Nested - Example}
+
+\egxpath{/journal/article\hiblue{[author[1]/last='Strachan']}}
+
+\begin{codelisting}
+\tiny
+<journal>
+    \hiblue{<article>}
+        <title>...</title>
+        <author>
+          <first>James</first>
+          <last>Strachan</last>
+        </author>
+        <author>
+          <first>Bob</first>
+          <last>McWhirter</last>
+        </author>
+        <text>
+        </text>
+    \hiblue{</article>}
+</journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\breakslide{Jaxen API}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Model Bindings}
+
+Several object-models, such as \emph{dom4j} and \emph{EXML} include
+bindings to the jaxen xpath engine through their own APIs, typically
+in the form of \emph{selectNodes(String xpathExpr)} or
+\emph{selectSingleNode(String xpathExpr)} methods on
+their \emph{Document} and \emph{Element} classes.
+
+Here, we'll address using jaxen directly in conjunction with an
+object-model.  Please consult your chosen model's API documentation
+for any native bindings it may have.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{The XPath Classes}
+
+The main interface for working with jaxen XPaths is
+\emph{org.jaxen.XPath}.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface XPath
+\{
+    Object evaluate(Object context)
+        throws JaxenException;
+
+    \dots
+\}
+\end{codelisting}
+
+Each supported object-model has a matching concrete implementation:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{org.jaxen.dom4j.Dom4jXPath}
+  \item \bemph{org.jaxen.jdom.JDOMXPath}
+  \item \bemph{org.jaxen.dom.DOMXPath}
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Constructing}
+
+Once the appropriate class has been selected and imported into your
+code, a new instance of the \emph{XPath} class may be created
+using the constructor that takes a string XPath expression.
+
+\begin{codelisting}
+try
+\{
+    \hiblue{XPath xpath = new Dom4jXPath( "/journal/article/[author/last='Strachan']" );}
+\}
+catch (JaxenException e)
+\{
+    e.printStackTrace();
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation}
+
+Once an \emph{XPath} has been instantiated successfully, it may be
+evaluated against multiple different contexts.  The \emph{XPath}
+implementations are thread-safe and so may be cached and shared 
+by multiple threads.
+
+\begin{codelisting}
+try
+\{
+    \hiblue{XPath xpath = new Dom4jXPath( "/journal/article/[author/last='Strachan']" );}
+
+    Document doc = retrieveDocument();
+
+    \hiblue{List results = (List) xpath.evaluate( doc );}
+\}
+catch (JaxenException e)
+\{
+    e.printStackTrace();
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - Results}
+
+As noted before, while the XPath is primarily intended for
+manipulating XML, it is a full expression language capable of
+evaluating non-XML-based expressions. The return value of
+\emph{evaluate(...)} is a \emph{java.lang.Object}.
+
+Calling code must cast the result to the appropriate class.
+When working with location paths, the result will always
+be a \emph{java.util.List} which represents the possibly
+empty node set of selected nodes.
+
+The members of the List will be instances of classes from the
+underlying object-model.
+In other cases, it may return \emph{java.lang.Number},
+\emph{java.lang.Boolean}, or \emph{java.lang.String}.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - Helpers}
+
+The \emph{XPath} interface allows for additional helper methods
+that handle much of the desired conversion and casting.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface XPath
+\{
+    String \hiblue{stringValueOf}(Object context)
+        throws JaxenException;
+
+    boolean \hiblue{booleanValueOf}(Object context)
+        throws JaxenException;
+
+    boolean \hiblue{numberValueOf}(Object context)
+        throws JaxenException;
+
+    List \hiblue{selectNodes}(Object context)
+        throws JaxenException;
+
+    Object \hiblue{selectSingleNode}(Object context)
+        throws JaxenException;
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - stringValueOf}
+
+The \emph{stringValueOf(...)} method performs a normal
+\emph{evaluate(...)} and then follows XPath's rules for 
+coercion of the result to a string.
+
+In terms of XPath, this means that the first node is converted to
+its string value and all others are discarded.
+
+\egxpath{/journal/article/author/last}
+
+While this path would select both of the \tag{author} tags,
+only the first would be converted to its string value, which for
+elements, is the complete text content. 
+
+This would result in the string \texttt{McWhirter}.
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - booleanValueOf}
+
+The \emph{booleanValueOf(...)} method performs a normal
+\emph{evaluate(...)} and then follows XPath's rules for
+coercion of the result to a boolean.
+
+An empty result set is interpreted as \texttt{false} while a
+non-empty result set is interpreted as \texttt{true}.
+
+This XPath would return \texttt{true}:
+
+\egxpath{/journal/article/author[last='McWhirter']}
+
+This XPath would return \texttt{false}:
+
+\egxpath{/journal/article/author[last='MacWithier']}
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - numberValueOf}
+
+The \emph{numberValueOf(...)} method performs a normal
+\emph{evaluate(...)} and then follows XPath's rules for 
+coercion of the result to a number.
+
+In terms of XPath, this means that the first node is converted to
+its number value and all others are discarded.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - selectNodes}
+
+The \emph{selectNodes(...)} method makes sense only for
+XPaths that perform node selection and not arithmetic.  It simplifies
+calling code by performing the cast to a \emph{List} on the results
+of \emph{evaluate(...)}.
+
+This XPath would return all \tag{author} elements in a list.
+
+\egxpath{/journal/article/author}
+
+\begin{codelisting}
+try
+\{
+    \hiblue{List authors = xpath.selectNodes( "/journal/article/author" );}
+\}
+catch (JaxenException e)
+\{
+    e.printStackTrace();
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{The XPath Classes - Evaluation - selectSingleNode}
+
+The \emph{selectSingleNode(...)} method operates similar to
+\emph{selectNodes(...)} but only returns the first member
+of the selected list as an \emph{Object}.  Depending on the
+expression, calling code must cast to a class appropriate to
+the object-model being used.
+
+This XPath would return only the first \tag{author} element.
+
+\egxpath{/journal/article/author}
+
+\begin{codelisting}
+try
+\{
+    \hiblue{Element firstAuthor = (Element) xpath.selectSingleNode( "/journal/article/author" );}
+\}
+catch (JaxenException e)
+\{
+    e.printStackTrace();
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\breakslide{Advanced XPath\\ \& \\ Jaxen}
+
+\begin{center}
+Namespaces - Variables - Functions
+\end{center}
+
+\slide{Namespaces}
+
+In many modern XML documents, XML Namespaces are used to help
+differentiate tags.  Multiple tags may have the same name but
+exist in different namespaces.  These are considered unique.
+
+\begin{codelisting}
+<\hiblue{soap:Envelope}
+  \hiblue{xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"}
+  soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+   <soap:Body>
+       <\hiblue{mail:Envelope} 
+         \hiblue{xmlns:mail="http://jaxen.org/example-ns/mail/"}>
+         <mail:to>bob@werken.com</mail:to> 
+       <\hiblue{/mail:Envelope}>
+   </soap:Body>
+<\hiblue{/soap:Envelope}>
+\end{codelisting}
+
+Here, two different \tag{Envelope} tags exist.  
+
+One exists in the
+\bemph{http://schemas.xmlsoap.org/soap/envelope} namespace
+while
+the other is in the \bemph{http://jaxen.org/example-ns/mail/}
+namespace.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - URIs}
+
+The namespace of an element is a \emph{URI} that does not necessarily
+have to be resolvable or point to any particular type of resource.  It
+acts purely as a distinguishing identifier.
+
+It would be unwieldy to affix the namespace URI to each element, so
+XML defines a way to declare a \emph{prefix mapping} for each
+namespace.
+
+This is accomplished by adding a pseudo-attribute to an element.
+
+\begin{codelisting}
+<wj:journal \hiblue{xmlns:wj="http://werken.com/werken-journal/"}>
+  <wj:article>
+    ...
+  </wj:article>
+</wj:journal>
+\end{codelisting}
+
+Any pseudo-attribute that begins with \emph{xmlns} is considered
+to be a namespace prefix mapping within the scope of the element
+upon which it is defined.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Prefix Mapping}
+
+The normal form of a namespace prefix mapping declaration is:
+
+\egcode{\hiblue{xmlns:\$\{PREFIX\}="\$\{URI\}"}}
+
+\egcode{\hifade{<tagname \hiblue{xmlns:myprefix="my-namespace"}>}}
+
+The declaration is available for the tag upon which it is declared
+and any nested child tag.  A prefix mapping is not required to be
+used by the tag upon which it is defined, and multiple mappings may
+be declared upon a single tag.
+
+\egcode{\hifade{<\hiblue{a:}tagname \hiblue{xmlns:a="uri-a" xmlns:b="uri-b"}>}}
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Default Mapping}
+
+A \emph{default namespace mapping} can be used to define which
+namespace tags are a part of, unless otherwise specified.  The format
+of the default mapping is identical to the prefix mapping, with the
+exception that a prefix is not used.
+
+\egcode{\hiblue{xmlns="\$\{URI\}"}}
+
+\egcode{\hifade{<tagname \hiblue{xmlns="my-namespace"}>}}
+
+In this case, \tag{tagname} has no prefix but a default namespace
+mapping is defined, so \tag{tagname} is a member of
+\texttt{\hiblue{my-namespace}}.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Prefixes Do Not Matter}
+
+The actual prefixes used within a document \bemph{do not matter}.
+Only the mapped namespace URI is important.  These three documents
+are semantically identical:
+
+Using the default namespace mapping functionality:
+
+\begin{codelisting}
+<journal xmlns="http://werken.com/werken-journal/">
+</journal>
+\end{codelisting}
+
+Using the prefix namespace mapping functionality:
+
+\begin{codelisting}
+<yak:journal yak:xmlns="http://werken.com/werken-journal/">
+</yak:journal>
+\end{codelisting}
+
+Using the prefix namespace mapping functionality with a different
+prefix:
+
+\begin{codelisting}
+<frobnovich:journal xmlns:frobnovich="http://werken.com/werken-journal/">
+</frobnovich:journal>
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Prefixes - XPath}
+
+Since prefixes do not matter, how do you construct an XPath that
+works with namespaces?
+
+\begin{center}
+\bemph{Using prefixes!}
+\end{center}
+
+Just as each element in a document has a set of prefix-to-namespace
+mappings, an XPath expression may also contain a set of
+prefix-to-namespace mappings.
+
+The only caveat is that XPath has absolutely no concept of a default
+namespace mapping.  
+
+\egxpath{\hiblue{j:}journal/\hiblue{j:}article/\hiblue{j:}author/\hiblue{j:}last}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Prefixes - XPath - Mappings}
+
+The XPath specification does not address how prefix namespace mappings
+are created.  It only specifies that an XPath is evaluated within the
+scope of a \emph{namespace context} which defines the mappings.
+
+In \emph{XSLT}, the namespace context is composed of all namespace
+mappings in effect within the template \emph{(not the target document)}
+at the point the xpath is used.
+
+\begin{codelisting}
+\hifade{<xsl:template match="\hiblue{wj:author}" 
+              \hiblue{xmlns:wj="http://werken.com/werken-journal/"}>
+    \dots
+</xsl:template>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Prefixes - XPath - Mappings}
+
+The template will match \tag{author} tags in the
+\emph{http://werken.com/werken-journal/} namespace, 
+regardless of the actual prefix (or default mapping) used within the
+target document.
+
+\begin{codelisting}
+\hifade{<journal \hiblue{xmlns="http://werken.com/werken-journal/"}>
+    <\hiblue{author}>
+        \dots
+    <\hiblue{/author}>
+</journal>}
+\end{codelisting}
+
+\begin{codelisting}
+\hifade{<yak:journal \hiblue{xmlns:yak="http://werken.com/werken-journal/"}>
+    <\hiblue{yak:author}>
+        \dots
+    <\hiblue{/yak:author}>
+</yak:journal>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Jaxen}
+
+Since jaxen is purely an XPath engine, and not an XSLT engine,
+it follows the specification in mandating nothing about how
+namespace prefix mappings are generated, but simply a \emph{namespace
+context} is available.
+
+This is accomplished through the \bemph{org.jaxen.NamespaceContext}
+interface.  It contains but a single method declaration for
+translating a prefix to a namespace URI.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface NamespaceContext
+\{
+    \hiblue{String translateNamespacePrefixToUri(String prefix);}
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Jaxen - SimpleNamespaceContext}
+
+Since mapping a prefix to a namespace URI is a perfect job for a
+look-up table, jaxen provides the
+\bemph{org.jaxen.SimpleNamespaceContext}, which is an implementation
+simply backed by a hash-map.
+
+\begin{codelisting}
+package org.jaxen;
+
+public class SimpleNamespaceContext
+    implements NamespaceContext
+\{
+    public SimpleNamespaceContext() \{ \dots \}
+
+    public SimpleNamespaceContext(Map namespaces) \{ \dots \}
+
+    public void addNamespace(String prefix, 
+                             String namespaceUri) \{ \dots \}
+
+    public String translateNamespacePrefixToUri(String prefix) \{ \dots \}
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Jaxen - Using NamespaceContext}
+
+Each \emph{XPath} has a \emph{NamespaceContext} associated with
+it.  The association is made using the \emph{setNamespaceContext(...)}
+method.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface XPath
+\{
+    \dots
+    \hiblue{void setNamespaceContext(NamespaceContext namespaceContext);}
+    \dots
+\}
+\end{codelisting}
+
+Any prefix that is resolvable through the \emph{NamespaceContext} may
+be used within the XPath expression itself.  
+If code using the
+\emph{XPath} does not explicitly set a \emph{NamespaceContext} then
+a default context that contains no mappings is used.
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Namespaces - Jaxen - Example}
+
+\begin{codelisting}
+try
+\{
+    XPath xpath = new Dom4jXPath( \hiblue{"/j:journal/j:article/j:author"} );
+
+    SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
+
+    \hiblue{nsContext.addNamespace( "j"
+                            "http://werken.com/werken-journal/" );
+
+    xpath.setNamespaceContext( nsContext );}
+
+    Document journalDoc = getJournalEdition( 42 );
+
+    List authors = xpath.selectNodes( journalDoc );
+\}
+catch (JaxenException e)
+\{
+    e.printStackTrace();
+\}
+
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Variables}
+
+The XPath specification allows for \emph{variables} in expressions
+to allow parameterization at evaluation time.
+
+Similar to the namespace-context, each XPath expression also has a 
+variable-context that maps variable names to values.
+
+\egxpath{/journal/article/author[last=\hiblue{\$lastName}]}
+
+Or with namespace support:
+
+\egxpath{/journal/article/author[last=\hiblue{\$myNsPrefix:lastName}]}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Variables - Jaxen - VariableContext}
+
+Parallel to the \emph{NamespaceContext}, jaxen provides an
+interface \emph{VariableContext} and a useful simple implementation.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface VariableContext
+\{
+    Object getVariableValue(String namespaceUri,
+                            String prefix,
+                            String localName)
+        throws UnresolvableException;
+\}
+\end{codelisting}
+
+The three parameters to the \emph{getVariableValue(...)}
+method are:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{enumerate}
+  \item \bemph{namespaceUri} The namespace URI associated with the\\
+    prefix as determined by the current \emph{NamespaceContext}.
+  \item \bemph{prefix} The actual prefix used in the XPath expression.
+  \item \bemph{localName} The portion of the variable name that is\\ 
+    not the namespace prefix.
+\end{enumerate}
+\end{minipage}
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Variables - Jaxen - SimpleVariableContext}
+
+A simple implementation of \emph{VariableContext} is provided by 
+the sensibly-named \emph{SimpleVariableContext}, which is backed
+by a hash-map.
+
+\begin{codelisting}
+package org.jaxen;
+
+public class SimpleVariableContext
+    implements VariableContext
+\{
+    public SimpleVariableContext() \{ \dots \}
+
+    public void setVariableValue(String namespaceUri,
+                                 String localName,
+                                 Object value) \{ \dots \}
+
+    public void setVariableValue(String localName,
+                                 Object value) \{ \dots \}
+
+    public Object getVariableValue(String namespaceUri,
+                                   String prefix,
+                                   String localName)
+        throws UnresolvableException \{ \dots \}
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Variables - Jaxen - Using VariableContext}
+
+Each \emph{XPath} has a \emph{VariableContext} associated with
+it.  The association is made using the \emph{setVariableContext(...)}
+method.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface XPath
+\{
+    \dots
+    \hiblue{void setVariableContext(VariableContext variableContext);}
+    \dots
+\}
+\end{codelisting}
+
+If code using the \emph{XPath} does not explicitly set a 
+\emph{VariableContex} then
+a default context that contains no variables is used.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Variables - Jaxen - Example}
+
+\begin{codelisting}
+try
+\{
+    XPath xpath = new Dom4jXPath( "/journal/article[author/last=\hiblue{\$lastName}]" );
+
+    \hiblue{SimpleVariableContext varContext = new SimpleVariableContext();
+
+    varContext.setVariable( "lastName"
+                            "Strachan" );
+
+    xpath.setVariableContext( varContext );}
+
+    Document journalDoc = getJournalEdition( 42 );
+
+    List strachanArticles = xpath.selectNodes( journalDoc );
+\}
+catch (JaxenException e)
+\{
+    e.printStackTrace();
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Functions}
+
+The XPath language supports functions in expressions and provides for
+a core library of functions dealing with strings, numbers, booleans
+and node sets.
+
+Determine the number of articles written by Mr. Strachan:
+
+\egxpath{\hiblue{count(}/journal/article[author/last="Strachan"]\hiblue{)}}
+
+Find the Irish:
+
+\egxpath{/journal/article[\hiblue{starts-with(}author/last,"Mc"\hiblue{)}]}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Core Library}
+
+The core XPath function library is divided into four groups:
+
+\begin{enumerate}
+  \item \bemph{Node set functions}\\
+    Functions for working with node-sets.
+    Either the implicit current node set or one passed as a parameter.
+  \item \bemph{String functions}\\
+    Functions for working with strings.  Includes type coercions.
+  \item \bemph{Boolean functions}\\
+    Functions for working with booleans.  Includes type coercions.
+  \item \bemph{Number functions}\\
+    Functions for working with numbers.  Includes type coercions.
+\end{enumerate}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Core Library - Node Set Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{last()}
+    Returns the index of the last item of the current result
+    set.  
+      \egxpath{/journal/article[\hiblue{last()}]}
+  \item \bemph{position()}
+    Returns the index of the current item in the current result set.
+      \egxpath{/journal/article[\hiblue{position()}<3]}
+  \item \bemph{count(\textsl{node-set})}
+    Returns the number of items in the parameter result set.
+      \egxpath{\hiblue{count(/journal/article)}}
+  \item \bemph{id(\textsl{object})}
+    Returns the elements with the ID specified.
+      \egxpath{\hiblue{id("article.1")}/author/last}
+\end{itemize}
+\end{minipage}
+
+\subslide{Functions - Core Library - Node Set Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{local-name(\textsl{node-set?})}
+    Returns the non-namespace portion of the node name of either
+    a node set passed as a parameter or the current node in the
+    current node set.
+      \egxpath{\hiblue{local-name(/wj:journal)}}
+      \egxpath{/journal/*[\hiblue{local-name()}="article"]}
+  \item \bemph{namespace-uri(\textsl{node-set?})}
+    Returns the namespace URI of the node name of either 
+    a node set passed as a parameter or the current node in the
+    current node set.
+      \egxpath{\hiblue{namespace-uri(/wj:journal)}}
+      \egxpath{/journal/*:*[\hiblue{namespace-uri()}="http://werken.com/werken-journal/"]}
+  \item \bemph{name(\textsl{node-set?})}
+    Returns the complete textual node name of either a node set
+    passed as a parameter or the current node in the current
+    node set.
+      \egxpath{\hiblue{name(/journal)}}
+      \egxpath{/*[\hiblue{name()}="soap:Envelope"]}
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Core Library - String Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{string(\textsl{object?})} 
+    Converts an object (possibly the current context node) to its
+    string value.
+      \egxpath{/journal/article/author[string()='Strachan']}
+  \item \bemph{concat(\textsl{string, string, string*})}
+    Concatenate two or more strings together.  
+      \egxpath{concat(author/salutation, ' ', author/last)}
+  \item \bemph{starts-with(\textsl{string, string})}
+    Determine if the first argument starts with the second argument
+string.
+      \egxpath{/journal/article[starts-with(title, 'Advanced')]}
+  \item \bemph{contains(\textsl{string, string})}
+    Determine if the first argument contains the second argument
+string.
+      \egxpath{/journal/article[contains(title, 'XPath')]}
+\end{itemize}
+\end{minipage}
+
+\subslide{Functions - Core Library - String Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{substring-before(\textsl{string, string})}
+    Retrieve the substring of the first argument that occurs before
+    the first occurrence of the second argument string.
+      \egxpath{substring-before(/journal/article[1]/date, '/')}
+  \item \bemph{substring-after(\textsl{string, string})}
+    Retrieve the substring of the first argument that occurs after
+    the first occurrence of the second argument string.
+      \egxpath{substring-after(/journal/article[1]/date, '/')}
+  \item \bemph{substring(\textsl{string, number, number?})}
+    Retrieve the substring of the first argument starting at the index
+    of the second number argument, for the length of the optional
+    third argument.
+      \egxpath{substring('McStrachan', 3)}
+  \item \bemph{string-length(\textsl{string?})}
+    Determine the length of a string, or the current context node
+    coerced to a string.
+      \egxpath{/journal/article[string-length(author/last) > 9]}
+\end{itemize}
+\end{minipage}
+
+\subslide{Functions - Core Library - String Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{normalize-space(\textsl{string?})}
+    Retrieve the string argument or context node with all space
+    normalized, trimming whitespace from the ends and compressing
+    consecutive whitespace elements to a single space.
+      \egxpath{normalize-space(/journal/article[1]/content)}
+  \item \bemph{translate(\textsl{string, string, string})}
+    Retrieve the first string argument augmented so that characters
+    that occur in the second string argument are replaced by the
+    character from the third argument in the same position.
+      \egxpath{translate( 'bob', 'abc', 'ZXY' )  XoX}
+    
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Core Library - Boolean Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{boolean(\textsl{object})}
+    Convert the argument to a boolean value.
+    \egxpath{boolean(/journal/article/author/last[.='Strachan']}
+  \item \bemph{not(\textsl{boolean})}
+    Negate a boolean value.
+    \egxpath{not(/journal/article/author/last[.='Strachan']}
+  \item \bemph{true()}
+    Boolean true.
+  \item \bemph{false()}
+    Boolean false.
+  \item \bemph{lang(\textsl{string})}
+    Test if the lang, as set by \verb|xml:lang| attributes is
+    the language specified.
+      \egxpath{/journal/article[1]/content[lang('en')]}
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Core Library - Number Functions}
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{number(\textsl{object?})}
+    Convert the argument or context node to a number value.
+      \egxpath{/journal[number(year)=2003]}
+  \item \bemph{sum(\textsl{node-set})}
+    Sum the values of the node-set.
+      \egxpath{sum(/journal/article/author/age)}
+  \item \bemph{floor(\textsl{number})}
+    Return the largest integer that is not greater than
+    the number argument.
+  \item \bemph{ceiling(\textsl{number})}
+    Return the smallest integer that is not less than the
+    number argument.
+  \item \bemph{round(\textsl{number})}
+    Round the number argument.
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Function Context}
+
+Like most other things in XPath, there is a \emph{function context}
+that contains the core library of functions. The set of functions available
+within an expression is extensible.  
+
+XSLT has added the
+\emph{document(\textsl{url})} function.  Other technologies, such as 
+\emph{XPointer} and \emph{BPEL4WS} add even more functions to
+the XPath function context.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Functions - Jaxen - Function Context}
+
+An extensible function context is supported in jaxen through the
+\emph{FunctionContext} interface.
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface FunctionContext
+\{
+    Function getFunction(String namepsaceUri,
+                         String prefix,
+                         String localName)
+        throws UnresolvableException;
+\}
+\end{codelisting}
+
+The three parameters to the \emph{getFunction(...)}
+method are:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{enumerate}
+  \item \bemph{namespaceUri} The namespace URI associated with the\\
+    prefix as determined by the current \emph{NamespaceContext}.
+  \item \bemph{prefix} The actual prefix used in the XPath expression.
+  \item \bemph{localName} The portion of the variable name that is\\ 
+    not the namespace prefix.
+\end{enumerate}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\breakslide{Quick Romp Through Advanced XPath}
+
+\slide{Advanced Axes}
+
+XPath provides many different semantic methods for navigating
+a document.  Each direction is an \emph{axis} that defines
+which nodes each \emph{step} will be applied to.  Some we
+have already visited.
+
+Each axis allows the effects of a particular step to be 
+constrained to a certain set of nodes for matching.
+
+The general syntax for a step with an explicit axis is:
+
+\egxpath{\hiblue{\$\{AXIS\}::}\$\{NAME\}}
+
+\egxpath{/\hiblue{child::}journal/\hiblue{child::}article/\hiblue{attribute::}id}
+\egxpath{\small{/journal/article/@id}}
+
+\subslide{Advanced Axes - Descriptions}
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{child} 
+    Children of the context node.  This is the default implicit axis.
+  \item \bemph{descendant} 
+    Descendent of the context node.  
+  \item \bemph{parent} 
+    Parent of the context node.
+  \item \bemph{ancestor} 
+    Ancestors of the context node.
+  \item \bemph{following-sibling} 
+    Following siblings of the context node.
+  \item \bemph{preceding-sibling} 
+    Preceding siblings of the context node.
+  \item \bemph{following} 
+    Nodes following the context node.
+  \item \bemph{preceding} 
+    Nodes preceding the context node.
+  \item \bemph{attribute} 
+    Attributes of the context node.  Steps begining with `@' operate
+    along the attribute axis.
+  \item \bemph{namespace} 
+    Namespaces of the context node.  
+  \item \bemph{self} 
+    The context node. 
+  \item \bemph{descendant-or-self} 
+    The context node or its descendants.
+  \item \bemph{ancestor-or-self} 
+    The context node or its ancestors
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples}
+
+In the following slides, the context node will be highlighed
+in \hiblue{blue} and the axis will be demonstrated in
+\hired{red}.  When the context node is a part of the axis,
+it will be highlighted in \hipurple{purple}.
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - child}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article id="article.2">}
+            \hired{<author>}
+                <last></last>
+                <first></first>
+            \hired{</author>}
+        \hiblue{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - descendant}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article id="article.2">
+            \hired{<author>
+                <last></last>
+                <first></first>
+            </author>}
+        </article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - parent}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    \hired{<journal>}
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    \hired{</journal>}
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - ancestor}
+
+\begin{codelisting}
+\hifade{\hired{<library>}
+    <journal> ... </journal>
+    \hired{<journal>}
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    \hired{</journal>}
+    <journal> ... </journal>
+\hired{</library>}}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - following-sibling}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        \hired{<article id="article.3">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hired{</article>}
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - preceding-sibling}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        \hired{<article id="article.1">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hired{</article>}
+        \hiblue{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - following}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        \hired{<article id="article.3">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hired{</article>}
+    </journal>
+    \hired{<journal> ... </journal>}
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - preceding}
+
+\begin{codelisting}
+\hifade{<library>
+    \hired{<journal> ... </journal>}
+    <journal>
+        \hired{<article id="article.1">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hired{</article>}
+        \hiblue{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - attribute}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hiblue{<article \hired{id="article.2"}>}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hiblue{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - self}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hipurple{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hipurple{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - descendant-or-self}
+
+\begin{codelisting}
+\hifade{<library>
+    <journal> ... </journal>
+    <journal>
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hipurple{<article id="article.2">}
+            \hired{<author>
+                <last></last>
+                <first></first>
+            </author>}
+        \hipurple{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    </journal>
+    <journal> ... </journal>
+</library>}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Advanced Axes - Examples - ancestor-or-self}
+
+\begin{codelisting}
+\hifade{\hired{<library>}
+    <journal> ... </journal>
+    \hired{<journal>}
+        <article id="article.1">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+        \hipurple{<article id="article.2">}
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        \hipurple{</article>}
+        <article id="article.3">
+            <author>
+                <last></last>
+                <first></first>
+            </author>
+        </article>
+    \hired{</journal>}
+    <journal> ... </journal>
+\hired{</library>}}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Node Types}
+
+Most of the previous examples have dealt with elements and attributes,
+but XPath defines several types of nodes that can be matched by
+expressions.
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+    \item \bemph{comment} Matches any comment node.
+        \egxpath{//\hiblue{comment()}}
+    \item \bemph{text} Matches text nodes.
+        \egxpath{/journal/article/title/\hiblue{text()}}
+    \item \bemph{processing-instruction} Matches processing-instructions.
+        \egxpath{//\hiblue{processing-instruction( 'template' )}}
+    \item \bemph{node} Matches any node.
+        \egxpath{/journal/article/author/\hiblue{node()}}
+\end{itemize}
+\end{minipage}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Node Types - Implicit}
+
+Implicit node types addressable by names include:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+    \item \bemph{element} The default node-type when performing name-based matches:
+        \egxpath{/journal/article/author}
+    \item \bemph{attribute} The nodes matched by steps along the
+\emph{attribute} axis.
+        \egxpath{/journal/article/attribute::id}
+        \egxpath{/journal/article/@id}
+    \item \bemph{namespace} The nodes matched by steps along the
+\emph{namespace} axis.
+        \egxpath{/journal/namespace::*}
+\end{itemize}
+\end{minipage}
+
+ 
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Abbreviations}
+
+The XPath syntax includes a few abbreviations to make authoring
+expressions easier.  Implicitly, the \emph{child} axis is used
+for any name-based matches.
+
+\egxpath{/journal/article}
+\egxpath{/\hiblue{child::}journal/\hiblue{child::}article}
+
+The `@' symbol is used as an abbreviation for the \emph{attribute}
+axis.
+
+\egxpath{/journal/article/\hiblue{@}id}
+\egxpath{/journal/article/\hiblue{attribute::}id}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Abbreviations}
+
+The `.' character is an abbreviation for \emph{self::node()}.
+
+\egxpath{/journal/article[\hiblue{.}/@id='article.1']}
+
+The `//' sequence is an abbreviation for
+\emph{descendant-or-self::node()}
+which allows for matching nodes with arbitrary nodes in-between.
+
+\egxpath{\hiblue{//}author/last[.='Strachan']}
+\egxpath{\hiblue{/descendant-or-self::node()}/author/last[.='Strachan']}
+
+The `*' character matches any element or attribute name.
+
+\egxpath{/journal/\hiblue{*}[author/last='Strachan']}
+\egxpath{/journal/\hiblue{@*}}
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\breakslide{Navigator}
+
+\begin{center}
+Adapting models for XPath
+\end{center}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\slide{Navigation}
+
+Since XPath expression steps are evaluated in relation to a context
+node across a particular axis of `travel', the main aspects of
+navigating an object-model involves iterating over members of an axis.
+
+The \emph{Navigator} interface has a method for each axis in
+the form of:
+
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\small
+\begin{alltt}
+Iterator get\hiblue{\$\{AXIS\}}AxisIterator(Object contextNode)
+    throws UnsupportedAxisException;     
+\end{alltt}
+\end{minipage}
+\end{center}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Navigation - Axis Iterators}
+
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface Navigator
+\{
+    Iterator getChildAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getDescendantAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getParentAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getAncestorAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getFollowingSiblingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getPrecedingSiblingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+\end{codelisting}
+
+continues\dots
+
+\subslide{Navigator - Axis Iterator - continued}
+
+\dots\ continued
+
+\begin{codelisting}
+    Iterator getFollowingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getPrecedingAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getAttributeAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getNamespaceAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getSelfAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getDescendantOrSelfAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+
+    Iterator getAncestorOrSelfAxisIterator(Object contextNode)
+        throws UnsupportedAxisException;
+\}
+\end{codelisting}
+
+\subslide{Navigation - DefaultNavigator}
+
+Since many of the axes are composite axes that can be synthesized
+from a sub-set, jaxen provides the \emph{DefaultNavigator} which
+is a useful base class for model-specific navigators.
+
+If a model-specific navigator implements
+\emph{getParentAxisIterator(...)}
+then the \emph{DefaultNavigator} can synthesize a useful
+default \emph{getAncestorAxisIterator(...)}.
+
+\subslide{Navigation - DefaultNavigator - Axis Synthesis}
+
+The following axes can be synthesized:
+
+\begin{minipage}{\textwidth}
+\small
+\begin{itemize}
+  \item \bemph{descendant} Built from \emph{child} recursively.
+  \item \bemph{ancestor} Built from \emph{parent} recursively.
+  \item \bemph{self} Completely synthetic.
+  \item \bemph{descendant-or-self} Built from \emph{child} recursively.
+  \item \bemph{ancestor-or-self} Built from \emph{parent} recursively.
+  \item \bemph{following} Built from \emph{parent} and \emph{child}.
+  \item \bemph{preceding} Built from \emph{parent} and \emph{child}.
+  \item \bemph{following-sibling} Built from \emph{parent} and \emph{child}.
+  \item \bemph{preceding-sibling} Built from \emph{parent} and \emph{child}.
+\end{itemize}
+
+Much of the axes are defined by purely providing implementation for
+accessing parent and child relationships.
+\end{minipage}
+
+
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\subslide{Navigation - Node types}
+
+Each method is responsible for inspecting the \emph{contextNode}
+parameter object and returning an \emph{Iterator} over the axis
+in relation to the context-node object.  If the object-model as a
+whole does not support a particular axis of travel,
+\emph{UnsupportedAxisException} may be thrown.
+
+The core jaxen engine will ensure that the methods are not called with
+a non-sensical context.  For example,
+\emph{getAttributeAxisIterator(...)} will never be called with a 
+\emph{comment} node as the parameter.
+
+The \emph{Navigator} provides methods to allow the core engine
+to determine the node's type.
+
+\subslide{Navigation - Node types - Tests}
+
+\begin{codelisting}
+package org.jaxen;
+
+public interface Navigator
+\{
+    boolean isDocument(Object object);
+
+    boolean isElement(Object object);
+
+    boolean isAttribute(Object object);
+
+    boolean isNamespace(Object object);
+
+    boolean isComment(Object object);
+
+    boolean isText(Object object);
+
+    boolean isProcessingInstruction(Object object);
+\}
+\end{codelisting}
+
+\subslide{Navigation - Inspection}
+
+The core jaxen engine requires a way to inspect nodes for various
+properties, such as names, namespace URIs, and string values.
+
+\begin{codelisting} 
+package org.jaxen;
+
+public interface Navigator
+\{
+    String getElementName(Object element);
+    String getElementNamespaceUri(Object element);
+    String getAttributeName(Object attr);
+    String getAttributeNameNamespaceUri(Object attr);
+    String getProcessingInstructionTarget(Object pi);
+    String getProcessingInstructionData(Object pi);
+
+    String getCommentStringValue(Object comment);
+    String getElementStringValue(Object element);
+    String getAttributeStringValue(Object attr);
+    String getNamespaceStringValue(Object ns);
+    String getTextStringValue(Object text);
+    String getTextStringValue(Object text);
+\}
+\end{codelisting} 
+
+\subslide{Navigation - Example Navigator}
+Here are some examples of implementations from the
+\emph{DocumentNavigator} for dom4j.  
+
+\subslide{Navigation - Example Navigator - Axis Iterators}
+
+\begin{codelisting}    
+public Iterator getChildAxisIterator(Object contextNode)
+\{
+    if ( contextNode instanceof Branch )
+    \{
+        Branch node = (Branch) contextNode;
+        
+        return node.nodeIterator();
+    \}
+
+    return null;
+\}
+
+public Iterator getAttributeAxisIterator(Object contextNode)
+\{
+    if ( ! ( contextNode instanceof Element ) )
+    {
+        return null;
+    }
+
+    Element elem = (Element) contextNode;
+
+    return elem.attributeIterator();
+\}
+\end{codelisting}
+
+\subslide{Navigation - Example Navigator - Node Types}
+
+\begin{codelisting}
+public boolean isText(Object obj)
+\{
+    return ( obj instanceof Text 
+             ||
+             obj instanceof CDATA );
+\}
+
+public boolean isAttribute(Object obj)
+\{
+    return obj instanceof Attribute;
+\}    
+
+public boolean isProcessingInstruction(Object obj)
+\{
+    return obj instanceof ProcessingInstruction;
+\}
+\end{codelisting}
+
+\subslide{Navigation - Example Navigator - Inspection}
+
+\begin{codelisting}    
+public String getAttributeName(Object obj)
+\{
+    Attribute attr = (Attribute) obj;
+
+    return attr.getName();
+\}
+
+public String getAttributeNamespaceUri(Object obj)
+\{
+    Attribute attr = (Attribute) obj;
+
+    String uri = attr.getNamespaceURI();
+    if ( uri != null && uri.length() == 0 ) 
+        return null;
+    else
+        return uri;
+\}
+
+public String getNamespaceStringValue(Object obj)
+\{
+    Namespace ns = (Namespace) obj;
+
+    return ns.getURI();
+\}
+\end{codelisting}
+
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+%% ----------------------------------------------------------------------
+
+\breakslide{Thanks}
+
+I'd particularly wish to thank Pete Kazmier and Jeffrey Brekke
+for their diligent review of this presentation.  Any errors that 
+remain herein are purely my own responsibility.
+
+\breakslide{Colophon}
+
+\FoilTeX\ \& \LaTeXe\ were used in the production of these
+slides.  
+
+Images were produced via \texttt{dia}, exported to \texttt{EPS} 
+and converted to \texttt{PDF} for inclusion using 
+the \texttt{epstopdf} utility.
+
+This slide deck is 100\% Microsoft-free and produced using
+only open-source software.
+
+\end{document}
+
+
+

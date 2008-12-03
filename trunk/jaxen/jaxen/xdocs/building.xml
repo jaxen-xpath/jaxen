@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<document url="http://jaxen.org/building.xml">
+
+  <properties>
+    <author>Elliotte Rusty Harold</author>
+    <title>Building Jaxen</title>
+  </properties>
+
+  <body>
+    <title>Building Jaxen</title>
+    
+    <section name="Compiling">
+      <p>
+        Jaxen's build system is officially <a href="http://maven.apache.org/maven-1.x/">Maven 1.0.2</a>. 
+        However version 1.1 also seems to work. 
+        To compile Jaxen, install Maven. Then at the shell 
+        prompt inside the top-level jaxen directory, type "maven java:compile":
+      </p>
+      
+      <p><samp>$ maven java:compile</samp></p>
+      
+      <p>
+        You'll likely see some deprecation warnings. Don't worry about these. 
+        They're internal to jaxen, and do not indicate bugs.
+      </p>
+      
+      <p>
+        To run the unit tests, type "maven test":
+      </p>
+      
+      <p><samp>$ maven test</samp></p>
+      
+      <p>
+        To build a jar file  at the shell 
+        prompt type "maven jar":
+      </p>
+      
+      <p><samp>$ maven jar</samp></p>
+      
+      <p>
+        This runs the unit tests as well. If any are failing and you still want to 
+        build a jar file, use the <code>-Dmaven.test.failure.ignore=true</code> option:
+      </p>
+ 
+       <p><samp>$ maven -Dmaven.test.failure.ignore=true jar</samp></p>
+      
+      <p>
+        To generate javadoc, type "maven javadoc":
+      </p>
+      
+      <p><samp>$ maven javadoc</samp></p>
+      
+      <p>
+        To generate the complete documentation for the site, including 
+        code coverage measurements, static code analysis, and more, type "maven site":
+      </p>
+      
+      <p><samp>$ maven site</samp></p>
+      
+      <p>
+        In all three cases the output appears in the target folder. 
+      </p>
+      
+     <p>
+        To remove build artifacts, type "maven clean":
+      </p>
+      
+      <p><samp>$ maven clean</samp></p>
+      
+      
+    </section>
+
+    <section name="Publishing a Release">
+      <p>
+       To prepare jaxen for release:
+      </p>
+      
+      
+      <ol>
+        <li>Tag the release in Subversion.</li>
+        <li>Generate the release files with <samp>maven dist</samp>. Depending on hardware, this will take
+            20-30 minutes.</li>
+        <li>
+          Using a WebDAV client, open https://dav.codehaus.org/dist/jaxen/.
+          (In the Mac OS X Finder, this is Go/Connect to Server...) 
+        </li>
+        <li>
+          Copy the <tt>.zip</tt> and <tt>.tar.gz</tt> files from target/distributions to https://dav.codehaus.org/dist/jaxen/distributions. 
+        </li>
+         <li>
+          Copy the <tt>.jar</tt>  file from target to https://dav.codehaus.org/dist/jaxen/jars/. 
+        </li>
+        <li>
+          Copy the <tt>.pom</tt>  file from target to https://dav.codehaus.org/dist/jaxen/poms/. 
+        </li>
+        <li>
+          Using the Mac Finder, or another WebDAV client, open https://dav.codehaus.org/jaxen/.
+        </li>
+
+        <li>
+          Copy all files from target/docs into this directory, overwriting the existing files.
+        </li>
+        <li>
+          File a <a href="http://maven.apache.org/guides/mini/guide-ibiblio-upload.html">Maven bug report</a>
+          about the new POM so it can be copied over to IBiblio. 
+        </li>
+      </ol>
+
+
+      <p>
+        Note: <samp>maven dist:deploy</samp> no longer works.
+      </p>
+
+    </section>
+
+
+  </body>
+</document>
+
+
+
+
+
+
+
+
+
