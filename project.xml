@@ -31,7 +31,7 @@
   
   <repository>
     <connection>scm:svn:https://svn.codehaus.org/jaxen/trunk/jaxen/</connection>
-    <url>https://svn.codehaus.org/jaxen/trunk/jaxen/</url>
+    <url>http://fisheye.codehaus.org/browse/jaxen/</url>
   </repository>
   
   <mailingLists>
