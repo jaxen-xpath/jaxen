@@ -331,21 +331,21 @@
 
   <document url="xml/nitf.xml">
     <context select="/nitf/head/docdata">
-      <test select="doc-id[@regsrc='AP' and @id-string='D76UIMO80']" count="1"/>
+      <test select="doc-id[@regsrc='FAKE' and @id-string='YYY']" count="1"/>
     </context>
     <context select="/nitf/head">
-      <test select="meta[@name='ap-cycle']" count="1"/>
-      <test select="meta[@content='AP']" count="1"/>
+      <test select="meta[@name='fake-cycle']" count="1"/>
+      <test select="meta[@content='FAKE']" count="1"/>
       <test select="meta[@name and @content]" count="8"/>
-      <test select="meta[@name='ap-cycle' and @content='AP']" count="1"/>
-      <test select="meta[@name != 'ap-cycle']" count="7"/>
+      <test select="meta[@name='fake-cycle' and @content='FAKE']" count="1"/>
+      <test select="meta[@name != 'fake-cycle']" count="7"/>
     </context>
     <context select="/">
-      <test select="/nitf/head/meta[@name='ap-cycle']" count="1"/>
-      <test select="/nitf/head/meta[@content='AP']" count="1"/>
+      <test select="/nitf/head/meta[@name='fake-cycle']" count="1"/>
+      <test select="/nitf/head/meta[@content='FAKE']" count="1"/>
       <test select="/nitf/head/meta[@name and @content]" count="8"/>
-      <test select="/nitf/head/meta[@name='ap-cycle' and @content='AP']" count="1"/>
-      <test select="/nitf/head/meta[@name != 'ap-cycle']" count="7"/>
+      <test select="/nitf/head/meta[@name='fake-cycle' and @content='FAKE']" count="1"/>
+      <test select="/nitf/head/meta[@name != 'fake-cycle']" count="7"/>
     </context>
   </document>
 
@@ -665,7 +665,7 @@
       <test select="//namespace::*" count="25" debug="off"/>
       <test select="//namespace::xplt" count="8" debug="off"/>
       <!-- the name test literally matches the prefix as given in the
-      document, and does not use the uri -->
+      document, and does not use the URI -->
       <test xmlns:somethingelse="http://www.xxxx.com/"
 	    select="//namespace::somethingelse" count="0" debug="off"/>
     </context>
