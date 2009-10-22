@@ -144,7 +144,7 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
             }
         }
         
-        if (getSteps().size() > 1) {
+        if (getSteps().size() > 1 || nodeSet.size() > 1) {
             Collections.sort(contextNodeSet, new NodeComparator(support.getNavigator()));
         }
         
