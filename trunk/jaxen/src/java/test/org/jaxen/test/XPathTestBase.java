@@ -226,8 +226,9 @@ public abstract class XPathTestBase extends TestCase
     }
 
 
-    /* test for jaxen-24
-    */
+    /**
+     *  test for jaxen-24
+     */
     public void testJaxen24() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -246,8 +247,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* jaxen-58
-    */
+    /**
+     *  jaxen-58
+     */
     public void testJaxen58() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -268,8 +270,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test for jaxen-3
-    */
+    /**
+     *  test for jaxen-3
+     */
     public void testJaxen3() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -338,8 +341,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test for jaxen-3
-    */
+    /**
+     *  test for jaxen-3
+     */
     public void testJaxen3dupe() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -357,8 +361,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* parser test cases all of which should fail
-    */
+    /**
+     *  parser test cases all of which should fail
+     */
     public void testForParserErrors() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -372,33 +377,34 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* repeated xpaths, jaxen-35
-            */
+            
+            // repeated xpaths, jaxen-35
             assertInvalidXPath(context, "/numbers numbers");
-            /* invalid xpath, jaxen-34
-            */
+            // invalid xpath, jaxen-34
             assertInvalidXPath(context, "/a/b[c > d]efg");
-            /* invalid xpath, jaxen-27
-            */
+            
+            // invalid xpath, jaxen-27
             assertInvalidXPath(context, "/inv/child::");
-            /* invalid xpath, jaxen-26
-            */
+            
+            // invalid xpath, jaxen-26
             assertInvalidXPath(context, "/invoice/@test[abcd");
             assertInvalidXPath(context, "/invoice/@test[abcd > x");
-            /* unterminated string
-            */
+            
+            // unterminated string
             assertInvalidXPath(context, "string-length('a");
-            /* various edge cases where code threw no exception
-            */
+            
+            // various edge cases where code threw no exception
             assertInvalidXPath(context, "/descendant::()");
             assertInvalidXPath(context, "(1 + 1");
+            
             // no ! operator
             assertInvalidXPath(context, "!false()");
         }
     }
 
-    /* test cases for the use of underscores in names
-    */
+    /**
+     *  test cases for the use of underscores in names
+     */
     public void testUnderscoresInNames() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -423,8 +429,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test cases for the use of = with node-sets
-    */
+    /** 
+     * test cases for the use of = with node-sets
+     */
     public void testNodesetEqualsString() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -465,8 +472,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test basic math...
-    */
+    /** 
+     * test basic math...
+     */
     public void testIntegerArithmetic() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -484,33 +492,33 @@ public abstract class XPathTestBase extends TestCase
             assertValueOfXPath("true", context, "(1 + 8 * 2) = 17");
             assertValueOfXPath("true", context, "(7 - 3 + 1) = 5");
             assertValueOfXPath("true", context, "(8 - 4 + 5 - 6) = 3");
-            /* left-assoc tests, comments show WRONG evaluation
+            /** left-assoc tests, comments show WRONG evaluation
             */
-            /* 3 - 2 - 1 != 2
+            /** 3 - 2 - 1 != 2
             */
             assertValueOfXPath("0", context, "3 - 2 - 1");
-            /* 8 div 4 div 2 != 4
+            /** 8 div 4 div 2 != 4
             */
             assertValueOfXPath("1", context, "8 div 4 div 2");
-            /* 3 mod 5 mod 7 != 1
+            /** 3 mod 5 mod 7 != 1
             */
             assertValueOfXPath("3", context, "3 mod 7 mod 5");
-            /* 1=(2=2) is true
+            /** 1=(2=2) is true
             */
             assertValueOfXPath("false", context, "1 = 2 = 2");
-            /*  2!=(3!=1) => 2!=1 => true, (2!=3)!=1 => 1!=1 => false
+            /**  2!=(3!=1) => 2!=1 => true, (2!=3)!=1 => 1!=1 => false
             */
             assertValueOfXPath("false", context, "2 != 3 != 1");
-            /* 3 > (2 > 1) is true
+            /** 3 > (2 > 1) is true
             */
             assertValueOfXPath("false", context, "3 > 2 > 1");
-            /* 3 >= (2 >= 2) is true
+            /** 3 >= (2 >= 2) is true
             */
             assertValueOfXPath("false", context, "3 >= 2 >= 2");
-            /* 1 < (2 < 3) is false
+            /** 1 < (2 < 3) is false
             */
             assertValueOfXPath("true", context, "1 < 2 < 3");
-            /* 0 <= (2 <= 3) is true
+            /** 0 <= (2 <= 3) is true
             */
             assertValueOfXPath("true", context, "2 <= 2 <= 3");
         }
@@ -545,8 +553,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test cases for preceding axis with different node types
-    */
+    /** 
+     * test cases for preceding axis with different node types
+     */
     public void testPrecedingSiblingAxis() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -609,14 +618,15 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* attributes have a parent: their element
+            /** attributes have a parent: their element
             */
             assertCountXPath(1, context, "/foo/@id/parent::foo");
         }
     }
 
-    /* attributes can also be used as context nodes
-    */
+    /** 
+     * attributes can also be used as context nodes
+     */
     public void testAttributeAsContext() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -654,8 +664,9 @@ public abstract class XPathTestBase extends TestCase
             }
             }
 
-    /* test evaluate() extension function
-    */
+    /** 
+     * test evaluate() extension function
+     */
     public void testid54032() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -712,8 +723,9 @@ public abstract class XPathTestBase extends TestCase
     </context>
     
     */
-    /* test sibling axes 
-    */
+    /** 
+     * test sibling axes 
+     */
     public void testid54145() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -873,8 +885,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test name
-    */
+    /**
+     *  test name
+     */
     public void testid54298() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -891,9 +904,7 @@ public abstract class XPathTestBase extends TestCase
                 Object result = assertCountXPath2(1, context, "*");
                 assertValueOfXPath("web-app", result, "name()");
             /* NOTE that the child::node() tests only work if the
-              XML document does not comments or PIs
-
-            */
+               XML document does not contain comments or processing instructions */
             result = assertCountXPath2(1, context, "./*");
                 assertValueOfXPath("web-app", result, "name()");
             result = assertCountXPath2(1, context, "child::*");
@@ -904,15 +915,15 @@ public abstract class XPathTestBase extends TestCase
                 assertValueOfXPath("web-app", result, "name(.)");
             result = assertCountXPath2(1, context, "child::node()");
                 assertValueOfXPath("web-app", result, "name(.)");
-            /* empty names
-            */
+                
+            // empty names
             assertValueOfXPath("", context, "name()");
             assertValueOfXPath("", context, "name(.)");
             assertValueOfXPath("", context, "name(parent::*)");
             assertValueOfXPath("", context, "name(/)");
             assertValueOfXPath("", context, "name(/.)");
             assertValueOfXPath("", context, "name(/self::node())");
-            /* name of root elemet
+            /** name of root elemet
             */
             assertValueOfXPath("web-app", context, "name(node())");
             assertValueOfXPath("web-app", context, "name(/node())");
@@ -939,12 +950,12 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* empty names
+            /** empty names
             */
             assertValueOfXPath("", context, "name(..)");
             assertValueOfXPath("", context, "name(parent::node())");
             assertValueOfXPath("", context, "name(parent::*)");
-            /* name of root elemet
+            /** name of root elemet
             */
             assertValueOfXPath("web-app", context, "name()");
             assertValueOfXPath("web-app", context, "name(.)");
@@ -953,8 +964,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test predicates
-    */
+    /** 
+     * test predicates
+     */
     public void testid54522() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1062,8 +1074,9 @@ public abstract class XPathTestBase extends TestCase
             }
             }
 
-    /* test other node types
-    */
+    /** 
+     * test other node types
+     */
     public void testNodeTypes() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1087,8 +1100,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test positioning
-    */
+    /** 
+     * test positioning
+     */
     public void testPositioning() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1111,10 +1125,6 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test number functions
-    */
-    /* test Axes 
-    */
     public void testid54853() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1227,13 +1237,12 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* Test correct predicate application
-            */
+            // Test correct predicate application
             assertValueOfXPath("5", context, "count(/PLAY/ACT/SCENE[1])");
         }
     }
 
-    /* test axis node ordering
+    /** test axis node ordering
     */
     public void testAxisNodeOrdering() throws JaxenException
     {
@@ -1248,16 +1257,16 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* Reported as Jira issue JAXEN-24
-            */
+            // Reported as Jira issue JAXEN-24
             assertCountXPath(1, context, "//servlet-mapping/preceding::*[1][name()='description']");
             assertCountXPath(1, context, "/web-app/servlet//description/following::*[1][name()='servlet-mapping']");
             assertCountXPath(1, context, "/web-app/servlet//description/following::*[2][name()='servlet-name']");
         }
     }
 
-    /* test document function
-    */
+    /** 
+     * test document function
+     */
     public void testDocumentFunction1() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1278,10 +1287,10 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* Test to check if the context changes when an extension function is used.
-    First test is an example, second is the actual test.
-    
-    */
+    /** 
+     * Test to check if the context changes when an extension function is used.
+     * First test is an example, second is the actual test.
+     */
     public void testDocumentFunctionContextExample() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1318,8 +1327,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test behaviour of AbsoluteLocationPath
-    */
+    /** 
+     * test behavior of AbsoluteLocationPath
+     */
     public void testAbsoluteLocationPaths() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1340,8 +1350,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test the translate() function
-    */
+    /** 
+     * test the translate() function
+     */
     public void testTranslateFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1392,8 +1403,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* Some tests for the normalize-space() function
-    */
+    /** 
+     * Some tests for the normalize-space() function
+     */
     public void testNormalizeSpaceFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1410,17 +1422,16 @@ public abstract class XPathTestBase extends TestCase
             assertValueOfXPath("abc", context, "normalize-space('    abc    ')");
             assertValueOfXPath("a b c", context, "normalize-space(' a  b  c  ')");
             assertValueOfXPath("a b c", context, "normalize-space(' a \n b \n  c')");
-            /* Next test case addresses issue JAXEN-22
-            */
+            // Next test case addresses issue JAXEN-22
             assertValueOfXPath("", context, "normalize-space(' ')");
-            /* Next test case addresses issue JAXEN-29
-            */
+            // Next test case addresses issue JAXEN-29
             assertValueOfXPath("", context, "normalize-space('')");
         }
     }
 
-    /* test cases for String extension functions
-    */
+    /** 
+     * test cases for String extension functions
+     */
     public void testStringExtensionFunctions() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1444,8 +1455,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test cases for the lang() function
-    */
+    /** 
+     * test cases for the lang() function
+     */
     public void testLangFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1470,8 +1482,9 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* test namespace
-    */
+    /** 
+     * test namespace
+     */
     public void testNamespacesAgain() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1502,9 +1515,10 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* the prefix here and in the document have no relation; it's their
-    namespace-uri binding that counts 
-    */
+    /** 
+     * the prefix here and in the document have no relation; it's their
+     * namespace-uri binding that counts 
+     */
     public void testPrefixDoesntMatter() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1525,7 +1539,7 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* Jaxen-67, affects Jelly and Maven */
+    /** Jaxen-67, affects Jelly and Maven */
     public void testCDATASectionsAreIncludedInTextNodes() throws JaxenException
     {
         Navigator nav = getNavigator();
@@ -1567,7 +1581,8 @@ public abstract class XPathTestBase extends TestCase
             assertValueOfXPath("Hey", context, "/foo:a/foo:d/foo:e");
             assertValueOfXPath("Hey3", context, "/foo:a/alias:x/alias:y");
             assertValueOfXPath("Hey3", context, "/foo:a/foo:x/foo:y");
-            assertValueOfXPath("Hey3", context, "/*[local-name()='a' and namespace-uri()='http://fooNamespace/']/*[local-name()='x' and namespace-uri()='http://fooNamespace/']/*[local-name()='y' and namespace-uri()='http://fooNamespace/']");
+            assertValueOfXPath("Hey3", context, 
+                    "/*[local-name()='a' and namespace-uri()='http://fooNamespace/']/*[local-name()='x' and namespace-uri()='http://fooNamespace/']/*[local-name()='y' and namespace-uri()='http://fooNamespace/']");
         }
     }
 
@@ -1584,8 +1599,7 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* NOTE: /a/b/c selects elements in no namespace only!
-            */
+            // NOTE: /a/b/c selects elements in no namespace only!
             assertCountXPath(0, context, "/a/b/c");
             /*
                 The following test uses an unbound prefix 'x' and should throw an exception.
@@ -1648,16 +1662,13 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* the root is not an element, so no namespaces
-            */
+            // the root is not an element, so no namespaces
             assertCountXPath(0, context, "namespace::*");
             assertCountXPath(0, context, "/namespace::*");
-            /* must count the default xml: prefix as well
-            */
+            // must count the default xml: prefix as well
             assertCountXPath(3, context, "/Template/Application1/namespace::*");
             assertCountXPath(3, context, "/Template/Application2/namespace::*");
-            /* every element has separate copies
-            */
+            // every element has separate copies
             assertCountXPath(25, context, "//namespace::*");
         }
     }
@@ -1675,8 +1686,7 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* must count the default xml: prefix as well
-            */
+            // must count the default xml: prefix as well
             assertCountXPath(3, context, "namespace::*");
             assertCountXPath(0, context, "/namespace::*");
             assertCountXPath(3, context, "/Template/Application1/namespace::*");
@@ -1684,8 +1694,7 @@ public abstract class XPathTestBase extends TestCase
             assertCountXPath(25, context, "//namespace::*");
             assertCountXPath(8, context, "//namespace::xplt");
             /* the name test literally matches the prefix as given in the
-              document, and does not use the uri
-            */
+              document, and does not use the URI */
             assertCountXPath(0, context, "//namespace::somethingelse");
         }
     }
@@ -1703,14 +1712,14 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-            /* namespace nodes have their element as their parent
-            */
+            // namespace nodes have their element as their parent
             assertCountXPath(1, context, "/Template/namespace::xml/parent::Template");
         }
     }
 
-    /* namespace nodes can also be used as context nodes
-    */
+    /** 
+     * namespace nodes can also be used as context nodes
+     */
     public void testNamespaceNodeAsContext() throws JaxenException
     {
         Navigator nav = getNavigator();
