@@ -54,6 +54,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -1159,5 +1160,24 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    // JAXEN-206
+    public void testMismatchedDepthsInContext()
+      throws JaxenException {
+        XPath xpath = new DOMXPath("parent::*");
+        org.w3c.dom.Element z = doc.createElementNS("", "z");
+        doc.appendChild(z);
+        org.w3c.dom.Element a = doc.createElementNS("", "a");
+        z.appendChild(a);
+        org.w3c.dom.Element b = doc.createElementNS("", "b");
+        a.appendChild(b);
+        org.w3c.dom.Element c = doc.createElementNS("", "c");
+        z.appendChild(c);
+
+        List context = new ArrayList();
+        context.add(b);
+        context.add(c);
+        List result = xpath.selectNodes(context);
+        assertEquals(z, result.get(0));
+    }
     
 }
