@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<document url="http://jaxen.org/status.xml">
+<document url="http://jaxen.codehaus.org/status.xml">
 
   <properties>
     <author email="bob@eng.werken.com">bob mcwhirter</author>
@@ -9,11 +9,26 @@
   <body>
     
     <section name="Change History">
-   <!--  <section name="Changes in CVS since last release">
+
+   <section name="Jaxen 1.1.2">
+
       <p>
-        Various updates to the web site. 
+         Jaxen 1.1.2 fixes a few assorted minor bugs.  
       </p>
-    </section> -->
+      
+
+    </section>
+
+
+   <section name="Jaxen 1.1.1">
+
+      <p>
+         Jaxen 1.1.1 fixes a number of minor bugs.  
+      </p>
+      
+
+    </section>
+
 
    <section name="Jaxen 1.1.1">
 
