@@ -77,7 +77,7 @@
       
       
       <ol>
-        <li>Update xdocs/releases.xml with the new version number and information.</li>
+        <li>Update xdocs/releases.xml and xdocs/status.xml with the new version number and information.</li>
         <li>Tag the release in Subversion.</li>
         <li>Generate the release files with <samp>maven dist</samp>. Depending on hardware, this will take
             20-30 minutes.</li>
