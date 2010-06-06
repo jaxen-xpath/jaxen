@@ -67,7 +67,7 @@
     <developer>
       <name>Bob McWhirter</name>
       <id>bob</id>
-      <email>bob@eng.werken.com</email>
+      <email>bob.mcwhirter@redhat.com</email>
       <organization>The Werken Company</organization>
     </developer>
 
@@ -147,7 +147,7 @@
     <developer>
       <name>Elliotte Rusty Harold</name>
       <id>elharo</id>
-      <email>elharo@metalab.unc.edu</email>
+      <email>elharo@ibiblio.org</email>
       <organization>Cafe au Lait</organization>
       <url>http://www.elharo.com/</url>
     </developer>
