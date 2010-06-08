@@ -54,7 +54,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 
@@ -345,8 +347,49 @@ public class DOMXPathTest extends TestCase
                 + "contains($FinResp, \"SL_Buyer\") or"
                 + "contains($FinResp, \"SL_Purchasing_Inquiry\")");
     }
+
+
+    public void testImplictCastFromTextInARelationalExpression() 
+      throws JaxenException, ParserConfigurationException, SAXException, IOException {
+        XPath implicitCast = new DOMXPath("//lat[(text() >= 37)]");
+        XPath explicitCast = new DOMXPath("//lat[(number(text()) >= 37)]");
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        ByteArrayInputStream in = new ByteArrayInputStream("<geo><lat>39</lat></geo>".getBytes("UTF-8"));
+        Document document = builder.parse(in);
+        List result = explicitCast.selectNodes(document);
+        assertEquals(1, result.size());
+        result = implicitCast.selectNodes(document);
+        assertEquals(1, result.size());
+    }
     
      
+    public void testImplictCastFromCommentInARelationalExpression() 
+      throws JaxenException, ParserConfigurationException, SAXException, IOException {
+          XPath implicitCast = new DOMXPath("//lat[(comment() >= 37)]");
+          XPath explicitCast = new DOMXPath("//lat[(number(comment()) >= 37)]");
+          DocumentBuilder builder = factory.newDocumentBuilder();
+          ByteArrayInputStream in = new ByteArrayInputStream("<geo><lat><!--39--></lat></geo>".getBytes("UTF-8"));
+          Document document = builder.parse(in);
+          List result = explicitCast.selectNodes(document);
+          assertEquals(1, result.size());
+          result = implicitCast.selectNodes(document);
+          assertEquals(1, result.size());
+    }
+  
+
+    public void testImplictCastFromProcessingInstructionInARelationalExpression() 
+      throws JaxenException, ParserConfigurationException, SAXException, IOException {
+        XPath implicitCast = new DOMXPath("//lat[(processing-instruction() >= 37)]");
+        XPath explicitCast = new DOMXPath("//lat[(number(processing-instruction()) >= 37)]");
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        ByteArrayInputStream in = new ByteArrayInputStream("<geo><lat><?test 39?></lat></geo>".getBytes("UTF-8"));
+        Document document = builder.parse(in);
+        List result = explicitCast.selectNodes(document);
+        assertEquals(1, result.size());
+        result = implicitCast.selectNodes(document);
+        assertEquals(1, result.size());
+    }
+    
     public void testPrecedingAxisInDocumentOrder() 
       throws JaxenException {
         
