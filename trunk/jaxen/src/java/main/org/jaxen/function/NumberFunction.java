@@ -195,7 +195,9 @@ public class NumberFunction implements Function
         {
           return evaluate( StringFunction.evaluate( obj, nav ), nav );
         }
-        else if ( nav.isElement( obj ) || nav.isAttribute( obj ) )
+        else if ( nav.isElement( obj ) || nav.isAttribute( obj ) 
+                || nav.isText( obj ) || nav.isComment( obj ) || nav.isProcessingInstruction( obj ) 
+                || nav.isDocument( obj ) || nav.isNamespace( obj ))
         {
             return evaluate( StringFunction.evaluate( obj, nav ), nav );
         }
