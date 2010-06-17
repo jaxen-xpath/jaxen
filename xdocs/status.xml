@@ -84,7 +84,7 @@
       </li>
       <li>
          The <code>matrix-concat</code> extension function has been removed 
-         because its license staus was unclear, the originator could not be contacted,
+         because its license status was unclear, the originator could not be contacted,
          and it was undocumented and untested. If someone cares to reimplement it,
          it could be restored in the future. 
       </li>
@@ -246,7 +246,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         </p>
         <p>The translate() function is now implemented - thanks to Jan for that!
         </p>
-        <p>Some auxillary implementation detail changes, which shouldn't affect the public API in any way are as follows
+        <p>Some auxiliary implementation detail changes, which shouldn't affect the public API in any way are as follows
           <ul>
             <li>The org.jaxen.JaXPath class has been removed. Now we have an org.jaxen.XPath interface its no longer required.</li>
             <li>The org.jaxen.expr.XPath class has been renamed to org.jaxen.expr.XPathExpr to avoid confusion and to use a more consistent name.
