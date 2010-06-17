@@ -177,7 +177,7 @@
       <p>1.1 is a major upgrade that significantly improves Jaxen's conformance to the
          underlying XPath specs. Even though it's officially a beta, it is a vast 
          improvement over 1.0, and all users are strongly encouraged to upgrade.
-         Witha  few small exceptions (e.g. the the document() function 
+         With a few small exceptions (e.g. the the document() function 
         has moved to  the org.jaxen.function.xslt package and 
         the ElectricXML navigator has been deleted) it is backwards compatible 
         with code written to the 1.0 APIs.
@@ -248,7 +248,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         </p>
         <p>Some auxiliary implementation detail changes, which shouldn't affect the public API in any way are as follows
           <ul>
-            <li>The org.jaxen.JaXPath class has been removed. Now we have an org.jaxen.XPath interface its no longer required.</li>
+            <li>The org.jaxen.JaXPath class has been removed. Now that we have an org.jaxen.XPath interface it's no longer required.</li>
             <li>The org.jaxen.expr.XPath class has been renamed to org.jaxen.expr.XPathExpr to avoid confusion and to use a more consistent name.
             Similarly the DefaultXPath class has been renamed to DefaultXPathExpr as well.</li>
             <li>The very confusing jaSelect*() methods have gone from JaXPath and BaseXPath. All evaluation methods can take a Context object, null, a node or a node set.</li>
