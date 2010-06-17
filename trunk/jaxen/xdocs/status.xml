@@ -2,13 +2,23 @@
 <document url="http://jaxen.codehaus.org/status.xml">
 
   <properties>
-    <author email="bob@eng.werken.com">bob mcwhirter</author>
+    <author email="bob.mcwhirter@redhat.com">bob mcwhirter</author>
     <title>Status</title>
   </properties>
 
   <body>
     
     <section name="Change History">
+
+   <section name="Jaxen 1.1.3">
+
+      <p>
+         Jaxen 1.1.3 fixes one bug involving non-element nodes and relational operators.  
+      </p>
+      
+
+    </section>
+
 
    <section name="Jaxen 1.1.2">
 
