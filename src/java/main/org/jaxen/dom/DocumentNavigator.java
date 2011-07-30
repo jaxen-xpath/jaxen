@@ -149,7 +149,11 @@ public class DocumentNavigator extends DefaultNavigator
      */
     public Iterator getChildAxisIterator (Object contextNode)
     {
-        return new NodeIterator ((Node)contextNode) {
+        Node node = (Node) contextNode;
+
+        if ( node.getNodeType() == Node.ELEMENT_NODE || node.getNodeType() == Node.DOCUMENT_NODE)
+        {
+            return new NodeIterator ((Node)contextNode) {
                 protected Node getFirstNode (Node node)
                 {
                     return node.getFirstChild();
@@ -159,6 +163,10 @@ public class DocumentNavigator extends DefaultNavigator
                     return node.getNextSibling();
                 }
             };
+        }
+
+        return JaxenConstants.EMPTY_ITERATOR;
+
     }
 
 
