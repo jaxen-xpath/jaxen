@@ -124,6 +124,18 @@ public class DOMXPathTest extends TestCase
         
     }
 
+    // see JAXEN-214
+    public void testAttributeNodesDontHaveChildren() 
+      throws JaxenException {
+        
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        root.setAttribute("name", "value");
+        
+        XPath xpath = new DOMXPath("//@*/text()");
+        List result = xpath.selectNodes(doc);
+        assertEquals(0, result.size());
+    }
     
     // see JAXEN-105
     public void testConsistentNamespaceDeclarations() 
