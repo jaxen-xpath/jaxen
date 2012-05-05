@@ -86,6 +86,23 @@ public class DOMXPathTest extends TestCase
         doc = factory.newDocumentBuilder().newDocument();        
     }
     
+    // Jaxen-221
+    public void  testTimSort() throws ParserConfigurationException, JaxenException {
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+
+        // need at least 32 of each to trigger the bug
+        for (int i = 0; i < 32; i++) {
+            root.setAttribute("att" + i, "one");
+        }
+        for (int i = 0; i < 32; i++) {
+            root.appendChild(doc.createElement("child"));
+        }
+
+        XPath xp = new DOMXPath("//@*[string() = 'one'] | //* ");
+        xp.evaluate(doc);
+    }
+    
 
     public void testConstruction() throws JaxenException
     {
