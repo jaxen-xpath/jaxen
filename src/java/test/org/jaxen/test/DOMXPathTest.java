@@ -60,6 +60,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jaxen.JaxenException;
+import org.jaxen.SimpleVariableContext;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
@@ -132,6 +133,18 @@ public class DOMXPathTest extends TestCase
         xpath.addNamespace("", "http://www.example.org/");
         List result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
+    }
+    
+    public void testVariableWithNamespace() throws IOException, JaxenException {
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("//*[not($foo)]");
+        SimpleVariableContext variables = new SimpleVariableContext();
+        variables.setVariableValue("foo", "bar");
+        xpath.setVariableContext(variables);
+        xpath.addNamespace("", "http://www.example.org/");
+        List result = xpath.selectNodes(doc);
+        assertEquals(0, result.size());
     }
 
     // see JAXEN-214

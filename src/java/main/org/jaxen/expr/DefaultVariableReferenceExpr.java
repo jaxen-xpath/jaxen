@@ -94,15 +94,18 @@ class DefaultVariableReferenceExpr extends DefaultExpr implements VariableRefere
         return "$" + getQName();
     }
 
-    public Object evaluate(Context context)
-        throws UnresolvableException
+    public Object evaluate(Context context) throws UnresolvableException
     {
-        String namespaceURI =
-            context.translateNamespacePrefixToUri( getPrefix() );
-
+        String prefix = getPrefix();
+        String namespaceURI = null;
+        // default namespace is not used within XPath expressions
+        if (prefix != null && !"".equals(prefix)) {
+            namespaceURI = context.translateNamespacePrefixToUri( prefix );
+        }
+        
         return context.getVariableValue( namespaceURI,
                                          prefix,
-                                         localName );
-    }
+                                     localName );
+}
     
 }
