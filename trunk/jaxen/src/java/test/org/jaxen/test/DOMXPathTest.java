@@ -124,6 +124,16 @@ public class DOMXPathTest extends TestCase
         
     }
 
+    public void testFunctionWithNamespace() throws IOException, JaxenException {
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("//*[not(self::pre:test)]");
+        xpath.addNamespace("pre", "http://www.example.org/");
+        xpath.addNamespace("", "http://www.example.org/");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+    }
+
     // see JAXEN-214
     public void testAttributeNodesDontHaveChildren() 
       throws JaxenException {

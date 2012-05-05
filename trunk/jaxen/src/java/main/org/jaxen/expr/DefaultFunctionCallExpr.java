@@ -166,11 +166,15 @@ public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCall
 
     public Object evaluate(Context context) throws JaxenException
     {
-        String namespaceURI =
-                context.translateNamespacePrefixToUri(getPrefix());
+        String prefix = getPrefix();
+        String namespaceURI = null;
+        // default namespace is not used within XPath expressions
+        if (prefix != null && !"".equals(prefix)) {
+            namespaceURI = context.translateNamespacePrefixToUri(prefix);
+        }
 
         Function func = context.getFunction(namespaceURI,
-                getPrefix(),
+                prefix,
                 getFunctionName());
         List paramValues = evaluateParams(context);
 
