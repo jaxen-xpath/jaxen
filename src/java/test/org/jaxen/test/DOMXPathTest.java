@@ -147,6 +147,15 @@ public class DOMXPathTest extends TestCase
         assertEquals(0, result.size());
     }
 
+    public void testElementWithoutNamespace() throws IOException, JaxenException {
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        XPath xpath = new DOMXPath("//root");
+        xpath.addNamespace("", "http://www.example.org/");
+        List result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+    }
+
     // see JAXEN-214
     public void testAttributeNodesDontHaveChildren() 
       throws JaxenException {
