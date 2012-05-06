@@ -103,7 +103,30 @@ public class DOMXPathTest extends TestCase
         xp.evaluate(doc);
     }
     
+    public void testNamespaceNodesPrecedeAttributeNodes() throws ParserConfigurationException, JaxenException {
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        root.setAttribute("att", "one");
 
+        XPath xp = new DOMXPath("//@* | //namespace::* ");
+        List result = (List) xp.evaluate(doc);
+        assertEquals(3, result.size());
+        Node third = (Node) result.get(2);
+        assertEquals(Node.ATTRIBUTE_NODE, third.getNodeType());
+    }
+    
+    public void testNamespaceNodesPrecedeAttributeNodes2() throws ParserConfigurationException, JaxenException {
+        Element root = doc.createElementNS("http://www.example.org/", "root");
+        doc.appendChild(root);
+        root.setAttribute("att", "one");
+
+        XPath xp = new DOMXPath("//namespace::* | //@* ");
+        List result = (List) xp.evaluate(doc);
+        assertEquals(3, result.size());
+        Node third = (Node) result.get(2);
+        assertEquals(Node.ATTRIBUTE_NODE, third.getNodeType());
+    }
+    
     public void testConstruction() throws JaxenException
     {
         DOMXPath xpath = new DOMXPath( "/foo/bar/baz" );

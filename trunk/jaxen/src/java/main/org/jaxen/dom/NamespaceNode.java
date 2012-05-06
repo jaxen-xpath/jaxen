@@ -77,7 +77,7 @@ import org.w3c.dom.UserDataHandler;
  * defaults, there will be some unexpected surprises, so users are
  * advised to test for NamespaceNodes and filter them out from the
  * result sets as early as possible.
-  * </p>
+ * </p>
  *
  * <ol>
  *
@@ -128,7 +128,7 @@ public class NamespaceNode implements Node
     public NamespaceNode (Node parent, String name, String value)
     {
         this.parent = parent;
-        this.name = name;
+        this.name = name == null ? "" : name;
         this.value = value;
     }
 
