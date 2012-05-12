@@ -81,7 +81,7 @@
         <li>Update project.xml and INSTALL with the new version number.</li>        
         <li>Tag the release in Subversion.</li>
         <li>Generate the release files with <samp>maven dist</samp>. Depending on hardware, this will take
-            20-30 minutes.</li>
+            5-10 minutes.</li>
         <li>
           Using a WebDAV client, open https://dav.codehaus.org/dist/jaxen/.
           (In the Mac OS X Finder, this is Go/Connect to Server...) 
