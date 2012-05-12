@@ -16,11 +16,23 @@
 	as XML, thus enabling you to query these trees with XPath too.
       </p>
 
+      <p>
+      The current version is <strong>1.1.4</strong>:
+      </p>
+
+      <ul>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4.zip">1.1.4  binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4.tar.gz">1.1.4 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4-src.zip">1.1.4 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4-src.tar.gz">1.1.4 sources in tar/gz format.</a></li>
+      </ul>
+
+
     <section name="Getting Started">
       <p>You can download Jaxen
-        via the <a href="releases.html">releases page</a>.</p>
+        from the <a href="releases.html">releases page</a>.</p>
 
-      <p>You could try browsing the
+      <p>You browse the
         <a href="faq.html">FAQ</a> or the online 
         <a href="apidocs/index.html">JavaDoc</a>.
       </p>      
@@ -29,7 +41,7 @@
     
     <section name="News">
       <p>
-	<a href="http://www.xom.nu/">XOM 1.2.4</a> bundles Jaxen 1.1.2.
+	<a href="http://www.xom.nu/">XOM 1.2.6</a> bundles Jaxen 1.1.3.
       </p>
 
       <p>
