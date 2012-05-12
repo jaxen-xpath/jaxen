@@ -87,7 +87,7 @@ public class DOM3NamespaceTest extends TestCase {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             NamespaceNode node = (NamespaceNode) iterator.next();
-            if (node.getLocalName() == null) rootNS = node;
+            if (node.getLocalName() == null || "".equals(node.getLocalName())) rootNS = node;
             else if (node.getLocalName().equals("xml")) xmlNS = node;
             else if (node.getLocalName().equals("pre")) attributeNS = node;
         }
