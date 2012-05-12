@@ -10,6 +10,17 @@
     
     <section name="Change History">
 
+
+   <section name="Jaxen 1.1.4">
+
+      <p>
+         Jaxen 1.1.4 is now compatible with Java 7. It also fixes several bugs involving namespace nodes, and variable and function bindings 
+         in the presence of the default namespace. 
+      </p>
+      
+
+    </section>
+
    <section name="Jaxen 1.1.3">
 
       <p>
