@@ -10,8 +10,8 @@
     <section name="Official Builds">
 
       <p>
-The current version is 1.1.3. 1.1.3 is a minor upgrades that fixes one bug involving relational operators and 
-non-element nodes.
+The current version is 1.1.4. 1.1.4 is a significant upgrade that fixes several bugs in XPath evaluation and
+makes Jaxen compatible with Java 7. 
 </p>
 
 <p>
@@ -25,23 +25,20 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <p>
-      The recommended build is <strong>1.1.3</strong>:
+      The recommended build is <strong>1.1.4</strong>:
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.3.zip">1.1.3  binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.3.tar.gz">1.1.3 binaries in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.3-src.zip">1.1.3 sources in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.3-src.tar.gz">1.1.3 sources in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4.zip">1.1.3  binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4.tar.gz">1.1.3 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4-src.zip">1.1.3 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4-src.tar.gz">1.1.3 sources in tar/gz format.</a></li>
       </ul>
 
     </section>
 
     <section name="Nightly Builds">
-      <p>
-      Nightly builds have been temporarily suspended as we ramp up
-      with using <a href="http://maven.apache.org/">Maven</a>.
-      However, you can grab a <a href="http://svn.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
+      <p>You can grab a <a href="http://svn.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
       To build Jaxen, you'll need to have maven installed. Assuming you do, you should be able to just type "maven jar" at the command line 
       in the jaxen directory to create a JAR archive. <!-- If any of the tests are currently failing- -a couple of 
       tests are currently picking up JDOM bugs- -you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
