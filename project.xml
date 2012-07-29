@@ -5,7 +5,7 @@
   <pomVersion>3</pomVersion>
   <id>jaxen</id>
   <name>jaxen</name>
-  <currentVersion>1.1.4</currentVersion>
+  <currentVersion>1.1.5</currentVersion>
 
   <organization>
     <name>Codehaus</name>
@@ -48,7 +48,7 @@
         <archive>http://archive.jaxen.codehaus.org/dev/</archive>
     </mailingList>
     <mailingList>
-        <name>Jaxen CVS Commits List</name>
+        <name>Jaxen SVN Commits List</name>
         <subscribe>scm-subscribe@jaxen.codehaus.org</subscribe>
         <unsubscribe>scm-unsubscribe@jaxen.codehaus.org</unsubscribe>
         <archive>http://archive.jaxen.codehaus.org/scm/</archive>

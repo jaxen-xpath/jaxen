@@ -11,6 +11,16 @@
     <section name="Change History">
 
 
+   <section name="Jaxen 1.1.5">
+
+      <p>
+         Jaxen 1.1.5 is now compatible with Maven 3, and has a significantly reduced dependency tree when built with Maven 3. It also fixes one very remote bug in 
+         boolean-to-number conversion that has probably never showed up in practice. 
+      </p>
+      
+
+    </section>
+
    <section name="Jaxen 1.1.4">
 
       <p>

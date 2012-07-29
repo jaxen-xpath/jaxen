@@ -10,8 +10,7 @@
     <section name="Official Builds">
 
       <p>
-The current version is 1.1.4. 1.1.4 is a significant upgrade that fixes several bugs in XPath evaluation and
-makes Jaxen compatible with Java 7. 
+The current version is 1.1.5. 1.1.5 fixes one very unlikley bug, and is now compatible with Maven 3. 
 </p>
 
 <p>
@@ -20,19 +19,19 @@ This release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
 With a few small exceptions (e.g. the <code>document()</code> function has moved to the 
 <code>org.jaxen.function.xslt</code> package, the <code>IdentityHashMap</code> class has been deleted,
-and the ElectricXML navigator has been deleted) 1.1.4
+and the ElectricXML navigator has been deleted) 1.1.5
 is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <p>
-      The recommended build is <strong>1.1.4</strong>:
+      The recommended build is <strong>1.1.5</strong>:
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4.zip">1.1.4  binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4.tar.gz">1.1.4 binaries in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4-src.zip">1.1.4 sources in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.4-src.tar.gz">1.1.4 sources in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5.zip">1.1.4  binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5.tar.gz">1.1.4 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-src.zip">1.1.4 sources in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-src.tar.gz">1.1.4 sources in tar/gz format.</a></li>
       </ul>
 
     </section>
