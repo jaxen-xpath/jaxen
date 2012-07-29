@@ -57,8 +57,10 @@ import junit.framework.TestCase;
 
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DocumentNavigator;
 import org.jaxen.function.NumberFunction;
 import org.w3c.dom.Document;
 
@@ -119,7 +121,16 @@ public class NumberTest extends TestCase {
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(2, result.intValue());
         
-    }    
+    }   
+    
+    public void testBooleanConvertedToNumber() {
+        double tolerance = 0.0000001;
+        Navigator navigator = new DocumentNavigator();
+        assertEquals(0.0, NumberFunction.evaluate(Boolean.FALSE, navigator ).doubleValue(), tolerance);
+        assertEquals(1.0, NumberFunction.evaluate(Boolean.TRUE, navigator).doubleValue(), tolerance);
+        assertEquals(0.0, NumberFunction.evaluate(new Boolean(false), navigator).doubleValue(), tolerance);
+        assertEquals(1.0, NumberFunction.evaluate(new Boolean(true), navigator).doubleValue(), tolerance);
+    }
 
 
     public void testNumberFunctionRequiresAtMostOneArgument() 

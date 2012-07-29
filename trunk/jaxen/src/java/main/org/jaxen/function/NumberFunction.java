@@ -203,7 +203,7 @@ public class NumberFunction implements Function
         }
         else if ( obj instanceof Boolean )
           {
-          if ( obj == Boolean.TRUE )
+          if ( Boolean.TRUE.equals(obj) )
           {
               return new Double( 1 );
           }
