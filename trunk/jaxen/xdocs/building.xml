@@ -104,7 +104,7 @@
         </li>
         <li>
           File a <a href="http://maven.apache.org/guides/mini/guide-ibiblio-upload.html">Maven bug report</a>
-          about the new POM so it can be copied over to IBiblio. 
+          about the new POM so it can be copied over to IBiblio. <i>Is this still true? or does Maven pull automatically from Codehaus?</i>
         </li>
       </ol>
 
