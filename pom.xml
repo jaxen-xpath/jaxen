@@ -20,6 +20,11 @@
     </notifiers>
   </ciManagement>
   <inceptionYear>2001</inceptionYear>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
   <mailingLists>
     <mailingList>
@@ -113,7 +118,7 @@
     <developer>
       <id>elharo</id>
       <name>Elliotte Rusty Harold</name>
-      <email>elharo@metalab.unc.edu</email>
+      <email>elharo@ibiblio.org</email>
       <url>http://www.elharo.com/</url>
       <organization>Cafe au Lait</organization>
     </developer>
