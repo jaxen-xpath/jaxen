@@ -7,6 +7,11 @@
   <version>1.1.5</version>
   <description>Jaxen is a universal Java XPath engine.</description>
   <url>http://jaxen.codehaus.org/</url>
+  <licenses>
+    <license>
+      <url>http://jaxen.codehaus.org/license.html</url>
+    </license>
+  </licenses>
   <issueManagement>
     <system>JIRA</system>
     <url>http://jira.codehaus.org/BrowseProject.jspa?id=10022</url>
@@ -204,6 +209,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
         <configuration>
           <debug>true</debug>
           <optimize>true</optimize>
@@ -213,7 +219,24 @@
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-repository-plugin</artifactId>
+        <version>2.3.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8.1</version>
         <configuration>
           <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers</excludePackageNames>
           <links>
@@ -234,6 +257,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12</version>
         <configuration>
           <includes>
             <include>**/*Test.java</include>
