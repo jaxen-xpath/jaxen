@@ -28,10 +28,12 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5.zip">1.1.5  binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5.tar.gz">1.1.5 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-bin.zip">1.1.5  binaries in zip format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-bin.tar.gz">1.1.5 binaries in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-bin.tar.bz2">1.1.5 binaries in bz2 format.</a></li>
         <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-src.zip">1.1.5 sources in zip format.</a></li>
         <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-src.tar.gz">1.1.5 sources in tar/gz format.</a></li>
+        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.5-src.tar.bz2">1.1.5 sources in bz2 format.</a></li>
       </ul>
 
     </section>
