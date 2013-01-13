@@ -11,13 +11,12 @@
     
     <section name="Compiling">
       <p>
-        Jaxen's build system is officially <a href="http://maven.apache.org/maven-1.x/">Maven 1.0.2</a>. 
-        However version 1.1 also seems to work. 
+        Jaxen's build system is officially <a href="http://maven.apache.org/">Maven 3</a>. 
         To compile Jaxen, install Maven. Then at the shell 
-        prompt inside the top-level jaxen directory, type "maven java:compile":
+        prompt inside the top-level jaxen directory, type "mvn compile":
       </p>
       
-      <p><samp>$ maven java:compile</samp></p>
+      <p><samp>$ mvn compile</samp></p>
       
       <p>
         You'll likely see some deprecation warnings. Don't worry about these. 
@@ -25,47 +24,49 @@
       </p>
       
       <p>
-        To run the unit tests, type "maven test":
+        To run the unit tests, type "mvn test":
       </p>
       
-      <p><samp>$ maven test</samp></p>
+      <p><samp>$ mvn test</samp></p>
       
       <p>
         To build a jar file  at the shell 
-        prompt type "maven jar":
+        prompt type "mvn package":
       </p>
       
-      <p><samp>$ maven jar</samp></p>
+      <p><samp>$ mvn package</samp></p>
       
       <p>
-        This runs the unit tests as well. If any are failing and you still want to 
-        build a jar file, use the <code>-Dmaven.test.failure.ignore=true</code> option:
+        This runs the unit tests as well. The jar file will appear in the target directory. <!--   If any are failing and you still want to 
+        build a jar file, use the <code>-Dmaven.test.failure.ignore=true</code> option:-->
       </p>
- 
+ <!--
        <p><samp>$ maven -Dmaven.test.failure.ignore=true jar</samp></p>
+      -->
+      
       
       <p>
-        To generate javadoc, type "maven javadoc":
+        To generate javadoc, type "mvn javadoc:javadoc":
       </p>
       
-      <p><samp>$ maven javadoc</samp></p>
+      <p><samp>$ mvn javadoc:javadoc</samp></p>
       
       <p>
         To generate the complete documentation for the site, including 
-        code coverage measurements, static code analysis, and more, type "maven site":
+        code coverage measurements, static code analysis, and more, type "mvn site":
       </p>
       
-      <p><samp>$ maven site</samp></p>
+      <p><samp>$ mvn site</samp></p>
       
       <p>
-        In all three cases the output appears in the target folder. 
+       Again the output appears in the target folder. 
       </p>
       
      <p>
-        To remove build artifacts, type "maven clean":
+        To remove build artifacts, type "mvn clean":
       </p>
       
-      <p><samp>$ maven clean</samp></p>
+      <p><samp>$ mvn clean</samp></p>
       
       
     </section>
@@ -80,14 +81,14 @@
         <li>Update xdocs/releases.xml, xdocs/status.xml, and xdocs/index.xml with the new version number and information.</li>        
         <li>Update project.xml and INSTALL with the new version number.</li>        
         <li>Tag the release in Subversion.</li>
-        <li>Generate the release files with <samp>maven dist</samp>. Depending on hardware, this will take
-            5-10 minutes.</li>
+        <li>Generate the release files by running 
+        <samp>mvn package</samp>, <samp>mvn javadoc:javadoc</samp>, <samp>mvn assembly:single</samp>, and <samp>mvn site</samp>.</li>
         <li>
           Using a WebDAV client, open https://dav.codehaus.org/dist/jaxen/.
           (In the Mac OS X Finder, this is Go/Connect to Server...) 
         </li>
         <li>
-          Copy the <tt>.zip</tt> and <tt>.tar.gz</tt> files from target/distributions to https://dav.codehaus.org/dist/jaxen/distributions. 
+          Copy the <tt>.zip</tt>, <tt>.bz2</tt> and <tt>.tar.gz</tt> files from target to https://dav.codehaus.org/dist/jaxen/distributions. 
         </li>
          <li>
           Copy the <tt>.jar</tt>  file from target to https://dav.codehaus.org/dist/jaxen/jars/. 
@@ -100,18 +101,9 @@
         </li>
 
         <li>
-          Copy all files from target/docs into this directory, overwriting the existing files.
-        </li>
-        <li>
-          File a <a href="http://maven.apache.org/guides/mini/guide-ibiblio-upload.html">Maven bug report</a>
-          about the new POM so it can be copied over to IBiblio. <i>Is this still true? or does Maven pull automatically from Codehaus?</i>
+          Copy all files from target/site into this directory, overwriting the existing files.
         </li>
       </ol>
-
-
-      <p>
-        Note: <samp>maven dist:deploy</samp> no longer works.
-      </p>
 
     </section>
 
