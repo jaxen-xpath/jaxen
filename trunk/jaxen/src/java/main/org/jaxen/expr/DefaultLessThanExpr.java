@@ -65,7 +65,7 @@ DefaultLessThanExpr( Expr lhs, Expr rhs )
 
   protected boolean evaluateDoubleDouble( Double lhs, Double rhs )
     {
-    return lhs.compareTo( rhs ) < 0;
+    return lhs.doubleValue() < rhs.doubleValue();
     }    
 
 }
