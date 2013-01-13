@@ -108,6 +108,93 @@ public class ArithmeticTest extends TestCase {
         assertFalse(result.booleanValue());
         
     }    
+   
+
+   public void testNegativeZeroNotEqualsZero() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("0 != -0");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+        
+   }    
+   
+   
+   public void testNegativeZeroEqualsZero() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("0 = -0");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+        
+   }    
+   
+   
+   public void testZeroNotGreaterThanNegativeZero() 
+      throws JaxenException {
+     
+     XPath xpath = new DOMXPath("0 > -0");
+     Boolean result = (Boolean) xpath.evaluate(doc);
+     assertFalse(result.booleanValue());
+     
+   } 
+   
+   public void testZeroGreaterThanOrEqualsToNegativeZero() 
+       throws JaxenException {
+  
+      XPath xpath = new DOMXPath("0 >= -0");
+      Boolean result = (Boolean) xpath.evaluate(doc);
+      assertTrue(result.booleanValue());
+      
+   } 
+
+    public void testZeroLessThanOrEqualToNegativeZero()
+       throws JaxenException {
+
+      XPath xpath = new DOMXPath("0 <= -0");
+      Boolean result = (Boolean) xpath.evaluate(doc);
+      assertTrue(result.booleanValue());
+
+   } 
+
+   
+   public void testNegativeZeroNotLessThanZero() 
+      throws JaxenException {
+     
+     XPath xpath = new DOMXPath("-0 < 0");
+     Boolean result = (Boolean) xpath.evaluate(doc);
+     assertFalse(result.booleanValue());
+     
+   }   
+   
+
+   public void testNaNNotEqualsString() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("(0.0 div 0.0) != 'foo'");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+        
+   }    
+   
+
+   public void testNaNEqualsString() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("(0.0 div 0.0) = 'foo'");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+        
+   }  
+   
+   public void testEqualityPrecedence() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("1.5 = 2.3 = 2.3");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+        
+   }  
 
     
 }

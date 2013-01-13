@@ -49,9 +49,7 @@ package org.jaxen.expr;
 
 class DefaultLessThanEqualExpr extends DefaultRelationalExpr
   {
-  /**
-     * 
-     */
+
     private static final long serialVersionUID = 7980276649555334242L;
 DefaultLessThanEqualExpr( Expr lhs, Expr rhs )
     {
@@ -65,7 +63,7 @@ DefaultLessThanEqualExpr( Expr lhs, Expr rhs )
 
   protected boolean evaluateDoubleDouble( Double lhs, Double rhs )
     {
-    return lhs.compareTo( rhs ) <= 0;        
+    return lhs.doubleValue() <= rhs.doubleValue();        
     }
 
 }

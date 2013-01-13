@@ -49,8 +49,6 @@
 
 package org.jaxen.expr;
 
-import org.jaxen.function.NumberFunction;
-
 class DefaultNotEqualsExpr extends DefaultEqualityExpr 
   {
   /**
@@ -78,10 +76,11 @@ DefaultNotEqualsExpr( Expr lhs, Expr rhs )
         if( eitherIsNumber( lhs, rhs ) )
         {
     
-            if( NumberFunction.isNaN( (Double) lhs ) || NumberFunction.isNaN( (Double) rhs ) )
-            {
-                return true;
-            }
+            // Double.equals does not implement standard IEEE 754 comparisons but != does
+            Double left = (Double) lhs;
+            Double right = (Double) rhs;
+            
+            return left.doubleValue() != right.doubleValue();
     
         }
         return !lhs.equals( rhs );
