@@ -14,8 +14,19 @@
    <section name="Jaxen 1.1.5">
 
       <p>
+         Jaxen 1.1.6 fixes several bugs in the handling of IEEE-754 -0.
+      </p>
+      
+
+    </section>
+    
+    
+
+   <section name="Jaxen 1.1.5">
+
+      <p>
          Jaxen 1.1.5 is now compatible with Maven 3, and has a significantly reduced dependency tree when built with Maven 3. It also fixes one very remote bug in 
-         boolean-to-number conversion that has probably never showed up in practice, and several bugs in the handling of IEEE-754 -0.
+         boolean-to-number conversion that has probably never showed up in practice.
       </p>
       
 
