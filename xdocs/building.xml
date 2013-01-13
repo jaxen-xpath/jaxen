@@ -80,7 +80,8 @@
       <ol>
         <li>Update xdocs/releases.xml, xdocs/status.xml, and xdocs/index.xml with the new version number and information.</li>        
         <li>Update project.xml and INSTALL with the new version number.</li>    
-        <li>Make sure all changes are committed.</li>    
+        <li>Make sure all changes are committed.</li>   
+        <li>Check that all tests pass by running <samp>mvn test</samp>.</li> 
         <li>Tag the release in Subversion.</li>
         <li>Generate the release files by running 
         <samp>mvn package</samp>, <samp>mvn javadoc:javadoc</samp>, <samp>mvn assembly:single</samp>, and <samp>mvn site</samp>.</li>
