@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>oss-parent</artifactId>
+    <groupId>org.sonatype.oss</groupId>
+    <version>7</version>
+  </parent>
+
   <groupId>jaxen</groupId>
   <artifactId>jaxen</artifactId>
+  <packaging>bundle</packaging>
   <name>jaxen</name>
-  <version>1.1.5</version>
+  <version>1.1.6</version>
   <description>Jaxen is a universal Java XPath engine.</description>
   <url>http://jaxen.codehaus.org/</url>
   <licenses>
@@ -191,6 +199,10 @@
       <name>Ben McCann</name>
       <email>benjamin.j.mccann@gmail.com</email>
     </contributor>
+    <contributor>
+      <name>Don Corley</name>
+      <email>don@donandann.com</email>
+    </contributor>
   </contributors>
 
   <scm>
@@ -218,21 +230,55 @@
           <target>1.2</target>
         </configuration>
       </plugin>
+
       <plugin>
-        <artifactId>maven-repository-plugin</artifactId>
-        <version>2.3.1</version>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.3.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Export-Package>org.jaxen.*;version=${project.version}</Export-Package>
+            <Include-Resource>
+              org/w3c/dom/UserDataHandler.class=target/classes/org/w3c/dom/UserDataHandler.class,
+              META-INF/LICENSE.txt=LICENSE.txt
+            </Include-Resource>
+            <Import-Package>
+              org.w3c.dom;resolution:=optional,
+              *;resolution:=optional
+            </Import-Package>
+            <Private-Package>!org.w3c.dom</Private-Package>
+          </instructions>
+        </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.4</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.3</version>
         <executions>
           <execution>
             <phase>package</phase>
             <goals>
-              <goal>sign</goal>
+              <goal>single</goal>
+              <goal>javadoc</goal>
+              <goal>site</goal>
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>project</descriptorRef>
+            <descriptorRef>src</descriptorRef>
+            <descriptorRef>bin</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-repository-plugin</artifactId>
+        <version>2.3.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -388,11 +434,6 @@
   </reporting>
 
   <distributionManagement>
-    <repository>
-      <id>default</id>
-      <name>Default Repository</name>
-      <url>file:///dist</url>
-    </repository>
     <site>
       <id>default</id>
       <name>Default Site</name>
