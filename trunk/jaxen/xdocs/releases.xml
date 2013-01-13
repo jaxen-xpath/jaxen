@@ -38,14 +38,6 @@ is backwards compatible with code written to the 1.0 APIs.
 
     </section>
 
-    <section name="Nightly Builds">
-      <p>You can grab a <a href="http://svn.jaxen.codehaus.org/">tarball</a> of the current CVS head from FishEye if you like. 
-      To build Jaxen, you'll need to have maven installed. Assuming you do, you should be able to just type "maven jar" at the command line 
-      in the jaxen directory to create a JAR archive. <!-- If any of the tests are currently failing- -a couple of 
-      tests are currently picking up JDOM bugs- -you'll need to type "maven -Dmaven.test.failure.ignore=true jar" instead
-      (or fix the bugs that cause the tests to fail). -->
-      </p>
-    </section>
 
   </body>
 
