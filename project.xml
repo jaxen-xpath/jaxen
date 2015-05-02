@@ -47,18 +47,6 @@
         <unsubscribe>dev-unsubscribe@jaxen.codehaus.org</unsubscribe>
         <archive>http://archive.jaxen.codehaus.org/dev/</archive>
     </mailingList>
-    <mailingList>
-        <name>Jaxen SVN Commits List</name>
-        <subscribe>scm-subscribe@jaxen.codehaus.org</subscribe>
-        <unsubscribe>scm-unsubscribe@jaxen.codehaus.org</unsubscribe>
-        <archive>http://archive.jaxen.codehaus.org/scm/</archive>
-    </mailingList>
-    <!-- <mailingList>
-        <name>Jaxen Announcement List</name>
-        <subscribe>announce-subscribe@jaxen.codehaus.org</subscribe>
-        <unsubscribe>announce-unsubscribe@jaxen.codehaus.org</unsubscribe>
-        <archive>http://archive.jaxen.codehaus.org/announce/</archive>
-    </mailingList> -->
   </mailingLists>
 
 
