@@ -69,7 +69,7 @@ import org.jaxen.util.SingletonList;
  *  </p>
  *
  *  <p>
- *  If you want to adapt the Jaxen engine so that it can traverse your own
+ *  If you want to adapt the Jaxen engine to traverse your own
  *  object model, then this is a good base class to derive from.
  *  Typically you only really need to provide your own 
  *  {@link org.jaxen.Navigator} implementation.
@@ -698,7 +698,7 @@ public class BaseXPath implements XPath, Serializable
      */
     protected Object selectSingleNodeForContext(Context context) throws JaxenException
     {
-        List results = selectNodesForContext( context );
+        List results = selectNodesForContext(context);
 
         if ( results.isEmpty() )
         {
