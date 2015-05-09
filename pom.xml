@@ -14,10 +14,10 @@
   <name>jaxen</name>
   <version>1.1.6</version>
   <description>Jaxen is a universal Java XPath engine.</description>
-  <url>http://jaxen.codehaus.org/</url>
+  <url>http://www.cafeconleche.org/jaxen</url>
   <licenses>
     <license>
-      <url>http://jaxen.codehaus.org/license.html</url>
+      <url>http://www.cafeconleche.org/jaxen/license.html</url>
     </license>
   </licenses>
   <issueManagement>
@@ -206,13 +206,14 @@
   </contributors>
 
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/jaxen/trunk/jaxen/</connection>
-    <url>http://fisheye.codehaus.org/browse/jaxen/</url>
+	<url>https://github.com/jaxen-xpath/jaxen</url>
+    <connection>scm:git:git://github.com/jaxen-xpath/jaxen.git</connection>
+    <developerConnection>scm:git:git@github.com:jaxen-xpath/jaxen.git</developerConnection>
   </scm>
 
   <organization>
-    <name>Codehaus</name>
-    <url>http://codehaus.org</url>
+    <name>The Jaxen Project</name>
+    <url>http://www.cafeconleche.org/jaxen</url>
   </organization>
 
   <build>
@@ -431,11 +432,11 @@
     </plugins>
   </reporting>
 
-  <distributionManagement>
+<!--  <distributionManagement>
     <site>
       <id>default</id>
       <name>Default Site</name>
       <url>scp://jaxen.codehaus.org/home/projects/jaxen/public_html</url>
     </site>
-  </distributionManagement>
+  </distributionManagement> -->
 </project>

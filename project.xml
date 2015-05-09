@@ -5,12 +5,11 @@
   <pomVersion>3</pomVersion>
   <id>jaxen</id>
   <name>jaxen</name>
-  <currentVersion>1.1.5</currentVersion>
+  <currentVersion>1.1.6</currentVersion>
 
   <organization>
-    <name>Codehaus</name>
-    <url>http://codehaus.org</url>
-    <logo>http://codehaus.org/codehaus-small.gif</logo>
+    <name>The Jaxen Project</name>
+    <url>http://www.cafeconleche.org/jaxen/</url>
   </organization>
   <inceptionYear>2001</inceptionYear>
   <package>org.jaxen</package>
@@ -22,16 +21,16 @@
   </description>
   <shortDescription>Universal Java XPath Engine</shortDescription>
 
-  <url>http://jaxen.codehaus.org/</url>
+  <url>http://www.cafeconleche.org/jaxen/</url>
 
   <issueTrackingUrl>http://jira.codehaus.org/BrowseProject.jspa?id=10022</issueTrackingUrl>
-  <siteAddress>jaxen.codehaus.org</siteAddress>
-  <siteDirectory>/home/projects/jaxen/public_html</siteDirectory>
-  <distributionDirectory>/dist</distributionDirectory>
+  <siteAddress>www.cafeconleche.org</siteAddress>
+  <siteDirectory>/jaxen</siteDirectory>
+  <distributionDirectory>/jaxen/dist</distributionDirectory>
   
   <repository>
-    <connection>scm:svn:https://svn.codehaus.org/jaxen/trunk/jaxen/</connection>
-    <url>http://fisheye.codehaus.org/browse/jaxen/</url>
+    <connection>https://github.com/jaxen-xpath/jaxen</connection>
+    <url>https://github.com/jaxen-xpath/jaxen.git</url>
   </repository>
   
   <mailingLists>
@@ -235,8 +234,8 @@
      <report>maven-jdepend-plugin</report>
      <report>maven-checkstyle-plugin</report>
      <report>maven-cobertura-plugin</report>
-     <report>maven-changelog-plugin</report>
-     <report>maven-developer-activity-plugin</report>
+  <!--   <report>maven-changelog-plugin</report>
+     <report>maven-developer-activity-plugin</report> -->
      <!-- file activity seems broken by move to subversion; links still
           point to CVS; I don't know why -->
      <!-- <report>maven-file-activity-plugin</report> -->
