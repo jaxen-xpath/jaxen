@@ -28,12 +28,12 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <ul>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.6-bin.zip">1.1.6  binaries in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.6-bin.tar.gz">1.1.6 binaries in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.6-bin.tar.bz2">1.1.6 binaries in bz2 format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.6-src.zip">1.1.6 sources in zip format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.6-src.tar.gz">1.1.6 sources in tar/gz format.</a></li>
-        <li><a href="http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.6-src.tar.bz2">1.1.6 sources in bz2 format.</a></li>
+        <li><a href="dist/jaxen-1.1.6-bin.zip">1.1.6  binaries in zip format.</a></li>
+        <li><a href="dist/jaxen-1.1.6-bin.tar.gz">1.1.6 binaries in tar/gz format.</a></li>
+        <li><a href="dist/jaxen-1.1.6-bin.tar.bz2">1.1.6 binaries in bz2 format.</a></li>
+        <li><a href="dist/jaxen-1.1.6-src.zip">1.1.6 sources in zip format.</a></li>
+        <li><a href="dist/jaxen-1.1.6-src.tar.gz">1.1.6 sources in tar/gz format.</a></li>
+        <li><a href="dist/jaxen-1.1.6-src.tar.bz2">1.1.6 sources in bz2 format.</a></li>
       </ul>
 
     </section>
