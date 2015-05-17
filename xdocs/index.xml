@@ -45,16 +45,6 @@
       </p>
 
       <p>
-	    Bob McWhirter  <a href="/pdf/intro-slides.pdf">talked about Jaxen</a> 
-	    at Software Development 2003 West.
-      </p>
-
-      <p>
-      Check out these <a href="http://dom4j.org/benchmarks/xpath/index.html">Performance Benchmarks</a> 
-      comparing dom4j and Jaxen against Xerces and Xalan. 
-      </p>
-
-      <p>
         Sun chose Jaxen for the XPath engine for the <acronym title="Java Server Pages">JSP</acronym> 
         Standard Tag Library (<acronym>JSTL</acronym>)</a> and the Java Web Services Developer Pack 1.0 and 1.1.
       </p>
