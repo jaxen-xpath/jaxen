@@ -55,10 +55,10 @@ import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.jaxen.jdom.DocumentNavigator;
 import org.jaxen.jdom.JDOMXPath;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
+import org.jdom2.input.SAXBuilder;
 
 public class JDOMNavigatorTest extends XPathTestBase
 {

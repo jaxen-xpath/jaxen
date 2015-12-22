@@ -36,9 +36,9 @@ package org.jaxen.test;
 import java.net.URL;
 
 import org.jaxen.jdom.JDOMXPath;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
 
 class JDOMPerformance {
     
