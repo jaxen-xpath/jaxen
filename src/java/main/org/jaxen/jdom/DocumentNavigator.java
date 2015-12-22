@@ -61,15 +61,15 @@ import org.jaxen.XPath;
 import org.jaxen.JaxenConstants;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.util.SingleObjectIterator;
-import org.jdom.Attribute;
-import org.jdom.CDATA;
-import org.jdom.Comment;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.Namespace;
-import org.jdom.ProcessingInstruction;
-import org.jdom.Text;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Attribute;
+import org.jdom2.CDATA;
+import org.jdom2.Comment;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
+import org.jdom2.ProcessingInstruction;
+import org.jdom2.Text;
+import org.jdom2.input.SAXBuilder;
 
 /** 
  * Interface for navigating around the JDOM object model.

@@ -58,13 +58,13 @@ import java.util.List;
 import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.jdom.JDOMXPath;
-import org.jdom.Attribute;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.Namespace;
-import org.jdom.Text;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Attribute;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.Namespace;
+import org.jdom2.Text;
+import org.jdom2.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
 public class JDOMXPathTest extends TestCase

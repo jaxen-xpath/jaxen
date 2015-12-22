@@ -48,8 +48,8 @@
 
 package org.jaxen.jdom;
 
-import org.jdom.Element;
-import org.jdom.Namespace;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
 
 /** Wrapper for JDOM namespace nodes to give them a parent, as required
  *  by the XPath data model.
