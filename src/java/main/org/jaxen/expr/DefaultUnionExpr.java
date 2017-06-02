@@ -95,6 +95,16 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
             List lhsResults = (List) getLHS().evaluate( context );
             List rhsResults = (List) getRHS().evaluate( context );
     
+            if ( lhsResults.size() == 0 )
+            {
+                return rhsResults;
+            }
+
+            if ( rhsResults.size() == 0 )
+            {
+                return lhsResults;
+            }
+
             Set unique = new HashSet();
     
             results.addAll( lhsResults );
