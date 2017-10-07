@@ -246,7 +246,6 @@
             <Bundle-Version>${project.version}</Bundle-Version>
             <Export-Package>org.jaxen.*;version=${project.version}</Export-Package>
             <Include-Resource>
-              org/w3c/dom/UserDataHandler.class=target/classes/org/w3c/dom/UserDataHandler.class,
               META-INF/LICENSE.txt=LICENSE.txt
             </Include-Resource>
             <Import-Package>
