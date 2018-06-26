@@ -168,6 +168,14 @@ public class ContextSupport implements Serializable {
     {
         return this.navigator;
     }
+ 
+    /** Set the <code>Navigator</code>.
+     *
+     *  @return the navigator
+     */
+    public void setNavigator(final Navigator navigator) {
+        this.navigator = navigator;
+    }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
