@@ -221,14 +221,37 @@
     <testSourceDirectory>src/java/test</testSourceDirectory>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-toolchains-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>toolchain</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <toolchains>
+            <jdk>
+              <version>[8,10)</version>
+            </jdk>
+          </toolchains>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <executions>
           <execution>
             <id>default-compile</id>
             <configuration>
-              <!-- compile everything except module-info to Level 6 -->
-              <release>6</release>
+              <!-- compile everything except module-info to Level 5 -->
+              <jdkToolchain>
+                <version>8</version>
+              </jdkToolchain>
+              <source>1.5</source>
+              <target>1.5</target>
               <excludes>module-info.java</excludes>
             </configuration>
           </execution>
@@ -239,6 +262,9 @@
             </goals>
             <!-- recompile just the module-info.java for 9+ -->
             <configuration>
+              <jdkToolchain>
+                <version>10</version>
+              </jdkToolchain>
               <release>9</release>
               <includes>module-info.java</includes>
             </configuration>
@@ -248,7 +274,6 @@
           <debug>true</debug>
           <optimize>true</optimize>
           <showDeprecation>true</showDeprecation>
-          <release>6</release>
         </configuration>
       </plugin>
 
