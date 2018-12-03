@@ -1,0 +1,19 @@
+language: java
+jdk:
+  - oraclejdk8
+#  - oraclejdk9
+#  - oraclejdk10
+#  - openjdk10
+#  - oraclejdk11
+#  - openjdk11
+#  - openjdk-ea
+
+#matrix:
+#  allow_failures:
+#    - jdk: openjdk-ea
+
+script:
+  - echo PATH = ${PATH}
+  - echo JAVA_HOME = ${JAVA_HOME}
+  - java -version
+  - "mvn test -B"
