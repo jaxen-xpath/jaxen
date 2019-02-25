@@ -227,8 +227,8 @@
           <debug>true</debug>
           <optimize>true</optimize>
           <showDeprecation>true</showDeprecation>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.4</source>
+          <target>1.4</target>
         </configuration>
       </plugin>
 
