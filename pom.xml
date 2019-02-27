@@ -12,7 +12,7 @@
   <artifactId>jaxen</artifactId>
   <packaging>bundle</packaging>
   <name>jaxen</name>
-  <version>1.1.6</version>
+  <version>1.2.0</version>
   <description>Jaxen is a universal Java XPath engine.</description>
   <url>http://www.cafeconleche.org/jaxen</url>
   <licenses>
@@ -429,11 +429,4 @@
     </plugins>
   </reporting>
 
-<!--  <distributionManagement>
-    <site>
-      <id>default</id>
-      <name>Default Site</name>
-      <url>scp://jaxen.codehaus.org/home/projects/jaxen/public_html</url>
-    </site>
-  </distributionManagement> -->
 </project>
