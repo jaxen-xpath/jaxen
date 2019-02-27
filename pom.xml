@@ -227,8 +227,8 @@
           <debug>true</debug>
           <optimize>true</optimize>
           <showDeprecation>true</showDeprecation>
-          <source>1.3</source>
-          <target>1.2</target>
+          <source>1.4</source>
+          <target>1.4</target>
         </configuration>
       </plugin>
 
@@ -244,14 +244,11 @@
             <Bundle-Version>${project.version}</Bundle-Version>
             <Export-Package>org.jaxen.*;version=${project.version}</Export-Package>
             <Include-Resource>
-              org/w3c/dom/UserDataHandler.class=target/classes/org/w3c/dom/UserDataHandler.class,
               META-INF/LICENSE.txt=LICENSE.txt
             </Include-Resource>
             <Import-Package>
-              org.w3c.dom;resolution:=optional,
               *;resolution:=optional
             </Import-Package>
-            <Private-Package>!org.w3c.dom</Private-Package>
           </instructions>
         </configuration>
       </plugin>
