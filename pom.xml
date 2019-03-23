@@ -17,7 +17,9 @@
   <url>http://www.cafeconleche.org/jaxen</url>
   <licenses>
     <license>
-      <url>http://www.cafeconleche.org/jaxen/license.html</url>
+      <name>BSD License 2.0</name>
+      <url>https://raw.githubusercontent.com/jaxen-xpath/jaxen/master/LICENSE.txt</url>
+      <distribution>repo</distribution>
     </license>
   </licenses>
   <issueManagement>
