@@ -22,7 +22,7 @@
   </licenses>
   <issueManagement>
     <system>JIRA</system>
-    <url>http://jira.codehaus.org/BrowseProject.jspa?id=10022</url>
+    <url>https://github.com/jaxen-xpath/jaxen/issues</url>
   </issueManagement>
   <ciManagement>
     <notifiers>
@@ -43,21 +43,11 @@
   <mailingLists>
     <mailingList>
       <name>Jaxen Users List</name>
-      <subscribe>user-subscribe@jaxen.codehaus.org</subscribe>
-      <unsubscribe>user-unsubscribe@jaxen.codehaus.org</unsubscribe>
-      <archive>http://archive.jaxen.codehaus.org/user/</archive>
+      <archive>https://markmail.org/search/?q=list%3Aorg.codehaus.jaxen.user</archive>
     </mailingList>
     <mailingList>
       <name>Jaxen Developers List</name>
-      <subscribe>dev-subscribe@jaxen.codehaus.org</subscribe>
-      <unsubscribe>dev-unsubscribe@jaxen.codehaus.org</unsubscribe>
-      <archive>http://archive.jaxen.codehaus.org/dev/</archive>
-    </mailingList>
-    <mailingList>
-      <name>Jaxen Commits List</name>
-      <subscribe>scm-subscribe@jaxen.codehaus.org</subscribe>
-      <unsubscribe>scm-unsubscribe@jaxen.codehaus.org</unsubscribe>
-      <archive>http://archive.jaxen.codehaus.org/scm/</archive>
+      <archive>https://markmail.org/search/?q=list%3Aorg.codehaus.jaxen.dev</archive>
     </mailingList>
   </mailingLists>
 
@@ -433,11 +423,4 @@
     </plugins>
   </reporting>
 
-<!--  <distributionManagement>
-    <site>
-      <id>default</id>
-      <name>Default Site</name>
-      <url>scp://jaxen.codehaus.org/home/projects/jaxen/public_html</url>
-    </site>
-  </distributionManagement> -->
 </project>
