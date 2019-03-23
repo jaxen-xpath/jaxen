@@ -11,7 +11,7 @@
     
     <section name="Compiling">
       <p>
-        Jaxen's build system is officially <a href="http://maven.apache.org/">Maven 3</a>. 
+        Jaxen's build system is <a href="http://maven.apache.org/">Maven 3</a>. 
         To compile Jaxen, install Maven. Then at the shell 
         prompt inside the top-level jaxen directory, type "mvn compile":
       </p>
@@ -75,35 +75,16 @@
       <p>
        To prepare jaxen for release:
       </p>
-      
-      
+     
       <ol>
         <li>Update xdocs/releases.xml, xdocs/status.xml, and xdocs/index.xml with the new version number and information.</li>        
-        <li>Update project.xml and INSTALL with the new version number.</li>    
+        <li>Update pom.xml and INSTALL with the new version number.</li>    
         <li>Make sure all changes are committed.</li>   
         <li>Check that all tests pass by running <samp>mvn test</samp>.</li> 
-        <li>Tag the release in Subversion.</li>
-        <li>Generate the release files by running <samp>mvn jar:jar</samp>,
-        <samp>mvn package</samp>, <samp>mvn javadoc:javadoc</samp>, <samp>mvn assembly:single</samp>, and <samp>mvn site</samp>.</li>
+        <li>Tag the release in Github.</li>
+        <li>And then a miracle occurs to upload to Maven Central.</li>
         <li>
-          Using a WebDAV client, open https://dav.codehaus.org/dist/jaxen/.
-          (In the Mac OS X Finder, this is Go/Connect to Server...) 
-        </li>
-        <li>
-          Copy the <tt>.zip</tt>, <tt>.bz2</tt> and <tt>.tar.gz</tt> files from target to https://dav.codehaus.org/dist/jaxen/distributions. 
-        </li>
-         <li>
-          Copy the <tt>.jar</tt>  file from target to https://dav.codehaus.org/dist/jaxen/jars/. 
-        </li>
-        <li>
-          Copy the <tt>.pom</tt>  file from target to https://dav.codehaus.org/dist/jaxen/poms/. 
-        </li>
-        <li>
-          Using the Mac Finder, or another WebDAV client, open https://dav.codehaus.org/jaxen/.
-        </li>
-
-        <li>
-          Copy all files from target/site into this directory, overwriting the existing files.
+          Upload site and binaries to cafeconleche.org/jaxen.
         </li>
       </ol>
 
