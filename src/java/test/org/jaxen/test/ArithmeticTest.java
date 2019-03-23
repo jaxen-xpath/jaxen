@@ -83,7 +83,6 @@ public class ArithmeticTest extends TestCase {
 
     public void testNumbersThatBeginWithADecimalPoint() 
       throws JaxenException {
-        
         XPath xpath = new DOMXPath(".5 > .4");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
