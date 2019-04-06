@@ -289,6 +289,7 @@
           </execution>
         </executions>
         <configuration>
+          <failOnError>false</failOnError>
           <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers</excludePackageNames>
           <links>
             <link>https://docs.oracle.com/javase/6/docs/api/</link>
