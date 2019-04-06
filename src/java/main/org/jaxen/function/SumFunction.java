@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.4</b> <code><i>number</i> sum(<i>node-set</i>)</code> </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath#function-sum">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-sum">
  * The sum function returns the sum, for each node in the argument node-set, 
  * of the result of converting the string-values of the node to a number.
  * </blockquote>

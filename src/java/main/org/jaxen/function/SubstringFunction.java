@@ -58,7 +58,7 @@ import org.jaxen.Navigator;
  * <code><i>string</i> substring(<i>string</i>,<i>number</i>,<i>number?</i>)</code>
  * </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath"> 
+ * <blockquote cite="http://www.w3.org/TR/xpath"> 
  * <p>The <b>substring</b> function returns the
  * substring of the first argument starting at the position specified in
  * the second argument with length specified in the third argument. For

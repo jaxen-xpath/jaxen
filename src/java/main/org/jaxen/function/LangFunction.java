@@ -62,7 +62,7 @@ import org.jaxen.UnsupportedAxisException;
  * <b>4.3</b> <code><i>boolean</i> lang(<i>string</i>)</code>
  * </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath#function-lang">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-lang">
  * <p>
  * The <b>lang</b> function returns true or false depending on whether
  * the language of the context node as specified by

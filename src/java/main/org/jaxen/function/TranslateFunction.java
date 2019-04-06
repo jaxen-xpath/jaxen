@@ -63,7 +63,7 @@ import org.jaxen.Navigator;
  * <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code>
  * </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath#function-translate">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-translate">
  * <p>
  * The <b><a href="http://www.w3.org/TR/xpath#function-translate">translate</a></b> function
  * returns the first argument string with occurrences of characters in

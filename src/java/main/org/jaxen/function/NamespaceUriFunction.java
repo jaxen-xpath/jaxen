@@ -61,7 +61,7 @@ import org.jaxen.Navigator;
  * <code><i>string</i> namespace-uri(<i>node-set?</i>)</code>
  * </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * <p>
  * The <b>namespace-uri</b>
  * function returns the namespace URI of the <a

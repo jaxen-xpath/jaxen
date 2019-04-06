@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.4</b> <code><i>number</i> floor(<i>number</i>)</code></p> 
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * The floor function returns the largest (closest to positive infinity) 
  * number that is not greater than the argument and that is an integer....
  * If the argument is NaN, then NaN is returned. 

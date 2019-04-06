@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.2</b> <code><i>boolean</i> starts-with(<i>string</i>,<i>string</i>)</code></p> 
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * The <b>starts-with</b> function returns true if the first argument string starts 
  * with the second argument string, and otherwise returns false.
  * </blockquote>

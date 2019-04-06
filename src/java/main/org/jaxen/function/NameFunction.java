@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.1</b> <code><i>string</i> name(<i>node-set?</i>)</code> </p>
  *  
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * The <b>name</b> function returns a string containing a QName representing 
  * the expanded-name of the node in the argument node-set that is first in document order. 
  * The QName must represent the expanded-name with respect to the namespace declarations 

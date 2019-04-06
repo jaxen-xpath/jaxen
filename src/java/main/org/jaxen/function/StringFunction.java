@@ -68,7 +68,7 @@ import java.util.Locale;
  * </p>
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * <p>
  * The <b>string</b> function converts
  * an object to a string as follows:

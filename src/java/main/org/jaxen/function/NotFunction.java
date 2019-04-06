@@ -58,7 +58,7 @@ import org.jaxen.Navigator;
  * <p><b>4.3</b> <code><i>boolean</i> not(<i>boolean</i>)</code> </p>
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath#function-not">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-not">
  * The <b>not</b> function returns true if its argument is false, and false otherwise.
  * </blockquote>
  * 
