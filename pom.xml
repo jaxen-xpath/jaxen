@@ -184,7 +184,7 @@
   </contributors>
 
   <scm>
-	  <url>https://github.com/jaxen-xpath/jaxen</url>
+    <url>https://github.com/jaxen-xpath/jaxen</url>
     <connection>scm:git:git://github.com/jaxen-xpath/jaxen.git</connection>
     <developerConnection>scm:git:git@github.com:jaxen-xpath/jaxen.git</developerConnection>
   </scm>
