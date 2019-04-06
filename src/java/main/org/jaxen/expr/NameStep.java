@@ -49,7 +49,7 @@ package org.jaxen.expr;
 /**
  * Represents an XPath name test such as <code>para</code> or 
  * <code>svg:rect</code>. This is production 37 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-NameTest">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-NameTest">XPath 1.0 specification</a>:
  * 
  * <pre>[37] NameTest ::=  '*' 
  *                | NCName ':' '*'    

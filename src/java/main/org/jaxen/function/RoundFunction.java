@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.4</b> <code><i>number</i> round(<i>number</i>)</code> </p>
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * The <b>round</b> function returns the number that is closest to the argument and that is an integer. 
  * If there are two such numbers, then the one that is closest to positive infinity is returned. 
  * If the argument is NaN, then NaN is returned. If the argument is positive infinity, then positive infinity is returned. 
@@ -71,7 +71,7 @@ import org.jaxen.Navigator;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-round" target="_top">Section 4.4 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-round" target="_top">Section 4.4 of the XPath Specification</a>
  */
 public class RoundFunction implements Function
 {

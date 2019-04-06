@@ -56,11 +56,11 @@ import org.jaxen.FunctionCallException;
 /**
  *  <p><b>4.1</b> <code><i>number</i> count(<i>node-set</i>)</code></p> 
  *  
- * <blockquote src="http://www.w3.org/TR/xpath#function-count">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-count">
  * The <b>count</b> function returns the number of nodes in the argument node-set.
  * </blockquote>
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-count">Section 4.1 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-count">Section 4.1 of the XPath Specification</a>
  */
 public class CountFunction implements Function
 {

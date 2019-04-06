@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.2</b> <code><i>string</i> substring-before(<i>string</i>,<i>string</i>)</code></p>
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath#function-substring-before">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-substring-before">
  * The substring-before function returns the substring of the first argument 
  * string that precedes the first occurrence of the second argument string 
  * in the first argument string, or the empty string if the 
@@ -69,7 +69,7 @@ import org.jaxen.Navigator;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-substring-before" target="_top">Section 4.2 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-substring-before" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringBeforeFunction implements Function
 {

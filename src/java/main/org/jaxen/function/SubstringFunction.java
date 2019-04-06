@@ -58,7 +58,7 @@ import org.jaxen.Navigator;
  * <code><i>string</i> substring(<i>string</i>,<i>number</i>,<i>number?</i>)</code>
  * </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath"> 
+ * <blockquote cite="http://www.w3.org/TR/xpath"> 
  * <p>The <b>substring</b> function returns the
  * substring of the first argument starting at the position specified in
  * the second argument with length specified in the third argument. For
@@ -73,7 +73,7 @@ import org.jaxen.Navigator;
  * 
  * <p>
  * More precisely, each character in the string (see <a
- * href="http://www.w3.org/TR/xpath#strings">[<b>3.6 Strings</b>]</a>) is considered to have a
+ * href="https://www.w3.org/TR/xpath#strings">[<b>3.6 Strings</b>]</a>) is considered to have a
  * numeric position: the position of the first character is 1, the
  * position of the second character is 2 and so on.
  * </p>
@@ -130,15 +130,14 @@ import org.jaxen.Navigator;
  * </p>
  * </li>
  * 
- * <li>
- * <p>
+ * </ul>
  * 
  * <code>substring("12345", -1 div 0, 1 div 0)</code> returns
  * <code>""</code> </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-substring"
+ * @see <a href="https://www.w3.org/TR/xpath#function-substring"
  *      target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringFunction implements Function

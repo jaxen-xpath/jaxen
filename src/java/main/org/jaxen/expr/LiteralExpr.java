@@ -52,7 +52,7 @@ package org.jaxen.expr;
 
 /**
  * Represents an XPath string literal. This is production 29 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-Literal">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-Literal">XPath 1.0 specification</a>:
  * 
  * <pre>[29] Literal ::= '"' [^"]* '"'   
  *               | "'" [^']* "'"</pre>

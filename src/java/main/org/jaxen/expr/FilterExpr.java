@@ -55,13 +55,13 @@ import org.jaxen.JaxenException;
 /**
  * Represents an XPath filter expression. This is 
  * <a href='http://www.w3.org/TR/xpath#NT-FilterExpr'>production 20</a> in the 
- * <a href="http://www.w3.org/TR/xpath">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath">XPath 1.0 specification</a>:
  * 
  * <table><tr valign="baseline">
- * <td><a name="NT-FilterExpr"></a>[20]&nbsp;&nbsp;&nbsp;</td><td>FilterExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="http://www.w3.org/TR/xpath#NT-PrimaryExpr">PrimaryExpr</a></td><td></td>
+ * <td><a name="NT-FilterExpr"></a>[20]&nbsp;&nbsp;&nbsp;</td><td>FilterExpr</td><td>&nbsp;&nbsp;&nbsp;::=&nbsp;&nbsp;&nbsp;</td><td><a href="https://www.w3.org/TR/xpath#NT-PrimaryExpr">PrimaryExpr</a></td><td></td>
  * </tr>
  * <tr valign="baseline">
- * <td></td><td></td><td></td><td>| <a href="http://www.w3.org/TR/xpath#NT-FilterExpr">FilterExpr</a> <a href="http://www.w3.org/TR/xpath#NT-Predicate">Predicate</a></td><td></td>
+ * <td></td><td></td><td></td><td>| <a href="https://www.w3.org/TR/xpath#NT-FilterExpr">FilterExpr</a> <a href="https://www.w3.org/TR/xpath#NT-Predicate">Predicate</a></td><td></td>
  * </tr> 
  * </table>
  * 

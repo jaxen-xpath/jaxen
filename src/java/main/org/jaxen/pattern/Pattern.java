@@ -109,12 +109,12 @@ public abstract class Pattern {
     public abstract boolean matches( Object node, Context context ) throws JaxenException;
     
     /** Returns the default resolution policy of the pattern according to the
-      * <a href="http://www.w3.org/TR/xslt#conflict">
+      * <a href="https://www.w3.org/TR/xslt#conflict">
       * XSLT conflict resolution rules</a>.
       *  
      * @return 0.5; the default priority defined in XSLT
      * 
-     * @see <a href="http://www.w3.org/TR/xslt#conflict" target="_top">Section 5.5 of the XSLT specification</a>
+     * @see <a href="https://www.w3.org/TR/xslt#conflict" target="_top">Section 5.5 of the XSLT specification</a>
       * 
       */
     public double getPriority() 

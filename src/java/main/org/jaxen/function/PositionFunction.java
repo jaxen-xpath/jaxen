@@ -58,12 +58,12 @@ import org.jaxen.FunctionCallException;
  * <p><b>4.1</b> <code><i>number</i> position()</code></p>
  *
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * The position function returns a number equal to the context position from the expression evaluation context.
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-position" target="_top">Section 4.1 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-position" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class PositionFunction implements Function
 {

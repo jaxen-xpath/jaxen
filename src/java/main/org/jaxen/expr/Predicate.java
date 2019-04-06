@@ -57,7 +57,7 @@ import org.jaxen.JaxenException;
 /**
  * Represents an XPath predicate such as <code>[position() = last()]</code>.
  * This is production 8 and 9 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-Predicate">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-Predicate">XPath 1.0 specification</a>:
  * 
  * <pre> [8] Predicate     ::= '[' PredicateExpr ']'   
  * [9] PredicateExpr ::= Expr</pre>

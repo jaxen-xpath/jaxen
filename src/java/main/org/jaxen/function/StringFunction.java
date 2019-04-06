@@ -68,7 +68,7 @@ import java.util.Locale;
  * </p>
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * <p>
  * The <b>string</b> function converts
  * an object to a string as follows:
@@ -79,8 +79,8 @@ import java.util.Locale;
  * <li>
  * <p>
  * A node-set is converted to a string by returning the <a
- * href="http://www.w3.org/TR/xpath#dt-string-value" target="_top">string-value</a> of the node in the node-set
- * that is first in <a href="http://www.w3.org/TR/xpath#dt-document-order" target="_top">document order</a>. If
+ * href="https://www.w3.org/TR/xpath#dt-string-value" target="_top">string-value</a> of the node in the node-set
+ * that is first in <a href="https://www.w3.org/TR/xpath#dt-document-order" target="_top">document order</a>. If
  * the node-set is empty, an empty string is returned.
  * </p>
  * </li>
@@ -127,7 +127,7 @@ import java.util.Locale;
  * <li>
  * <p>
  * if the number is an integer, the number is represented in decimal
- * form as a <a href="http://www.w3.org/TR/xpath#NT-Number" target="_top">Number</a> with no decimal point and
+ * form as a <a href="https://www.w3.org/TR/xpath#NT-Number" target="_top">Number</a> with no decimal point and
  * no leading zeros, preceded by a minus sign (<code>-</code>) if
  * the number is negative
  * </p>
@@ -177,7 +177,7 @@ import java.util.Locale;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-string"
+ * @see <a href="https://www.w3.org/TR/xpath#function-string"
  *      target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class StringFunction implements Function

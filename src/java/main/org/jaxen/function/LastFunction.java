@@ -56,13 +56,13 @@ import org.jaxen.FunctionCallException;
 /**
  * <p><b>4.1</b> <code><i>number</i> last()</code> </p>
  * 
- * <blockquote src="http://www.w3.org/TR/xpath#function-last">
+ * <blockquote cite="http://www.w3.org/TR/xpath#function-last">
  * The <b>last</b> function returns a number equal to 
  * the context size from the expression evaluation context.
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-last" target="_top">Section 4.1 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-last" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class LastFunction implements Function
 {

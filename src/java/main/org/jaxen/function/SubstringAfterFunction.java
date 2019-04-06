@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.2</b> <code><i>string</i> substring-after(<i>string</i>,<i>string</i>)</code></p> 
  * 
  * 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * The <b>substring-after</b> function returns the substring of the first argument string 
  * that follows the first occurrence of the second argument string in the first 
  * argument string, or the empty string if the first argument string does not contain the second argument string. 
@@ -68,7 +68,7 @@ import org.jaxen.Navigator;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-substring-after" target="_top">Section 4.2 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-substring-after" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringAfterFunction implements Function
 {

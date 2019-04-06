@@ -52,7 +52,7 @@ package org.jaxen.expr;
 /**
  * Represents an XPath unary expression such as <code>-78</code>.
  * This is production 27 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-UnaryExpr">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-UnaryExpr">XPath 1.0 specification</a>:
  * 
  * <pre>[27] UnaryExpr ::= UnionExpr | '-' UnaryExpr</pre>
  * 

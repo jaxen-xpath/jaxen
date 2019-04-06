@@ -78,7 +78,7 @@ import org.jaxen.Navigator;
  * @author Erwin Bolwidt (ejb @ klomp.org)
  * @author J\u00e9r\u00f4me N\u00e8gre (jerome.negre @ e-xmlmedia.fr)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-id" target="_top">Section 4.1 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-id" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class IdFunction implements Function
 {

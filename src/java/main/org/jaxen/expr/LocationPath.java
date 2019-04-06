@@ -53,7 +53,7 @@ import java.util.List;
  * Represents an XPath location path such as <code>//foo/bar</code>
  * or <code>pre:baz[position()=last()]</code>.
  * This is production 1 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-LocationPath">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-LocationPath">XPath 1.0 specification</a>:
  * 
  * <pre>[1]  LocationPath ::= RelativeLocationPath    
  *                    | AbsoluteLocationPath</pre>

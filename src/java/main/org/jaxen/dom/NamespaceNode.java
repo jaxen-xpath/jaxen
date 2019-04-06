@@ -87,7 +87,7 @@ import org.w3c.dom.UserDataHandler;
  *
  * <li>The {@link #getOwnerDocument} method returns the owner document
  * of the parent node, but that owner document will know nothing about
- * the namespace node.</p>
+ * the namespace node.</li>
  *
  * <li>The {@link #isSupported} method always returns false.</li>
  *

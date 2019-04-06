@@ -57,7 +57,7 @@ import org.jaxen.Navigator;
 
 /**
  *  <p><b>4.4</b> <code><i>number</i> ceiling(<i>number</i>)</code> 
- * <blockquote src="http://www.w3.org/TR/xpath">
+ * <blockquote cite="http://www.w3.org/TR/xpath">
  * <p>
  *
  * <p><q>The ceiling function returns the smallest 
@@ -74,8 +74,8 @@ import org.jaxen.Navigator;
  * 
  *  @author bob mcwhirter (bob @ werken.com)
  *  
- *  @see <a href="http://www.w3.org/TR/xpath#function-ceiling">Section 4.4 of the XPath Specification</a>
- *  @see <a href="http://www.w3.org/1999/11/REC-xpath-19991116-errata/">XPath Specification Errata</a>
+ *  @see <a href="https://www.w3.org/TR/xpath#function-ceiling">Section 4.4 of the XPath Specification</a>
+ *  @see <a href="https://www.w3.org/1999/11/REC-xpath-19991116-errata/">XPath Specification Errata</a>
  *  
  */
 public class CeilingFunction implements Function

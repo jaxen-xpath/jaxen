@@ -187,7 +187,7 @@ public interface XPathFactory
      * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
-     * @return <code><i>lhs</i> | <i>rhs</i></code></code>
+     * @return <code><i>lhs</i> | <i>rhs</i></code>
      * @throws JaxenException
      */
     UnionExpr createUnionExpr( Expr lhs,
