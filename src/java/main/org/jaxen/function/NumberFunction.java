@@ -88,7 +88,7 @@ import org.jaxen.Navigator;
  * 
  * <p>
  * a node-set is first converted to a string as if by a call to the <b><a
- * href="http://www.w3.org/TR/xpath#function-string" target="_top">string</a></b> function and then converted
+ * href="https://www.w3.org/TR/xpath#function-string" target="_top">string</a></b> function and then converted
  * in the same way as a string argument
  * </p>
  * 
@@ -115,13 +115,13 @@ import org.jaxen.Navigator;
  * typically be transformed into a language-specific format for
  * presentation to a user). In addition, the <b>number</b> function cannot be used
  * unless the language-neutral format used by the element is consistent
- * with the XPath syntax for a <a href="http://www.w3.org/TR/xpath#NT-Number">Number</a>.</blockquote>
+ * with the XPath syntax for a <a href="https://www.w3.org/TR/xpath#NT-Number">Number</a>.</blockquote>
  * 
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-number"
+ * @see <a href="https://www.w3.org/TR/xpath#function-number"
  *      target="_top">Section 4.4 of the XPath Specification</a>
  */
 public class NumberFunction implements Function

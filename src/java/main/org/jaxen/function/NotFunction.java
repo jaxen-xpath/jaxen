@@ -63,7 +63,7 @@ import org.jaxen.Navigator;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-not" target="_top">Section 4.3 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-not" target="_top">Section 4.3 of the XPath Specification</a>
  */
 public class NotFunction implements Function
 {

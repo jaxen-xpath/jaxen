@@ -72,7 +72,7 @@ import org.jaxen.Navigator;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-name" target="_top">Section 4.1 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-name" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class NameFunction implements Function
 {

@@ -65,12 +65,12 @@ import org.jaxen.Navigator;
  * <p>
  * The <b>namespace-uri</b>
  * function returns the namespace URI of the <a
- * href="http://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a> of the node in the
+ * href="https://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a> of the node in the
  * argument node-set that is first in <a
- * href="http://www.w3.org/TR/xpath#dt-document-order" target="_top">document order</a>. If the argument
+ * href="https://www.w3.org/TR/xpath#dt-document-order" target="_top">document order</a>. If the argument
  * node-set is empty, the first node has no <a
- * href="http://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a>, or the namespace URI of
- * the <a href="http://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a> is null, an empty
+ * href="https://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a>, or the namespace URI of
+ * the <a href="https://www.w3.org/TR/xpath#dt-expanded-name" target="_top">expanded-name</a> is null, an empty
  * string is returned. If the argument is omitted, it defaults to a
  * node-set with the context node as its only member.
  * </p>
@@ -81,7 +81,7 @@ import org.jaxen.Navigator;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-namespace-uri"
+ * @see <a href="https://www.w3.org/TR/xpath#function-namespace-uri"
  *      target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class NamespaceUriFunction implements Function

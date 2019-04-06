@@ -62,7 +62,7 @@ import org.jaxen.FunctionCallException;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-last" target="_top">Section 4.1 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-last" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class LastFunction implements Function
 {

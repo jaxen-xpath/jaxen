@@ -65,7 +65,7 @@ import org.jaxen.Navigator;
  * 
  * <blockquote cite="http://www.w3.org/TR/xpath#function-translate">
  * <p>
- * The <b><a href="http://www.w3.org/TR/xpath#function-translate">translate</a></b> function
+ * The <b><a href="https://www.w3.org/TR/xpath#function-translate">translate</a></b> function
  * returns the first argument string with occurrences of characters in
  * the second argument string replaced by the character at the
  * corresponding position in the third argument string. For example,
@@ -91,7 +91,7 @@ import org.jaxen.Navigator;
  * 
  * @author Jan Dvorak ( jan.dvorak @ mathan.cz )
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-translate"
+ * @see <a href="https://www.w3.org/TR/xpath#function-translate"
  *      target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class TranslateFunction implements Function

@@ -52,7 +52,7 @@ import java.util.List;
 
 /**
  * Represents an XPath function call expression. This is production 16 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-FunctionCall">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-FunctionCall">XPath 1.0 specification</a>:
  * 
  * <<pre>[16] FunctionCall ::= FunctionName '(' ( Argument ( ',' Argument )* )? ')'</pre>
  * 

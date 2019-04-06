@@ -73,7 +73,7 @@ import org.jaxen.Navigator;
  * 
  * <p>
  * More precisely, each character in the string (see <a
- * href="http://www.w3.org/TR/xpath#strings">[<b>3.6 Strings</b>]</a>) is considered to have a
+ * href="https://www.w3.org/TR/xpath#strings">[<b>3.6 Strings</b>]</a>) is considered to have a
  * numeric position: the position of the first character is 1, the
  * position of the second character is 2 and so on.
  * </p>
@@ -138,7 +138,7 @@ import org.jaxen.Navigator;
  * 
  * @author bob mcwhirter (bob @ werken.com)
  * 
- * @see <a href="http://www.w3.org/TR/xpath#function-substring"
+ * @see <a href="https://www.w3.org/TR/xpath#function-substring"
  *      target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringFunction implements Function

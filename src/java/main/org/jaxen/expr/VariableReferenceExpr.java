@@ -51,7 +51,7 @@ package org.jaxen.expr;
 
 /**
  * Represents an XPath variable reference. This is production 36 in the 
- * <a href="http://www.w3.org/TR/xpath#NT-VariableReference">XPath 1.0 specification</a>:
+ * <a href="https://www.w3.org/TR/xpath#NT-VariableReference">XPath 1.0 specification</a>:
  * 
  * <pre>[36] VariableReference ::= '$' QName</pre>
  * 

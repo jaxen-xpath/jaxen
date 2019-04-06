@@ -62,7 +62,7 @@ import org.jaxen.Navigator;
  * 
  * <blockquote cite="http://www.w3.org/TR/xpath#section-Boolean-Functions">
  * <p>
- * The <b><a href="http://www.w3.org/TR/xpath#function-boolean" target="_top">boolean</a></b>
+ * The <b><a href="https://www.w3.org/TR/xpath#function-boolean" target="_top">boolean</a></b>
  * function converts its argument to a boolean as follows:
  * </p>
  * 
@@ -96,7 +96,7 @@ import org.jaxen.Navigator;
  * </blockquote>
  * 
  * @author bob mcwhirter (bob @ werken.com)
- * @see <a href="http://www.w3.org/TR/xpath#function-boolean">Section 4.3 of the XPath Specification</a>
+ * @see <a href="https://www.w3.org/TR/xpath#function-boolean">Section 4.3 of the XPath Specification</a>
  */
 public class BooleanFunction implements Function
 {

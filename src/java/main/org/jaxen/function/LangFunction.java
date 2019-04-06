@@ -94,7 +94,7 @@ import org.jaxen.UnsupportedAxisException;
  * </blockquote>
  * 
  * @author Attila Szegedi (szegedia @ freemail.hu)
- * @see <a href="http://www.w3.org/TR/xpath#function-lang"
+ * @see <a href="https://www.w3.org/TR/xpath#function-lang"
  *      target="_top">XPath Specification</a>
  */
 public class LangFunction implements Function
