@@ -62,7 +62,7 @@ package org.jaxen.expr;
  *<td></td><td></td><td></td><td>| <a href="https://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&lt;=' <a href="https://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>
  * </tr>
  * <tr valign="baseline">
- * <td></td><td></td><td></td><td>| <a href="https://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&gt;=' <a href="https://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td>v * </tr></table>
+ * <td></td><td></td><td></td><td>| <a href="https://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a> '&gt;=' <a href="https://www.w3.org/TR/xpath#NT-AdditiveExpr">AdditiveExpr</a></td><td></td></tr></table>
  * 
  */
 public interface RelationalExpr extends BinaryExpr {

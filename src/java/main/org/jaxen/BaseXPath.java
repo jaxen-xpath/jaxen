@@ -216,12 +216,12 @@ public class BaseXPath implements XPath, Serializable
         return selectNodesForContext( context );
     }
 
-    /** Select only the first node selected by this XPath
-     *  expression.  If multiple nodes match, only one node will be
-     *  returned. The selected node will be the first
-     *  selected node in document-order, as defined by the XPath
-     *  specification.
-     *  </p>
+    /** 
+     * Select only the first node selected by this XPath
+     * expression.  If multiple nodes match, only one node will be
+     * returned. The selected node will be the first
+     * selected node in document-order, as defined by the XPath
+     * specification.
      *
      * @param node the node, node-set or Context object for evaluation. 
      *     This value can be null.
@@ -663,7 +663,6 @@ public class BaseXPath implements XPath, Serializable
      *  specification. If the expression selects a non-node-set
      *  (i.e. a number, boolean, or string) then a List
      *  containing just that one object is returned.
-     *  </p>
      *
      * @param context the Context which gets evaluated
      *
@@ -686,7 +685,6 @@ public class BaseXPath implements XPath, Serializable
      *  selected node in document-order, as defined by the XPath
      *  specification. If the XPath expression selects a double,
      *  String, or boolean, then that object is returned.
-     *  </p>
      *
      * @param context the Context against which this expression is evaluated
      *
@@ -694,7 +692,7 @@ public class BaseXPath implements XPath, Serializable
      *          by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
      *
-     *  @see #selectNodesForContext
+     * @see #selectNodesForContext
      */
     protected Object selectSingleNodeForContext(Context context) throws JaxenException
     {

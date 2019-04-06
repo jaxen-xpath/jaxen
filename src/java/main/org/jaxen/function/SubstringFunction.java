@@ -130,8 +130,7 @@ import org.jaxen.Navigator;
  * </p>
  * </li>
  * 
- * <li>
- * <p>
+ * </ul>
  * 
  * <code>substring("12345", -1 div 0, 1 div 0)</code> returns
  * <code>""</code> </blockquote>
