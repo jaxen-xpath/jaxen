@@ -30,3 +30,5 @@ _Enter your GPG password when prompted_
 $ mvn deploy -Prelease -DskipRemoteStaging -DskipTests -Dadditionalparam="-Xdoclint:none" -DaltStagingDirectory=/tmp/jaxen-deploy -Dmaven.install.skip
 $ mvn deploy -Prelease -DskipTests -Dadditionalparam="-Xdoclint:none" -DaltStagingDirectory=/tmp/jaxen-deploy -Dmaven.install.skip
 ```
+
+Once the binary is available on Maven Central, run `mvn:site` and upload the generated content to IBiblio. 
