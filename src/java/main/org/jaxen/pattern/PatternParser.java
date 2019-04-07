@@ -78,6 +78,7 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
   * XSLT patterns
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+  * @deprecated will be removed in Jaxen 2.0
   */
 public class PatternParser 
 {

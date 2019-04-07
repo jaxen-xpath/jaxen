@@ -64,6 +64,7 @@ import org.jaxen.util.SingletonList;
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
   * @version $Revision$
+  * @deprecated will be removed in Jaxen 2.0
   */
 public class LocationPathPattern extends Pattern {
 

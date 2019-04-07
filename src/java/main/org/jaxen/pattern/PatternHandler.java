@@ -61,6 +61,7 @@ import org.jaxen.saxpath.Axis;
  *  different object models.
  *
  *  @author bob mcwhirter (bob@werken.com)
+  * @deprecated will be removed in Jaxen 2.0
  */
 public class PatternHandler extends JaxenHandler
 {
