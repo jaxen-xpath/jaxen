@@ -53,6 +53,7 @@ package org.jaxen.pattern;
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
   * @version $Revision$
+  * @deprecated will be removed in Jaxen 2.0
   */
 public abstract class NodeTest extends Pattern {
 
