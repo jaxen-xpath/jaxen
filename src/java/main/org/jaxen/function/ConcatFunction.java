@@ -77,7 +77,7 @@ public class ConcatFunction implements Function
     /** 
      * Concatenates the arguments and returns the resulting string.
      * Non-string items are first converted to strings as if by the 
-     * XPath <code>string()<code> function.
+     * XPath <code>string()</code> function.
      *
      * @param context the context at the point in the
      *         expression when the function is called
