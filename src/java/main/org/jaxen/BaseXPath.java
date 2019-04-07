@@ -192,20 +192,19 @@ public class BaseXPath implements XPath, Serializable
         return answer;
     }
     
-    /** Select all nodes that are selected by this XPath
+    /** 
+     *  List all the nodes selected by this XPath
      *  expression. If multiple nodes match, multiple nodes
-     *  will be returned. Nodes will be returned
+     *  are returned. Nodes are returned
      *  in document-order, as defined by the XPath
      *  specification. If the expression selects a non-node-set
      *  (i.e. a number, boolean, or string) then a List
      *  containing just that one object is returned.
-     *  </p>
      *
      * @param node the node, node-set or Context object for evaluation. 
      *     This value can be null.
      *
-     * @return the node-set of all items selected
-     *          by this XPath expression
+     * @return the node-set of all items selected by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
      *
      * @see #selectNodesForContext
@@ -217,8 +216,8 @@ public class BaseXPath implements XPath, Serializable
     }
 
     /** 
-     * Select only the first node selected by this XPath
-     * expression.  If multiple nodes match, only one node will be
+     * Return the first node selected by this XPath
+     * expression. If multiple nodes match, only one node is
      * returned. The selected node will be the first
      * selected node in document-order, as defined by the XPath
      * specification.
