@@ -56,11 +56,10 @@ import org.jaxen.FunctionCallException;
 import org.jaxen.Navigator;
 
 /**
- *  <p><b>4.4</b> <code><i>number</i> ceiling(<i>number</i>)</code> 
+ *  <p><b>4.4</b> <code><i>number</i> ceiling(<i>number</i>)</code></p>
  * <blockquote cite="http://www.w3.org/TR/xpath">
- * <p>
  *
- * <p><q>The ceiling function returns the smallest 
+ * <p>The ceiling function returns the smallest 
  *   (closest to negative infinity) number that is not less 
  *   than the argument and that is an integer....If the argument 
  *   is NaN, then NaN is returned. If the argument is positive infinity, 
@@ -69,8 +68,8 @@ import org.jaxen.Navigator;
  *   then positive zero is returned. 
  *   If the argument is negative zero, then negative zero is returned. 
  *   If the argument is less than zero, but greater than -1, 
- *   then negative zero is returned.</q>
- * </p>
+ *   then negative zero is returned.
+ * </p></blockquote>
  * 
  *  @author bob mcwhirter (bob @ werken.com)
  *  
