@@ -31,4 +31,6 @@ $ mvn deploy -Prelease -DskipRemoteStaging -DskipTests -Dadditionalparam="-Xdocl
 $ mvn deploy -Prelease -DskipTests -Dadditionalparam="-Xdoclint:none" -DaltStagingDirectory=/tmp/jaxen-deploy -Dmaven.install.skip
 ```
 
+Then login to [https://oss.sonatype.org/#stagingRepositories](https://oss.sonatype.org/#stagingRepositories) and release the repository. 
+
 Once the binary is available on Maven Central, run `mvn:site` and upload the generated content to IBiblio. 
