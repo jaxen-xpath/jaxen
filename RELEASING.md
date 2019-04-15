@@ -1,14 +1,9 @@
-Jaxen hasn't been released since Codehaus went away. A new release process that goes straight to Maven Central is in development but has not yet been tested. For now these are just notes that may or may not work.
+Jaxen hasn't been released since Codehaus went away. A new release process that goes straight to Maven Central is in development, but has not yet been fully debugged. For now these are incomplete notes.
 
 * You will need to install GPG and set up GPG credentials
 * You will need permissions on Sonatype to release jaxen.
 
-Tagging a release. 
-
-How to push a snapshot.
-
-
-How to push a release.
+Send a PR removing the SNAPSHOT from the version. Do not merge this yet.
 
 In the jaxen directory:
 
@@ -32,5 +27,9 @@ $ mvn deploy -Prelease -DskipTests -Dadditionalparam="-Xdoclint:none" -DaltStagi
 ```
 
 Then login to [https://oss.sonatype.org/#stagingRepositories](https://oss.sonatype.org/#stagingRepositories) and release the repository. 
+
+Now merge the version PR on Github.
+
+Create a release on Github in the form v1.2.0. 
 
 Once the binary is available on Maven Central, run `mvn:site` and upload the generated content to IBiblio. 
