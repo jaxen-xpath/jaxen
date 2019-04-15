@@ -7,7 +7,7 @@ DOM, XOM, dom4j, and JDOM. It is also possible to write
 adapters that treat non-XML trees such as compiled Java byte code
 or Java beans as XML, thus enabling you to query these trees with XPath too.
 
-The current version is *1.1.6*.
+The current version is *1.2.0*.
 
 ## Adding Jaxen to your build
 
@@ -17,7 +17,7 @@ Jaxen's Maven group ID is `jaxen` and its artifact ID is `jaxen`. To add a depen
 <dependency>
   <groupId>jaxen</groupId>
   <artifactId>jaxen</artifactId>
-  <version>1.1.6</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -25,7 +25,7 @@ To add a dependency using Gradle:
 
 ```gradle
 dependencies {
-  compile 'jaxen:jaxen:1.1.6'
+  compile 'jaxen:jaxen:1.2.0'
 }
 ```
 
