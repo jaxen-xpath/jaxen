@@ -73,7 +73,6 @@ public class JaxenTests {
         result.addTest(DOM4JTests.suite());
         result.addTest(XOMTests.suite());
         result.addTest(JavaBeanTests.suite());
-        result.addTest(PatternTests.suite());
         result.addTest(BaseTests.suite());
         result.addTest(HelpersTests.suite());
         result.addTest(ExprTests.suite());
