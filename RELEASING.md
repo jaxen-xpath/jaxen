@@ -1,14 +1,8 @@
-Warning: some details may be incomplete:
 
 * You will need to install GPG and set up GPG credentials
 * You will need permissions on Sonatype OSSRH to release jaxen.
 
-Tagging a release. 
-
-How to push a snapshot.
-
-
-How to push a release.
+Send a PR removing the SNAPSHOT from the version. Do not merge this yet.
 
 In the jaxen directory:
 
@@ -24,4 +18,9 @@ $ mvn deploy -Prelease -DaltStagingDirectory=/tmp/jaxen-deploy -Dmaven.install.s
 
 Once that's done, login to [OSSRH](https://oss.sonatype.org/#welcome) and release the repository. 
 
+Now merge the version PR on Github.
+
+Create a release on Github in the form v1.2.0. 
+
 Once the binary is available on Maven Central, run `mvn:site` and upload the generated content to IBiblio. 
+

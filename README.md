@@ -10,7 +10,8 @@ DOM, XOM, dom4j, and JDOM. It is also possible to write
 adapters that treat non-XML trees such as compiled Java byte code
 or Java beans as XML, thus enabling you to query these trees with XPath too.
 
-The current version is *1.2.0*.
+The current version is *1.2.0*. This release requires Java 1.4 or later.
+If you're still using Java 1.3 or earlier, try Jaxen 1.1.6. 
 
 ## Adding Jaxen to your build
 
