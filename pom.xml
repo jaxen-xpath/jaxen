@@ -31,6 +31,7 @@
   <modules>
     <module>core</module>
     <module>javabean</module>
+    <module>dom4j</module>
   </modules>
 
   <mailingLists>
@@ -200,12 +201,6 @@
   </organization>
 
   <dependencies>
-    <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <groupId>jdom</groupId>
       <artifactId>jdom</artifactId>
