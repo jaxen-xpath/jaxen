@@ -32,6 +32,7 @@
     <module>core</module>
     <module>javabean</module>
     <module>dom4j</module>
+    <module>xom</module>
     <module>integration-tests</module>
   </modules>
 
