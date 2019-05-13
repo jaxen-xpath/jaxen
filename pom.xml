@@ -33,6 +33,7 @@
     <module>javabean</module>
     <module>dom4j</module>
     <module>xom</module>
+    <module>jdom</module>
     <module>integration-tests</module>
   </modules>
 
@@ -204,12 +205,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>jdom</groupId>
-      <artifactId>jdom</artifactId>
-      <version>1.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>
       <version>1.3.02</version>
@@ -220,12 +215,6 @@
       <artifactId>xercesImpl</artifactId>
       <version>2.6.2</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>xom</groupId>
-      <artifactId>xom</artifactId>
-      <version>1.0</version>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
