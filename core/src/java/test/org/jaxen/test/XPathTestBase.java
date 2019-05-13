@@ -62,8 +62,6 @@ import java.util.List;
 
 public abstract class XPathTestBase extends TestCase
 {
-    protected static String VAR_URI   = "http://jaxen.org/test-harness/var";
-    protected static String TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean verbose = false;
     protected static boolean debug = false;
