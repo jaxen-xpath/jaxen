@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright 2005 Elliotte Rusty Harold.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,77 +46,39 @@
  */
 
 
-
 package org.jaxen.test;
 
-import junit.framework.TestCase;
 
-import org.jaxen.JaxenException;
-import org.jaxen.pattern.Pattern;
-import org.jaxen.pattern.PatternParser;
-import org.jaxen.saxpath.SAXPathException;
-import org.jaxen.saxpath.XPathSyntaxException;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
-public class PatternHandlerTest extends TestCase
-{
+/**
+ * <p>
+ *   Collect all the Jaxen tests into one suite.
+ * </p>
+ * 
+ * @author Elliotte Rusty Harold
+ * @version 1.1b9
+ *
+ */
+public class JaxenTests {
     
-    String[] paths = {
-        "foo",
-        "*",
-        "/",
-        "foo/bar",
-        "foo//bar",
-        "/*/foo",
-        "*[@name]",
-        "foo/bar[1]",
-        "foo[bar=\"contents\"]",
-        "foo[bar='contents']",
-        "foo|bar",
-        "foo/title | bar/title | xyz/title",
-        "/foo//*",
-        "foo/text()",
-        "foo/@*",
-    };
-
-    String[] bogusPaths = { };
-    
-    String[] ignore_bogusPaths = {        
-        // this path is bogus because of a trailing /
-        "/foo/bar/",
+    public static Test suite() {
+        TestSuite result = new TestSuite();
+        result.addTest(SAXPathTests.suite());
+        result.addTest(FunctionTests.suite());
+        result.addTest(CoreTests.suite());
+        result.addTest(DOMTests.suite());
+        result.addTest(JDOMTests.suite());
+        result.addTest(DOM4JTests.suite());
+        result.addTest(XOMTests.suite());
+        result.addTest(BaseTests.suite());
+        result.addTest(HelpersTests.suite());
+        result.addTest(ExprTests.suite());
+        result.addTest(UtilTests.suite());
+        return result;
         
-        // This path is bogus because '/' is not division, but
-        // rather just the step separator.
-        "12 + sum(count(//author),count(//author/attribute::*)) / 2",
-        "id()/2",
-        "+"
-    };
+    }
+
     
-    public PatternHandlerTest(String name)
-    {
-        super( name );
-    }
-
-    public void testValidPaths() throws JaxenException, SAXPathException
-    {
-        for ( int i = 0; i < paths.length; i++ ) {
-            String path = paths[i];
-            PatternParser.parse( path );
-        }
-    }
-
-    public void testBogusPaths() throws JaxenException, SAXPathException
-    {
-        for ( int i = 0; i < bogusPaths.length; i++ ) {
-            String path = bogusPaths[i];
-            try
-            {                    
-                Pattern pattern = PatternParser.parse( path );
-                fail( "Parsed bogus path as: " + pattern );
-            }
-            catch (XPathSyntaxException e)
-            {                    
-            }
-        }
-
-    }
 }
