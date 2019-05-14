@@ -52,7 +52,6 @@
     <developer>
       <id>bob</id>
       <name>Bob McWhirter</name>
-      <email>bob@eng.werken.com</email>
       <organization>The Werken Company</organization>
     </developer>
     <developer>
@@ -120,7 +119,7 @@
       <id>elharo</id>
       <name>Elliotte Rusty Harold</name>
       <email>elharo@ibiblio.org</email>
-      <url>http://www.elharo.com/</url>
+      <url>https://www.elharo.com/</url>
       <organization>Cafe au Lait</organization>
     </developer>
   </developers>
