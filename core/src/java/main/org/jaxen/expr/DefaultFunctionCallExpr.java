@@ -56,11 +56,7 @@ import org.jaxen.Context;
 import org.jaxen.Function;
 import org.jaxen.JaxenException;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
+class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
 {
 
     private static final long serialVersionUID = -4747789292572193708L;

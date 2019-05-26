@@ -69,7 +69,7 @@ import org.jaxen.function.BooleanFunction;
  * <p>
  * There is no rule that the same predicate may not 
  * appear twice in an XPath expression, nor does this class enforce any such rule.
- * This is implemented more as a list than a set. However, adding the swme predicate 
+ * This is implemented more as a list than a set. However, adding the same predicate 
  * twice should have no effect on the final result other than slowing it down.
  * </p>
  */

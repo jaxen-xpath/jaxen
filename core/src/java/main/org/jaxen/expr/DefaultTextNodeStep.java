@@ -45,24 +45,18 @@
  * $Id$
  */
 
-
-
 package org.jaxen.expr;
 
 import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
+class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
 {
 
     private static final long serialVersionUID = -3821960984972022948L;
 
-    public DefaultTextNodeStep(IterableAxis axis, PredicateSet predicateSet )
+    DefaultTextNodeStep(IterableAxis axis, PredicateSet predicateSet )
     {
         super( axis, predicateSet );
     }

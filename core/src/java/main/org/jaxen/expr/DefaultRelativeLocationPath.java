@@ -49,15 +49,12 @@
 
 package org.jaxen.expr;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultRelativeLocationPath extends DefaultLocationPath 
+class DefaultRelativeLocationPath extends DefaultLocationPath 
 {
 
     private static final long serialVersionUID = -1006862529366150615L;
 
+    @Override
     public String toString()
     {
         return "[(DefaultRelativeLocationPath): " + super.toString() + "]";

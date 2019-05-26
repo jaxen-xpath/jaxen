@@ -66,7 +66,7 @@ import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.Operator;
 
 /**
- * The concrete implementation of the XPathFactory anstract factory.
+ * The concrete implementation of the XPathFactory abstract factory.
  *
  *
  * @see XPathFactory

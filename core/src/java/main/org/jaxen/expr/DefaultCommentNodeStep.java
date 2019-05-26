@@ -53,19 +53,16 @@ import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeStep
+class DefaultCommentNodeStep extends DefaultStep implements CommentNodeStep
 {
 
     private static final long serialVersionUID = 4340788283861875606L;
-    public DefaultCommentNodeStep(IterableAxis axis, PredicateSet predicateSet)
+    DefaultCommentNodeStep(IterableAxis axis, PredicateSet predicateSet)
     {
         super( axis, predicateSet );
     }
 
+    @Override
     public String toString()
     {
         return "[(DefaultCommentNodeStep): " + getAxis() + "]";
