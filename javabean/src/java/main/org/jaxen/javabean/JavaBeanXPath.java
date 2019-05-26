@@ -106,7 +106,7 @@ public class JavaBeanXPath extends BaseXPath
 
         if ( node instanceof List )
         {
-            List newList = new ArrayList();
+            List<Element> newList = new ArrayList<Element>();
 
             for ( Iterator listIter = ((List)node).iterator();
                   listIter.hasNext(); )
@@ -131,9 +131,9 @@ public class JavaBeanXPath extends BaseXPath
         }
         else if ( result instanceof Collection )
         {
-            List newList = new ArrayList();
+            List<Object> newList = new ArrayList<Object>();
 
-            for ( Iterator listIter = ((Collection)result).iterator();
+            for ( Iterator<Object> listIter = ((Collection)result).iterator();
                   listIter.hasNext(); )
             {
                 Object member = listIter.next();

@@ -125,7 +125,7 @@ public class XPathReaderFactory
      */
     public static XPathReader createReader(String className) throws SAXPathException
     {
-        Class readerClass  = null;
+        Class<?> readerClass  = null;
         XPathReader reader = null;
 
         try
