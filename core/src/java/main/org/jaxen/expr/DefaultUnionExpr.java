@@ -64,8 +64,7 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 
     private static final long serialVersionUID = 7629142718276852707L;
 
-    public DefaultUnionExpr(Expr lhs,
-                            Expr rhs)
+    DefaultUnionExpr(Expr lhs, Expr rhs)
     {
         super( lhs,
                rhs );
@@ -76,6 +75,7 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         return "|";
     }
 
+    @Override
     public String toString()
     {
         return "[(DefaultUnionExpr): " + getLHS() + ", " + getRHS() + "]";
