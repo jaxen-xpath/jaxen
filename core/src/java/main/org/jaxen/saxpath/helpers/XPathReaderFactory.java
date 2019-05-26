@@ -46,9 +46,6 @@
  * $Id$
  */
 
-
-
-
 package org.jaxen.saxpath.helpers;
 
 import org.jaxen.saxpath.SAXPathException;

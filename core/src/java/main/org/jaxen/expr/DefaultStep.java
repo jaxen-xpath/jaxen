@@ -57,12 +57,12 @@ import org.jaxen.UnsupportedAxisException;
 import org.jaxen.expr.iter.IterableAxis;
 import org.jaxen.saxpath.Axis;
 
-public abstract class DefaultStep implements Step
+abstract class DefaultStep implements Step
 {
     private IterableAxis axis;
     private PredicateSet predicates;
 
-    public DefaultStep(IterableAxis axis, PredicateSet predicates)
+    DefaultStep(IterableAxis axis, PredicateSet predicates)
     {
         this.axis = axis;
         this.predicates = predicates;

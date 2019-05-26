@@ -84,7 +84,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b10
+ * @version 2.0
  *
  */
 public class BaseXPathTest extends TestCase {
@@ -145,7 +145,7 @@ public class BaseXPathTest extends TestCase {
         html.appendChild(a2);
         doc.appendChild(html);
 
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(a2, result.get(0));
     }
@@ -194,7 +194,7 @@ public class BaseXPathTest extends TestCase {
         BaseXPath xpath = new DOMXPath("(/descendant-or-self::node())");
         
         doc.appendChild(doc.createElement("root"));
-        List result = (List) xpath.evaluate(doc);
+        List<?> result = (List) xpath.evaluate(doc);
         assertEquals(2, result.size());
         
     }
@@ -232,7 +232,7 @@ public class BaseXPathTest extends TestCase {
         root.appendChild(parent);
         parent.appendChild(child);
         
-        List result = xpath.selectNodes(child);
+        List<?> result = xpath.selectNodes(child);
         assertEquals(2, result.size());
         assertEquals(root, result.get(0));   
         assertEquals(parent, result.get(1));
@@ -252,7 +252,7 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         root.appendChild(child3);
         
-        List result = xpath.selectNodes(child3);
+        List<?> result = xpath.selectNodes(child3);
         assertEquals(2, result.size());
         assertEquals(child1, result.get(0));   
         assertEquals(child2, result.get(1));
@@ -276,7 +276,7 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         parent2.appendChild(child3);
         
-        List result = xpath.selectNodes(child3);
+        List<?> result = xpath.selectNodes(child3);
         assertEquals(3, result.size());
         assertEquals(parent1, result.get(0));   
         assertEquals(child1, result.get(1));   
@@ -297,7 +297,7 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         root.appendChild(child3);
         
-        List result = xpath.selectNodes(child3);
+        List<?> result = xpath.selectNodes(child3);
         assertEquals(1, result.size());  
         assertEquals(child2, result.get(0));
         
@@ -316,7 +316,7 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         child2.appendChild(child3);
         
-        List result = xpath.selectNodes(child3);
+        List<?> result = xpath.selectNodes(child3);
         assertEquals(1, result.size());  
         assertEquals(child2, result.get(0));
         
@@ -333,7 +333,7 @@ public class BaseXPathTest extends TestCase {
         root.appendChild(parent);
         parent.appendChild(child);
         
-        List result = xpath.selectNodes(child);
+        List<?> result = xpath.selectNodes(child);
         assertEquals(3, result.size());
         assertEquals(root, result.get(0));   
         assertEquals(parent, result.get(1));
@@ -363,7 +363,7 @@ public class BaseXPathTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertEquals(x1, result.get(0));   
         assertEquals(x2, result.get(1));   
@@ -394,7 +394,7 @@ public class BaseXPathTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertEquals(x1, result.get(0));   
         assertEquals(x2, result.get(1));   
@@ -425,7 +425,7 @@ public class BaseXPathTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertEquals(x1, result.get(0));   
         assertEquals(x2, result.get(1));   
@@ -463,7 +463,7 @@ public class BaseXPathTest extends TestCase {
         a4.setNodeValue("4");
         x4.setAttributeNode(a4);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertEquals(a1, result.get(0));   
         assertEquals(a2, result.get(1));   
@@ -501,10 +501,10 @@ public class BaseXPathTest extends TestCase {
         a4.setNodeValue("http://www.example.org/");
         x4.setAttributeNode(a4);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(8, result.size());
-        Iterator iterator = result.iterator();
-        StringBuffer sb = new StringBuffer(4);
+        Iterator<?> iterator = result.iterator();
+        StringBuilder sb = new StringBuilder(4);
         while (iterator.hasNext()) {
             NamespaceNode ns = (NamespaceNode) iterator.next();
             if (ns.getNodeValue().equals("http://www.example.org/")) {
@@ -539,7 +539,7 @@ public class BaseXPathTest extends TestCase {
         a4.setNodeValue("4");
         x1.setAttributeNode(a4);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertTrue(result.contains(a1));
         assertTrue(result.contains(a2));
@@ -567,7 +567,7 @@ public class BaseXPathTest extends TestCase {
         root.appendChild(child);
         
         BaseXPath xpath = new DOMXPath("ancestor::*/@xml:*");
-        List result = xpath.selectNodes(child);
+        List<?> result = xpath.selectNodes(child);
         assertEquals(2, result.size());
         assertEquals(p0, result.get(0));
         assertEquals(p1, result.get(1));
@@ -603,7 +603,7 @@ public class BaseXPathTest extends TestCase {
         a4.setNodeValue("4");
         x4.setAttributeNode(a4);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(8, result.size());
         assertEquals(x1, result.get(0));   
         assertEquals(a1, result.get(1));   
@@ -636,7 +636,7 @@ public class BaseXPathTest extends TestCase {
         x3.setNodeValue("3");
         x3.setAttributeNode(a3);
         
-        List result = xpath.selectNodes(x3);
+        List<?> result = xpath.selectNodes(x3);
         assertEquals(2, result.size());
         assertEquals(a1, result.get(0));   
         assertEquals(a2, result.get(1)); 
@@ -653,7 +653,7 @@ public class BaseXPathTest extends TestCase {
         a.setAttributeNode(test);
         doc.appendChild(a);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size()); 
         
     }
@@ -668,7 +668,7 @@ public class BaseXPathTest extends TestCase {
         a.setAttributeNode(test);
         doc.appendChild(a);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());   
         
     } 
@@ -695,7 +695,7 @@ public class BaseXPathTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertEquals(x1, result.get(0));   
         assertEquals(x2, result.get(1));   
@@ -725,7 +725,7 @@ public class BaseXPathTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(6, result.size());
         
     }    
@@ -819,7 +819,7 @@ public class BaseXPathTest extends TestCase {
         BaseXPath xpath = new DOMXPath("/b/c");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         doc.appendChild(a);
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertTrue(! xpath.booleanValueOf(result));
         
     } 
@@ -878,7 +878,7 @@ public class BaseXPathTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(6, result.size());
         assertEquals(a, result.get(0));   
         assertEquals(x1, result.get(1));   
@@ -1046,7 +1046,7 @@ public class BaseXPathTest extends TestCase {
         doc.appendChild(root);
         root.setAttribute("name", "value");
         XPath xpath = new DOMXPath("/*/attribute::* | /*/namespace::node()");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
         assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
         assertTrue(((org.w3c.dom.Node) result.get(2)).getNodeType() == Node.ATTRIBUTE_NODE);
@@ -1075,7 +1075,7 @@ public class BaseXPathTest extends TestCase {
         root.appendChild(child);
         
         XPath xpath = new DOMXPath("/*/*/namespace::node() | //attribute::* ");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());
         assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Node.ATTRIBUTE_NODE);
         assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
@@ -1094,7 +1094,7 @@ public class BaseXPathTest extends TestCase {
         context1.addNamespace("a", "http://www.a.com/");
         context1.addNamespace("b", "http://www.b.com/");
         xpath.setNamespaceContext(context1);
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(b, result.get(0));
    
@@ -1105,14 +1105,14 @@ public class BaseXPathTest extends TestCase {
         
         doc = builder.parse(new File("xml/testNamespaces.xml"));
         XPath xpath = new DOMXPath("/Template/Application2/namespace::*/parent::*");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
    
     }
     
     public void testSelectNodesReturnsANonNodeSet() throws JaxenException {
         XPath xpath = new DOMXPath("1 + 2 + 3");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
     }
     
@@ -1124,7 +1124,7 @@ public class BaseXPathTest extends TestCase {
         a.appendChild(b);
         
         XPath xpath = new DOMXPath("..");
-        List result = (List) xpath.evaluate(b);
+        List<?> result = (List) xpath.evaluate(b);
         assertEquals(1, result.size());
         assertEquals(a, result.get(0));
    
@@ -1176,7 +1176,7 @@ public class BaseXPathTest extends TestCase {
         List context = new ArrayList();
         context.add(b);
         context.add(c);
-        List result = xpath.selectNodes(context);
+        List<?> result = xpath.selectNodes(context);
         assertEquals(z, result.get(0));
     }
     
