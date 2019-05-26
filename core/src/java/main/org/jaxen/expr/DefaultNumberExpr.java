@@ -54,9 +54,7 @@ import org.jaxen.Context;
 
 class DefaultNumberExpr extends DefaultExpr implements NumberExpr
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = -6021898973386269611L;
     private Double number;
 

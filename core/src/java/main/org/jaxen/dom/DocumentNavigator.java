@@ -102,9 +102,6 @@ public class DocumentNavigator extends DefaultNavigator
     // Constants.
     ////////////////////////////////////////////////////////////////////
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 8460943068889528115L; 
     
     private final static DocumentNavigator SINGLETON = new DocumentNavigator();

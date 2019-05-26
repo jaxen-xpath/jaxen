@@ -110,7 +110,7 @@ public class ContextTest extends TestCase
         Context original = new Context( this.support );
         original.setNodeSet( this.nodeSet );
         original.setPosition(3);
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<String>();
         list.add("1");
         list.add("2");
         list.add("3");

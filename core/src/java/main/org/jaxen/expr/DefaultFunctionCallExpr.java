@@ -62,9 +62,7 @@ import org.jaxen.JaxenException;
  */
 public class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = -4747789292572193708L;
     private String prefix;
     private String functionName;

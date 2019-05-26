@@ -56,6 +56,7 @@ abstract class DefaultAdditiveExpr extends DefaultArithExpr implements AdditiveE
                rhs );
     }
 
+    @Override
     public String toString()
     {
         return "[(" + getClass().getName() + "): " + getLHS() + ", " + getRHS() + "]";

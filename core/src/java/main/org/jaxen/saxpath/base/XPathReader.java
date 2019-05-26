@@ -65,7 +65,7 @@ import org.jaxen.saxpath.helpers.DefaultXPathHandler;
  */
 public class XPathReader implements org.jaxen.saxpath.XPathReader
 {
-    private ArrayList  tokens;
+    private ArrayList<Token>  tokens;
     private XPathLexer lexer;
 
     private XPathHandler handler;
@@ -113,7 +113,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     void setUpParse(String xpath)
     {
-        this.tokens = new ArrayList();
+        this.tokens = new ArrayList<Token>();
         this.lexer = new XPathLexer( xpath );
     }
 
@@ -1056,7 +1056,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
         }
 
-        return (Token) tokens.get( position - 1 );
+        return tokens.get( position - 1 );
     }
 
     private boolean isNodeTypeName(Token name)

@@ -55,9 +55,6 @@ import java.io.Serializable;
  */
 public class ContextSupport implements Serializable {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 4494082174713652559L;
 
     /** Function context. */

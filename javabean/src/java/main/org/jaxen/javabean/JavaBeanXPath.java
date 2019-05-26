@@ -77,9 +77,7 @@ import java.util.Iterator;
  */
 public class JavaBeanXPath extends BaseXPath
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = -1567521943360266313L;
 
     /** Construct given an XPath expression string.

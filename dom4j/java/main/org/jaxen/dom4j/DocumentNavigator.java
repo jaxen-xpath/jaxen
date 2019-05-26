@@ -91,9 +91,7 @@ import org.jaxen.util.SingleObjectIterator;
 public class DocumentNavigator extends DefaultNavigator implements NamedAccessNavigator
 {
     
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 5582300797286535936L;
     private transient SAXReader reader;
 
