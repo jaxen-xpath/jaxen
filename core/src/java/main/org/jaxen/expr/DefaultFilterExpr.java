@@ -54,11 +54,7 @@ import java.util.List;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
+class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predicated
 {
 
     private static final long serialVersionUID = -549640659288005735L;

@@ -52,16 +52,12 @@ package org.jaxen.expr;
 import org.jaxen.ContextSupport;
 import org.jaxen.expr.iter.IterableAxis;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
+class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
 {
 
     private static final long serialVersionUID = 292886316770123856L;
     
-    public DefaultAllNodeStep(IterableAxis axis, PredicateSet predicateSet)
+    DefaultAllNodeStep(IterableAxis axis, PredicateSet predicateSet)
     {
         super( axis, predicateSet );
     }

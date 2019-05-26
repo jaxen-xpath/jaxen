@@ -53,20 +53,16 @@ import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultProcessingInstructionNodeStep extends DefaultStep
+class DefaultProcessingInstructionNodeStep extends DefaultStep
     implements ProcessingInstructionNodeStep
 {
 
     private static final long serialVersionUID = -4825000697808126927L;
     private String name;
 
-    public DefaultProcessingInstructionNodeStep(IterableAxis axis,
-                                                String name,
-                                                PredicateSet predicateSet)
+    DefaultProcessingInstructionNodeStep(IterableAxis axis,
+                                         String name,
+                                          PredicateSet predicateSet)
     {
         super( axis, predicateSet );
 

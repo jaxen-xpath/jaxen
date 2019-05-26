@@ -59,11 +59,7 @@ import org.jaxen.Context;
 import org.jaxen.JaxenException;
 import org.jaxen.XPathSyntaxException;
 
-/**
- * @deprecated this class will become non-public in the future;
- *     use the interface instead
- */
-public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
+class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 {
 
     private static final long serialVersionUID = 7629142718276852707L;
