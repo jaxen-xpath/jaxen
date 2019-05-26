@@ -59,9 +59,6 @@ package org.jaxen;
 public class JaxenException extends org.jaxen.saxpath.SAXPathException
 {
     
-    /**
-     * 
-     */
     private static final long serialVersionUID = 7132891439526672639L;
     static double javaVersion = 1.4;
     

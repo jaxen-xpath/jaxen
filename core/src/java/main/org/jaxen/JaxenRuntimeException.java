@@ -57,9 +57,7 @@ import java.io.PrintWriter;
  */
 public class JaxenRuntimeException extends RuntimeException
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = -930309761511911193L;
     
     private Throwable cause;

@@ -51,31 +51,30 @@ package org.jaxen.expr;
 
 class DefaultEqualsExpr extends DefaultEqualityExpr {
     
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8327599812627931648L;
+
+  private static final long serialVersionUID = -8327599812627931648L;
     
   DefaultEqualsExpr( Expr lhs, Expr rhs )
-    {
+  {
     super( lhs, rhs );
-    }
+  }
 
   public String getOperator()
     {
     return "=";
     }
 
+  @Override
   public String toString()
-    {
+  {
     return "[(DefaultEqualsExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
+  }
   
 
   
   protected boolean evaluateObjectObject( Object lhs, Object rhs )
   {
-      if( eitherIsNumber( lhs, rhs ) )
+      if ( eitherIsNumber( lhs, rhs ) )
       {
           // Double.equals does not implement standard IEEE 754 comparisons but == does
           Double left = (Double) lhs;

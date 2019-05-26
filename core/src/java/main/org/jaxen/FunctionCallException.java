@@ -60,9 +60,6 @@ package org.jaxen;
 public class FunctionCallException extends JaxenException
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 7908649612495640943L;
 
     /**

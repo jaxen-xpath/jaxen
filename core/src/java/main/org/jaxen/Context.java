@@ -65,9 +65,6 @@ import java.util.List;
  */
 public class Context implements Serializable {
     
-    /**
-     * 
-     */
     private static final long serialVersionUID = 2315979994685591055L;
 
     // ----------------------------------------------------------------------

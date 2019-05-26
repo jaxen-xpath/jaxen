@@ -59,9 +59,7 @@ import org.jaxen.expr.iter.IterableAxis;
  */
 public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeStep
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 4340788283861875606L;
     public DefaultCommentNodeStep(IterableAxis axis, PredicateSet predicateSet)
     {

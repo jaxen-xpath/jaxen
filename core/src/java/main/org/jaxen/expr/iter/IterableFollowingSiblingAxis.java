@@ -55,9 +55,7 @@ import org.jaxen.UnsupportedAxisException;
 
 public class IterableFollowingSiblingAxis extends IterableAxis
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 4412705219546610009L;
 
     public IterableFollowingSiblingAxis(int value)

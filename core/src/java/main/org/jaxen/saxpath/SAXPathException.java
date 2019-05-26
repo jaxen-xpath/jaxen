@@ -58,9 +58,6 @@ import java.io.PrintWriter;
 public class SAXPathException extends Exception
 {
     
-    /**
-     * 
-     */
     private static final long serialVersionUID = 4826444568928720706L;
     
     private static double javaVersion = 1.4;

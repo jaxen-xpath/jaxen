@@ -65,9 +65,7 @@ import org.jaxen.XPathSyntaxException;
  */
 public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 7629142718276852707L;
 
     public DefaultUnionExpr(Expr lhs,
@@ -89,7 +87,7 @@ public class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
-        List results = new ArrayList();
+        List<Object> results = new ArrayList<Object>();
 
         try {
             List lhsResults = (List) getLHS().evaluate( context );

@@ -56,9 +56,7 @@ import org.jaxen.UnsupportedAxisException;
 public class IterableAncestorAxis extends IterableAxis
 {
 
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 1L;
 
     public IterableAncestorAxis(int value)
