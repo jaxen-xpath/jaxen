@@ -63,7 +63,7 @@ public interface XPath
     /** Evaluate this XPath against the given context.
      *
      *  <p>
-     *  The context of evaluation my be a <em>document</em>,
+     *  The context of evaluation may be a <em>document</em>,
      *  an <em>element</em>, or a set of <em>elements</em>.
      *  </p>
      *
@@ -101,30 +101,6 @@ public interface XPath
     // ----------------------------------------------------------------------
     //     Advanced Evaluation
     // ----------------------------------------------------------------------
-    
-    /** Retrieve a string-value interpretation of this XPath
-     *  expression when evaluated against the given context.
-     *
-     *  <p>
-     *  The string-value of the expression is determined per
-     *  the <code>string(..)</code> core function as defined
-     *  in the XPath specification.  This means that an expression
-     *  that selects more than one nodes will return the string value
-     *  of the first node in the node set..
-     *  </p>
-     *
-     *  @deprecated use {@link #stringValueOf(Object)} instead
-     *
-     *  @param context the node, node-set or Context object for evaluation. 
-     *         This value can be null.
-     *
-     *  @return the string-value of this expression
-     *
-     *  @throws JaxenException if an error occurs while attempting
-     *          to evaluate the expression
-     */
-    String valueOf(Object context)
-        throws JaxenException;
 
     /** Retrieve a string-value interpretation of this XPath
      *  expression when evaluated against the given context.
@@ -208,7 +184,7 @@ public interface XPath
      *  <p>
      *  <strong>NOTE:</strong> In most cases, nodes will be returned
      *  in document-order, as defined by the XML Canonicalization
-     *  specification.  The exception occurs when using XPath
+     *  specification. The exception occurs when using XPath
      *  expressions involving the <code>union</code> operator
      *  (denoted with the pipe '|' character).
      *  </p>
@@ -218,8 +194,7 @@ public interface XPath
      *  @param context the node, node-set or Context object for evaluation. 
      *     This value can be null.
      *
-     *  @return the node-set of all items selected
-     *          by this XPath expression.
+     *  @return the node-set of all items selected by this XPath expression
      *
      *  @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
