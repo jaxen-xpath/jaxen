@@ -90,19 +90,5 @@ public class FunctionCallException extends JaxenException
     public FunctionCallException(String message, Exception nestedException) {
         super( message, nestedException );
     }
-       
-    /**
-     * <p>
-     * Returns the exception that caused this function call to fail.
-     * Use <code>getCause</code> instead.
-     * </p>
-     * 
-     * @return the exception that caused this function call to fail
-     * 
-     * @deprecated replaced by {@link #getCause()}
-     */
-    public Throwable getNestedException() {
-        return getCause();
-    }
     
 }
