@@ -616,7 +616,7 @@ public class NamespaceNode implements Node
      * @return null
      */
     public String getBaseURI() {
-        Class clazz = Node.class;
+        Class<Node> clazz = Node.class;
         try {
             Class[] args = new Class[0];
             Method getBaseURI = clazz.getMethod("getBaseURI", args);
@@ -690,7 +690,7 @@ public class NamespaceNode implements Node
         Node thisParent = this.getParentNode();
         Node thatParent = other.getParentNode();
         try {
-            Class clazz = Node.class;
+            Class<Node> clazz = Node.class;
             Class[] args = {clazz};
             Method isEqual = clazz.getMethod("isEqual", args);
             Object[] args2 = new Object[1];
@@ -728,7 +728,7 @@ public class NamespaceNode implements Node
         // It hardly seems worth the effort though.
         
         try {
-            Class clazz = Node.class;
+            Class<Node> clazz = Node.class;
             Class[] argTypes = {String.class};
             Method lookupPrefix = clazz.getMethod("lookupPrefix", argTypes);
             String[] args = {namespaceURI};
@@ -778,7 +778,7 @@ public class NamespaceNode implements Node
         // It hardly seems worth the effort though.
         
         try {
-            Class clazz = Node.class;
+            Class<Node> clazz = Node.class;
             Class[] argTypes = {String.class};
             Method lookupNamespaceURI = clazz.getMethod("lookupNamespaceURI", argTypes);
             String[] args = {prefix};
@@ -832,7 +832,7 @@ public class NamespaceNode implements Node
 
     
     // XXX userdata needs testing
-    private HashMap userData = new HashMap();
+    private HashMap<String, Object> userData = new HashMap<String, Object>();
 
     /**
      * Associates an object with a key. 
