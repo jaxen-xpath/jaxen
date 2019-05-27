@@ -11,9 +11,9 @@
     <version>2.0.0-BETA</version>
   </parent>
 
-  <artifactId>jaxen-jdom</artifactId>
+  <artifactId>jdom-navigator</artifactId>
   <packaging>bundle</packaging>
-  <name>jaxen-jdom</name>
+  <name>jdom-navigator</name>
   <description>A JDOM 1.0 navigator for Jaxen.</description>
 
   <dependencies>

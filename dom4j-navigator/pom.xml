@@ -11,16 +11,21 @@
     <version>2.0.0-BETA</version>
   </parent>
 
-  <artifactId>jaxen-javabean</artifactId>
+  <artifactId>dom4j-navigator</artifactId>
   <packaging>bundle</packaging>
-  <name>jaxen-javabean</name>
-  <description>A Javabean navigator for Jaxen.</description>
+  <name>dom4j-navigator</name>
+  <description>A dom4j navigator for Jaxen.</description>
 
   <dependencies>
     <dependency>
       <groupId>jaxen</groupId>
       <artifactId>jaxen</artifactId>
       <version>2.0.0-BETA</version>
+    </dependency>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.6.1</version>
     </dependency>
   </dependencies>
 

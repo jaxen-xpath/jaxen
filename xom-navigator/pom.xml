@@ -11,10 +11,10 @@
     <version>2.0.0-BETA</version>
   </parent>
 
-  <artifactId>jaxen-dom4j</artifactId>
+  <artifactId>xom-navigator</artifactId>
   <packaging>bundle</packaging>
-  <name>jaxen-dom4j</name>
-  <description>A dom4j navigator for Jaxen.</description>
+  <name>xom-navigator</name>
+  <description>A XOM navigator for Jaxen.</description>
 
   <dependencies>
     <dependency>
@@ -23,9 +23,9 @@
       <version>2.0.0-BETA</version>
     </dependency>
     <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
+      <groupId>xom</groupId>
+      <artifactId>xom</artifactId>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
 
