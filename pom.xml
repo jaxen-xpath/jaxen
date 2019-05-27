@@ -30,10 +30,10 @@
 
   <modules>
     <module>core</module>
-    <module>javabean</module>
-    <module>dom4j</module>
-    <module>xom</module>
-    <module>jdom</module>
+    <module>javabean-navigator</module>
+    <module>dom4j-navigator</module>
+    <module>xom-navigator</module>
+    <module>jdom-navigator</module>
     <module>integration-tests</module>
   </modules>
 
