@@ -91,9 +91,9 @@ import org.w3c.dom.UserDataHandler;
  *
  * <li>The {@link #isSupported} method always returns false.</li>
  *
- * <li> The DOM3 methods sometimes throw UnsupportedOperationException.
- *      They're here only to allow this class to be compiled with Java 1.5.
- *       Do not call or rely on them.</li>
+ * <li>The DOM3 methods sometimes throw UnsupportedOperationException.
+ *     They're here only to allow this class to be compiled with Java 1.5.
+ *     Do not call or rely on them.</li>
  * </ol>
  *
  * <p>All attempts to modify a <code>NamespaceNode</code> will fail with a {@link
