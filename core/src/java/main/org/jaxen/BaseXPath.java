@@ -243,19 +243,6 @@ public class BaseXPath implements XPath, Serializable
         return results.get( 0 );
     }
 
-    /**
-     * Returns the XPath string-value of the argument node.
-     * 
-     * @param node the node whose value to take
-     * @return the XPath string value of this node
-     * @throws JaxenException if an XPath error occurs during expression evaluation
-     * @deprecated replaced by {@link #stringValueOf}
-     */
-    public String valueOf(Object node) throws JaxenException
-    {
-        return stringValueOf( node );
-    }
-
     /** Retrieves the string-value of the result of
      *  evaluating this XPath expression when evaluated 
      *  against the specified context.
