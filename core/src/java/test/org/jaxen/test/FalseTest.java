@@ -93,7 +93,37 @@ public class FalseTest extends TestCase {
         {
             assertEquals("false() requires no arguments.", e.getMessage());
         }
-    }    
+    }
+    
+    // https://github.com/jaxen-xpath/jaxen/issues/68
+    public void testFalseLessThanOrEqualToFalse() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "false() <= false()" );
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    } 
+
+    public void testEmptyNodeSetLessThanOrEqualToFalse() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "/nonexistent<=false()" );
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    } 
+
+
+    public void testFalseLessThanOrEqualToEmptyNodeSet() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "false()<=/nonexistent" );
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    }
+    
+    public void testFalseGreaterThanOrEqualToEmptyNodeSet() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "false()>=/nonexistent" );
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result.booleanValue());
+    } 
 
     public void testFalse() throws JaxenException
     {

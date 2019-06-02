@@ -60,6 +60,7 @@ abstract class DefaultTruthExpr extends DefaultBinaryExpr
                rhs );
     }
 
+    @Override
     public String toString()
     {
         return "[(DefaultTruthExpr): " + getLHS() + ", " + getRHS() + "]";

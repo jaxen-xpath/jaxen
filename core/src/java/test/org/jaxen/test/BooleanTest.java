@@ -77,11 +77,6 @@ public class BooleanTest extends TestCase {
         doc = builder.newDocument();
     }
 
-
-    public BooleanTest(String name) {
-        super(name);
-    }
-
     // test case for JAXEN-55
     public void testNonEmptyNodeSetsAreTrue() 
       throws JaxenException {
@@ -101,7 +96,7 @@ public class BooleanTest extends TestCase {
         x3.appendChild(doc.createTextNode("false"));
         x4.appendChild(doc.createTextNode("false"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Boolean.TRUE, result.get(0));
         
@@ -125,7 +120,7 @@ public class BooleanTest extends TestCase {
         x3.appendChild(doc.createTextNode("false"));
         x4.appendChild(doc.createTextNode("false"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Boolean.FALSE, result.get(0));
         
@@ -137,7 +132,7 @@ public class BooleanTest extends TestCase {
         BaseXPath xpath = new DOMXPath("boolean(0)");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         
-        List result = xpath.selectNodes(a);
+        List<?> result = xpath.selectNodes(a);
         assertEquals(1, result.size());
         assertEquals(Boolean.FALSE, result.get(0));
         
@@ -149,7 +144,7 @@ public class BooleanTest extends TestCase {
         BaseXPath xpath = new DOMXPath("boolean('')");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         
-        List result = xpath.selectNodes(a);
+        List<?> result = xpath.selectNodes(a);
         assertEquals(1, result.size());
         assertEquals(Boolean.FALSE, result.get(0));
         
@@ -170,7 +165,7 @@ public class BooleanTest extends TestCase {
         BaseXPath xpath = new DOMXPath("boolean('false')");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         
-        List result = xpath.selectNodes(a);
+        List<?> result = xpath.selectNodes(a);
         assertEquals(1, result.size());
         assertEquals(Boolean.TRUE, result.get(0));
         
