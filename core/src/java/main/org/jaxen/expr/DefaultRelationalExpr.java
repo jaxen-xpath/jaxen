@@ -78,6 +78,26 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr implements Relatio
       {
       return evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
       }
+    
+    if (isBoolean(rhsValue) && isSet(lhsValue)) {
+        List left = convertToList( lhsValue );
+        if (left.isEmpty()) {
+            return evaluateObjectObject(rhsValue, Boolean.FALSE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+        else {
+            return evaluateObjectObject(rhsValue, Boolean.TRUE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+    }
+    else if (isBoolean(lhsValue) && isSet(rhsValue)) {
+        List right = convertToList( rhsValue );
+        if (right.isEmpty()) {
+            return evaluateObjectObject(lhsValue, Boolean.FALSE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+        else {
+            return evaluateObjectObject(lhsValue, Boolean.TRUE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+    }
+    
 
     if( eitherIsSet( lhsValue, rhsValue ) )
       {
