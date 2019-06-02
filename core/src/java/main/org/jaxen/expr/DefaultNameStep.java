@@ -233,28 +233,28 @@ class DefaultNameStep extends DefaultStep implements NameStep {
                     continue;
                 }
 
-				while (axisNodeIter.hasNext())
-				{
-					Object eachAxisNode = axisNodeIter.next();
-					interimSet.add(eachAxisNode);
-				}
+                while (axisNodeIter.hasNext())
+                {
+                    Object eachAxisNode = axisNodeIter.next();
+                    interimSet.add(eachAxisNode);
+                }
 
-				// evaluate the predicates
-				List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);
+                // evaluate the predicates
+                List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);
 
-				// ensure only one of each node in the result
-				Iterator predicateNodeIter = predicateNodes.iterator();
-				while (predicateNodeIter.hasNext())
-				{
-					Object eachPredicateNode = predicateNodeIter.next();
-					if (! unique.contains(eachPredicateNode))
-					{
-						unique.add(eachPredicateNode);
-						newNodeSet.add(eachPredicateNode);
-					}
-				}
-				interimSet.clear();
-			}
+                // ensure only one of each node in the result
+                Iterator predicateNodeIter = predicateNodes.iterator();
+                while (predicateNodeIter.hasNext())
+                {
+                    Object eachPredicateNode = predicateNodeIter.next();
+                    if (! unique.contains(eachPredicateNode))
+                    {
+                        unique.add(eachPredicateNode);
+                        newNodeSet.add(eachPredicateNode);
+                    }
+                }
+                interimSet.clear();
+            }
             
         } else {
             for (int i = 0; i < contextSize; ++i) {
@@ -278,24 +278,24 @@ class DefaultNameStep extends DefaultStep implements NameStep {
                     Object eachAxisNode = axisNodeIter.next();
 
                     if (matches(eachAxisNode, support)) {
-						interimSet.add(eachAxisNode);
+                        interimSet.add(eachAxisNode);
                     }
                 }
 
                 // evaluate the predicates
-				List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);
+                List predicateNodes = getPredicateSet().evaluatePredicates(interimSet, support);
 
-				// ensure only one of each node in the result
-				Iterator predicateNodeIter = predicateNodes.iterator();
-				while (predicateNodeIter.hasNext())
-				{
-					Object eachPredicateNode = predicateNodeIter.next();
-					if (! unique.contains(eachPredicateNode))
-					{
-						unique.add(eachPredicateNode);
-						newNodeSet.add(eachPredicateNode);
-					}
-				}
+                // ensure only one of each node in the result
+                Iterator predicateNodeIter = predicateNodes.iterator();
+                while (predicateNodeIter.hasNext())
+                {
+                    Object eachPredicateNode = predicateNodeIter.next();
+                    if (! unique.contains(eachPredicateNode))
+                    {
+                        unique.add(eachPredicateNode);
+                        newNodeSet.add(eachPredicateNode);
+                    }
+                }
                 interimSet.clear();
             }
         }
@@ -350,7 +350,7 @@ class DefaultNameStep extends DefaultStep implements NameStep {
         if (hasPrefix) {
             myUri = contextSupport.translateNamespacePrefixToUri(this.prefix);
             if (myUri == null) {
-            	throw new UnresolvableException("Cannot resolve namespace prefix '"+this.prefix+"'");
+                throw new UnresolvableException("Cannot resolve namespace prefix '"+this.prefix+"'");
             }
         } 
         else if (matchesAnyName) {
