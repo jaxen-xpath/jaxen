@@ -176,7 +176,7 @@ public abstract class XPathTestBase extends TestCase
 
     private void assertExprGetTextIdempotent(BaseXPath xpath) throws JaxenException
     {
-    	assertEquals(0, ExprComparator.EXPR_COMPARATOR.compare(xpath.getRootExpr(), 
+        assertEquals(0, ExprComparator.EXPR_COMPARATOR.compare(xpath.getRootExpr(), 
           new BaseXPath(xpath.getRootExpr().getText(), null).getRootExpr()));
     }
     
