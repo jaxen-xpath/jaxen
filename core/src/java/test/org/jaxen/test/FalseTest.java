@@ -110,6 +110,12 @@ public class FalseTest extends TestCase {
         assertTrue(result.booleanValue());
     } 
 
+    public void testEmptyNodeSetLessThanFalse() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "/nonexistent<false()" );
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
+    } 
 
     public void testFalseLessThanOrEqualToEmptyNodeSet() throws JaxenException
     {
@@ -123,6 +129,13 @@ public class FalseTest extends TestCase {
         XPath xpath = new DOMXPath( "false()>=/nonexistent" );
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
+    } 
+    
+    public void testFalseGreaterThaEmptyNodeSet() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "false()>/nonexistent" );
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result.booleanValue());
     } 
 
     public void testFalse() throws JaxenException
