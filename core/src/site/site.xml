@@ -5,11 +5,11 @@ name="jaxen core: universal Java XPath engine">
 
   <body>
     <menu name="Navigators">
-      <item name='jaxen-core' href='/jaxen/index.html'/>
-      <item name='jdom-navigator' href='/jdom-navigator/index.html'/>
-      <item name='dom4j-navigator' href='/dom4j-navigator/index.html'/>
-      <item name='xom-navigator' href='/xom-navigator/index.html'/>
-      <item name='javabean-navigator' href='/javabean-navigator/index.html'/>
+      <item name='jaxen' href='../index.html'/>
+      <item name='jdom-navigator' href='../jdom-navigator/index.html'/>
+      <item name='dom4j-navigator' href='../dom4j-navigator/index.html'/>
+      <item name='xom-navigator' href='../xom-navigator/index.html'/>
+      <item name='javabean-navigator' href='../javabean-navigator/index.html'/>
     </menu>
     <menu ref="reports"/>
   </body>
