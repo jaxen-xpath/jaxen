@@ -13,6 +13,14 @@ name="jaxen: universal Java XPath engine">
       <item name="Build Instructions" href="/building.html"/>
       <item name="Releases" href="/releases.html"/>
       <item name="Status" href="/status.html"/>
+      <item name="Navigators" href='/jaxen/index.html'>
+        <description>Navigators</description>
+        <item name='jaxen-core' href='/jaxen/index.html'/>
+        <item name='jdom-navigator' href='/jdom-navigator/index.html'/>
+        <item name='dom4j-navigator' href='/dom4j-navigator/index.html'/>
+        <item name='xom-navigator' href='/xom-navigator/index.html'/>
+        <item name='javabean-navigator' href='/javabean-navigator/index.html'/>
+      </item>
     </menu>
   </body>
 
