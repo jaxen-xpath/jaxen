@@ -20,7 +20,7 @@
       If you're still using Java 1.3 or earlier, try Jaxen 1.1.6. 
       </p>
 
-<P>Jaxen's Maven group ID is <code>jaxen</code> and its artifact ID is <code>jaxen</code>. To add a dependency on jaxen using Maven, add this <code>dependency</code> element to your pom.xml:</P>
+<p>Jaxen's Maven group ID is <code>jaxen</code> and its artifact ID is <code>jaxen</code>. To add a dependency on jaxen using Maven, add this <code>dependency</code> element to your pom.xml:</p>
 
 <pre><code>&lt;dependency>
   &lt;groupId>jaxen&lt;/groupId>
