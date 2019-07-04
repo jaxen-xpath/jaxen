@@ -20,7 +20,7 @@ Once that's done, login to [OSSRH](https://oss.sonatype.org/#welcome) and releas
 
 Now merge the version PR on Github.
 
-Create a release on Github in the form v1.2.0. 
+Create a release on Github in the form v2.0.0. 
 
-Once the binary is available on Maven Central, run `mvn:site` and upload the generated content to IBiblio. 
+Once the binary is available on Maven Central, run `mvn site:stage` and upload the generated content to IBiblio. 
 

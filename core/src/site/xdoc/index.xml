@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<document url="http://jaxen.org/index.xml">
+
+  <properties>
+    <author>Elliotte Rusty Harold</author>
+    <title>jaxen core</title>
+  </properties>
+
+  <body>
+
+    <p> Jaxen is an open source XPath library written in
+      Java. It is adaptable to many different object models,
+      including DOM, XOM, dom4j, and JDOM. Is it also possible
+      to write adapters that treat non-XML trees such as
+      compiled Java byte code or Java beans as XML, thus
+      enabling you to query these trees with XPath too. </p>
+
+      <p>
+      The current version is <strong>2.0.0</strong>.  This release requires Java 1.5 or later. If you're still using Java 1.4, try Jaxen 1.2.0. 
+      If you're still using Java 1.3 or earlier, try Jaxen 1.1.6. 
+      </p>
+
+<P>Jaxen's Maven group ID is <code>jaxen</code> and its artifact ID is <code>jaxen</code>. To add a dependency on jaxen using Maven, add this <code>dependency</code> element to your pom.xml:</P>
+
+<pre><code>&lt;dependency>
+  &lt;groupId>jaxen&lt;/groupId>
+  &lt;artifactId>jaxen&lt;/artifactId>
+  &lt;version>2.0.0&lt;/version>
+&lt;/dependency></code></pre>
+
+To add a dependency using Gradle:
+
+<pre><code>gradle
+dependencies {
+  compile 'jaxen:jaxen:2.0.0'
+}</code></pre>
+
+  </body>
+</document>
