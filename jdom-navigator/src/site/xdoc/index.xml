@@ -19,7 +19,7 @@
 
 <pre><code>&lt;dependency>
   &lt;groupId>jaxen&lt;/groupId>
-  &lt;artifactId>jaxen&lt;/artifactId>
+  &lt;artifactId>jaxen-core&lt;/artifactId>
   &lt;version>2.0.0&lt;/version>
 &lt;/dependency>
 &lt;dependency>
@@ -33,7 +33,7 @@ To add a dependency using Gradle:
 
 <pre><code>
 dependencies {
-  compile 'jaxen:jaxen:2.0.0'
+  compile 'jaxen:jaxen-core:2.0.0'
   compile 'jaxen:jdom-navigator:2.0.0'
 }</code></pre>
 
