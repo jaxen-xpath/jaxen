@@ -1,19 +1,9 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
-name="jaxen: universal Java XPath engine">
+name="jaxen core: universal Java XPath engine">
 
   <body>
-    <menu name="jaxen">
-      <item name="Overview" href="/index.html"/>
-      <item name="Download Jaxen" href="/releases.html"/>
-      <item name="API Documentation" href="/apidocs/index.html"/>
-      <item name="FAQ" href="/faq.html"/>
-      <item name="Writing Extension Functions" href="/extensions.html"/>
-      <item name="Build Instructions" href="/building.html"/>
-      <item name="Releases" href="/releases.html"/>
-      <item name="Status" href="/status.html"/>
-    </menu>
     <menu name="Navigators">
       <item name='jaxen-core' href='/jaxen/index.html'/>
       <item name='jdom-navigator' href='/jdom-navigator/index.html'/>
