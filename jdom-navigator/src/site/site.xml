@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
-name="jaxen core: universal Java XPath engine">
+name="jaxen navigator for JDOM">
 
   <body>
     <menu name="Navigators">
       <item name='jaxen' href='../index.html'/>
-      <item name='jdom-navigator' href='../jdom-navigator/index.html'/>
+      <item name='jaxen-core' href='../jaxen/index.html'/>
       <item name='dom4j-navigator' href='../dom4j-navigator/index.html'/>
       <item name='xom-navigator' href='../xom-navigator/index.html'/>
       <item name='javabean-navigator' href='../javabean-navigator/index.html'/>
