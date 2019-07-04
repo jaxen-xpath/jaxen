@@ -4,9 +4,6 @@
 name="jaxen core: universal Java XPath engine">
 
   <body>
-    <menu name="jaxen-core">
-      <item name="Overview" href="/index.html"/>
-    </menu>
     <menu name="Navigators">
       <item name='jaxen-core' href='/jaxen/index.html'/>
       <item name='jdom-navigator' href='/jdom-navigator/index.html'/>
