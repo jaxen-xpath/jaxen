@@ -22,6 +22,7 @@ name="jaxen: universal Java XPath engine">
         <item name='javabean-navigator' href='/javabean-navigator/index.html'/>
       </item>
     </menu>
+    <menu ref="reports"/>
   </body>
 
 </project>
