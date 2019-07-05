@@ -76,11 +76,13 @@ class QualifiedName implements Serializable
         this.localName = localName;
     }
 
+    @Override
     public int hashCode()
     {
         return ( localName.hashCode() ^ namespaceURI.hashCode() );
     }
 
+    @Override
     public boolean equals( Object o )
     {
         // Because this class is package protected and used in only

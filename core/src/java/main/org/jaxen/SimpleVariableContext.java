@@ -67,7 +67,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
 
     private static final long serialVersionUID = 961322093794516518L;
     /** Table of variable bindings. */
-    private Map variables;
+    private Map<QualifiedName, Object> variables;
 
     /** Construct.
      *
@@ -77,7 +77,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
      */
     public SimpleVariableContext()
     {
-        variables = new HashMap();
+        variables = new HashMap<QualifiedName, Object>();
     }
 
     /** Set the value associated with a variable.
