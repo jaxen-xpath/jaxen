@@ -85,7 +85,7 @@ public abstract class LocaleFunctionSupport implements Function
         {
             return (Locale) value;
         }
-        else if(value instanceof List)
+        else if (value instanceof List)
         {
             List list = (List) value;
             if ( ! list.isEmpty() ) 

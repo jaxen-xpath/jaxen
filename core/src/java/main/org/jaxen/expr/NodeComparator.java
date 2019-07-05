@@ -53,7 +53,7 @@ import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
 
-class NodeComparator implements Comparator {
+class NodeComparator implements Comparator<Object> {
     
     private Navigator navigator;
 

@@ -88,7 +88,7 @@ public class NotTest extends TestCase {
         
         BaseXPath xpath = new DOMXPath("not(0)");
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Boolean.TRUE, result.get(0));
         
@@ -99,7 +99,7 @@ public class NotTest extends TestCase {
         
         BaseXPath xpath = new DOMXPath("not(1)");
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Boolean.FALSE, result.get(0));
         
@@ -110,7 +110,7 @@ public class NotTest extends TestCase {
         
         BaseXPath xpath = new DOMXPath("not('')");
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Boolean.TRUE, result.get(0));
         
@@ -130,7 +130,7 @@ public class NotTest extends TestCase {
         
         BaseXPath xpath = new DOMXPath("not('false')");
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Boolean.FALSE, result.get(0));
         
