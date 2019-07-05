@@ -87,13 +87,13 @@ public class JaxenHandler implements XPathHandler
      * if you are please try to use it as a generic List. Don't use the 
      * methods that are only available in LinkedList.
      */
-    protected LinkedList stack;
+    protected LinkedList<LinkedList<Object>> stack;
 
     /** Constructor
      */
     public JaxenHandler()
     {
-        this.stack        = new LinkedList();
+        this.stack        = new LinkedList<LinkedList<Object>>();
         this.xpathFactory = new DefaultXPathFactory();
     }
     
@@ -279,7 +279,6 @@ public class JaxenHandler implements XPathHandler
     
     public void startTextNodeStep(int axis) throws JaxenException
     {
-        //System.err.println("startTextNodeStep()");
         pushFrame();
         
         push( getXPathFactory().createTextNodeStep( axis ) );
@@ -363,7 +362,7 @@ public class JaxenHandler implements XPathHandler
         
         FilterExpr filter = getXPathFactory().createFilterExpr( expr );
 
-        Iterator predIter = popFrame().iterator();
+        Iterator<?> predIter = popFrame().iterator();
 
         addPredicates( filter,
                        predIter );
@@ -601,16 +600,16 @@ public class JaxenHandler implements XPathHandler
 
     protected void pushFrame()
     {
-        this.stack.addLast( new LinkedList() );
+        this.stack.addLast( new LinkedList<Object>() );
     }
 
-    protected LinkedList popFrame()
+    protected LinkedList<Object> popFrame()
     {
-        return (LinkedList) this.stack.removeLast();
+        return this.stack.removeLast();
     }
 
-    protected LinkedList peekFrame()
+    protected LinkedList<Object> peekFrame()
     {
-        return (LinkedList) this.stack.getLast();
+        return this.stack.getLast();
     }
 }
