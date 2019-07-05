@@ -102,8 +102,7 @@ final class Verifier {
         if (c < 0x0061) return false;  if (c <= 0x007A) return true;
         if (c < 0x00C0) return false;  if (c <= 0x00D6) return true;
         if (c < 0x00D8) return false;  if (c <= 0x00F6) return true;
-        if (c < 0x00F8) return false;  if (c <= 0x00FF) return true;
-        if (c < 0x0100) return false;  if (c <= 0x0131) return true;
+        if (c < 0x00F8) return false;  if (c <= 0x0131) return true;
         if (c < 0x0134) return false;  if (c <= 0x013E) return true;
         if (c < 0x0141) return false;  if (c <= 0x0148) return true;
         if (c < 0x014A) return false;  if (c <= 0x017E) return true;
@@ -332,10 +331,7 @@ final class Verifier {
         if (c == 0x05C4) return true;
         if (c < 0x064B) return false;  if (c <= 0x0652) return true;
         if (c == 0x0670) return true;
-        if (c < 0x06D6) return false;  if (c <= 0x06DC) return true;
-                                       
-        if (c < 0x06DD) return false;  if (c <= 0x06DF) return true;
-        if (c < 0x06E0) return false;  if (c <= 0x06E4) return true;
+        if (c < 0x06D6) return false;  if (c <= 0x06E4) return true;
         if (c < 0x06E7) return false;  if (c <= 0x06E8) return true;
                                        
         if (c < 0x06EA) return false;  if (c <= 0x06ED) return true;
