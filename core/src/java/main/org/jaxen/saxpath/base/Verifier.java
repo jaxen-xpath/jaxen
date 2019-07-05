@@ -54,7 +54,7 @@ package org.jaxen.saxpath.base;
 final class Verifier {
 
     /**
-     * This is a utility function for determining whether a specified 
+     * Utility function for determining whether a specified 
      * character is a name character according to production 4 of the 
      * XML 1.0 specification.
      *
@@ -70,14 +70,14 @@ final class Verifier {
     }
 
     /**
-     * This is a utility function for determining whether a specified 
+     * Utility function for determining whether a specified 
      * character is a legal name start character according to production 5
      * of the XML 1.0 specification. This production does allow names
      * to begin with colons which the Namespaces in XML Recommendation
      * disallows. 
      *
      * @param c <code>char</code> to check for XML name start compliance
-     * @return true if it's a name start character, false otherwise
+     * @return true if <code>c</code> is a name start character, false otherwise
      */
     static boolean isXMLNCNameStartCharacter(char c) {
     
@@ -90,7 +90,7 @@ final class Verifier {
      * is a letter according to production 84 of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check for XML name compliance
-     * @return <code>String</code> true if it's a letter, false otherwise
+     * @return true if <code>c</code> is a letter, false otherwise
      */
     static boolean isXMLLetter(char c) {
         // Note that order is very important here.  The search proceeds 
@@ -313,7 +313,7 @@ final class Verifier {
      * of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check
-     * @return <code>boolean</code> true if it's a combining character,
+     * @return true if <code>c</code> is a combining character,
      *         false otherwise
      */
     static boolean isXMLCombiningChar(char c) {
@@ -445,7 +445,7 @@ final class Verifier {
      * specification.
      *
      * @param c <code>char</code> to check
-     * @return true if it's an extender, false otherwise
+     * @return true if <code>c</code> is an extender, false otherwise
      */
     static boolean isXMLExtender(char c) {
 
@@ -474,7 +474,7 @@ final class Verifier {
      * is a digit according to production 88 of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check for XML digit compliance
-     * @return <code>boolean</code> true if it's a digit, false otherwise
+     * @return true if <code>c</code> is a a digit, false otherwise
      */
     static boolean isXMLDigit(char c) {
       
