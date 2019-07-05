@@ -1046,7 +1046,13 @@ public class BaseXPathTest extends TestCase {
         assertTrue(result);
     }
     
-    
+
+    public void testNotEqualsDifferentTypesReverse() throws JaxenException {
+        XPath xpath = new DOMXPath("\"foo\" != 3.5");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
+    }
+      
     public void testNamespaceNodesComeBeforeAttributeNodesInDocumentOrder() throws JaxenException {
         
         org.w3c.dom.Element root = doc.createElementNS("http://www.example.org", "pre:b");
