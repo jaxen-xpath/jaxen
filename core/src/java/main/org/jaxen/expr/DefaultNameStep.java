@@ -390,7 +390,7 @@ class DefaultNameStep extends DefaultStep implements NameStep {
      * @param uri2  the second URI
      * @return true if equal, where null==""
      */
-    protected boolean matchesNamespaceURIs(String uri1, String uri2) {
+    boolean matchesNamespaceURIs(String uri1, String uri2) {
         if (uri1 == uri2) {
             return true;
         }
@@ -408,6 +408,7 @@ class DefaultNameStep extends DefaultStep implements NameStep {
      * 
      * @return a debugging string
      */
+    @Override
     public String toString() {
         String prefix = getPrefix();
         String qName = "".equals(prefix) ? getLocalName() : getPrefix() + ":" + getLocalName();

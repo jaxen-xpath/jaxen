@@ -173,19 +173,11 @@ public class LocalNameTest extends TestCase {
         assertEquals("xml", result);
     }    
 
-    public void testLocalNameNoArguments()
+    public void testLocalNameNoArguments() throws JaxenException
     {
-        try
-        {
-            XPath xpath = new DOMXPath( "local-name()" );
-            List results = xpath.selectNodes( doc );
-            assertEquals("", results.get(0));
-       }
-       catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
-        }
+        XPath xpath = new DOMXPath( "local-name()" );
+        List<?> results = xpath.selectNodes( doc );
+        assertEquals("", results.get(0));
     }    
 
 }

@@ -52,7 +52,6 @@ package org.jaxen.expr;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.jaxen.Context;
@@ -78,14 +77,14 @@ public class PredicateSet implements Serializable
 
     private static final long serialVersionUID = -7166491740228977853L;
     
-    private List predicates;
+    private List<Predicate> predicates;
 
     /**
      * Create a new empty predicate set.
      */
     public PredicateSet()
     {
-        this.predicates = Collections.EMPTY_LIST;
+        this.predicates = new ArrayList<Predicate>();
     }
 
     /**
@@ -95,11 +94,6 @@ public class PredicateSet implements Serializable
      */
     public void addPredicate(Predicate predicate)
     {
-        if ( this.predicates == Collections.EMPTY_LIST )
-        {
-            this.predicates = new ArrayList();
-        }
-
         this.predicates.add( predicate );
     }
 
@@ -119,12 +113,12 @@ public class PredicateSet implements Serializable
      */
     public void simplify()
     {
-        Iterator  predIter = this.predicates.iterator();
+        Iterator<Predicate>  predIter = this.predicates.iterator();
         Predicate eachPred = null;
 
         while ( predIter.hasNext() )
         {
-            eachPred = (Predicate) predIter.next();
+            eachPred = predIter.next();
             eachPred.simplify();
         }
     }
@@ -138,7 +132,7 @@ public class PredicateSet implements Serializable
     {
         StringBuffer buf = new StringBuffer();
 
-        Iterator  predIter = this.predicates.iterator();
+        Iterator<Predicate>  predIter = this.predicates.iterator();
         Predicate eachPred = null;
 
         while ( predIter.hasNext() )
@@ -170,10 +164,10 @@ public class PredicateSet implements Serializable
    private boolean anyMatchingNode(List contextNodeSet, ContextSupport support)
      throws JaxenException {
         // Easy way out (necessary)
-        if (predicates.size() == 0) {
+        if (predicates.isEmpty()) {
             return false;
         }
-        Iterator predIter = predicates.iterator();
+        Iterator<Predicate> predIter = predicates.iterator();
 
         // initial list to filter
         List nodes2Filter = contextNodeSet;
@@ -182,7 +176,7 @@ public class PredicateSet implements Serializable
             final int nodes2FilterSize = nodes2Filter.size();
             // Set up a dummy context with a list to hold each node
             Context predContext = new Context(support);
-            List tempList = new ArrayList(1);
+            List<Object> tempList = new ArrayList<Object>(1);
             predContext.setNodeSet(tempList);
             // loop through the current nodes to filter and add to the
             // filtered nodes list if the predicate succeeds
@@ -235,7 +229,7 @@ public class PredicateSet implements Serializable
         if (predicates.size() == 0) {
             return contextNodeSet;
         }
-        Iterator predIter = predicates.iterator();
+        Iterator<Predicate> predIter = predicates.iterator();
 
         // initial list to filter
         List nodes2Filter = contextNodeSet;
@@ -251,10 +245,10 @@ public class PredicateSet implements Serializable
     public List applyPredicate(Predicate predicate, List nodes2Filter, ContextSupport support)
             throws JaxenException {
         final int nodes2FilterSize = nodes2Filter.size();
-        List filteredNodes = new ArrayList(nodes2FilterSize);
+        List<Object> filteredNodes = new ArrayList<Object>(nodes2FilterSize);
         // Set up a dummy context with a list to hold each node
         Context predContext = new Context(support);
-        List tempList = new ArrayList(1);
+        List<Object> tempList = new ArrayList<Object>(1);
         predContext.setNodeSet(tempList);
         // loop through the current nodes to filter and add to the
         // filtered nodes list if the predicate succeeds

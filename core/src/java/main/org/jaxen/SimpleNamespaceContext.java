@@ -63,14 +63,14 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
 
     private static final long serialVersionUID = -808928409643497762L;
     // XXX should this prebind the xml prefix?
-    private Map namespaces;
+    private Map<String, String> namespaces;
 
     /**
      * Creates a new empty namespace context.
      */
     public SimpleNamespaceContext()
     {
-        this.namespaces = new HashMap();
+        this.namespaces = new HashMap<String, String>();
     }
 
     /**
@@ -85,7 +85,7 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
      */
     public SimpleNamespaceContext(Map namespaces)
     {
-        Iterator entries = namespaces.entrySet().iterator();
+        Iterator<?> entries = namespaces.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry entry = (Map.Entry) entries.next();
             if (! (entry.getKey() instanceof String)
@@ -139,7 +139,7 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
     {
         if ( this.namespaces.containsKey( prefix ) )
         {
-            return (String) this.namespaces.get( prefix );
+            return this.namespaces.get( prefix );
         }
 
         return null;

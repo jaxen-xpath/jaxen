@@ -104,7 +104,7 @@ public class NumberTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(Double.valueOf("2.0"), result.get(0));
         

@@ -166,19 +166,11 @@ public class NameTest extends TestCase {
         assertEquals("xml", result);
     }    
 
-    public void testNameNoArguments()
+    public void testNameNoArguments() throws JaxenException
     {
-        try
-        {
-            XPath xpath = new DOMXPath( "name()" );
-            List results = xpath.selectNodes( doc );
-            assertEquals("", results.get(0));
-       }
-       catch (Exception e)
-        {
-            e.printStackTrace();
-            fail( e.getMessage() );
-        }
+        XPath xpath = new DOMXPath( "name()" );
+        List<?> results = xpath.selectNodes( doc );
+        assertEquals("", results.get(0));
     }    
 
 }
