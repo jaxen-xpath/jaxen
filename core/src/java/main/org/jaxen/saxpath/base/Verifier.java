@@ -54,7 +54,7 @@ package org.jaxen.saxpath.base;
 final class Verifier {
 
     /**
-     * This is a utility function for determining whether a specified 
+     * Utility function for determining whether a specified 
      * character is a name character according to production 4 of the 
      * XML 1.0 specification.
      *
@@ -70,14 +70,14 @@ final class Verifier {
     }
 
     /**
-     * This is a utility function for determining whether a specified 
+     * Utility function for determining whether a specified 
      * character is a legal name start character according to production 5
      * of the XML 1.0 specification. This production does allow names
      * to begin with colons which the Namespaces in XML Recommendation
      * disallows. 
      *
      * @param c <code>char</code> to check for XML name start compliance
-     * @return true if it's a name start character, false otherwise
+     * @return true if <code>c</code> is a name start character, false otherwise
      */
     static boolean isXMLNCNameStartCharacter(char c) {
     
@@ -90,7 +90,7 @@ final class Verifier {
      * is a letter according to production 84 of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check for XML name compliance
-     * @return <code>String</code> true if it's a letter, false otherwise
+     * @return true if <code>c</code> is a letter, false otherwise
      */
     static boolean isXMLLetter(char c) {
         // Note that order is very important here.  The search proceeds 
@@ -102,8 +102,7 @@ final class Verifier {
         if (c < 0x0061) return false;  if (c <= 0x007A) return true;
         if (c < 0x00C0) return false;  if (c <= 0x00D6) return true;
         if (c < 0x00D8) return false;  if (c <= 0x00F6) return true;
-        if (c < 0x00F8) return false;  if (c <= 0x00FF) return true;
-        if (c < 0x0100) return false;  if (c <= 0x0131) return true;
+        if (c < 0x00F8) return false;  if (c <= 0x0131) return true;
         if (c < 0x0134) return false;  if (c <= 0x013E) return true;
         if (c < 0x0141) return false;  if (c <= 0x0148) return true;
         if (c < 0x014A) return false;  if (c <= 0x017E) return true;
@@ -314,7 +313,7 @@ final class Verifier {
      * of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check
-     * @return <code>boolean</code> true if it's a combining character,
+     * @return true if <code>c</code> is a combining character,
      *         false otherwise
      */
     static boolean isXMLCombiningChar(char c) {
@@ -332,10 +331,7 @@ final class Verifier {
         if (c == 0x05C4) return true;
         if (c < 0x064B) return false;  if (c <= 0x0652) return true;
         if (c == 0x0670) return true;
-        if (c < 0x06D6) return false;  if (c <= 0x06DC) return true;
-                                       
-        if (c < 0x06DD) return false;  if (c <= 0x06DF) return true;
-        if (c < 0x06E0) return false;  if (c <= 0x06E4) return true;
+        if (c < 0x06D6) return false;  if (c <= 0x06E4) return true;
         if (c < 0x06E7) return false;  if (c <= 0x06E8) return true;
                                        
         if (c < 0x06EA) return false;  if (c <= 0x06ED) return true;
@@ -449,7 +445,7 @@ final class Verifier {
      * specification.
      *
      * @param c <code>char</code> to check
-     * @return true if it's an extender, false otherwise
+     * @return true if <code>c</code> is an extender, false otherwise
      */
     static boolean isXMLExtender(char c) {
 
@@ -478,7 +474,7 @@ final class Verifier {
      * is a digit according to production 88 of the XML 1.0 specification.
      *
      * @param c <code>char</code> to check for XML digit compliance
-     * @return <code>boolean</code> true if it's a digit, false otherwise
+     * @return true if <code>c</code> is a a digit, false otherwise
      */
     static boolean isXMLDigit(char c) {
       
