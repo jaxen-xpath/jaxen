@@ -76,26 +76,28 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b10
+ * @version 2.0.0
  *
  */
 public class SimpleNamespaceContextTest extends TestCase
 {
 
+	
+	private final Map<Object, Object> map = new HashMap<Object, Object>();
+
+	
     /**
      * Need to make sure that changing the map after it's used to create the 
      * namespace context does not affect the context. i.e.
      * data encapsulation is not violated.
      */
     public void testMapCopy() {
-        Map map = new HashMap();
         SimpleNamespaceContext context = new SimpleNamespaceContext(map);
         map.put("pre", "http://www.example.org/");
         assertNull(context.translateNamespacePrefixToUri("pre"));
     }
  
     public void testCantUseNonStringsAsValues() {
-        Map map = new HashMap();
         map.put("key", new Object());
         try {
             new SimpleNamespaceContext(map);
@@ -107,7 +109,6 @@ public class SimpleNamespaceContextTest extends TestCase
     }
  
     public void testCantUseNonStringsAsKeys() {
-        Map map = new HashMap();
         map.put(new Object(), "value");
         try {
             new SimpleNamespaceContext(map);
