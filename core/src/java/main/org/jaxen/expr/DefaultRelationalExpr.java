@@ -63,6 +63,7 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr implements Relatio
     super( lhs, rhs );
     }
   
+  @Override
   public String toString()
     {
     return "[(DefaultRelationalExpr): " + getLHS() + ", " + getRHS() + "]";
