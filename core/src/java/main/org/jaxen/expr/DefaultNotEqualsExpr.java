@@ -61,17 +61,20 @@ DefaultNotEqualsExpr( Expr lhs, Expr rhs )
     super( lhs, rhs );
     }
 
+  @Override
   public String getOperator()
     {
     return "!=";
     }
 
+  @Override
   public String toString()
     {
     return "[(DefaultNotEqualsExpr): " + getLHS() + ", " + getRHS() + "]";
     }
   
-    protected boolean evaluateObjectObject( Object lhs, Object rhs )
+  @Override  
+  protected boolean evaluateObjectObject( Object lhs, Object rhs )
     {
         if( eitherIsNumber( lhs, rhs ) )
         {

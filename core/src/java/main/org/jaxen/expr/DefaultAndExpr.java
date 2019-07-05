@@ -64,16 +64,18 @@ class DefaultAndExpr extends DefaultLogicalExpr
                rhs );
     }
 
+    @Override
     public String getOperator()
     {
         return "and";
     }
 
+    @Override
     public String toString()
     {
         return "[(DefaultAndExpr): " + getLHS() + ", " + getRHS() + "]";
     }
-
+    
     public Object evaluate(Context context) throws JaxenException
     {
         Navigator nav = context.getNavigator();

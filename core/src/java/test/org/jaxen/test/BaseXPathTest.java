@@ -1040,6 +1040,13 @@ public class BaseXPathTest extends TestCase {
     }
     
     
+    public void testNotEqualsDifferentTypes() throws JaxenException {
+        XPath xpath = new DOMXPath("1.5 != \"foo\"");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
+    }
+    
+    
     public void testNamespaceNodesComeBeforeAttributeNodesInDocumentOrder() throws JaxenException {
         
         org.w3c.dom.Element root = doc.createElementNS("http://www.example.org", "pre:b");
@@ -1047,16 +1054,16 @@ public class BaseXPathTest extends TestCase {
         root.setAttribute("name", "value");
         XPath xpath = new DOMXPath("/*/attribute::* | /*/namespace::node()");
         List<?> result = xpath.selectNodes(doc);
-        assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(2)).getNodeType() == Node.ATTRIBUTE_NODE);
+        assertEquals(((org.w3c.dom.Node) result.get(0)).getNodeType(), Pattern.NAMESPACE_NODE);
+        assertEquals(((org.w3c.dom.Node) result.get(1)).getNodeType(), Pattern.NAMESPACE_NODE);
+        assertEquals(((org.w3c.dom.Node) result.get(2)).getNodeType(), Node.ATTRIBUTE_NODE);
         
         // now flip the order of the statement and retest
         xpath = new DOMXPath("/*/namespace::node() | /*/attribute::* ");
         result = xpath.selectNodes(doc);
-        assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Pattern.NAMESPACE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(2)).getNodeType() == Node.ATTRIBUTE_NODE);
+        assertEquals(((org.w3c.dom.Node) result.get(0)).getNodeType(), Pattern.NAMESPACE_NODE);
+        assertEquals(((org.w3c.dom.Node) result.get(1)).getNodeType(), Pattern.NAMESPACE_NODE);
+        assertEquals(((org.w3c.dom.Node) result.get(2)).getNodeType(), Node.ATTRIBUTE_NODE);
    
     }
 
@@ -1173,7 +1180,7 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element c = doc.createElementNS("", "c");
         z.appendChild(c);
 
-        List context = new ArrayList();
+        List<Element> context = new ArrayList<Element>();
         context.add(b);
         context.add(c);
         List<?> result = xpath.selectNodes(context);

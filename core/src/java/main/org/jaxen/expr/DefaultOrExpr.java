@@ -66,11 +66,13 @@ class DefaultOrExpr extends DefaultLogicalExpr
                rhs );
     }
 
+    @Override
     public String getOperator()
     {
         return "or";
     }
 
+    @Override
     public String toString()
     {
         return "[(DefaultOrExpr): " + getLHS() + ", " + getRHS() + "]";

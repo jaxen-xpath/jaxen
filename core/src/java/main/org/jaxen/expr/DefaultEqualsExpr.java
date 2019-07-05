@@ -59,6 +59,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr {
     super( lhs, rhs );
   }
 
+  @Override
   public String getOperator()
     {
     return "=";
@@ -70,8 +71,7 @@ class DefaultEqualsExpr extends DefaultEqualityExpr {
     return "[(DefaultEqualsExpr): " + getLHS() + ", " + getRHS() + "]";
   }
   
-
-  
+  @Override
   protected boolean evaluateObjectObject( Object lhs, Object rhs )
   {
       if ( eitherIsNumber( lhs, rhs ) )
