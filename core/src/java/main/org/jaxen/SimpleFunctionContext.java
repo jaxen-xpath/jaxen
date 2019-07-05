@@ -65,7 +65,7 @@ import java.util.HashMap;
 public class SimpleFunctionContext implements FunctionContext
 {
     /** Table of functions. */
-    private HashMap functions;
+    private HashMap<QualifiedName, Function> functions;
 
     /** 
      *  <p>
@@ -74,7 +74,7 @@ public class SimpleFunctionContext implements FunctionContext
      */
     public SimpleFunctionContext()
     {
-        this.functions = new HashMap();
+        this.functions = new HashMap<QualifiedName, Function>();
     }
 
     /** Register a new function.

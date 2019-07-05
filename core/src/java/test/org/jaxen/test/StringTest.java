@@ -103,7 +103,7 @@ public class StringTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals("2", result.get(0));
         
