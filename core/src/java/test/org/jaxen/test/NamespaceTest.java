@@ -85,7 +85,7 @@ public class NamespaceTest extends TestCase {
         root.appendChild(child);
         
         XPath xpath = new DOMXPath("namespace::node()");
-        List result = xpath.selectNodes(child);
+        List<?> result = xpath.selectNodes(child);
         assertEquals(3, result.size());
    
     }
@@ -98,7 +98,7 @@ public class NamespaceTest extends TestCase {
         root.appendChild(child);
         
         XPath xpath = new DOMXPath("//namespace::node()");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());
         // 1 for xml prefix on root; 1 for foo prefix on child; 1 for xml prefix on child
    
@@ -113,7 +113,7 @@ public class NamespaceTest extends TestCase {
         root.appendChild(child);
         
         XPath xpath = new DOMXPath("namespace::node()");
-        List result = xpath.selectNodes(child);
+        List<?> result = xpath.selectNodes(child);
         assertEquals(2, result.size());
    
     }
@@ -127,7 +127,7 @@ public class NamespaceTest extends TestCase {
         root.appendChild(child);
         
         XPath xpath = new DOMXPath("namespace::node()");
-        List result = xpath.selectNodes(child);
+        List<?> result = xpath.selectNodes(child);
         assertEquals(2, result.size());
    
     }   
@@ -142,7 +142,7 @@ public class NamespaceTest extends TestCase {
         root.setAttributeNode(a);
         
         XPath xpath = new DOMXPath("namespace::node()");
-        List result = xpath.selectNodes(root);
+        List<?> result = xpath.selectNodes(root);
         // one for the xml prefix; one from the attribute node
         assertEquals(2, result.size());
    
@@ -171,7 +171,7 @@ public class NamespaceTest extends TestCase {
         doc.appendChild(root);
         XPath xpath = new DOMXPath("/pre:root");
         xpath.addNamespace("pre", "http://www.example.org/");
-        List result = xpath.selectNodes(root);
+        List<?> result = xpath.selectNodes(root);
         assertEquals(1, result.size());
    
     }   
@@ -185,7 +185,7 @@ public class NamespaceTest extends TestCase {
         SimpleNamespaceContext context = new SimpleNamespaceContext();
         context.addNamespace("pre", "http://www.example.org/");
         xpath.setNamespaceContext(context);
-        List result = xpath.selectNodes(root);
+        List<?> result = xpath.selectNodes(root);
         assertEquals(1, result.size());
    
     }   

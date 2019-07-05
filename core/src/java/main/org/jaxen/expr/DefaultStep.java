@@ -103,6 +103,7 @@ abstract class DefaultStep implements Step
         return this.predicates.getText();
     }
 
+    @Override
     public String toString()
     {
         return getIterableAxis() + " " + super.toString();
@@ -127,8 +128,8 @@ abstract class DefaultStep implements Step
 
         // ???? try linked lists instead?
         // ???? initial size for these?
-        final ArrayList interimSet = new ArrayList();
-        final ArrayList newNodeSet = new ArrayList();
+        final ArrayList<Object> interimSet = new ArrayList<Object>();
+        final ArrayList<Object> newNodeSet = new ArrayList<Object>();
         final ContextSupport support = context.getContextSupport();
             
         // ???? use iterator instead
@@ -144,7 +145,7 @@ abstract class DefaultStep implements Step
                  * Children, descendant, ancestor, and sibling axes never 
                  * see any attributes or namespaces
                  */
-            Iterator axisNodeIter = axis.iterator(eachContextNode, support);
+            Iterator<?> axisNodeIter = axis.iterator(eachContextNode, support);
             while ( axisNodeIter.hasNext() )
             {
                 Object eachAxisNode = axisNodeIter.next();

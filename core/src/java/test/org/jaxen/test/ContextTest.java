@@ -71,7 +71,7 @@ import org.xml.sax.SAXException;
 
 public class ContextTest extends TestCase
 {
-    private List           nodeSet;
+    private List<String>   nodeSet;
     private ContextSupport support;
 
     public ContextTest(String name)
@@ -81,7 +81,7 @@ public class ContextTest extends TestCase
 
     public void setUp()
     {
-        this.nodeSet = new ArrayList();
+        this.nodeSet = new ArrayList<String>();
 
         this.nodeSet.add( "one" );
         this.nodeSet.add( "two" );
@@ -135,9 +135,9 @@ public class ContextTest extends TestCase
         
         assertTrue( original != dupe );
 
-        List dupeNodeSet = dupe.getNodeSet();
+        List<?> dupeNodeSet = dupe.getNodeSet();
 
-        assertTrue( original.getNodeSet() != dupe.getNodeSet() );
+        assertNotSame( original.getNodeSet(), dupe.getNodeSet() );
 
         dupeNodeSet.clear();
 
@@ -179,7 +179,7 @@ public class ContextTest extends TestCase
        Element root = doc.getDocumentElement();
        root.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en");
        XPath xpath = new DOMXPath( "/*/@xml:lang" );
-       List result = xpath.selectNodes( doc );
+       List<?> result = xpath.selectNodes( doc );
        assertEquals(1, result.size());
 
     }    

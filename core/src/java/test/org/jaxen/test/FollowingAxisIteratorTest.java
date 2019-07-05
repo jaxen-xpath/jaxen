@@ -59,7 +59,7 @@ import junit.framework.TestCase;
 
 public class FollowingAxisIteratorTest extends TestCase {
 
-    private Iterator iterator;
+    private Iterator<?> iterator;
 
     public FollowingAxisIteratorTest(String name) {
         super(name);
@@ -84,24 +84,18 @@ public class FollowingAxisIteratorTest extends TestCase {
             fail("Iterated too far");   
         }
         catch (NoSuchElementException ex) {
-            pass();
         }
         
     }
-    
-    
-    private void pass() {
-        // Just to make checkstyle and the like happy
-    }
+
 
     public void testRemove() {
         
         try {
             iterator.remove();
-            fail("Removed from descendant axis iterator");   
+            fail("Removed from following axis iterator");   
         }
         catch (UnsupportedOperationException ex) {
-            pass();
         }
         
     }

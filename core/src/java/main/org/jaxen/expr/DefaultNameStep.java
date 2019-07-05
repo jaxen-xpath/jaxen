@@ -213,8 +213,8 @@ class DefaultNameStep extends DefaultStep implements NameStep {
 
         // full case
         IdentitySet unique = new IdentitySet();
-        List interimSet = new ArrayList(contextSize);
-        List newNodeSet = new ArrayList(contextSize);
+        List<Object> interimSet = new ArrayList<Object>(contextSize);
+        List<Object> newNodeSet = new ArrayList<Object>(contextSize);
         
         if (namedAccess) {
             String uri = null;

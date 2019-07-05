@@ -46,7 +46,7 @@ import java.util.HashSet;
  */
 final class IdentitySet {
 
-    private HashSet contents = new HashSet();
+    private HashSet<Object> contents = new HashSet<Object>();
     
     IdentitySet() {
         super();
@@ -70,11 +70,13 @@ final class IdentitySet {
             this.object = object;
         }
         
+        @Override
         public boolean equals(Object o) {
             IdentityWrapper w = (IdentityWrapper) o;
             return object == w.object;
         }
 
+        @Override
         public int hashCode() {
             return System.identityHashCode(object);
         }

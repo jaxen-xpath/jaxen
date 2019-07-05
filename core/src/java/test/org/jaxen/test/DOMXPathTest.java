@@ -109,7 +109,7 @@ public class DOMXPathTest extends TestCase
         root.setAttribute("att", "one");
 
         XPath xp = new DOMXPath("//@* | //namespace::* ");
-        List result = (List) xp.evaluate(doc);
+        List<?> result = (List) xp.evaluate(doc);
         assertEquals(3, result.size());
         Node third = (Node) result.get(2);
         assertEquals(Node.ATTRIBUTE_NODE, third.getNodeType());
@@ -121,7 +121,7 @@ public class DOMXPathTest extends TestCase
         root.setAttribute("att", "one");
 
         XPath xp = new DOMXPath("//namespace::* | //@* ");
-        List result = (List) xp.evaluate(doc);
+        List<?> result = (List) xp.evaluate(doc);
         assertEquals(3, result.size());
         Node third = (Node) result.get(2);
         assertEquals(Node.ATTRIBUTE_NODE, third.getNodeType());
@@ -171,7 +171,7 @@ public class DOMXPathTest extends TestCase
         XPath xpath = new DOMXPath("//*[not(self::pre:test)]");
         xpath.addNamespace("pre", "http://www.example.org/");
         xpath.addNamespace("", "http://www.example.org/");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
     }
     
@@ -183,7 +183,7 @@ public class DOMXPathTest extends TestCase
         variables.setVariableValue("foo", "bar");
         xpath.setVariableContext(variables);
         xpath.addNamespace("", "http://www.example.org/");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
     }
 
@@ -192,7 +192,7 @@ public class DOMXPathTest extends TestCase
         doc.appendChild(root);
         XPath xpath = new DOMXPath("//root");
         xpath.addNamespace("", "http://www.example.org/");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
     }
 
@@ -205,7 +205,7 @@ public class DOMXPathTest extends TestCase
         root.setAttribute("name", "value");
         
         XPath xpath = new DOMXPath("//@*/text()");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
     }
     
@@ -221,7 +221,7 @@ public class DOMXPathTest extends TestCase
         child.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo2", "http://www.contradictory.org");
         
         XPath xpath = new DOMXPath("//namespace::node()");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         
     }
@@ -238,7 +238,7 @@ public class DOMXPathTest extends TestCase
         child.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo", "http://www.contradictory.org");
         
         XPath xpath = new DOMXPath("//namespace::node()");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());
         
     }
@@ -255,7 +255,7 @@ public class DOMXPathTest extends TestCase
         child.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo", "http://www.contradictory.org");
         
         XPath xpath = new DOMXPath("//namespace::node()[name(.)='foo']");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         Node node = (Node) result.get(0);
         assertEquals("http://www.example.org", node.getNodeValue());
@@ -290,7 +290,7 @@ public class DOMXPathTest extends TestCase
         root.setAttributeNS("http://www.contradictory.org", "pre:foo", "value");
         
         XPath xpath = new DOMXPath("//namespace::node()[name(.)='pre']");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         Node node = (Node) result.get(0);
         assertEquals("http://www.example.org", node.getNodeValue());
@@ -322,7 +322,7 @@ public class DOMXPathTest extends TestCase
     
         Document document = builder.parse( BASIC_XML );
 
-        List results = xpath.selectNodes( document );
+        List<?> results = xpath.selectNodes( document );
 
         assertEquals( 3,
                       results.size() );
@@ -350,7 +350,7 @@ public class DOMXPathTest extends TestCase
         DocumentBuilder builder = factory.newDocumentBuilder();
     
         Document document = builder.parse( "xml/web2.xml" );
-        List result = xpath.selectNodes(document);
+        List<?> result = xpath.selectNodes(document);
         assertEquals(1, result.size());
         
     }
@@ -439,10 +439,10 @@ public class DOMXPathTest extends TestCase
         DocumentBuilder builder = factory.newDocumentBuilder();
         ByteArrayInputStream in = new ByteArrayInputStream("<geo><lat>39</lat></geo>".getBytes("UTF-8"));
         Document document = builder.parse(in);
-        List result = explicitCast.selectNodes(document);
-        assertEquals(1, result.size());
-        result = implicitCast.selectNodes(document);
-        assertEquals(1, result.size());
+        List<?> explicitResult = explicitCast.selectNodes(document);
+        assertEquals(1, explicitResult.size());
+        List<?> implicitResult = implicitCast.selectNodes(document);
+        assertEquals(1, implicitResult.size());
     }
     
      
@@ -453,10 +453,10 @@ public class DOMXPathTest extends TestCase
           DocumentBuilder builder = factory.newDocumentBuilder();
           ByteArrayInputStream in = new ByteArrayInputStream("<geo><lat><!--39--></lat></geo>".getBytes("UTF-8"));
           Document document = builder.parse(in);
-          List result = explicitCast.selectNodes(document);
-          assertEquals(1, result.size());
-          result = implicitCast.selectNodes(document);
-          assertEquals(1, result.size());
+          List<?> explicitResult = explicitCast.selectNodes(document);
+          assertEquals(1, explicitResult.size());
+          List<?> implicitResult = implicitCast.selectNodes(document);
+          assertEquals(1, implicitResult.size());
     }
   
 
@@ -467,10 +467,10 @@ public class DOMXPathTest extends TestCase
         DocumentBuilder builder = factory.newDocumentBuilder();
         ByteArrayInputStream in = new ByteArrayInputStream("<geo><lat><?test 39?></lat></geo>".getBytes("UTF-8"));
         Document document = builder.parse(in);
-        List result = explicitCast.selectNodes(document);
-        assertEquals(1, result.size());
-        result = implicitCast.selectNodes(document);
-        assertEquals(1, result.size());
+        List<?> explicitResult = explicitCast.selectNodes(document);
+        assertEquals(1, explicitResult.size());
+        List<?> implicitResult = implicitCast.selectNodes(document);
+        assertEquals(1, implicitResult.size());
     }
     
     public void testPrecedingAxisInDocumentOrder() 
@@ -488,7 +488,7 @@ public class DOMXPathTest extends TestCase
         Element c = doc.createElement("c");
         a.appendChild(c);
         
-        List result = xpath.selectNodes(b);
+        List<?> result = xpath.selectNodes(b);
         assertEquals(2, result.size());
         assertEquals(a, result.get(0));
         assertEquals(c, result.get(1));
