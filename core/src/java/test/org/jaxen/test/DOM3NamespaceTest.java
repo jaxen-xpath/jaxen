@@ -82,9 +82,9 @@ public class DOM3NamespaceTest extends TestCase {
         root.setAttributeNode(a);
         
         XPath xpath = new DOMXPath("namespace::node()");
-        List result = xpath.selectNodes(root);
+        List<?> result = xpath.selectNodes(root);
         
-        Iterator iterator = result.iterator();
+        Iterator<?> iterator = result.iterator();
         while (iterator.hasNext()) {
             NamespaceNode node = (NamespaceNode) iterator.next();
             if (node.getLocalName() == null || "".equals(node.getLocalName())) rootNS = node;
