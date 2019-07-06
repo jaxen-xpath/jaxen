@@ -10,16 +10,44 @@
     
     <section name="Change History">
 
-   <section name="Jaxen 1.2.0">
+
+   <section name="Jaxen 2.0.0">
 
       <p>
-         Jaxen 1.2.0 now requires Java 1.4 or later, and no longer bundles any of the org.w3c.dom classes. It also deprecates the <code>org.jaxen.pattern</code> package. It should be fully compatible with code written to Java 1.1.
+         Jaxen 2.0.0 (BETA) now requires Java 1.5 or later. 
+         It fixes one obscure bug in XPath evaluation found through fuzz testing. 
+         It removes most of the deprecated <code>org.jaxen.pattern</code> package. Otherwise it should be fully API compatible with code written to Java 1.1.
+      </p>
+
+      <p>
+        The biggest change in 2.0.0 is in Maven coordinates. The various navigators
+        except for DOM have been split into separate artifacts. This avoids a lot of
+        unnecessary dependencies and breaks many dependency cycles. The new Maven coordinates are:
+      </p>
+
+      <ul>
+       <li>jaxen:jaxen-core:2.0.0 - mandatory classes including a navigator for DOM.</li>
+       <li>jaxen:jdom-navigator:2.0.0 - support for JDOM 1.0. Unnecessary if you're not using JDOM.</li>
+       <li>jaxen:dom4j-navigator:2.0.0 - support for dom4j 1.x. Unnecessary if you're not using dom4j.</li>
+       <li>jaxen:xom-navigator:2.0.0 - support for XOM 1.x. Unnecessary if you're not using XOM.</li>
+       <li>jaxen:javabean-navigator:2.0.0 - support for querying JavaBeans. Unnecessary if you're not using org.jaxen.javabean.</li>
+      </ul>
+
+      <p>However this does introduce the risk of diamond dependency conflicts since it 
+      is now possible to have multiple jars containing the same classes in your classpath. You may wish to exclude jaxen:jaxen in your build system. 
       </p>
 
     </section>
-    
-    
 
+
+   <section name="Jaxen 1.2.0">
+
+      <p>
+         Jaxen 1.2.0 now requires Java 1.4 or later and is compatible with Java 9 and later. It no longer bundles any of the org.w3c.dom classes. It also deprecates the <code>org.jaxen.pattern</code> package. It should be fully compatible with code written to Java 1.1.
+         There were also a number of internal changes to account for the demise of codehaus.
+      </p>
+
+    </section>
 
 
    <section name="Jaxen 1.1.6">
