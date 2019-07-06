@@ -69,7 +69,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b12
+ * @version 2.0.0
  *
  */
 public class SimpleVariableContextTest extends TestCase
@@ -109,16 +109,26 @@ public class SimpleVariableContextTest extends TestCase
       throws IOException, ClassNotFoundException, UnresolvableException {
         
         //deserialize
-        InputStream in = new FileInputStream("xml/simplevariablecontext.ser");
-        ObjectInputStream ois = new ObjectInputStream(in);
-        Object o = ois.readObject();
-        SimpleVariableContext context = (SimpleVariableContext) o;
+        InputStream in = null;
+        ObjectInputStream ois = null;
         
-        // test the result
-        assertEquals("String Value", context.getVariableValue("", "", "s"));
-        assertEquals(new Double(3.1415292), context.getVariableValue("", "", "x"));
-        assertEquals(Boolean.TRUE, context.getVariableValue("", "", "b"));
-        assertEquals("", "");
+        try {
+	        in = new FileInputStream("xml/simplevariablecontext.ser");
+	        ois = new ObjectInputStream(in);
+	        Object o = ois.readObject();
+	        SimpleVariableContext context = (SimpleVariableContext) o;
+	        
+	        // test the result
+	        assertEquals("String Value", context.getVariableValue("", "", "s"));
+	        assertEquals(new Double(3.1415292), context.getVariableValue("", "", "x"));
+	        assertEquals(Boolean.TRUE, context.getVariableValue("", "", "b"));
+	        assertEquals("", "");
+	        }
+        finally {
+        	if (ois != null) {
+        		ois.close();
+        	}
+        }
         
     }
     
