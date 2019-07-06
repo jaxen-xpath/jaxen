@@ -101,7 +101,7 @@ public class LastTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(2, result.size());
         assertEquals(x3, result.get(0));
         assertEquals(x4, result.get(1));

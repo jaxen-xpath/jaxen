@@ -86,15 +86,15 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         List<Object> results = new ArrayList<Object>();
 
         try {
-            List lhsResults = (List) getLHS().evaluate( context );
-            List rhsResults = (List) getRHS().evaluate( context );
+            List<Object> lhsResults = (List<Object>) getLHS().evaluate( context );
+            List<Object> rhsResults = (List<Object>) getRHS().evaluate( context );
     
-            Set unique = new HashSet();
+            Set<Object> unique = new HashSet<Object>();
     
             results.addAll( lhsResults );
             unique.addAll( lhsResults );
     
-            Iterator rhsIter = rhsResults.iterator();
+            Iterator<Object> rhsIter = rhsResults.iterator();
     
             while ( rhsIter.hasNext() )
             {
