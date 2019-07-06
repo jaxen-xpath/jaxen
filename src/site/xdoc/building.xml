@@ -30,7 +30,7 @@
       <p><samp>$ mvn test</samp></p>
       
       <p>
-        To build a jar file  at the shell 
+        To build a jar file at the shell 
         prompt type "mvn package":
       </p>
       
