@@ -19,8 +19,8 @@
     </section>
 
     <section name="What is the jaxen license?">
-      <p>We use an Apache-style open source license which is one of the least
-        restrictive licenses around, you can use <code>jaxen</code> to create new products
+      <p>We use the <a nref='https://opensource.org/licenses/BSD-2-Clause'>BSD 2-clause license</a>, also known as the simplified BSD license. This is one of the least
+        restrictive licenses. You can use <code>jaxen</code> to create new products
         without them having to be open source.
       </p>
     </section>
@@ -127,11 +127,11 @@
     <section name="Who uses jaxen?">
       <p>
       <code>jaxen</code> has been embedded directly into <strong>dom4j</strong> and 
-      <strong><a href="http://www.xom.nu/">XOM 1.1</a></strong> to provide
-      easy XPath evaluation directly from your documents.  Additionally, it's
+      <strong><a href="https://xom.nu/">XOM</a></strong> to provide
+      easy XPath evaluation directly from your documents. Additionally, it's
       being integrated into David Megginson's 
       <a href="http://newsml-toolkit.sourceforge.net/">NewsML Framework</a>.
-      Tom Copeland's <a href="http://pmd.sourceforge.net/">PMD</a> static code analyzer uses jaxen to query Java code structures using XPath.  
+      Tom Copeland's <a href="https://pmd.github.io/">PMD</a> static code analyzer uses jaxen to query Java code structures using XPath.  
       </p>
     </section>
 
