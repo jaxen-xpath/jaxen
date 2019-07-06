@@ -71,7 +71,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.1b9
+ * @version 2.0.0
  *
  */
 public class EqualsTest extends TestCase
@@ -92,7 +92,7 @@ public class EqualsTest extends TestCase
         Element c = doc.createElement("c");
         b.appendChild(c);
         
-        List result = (List) xpath.evaluate(doc);
+        List<?> result = (List<?>) xpath.evaluate(doc);
         assertEquals(0, result.size());
         
     }
@@ -110,7 +110,7 @@ public class EqualsTest extends TestCase
         factory.setNamespaceAware(true);
         Document doc = factory.newDocumentBuilder().parse(in);
         
-        List result = (List) xpath.evaluate(doc);
+        List<?> result = (List<?>) xpath.evaluate(doc);
         assertEquals(1, result.size());
         
     }

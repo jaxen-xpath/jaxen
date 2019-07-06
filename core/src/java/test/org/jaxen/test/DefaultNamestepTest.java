@@ -104,7 +104,7 @@ public class DefaultNamestepTest extends TestCase {
         x4.appendChild(doc.createTextNode("4"));
         x5.appendChild(doc.createTextNode("5"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(x1, result.get(0));
         

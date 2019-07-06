@@ -109,7 +109,7 @@ public class IdTest extends TestCase {
         id.setNodeValue("p1");
         x2.setAttributeNode(id);
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
         
     }    
@@ -154,7 +154,7 @@ public class IdTest extends TestCase {
         StringReader reader = new StringReader(text);
         InputSource in = new InputSource(reader);
         Document doc = builder.parse(in);
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         Element a = (Element) result.get(0);
         assertEquals("a", a.getNodeName());
@@ -169,7 +169,7 @@ public class IdTest extends TestCase {
         StringReader reader = new StringReader(text);
         InputSource in = new InputSource(reader);
         Document doc = builder.parse(in);
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         Element a = (Element) result.get(0);
         assertEquals("a", a.getNodeName());
@@ -184,7 +184,7 @@ public class IdTest extends TestCase {
         StringReader reader = new StringReader(text);
         InputSource in = new InputSource(reader);
         Document doc = builder.parse(in);
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(2, result.size());
         Element a1 = (Element) result.get(0);
         Element a2 = (Element) result.get(1);
@@ -202,7 +202,7 @@ public class IdTest extends TestCase {
         StringReader reader = new StringReader(text);
         InputSource in = new InputSource(reader);
         Document doc = builder.parse(in);
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         Element a = (Element) result.get(0);
         assertEquals("a", a.getNodeName());

@@ -102,7 +102,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());
         assertEquals(b, result.get(0));
         assertEquals(x2, result.get(1));
@@ -129,7 +129,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
         
     }    
@@ -153,7 +153,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());
         assertEquals(b, result.get(0));
         assertEquals(x2, result.get(1));
@@ -180,7 +180,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
         
     }    
@@ -206,7 +206,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
         
     }    
@@ -230,7 +230,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         assertEquals(b, result.get(0));
         
@@ -255,7 +255,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(2, result.size());
         assertEquals(x2.getFirstChild(), result.get(0));
         assertEquals(x3.getFirstChild(), result.get(1));
@@ -306,7 +306,7 @@ public class LangTest extends TestCase {
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
         
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size());
         
     }    

@@ -273,7 +273,7 @@ public class DOMXPathTest extends TestCase
         root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:foo", "http://www.contradictory.org");
         
         XPath xpath = new DOMXPath("//namespace::node()[name(.)='foo']");
-        List result = xpath.selectNodes(doc);
+        List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
         Node node = (Node) result.get(0);
         assertEquals("http://www.example.org/", node.getNodeValue());

@@ -8,13 +8,13 @@ public class Person
     private String name;
     private int age;
 
-    private Set brothers;
+    private Set<Person> brothers;
 
     Person(String name, int age)
     {
         this.name = name;
         this.age  = age;
-        this.brothers = new HashSet();
+        this.brothers = new HashSet<Person>();
     }
 
     public String getName()
@@ -32,7 +32,7 @@ public class Person
         this.brothers.add( brother );
     }
 
-    public Set getBrothers()
+    public Set<Person> getBrothers()
     {
         return this.brothers;
     }
