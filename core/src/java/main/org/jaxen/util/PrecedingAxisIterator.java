@@ -86,14 +86,14 @@ import java.util.NoSuchElementException;
  * Most object models could provide a faster implementation of the reversed
  * 'children-or-self' used here.</p>
  * 
- * @version 1.2b12
+ * @version 2.0.0
  */
 public class PrecedingAxisIterator implements Iterator
 {
-    private Iterator ancestorOrSelf;
-    private Iterator precedingSibling;
-    private ListIterator childrenOrSelf;
-    private ArrayList stack;
+    private Iterator<Object> ancestorOrSelf;
+    private Iterator<Object> precedingSibling;
+    private ListIterator<Object> childrenOrSelf;
+    private ArrayList<Object> stack;
 
     private Navigator navigator;
 
@@ -110,7 +110,7 @@ public class PrecedingAxisIterator implements Iterator
         this.ancestorOrSelf = navigator.getAncestorOrSelfAxisIterator(contextNode);
         this.precedingSibling = JaxenConstants.EMPTY_ITERATOR;
         this.childrenOrSelf = JaxenConstants.EMPTY_LIST_ITERATOR;
-        this.stack = new ArrayList();
+        this.stack = new ArrayList<Object>();
     }
 
 
@@ -154,13 +154,13 @@ public class PrecedingAxisIterator implements Iterator
         }
     }
 
-    private ListIterator childrenOrSelf(Object node)
+    private ListIterator<Object> childrenOrSelf(Object node)
     {
         try
         {
-            ArrayList reversed = new ArrayList();
+            ArrayList<Object> reversed = new ArrayList<Object>();
             reversed.add(node);
-            Iterator childAxisIterator = navigator.getChildAxisIterator(node);
+            Iterator<Object> childAxisIterator = navigator.getChildAxisIterator(node);
             if (childAxisIterator != null)
             {
                 while (childAxisIterator.hasNext())

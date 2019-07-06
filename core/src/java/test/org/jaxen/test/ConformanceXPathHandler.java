@@ -50,19 +50,19 @@
 
 package org.jaxen.test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.jaxen.saxpath.XPathHandler;
 
 class ConformanceXPathHandler implements XPathHandler
 {
-    private List events;
+    private List<String> events;
 
     ConformanceXPathHandler()
     {
-        this.events = new LinkedList();
+        this.events = new ArrayList<String>();
     }
 
     public void startXPath()
@@ -292,6 +292,7 @@ class ConformanceXPathHandler implements XPathHandler
         this.events.add( eventStr );
     }
 
+    @Override
     public boolean equals(Object thatObj)
     {
         if ( thatObj instanceof ConformanceXPathHandler )
@@ -304,22 +305,24 @@ class ConformanceXPathHandler implements XPathHandler
         return false;
     }
     
+    @Override
     public int hashCode() {
         return this.events.hashCode();
     }
     
 
+    @Override
     public String toString()
     {
-        Iterator eventIter = this.events.iterator();
+        Iterator<String> eventIter = this.events.iterator();
         int      i = 0;
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         while( eventIter.hasNext() )
         {
             buf.append("(").append(i).append(") ").append( eventIter.next().toString() ).append("\n");
-            ++i;
+            i++;
         }
 
         return buf.toString();
