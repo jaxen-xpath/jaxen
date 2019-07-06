@@ -55,7 +55,7 @@ public class SingletonListTest extends TestCase {
 
     public void testIndexOutOfBoundsException() {
      
-        List list = new SingletonList(new Object());
+        List<?> list = new SingletonList(new Object());
         try {
             list.get(1);
             fail("Got element 1");

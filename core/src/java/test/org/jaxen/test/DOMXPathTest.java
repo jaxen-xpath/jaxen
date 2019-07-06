@@ -109,7 +109,7 @@ public class DOMXPathTest extends TestCase
         root.setAttribute("att", "one");
 
         XPath xp = new DOMXPath("//@* | //namespace::* ");
-        List<?> result = (List) xp.evaluate(doc);
+        List<?> result = (List<?>) xp.evaluate(doc);
         assertEquals(3, result.size());
         Node third = (Node) result.get(2);
         assertEquals(Node.ATTRIBUTE_NODE, third.getNodeType());
@@ -121,7 +121,7 @@ public class DOMXPathTest extends TestCase
         root.setAttribute("att", "one");
 
         XPath xp = new DOMXPath("//namespace::* | //@* ");
-        List<?> result = (List) xp.evaluate(doc);
+        List<?> result = (List<?>) xp.evaluate(doc);
         assertEquals(3, result.size());
         Node third = (Node) result.get(2);
         assertEquals(Node.ATTRIBUTE_NODE, third.getNodeType());
@@ -307,7 +307,7 @@ public class DOMXPathTest extends TestCase
         
         DOMXPath xpath = new DOMXPath( "//comment()" );
         
-        List results = xpath.selectNodes(doc);
+        List<?> results = xpath.selectNodes(doc);
         Node backroot = (Node) results.get(0);
         backroot.setNodeValue("test");
         assertEquals("test", backroot.getNodeValue());
@@ -327,7 +327,7 @@ public class DOMXPathTest extends TestCase
         assertEquals( 3,
                       results.size() );
 
-        Iterator iter = results.iterator();
+        Iterator<?> iter = results.iterator();
 
         assertEquals( "baz",
                       ((Element)iter.next()).getLocalName() );
@@ -371,7 +371,7 @@ public class DOMXPathTest extends TestCase
 
     public void testJaxen207() 
       throws JaxenException {
-        XPath xpath = new DOMXPath( "contains($FinResp, \"NS_Payables_Associate\") or"
+        new DOMXPath( "contains($FinResp, \"NS_Payables_Associate\") or"
                 + "contains($FinResp, \"NS_Payables_Manager\") or"
                 + "contains($FinResp, \"NS_Payment_Processing\") or"
                 + "contains($FinResp, \"NS_Vendor_Maintenance\") or"

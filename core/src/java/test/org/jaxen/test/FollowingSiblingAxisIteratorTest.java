@@ -59,7 +59,7 @@ import junit.framework.TestCase;
 
 public class FollowingSiblingAxisIteratorTest extends TestCase {
 
-    private Iterator iterator;
+    private Iterator<?> iterator;
 
     public FollowingSiblingAxisIteratorTest(String name) {
         super(name);
