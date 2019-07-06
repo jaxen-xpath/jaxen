@@ -10,6 +10,17 @@
     
     <section name="Change History">
 
+   <section name="Jaxen 1.2.0">
+
+      <p>
+         Jaxen 1.2.0 now requires Java 1.4 or later, and no longer bundles any of the org.w3c.dom classes. It also deprecates the <code>org.jaxen.pattern</code> package. It should be fully compatible with code written to Java 1.1.
+      </p>
+
+    </section>
+    
+    
+
+
 
    <section name="Jaxen 1.1.6">
 
