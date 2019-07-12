@@ -1,4 +1,4 @@
-package org.jaxen.javabean.test;
+package org.jaxen.test;
 
 import java.util.List;
 
