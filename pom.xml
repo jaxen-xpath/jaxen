@@ -32,7 +32,6 @@
 
   <modules>
     <module>core</module>
-    <module>javabean-navigator</module>
     <module>dom4j-navigator</module>
     <module>xom-navigator</module>
     <module>jdom-navigator</module>
