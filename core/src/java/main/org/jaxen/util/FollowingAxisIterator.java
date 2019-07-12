@@ -62,7 +62,7 @@ import org.jaxen.JaxenConstants;
  * node that are after the context node in document order, excluding any descendants 
  * and excluding attribute nodes and namespace nodes."
  * 
- * @version 1.2b12
+ * @version 2.0.0
  */
 public class FollowingAxisIterator implements Iterator
 {

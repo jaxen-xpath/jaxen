@@ -64,7 +64,7 @@ import org.jaxen.UnsupportedAxisException;
  * attribute node or namespace node, the <code>following-sibling</code>
  * axis is empty."
  * 
- * @version 1.2b12
+ * @version 2.0.0
  *
  */
 public class FollowingSiblingAxisIterator implements Iterator
@@ -78,6 +78,7 @@ public class FollowingSiblingAxisIterator implements Iterator
      * 
      * @param contextNode the node to start from
      * @param navigator the object model specific navigator
+     * @throws UnsupportedAxisException if the navigator does not support the following-sibling axis
      */
     public FollowingSiblingAxisIterator(Object contextNode,
                                         Navigator navigator) throws UnsupportedAxisException
