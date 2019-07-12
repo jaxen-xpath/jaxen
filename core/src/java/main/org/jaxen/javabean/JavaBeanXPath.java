@@ -92,6 +92,7 @@ public class JavaBeanXPath extends BaseXPath
         super( xpathExpr, DocumentNavigator.getInstance() );
     }
 
+    @Override
     protected Context getContext(Object node)
     {
         if ( node instanceof Context )
@@ -120,6 +121,7 @@ public class JavaBeanXPath extends BaseXPath
         return super.getContext( new Element( null, "root", node ) );
     }
 
+    @Override
     public Object evaluate(Object node)
         throws JaxenException
     {
