@@ -13,7 +13,7 @@
 
   <artifactId>jaxen</artifactId>
   <packaging>bundle</packaging>
-  <name>jaxen-core</name>
+  <name>jaxen</name>
   <description>Jaxen is a universal XPath engine for Java.</description>
 
 </project>
