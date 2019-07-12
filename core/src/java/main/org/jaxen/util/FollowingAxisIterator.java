@@ -79,6 +79,7 @@ public class FollowingAxisIterator implements Iterator
      * 
      * @param contextNode the node to start from
      * @param navigator the object model specific navigator
+     * @throws UnsupportedAxisException if the navigator does not support the following axis
      */
     public FollowingAxisIterator(Object contextNode,
                                  Navigator navigator) throws UnsupportedAxisException
