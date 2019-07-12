@@ -62,7 +62,7 @@ import java.util.ArrayList;
  * a descendant is a child or a child of a child and so on; thus 
  * the descendant axis never contains attribute or namespace nodes."
  * 
- * @version 1.2b12
+ * @version 2.0.0
  */
 public class DescendantAxisIterator implements Iterator
 {

@@ -65,7 +65,7 @@ import org.jaxen.UnsupportedAxisException;
  * attribute node or namespace node, the <code>preceding-sibling</code>
  * axis is empty."
  * 
- * @version 1.2b12
+ * @version 2.0.0
  *
  */
 public class PrecedingSiblingAxisIterator implements Iterator
