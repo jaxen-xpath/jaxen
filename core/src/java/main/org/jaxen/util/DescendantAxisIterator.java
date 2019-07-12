@@ -76,6 +76,7 @@ public class DescendantAxisIterator implements Iterator
      * 
      * @param contextNode the node to start from
      * @param navigator the object model specific navigator
+     * @throws UnsupportedAxisException if the navigator does not support the descendant axis
      */
     public DescendantAxisIterator(Object contextNode,
                                   Navigator navigator) throws UnsupportedAxisException
@@ -96,7 +97,8 @@ public class DescendantAxisIterator implements Iterator
      * @return true if any descendants remain; false otherwise
      * 
      * @see java.util.Iterator#hasNext()
-     */    public boolean hasNext()
+     */
+    public boolean hasNext()
     {
         while (!children.hasNext())
         {

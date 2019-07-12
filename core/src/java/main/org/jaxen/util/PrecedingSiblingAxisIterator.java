@@ -81,6 +81,7 @@ public class PrecedingSiblingAxisIterator implements Iterator
      * 
      * @param contextNode the node to start from
      * @param navigator the object model specific navigator
+     * @throws UnsupportedAxisException if the navigator does not support the preceding-sibling axis
      */
     public PrecedingSiblingAxisIterator(Object contextNode,
                                         Navigator navigator) throws UnsupportedAxisException
@@ -166,7 +167,7 @@ public class PrecedingSiblingAxisIterator implements Iterator
     /**
      * This operation is not supported.
      * 
-     * @throws UnsupportedOperationException
+     * @throws UnsupportedOperationException always
      */
     public void remove() throws UnsupportedOperationException
     {
