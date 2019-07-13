@@ -252,9 +252,6 @@
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
             <Export-Package>org.jaxen.*;version=${project.version}</Export-Package>
-            <Import-Package>
-              *;resolution:=optional
-            </Import-Package>
           </instructions>
         </configuration>
       </plugin>
