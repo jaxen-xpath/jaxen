@@ -36,7 +36,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import java.io.Serializable;
 
-/** Supporting context information for resolving
+/** 
+ *  Supporting context information for resolving
  *  namespace prefixes, functions, and variables.
  * 
  *  <p>
