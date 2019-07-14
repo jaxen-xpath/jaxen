@@ -73,6 +73,8 @@ public interface Step extends Predicated
      * Performs the node-test part of evaluating the step for the given node
      * (which must be on the axis).
      * 
+     * @param node the node to test
+     * @param contextSupport function, namespace, and variable contexts
      * @return true if the node matches this step; false if it doesn't
      */    
     boolean matches(Object node,
@@ -105,8 +107,7 @@ public interface Step extends Predicated
      * @param contextNode the node from which to follow this step
      * @param support the remaining context for the traversal
      * @return an iterator over the nodes along the axis
-     * @throws UnsupportedAxisException if the navigator does not support this step's axis
-     * 
+     * @throws UnsupportedAxisException if the navigator does not support this step's axis 
      */
     Iterator axisIterator(Object contextNode,
                           ContextSupport support) throws UnsupportedAxisException;
@@ -116,6 +117,7 @@ public interface Step extends Predicated
      * For each node in the given context calls matches() for every node on the
      * axis, then filters the result by each of the predicates.
      * 
+     * @param context the node in context of its position in the document
      * @return a list of matching nodes
      */
     List evaluate(Context context) throws JaxenException;
