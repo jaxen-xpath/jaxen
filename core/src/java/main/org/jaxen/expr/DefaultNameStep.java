@@ -58,7 +58,7 @@ import org.jaxen.saxpath.Axis;
  * @author bob mcwhirter (bob@werken.com)
  * @author Stephen Colebourne
  */
-class DefaultNameStep extends DefaultStep implements NameStep {
+public class DefaultNameStep extends DefaultStep implements NameStep {
     
     private static final long serialVersionUID = 428414912247718390L;
 

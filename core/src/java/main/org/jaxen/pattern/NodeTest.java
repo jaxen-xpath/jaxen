@@ -45,33 +45,16 @@
  * $Id$
  */
 
-package org.jaxen.expr;
+package org.jaxen.pattern;
 
-import org.jaxen.ContextSupport;
-import org.jaxen.Navigator;
-import org.jaxen.expr.iter.IterableAxis;
 
-public class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
-{
 
-    private static final long serialVersionUID = -3821960984972022948L;
+/** <p><code>NodeTest</code> is a simple test on a node.</p>
+  *
+  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+  * @version $Revision$
+  * @deprecated will be removed in Jaxen 2.0
+  */
+public abstract class NodeTest extends Pattern {
 
-    DefaultTextNodeStep(IterableAxis axis, PredicateSet predicateSet )
-    {
-        super( axis, predicateSet );
-    }
-
-    public boolean matches(Object node,
-                           ContextSupport support)
-    {
-        Navigator nav = support.getNavigator();
-
-        return nav.isText( node );
-    }
-
-    public String getText()
-    {
-        return getAxisName() + "::text()" + super.getText();
-    }
-    
 }

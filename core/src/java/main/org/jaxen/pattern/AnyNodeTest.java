@@ -45,33 +45,45 @@
  * $Id$
  */
 
-package org.jaxen.expr;
+package org.jaxen.pattern;
 
-import org.jaxen.ContextSupport;
-import org.jaxen.Navigator;
-import org.jaxen.expr.iter.IterableAxis;
+import org.jaxen.Context;
 
-public class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
-{
+/** <p><code>AnyNodeTest</code> matches any node.</p>
+  *
+  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+  * @version $Revision$
+  */
+public class AnyNodeTest extends NodeTest {
 
-    private static final long serialVersionUID = -3821960984972022948L;
-
-    DefaultTextNodeStep(IterableAxis axis, PredicateSet predicateSet )
+    private static final AnyNodeTest instance = new AnyNodeTest();
+    
+    public static AnyNodeTest getInstance() 
     {
-        super( axis, predicateSet );
-    }
-
-    public boolean matches(Object node,
-                           ContextSupport support)
-    {
-        Navigator nav = support.getNavigator();
-
-        return nav.isText( node );
-    }
-
-    public String getText()
-    {
-        return getAxisName() + "::text()" + super.getText();
+        return instance;
     }
     
+    private AnyNodeTest() {}
+    
+    /** @return true if the pattern matches the given node
+      */
+    public boolean matches( Object node, Context context ) 
+    {
+        return true;
+    }
+    
+    public double getPriority() 
+    {
+        return -0.5;
+    }
+
+    public short getMatchType() 
+    {
+        return ANY_NODE;
+    }
+    
+    public String getText() 
+    {
+        return "*";
+    }
 }

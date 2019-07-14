@@ -53,7 +53,7 @@ import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
-class DefaultProcessingInstructionNodeStep extends DefaultStep
+public class DefaultProcessingInstructionNodeStep extends DefaultStep
     implements ProcessingInstructionNodeStep
 {
 

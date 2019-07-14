@@ -47,14 +47,16 @@
 
 package org.jaxen.pattern;
 
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
-/** <p>Node type constants defined here for legacy reasons.</p>
+/** <p><code>Pattern</code> defines the behaviour for pattern in
+  * the XSLT processing model.</p>
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
   * @version $Revision$
-  * @deprecated will be removed in Jaxen 3.0
   */
-public class Pattern {
+public abstract class Pattern {
 
     // These node numbers are compatible with both DOM and dom4j's node types
     /** Matches Element nodes */
@@ -95,4 +97,80 @@ public class Pattern {
     
     /** Matches no nodes */
     public static final short NO_NODE = 14;
+    
+    
+    /** 
+     * 
+     * @param node ????
+     * @param context ????
+     * @return true if the pattern matches the given node
+     * @throws JaxenException  if ????
+      */
+    public abstract boolean matches( Object node, Context context ) throws JaxenException;
+    
+    /** Returns the default resolution policy of the pattern according to the
+      * <a href="https://www.w3.org/TR/xslt#conflict">
+      * XSLT conflict resolution rules</a>.
+      *  
+     * @return 0.5; the default priority defined in XSLT
+     * 
+     * @see <a href="https://www.w3.org/TR/xslt#conflict" target="_top">Section 5.5 of the XSLT specification</a>
+      * 
+      */
+    public double getPriority() 
+    {
+        return 0.5;
+    }
+    
+    /** If this pattern is a union pattern then this
+      * method should return an array of patterns which
+      * describe the union pattern, which should contain more than one pattern.
+      * Otherwise this method should return null.
+      *
+      * @return an array of the patterns which make up this union pattern
+      * or null if this pattern is not a union pattern
+      */
+    public Pattern[] getUnionPatterns() 
+    {
+        return null;
+    }
+
+    
+    /** 
+     * Returns the type of node the pattern matches.
+     * 
+     * @return <code>ANY_NODE</code> unless overridden
+      */
+    public short getMatchType() 
+    {
+        return ANY_NODE;
+    }
+
+
+    /** For patterns which only match an ATTRIBUTE_NODE or an 
+      * ELEMENT_NODE then this pattern may return the name of the
+      * element or attribute it matches. This allows a more efficient
+      * rule matching algorithm to be performed, rather than a brute 
+      * force approach of evaluating every pattern for a given Node.
+      *
+      * @return the name of the element or attribute this pattern matches
+      * or null if this pattern matches any or more than one name
+      */
+    public String getMatchesNodeName() 
+    {
+        return null;
+    }
+    
+    
+    public Pattern simplify() 
+    {
+        return this;
+    }
+    
+    /** Returns a textual representation of this pattern
+     * 
+     * @return the usual string form of this XSLT pattern
+     */
+    public abstract String getText();
+
 }
