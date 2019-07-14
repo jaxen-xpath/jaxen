@@ -45,33 +45,86 @@
  * $Id$
  */
 
-package org.jaxen.expr;
+package org.jaxen.pattern;
 
-import org.jaxen.ContextSupport;
+import org.jaxen.Context;
 import org.jaxen.Navigator;
-import org.jaxen.expr.iter.IterableAxis;
 
-public class DefaultTextNodeStep extends DefaultStep implements TextNodeStep
-{
-
-    private static final long serialVersionUID = -3821960984972022948L;
-
-    DefaultTextNodeStep(IterableAxis axis, PredicateSet predicateSet )
+/** <p><code>NameTest</code> tests for a node name.</p>
+  *
+  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+  * @version $Revision$
+  */
+public class NameTest extends NodeTest {
+    
+    /** The name to match against */
+    private String name;
+    
+    /** The type of node to match - either attribute or element */
+    private short nodeType;
+    
+    public NameTest(String name, short nodeType)   
     {
-        super( axis, predicateSet );
+        this.name = name;
+        this.nodeType = nodeType;
     }
-
-    public boolean matches(Object node,
-                           ContextSupport support)
+        
+    /** @return true if the pattern matches the given node
+      */
+    public boolean matches( Object node, Context context ) 
     {
-        Navigator nav = support.getNavigator();
-
-        return nav.isText( node );
-    }
-
-    public String getText()
-    {
-        return getAxisName() + "::text()" + super.getText();
+        Navigator navigator = context.getNavigator();
+        if ( nodeType == Pattern.ELEMENT_NODE ) 
+        {
+            return navigator.isElement( node ) 
+                && name.equals( navigator.getElementName( node ) );
+        }
+        else if ( nodeType == Pattern.ATTRIBUTE_NODE ) 
+        {
+            return navigator.isAttribute( node )
+                && name.equals( navigator.getAttributeName( node ) );
+        }
+        else
+        {
+            if ( navigator.isElement( node ) )
+            {
+                return name.equals( navigator.getElementName( node ) );
+            }
+            else
+            if ( navigator.isAttribute( node ) )
+            {
+                return name.equals( navigator.getAttributeName( node ) );
+            }
+        }
+        return false;
     }
     
+    public double getPriority() 
+    {
+        return 0.0;
+    }
+
+
+    public short getMatchType() 
+    {
+        return nodeType;
+    }
+    
+    public String getText() 
+    {
+        if ( nodeType == Pattern.ATTRIBUTE_NODE ) 
+        {
+            return "@" + name;
+        }
+        else 
+        {
+            return name;
+        }
+    }
+    
+    @Override
+    public String toString()
+    {
+        return super.toString() + "[ name: " + name + " type: " + nodeType + " ]";
+    }
 }

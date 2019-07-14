@@ -53,7 +53,7 @@ import org.jaxen.ContextSupport;
 import org.jaxen.Navigator;
 import org.jaxen.expr.iter.IterableAxis;
 
-class DefaultCommentNodeStep extends DefaultStep implements CommentNodeStep
+public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeStep
 {
 
     private static final long serialVersionUID = 4340788283861875606L;

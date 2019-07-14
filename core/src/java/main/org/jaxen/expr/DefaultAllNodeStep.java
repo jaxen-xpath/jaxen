@@ -52,7 +52,7 @@ package org.jaxen.expr;
 import org.jaxen.ContextSupport;
 import org.jaxen.expr.iter.IterableAxis;
 
-class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
+public class DefaultAllNodeStep extends DefaultStep implements AllNodeStep
 {
 
     private static final long serialVersionUID = 292886316770123856L;
