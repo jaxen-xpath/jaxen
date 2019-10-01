@@ -165,12 +165,9 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
             Object contextNode = contextNodeSet.get(0);
             if (namedAccess) {
                 // get the iterator over the nodes and check it
-                String uri = null;
-                if (hasPrefix) {
-                    uri = support.translateNamespacePrefixToUri(prefix);
-                    if (uri == null) {
-                        throw new UnresolvableException("XPath expression uses unbound namespace prefix " + prefix);
-                    }
+                String uri = support.translateNamespacePrefixToUri(prefix);
+                if (hasPrefix && uri == null) {
+                    throw new UnresolvableException("XPath expression uses unbound namespace prefix " + prefix);
                 }
                 Iterator axisNodeIter = iterableAxis.namedAccessIterator(
                                 contextNode, support, localName, prefix, uri);
