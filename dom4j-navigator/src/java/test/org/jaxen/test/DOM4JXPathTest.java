@@ -51,8 +51,10 @@ package org.jaxen.test;
 import junit.framework.TestCase;
 
 import java.io.StringReader;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -64,6 +66,7 @@ import org.dom4j.tree.DefaultAttribute;
 import org.dom4j.tree.DefaultDocument;
 import org.dom4j.tree.DefaultElement;
 import org.jaxen.JaxenException;
+import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.XPath;
 import org.jaxen.XPathSyntaxException;
 import org.jaxen.dom4j.Dom4jXPath;
@@ -148,6 +151,23 @@ public class DOM4JXPathTest extends TestCase
         List results = xpath.selectNodes( doc );
         assertEquals( 0, results.size() );
 
+    }
+
+    public void testDefaultNamespace() throws DocumentException, JaxenException
+    {
+        String document = "<?xml version=\"1.0\"?>\n<a xmlns=\"uri:1\"><b>c</b></a>";
+        SAXReader reader = new SAXReader();
+        Document doc = reader.read(new StringReader(document));
+
+        XPath xpath = new Dom4jXPath("/a/b");
+
+        // This namespace context simulates dom4j's behaviour, where the current context element resolves the namespace prefix.
+        Map namespaces = new HashMap();
+        namespaces.put("", "uri:1");
+        xpath.setNamespaceContext(new SimpleNamespaceContext(namespaces));
+
+        List results = xpath.selectNodes(doc);
+        assertEquals(1, results.size());
     }
     
     public void testNamespaceNodesAreInherited() throws JaxenException
