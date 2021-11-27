@@ -248,8 +248,17 @@ public class PatternParser
             }
             else 
             {
-                path.setNodeTest( new NameTest( localName, nodeType ) );
-                // XXXX: should support namespace in the test too
+                NameTest nameTest = new NameTest( localName, nodeType );
+                NodeTest nodeTest;
+                if (prefix.length() > 0)
+                {
+                    nodeTest = new NameNamespaceCompositeTest(nameTest, new NamespaceTest( prefix, nodeType ));
+                }
+                else
+                {
+                    nodeTest = nameTest;
+                }
+                path.setNodeTest( nodeTest );
             }
             return convertDefaultStep(path, nameStep);
         }
