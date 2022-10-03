@@ -333,6 +333,34 @@
         <artifactId>findbugs-maven-plugin</artifactId>
         <version>3.0.5</version>
       </plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-enforcer-plugin</artifactId>
+         <version>3.0.0-M3</version>
+         <dependencies>
+           <dependency>
+             <groupId>com.google.cloud.tools</groupId>
+             <artifactId>linkage-checker-enforcer-rules</artifactId>
+             <version>1.5.12</version>
+           </dependency>
+         </dependencies>
+         <executions>
+           <execution>
+             <id>enforce-linkage-checker</id>
+             <phase>verify</phase>
+             <goals>
+               <goal>enforce</goal>
+             </goals>
+             <configuration>
+               <rules>
+                 <LinkageCheckerRule implementation= "com.google.cloud.tools.dependencies.enforcer.LinkageCheckerRule">
+                   <level>WARN</level>
+                 </LinkageCheckerRule>
+               </rules>
+             </configuration>
+           </execution>
+         </executions>
+        </plugin>
     </plugins>
   </build>
 
