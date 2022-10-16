@@ -70,8 +70,8 @@ import org.jaxen.Navigator;
  * 
  * <p>
  * There should be no more than one element in any document with a 
- * certain ID. However, if there are multiple such elements--i.e. if 
- * there are duplicate IDs--then this function selects only the first element 
+ * certain ID. However, if there are multiple such elements — that is, if 
+ * there are duplicate IDs — then this function selects only the first element 
  * in document order with the specified ID. 
  * </p>
  * 

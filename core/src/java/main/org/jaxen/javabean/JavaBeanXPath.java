@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -42,7 +36,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <http://www.jaxen.org/>.
  * 
- * $Id$
  */
 
 package org.jaxen.javabean;
@@ -73,7 +66,6 @@ import java.util.Iterator;
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *
- * @version $Revision$
  */
 public class JavaBeanXPath extends BaseXPath
 {
@@ -82,7 +74,7 @@ public class JavaBeanXPath extends BaseXPath
 
     /** Construct given an XPath expression string.
      *
-     *  @param xpathExpr The XPath expression.
+     *  @param xpathExpr the XPath expression
      *
      *  @throws JaxenException if there is a syntax error while
      *          parsing the expression
