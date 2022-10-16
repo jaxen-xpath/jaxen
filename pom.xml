@@ -33,7 +33,6 @@
 
   <modules>
     <module>core</module>
-    <module>xom-navigator</module>
     <module>integration-tests</module>
   </modules>
 
