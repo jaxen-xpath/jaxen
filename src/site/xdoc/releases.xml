@@ -9,8 +9,16 @@
   <body>
     <section name="Official Builds">
 
+
 <p>
-The current version is 1.2.0. 1.2.0 now requires Java 1.4 or later, and no longer bundles any of the org.w3c.dom classes. It also deprecates the <code>org.jaxen.pattern</code> package. It should be fully compatible with code written to Java 1.1.
+The current version is 2.0.0. 2.0.0 now requires Java 1.5 or later, 
+and no longer bundles any of the third party navigators
+so dependency trees should be much smaller.
+</p>
+
+<p>
+The current version is 1.2.0. 1.2.0 now requires Java 1.4 or later, and no longer bundles any of the org.w3c.dom classes.
+It also deprecates the <code>org.jaxen.pattern</code> package. It should be fully compatible with code written to Jaxen 1.1.
 </p>
 
 <p>
@@ -28,16 +36,16 @@ is backwards compatible with code written to the 1.0 APIs.
       </p>
 
       <p>
-      The recommended build is <strong>1.2.0</strong>:
+      The recommended build is <strong>2.0.0</strong>:
       </p>
 
       <ul>
-        <li><a href="dist/jaxen-1.2.0-bin.zip">1.2.0  binaries in zip format.</a></li>
-        <li><a href="dist/jaxen-1.2.0-bin.tar.gz">1.2.0 binaries in tar/gz format.</a></li>
-        <li><a href="dist/jaxen-1.2.0-bin.tar.bz2">1.2.0 binaries in bz2 format.</a></li>
-        <li><a href="dist/jaxen-1.2.0-src.zip">1.2.0 sources in zip format.</a></li>
-        <li><a href="dist/jaxen-1.2.0-src.tar.gz">1.2.0 sources in tar/gz format.</a></li>
-        <li><a href="dist/jaxen-1.2.0-src.tar.bz2">1.2.0 sources in bz2 format.</a></li>
+        <li><a href="dist/jaxen-2.0.0-bin.zip">2.0  binaries in zip format.</a></li>
+        <li><a href="dist/jaxen-2.0.0-bin.tar.gz">2.0 binaries in tar/gz format.</a></li>
+        <li><a href="dist/jaxen-2.0.0-bin.tar.bz2">2.0 binaries in bz2 format.</a></li>
+        <li><a href="dist/jaxen-2.0.0-src.zip">2.0 sources in zip format.</a></li>
+        <li><a href="dist/jaxen-2.0.0-src.tar.gz">2.0 sources in tar/gz format.</a></li>
+        <li><a href="dist/jaxen-2.0.0-src.tar.bz2">2.0 sources in bz2 format.</a></li>
       </ul>
 
     </section>
