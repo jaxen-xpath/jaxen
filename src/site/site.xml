@@ -14,9 +14,6 @@ name="jaxen: universal Java XPath engine">
       <item name="Releases" href="/releases.html"/>
       <item name="Status" href="/status.html"/>
     </menu>
-    <menu name="Navigators">
-      <item name='jaxen-core' href='/jaxen/index.html'/>
-    </menu>
     <menu ref="reports"/>
   </body>
 
