@@ -16,7 +16,8 @@
       enabling you to query these trees with XPath too. </p>
 
       <p>
-      The current version is <strong>2.0.0</strong>.  This release requires Java 1.5 or later. If you're still using Java 1.4, try Jaxen 1.2.0. 
+      The current version is <strong>2.0.0</strong>.  This release requires Java 1.5 or later.
+      If you're still using Java 1.4, try Jaxen 1.2.0. 
       If you're still using Java 1.3 or earlier, try Jaxen 1.1.6. 
       </p>
 
@@ -24,7 +25,7 @@
 
 <pre><code>&lt;dependency>
   &lt;groupId>jaxen&lt;/groupId>
-  &lt;artifactId>jaxen-core&lt;/artifactId>
+  &lt;artifactId>jaxen&lt;/artifactId>
   &lt;version>2.0.0&lt;/version>
 &lt;/dependency></code></pre>
 
@@ -32,19 +33,13 @@ To add a dependency using Gradle:
 
 <pre><code>gradle
 dependencies {
-  compile 'jaxen:jaxen-core:2.0.0'
+  compile 'jaxen:jaxen:2.0.0'
 }</code></pre>
 
 <p>
-If you're using any object model other than DOM, you should also add the navigator for the model:
+If you're using any object model other than DOM, you should also add the dependency
+that supplies a navigator for the model.
 </p>
-
-<ul>
-<li>jaxen:jdom-navigator:2.0.0</li>
-<li>jaxen:xom-navigator:2.0.0</li>
-<li>jaxen:dom4j-navigator:2.0.0</li>
-<li>jaxen:javabean-navigator:2.0.0</li>
-</ul>
 
     <section name="Getting Started">
       <p>You browse the
@@ -55,7 +50,7 @@ If you're using any object model other than DOM, you should also add the navigat
     
     <section name="News">
       <p>
-       <a href="http://www.xom.nu/">XOM 1.3.2</a> bundles Jaxen 1.2.0.
+       <a href="https://xom.nu/">XOM 1.3.2</a> bundles Jaxen 1.2.0.
       </p>
 
       <p>
@@ -66,18 +61,18 @@ If you're using any object model other than DOM, you should also add the navigat
       <p>
         Since the reference implementation of 
         Java API for XML Messaging
-        is based on <a href="http://dom4j.org">dom4j</a> and Jaxen, you can use
+        is based on <a href="https://dom4j.org">dom4j</a> and Jaxen, you can use
         Jaxen to query SOAP messages on the Java platform too!
       </p>
 
       <p>
         Check out Elliotte Rusty Harold's book chapter on XPath and 
-        <a href="http://cafeconleche.org/books/xmljava/chapters/ch16s07.html">Jaxen</a>
+        <a href="https://cafeconleche.org/books/xmljava/chapters/ch16s07.html">Jaxen</a>
       </p>
 
       <p>
         Alex Chaffee wrote 
-        <a href="http://sourceforge.net/projects/xpe">XPath Explorer</a> 
+        <a href="https://sourceforge.net/projects/xpe">XPath Explorer</a> 
         to help visualize results of XPath expressions.
       </p>
     </section>

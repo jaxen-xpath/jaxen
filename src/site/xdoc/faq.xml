@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<document url="http://www.cafeconleche.org/jaxen/faq.xml">
+<document url="https://www.cafeconleche.org/jaxen/faq.xml">
 
   <properties>
     <author email="bob.mcwhirter@redhat.com">bob mcwhirter</author>
@@ -66,13 +66,6 @@
       <p>
       <code>jaxen</code> itself is based upon SAXPath, which is
       an event-based model for parsing XPath expressions.
-      </p>
-
-      <p>
-      <code>jaxen</code> currently has navigators defined for <a href="http://dom4j.org/">dom4j</a>
-      and <a href="http://jdom.org/">JDOM</a>, two popular and convenient object models
-      for representing XML documents.  
-      Of course, <a href="http://www.w3.org/DOM/">W3C DOM</a> is also supported.
       </p>
     </section>
 
