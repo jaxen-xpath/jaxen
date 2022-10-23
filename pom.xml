@@ -199,16 +199,6 @@
     <url>http://www.cafeconleche.org/jaxen</url>
   </organization>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-
   <build>
     <sourceDirectory>src/java/main</sourceDirectory>
     <testSourceDirectory>src/java/test</testSourceDirectory>
