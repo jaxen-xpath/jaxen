@@ -33,6 +33,7 @@
 
   <modules>
     <module>core</module>
+    <module>dom4j-navigator</module>
     <module>xom-navigator</module>
     <module>integration-tests</module>
   </modules>
