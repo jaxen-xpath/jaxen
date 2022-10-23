@@ -282,9 +282,7 @@
           <links>
             <link>https://docs.oracle.com/javase/6/docs/api/</link>
           </links>
-          <stylesheetfile>${basedir}/src/site/resources/css/javadoc-style.css</stylesheetfile>
           <docencoding>UTF-8</docencoding>
-          <stylesheetfile>./xdocs/stylesheets/javadoc-style.css</stylesheetfile>
           <tags>
             <tag>
               <head>To Do:</head>
