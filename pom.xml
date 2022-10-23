@@ -33,9 +33,6 @@
 
   <modules>
     <module>core</module>
-    <module>dom4j-navigator</module>
-    <module>xom-navigator</module>
-    <module>jdom-navigator</module>
     <module>integration-tests</module>
   </modules>
 
@@ -201,16 +198,6 @@
     <name>The Jaxen Project</name>
     <url>http://www.cafeconleche.org/jaxen</url>
   </organization>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
 
   <build>
     <sourceDirectory>src/java/main</sourceDirectory>
