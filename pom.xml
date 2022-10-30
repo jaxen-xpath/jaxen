@@ -197,8 +197,9 @@
 
   <organization>
     <name>The Jaxen Project</name>
-    <url>http://www.cafeconleche.org/jaxen</url>
+    <url>https://www.cafeconleche.org/jaxen</url>
   </organization>
+
 
   <build>
     <sourceDirectory>src/java/main</sourceDirectory>
@@ -267,6 +268,7 @@
         <version>2.3.1</version>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${project.javadoc.version}</version>
         <executions>
@@ -278,8 +280,8 @@
           </execution>
         </executions>
         <configuration>
-          <failOnError>false</failOnError>
-          <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers</excludePackageNames>
+          <doclint>none</doclint>
+          <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers,org.jaxen.pattern,org.jaxen.jdom,org.jaxen.xom,org.jaxen.dom4j</excludePackageNames>
           <links>
             <link>https://docs.oracle.com/javase/6/docs/api/</link>
           </links>
@@ -338,10 +340,24 @@
         <version>2.9.1</version>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${project.javadoc.version}</version>
         <configuration>
-          <additionalparam>-Xdoclint:none</additionalparam>
+          <doclint>none</doclint>
+          <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers,org.jaxen.pattern,org.jaxen.jdom,org.jaxen.xom,org.jaxen.dom4j</excludePackageNames>
+          <links>
+            <link>https://docs.oracle.com/javase/6/docs/api/</link>
+          </links>
+          <docencoding>UTF-8</docencoding>
+          <tags>
+            <tag>
+              <head>To Do:</head>
+              <name>todo</name>
+              <placement>Xa</placement>
+            </tag>
+          </tags>
+          <docencoding>UTF-8</docencoding>
         </configuration>
       </plugin>
       <plugin>
@@ -418,7 +434,7 @@
           </plugin>
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
-      <artifactId>nexus-staging-maven-plugin</artifactId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
             <version>1.6.6</version>
             <extensions>true</extensions>
             <configuration>
