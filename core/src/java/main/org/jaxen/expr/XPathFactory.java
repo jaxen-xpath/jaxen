@@ -61,7 +61,7 @@ public interface XPathFactory
      * 
      * @param rootExpr the expression wrapped by the resulting XPathExpr
      * @return an XPathExpr wrapping the root expression
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     XPathExpr createXPath( Expr rootExpr ) throws JaxenException;
 
@@ -71,7 +71,7 @@ public interface XPathFactory
      * @param filterExpr the filter expression that starts the path expression
      * @param locationPath the location path that follows the filter expression
      * @return a path expression formed by concatenating the two arguments
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     PathExpr createPathExpr( FilterExpr filterExpr,
                              LocationPath locationPath ) throws JaxenException;
@@ -80,7 +80,7 @@ public interface XPathFactory
      * Create a new empty relative location path.
      * 
      * @return an empty relative location path
-     * @throws JaxenException
+     * @throws JaxenException never
      */
     LocationPath createRelativeLocationPath() throws JaxenException;
 
@@ -88,7 +88,7 @@ public interface XPathFactory
      * Create a new empty absolute location path.
      * 
      * @return an empty absolute location path
-     * @throws JaxenException
+     * @throws JaxenException never
      */
     LocationPath createAbsoluteLocationPath() throws JaxenException;
 
@@ -98,7 +98,7 @@ public interface XPathFactory
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @return <code><i>lhs</i> or <i>rhs</i></code>
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     BinaryExpr createOrExpr( Expr lhs,
                              Expr rhs ) throws JaxenException;
@@ -109,7 +109,7 @@ public interface XPathFactory
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @return <code><i>lhs</i> and <i>rhs</i></code>
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     BinaryExpr createAndExpr( Expr lhs,
                               Expr rhs ) throws JaxenException;
@@ -177,7 +177,7 @@ public interface XPathFactory
      * @param expr the expression to be negated
      * @param unaryOperator <code>Operator.NEGATIVE</code>
      * @return <code>- <i>expr</i></code> or <code><i>expr</i></code>
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     Expr createUnaryExpr( Expr expr,
                           int unaryOperator ) throws JaxenException;
@@ -188,7 +188,7 @@ public interface XPathFactory
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @return <code><i>lhs</i> | <i>rhs</i></code>
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     UnionExpr createUnionExpr( Expr lhs,
                                Expr rhs ) throws JaxenException;
@@ -198,7 +198,7 @@ public interface XPathFactory
      * 
      * @param expr the basic expression to which the predicate will be added
      * @return the expression with an empty predicate set
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     FilterExpr createFilterExpr( Expr expr ) throws JaxenException;
 
@@ -209,7 +209,7 @@ public interface XPathFactory
      * @param prefix the namespace prefix of the function
      * @param functionName the local name of the function 
      * @return a function with an empty argument list
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     FunctionCallExpr createFunctionCallExpr( String prefix,
                                              String functionName ) throws JaxenException;
@@ -219,7 +219,7 @@ public interface XPathFactory
      * 
      * @param number the value
      * @return a number expression wrapping that value
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     NumberExpr createNumberExpr( int number ) throws JaxenException;
 
@@ -228,7 +228,7 @@ public interface XPathFactory
      * 
      * @param number the value
      * @return a number expression wrapping that value
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     NumberExpr createNumberExpr( double number ) throws JaxenException;
 
@@ -237,7 +237,7 @@ public interface XPathFactory
      * 
      * @param literal the value
      * @return a literal expression wrapping that value
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     LiteralExpr createLiteralExpr( String literal ) throws JaxenException;
 
@@ -247,7 +247,7 @@ public interface XPathFactory
      * @param prefix the namespace prefix of the variable
      * @param variableName the local name of the variable 
      * @return a variable expression
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     VariableReferenceExpr createVariableReferenceExpr( String prefix,
                                                        String variableName ) throws JaxenException;
@@ -259,7 +259,7 @@ public interface XPathFactory
      * @param prefix the namespace prefix for the test
      * @param localName the local name for the test
      * @return a name step
-     * @throws JaxenException if <code>axis</code> is not one of the axis constants????
+     * @throws JaxenException if <code>axis</code> is not one of the axis constants
      */
     Step createNameStep( int axis,
                          String prefix,
@@ -270,7 +270,7 @@ public interface XPathFactory
      * 
      * @param axis the axis to create the node-test on
      * @return an all node step
-     * @throws JaxenException if <code>axis</code> is not one of the axis constants????
+     * @throws JaxenException if <code>axis</code> is not one of the axis constants
      */
     Step createAllNodeStep( int axis ) throws JaxenException;
 
@@ -279,7 +279,7 @@ public interface XPathFactory
      * 
      * @param axis the axis to create the <code>comment()</code> node-test on
      * @return a comment node step
-     * @throws JaxenException if <code>axis</code> is not one of the axis constants????
+     * @throws JaxenException if <code>axis</code> is not one of the axis constants
      */
     Step createCommentNodeStep( int axis ) throws JaxenException;
 
@@ -288,7 +288,7 @@ public interface XPathFactory
      * 
      * @param axis the axis to create the <code>text()</code> node-test on
      * @return a text node step
-     * @throws JaxenException if <code>axis</code> is not one of the axis constants????
+     * @throws JaxenException if <code>axis</code> is not one of the axis constants
      */
     Step createTextNodeStep( int axis ) throws JaxenException;
 
@@ -298,7 +298,7 @@ public interface XPathFactory
      * @param axis the axis to create the <code>processing-instruction()</code> node-test on
      * @param name the target to match, may be empty
      * @return a processing instruction node step
-     * @throws JaxenException if <code>axis</code> is not one of the axis constants????
+     * @throws JaxenException if <code>axis</code> is not one of the axis constants
      */
     Step createProcessingInstructionNodeStep( int axis,
                                               String name ) throws JaxenException;
@@ -308,7 +308,7 @@ public interface XPathFactory
      * 
      * @param predicateExpr the expression to evaluate in the predicate
      * @return a predicate
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     Predicate createPredicate( Expr predicateExpr ) throws JaxenException;
 
@@ -316,7 +316,7 @@ public interface XPathFactory
      * Create an empty predicate set. 
      * 
      * @return an empty predicate set
-     * @throws JaxenException
+     * @throws JaxenException never
      */
     PredicateSet createPredicateSet() throws JaxenException;
     
