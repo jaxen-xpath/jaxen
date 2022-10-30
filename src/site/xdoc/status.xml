@@ -18,8 +18,8 @@
       </p>
 
       <p>
-        The biggest change in 2.0.0 is that the various navigators
-        except for DOM have been removed. This avoids many
+        The biggest change in 2.0.0 is that the third party models for XOM, JDOM, and
+        dom4j have been marked optional. This avoids many
         unnecessary dependencies and breaks many dependency cycles.
         Navigators for JDOM2 and dom4j 2 are available in their respective projects.
       </p>

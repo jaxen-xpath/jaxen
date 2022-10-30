@@ -7,7 +7,7 @@
   <groupId>jaxen</groupId>
   <artifactId>jaxen-parent</artifactId>
   <packaging>pom</packaging>
-  <name>jaxen-parent</name>
+  <name>Jaxen</name>
   <version>2.0.0-BETA</version>
   <description>Jaxen is a universal XPath engine for Java.</description>
   <url>http://www.cafeconleche.org/jaxen</url>

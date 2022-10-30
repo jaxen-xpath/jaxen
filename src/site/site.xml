@@ -3,6 +3,10 @@
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
 name="jaxen: universal Java XPath engine">
 
+  <bannerLeft>
+    <name>Jaxen</name>
+  </bannerLeft>
+
   <body>
     <menu name="jaxen">
       <item name="Overview" href="/index.html"/>
@@ -15,6 +19,7 @@ name="jaxen: universal Java XPath engine">
       <item name="Status" href="/status.html"/>
     </menu>
     <menu ref="reports"/>
+    <footer>Copyright 2001-2022 The Jaxen Project. All Rights Reserved.</footer>
   </body>
-
+  
 </project>
