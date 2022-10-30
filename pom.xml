@@ -287,6 +287,7 @@
         </executions>
         <configuration>
           <doclint>none</doclint>
+          <bottom>Copyright {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
           <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers,org.jaxen.pattern,org.jaxen.jdom,org.jaxen.xom,org.jaxen.dom4j</excludePackageNames>
           <links>
             <link>https://docs.oracle.com/javase/6/docs/api/</link>
@@ -347,6 +348,7 @@
         <version>${project.javadoc.version}</version>
         <configuration>
           <doclint>none</doclint>
+          <bottom>Copyright {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
           <excludePackageNames>org.jaxen.saxpath.base,org.jaxen.saxpath.helpers,org.jaxen.pattern,org.jaxen.jdom,org.jaxen.xom,org.jaxen.dom4j</excludePackageNames>
           <links>
             <link>https://docs.oracle.com/javase/6/docs/api/</link>
