@@ -12,13 +12,16 @@
 
 <p>
 The current version is 2.0.0. 2.0.0 now requires Java 1.5 or later, 
-and no longer bundles any of the third party navigators
+and marks the third party models for XOM, JDOM, and dom4j optional
 so dependency trees should be much smaller.
+Although this is a major release, it's almost completely API compatible and should be a drop-in
+replacement for most existing projects. 
 </p>
 
 <p>
-The current version is 1.2.0. 1.2.0 now requires Java 1.4 or later, and no longer bundles any of the org.w3c.dom classes.
-It also deprecates the <code>org.jaxen.pattern</code> package. It should be fully compatible with code written to Jaxen 1.1.
+ 1.2.0 required Java 1.4 or later, and stopped bundling the org.w3c.dom classes.
+It also deprecated the <code>org.jaxen.pattern</code> package.
+It should be fully compatible with code written to Jaxen 1.1.
 </p>
 
 <p>
@@ -29,9 +32,9 @@ It also deprecates the <code>org.jaxen.pattern</code> package. It should be full
 1.1 is a major upgrade that significantly improved jaxen's conformance to the underlying XPath 1.0 specification. 
 This release
 is a vast improvement over 1.0, and all users are strongly encouraged to upgrade. 
-With a few small exceptions (e.g. the <code>document()</code> function has moved to the 
-<code>org.jaxen.function.xslt</code> package, the <code>IdentityHashMap</code> class has been deleted,
-and the ElectricXML navigator has been deleted) 1.2.0
+With a few small exceptions (e.g. the <code>document()</code> function moved to the 
+<code>org.jaxen.function.xslt</code> package, the <code>IdentityHashMap</code> class was deleted,
+and the ElectricXML navigator was deleted) 1.1
 is backwards compatible with code written to the 1.0 APIs.
       </p>
 
