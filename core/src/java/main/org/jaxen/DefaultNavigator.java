@@ -97,8 +97,8 @@ public abstract class DefaultNavigator implements Navigator
         throw new UnsupportedAxisException("child");
     }
 
-    /* (non-Javadoc)
-     * @see org.jaxen.Navigator#getDescendantAxisIterator(java.lang.Object)
+    /**
+     * {@inheritDoc}
      */
     public Iterator getDescendantAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -114,18 +114,14 @@ public abstract class DefaultNavigator implements Navigator
      * @return never returns
      * @throws UnsupportedAxisException always
      */
+    @Override
     public Iterator getParentAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         throw new UnsupportedAxisException("parent");
     }
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getAncestorAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -134,13 +130,8 @@ public abstract class DefaultNavigator implements Navigator
     }
 
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getFollowingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -149,13 +140,8 @@ public abstract class DefaultNavigator implements Navigator
     }
 
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getPrecedingSiblingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -163,45 +149,26 @@ public abstract class DefaultNavigator implements Navigator
                                                  this );
     }
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getFollowingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new FollowingAxisIterator( contextNode,
                                           this );
-
-        // throw new UnsupportedAxisException("following");
     }
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getPrecedingAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new PrecedingAxisIterator( contextNode,
                                          this );
-
-        // throw new UnsupportedAxisException("preceding");
     }
 
     /**
-     * Throws <code>UnsupportedAxisException</code>. Subclasses that 
-     * support the attribute axis must override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException
+     * {@inheritDoc}
      */
     public Iterator getAttributeAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -214,32 +181,23 @@ public abstract class DefaultNavigator implements Navigator
      * 
      * @param contextNode the node to start from
      * @return never returns
-     * @throws UnsupportedAxisException
+     * @throws UnsupportedAxisException always
      */
     public Iterator getNamespaceAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         throw new UnsupportedAxisException("namespace");
     }
     
-    /** 
-     * Returns an iterator that contains exactly the context node argument.
-     * 
-     * @param contextNode the node to return
-     * @return an iterator containing the context node
-     * @throws UnsupportedAxisException if the self axis isn't supported by the navigator
+    /**
+     * {@inheritDoc}
      */
     public Iterator getSelfAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
         return new SelfAxisIterator( contextNode );
     }
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getDescendantOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -247,13 +205,8 @@ public abstract class DefaultNavigator implements Navigator
                                                  this );
     }
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>.
-     * Subclasses should override this method.
-     * 
-     * @param contextNode the node to start from
-     * @return never returns
-     * @throws UnsupportedAxisException always
+    /**
+     * {@inheritDoc}
      */
     public Iterator getAncestorOrSelfAxisIterator(Object contextNode) throws UnsupportedAxisException
     {
@@ -275,10 +228,10 @@ public abstract class DefaultNavigator implements Navigator
     /** 
      * Returns null.
      * 
-     * @param contextNode
+     * @param contextNode the node to start from
      * @return null
      */
-    public String translateNamespacePrefixToUri(String prefix, Object element)
+    public String translateNamespacePrefixToUri(String prefix, Object contextNode)
     {
         return null;
     }
@@ -286,10 +239,10 @@ public abstract class DefaultNavigator implements Navigator
     /** 
      * Returns null.
      * 
-     * @param contextNode
+     * @param contextNode the node to start from
      * @return null
      */
-    public String getProcessingInstructionTarget(Object obj)
+    public String getProcessingInstructionTarget(Object contextNode)
     {
         return null;
     }
@@ -297,19 +250,16 @@ public abstract class DefaultNavigator implements Navigator
     /** 
      * Returns null.
      * 
-     * @param contextNode
+     * @param contextNode the node to start from
      * @return null
      */
-    public String getProcessingInstructionData(Object obj)
+    public String getProcessingInstructionData(Object contextNode)
     {
         return null;
     }
 
-    /** 
-     * Returns numeric constant for the node type.
-     * 
-     * @param contextNode
-     * @return numeric constant for the node type
+    /**
+     * {@inheritDoc}
      */
     public short getNodeType(Object node)
     {
