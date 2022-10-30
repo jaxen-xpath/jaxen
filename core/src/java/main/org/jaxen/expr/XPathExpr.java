@@ -91,17 +91,17 @@ public interface XPathExpr extends Serializable
      * <code>//para</code>. In practice, this is usually a noop.
      * Jaxen does not currently perform any simplification.
      */
-    void   simplify();
+    void simplify();
     
     
     /**
-     * Evaluates the expression and returns a list cintaing the resulting nodes,
+     * Evaluates the expression and returns a list containing the resulting nodes,
      * or a singleton list containing a <code>Double</code>, <code>String</code>, 
      * or <code>Boolean</code>. 
      * 
      * @param context the context in which to evaluate this expression
      * @return a list
-     * @throws JaxenException
+     * @throws JaxenException if expression evaluation fails
      */
     List asList(Context context) throws JaxenException;
 

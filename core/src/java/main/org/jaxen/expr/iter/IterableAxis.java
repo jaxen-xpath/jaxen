@@ -61,7 +61,7 @@ public abstract class IterableAxis implements Serializable {
     }
 
     /**
-     * Gets the axis value.
+     * Gets the numeric constant for the axis.
      * 
      * @return the axis value
      */
@@ -75,7 +75,7 @@ public abstract class IterableAxis implements Serializable {
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
      * @return an iterator for the axis 
-     * @throws UnsupportedAxisException
+     * @throws UnsupportedAxisException if the axis is not iterable
      */
     public abstract Iterator iterator(Object contextNode, ContextSupport support) throws UnsupportedAxisException;
 
@@ -87,6 +87,7 @@ public abstract class IterableAxis implements Serializable {
      * @param localName  the local name of the nodes to return
      * @param namespacePrefix  the prefix of the namespace of the nodes to return
      * @param namespaceURI  the URI of the namespace of the nodes to return
+     * @throws UnsupportedAxisException always until overridden
      */
     public Iterator namedAccessIterator(
         Object contextNode,
@@ -103,7 +104,7 @@ public abstract class IterableAxis implements Serializable {
      * Does this axis support named access?
      * 
      * @param support  the additional context information
-     * @return true if named access supported. If not iterator() will be used
+     * @return true if named access supported. If not, iterator() will be used.
      */
     public boolean supportsNamedAccess(ContextSupport support) {
         return false;
