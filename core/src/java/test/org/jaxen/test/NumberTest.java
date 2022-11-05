@@ -155,7 +155,7 @@ public class NumberTest extends TestCase {
         XPath xpath = new DOMXPath("number('Marx')");
         
         Double result = (Double) xpath.evaluate(doc);
-        assertEquals(new Double(Double.NaN), result);
+        assertEquals(Double.valueOf(Double.NaN), result);
         
     }     
     

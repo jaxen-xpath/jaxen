@@ -238,12 +238,12 @@ public class DefaultXPathFactory implements XPathFactory
 
     public NumberExpr createNumberExpr( int number ) throws JaxenException
     {
-        return new DefaultNumberExpr( new Double( number ) );
+        return new DefaultNumberExpr( Double.valueOf( number ) );
     }
 
     public NumberExpr createNumberExpr( double number ) throws JaxenException
     {
-        return new DefaultNumberExpr( new Double( number ) );
+        return new DefaultNumberExpr( Double.valueOf( number ) );
     }
 
     public LiteralExpr createLiteralExpr( String literal ) throws JaxenException

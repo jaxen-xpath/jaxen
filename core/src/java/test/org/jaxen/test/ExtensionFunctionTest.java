@@ -87,7 +87,7 @@ public class ExtensionFunctionTest extends TestCase {
 
         public Object call(Context context, List args) {
             
-            if (args.isEmpty()) return new Double(Double.NaN);
+            if (args.isEmpty()) return Double.valueOf(Double.NaN);
             
             Navigator navigator = context.getNavigator();
             double min = Double.MAX_VALUE;
@@ -96,7 +96,7 @@ public class ExtensionFunctionTest extends TestCase {
                 double next = NumberFunction.evaluate(iterator.next(), navigator).doubleValue();
                 min = Math.min(min, next);
             }
-            return new Double(min);
+            return Double.valueOf(min);
         }
         
     }
@@ -130,7 +130,7 @@ public class ExtensionFunctionTest extends TestCase {
         x4.appendChild(doc.createTextNode("4"));
         
         Double result = (Double) xpath.evaluate(doc);
-        assertEquals(new Double(2), result);
+        assertEquals(Double.valueOf(2), result);
        
         
     }

@@ -78,7 +78,7 @@ class DefaultMinusExpr extends DefaultAdditiveExpr
                                                    context.getNavigator() );
 
         double result = lhsValue.doubleValue() - rhsValue.doubleValue();
-        return new Double( result );
+        return Double.valueOf( result );
     }
 
 }

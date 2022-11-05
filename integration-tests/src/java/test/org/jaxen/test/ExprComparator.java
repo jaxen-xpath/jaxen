@@ -240,7 +240,7 @@ class ExprComparator implements Comparator {
                 case TYPE_NUMBER_EXPR:
                     NumberExpr numberExpr1 = (NumberExpr)o1;
                     NumberExpr numberExpr2 = (NumberExpr)o2;
-                    cmp = new Double(numberExpr1.getNumber().doubleValue()).compareTo(new Double(numberExpr2.getNumber().doubleValue()));
+                    cmp = Double.valueOf(numberExpr1.getNumber().doubleValue()).compareTo(Double.valueOf(numberExpr2.getNumber().doubleValue()));
                     break;
                 case TYPE_PATH_EXPR:
                     PathExpr pathExpr1 = (PathExpr)o1;

@@ -150,7 +150,7 @@ public class StringLengthFunction implements Function
                 }
             }
         }
-        return new Double(length);
+        return Double.valueOf(length);
     }
     
 }

@@ -131,7 +131,7 @@ public class SumFunction implements Function
             throw new FunctionCallException("The argument to the sum function must be a node-set");
         }
 
-        return new Double(sum);
+        return Double.valueOf(sum);
     }
     
 }

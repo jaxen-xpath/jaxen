@@ -107,7 +107,7 @@ public class CountFunction implements Function
       
         if (obj instanceof List)
         {
-            return new Double( ((List) obj).size() );
+            return Double.valueOf( ((List) obj).size() );
         }
       
         throw new FunctionCallException("count() function can only be used for node-sets");
