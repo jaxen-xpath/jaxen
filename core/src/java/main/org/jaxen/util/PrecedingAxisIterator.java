@@ -199,9 +199,11 @@ public class PrecedingAxisIterator implements Iterator
                 // if this isn't 'self' construct 'descendant-or-self'
                 stack.add(childrenOrSelf);
                 childrenOrSelf = childrenOrSelf(result);
-                continue;
             }
-            return result;
+            else
+            {
+                return result;
+            }
         }
     }
 
