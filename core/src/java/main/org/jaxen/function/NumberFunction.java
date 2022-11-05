@@ -125,10 +125,7 @@ import org.jaxen.Navigator;
  *      target="_top">Section 4.4 of the XPath Specification</a>
  */
 public class NumberFunction implements Function
-{
-
-    private final static Double NaN = Double.valueOf( Double.NaN );
-    
+{    
     
     /**
      * Create a new <code>NumberFunction</code> object.
@@ -188,7 +185,7 @@ public class NumberFunction implements Function
             }
             catch (NumberFormatException e)
             {
-                return NaN;
+                return Double.NaN;
             }
         }
         else if ( obj instanceof List || obj instanceof Iterator )
@@ -212,7 +209,7 @@ public class NumberFunction implements Function
               return Double.valueOf( 0 );
           }
         }    
-        return NaN;
+        return Double.NaN;
     }
   
   /**
@@ -236,7 +233,7 @@ public class NumberFunction implements Function
    */
     public static boolean isNaN( Double val )
     {
-        return val.equals( NaN );
+        return val.equals( Double.NaN );
     }  
   
 }
