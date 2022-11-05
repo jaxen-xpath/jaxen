@@ -81,7 +81,7 @@ public class SimpleVariableContextTest extends TestCase
         // construct test object
         SimpleVariableContext original = new SimpleVariableContext();
         original.setVariableValue("s", "String Value");
-        original.setVariableValue("x", new Double(3.1415292));
+        original.setVariableValue("x", Double.valueOf(3.1415292));
         original.setVariableValue("b", Boolean.TRUE);
         
         // serialize
@@ -99,7 +99,7 @@ public class SimpleVariableContextTest extends TestCase
         
         // test the result
         assertEquals("String Value", copy.getVariableValue("", "", "s"));
-        assertEquals(new Double(3.1415292), copy.getVariableValue("", "", "x"));
+        assertEquals(Double.valueOf(3.1415292), copy.getVariableValue("", "", "x"));
         assertEquals(Boolean.TRUE, copy.getVariableValue("", "", "b"));
         assertEquals("", "");
         
@@ -120,7 +120,7 @@ public class SimpleVariableContextTest extends TestCase
 	        
 	        // test the result
 	        assertEquals("String Value", context.getVariableValue("", "", "s"));
-	        assertEquals(new Double(3.1415292), context.getVariableValue("", "", "x"));
+	        assertEquals(Double.valueOf(3.1415292), context.getVariableValue("", "", "x"));
 	        assertEquals(Boolean.TRUE, context.getVariableValue("", "", "b"));
 	        assertEquals("", "");
 	        }

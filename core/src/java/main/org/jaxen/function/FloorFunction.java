@@ -123,7 +123,7 @@ public class FloorFunction implements Function
         Double value = NumberFunction.evaluate( obj,
                                                 nav );
 
-        return new Double( Math.floor( value.doubleValue() ) );
+        return Double.valueOf( Math.floor( value.doubleValue() ) );
     }
 }
 

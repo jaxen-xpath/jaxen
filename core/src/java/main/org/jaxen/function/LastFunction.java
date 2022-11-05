@@ -108,7 +108,7 @@ public class LastFunction implements Function
      */
     public static Double evaluate(Context context)
     {
-        return new Double( context.getSize() );
+        return Double.valueOf( context.getSize() );
     }
     
 }

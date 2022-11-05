@@ -128,6 +128,6 @@ public class RoundFunction implements Function
         }
 
         double value = d.doubleValue();
-        return new Double( Math.round( value ) );
+        return Double.valueOf( Math.round( value ) );
     }
 }

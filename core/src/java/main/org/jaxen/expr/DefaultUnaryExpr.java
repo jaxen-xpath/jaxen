@@ -91,7 +91,7 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
         Number number = NumberFunction.evaluate( getExpr().evaluate( context ),
                                                  context.getNavigator() );
 
-        return new Double( number.doubleValue() * -1 );
+        return Double.valueOf( number.doubleValue() * -1 );
     }
     
 }

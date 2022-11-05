@@ -125,6 +125,6 @@ public class CeilingFunction implements Function
         Double value = NumberFunction.evaluate( obj,
                                                 nav );
 
-        return new Double( Math.ceil( value.doubleValue() ) );
+        return Double.valueOf( Math.ceil( value.doubleValue() ) );
     }
 }

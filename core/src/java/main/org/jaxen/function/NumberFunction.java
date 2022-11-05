@@ -127,7 +127,7 @@ import org.jaxen.Navigator;
 public class NumberFunction implements Function
 {
 
-    private final static Double NaN = new Double( Double.NaN );
+    private final static Double NaN = Double.valueOf( Double.NaN );
     
     
     /**
@@ -183,7 +183,7 @@ public class NumberFunction implements Function
             String str = (String) obj;
             try
             {
-                Double doubleValue = new Double( str );        
+                Double doubleValue = Double.valueOf( str );        
                 return doubleValue;
             }
             catch (NumberFormatException e)
@@ -205,11 +205,11 @@ public class NumberFunction implements Function
           {
           if ( Boolean.TRUE.equals(obj) )
           {
-              return new Double( 1 );
+              return Double.valueOf( 1 );
           }
           else
           {
-              return new Double( 0 );
+              return Double.valueOf( 0 );
           }
         }    
         return NaN;
