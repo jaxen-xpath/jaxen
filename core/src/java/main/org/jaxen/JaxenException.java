@@ -60,19 +60,6 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
 {
     
     private static final long serialVersionUID = 7132891439526672639L;
-    static double javaVersion = 1.4;
-    
-    static {
-        try {
-            String versionString = System.getProperty("java.version");
-            versionString = versionString.substring(0, 3);
-            javaVersion = Double.valueOf(versionString).doubleValue();
-        }
-        catch (RuntimeException ex) {
-            // The version string format changed so presumably it's
-            // 1.4 or later.
-        }
-    }
     
     /**
      * Create an exception with a detail message.
