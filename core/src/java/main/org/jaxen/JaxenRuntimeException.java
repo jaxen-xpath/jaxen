@@ -59,9 +59,6 @@ public class JaxenRuntimeException extends RuntimeException
 {
 
     private static final long serialVersionUID = -930309761511911193L;
-    
-    private Throwable cause;
-    private boolean causeSet = false;
 
     /**
      * Create a new JaxenRuntimeException.
@@ -82,63 +79,6 @@ public class JaxenRuntimeException extends RuntimeException
      */
     public JaxenRuntimeException(String message) {
         super(message);
-    }
-
-    /**
-     * Returns the exception that caused this exception.
-     * This is necessary to implement Java 1.4 chained exception 
-     * functionality in a Java 1.3-compatible way.
-     * 
-     * @return the exception that caused this exception
-     */
-    public Throwable getCause() {
-        return cause;
-    }
-    
-
-    /**
-     * Sets the exception that caused this exception.
-     * This is necessary to implement Java 1.4 chained exception 
-     * functionality in a Java 1.3-compatible way.
-     * 
-     * @param cause the exception wrapped in this runtime exception
-     * 
-     * @return this exception
-     */
-    public Throwable initCause(Throwable cause) {
-        if (causeSet) throw new IllegalStateException("Cause cannot be reset");
-        if (cause == this) throw new IllegalArgumentException("Exception cannot be its own cause");
-        causeSet = true;
-        this.cause = cause;
-        return this;
-    }
-
-    /** Print this exception's stack trace, followed by the
-     *  source exception's trace, if any.
-     *
-     * @param s the stream on which to print the stack trace
-     */
-    public void printStackTrace ( PrintStream s )
-    {
-        super.printStackTrace ( s );
-        if (JaxenException.javaVersion < 1.4 && getCause() != null) {
-            s.print( "Caused by: " );
-            getCause().printStackTrace( s );
-        }
-    }
-
-    /** Print this exception's stack trace, followed by the
-     *  source exception's stack trace, if any.
-     *
-     * @param s the writer on which to print the stack trace
-     */
-    public void printStackTrace ( PrintWriter s )
-    {
-        super.printStackTrace( s );
-        if (JaxenException.javaVersion < 1.4 && getCause() != null) {
-            s.print( "Caused by: " );
-            getCause().printStackTrace( s );
-        }
     }
     
 }
