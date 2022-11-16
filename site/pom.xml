@@ -17,7 +17,27 @@
   <description>Jaxen Site.</description>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/jbake</directory>
+        <filtering>true</filtering>
+        <targetPath>${project.build.directory}/jbake</targetPath>
+      </resource>
+    </resources>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>collect-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -36,7 +56,7 @@
                   <version>${project.version}</version>
                   <classifier>site</classifier>
                   <type>zip</type>
-                  <outputDirectory>${project.build.directory}/site</outputDirectory>
+                  <outputDirectory>${project.build.directory}/jbake/assets</outputDirectory>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
@@ -44,7 +64,7 @@
                   <version>${project.version}</version>
                   <classifier>site</classifier>
                   <type>zip</type>
-                  <outputDirectory>${project.build.directory}/site/jaxen</outputDirectory>
+                  <outputDirectory>${project.build.directory}/jbake/assets/jaxen</outputDirectory>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
@@ -52,7 +72,7 @@
                   <version>${project.version}</version>
                   <classifier>javadoc</classifier>
                   <type>jar</type>
-                  <outputDirectory>${project.build.directory}/site/jaxen/apidocs</outputDirectory>
+                  <outputDirectory>${project.build.directory}/jbake/assets/jaxen/apidocs</outputDirectory>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
@@ -60,7 +80,7 @@
                   <version>${project.version}</version>
                   <classifier>site</classifier>
                   <type>zip</type>
-                  <outputDirectory>${project.build.directory}/site/jaxen-integration</outputDirectory>
+                  <outputDirectory>${project.build.directory}/jbake/assets/jaxen-integration</outputDirectory>
                 </artifactItem>
               </artifactItems>
             </configuration>

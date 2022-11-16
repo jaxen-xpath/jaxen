@@ -420,7 +420,7 @@
               <artifactId>jbake-maven-plugin</artifactId>
               <version>2.7.0-rc.6</version>
               <configuration>
-                <inputDirectory>${project.basedir}</inputDirectory>
+                <inputDirectory>${project.build.directory}/jbake</inputDirectory>
                 <outputDirectory>${project.build.directory}/website</outputDirectory>
               </configuration>
               <dependencies>
