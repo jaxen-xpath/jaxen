@@ -28,12 +28,12 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
+    <jacocoArgs></jacocoArgs> <!-- default is empty -->
   </properties>
 
   <modules>
     <module>core</module>
     <module>integration-tests</module>
-    <module>site</module>
   </modules>
 
   <mailingLists>
@@ -206,11 +206,6 @@
         <artifactId>jaxen</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>jaxen</groupId>
-        <artifactId>jaxen-integration</artifactId>
-        <version>${project.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -219,55 +214,31 @@
     <testSourceDirectory>src/java/test</testSourceDirectory>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>org.jbake</groupId>
-          <artifactId>jbake-maven-plugin</artifactId>
-          <version>2.7.0-rc.6</version>
-          <configuration>
-            <inputDirectory>${project.basedir}</inputDirectory>
-            <outputDirectory>${project.build.directory}/website</outputDirectory>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.jbake</groupId>
-              <artifactId>jbake-core</artifactId>
-              <version>2.7.0-rc.6</version>
-            </dependency>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj</artifactId>
-              <version>2.5.2</version>
-            </dependency>
-            <dependency>
-              <groupId>org.freemarker</groupId>
-              <artifactId>freemarker</artifactId>
-              <version>2.3.31</version>
-            </dependency>
-            <!-- markdown support -->
-            <dependency>
-              <groupId>com.vladsch.flexmark</groupId>
-              <artifactId>flexmark</artifactId>
-              <version>0.62.2</version>
-            </dependency>
-            <dependency>
-              <groupId>com.vladsch.flexmark</groupId>
-              <artifactId>flexmark-profile-pegdown</artifactId>
-              <version>0.62.2</version>
-            </dependency>
-            <!-- freemarker .data support. -->
-            <dependency>
-              <groupId>org.yaml</groupId>
-              <artifactId>snakeyaml</artifactId>
-              <version>1.29</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-
-        <!-- build -->
+        <!-- build: all java + sources + javadoc + site intentionally broken -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>3.1.0</version>
+          <executions>
+            <execution>
+              <id>enforce-java-and-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <!-- Newer Java cannot build for Java 7, while latest plugins require Java 8 to run -->
+                  <requireJavaVersion>
+                    <version>[1.8,9)</version>
+                  </requireJavaVersion>
+                  <!-- Just require some sane version of Maven -->
+                  <requireMavenVersion>
+                    <version>[3.6.3,)</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -284,6 +255,11 @@
             <source>1.5</source>
             <target>1.5</target>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -334,34 +310,18 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.4.2</version>
-          <inherited>false</inherited>
-          <executions>
-            <execution>
-              <phase>package</phase>
-              <goals>
-                <goal>single</goal>
-              </goals>
-            </execution>
-          </executions>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M7</version>
           <configuration>
-            <tarLongFileMode>gnu</tarLongFileMode>
-            <descriptorRefs>
-              <descriptorRef>project</descriptorRef>
-              <descriptorRef>src</descriptorRef>
-              <descriptorRef>bin</descriptorRef>
-            </descriptorRefs>
+            <includes>
+              <include>**/*Test.java</include>
+            </includes>
+            <forkCount>3</forkCount>
+            <reuseForks>true</reuseForks>
+            <useSystemClassLoader>false</useSystemClassLoader>
+            <argLine>@{jacocoArgs} -Xmx1024m -XX:MaxPermSize=256m</argLine>
           </configuration>
         </plugin>
-        <plugin>
-          <!-- Even if anything site related tried, it should fail -->
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>DISABLED_NON_EXISTENT_VERSION</version>
-        </plugin>
-
-        <!-- reporting -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
@@ -383,298 +343,33 @@
             </tags>
             <docencoding>UTF-8</docencoding>
           </configuration>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
+
         <plugin>
+          <!-- Even if anything site related tried, it should fail -->
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M7</version>
-          <configuration>
-            <includes>
-              <include>**/*Test.java</include>
-            </includes>
-            <forkCount>3</forkCount>
-            <reuseForks>true</reuseForks>
-            <useSystemClassLoader>false</useSystemClassLoader>
-            <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.8</version>
-        </plugin>
-        <plugin>
-          <groupId>com.github.spotbugs</groupId>
-          <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.7.3.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-changelog-plugin</artifactId>
-          <version>2.3</version>
-          <configuration>
-            <type>date</type>
-            <dates>
-              <date>2007-05-06</date>
-            </dates>
-            <outputEncoding>UTF-8</outputEncoding>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jxr-plugin</artifactId>
-          <version>3.3.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.19.0</version>
-          <configuration>
-            <targetJdk>1.5</targetJdk>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>3.0.0-M7</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.4.1</version>
-          <configuration>
-            <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-          </configuration>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>DISABLED_NON_EXISTENT_VERSION</version>
         </plugin>
       </plugins>
     </pluginManagement>
 
     <plugins>
-<!--      <plugin>-->
-<!--        <groupId>org.jbake</groupId>-->
-<!--        <artifactId>jbake-maven-plugin</artifactId>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <id>default-site</id>-->
-<!--            <phase>process-classes</phase>-->
-<!--            <goals>-->
-<!--              <goal>generate</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>enforce-java-and-maven</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <!-- Newer Java cannot build for Java 7, while latest plugins require Java 8 to run -->
-                <requireJavaVersion>
-                  <version>[1.8,9)</version>
-                </requireJavaVersion>
-                <!-- Just require some sane version of Maven -->
-                <requireMavenVersion>
-                  <version>[3.6.3,)</version>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <inherited>false</inherited>
-        <executions>
-          <execution>
-            <id>default</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <tarLongFileMode>gnu</tarLongFileMode>
-          <descriptorRefs>
-            <descriptorRef>project</descriptorRef>
-            <descriptorRef>src</descriptorRef>
-            <descriptorRef>bin</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
-        <configuration>
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
-          <forkCount>3</forkCount>
-          <reuseForks>true</reuseForks>
-          <useSystemClassLoader>false</useSystemClassLoader>
-          <argLine>@{argLine} -Xmx1024m -XX:MaxPermSize=256m</argLine>
-        </configuration>
-      </plugin>
-
-      <!-- reporting -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>initialize-coverage-report</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>create-coverage-report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>spotbugs-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>spotbugs</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changelog-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>changelog-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>dev-activity</goal>
-              <goal>file-activity</goal>
-              <goal>changelog</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>checkstyle-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>checkstyle</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jxr-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>jxr-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>jxr-no-fork</goal>
-              <goal>test-jxr-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>pmd-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>cpd</goal>
-              <goal>pmd</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>surefire-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>report-only</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>project-report</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>dependencies</goal>
-              <goal>scm</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
@@ -707,6 +402,262 @@
               <serverId>sonatype-nexus-staging</serverId>
               <autoReleaseAfterClose>false</autoReleaseAfterClose>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>site</id>
+      <modules>
+        <module>site</module>
+      </modules>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.jbake</groupId>
+              <artifactId>jbake-maven-plugin</artifactId>
+              <version>2.7.0-rc.6</version>
+              <configuration>
+                <inputDirectory>${project.basedir}</inputDirectory>
+                <outputDirectory>${project.build.directory}/website</outputDirectory>
+              </configuration>
+              <dependencies>
+                <dependency>
+                  <groupId>org.jbake</groupId>
+                  <artifactId>jbake-core</artifactId>
+                  <version>2.7.0-rc.6</version>
+                </dependency>
+                <dependency>
+                  <groupId>org.asciidoctor</groupId>
+                  <artifactId>asciidoctorj</artifactId>
+                  <version>2.5.2</version>
+                </dependency>
+                <dependency>
+                  <groupId>org.freemarker</groupId>
+                  <artifactId>freemarker</artifactId>
+                  <version>2.3.31</version>
+                </dependency>
+                <!-- markdown support -->
+                <dependency>
+                  <groupId>com.vladsch.flexmark</groupId>
+                  <artifactId>flexmark</artifactId>
+                  <version>0.62.2</version>
+                </dependency>
+                <dependency>
+                  <groupId>com.vladsch.flexmark</groupId>
+                  <artifactId>flexmark-profile-pegdown</artifactId>
+                  <version>0.62.2</version>
+                </dependency>
+                <!-- freemarker .data support. -->
+                <dependency>
+                  <groupId>org.yaml</groupId>
+                  <artifactId>snakeyaml</artifactId>
+                  <version>1.29</version>
+                </dependency>
+              </dependencies>
+            </plugin>
+
+            <!-- reporting -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <version>3.4.2</version>
+              <configuration>
+                <tarLongFileMode>gnu</tarLongFileMode>
+                <descriptors>
+                  <descriptor>src/assembly/site.xml</descriptor>
+                </descriptors>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>package-site</id>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>single</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+              <version>0.8.8</version>
+              <configuration>
+                <propertyName>jacocoArgs</propertyName>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>initialize-coverage-report</id>
+                  <phase>initialize</phase>
+                  <goals>
+                    <goal>prepare-agent</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>create-coverage-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>report</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs-maven-plugin</artifactId>
+              <version>4.7.3.0</version>
+              <executions>
+                <execution>
+                  <id>spotbugs-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>spotbugs</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-changelog-plugin</artifactId>
+              <version>2.3</version>
+              <configuration>
+                <type>date</type>
+                <dates>
+                  <date>2007-05-06</date>
+                </dates>
+                <outputEncoding>UTF-8</outputEncoding>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>changelog-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>dev-activity</goal>
+                    <goal>file-activity</goal>
+                    <goal>changelog</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-checkstyle-plugin</artifactId>
+              <version>3.2.0</version>
+              <executions>
+                <execution>
+                  <id>checkstyle-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>checkstyle</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jxr-plugin</artifactId>
+              <version>3.3.0</version>
+              <executions>
+                <execution>
+                  <id>jxr-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>jxr-no-fork</goal>
+                    <goal>test-jxr-no-fork</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-pmd-plugin</artifactId>
+              <version>3.19.0</version>
+              <configuration>
+                <targetJdk>1.5</targetJdk>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>pmd-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>cpd</goal>
+                    <goal>pmd</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-report-plugin</artifactId>
+              <version>3.0.0-M7</version>
+              <executions>
+                <execution>
+                  <id>surefire-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>report-only</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+              <version>3.4.1</version>
+              <configuration>
+                <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>project-report</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>dependencies</goal>
+                    <goal>scm</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-changelog-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jxr-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
