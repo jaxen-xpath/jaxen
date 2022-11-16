@@ -6,4 +6,8 @@ executed: mvn clean install && mvn site site:stage (both w/ -Dmaven.repo.local=l
 execution times: 0 min 25 sec and 1 min 35 sec
 local repo (after both executions): 142MB w/ 4051 files
 
-
+Checkpoint No1
+commit: fa4162720d8760e97c2733777fc0a0277832b20d
+executed: mvn clean install -P site -Dmaven.repo.local=local (empty)
+execution times: 0 min 35 sec
+local repo (after execution): 209MB w/ 3855 files
