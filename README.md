@@ -4,7 +4,7 @@
 
 The Jaxen XPath Engine for Java
 
-Jaxen is an open source XPath library written in Java.
+Jaxen is an open source XPath 1.0 library written in Java.
 It is adaptable to many different object models, including
 DOM, XOM, dom4j, and JDOM. It is also possible to write
 adapters that treat non-XML trees such as compiled Java byte code
