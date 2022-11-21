@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
   <name>Jaxen</name>
   <version>2.0.0-beta-1</version>
-  <description>Jaxen is a universal XPath engine for Java.</description>
+  <description>Jaxen is a universal XPath 1.0 engine for Java.</description>
   <url>http://www.cafeconleche.org/jaxen</url>
   <licenses>
     <license>
