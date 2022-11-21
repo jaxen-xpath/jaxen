@@ -8,7 +8,7 @@
 
   <body>
 
-    <p> Jaxen is an open source XPath library written in
+    <p> Jaxen is an open source XPath 1.0 library written in
       Java. It is adaptable to many different object models,
       including DOM, XOM, dom4j, and JDOM. Is it also possible
       to write adapters that treat non-XML trees such as
