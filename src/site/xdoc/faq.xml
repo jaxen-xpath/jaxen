@@ -163,8 +163,8 @@
         
        <p>
          If the namespace context does not contain a binding for a prefix that is used in
-         the XPath expression, an <code>UnresolvableException</code> 
-         (a subclass of <code>JaxenException</code>
+         the XPath expression, an <code>UnresolvableException</code>, 
+         a subclass of <code>JaxenException</code>,
          is thrown when you attempt
          to evaluate it.
        </p>
@@ -187,24 +187,23 @@
       
       </p>
       
-      <pre>        Element root = doc.createElementNS("http://www.example.org/", "root");
-        doc.appendChild(root);
-        XPath xpath = new DOMXPath("/pre:root");
-        SimpleNamespaceContext context = new SimpleNamespaceContext();
-        context.addNamespace("pre", "http://www.example.org/");
-        xpath.setNamespaceContext(context);
-        List result = xpath.selectNodes(root);</pre>
+      <pre>  Element root = doc.createElementNS("http://www.example.org/", "root");
+  doc.appendChild(root);
+  XPath xpath = new DOMXPath("/pre:root");
+  SimpleNamespaceContext context = new SimpleNamespaceContext();
+  context.addNamespace("pre", "http://www.example.org/");
+  xpath.setNamespaceContext(context);
+  List result = xpath.selectNodes(root);</pre>
 
      <p>Alternately, using the shortcut:
       </p>
       
-      <pre>        Element root = doc.createElementNS("http://www.example.org/", "root");
-        doc.appendChild(root);
-        XPath xpath = new DOMXPath("/pre:root");
-        xpath.addNamespace("pre", "http://www.example.org/");
-        List result = xpath.selectNodes(root);</pre>
+      <pre>    Element root = doc.createElementNS("http://www.example.org/", "root");
+  doc.appendChild(root);
+  XPath xpath = new DOMXPath("/pre:root");
+  xpath.addNamespace("pre", "http://www.example.org/");
+  List result = xpath.selectNodes(root);</pre>
 
-      
     </section>
 
   </body>
