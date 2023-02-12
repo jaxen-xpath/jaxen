@@ -213,10 +213,6 @@ public class PatternParser
         {
             path.setNodeTest( TextNodeTest.SINGLETON );
         }
-        else if ( step instanceof DefaultCommentNodeStep )
-        {
-            path.setNodeTest( NodeTypeTest.COMMENT_TEST );
-        }
         else if ( step instanceof DefaultNameStep )
         {
             DefaultNameStep nameStep = (DefaultNameStep) step;
