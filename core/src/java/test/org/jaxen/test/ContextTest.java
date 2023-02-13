@@ -132,8 +132,8 @@ public class ContextTest extends TestCase
 
         assertEquals(2, dupe.getPosition());
         assertEquals(4, dupe.getSize());
-        
-        assertTrue( original != dupe );
+
+        assertNotSame(original, dupe);
 
         List<?> dupeNodeSet = dupe.getNodeSet();
 

@@ -105,7 +105,7 @@ public class DOM4JXPathTest extends TestCase
                       ((Element)iter.next()).getName() );
         assertEquals( "baz",
                       ((Element)iter.next()).getName() );
-        assertTrue( ! iter.hasNext() );
+        assertFalse(iter.hasNext());
 
     }
     
@@ -118,7 +118,7 @@ public class DOM4JXPathTest extends TestCase
         assertTrue( "Xpath worked: " + xpath, answer );
         xpath = new Dom4jXPath( "'a' = 'b'" );
         answer = xpath.booleanValueOf( doc );
-        assertTrue( "XPath should return false: " + xpath, ! answer );
+        assertFalse("XPath should return false: " + xpath, answer);
     }
     
     public void testJaxen20AttributeNamespaceNodes() throws JaxenException

@@ -820,7 +820,7 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         doc.appendChild(a);
         List<?> result = xpath.selectNodes(doc);
-        assertTrue(! xpath.booleanValueOf(result));
+        assertFalse(xpath.booleanValueOf(result));
         
     } 
     
@@ -1090,8 +1090,8 @@ public class BaseXPathTest extends TestCase {
         XPath xpath = new DOMXPath("/*/*/namespace::node() | //attribute::* ");
         List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());
-        assertTrue(((org.w3c.dom.Node) result.get(0)).getNodeType() == Node.ATTRIBUTE_NODE);
-        assertTrue(((org.w3c.dom.Node) result.get(1)).getNodeType() == Pattern.NAMESPACE_NODE);
+        assertEquals(Node.ATTRIBUTE_NODE, ((Node) result.get(0)).getNodeType());
+        assertEquals(Pattern.NAMESPACE_NODE, ((Node) result.get(1)).getNodeType());
    
     }
 
