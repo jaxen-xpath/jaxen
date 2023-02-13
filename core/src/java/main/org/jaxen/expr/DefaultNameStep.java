@@ -135,12 +135,12 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
      * @return the full XPath for this step
      */
     public String getText() {
-        StringBuffer buf = new StringBuffer(64);
-        buf.append(getAxisName()).append("::");
+        StringBuilder stringBuilder = new StringBuilder(64);
+        stringBuilder.append(getAxisName()).append("::");
         if (getPrefix() != null && getPrefix().length() > 0) {
-            buf.append(getPrefix()).append(':');
+            stringBuilder.append(getPrefix()).append(':');
         }
-        return buf.append(getLocalName()).append(super.getText()).toString();
+        return stringBuilder.append(getLocalName()).append(super.getText()).toString();
     }
 
     /**

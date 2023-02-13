@@ -126,18 +126,18 @@ public class XPathSyntaxException extends JaxenException
      */
     public String getPositionMarker()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         int pos = getPosition();
 
         for ( int i = 0 ; i < pos ; ++i )
         {
-            buf.append(" ");
+            builder.append(" ");
         }
 
-        buf.append("^");
+        builder.append("^");
 
-        return buf.toString();
+        return builder.toString();
         
     }
 
@@ -154,13 +154,13 @@ public class XPathSyntaxException extends JaxenException
      */
     public String getMultilineMessage()
     {
-        StringBuffer buf = new StringBuffer(getMessage());
-        buf.append( "\n" );
-        buf.append( getXPath() );
-        buf.append( "\n" );
+        StringBuilder builder = new StringBuilder(getMessage());
+        builder.append( "\n" );
+        builder.append( getXPath() );
+        builder.append( "\n" );
 
-        buf.append( getPositionMarker() );
+        builder.append( getPositionMarker() );
 
-        return buf.toString();
+        return builder.toString();
     }
 }

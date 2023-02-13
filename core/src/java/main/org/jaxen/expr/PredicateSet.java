@@ -130,18 +130,18 @@ public class PredicateSet implements Serializable
      */
     public String getText()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
 
         Iterator<Predicate>  predIter = this.predicates.iterator();
         Predicate eachPred = null;
 
         while ( predIter.hasNext() )
         {
-            eachPred = (Predicate) predIter.next();
-            buf.append( eachPred.getText() );
+            eachPred = predIter.next();
+            stringBuilder.append( eachPred.getText() );
         }
 
-        return buf.toString();
+        return stringBuilder.toString();
     }
 
     /**

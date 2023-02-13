@@ -687,7 +687,7 @@ public class DocumentNavigator extends DefaultNavigator
     public String getElementStringValue (Object object)
     {
         if (isElement(object)) {
-            return getStringValue((Node)object, new StringBuffer()).toString();
+            return getStringValue((Node)object, new StringBuilder()).toString();
         }
         else {
             return null;
@@ -699,21 +699,21 @@ public class DocumentNavigator extends DefaultNavigator
      * Construct a node's string value recursively.
      *
      * @param node the current node
-     * @param buffer the buffer for building the text
-     * @return the buffer passed as a parameter (for convenience)
+     * @param builder the builder for building the text
+     * @return the builder passed as a parameter (for convenience)
      */
-    private StringBuffer getStringValue (Node node, StringBuffer buffer)
+    private StringBuilder getStringValue (Node node, StringBuilder builder)
     {
         if (isText(node)) {
-            buffer.append(node.getNodeValue());
+            builder.append(node.getNodeValue());
         } else {
             NodeList children = node.getChildNodes();
             int length = children.getLength();
             for (int i = 0; i < length; i++) {
-                getStringValue(children.item(i), buffer);
+                getStringValue(children.item(i), builder);
             }
         }
-        return buffer;
+        return builder;
     }
 
 

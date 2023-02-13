@@ -187,7 +187,7 @@ public class TranslateFunction implements Function
         }
 
         // Process the input string thru the map
-        StringBuffer outStr = new StringBuffer( inStr.length() );
+        StringBuilder outStr = new StringBuilder( inStr.length() );
         String[] inCharacters = toUnicodeCharacters(inStr);
         int inLen = inCharacters.length;
         for ( int i = 0; i < inLen; i++ ) {

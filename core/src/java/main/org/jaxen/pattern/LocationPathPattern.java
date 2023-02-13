@@ -256,18 +256,18 @@ public class LocationPathPattern extends Pattern {
     
     public String getText() 
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         if ( absolute )
         {
-            buffer.append( "/" );
+            builder.append( "/" );
         }
         if (ancestorPattern != null) 
         {
             String text = ancestorPattern.getText();
             if ( text.length() > 0 )
             {
-                buffer.append( text );
-                buffer.append( "//" );
+                builder.append( text );
+                builder.append( "//" );
             }
         }
         if (parentPattern != null) 
@@ -275,23 +275,23 @@ public class LocationPathPattern extends Pattern {
             String text = parentPattern.getText();
             if ( text.length() > 0 )
             {
-                buffer.append( text );
-                buffer.append( "/" );
+                builder.append( text );
+                builder.append( "/" );
             }
         }
-        buffer.append( nodeTest.getText() );
+        builder.append( nodeTest.getText() );
         
         if ( filters != null ) 
         {
-            buffer.append( "[" );
+            builder.append( "[" );
             for (Iterator iter = filters.iterator(); iter.hasNext(); ) 
             {
                 FilterExpr filter = (FilterExpr) iter.next();
-                buffer.append( filter.getText() );
+                builder.append( filter.getText() );
             }
-            buffer.append( "]" );
+            builder.append( "]" );
         }        
-        return buffer.toString();
+        return builder.toString();
     }
     
     @Override

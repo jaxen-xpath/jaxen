@@ -114,7 +114,7 @@ public class ConcatFunction implements Function
    public static String evaluate(List list,
                                   Navigator nav)
     {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         Iterator argIter = list.iterator();
         while ( argIter.hasNext() )
         {

@@ -95,35 +95,35 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
 
     public String getText()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         String prefix = getPrefix();
 
         if (prefix != null &&
                 prefix.length() > 0)
         {
-            buf.append(prefix);
-            buf.append(":");
+            builder.append(prefix);
+            builder.append(":");
         }
 
-        buf.append(getFunctionName());
-        buf.append("(");
+        builder.append(getFunctionName());
+        builder.append("(");
 
         Iterator paramIter = getParameters().iterator();
 
         while (paramIter.hasNext()) {
             Expr eachParam = (Expr) paramIter.next();
 
-            buf.append(eachParam.getText());
+            builder.append(eachParam.getText());
 
             if (paramIter.hasNext())
             {
-                buf.append(", ");
+                builder.append(", ");
             }
         }
 
-        buf.append(")");
+        builder.append(")");
 
-        return buf.toString();
+        return builder.toString();
     }
 
     public Expr simplify()

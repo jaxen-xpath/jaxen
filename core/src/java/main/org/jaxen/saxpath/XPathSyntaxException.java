@@ -121,15 +121,15 @@ public class XPathSyntaxException extends SAXPathException
     private String getPositionMarker()
     {
         int pos = getPosition();
-        StringBuffer buf = new StringBuffer(pos+1);
+        StringBuilder builder = new StringBuilder(pos+1);
         for ( int i = 0 ; i < pos ; ++i )
         {
-            buf.append(" ");
+            builder.append(" ");
         }
 
-        buf.append("^");
+        builder.append("^");
 
-        return buf.toString();
+        return builder.toString();
         
     }
 
@@ -143,16 +143,16 @@ public class XPathSyntaxException extends SAXPathException
      */
     public String getMultilineMessage()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
-        buf.append( getMessage() );
-        buf.append( lineSeparator );
-        buf.append( getXPath() );
-        buf.append( lineSeparator );
+        builder.append( getMessage() );
+        builder.append( lineSeparator );
+        builder.append( getXPath() );
+        builder.append( lineSeparator );
 
-        buf.append( getPositionMarker() );
+        builder.append( getPositionMarker() );
 
-        return buf.toString();
+        return builder.toString();
     }
 
 }
