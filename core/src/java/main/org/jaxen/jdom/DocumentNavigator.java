@@ -479,7 +479,7 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
     {
         Element elem = (Element) obj;
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         List     content     = elem.getContent();
         Iterator contentIter = content.iterator();
@@ -491,19 +491,19 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
 
             if ( each instanceof Text )
             {
-                buf.append( ((Text)each).getText() );
+                builder.append( ((Text)each).getText() );
             }
             else if ( each instanceof CDATA )
             {
-                buf.append( ((CDATA)each).getText() );
+                builder.append( ((CDATA)each).getText() );
             }
             else if ( each instanceof Element )
             {
-                buf.append( getElementStringValue( each ) );
+                builder.append( getElementStringValue( each ) );
             }
         }
 
-        return buf.toString();
+        return builder.toString();
     }
 
     public String getProcessingInstructionTarget(Object obj)

@@ -1549,12 +1549,12 @@ public abstract class XPathTestBase extends TestCase
         List list = contextPath.selectNodes(document);
         // Depending on the object model, there can be anywhere from 
         // 1 to 3 nodes returned here.
-        StringBuffer buffer = new StringBuffer(10);
+        StringBuilder builder = new StringBuilder(10);
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
-            buffer.append(StringFunction.evaluate(iterator.next(), nav));
+            builder.append(StringFunction.evaluate(iterator.next(), nav));
         }
-        assertEquals("awhateverb", buffer.toString());
+        assertEquals("awhateverb", builder.toString());
     }
 
     public void testNamespaces() throws JaxenException

@@ -76,19 +76,19 @@ public class DefaultProcessingInstructionNodeStep extends DefaultStep
 
     public String getText()
     {
-        StringBuffer buf = new StringBuffer();
-        buf.append(getAxisName());
-        buf.append("::processing-instruction(");
+        StringBuilder builder = new StringBuilder();
+        builder.append(getAxisName());
+        builder.append("::processing-instruction(");
         String name = getName();
         if (name != null && name.length() != 0)
         {
-            buf.append("'");
-            buf.append(name);
-            buf.append("'");
+            builder.append("'");
+            builder.append(name);
+            builder.append("'");
         }
-        buf.append(")");
-        buf.append(super.getText());
-        return buf.toString();
+        builder.append(")");
+        builder.append(super.getText());
+        return builder.toString();
     }
 
     public boolean matches(Object node,

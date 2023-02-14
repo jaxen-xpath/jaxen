@@ -93,32 +93,32 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
 
     public String getText()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         Iterator stepIter = getSteps().iterator();
         while (stepIter.hasNext())
         {
-            buf.append(((Step) stepIter.next()).getText());
+            builder.append(((Step) stepIter.next()).getText());
             if (stepIter.hasNext())
             {
-                buf.append("/");
+                builder.append("/");
             }
         }
-        return buf.toString();
+        return builder.toString();
     }
 
     public String toString()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
         Iterator stepIter = getSteps().iterator();
         while (stepIter.hasNext())
         {
-            buf.append(stepIter.next().toString());
+            builder.append(stepIter.next().toString());
             if (stepIter.hasNext())
             {
-                buf.append("/");
+                builder.append("/");
             }
         }
-        return buf.toString();
+        return builder.toString();
     }
 
     public boolean isAbsolute()

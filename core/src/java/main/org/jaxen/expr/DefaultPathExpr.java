@@ -90,18 +90,18 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
 
     public String getText() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         if (getFilterExpr() != null) {
-            buf.append(getFilterExpr().getText());
+            builder.append(getFilterExpr().getText());
         }
 
         if (getLocationPath() != null) {
-            if (!getLocationPath().getSteps().isEmpty()) buf.append("/");
-            buf.append(getLocationPath().getText());
+            if (!getLocationPath().getSteps().isEmpty()) builder.append("/");
+            builder.append(getLocationPath().getText());
         }
 
-        return buf.toString();
+        return builder.toString();
     }
 
 

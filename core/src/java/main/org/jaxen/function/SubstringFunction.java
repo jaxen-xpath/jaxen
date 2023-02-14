@@ -233,7 +233,7 @@ public class SubstringFunction implements Function
 
     private static String unicodeSubstring(String s, int start, int end) {
 
-        StringBuffer result = new StringBuffer(s.length());
+        StringBuilder result = new StringBuilder(s.length());
         for (int jChar = 0, uChar=0; uChar < end; jChar++, uChar++) {
             char c = s.charAt(jChar);
             if (uChar >= start) result.append(c);
