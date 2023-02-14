@@ -164,7 +164,7 @@ public class TranslateFunction implements Function
         String toStr = StringFunction.evaluate( toArg, nav );
     
         // Initialize the mapping in a HashMap
-        Map characterMap = new HashMap();
+        Map<String, String> characterMap = new HashMap<String, String>();
         String[] fromCharacters = toUnicodeCharacters(fromStr);
         String[] toCharacters = toUnicodeCharacters(toStr);
         int fromLen = fromCharacters.length;
@@ -193,7 +193,7 @@ public class TranslateFunction implements Function
         for ( int i = 0; i < inLen; i++ ) {
             String cIn = inCharacters[i];
             if ( characterMap.containsKey( cIn ) ) {
-                String cTo = (String) characterMap.get( cIn );
+                String cTo = characterMap.get( cIn );
                 if ( cTo != null ) {
                     outStr.append( cTo );
                 }
