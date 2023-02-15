@@ -106,7 +106,7 @@ public class JDOMXPathTest extends TestCase
         assertEquals( "baz",
                       ((Element)iter.next()).getName() );
 
-        assertTrue( ! iter.hasNext() );
+        assertFalse(iter.hasNext());
     }
     
     

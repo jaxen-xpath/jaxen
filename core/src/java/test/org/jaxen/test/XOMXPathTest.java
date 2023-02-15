@@ -101,6 +101,6 @@ public class XOMXPathTest extends TestCase
         assertEquals( "baz",
                       ((Element)iter.next()).getLocalName() );
 
-        assertTrue( ! iter.hasNext() );
+        assertFalse(iter.hasNext());
     }
 }
