@@ -48,6 +48,7 @@
 package org.jaxen.pattern;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,7 +56,6 @@ import org.jaxen.Context;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.jaxen.expr.FilterExpr;
-import org.jaxen.util.SingletonList;
 
 /** <p><code>LocationPathPattern</code> matches any node using a
   * location path such as A/B/C.
@@ -212,7 +212,7 @@ public class LocationPathPattern extends Pattern {
         
         if (filters != null) 
         {
-            List list = new SingletonList(node);
+            List list = Collections.singletonList(node);
 
             context.setNodeSet( list );
             

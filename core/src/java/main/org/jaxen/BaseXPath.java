@@ -49,6 +49,7 @@
 package org.jaxen;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import org.jaxen.expr.Expr;
@@ -59,7 +60,6 @@ import org.jaxen.function.StringFunction;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathReader;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
-import org.jaxen.util.SingletonList;
 
 /** Base functionality for all concrete, implementation-specific XPaths.
  *
@@ -568,7 +568,7 @@ public class BaseXPath implements XPath, Serializable
         }
         else
         {
-            List list = new SingletonList(node);
+            List list = Collections.singletonList(node);
             fullContext.setNodeSet( list );
         }
 

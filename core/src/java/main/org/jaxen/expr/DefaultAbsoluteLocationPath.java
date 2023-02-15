@@ -54,7 +54,6 @@ import org.jaxen.Context;
 import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
-import org.jaxen.util.SingletonList;
 
 class DefaultAbsoluteLocationPath extends DefaultLocationPath 
 {
@@ -100,7 +99,7 @@ class DefaultAbsoluteLocationPath extends DefaultLocationPath
             return Collections.EMPTY_LIST;
         }
 
-        List list = new SingletonList(docNode);
+        List list = Collections.singletonList(docNode);
 
         absContext.setNodeSet( list );
 
