@@ -51,6 +51,7 @@ import org.jaxen.util.SingletonList;
 
 import junit.framework.TestCase;
 
+@Deprecated
 public class SingletonListTest extends TestCase {
 
     public void testIndexOutOfBoundsException() {

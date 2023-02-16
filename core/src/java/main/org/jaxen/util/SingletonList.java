@@ -59,8 +59,9 @@ import java.util.AbstractList;
  * 
  * @version 1.2b12
  * @author Attila Szegedi
- * 
+ * @deprecated use java.util.Collections.singletonList() instead.
  */
+@Deprecated
 public class SingletonList extends AbstractList {
     
     private final Object element;
