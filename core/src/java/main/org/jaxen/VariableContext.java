@@ -107,7 +107,7 @@ public interface VariableContext
      *  @return  the variable's value (which can be <code>null</code>)
      *  @throws UnresolvableException  when the variable cannot be resolved
      */
-    public Object getVariableValue( String namespaceURI,
+    Object getVariableValue( String namespaceURI,
                                     String prefix,
                                     String localName )
         throws UnresolvableException;

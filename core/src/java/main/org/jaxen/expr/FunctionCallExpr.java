@@ -66,21 +66,21 @@ public interface FunctionCallExpr extends Expr
      * 
      * @return the namespace prefix of the function
      */
-    public String getPrefix();
+    String getPrefix();
     
     /**
      * Returns the local name of the function. 
      * 
      * @return the local name of the function
      */
-    public String getFunctionName();
+    String getFunctionName();
     
     /**
      * Add the next argument to the function. 
      * 
      * @param parameter a function argument 
      */
-    public void addParameter(Expr parameter);
+    void addParameter(Expr parameter);
     
     /**
      * Returns the the ordered list of function arguments.
@@ -88,6 +88,6 @@ public interface FunctionCallExpr extends Expr
      * 
      * @return the ordered list of function arguments
      */
-    public List getParameters();
+    List getParameters();
     
 }

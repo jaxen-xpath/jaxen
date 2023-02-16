@@ -64,5 +64,5 @@ public interface NumberExpr extends Expr
      * 
      * @return a <code>java.lang.Double</code> representing the number
      */
-    public Number getNumber();
+    Number getNumber();
 }

@@ -75,10 +75,10 @@ public interface FilterExpr extends Expr, Predicated
      * 
      * @return true if a node matches; false if no node matches
      */
-    public boolean asBoolean(Context context) throws JaxenException;
+    boolean asBoolean(Context context) throws JaxenException;
     
     /** 
      * @return the underlying filter expression
      */
-    public Expr getExpr();
+    Expr getExpr();
 }

@@ -99,7 +99,7 @@ public interface Step extends Predicated
      * @return the axis identifier
      * @see org.jaxen.saxpath.Axis
      */
-    public int getAxis();
+    int getAxis();
 
     /**
      * Get an Iterator for the current axis starting in the given contextNode.

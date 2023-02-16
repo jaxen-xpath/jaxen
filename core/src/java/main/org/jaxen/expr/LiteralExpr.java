@@ -66,5 +66,5 @@ public interface LiteralExpr extends Expr
      * 
      * @return the contents of the string literal
      */
-    public String getLiteral();
+    String getLiteral();
 }
