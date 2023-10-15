@@ -632,8 +632,8 @@
       -->
     </context>
     <context select="/"
-	     xmlns:dummy="http://dummyNamespace/">
-      <test select="/dummy:a/dummy:b/dummy:c" count="1"/>
+	     xmlns:prefix="https://example.org/">
+      <test select="/prefix:a/prefix:b/prefix:c" count="1"/>
     </context>
   </document>
   <document url="xml/text.xml">

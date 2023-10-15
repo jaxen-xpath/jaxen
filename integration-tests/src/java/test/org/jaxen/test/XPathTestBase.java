@@ -1619,13 +1619,13 @@ public abstract class XPathTestBase extends TestCase
         log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
-        nsContext.addNamespace("dummy", "http://dummyNamespace/");
+        nsContext.addNamespace("prefix", "https://example.org/");
         getContextSupport().setNamespaceContext(nsContext);
         Iterator iter = list.iterator();
         while (iter.hasNext())
         {
             Object context = iter.next();
-            assertCountXPath(1, context, "/dummy:a/dummy:b/dummy:c");
+            assertCountXPath(1, context, "/prefix:a/prefix:b/prefix:c");
         }
     }
 
