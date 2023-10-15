@@ -174,7 +174,7 @@ public class PredicateSet implements Serializable
         // apply all predicates
         while(predIter.hasNext()) {
             final int nodes2FilterSize = nodes2Filter.size();
-            // Set up a dummy context with a list to hold each node
+            // Set up a context with a list to hold each node
             Context predContext = new Context(support);
             List<Object> tempList = new ArrayList<Object>(1);
             predContext.setNodeSet(tempList);
@@ -246,7 +246,7 @@ public class PredicateSet implements Serializable
             throws JaxenException {
         final int nodes2FilterSize = nodes2Filter.size();
         List<Object> filteredNodes = new ArrayList<Object>(nodes2FilterSize);
-        // Set up a dummy context with a list to hold each node
+        // Set up a context with a list to hold each node
         Context predContext = new Context(support);
         List<Object> tempList = new ArrayList<Object>(1);
         predContext.setNodeSet(tempList);
@@ -257,7 +257,6 @@ public class PredicateSet implements Serializable
             tempList.clear();
             tempList.add(contextNode);
             predContext.setNodeSet(tempList);
-            // ????
             predContext.setPosition(i + 1);
             predContext.setSize(nodes2FilterSize);
             Object predResult = predicate.evaluate(predContext);
