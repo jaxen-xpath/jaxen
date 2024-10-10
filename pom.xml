@@ -37,17 +37,6 @@
     <module>integration-tests</module>
   </modules>
 
-  <mailingLists>
-    <mailingList>
-      <name>Jaxen Users List</name>
-      <archive>https://markmail.org/search/?q=list%3Aorg.codehaus.jaxen.user</archive>
-    </mailingList>
-    <mailingList>
-      <name>Jaxen Developers List</name>
-      <archive>https://markmail.org/search/?q=list%3Aorg.codehaus.jaxen.dev</archive>
-    </mailingList>
-  </mailingLists>
-
   <developers>
     <developer>
       <id>bob</id>
