@@ -317,6 +317,26 @@
         <artifactId>findbugs-maven-plugin</artifactId>
         <version>3.0.5</version>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.6.3</version>
+                </requireMavenVersion>
+              </rules>    
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -358,12 +378,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.5.0</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.19.0</version>
+        <version>3.25.0</version>
         <configuration>
           <sourceEncoding>utf-8</sourceEncoding>
           <targetJdk>1.5</targetJdk>
@@ -372,7 +392,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>3.5.1</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -411,7 +431,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
+            <version>3.2.7</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -425,7 +445,7 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.6</version>
+            <version>1.7.0</version>
             <extensions>true</extensions>
             <configuration>
               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
