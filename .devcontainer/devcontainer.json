@@ -1,0 +1,39 @@
+{
+    "name": "Java",
+    // Use the standard Microsoft Java dev container image
+    "image": "mcr.microsoft.com/devcontainers/java:0-17",
+
+    // Features to add to the dev container.
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "8",
+            "installMaven": "true",
+            "installGradle": "false"
+        }
+    },
+
+    // Forward ports, install extensions, etc.
+    "forwardPorts": [8080],
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+            ],
+            "settings": {
+                // Set the JDK 8 path for VS Code's Java extensions
+                "java.home": "/usr/lib/jvm/ms-zulu-8-amd64",
+                "java.configuration.runtimes": [
+                    {
+                        "name": "JavaSE-1.8",
+                        "path": "/usr/lib/jvm/ms-zulu-8-amd64",
+                        "default": true
+                    }
+                ]
+            }
+        }
+    },
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "sudo update-java-alternatives --set /usr/lib/jvm/ms-zulu-8-amd64 && export JAVA_HOME=/usr/lib/jvm/ms-zulu-8-amd64"
+}
