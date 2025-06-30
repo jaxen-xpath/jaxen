@@ -16,15 +16,7 @@
 			"extensions": [
 				"vscjava.vscode-java-pack"
 			],
-			"settings": {
-                "java.configuration.runtimes": [
-                  {
-                    "name": "JavaSE-1.8",
-                    "path": "/usr/lib/jvm/ms-zulu-8-amd64",
-                    "default": true
-                  }
-                ]
-            }
+			"settings": {}
 		}
 	}
 }
