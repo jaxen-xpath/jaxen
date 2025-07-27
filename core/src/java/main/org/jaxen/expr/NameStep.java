@@ -65,11 +65,11 @@ public interface NameStep extends Step
      * 
      * @return the namespace prefix of the natched node
      */
-    public String getPrefix();
+    String getPrefix();
     
     /**
      * Returns the local name of the matched node 
      * 
      * @return the local name of the test
      */
-    public String getLocalName();}
+    String getLocalName();}
