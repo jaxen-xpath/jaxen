@@ -50,7 +50,8 @@ package org.jaxen;
 
 import java.util.List;
 
-/** Interface for the extensible function framework.
+/**
+ * Interface for the extensible function framework.
  *
  *  <p>
  *  <strong>NOTE:</strong> This class is not typically used directly,
@@ -60,7 +61,7 @@ import java.util.List;
  *  <p>
  *  Implementations of <code>Function</code> are functors
  *  which are used to evaluate a function-call within an
- *  XPath expression.  
+ *  XPath expression.
  *  </p>
  *
  *  @see FunctionContext
@@ -69,16 +70,15 @@ import java.util.List;
  */
 public interface Function
 {
-    /** Evaluate this function.
+    /**
+     * Evaluate this function.
      *
      * @param context the context at the point in the
      *         expression when the function is called
      * @param args arguments provided to the function
-     * 
      * @return the result of evaluating the function; a <code>List</code>
      *    (node-set), <code>Double</code>, <code>Boolean</code>, or
      *    <code>String</code>
-     * 
      * @throws FunctionCallException if an XPath error occurs during evaluation;
      *     for instance, if the number or type of the arguments is incorrect
      */

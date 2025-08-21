@@ -49,7 +49,7 @@
 
 package org.jaxen;
 
-/** 
+/**
  * Indicates attempt to evaluate an XPath axis that
  * is unsupported by the current object-model. If this is thrown
  * the XPath expressions cannot be evaluated correctly, unless there is a fallback
@@ -64,9 +64,10 @@ public class UnsupportedAxisException extends JaxenException
 
     private static final long serialVersionUID = 3385500112257420949L;
 
-    /** Create a new UnsupportedAxisException.
+    /**
+     * Create a new UnsupportedAxisException.
      *
-     *  @param message the error message
+     *  @param message the error message.
      */
     public UnsupportedAxisException(String message)
     {

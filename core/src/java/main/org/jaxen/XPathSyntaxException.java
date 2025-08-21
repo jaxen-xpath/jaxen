@@ -48,7 +48,8 @@
 
 package org.jaxen;
 
-/** Indicates an error during parsing of an XPath expression.
+/**
+ * Indicates an error during parsing of an XPath expression.
  *
  *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
@@ -58,16 +59,16 @@ public class XPathSyntaxException extends JaxenException
 
     private static final long serialVersionUID = 1980601567207604059L;
 
-    /** The textual XPath expression */
+    /** The textual XPath expression. */
     private String xpath;
 
-    /** The position of the error */
+    /** The position of the error. */
     private int    position;
 
     /**
      * Create a new XPathSyntaxException wrapping an existing
      * <code>org.jaxen.saxpath.XPathSyntaxException</code>.
-     * 
+     *
      * @param e the exception that caused this exception
      */
     public XPathSyntaxException(org.jaxen.saxpath.XPathSyntaxException e)
@@ -78,11 +79,12 @@ public class XPathSyntaxException extends JaxenException
         this.position = e.getPosition();
     }
 
-    /** Constructor
+    /**
+     * Constructor
      *
      *  @param xpath the erroneous XPath expression
      *  @param position the position of the error
-     *  @param message the error message
+     *  @param message the error message.
      */
     public XPathSyntaxException(String xpath,
                                 int position,
@@ -94,25 +96,28 @@ public class XPathSyntaxException extends JaxenException
         this.position = position;
     }
 
-    /** Retrieve the position of the error.
+    /**
+     * Retrieve the position of the error.
      *
-     *  @return the position of the error
+     *  @return the position of the error.
      */
     public int getPosition()
     {
         return this.position;
     }
 
-    /** Retrieve the expression containing the error.
+    /**
+     * Retrieve the expression containing the error.
      *
-     *  @return the erroneous expression
+     *  @return the erroneous expression.
      */
     public String getXPath()
     {
         return this.xpath;
     }
 
-    /** Retrieve a string useful for denoting where
+    /**
+     * Retrieve a string useful for denoting where
      *  the error occurred.
      *
      *  <p>
@@ -122,7 +127,7 @@ public class XPathSyntaxException extends JaxenException
      *  friendly multi-line error displays.
      *  </p>
      *
-     *  @return the error position marker
+     *  @return the error position marker.
      */
     public String getPositionMarker()
     {
@@ -141,7 +146,8 @@ public class XPathSyntaxException extends JaxenException
         
     }
 
-    /** Retrieve the friendly multi-line error message.
+    /**
+     * Retrieve the friendly multi-line error message.
      *
      *  <p>
      *  This returns a multi-line string that contains
@@ -150,7 +156,7 @@ public class XPathSyntaxException extends JaxenException
      *  error occurred.
      *  </p>
      *
-     *  @return the multi-line error message
+     *  @return the multi-line error message.
      */
     public String getMultilineMessage()
     {

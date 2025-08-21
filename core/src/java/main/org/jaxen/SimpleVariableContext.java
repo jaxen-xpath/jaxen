@@ -52,7 +52,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Simple default implementation for <code>VariableContext</code>.
+/**
+ * Simple default implementation for <code>VariableContext</code>.
  *
  *  <p>
  *  This is a simple table-based key-lookup implementation
@@ -69,7 +70,8 @@ public class SimpleVariableContext implements VariableContext, Serializable
     /** Table of variable bindings. */
     private Map<QualifiedName, Object> variables;
 
-    /** Construct.
+    /**
+     * Construct.
      *
      *  <p>
      *  Create a new empty variable context.
@@ -80,10 +82,11 @@ public class SimpleVariableContext implements VariableContext, Serializable
         variables = new HashMap<QualifiedName, Object>();
     }
 
-    /** Set the value associated with a variable.
+    /**
+     * Set the value associated with a variable.
      *
      *  <p>
-     *  This method sets a variable that is 
+     *  This method sets a variable that is
      *  associated with a particular namespace.
      *  These variables appear such as <code>$prefix:foo</code>
      *  in an XPath expression.  Prefix to URI resolution
@@ -95,7 +98,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
      *
      *  @param namespaceURI the namespace URI of the variable
      *  @param localName the local name of the variable
-     *  @param value The value to be bound to the variable
+     *  @param value The value to be bound to the variable.
      */
     public void setVariableValue( String namespaceURI,
                                   String localName,
@@ -105,7 +108,8 @@ public class SimpleVariableContext implements VariableContext, Serializable
                             value );
     }
 
-    /** Set the value associated with a variable.
+    /**
+     * Set the value associated with a variable.
      *
      *  <p>
      *  This method sets a variable that is <strong>not</strong>
@@ -115,7 +119,7 @@ public class SimpleVariableContext implements VariableContext, Serializable
      *  </p>
      *
      *  @param localName the local name of the variable
-     *  @param value the value to be bound to the variable
+     *  @param value the value to be bound to the variable.
      */
     public void setVariableValue( String localName,
                                   Object value )

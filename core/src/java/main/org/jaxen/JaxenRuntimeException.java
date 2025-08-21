@@ -62,8 +62,8 @@ public class JaxenRuntimeException extends RuntimeException
 
     /**
      * Create a new JaxenRuntimeException.
-     * 
-     * @param cause the nested exception that's wrapped 
+     *
+     * @param cause the nested exception that's wrapped
      *     inside this exception
      */
     public JaxenRuntimeException(Throwable cause)
@@ -74,7 +74,7 @@ public class JaxenRuntimeException extends RuntimeException
 
     /**
      * Create a new JaxenRuntimeException.
-     * 
+     *
      * @param message the detail message
      */
     public JaxenRuntimeException(String message) {

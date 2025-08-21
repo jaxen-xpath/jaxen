@@ -48,7 +48,8 @@
 
 package org.jaxen;
 
-/** Resolves namespace prefixes to namespace URIs.
+/**
+ * Resolves namespace prefixes to namespace URIs.
  *
  *  <p>
  *  The prefixes used within an XPath expression are
@@ -65,7 +66,7 @@ package org.jaxen;
  *  resolved internal to the document based upon its own
  *  namespace nodes.
  *  </p>
- *  
+ *
  *  <p>
  *  Implementations of this interface should implement <code>Serializable</code>.
  *  </p>
@@ -78,7 +79,8 @@ package org.jaxen;
  */
 public interface NamespaceContext
 {
-    /** Translate the provided namespace prefix into 
+    /**
+     * Translate the provided namespace prefix into
      *  the matching bound namespace URI.
      *
      *  <p>
@@ -93,7 +95,7 @@ public interface NamespaceContext
      *  @param prefix the namespace prefix to resolve
      *
      *  @return the namespace URI bound to the prefix; or null if there
-     *     is no such namespace 
+     *     is no such namespace.
      */
     String translateNamespacePrefixToUri(String prefix);
 }

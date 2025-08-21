@@ -35,7 +35,7 @@ package org.jaxen;
 
 import java.util.Iterator;
 
-/** 
+/**
  * Interface for navigating around an arbitrary object model
  * accessing certain parts by name for performance.
  * <p>
@@ -60,9 +60,7 @@ public interface NamedAccessNavigator extends Navigator {
      * @param localName  the local name of the children to return, always present
      * @param namespacePrefix  the prefix of the namespace of the children to return
      * @param namespaceURI  the namespace URI of the children to return
-     *
      * @return an Iterator capable of traversing the named children, or null if none
-     *
      * @throws UnsupportedAxisException if the child axis is
      *         not supported by this object model
      */
@@ -85,9 +83,7 @@ public interface NamedAccessNavigator extends Navigator {
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return
      * @param namespaceURI  the URI of the namespace of the attributes to return
-     *
      * @return an Iterator capable of traversing the named attributes, or null if none
-     *
      * @throws UnsupportedAxisException if the attribute axis is
      *         not supported by this object model
      */

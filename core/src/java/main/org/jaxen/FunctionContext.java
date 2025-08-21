@@ -48,7 +48,8 @@
 
 package org.jaxen;
 
-/** Implemented by classes that know how to resolve XPath function names and
+/**
+ * Implemented by classes that know how to resolve XPath function names and
  *  namespaces to implementations of these functions.
  *
  *  <p>
@@ -62,7 +63,8 @@ package org.jaxen;
  */
 public interface FunctionContext
 {
-    /** An implementation should return a <code>Function</code> implementation object
+    /**
+     * An implementation should return a <code>Function</code> implementation object
      *  based on the namespace URI and local name of the function-call
      *  expression.
      *
@@ -84,7 +86,7 @@ public interface FunctionContext
      *                       name of the function.
      *
      *  @return  a Function implementation object.
-     *  @throws UnresolvableException  when the function cannot be resolved
+     *  @throws UnresolvableException  when the function cannot be resolved.
      */
     Function getFunction( String namespaceURI,
                           String prefix,

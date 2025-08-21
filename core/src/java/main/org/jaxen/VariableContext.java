@@ -48,11 +48,12 @@
 
 package org.jaxen;
 
-/** Resolves variable bindings within an XPath expression.
+/**
+ * Resolves variable bindings within an XPath expression.
  *
  *  <p>
  *  Variables within an XPath expression are denoted using
- *  notation such as <code>$varName</code> or 
+ *  notation such as <code>$varName</code> or
  *  <code>$nsPrefix:varName</code>, and may
  *  refer to a <code>Boolean</code>, <code>Double</code>, <code>String</code>,
  *  node-set (<code>List</code>) or individual XML node.
@@ -70,7 +71,7 @@ package org.jaxen;
  *  but an unbound variable (one that this context does not know about)
  *  should cause an {@link UnresolvableException} to be thrown.
  *  </p>
- *  
+ *
  *  <p>
  *  Implementations of this interface should implement <code>Serializable</code>.
  *  </p>
@@ -83,7 +84,8 @@ package org.jaxen;
  */
 public interface VariableContext
 {
-    /** An implementation should return the value of an XPath variable
+    /**
+     * An implementation should return the value of an XPath variable
      *  based on the namespace URI and local name of the variable-reference
      *  expression.
      *
@@ -105,7 +107,7 @@ public interface VariableContext
      *                       the whole name of the variable.
      *
      *  @return  the variable's value (which can be <code>null</code>)
-     *  @throws UnresolvableException  when the variable cannot be resolved
+     *  @throws UnresolvableException  when the variable cannot be resolved.
      */
     public Object getVariableValue( String namespaceURI,
                                     String prefix,

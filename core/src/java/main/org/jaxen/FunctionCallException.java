@@ -48,10 +48,10 @@
 
 package org.jaxen;
 
-/** 
+/**
  * Thrown if an exception occurs during the evaluation of a function.
- * This exception may include a root exception--for instance an 
- * <code>IOException</code> if the real problem was failure to 
+ * This exception may include a root exception--for instance an
+ * <code>IOException</code> if the real problem was failure to
  * load an XML document via the XSLT <code>document()</code> function.
  *
  * @author bob mcwhirter (bob @ werken.com)
@@ -64,7 +64,7 @@ public class FunctionCallException extends JaxenException
 
     /**
      * Create a new FunctionCallException with the specified detail message.
-     * 
+     *
      * @param message the detail message
      */
     public FunctionCallException(String message) {
@@ -73,7 +73,7 @@ public class FunctionCallException extends JaxenException
 
     /**
      * Create a new FunctionCallException with the specified root cause.
-     * 
+     *
      * @param nestedException the cause of this exception
      */
     public FunctionCallException(Throwable nestedException) {
@@ -83,7 +83,7 @@ public class FunctionCallException extends JaxenException
     /**
      * Create a new FunctionCallException with the specified detail message
      * and root cause.
-     * 
+     *
      * @param message the detail message
      * @param nestedException the cause of this exception
      */

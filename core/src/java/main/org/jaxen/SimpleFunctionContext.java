@@ -50,7 +50,8 @@ package org.jaxen;
 
 import java.util.HashMap;
 
-/** Simple default implementation of <code>FunctionContext</code>.
+/**
+ * Simple default implementation of <code>FunctionContext</code>.
  *
  *  <p>
  *  This is a simple table-based key-lookup implementation
@@ -67,8 +68,8 @@ public class SimpleFunctionContext implements FunctionContext
     /** Table of functions. */
     private HashMap<QualifiedName, Function> functions;
 
-    /** 
-     *  <p>
+    /**
+     * <p>
      *  Construct an empty function context.
      *  </p>
      */
@@ -77,7 +78,8 @@ public class SimpleFunctionContext implements FunctionContext
         this.functions = new HashMap<QualifiedName, Function>();
     }
 
-    /** Register a new function.
+    /**
+     * Register a new function.
      *
      *  <p>
      *  By registering a new function, any XPath expression
@@ -103,7 +105,7 @@ public class SimpleFunctionContext implements FunctionContext
      *  @param localName the non-prefixed local portion of the
      *         function to be registered with this context
      *  @param function a {@link Function} implementation object
-     *         to be used when evaluating the function
+     *         to be used when evaluating the function.
      */
     public void registerFunction(String namespaceURI,
                                  String localName,
