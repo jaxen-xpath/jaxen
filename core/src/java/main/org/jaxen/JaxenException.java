@@ -84,7 +84,7 @@ public class JaxenException extends org.jaxen.saxpath.SAXPathException
     /**
      * Create a new JaxenException with the specified detail message
      * and root cause.
-     * 
+     *
      * @param message the detail message
      * @param nestedException the cause of this exception
      */

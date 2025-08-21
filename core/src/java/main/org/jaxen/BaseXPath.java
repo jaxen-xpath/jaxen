@@ -61,26 +61,26 @@ import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathReader;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
-/** Base functionality for all concrete, implementation-specific XPaths.
+/**
+ * Base functionality for all concrete, implementation-specific XPaths.
  *
- *  <p>
- *  This class provides generic functionality for further-defined
- *  implementation-specific XPaths.
- *  </p>
+ * <p>
+ * This class provides generic functionality for further-defined
+ * implementation-specific XPaths.
+ * </p>
  *
- *  <p>
- *  If you want to adapt the Jaxen engine to traverse your own
- *  object model, then this is a good base class to derive from.
- *  Typically you only really need to provide your own 
- *  {@link org.jaxen.Navigator} implementation.
- *  </p>
+ * <p>
+ * If you want to adapt the Jaxen engine to traverse your own
+ * object model, then this is a good base class to derive from.
+ * Typically you only really need to provide your own
+ * {@link org.jaxen.Navigator} implementation.
+ * </p>
  *
- *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
- *  @see org.jaxen.jdom.JDOMXPath   XPath for JDOM
- *  @see org.jaxen.dom.DOMXPath     XPath for W3C DOM
- *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
- *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ * @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
+ * @see org.jaxen.jdom.JDOMXPath XPath for JDOM
+ * @see org.jaxen.dom.DOMXPath XPath for W3C DOM
  */
 public class BaseXPath implements XPath, Serializable
 {
@@ -90,20 +90,20 @@ public class BaseXPath implements XPath, Serializable
     /** Original expression text. */
     private final String exprText;
 
-    /** the parsed form of the XPath expression */
+    /** The parsed form of the XPath expression. */
     private final XPathExpr xpath;
     
-    /** the support information and function, namespace and variable contexts */
+    /** The support information and function, namespace and variable contexts. */
     private ContextSupport support;
 
-    /** the implementation-specific Navigator for retrieving XML nodes **/
+    /** The implementation-specific Navigator for retrieving XML nodes. */
     private Navigator navigator;
     
-    /** Construct given an XPath expression string. 
+    /**
+     * Construct given an XPath expression string.
      *
-     *  @param xpathExpr the XPath expression
-     *
-     *  @throws JaxenException if there is a syntax error while
+     * @param xpathExpr the XPath expression
+     * @throws JaxenException if there is a syntax error while
      *          parsing the expression
      */
     protected BaseXPath(String xpathExpr) throws JaxenException
@@ -128,13 +128,12 @@ public class BaseXPath implements XPath, Serializable
         this.exprText = xpathExpr;
     }
 
-    /** Construct given an XPath expression string.
+    /**
+     * Construct given an XPath expression string.
      *
-     *  @param xpathExpr the XPath expression
-     *
-     *  @param navigator the XML navigator to use
-     *
-     *  @throws JaxenException if there is a syntax error while
+     * @param xpathExpr the XPath expression
+     * @param navigator the XML navigator to use
+     * @throws JaxenException if there is a syntax error while
      *          parsing the expression
      */
     public BaseXPath(String xpathExpr, Navigator navigator) throws JaxenException
@@ -143,7 +142,8 @@ public class BaseXPath implements XPath, Serializable
         this.navigator = navigator;
     }
 
-    /** Evaluate this XPath against a given context.
+    /**
+     * Evaluate this XPath against a given context.
      *  The context of evaluation may be any object type
      *  the navigator recognizes as a node.
      *  The return value is either a <code>String</code>,
@@ -152,23 +152,22 @@ public class BaseXPath implements XPath, Serializable
      *
      *  <p>
      *  When using this method, one must be careful to
-     *  test the class of the returned object.  If the returned 
-     *  object is a list, then the items in this 
+     *  test the class of the returned object.  If the returned
+     *  object is a list, then the items in this
      *  list will be the actual <code>Document</code>,
      *  <code>Element</code>, <code>Attribute</code>, etc. objects
      *  as defined by the concrete XML object-model implementation,
      *  directly from the context document.  This method <strong>does
-     *  not return <em>copies</em> of anything</strong>, but merely 
+     *  not return <em>copies</em> of anything</strong>, but merely
      *  returns references to objects within the source document.
      *  </p>
-     *  
-     * @param context the node, node-set or Context object for evaluation. 
-     *      This value can be null.
      *
+     * @param context the node, node-set or Context object for evaluation.
+     *      This value can be null
      * @return the result of evaluating the XPath expression
      *          against the supplied context
-     * @throws JaxenException if an XPath error occurs during expression evaluation
      * @throws ClassCastException if the context is not a node
+     * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     public Object evaluate(Object context) throws JaxenException
     {
@@ -192,8 +191,8 @@ public class BaseXPath implements XPath, Serializable
         return answer;
     }
     
-    /** 
-     *  List all the nodes selected by this XPath
+    /**
+     * List all the nodes selected by this XPath
      *  expression. If multiple nodes match, multiple nodes
      *  are returned. Nodes are returned
      *  in document-order, as defined by the XPath
@@ -201,12 +200,10 @@ public class BaseXPath implements XPath, Serializable
      *  (i.e. a number, boolean, or string) then a List
      *  containing just that one object is returned.
      *
-     * @param node the node, node-set or Context object for evaluation. 
-     *     This value can be null.
-     *
+     * @param node the node, node-set or Context object for evaluation.
+     *     This value can be null
      * @return the node-set of all items selected by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
-     *
      * @see #selectNodesForContext
      */
     public List selectNodes(Object node) throws JaxenException
@@ -215,20 +212,18 @@ public class BaseXPath implements XPath, Serializable
         return selectNodesForContext( context );
     }
 
-    /** 
+    /**
      * Return the first node selected by this XPath
      * expression. If multiple nodes match, only one node is
      * returned. The selected node will be the first
      * selected node in document-order, as defined by the XPath
      * specification.
      *
-     * @param node the node, node-set or Context object for evaluation. 
-     *     This value can be null.
-     *
+     * @param node the node, node-set or Context object for evaluation.
+     *     This value can be null
      * @return the node-set of all items selected
      *          by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
-     *
      * @see #selectNodes
      */
     public Object selectSingleNode(Object node) throws JaxenException
@@ -243,8 +238,9 @@ public class BaseXPath implements XPath, Serializable
         return results.get( 0 );
     }
 
-    /** Retrieves the string-value of the result of
-     *  evaluating this XPath expression when evaluated 
+    /**
+     * Retrieves the string-value of the result of
+     *  evaluating this XPath expression when evaluated
      *  against the specified context.
      *
      *  <p>
@@ -257,7 +253,6 @@ public class BaseXPath implements XPath, Serializable
      *  </p>
      *
      * @param node the node, node-set or Context object for evaluation. This value can be null.
-     *
      * @return the string-value of the result of evaluating this expression with the specified context node
      * @throws JaxenException if an XPath error occurs during expression evaluation
      */
@@ -276,7 +271,8 @@ public class BaseXPath implements XPath, Serializable
                                         context.getNavigator() );
     }
 
-    /** Retrieve a boolean-value interpretation of this XPath
+    /**
+     * Retrieve a boolean-value interpretation of this XPath
      *  expression when evaluated against a given context.
      *
      *  <p>
@@ -289,7 +285,6 @@ public class BaseXPath implements XPath, Serializable
      *  </p>
      *
      * @param node the node, node-set or Context object for evaluation. This value can be null.
-     *
      * @return the boolean-value of the result of evaluating this expression with the specified context node
      * @throws JaxenException if an XPath error occurs during expression evaluation
      */
@@ -301,7 +296,8 @@ public class BaseXPath implements XPath, Serializable
         return BooleanFunction.evaluate( result, context.getNavigator() ).booleanValue();
     }
 
-    /** Retrieve a number-value interpretation of this XPath
+    /**
+     * Retrieve a number-value interpretation of this XPath
      *  expression when evaluated against a given context.
      *
      *  <p>
@@ -313,7 +309,6 @@ public class BaseXPath implements XPath, Serializable
      *  </p>
      *
      * @param node the node, node-set or Context object for evaluation. This value can be null.
-     *
      * @return a <code>Double</code> indicating the numeric value of
      *      evaluating this expression against the specified context
      * @throws JaxenException if an XPath error occurs during expression evaluation
@@ -328,28 +323,28 @@ public class BaseXPath implements XPath, Serializable
 
     // Helpers
 
-    /** Add a namespace prefix-to-URI mapping for this XPath
-     *  expression.
+    /**
+     * Add a namespace prefix-to-URI mapping for this XPath
+     * expression.
      *
-     *  <p>
-     *  Namespace prefix-to-URI mappings in an XPath are independent
-     *  of those used within any document.  Only the mapping explicitly
-     *  added to this XPath will be available for resolving the
-     *  XPath expression.
-     *  </p>
+     * <p>
+     * Namespace prefix-to-URI mappings in an XPath are independent
+     * of those used within any document.  Only the mapping explicitly
+     * added to this XPath will be available for resolving the
+     * XPath expression.
+     * </p>
      *
-     *  <p>
-     *  This is a convenience method for adding mappings to the
-     *  default {@link NamespaceContext} in place for this XPath.
-     *  If you have installed a custom <code>NamespaceContext</code>
-     *  that is not a <code>SimpleNamespaceContext</code>,
-     *  then this method will throw a <code>JaxenException</code>.
-     *  </p>
+     * <p>
+     * This is a convenience method for adding mappings to the
+     * default {@link NamespaceContext} in place for this XPath.
+     * If you have installed a custom <code>NamespaceContext</code>
+     * that is not a <code>SimpleNamespaceContext</code>,
+     * then this method will throw a <code>JaxenException</code>.
+     * </p>
      *
-     *  @param prefix the namespace prefix
-     *  @param uri the namespace URI
-     *
-     *  @throws JaxenException if the <code>NamespaceContext</code>
+     * @param prefix the namespace prefix
+     * @param uri the namespace URI
+     * @throws JaxenException if the <code>NamespaceContext</code>
      *          used by this XPath is not a <code>SimpleNamespaceContext</code>
      */
     public void addNamespace(String prefix,
@@ -374,126 +369,126 @@ public class BaseXPath implements XPath, Serializable
     // ------------------------------------------------------------
 
     
-    /** Set a <code>NamespaceContext</code> for use with this
-     *  XPath expression.
+    /**
+     * Set a <code>NamespaceContext</code> for use with this
+     * XPath expression.
      *
-     *  <p>
-     *  A <code>NamespaceContext</code> is responsible for translating
-     *  namespace prefixes within the expression into namespace URIs.
-     *  </p>
+     * <p>
+     * A <code>NamespaceContext</code> is responsible for translating
+     * namespace prefixes within the expression into namespace URIs.
+     * </p>
      *
-     *  @param namespaceContext the <code>NamespaceContext</code> to
+     * @param namespaceContext the <code>NamespaceContext</code> to
      *         install for this expression
-     *
-     *  @see NamespaceContext
-     *  @see NamespaceContext#translateNamespacePrefixToUri
+     * @see NamespaceContext
+     * @see NamespaceContext#translateNamespacePrefixToUri
      */
     public void setNamespaceContext(NamespaceContext namespaceContext)
     {
         getContextSupport().setNamespaceContext(namespaceContext);
     }
 
-    /** Set a <code>FunctionContext</code> for use with this XPath
-     *  expression.
+    /**
+     * Set a <code>FunctionContext</code> for use with this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>FunctionContext</code> is responsible for resolving
-     *  all function calls used within the expression.
-     *  </p>
+     * <p>
+     * A <code>FunctionContext</code> is responsible for resolving
+     * all function calls used within the expression.
+     * </p>
      *
-     *  @param functionContext the <code>FunctionContext</code> to
+     * @param functionContext the <code>FunctionContext</code> to
      *         install for this expression
-     *
-     *  @see FunctionContext
-     *  @see FunctionContext#getFunction
+     * @see FunctionContext
+     * @see FunctionContext#getFunction
      */
     public void setFunctionContext(FunctionContext functionContext)
     {
         getContextSupport().setFunctionContext(functionContext);
     }
 
-    /** Set a <code>VariableContext</code> for use with this XPath
-     *  expression.
+    /**
+     * Set a <code>VariableContext</code> for use with this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>VariableContext</code> is responsible for resolving
-     *  all variables referenced within the expression.
-     *  </p>
+     * <p>
+     * A <code>VariableContext</code> is responsible for resolving
+     * all variables referenced within the expression.
+     * </p>
      *
-     *  @param variableContext The <code>VariableContext</code> to
+     * @param variableContext the <code>VariableContext</code> to
      *         install for this expression
-     *
-     *  @see VariableContext
-     *  @see VariableContext#getVariableValue
+     * @see VariableContext
+     * @see VariableContext#getVariableValue
      */
     public void setVariableContext(VariableContext variableContext)
     {
         getContextSupport().setVariableContext(variableContext);
     }
 
-    /** Retrieve the <code>NamespaceContext</code> used by this XPath
-     *  expression.
+    /**
+     * Retrieve the <code>NamespaceContext</code> used by this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>NamespaceContext</code> is responsible for mapping
-     *  prefixes used within the expression to namespace URIs.
-     *  </p>
+     * <p>
+     * A <code>NamespaceContext</code> is responsible for mapping
+     * prefixes used within the expression to namespace URIs.
+     * </p>
      *
-     *  <p>
-     *  If this XPath expression has not previously had a <code>NamespaceContext</code>
-     *  installed, a new default <code>NamespaceContext</code> will be created,
-     *  installed and returned.
-     *  </p>
+     * <p>
+     * If this XPath expression has not previously had a <code>NamespaceContext</code>
+     * installed, a new default <code>NamespaceContext</code> will be created,
+     * installed and returned.
+     * </p>
      *
-     *  @return the <code>NamespaceContext</code> used by this expression
-     *
-     *  @see NamespaceContext
+     * @return the <code>NamespaceContext</code> used by this expression
+     * @see NamespaceContext
      */
     public NamespaceContext getNamespaceContext()
     {
         return getContextSupport().getNamespaceContext();
     }
 
-    /** Retrieve the <code>FunctionContext</code> used by this XPath
-     *  expression.
+    /**
+     * Retrieve the <code>FunctionContext</code> used by this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>FunctionContext</code> is responsible for resolving
-     *  all function calls used within the expression.
-     *  </p>
+     * <p>
+     * A <code>FunctionContext</code> is responsible for resolving
+     * all function calls used within the expression.
+     * </p>
      *
-     *  <p>
-     *  If this XPath expression has not previously had a <code>FunctionContext</code>
-     *  installed, a new default <code>FunctionContext</code> will be created,
-     *  installed and returned.
-     *  </p>
+     * <p>
+     * If this XPath expression has not previously had a <code>FunctionContext</code>
+     * installed, a new default <code>FunctionContext</code> will be created,
+     * installed and returned.
+     * </p>
      *
-     *  @return the <code>FunctionContext</code> used by this expression
-     *
-     *  @see FunctionContext
+     * @return the <code>FunctionContext</code> used by this expression
+     * @see FunctionContext
      */
     public FunctionContext getFunctionContext()
     {
         return getContextSupport().getFunctionContext();
     }
 
-    /** Retrieve the <code>VariableContext</code> used by this XPath
-     *  expression.
+    /**
+     * Retrieve the <code>VariableContext</code> used by this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>VariableContext</code> is responsible for resolving
-     *  all variables referenced within the expression.
-     *  </p>
+     * <p>
+     * A <code>VariableContext</code> is responsible for resolving
+     * all variables referenced within the expression.
+     * </p>
      *
-     *  <p>
-     *  If this XPath expression has not previously had a <code>VariableContext</code>
-     *  installed, a new default <code>VariableContext</code> will be created,
-     *  installed and returned.
-     *  </p>
-     *  
-     *  @return the <code>VariableContext</code> used by this expression
+     * <p>
+     * If this XPath expression has not previously had a <code>VariableContext</code>
+     * installed, a new default <code>VariableContext</code> will be created,
+     * installed and returned.
+     * </p>
      *
-     *  @see VariableContext
+     * @return the <code>VariableContext</code> used by this expression
+     * @see VariableContext
      */
     public VariableContext getVariableContext()
     {
@@ -501,37 +496,40 @@ public class BaseXPath implements XPath, Serializable
     }
     
     
-    /** Retrieve the root expression of the internal
-     *  compiled form of this XPath expression.
+    /**
+     * Retrieve the root expression of the internal
+     * compiled form of this XPath expression.
      *
-     *  <p>
-     *  Internally, Jaxen maintains a form of Abstract Syntax
-     *  Tree (AST) to represent the structure of the XPath expression.
-     *  This is normally not required during normal consumer-grade
-     *  usage of Jaxen.  This method is provided for hard-core users
-     *  who wish to manipulate or inspect a tree-based version of
-     *  the expression.
-     *  </p>
+     * <p>
+     * Internally, Jaxen maintains a form of Abstract Syntax
+     * Tree (AST) to represent the structure of the XPath expression.
+     * This is normally not required during normal consumer-grade
+     * usage of Jaxen.  This method is provided for hard-core users
+     * who wish to manipulate or inspect a tree-based version of
+     * the expression.
+     * </p>
      *
-     *  @return the root of the AST of this expression
+     * @return the root of the AST of this expression
      */
     public Expr getRootExpr() 
     {
         return xpath.getRootExpr();
     }
     
-    /** Return the original expression text.
+    /**
+     * Return the original expression text.
      *
-     *  @return the normalized XPath expression string
+     * @return the normalized XPath expression string
      */
     public String toString()
     {
         return this.exprText;
     }
 
-    /** Returns a string representation of the parse tree.
+    /**
+     * Returns a string representation of the parse tree.
      *
-     *  @return a string representation of the parse tree.
+     * @return a string representation of the parse tree
      */
     public String debug()
     {
@@ -545,13 +543,13 @@ public class BaseXPath implements XPath, Serializable
     // ------------------------------------------------------------
 
     
-    /** Create a {@link Context} wrapper for the provided
-     *  implementation-specific object.
+    /**
+     * Create a {@link Context} wrapper for the provided
+     * implementation-specific object.
      *
-     *  @param node the implementation-specific object 
+     * @param node the implementation-specific object
      *         to be used as the context
-     *
-     *  @return a <code>Context</code> wrapper around the object
+     * @return a <code>Context</code> wrapper around the object
      */
     protected Context getContext(Object node)
     {
@@ -575,11 +573,12 @@ public class BaseXPath implements XPath, Serializable
         return fullContext;
     }
 
-    /** Retrieve the {@link ContextSupport} aggregation of
-     *  <code>NamespaceContext</code>, <code>FunctionContext</code>,
-     *  <code>VariableContext</code>, and {@link Navigator}.
+    /**
+     * Retrieve the {@link ContextSupport} aggregation of
+     * <code>NamespaceContext</code>, <code>FunctionContext</code>,
+     * <code>VariableContext</code>, and {@link Navigator}.
      *
-     *  @return aggregate <code>ContextSupport</code> for this
+     * @return aggregate <code>ContextSupport</code> for this
      *          XPath expression
      */
     protected ContextSupport getContextSupport()
@@ -597,10 +596,11 @@ public class BaseXPath implements XPath, Serializable
         return support;
     }
 
-    /** Retrieve the XML object-model-specific {@link Navigator} 
-     *  for us in evaluating this XPath expression.
+    /**
+     * Retrieve the XML object-model-specific {@link Navigator}
+     * for us in evaluating this XPath expression.
      *
-     *  @return the implementation-specific <code>Navigator</code>
+     * @return the implementation-specific <code>Navigator</code>
      */
     public Navigator getNavigator()
     {
@@ -615,35 +615,39 @@ public class BaseXPath implements XPath, Serializable
     // ------------------------------------------------------------
     // ------------------------------------------------------------
 
-    /** Create a default <code>FunctionContext</code>.
+    /**
+     * Create a default <code>FunctionContext</code>.
      *
-     *  @return a default <code>FunctionContext</code>
+     * @return a default <code>FunctionContext</code>
      */
     protected FunctionContext createFunctionContext()
     {
         return XPathFunctionContext.getInstance();
     }
     
-    /** Create a default <code>NamespaceContext</code>.
+    /**
+     * Create a default <code>NamespaceContext</code>.
      *
-     *  @return a default <code>NamespaceContext</code> instance
+     * @return a default <code>NamespaceContext</code> instance
      */
     protected NamespaceContext createNamespaceContext()
     {
         return new SimpleNamespaceContext();
     }
     
-    /** Create a default <code>VariableContext</code>.
+    /**
+     * Create a default <code>VariableContext</code>.
      *
-     *  @return a default <code>VariableContext</code> instance
+     * @return a default <code>VariableContext</code> instance
      */
     protected VariableContext createVariableContext()
     {
         return new SimpleVariableContext();
     }
     
-    /** Select all nodes that match this XPath
-     *  expression on the given Context object. 
+    /**
+     * Select all nodes that match this XPath
+     *  expression on the given Context object.
      *  If multiple nodes match, multiple nodes
      *  will be returned in document-order, as defined by the XPath
      *  specification. If the expression selects a non-node-set
@@ -651,11 +655,9 @@ public class BaseXPath implements XPath, Serializable
      *  containing just that one object is returned.
      *
      * @param context the Context which gets evaluated
-     *
      * @return the node-set of all items selected
      *          by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
-     *
      */
     protected List selectNodesForContext(Context context) throws JaxenException
     {
@@ -665,7 +667,8 @@ public class BaseXPath implements XPath, Serializable
     }
  
 
-    /** Return only the first node that is selected by this XPath
+    /**
+     * Return only the first node that is selected by this XPath
      *  expression.  If multiple nodes match, only one node will be
      *  returned. The selected node will be the first
      *  selected node in document-order, as defined by the XPath
@@ -673,11 +676,9 @@ public class BaseXPath implements XPath, Serializable
      *  String, or boolean, then that object is returned.
      *
      * @param context the Context against which this expression is evaluated
-     *
      * @return the first node in document order of all nodes selected
      *          by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
-     *
      * @see #selectNodesForContext
      */
     protected Object selectSingleNodeForContext(Context context) throws JaxenException

@@ -65,11 +65,12 @@ import org.jaxen.expr.XPathFactory;
 import org.jaxen.saxpath.Operator;
 import org.jaxen.saxpath.XPathHandler;
 
-/** SAXPath <code>XPathHandler</code> implementation capable
- *  of building Jaxen expression trees which can walk various
- *  different object models.
+/**
+ * SAXPath <code>XPathHandler</code> implementation capable
+ * of building Jaxen expression trees which can walk various
+ * different object models.
  *
- *  @author bob mcwhirter (bob@werken.com)
+ * @author bob mcwhirter (bob@werken.com)
  */
 public class JaxenHandler implements XPathHandler
 {
@@ -82,14 +83,15 @@ public class JaxenHandler implements XPathHandler
     protected boolean simplified;
 
     /**
-     * This may be changed to an ArrayList in the future (i.e. version &gt;= 1.2). 
+     * This may be changed to an ArrayList in the future (i.e. version &gt;= 1.2).
      * You really shouldn't be accessing this field directly, but
-     * if you are please try to use it as a generic List. Don't use the 
+     * if you are please try to use it as a generic List. Don't use the
      * methods that are only available in LinkedList.
      */
     protected LinkedList stack;
 
-    /** Constructor
+    /**
+     * Constructor.
      */
     public JaxenHandler()
     {
@@ -97,51 +99,54 @@ public class JaxenHandler implements XPathHandler
         this.xpathFactory = new DefaultXPathFactory();
     }
     
-    /** Set the Jaxen <code>XPathFactory</code> that constructs
-     *  the XPath expression tree during the parse.
+    /**
+     * Set the Jaxen <code>XPathFactory</code> that constructs
+     * the XPath expression tree during the parse.
      *
-     *  @param xpathFactory the factory to use during the parse
+     * @param xpathFactory the factory to use during the parse
      */
     public void setXPathFactory(XPathFactory xpathFactory)
     {
         this.xpathFactory = xpathFactory;
     }
 
-    /** Retrieve the Jaxen <code>XPathFactory</code> used
-     *  during the parse to construct the XPath expression tree.
+    /**
+     * Retrieve the Jaxen <code>XPathFactory</code> used
+     * during the parse to construct the XPath expression tree.
      *
-     *  @return the <code>XPathFactory</code> used during the parse.
+     * @return the <code>XPathFactory</code> used during the parse
      */
     public XPathFactory getXPathFactory()
     {
         return this.xpathFactory;
     }
 
-    /** Retrieve the simplified Jaxen XPath expression tree.
+    /**
+     * Retrieve the simplified Jaxen XPath expression tree.
      *
-     *  <p>
-     *  This method is only valid once <code>XPathReader.parse(...)</code>
-     *  successfully returned.
-     *  </p>
+     * <p>
+     * This method is only valid once <code>XPathReader.parse(...)</code>
+     * successfully returned.
+     * </p>
      *
-     *  @return the XPath expression tree
+     * @return the XPath expression tree
      */
     public XPathExpr getXPathExpr()
     {
         return getXPathExpr( true );
     }
 
-    /** Retrieve the Jaxen XPath expression tree, optionally
-     *  simplified.
+    /**
+     * Retrieve the Jaxen XPath expression tree, optionally
+     * simplified.
      *
-     *  <p>
-     *  This method is only valid once <code>XPathReader.parse(...)</code>
-     *  successfully returned.
-     *  </p>
-     *  
-     *  @param shouldSimplify ????
+     * <p>
+     * This method is only valid once <code>XPathReader.parse(...)</code>
+     * successfully returned.
+     * </p>
      *
-     *  @return the XPath expression tree
+     * @param shouldSimplify ????
+     * @return the XPath expression tree
      */
     public XPathExpr getXPathExpr(boolean shouldSimplify)
     {

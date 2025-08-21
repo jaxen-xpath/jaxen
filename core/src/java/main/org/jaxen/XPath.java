@@ -36,23 +36,23 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import java.util.List;
 
-/** Represents an XPath 1.0 expression which
- *  can be evaluated against a variety of different XML object models.
+/**
+ * Represents an XPath 1.0 expression which
+ * can be evaluated against a variety of different XML object models.
  *
- *  <p>
- *  Most of the evaluation methods take a context object. This is typically a
- *  node or node-set object (which is typically a <code>List</code>
- *  of node objects) or a Jaxen <code>Context</code> object.
- *  A null context is allowed, meaning that 
- *  there are no XML nodes on which to evaluate.
- *  </p>
+ * <p>
+ * Most of the evaluation methods take a context object. This is typically a
+ * node or node-set object (which is typically a <code>List</code>
+ * of node objects) or a Jaxen <code>Context</code> object.
+ * A null context is allowed, meaning that
+ * there are no XML nodes on which to evaluate.
+ * </p>
  *
- *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
- *  @see org.jaxen.jdom.JDOMXPath  XPath for JDOM
- *  @see org.jaxen.dom.DOMXPath   XPath for W3C DOM
- *
- *  @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
- *  @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
+ * @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
+ * @see org.jaxen.jdom.JDOMXPath XPath for JDOM
+ * @see org.jaxen.dom.DOMXPath XPath for W3C DOM
  */
 public interface XPath
 {
@@ -60,40 +60,39 @@ public interface XPath
     //     Basic Evaluation
     // ----------------------------------------------------------------------
 
-    /** Evaluate this XPath against the given context.
+    /**
+     * Evaluate this XPath against the given context.
      *
-     *  <p>
-     *  The context of evaluation may be a <em>document</em>,
-     *  an <em>element</em>, or a set of <em>elements</em>.
-     *  </p>
+     * <p>
+     * The context of evaluation may be a <em>document</em>,
+     * an <em>element</em>, or a set of <em>elements</em>.
+     * </p>
      *
-     *  <p>
-     *  If the expression evaluates to an XPath string, number, or boolean
-     *  type, then the equivalent Java object type is returned.  
-     *  Otherwise, if the result is a node-set, then the returned value is a
-     *  <code>List</code>.
-     *  </p>
+     * <p>
+     * If the expression evaluates to an XPath string, number, or boolean
+     * type, then the equivalent Java object type is returned.
+     * Otherwise, if the result is a node-set, then the returned value is a
+     * <code>List</code>.
+     * </p>
      *
-     *  <p>
-     *  When using this method, one must be careful to
-     *  test the class of the returned objects, and of 
-     *  each of the composite members if a <code>List</code>
-     *  is returned.  If the returned members are XML nodes,
-     *  they will be the actual <code>Document</code>,
-     *  <code>Element</code> or <code>Attribute</code> objects
-     *  as defined by the concrete XML object-model implementation,
-     *  directly from the context document.  This method <strong>does not
-     *  return <em>copies</em> of anything</strong>. It merely returns
-     *  references to nodes within the source document.
-     *  </p>
-     *  
-     *  @param context the node, node-set or Context object for evaluation. 
-     *         This value can be null.
+     * <p>
+     * When using this method, one must be careful to
+     * test the class of the returned objects, and of
+     * each of the composite members if a <code>List</code>
+     * is returned.  If the returned members are XML nodes,
+     * they will be the actual <code>Document</code>,
+     * <code>Element</code> or <code>Attribute</code> objects
+     * as defined by the concrete XML object-model implementation,
+     * directly from the context document.  This method <strong>does not
+     * return <em>copies</em> of anything</strong>. It merely returns
+     * references to nodes within the source document.
+     * </p>
      *
-     *  @return the result of evaluating the XPath expression
+     * @param context the node, node-set or Context object for evaluation.
+     *         This value can be null
+     * @return the result of evaluating the XPath expression
      *          against the supplied context
-     *
-     *  @throws JaxenException if an error occurs while attempting
+     * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
      */
     Object evaluate(Object context) throws JaxenException;
@@ -102,72 +101,69 @@ public interface XPath
     //     Advanced Evaluation
     // ----------------------------------------------------------------------
 
-    /** Retrieve a string-value interpretation of this XPath
-     *  expression when evaluated against the given context.
+    /**
+     * Retrieve a string-value interpretation of this XPath
+     * expression when evaluated against the given context.
      *
-     *  <p>
-     *  The string-value of the expression is determined per
-     *  the <code>string(..)</code> core function as defined
-     *  in the XPath specification.  This means that an expression
-     *  that selects more than one nodes will return the string value
-     *  of the first node in the node set..
-     *  </p>
+     * <p>
+     * The string-value of the expression is determined per
+     * the <code>string(..)</code> core function as defined
+     * in the XPath specification.  This means that an expression
+     * that selects more than one nodes will return the string value
+     * of the first node in the node set..
+     * </p>
      *
-     *  @param context the node, node-set or Context object for evaluation. 
+     * @param context the node, node-set or Context object for evaluation.
      *     This value can be null
-     *
-     *  @return the string-value interpretation of this expression
-     *
-     *  @throws JaxenException if an error occurs while attempting
+     * @return the string-value interpretation of this expression
+     * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
      */
      String stringValueOf(Object context)
         throws JaxenException;
     
-    /** Retrieve the boolean value of the first node in document order
-     *  returned by this XPath expression when evaluated in 
-     *  the given context.
+    /**
+     * Retrieve the boolean value of the first node in document order
+     * returned by this XPath expression when evaluated in
+     * the given context.
      *
-     *  <p>
-     *  The boolean-value of the expression is determined per
-     *  the <code>boolean()</code> function defined
-     *  in the XPath specification.  This means that an expression
-     *  that selects zero nodes will return <code>false</code>,
-     *  while an expression that selects one or more nodes will
-     *  return <code>true</code>. An expression that returns a string
-     *  returns false for empty strings and true for all other strings.
-     *  An expression that returns a number
-     *  returns false for zero and true for non-zero numbers.
-     *  </p>
+     * <p>
+     * The boolean-value of the expression is determined per
+     * the <code>boolean()</code> function defined
+     * in the XPath specification.  This means that an expression
+     * that selects zero nodes will return <code>false</code>,
+     * while an expression that selects one or more nodes will
+     * return <code>true</code>. An expression that returns a string
+     * returns false for empty strings and true for all other strings.
+     * An expression that returns a number
+     * returns false for zero and true for non-zero numbers.
+     * </p>
      *
-     *  @param context the node, node-set or Context object for evaluation. This value can be null.
-     *
-     *  @return the boolean-value of this expression
-     *
-     *  @throws JaxenException if an error occurs while attempting
+     * @param context the node, node-set or Context object for evaluation. This value can be null.
+     * @return the boolean-value of this expression
+     * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
      */
     boolean booleanValueOf(Object context)
         throws JaxenException;
     
 
-    /** Retrieve the number-value of the first node in document order
-     *  returned by this XPath expression when evaluated in 
-     *  the given context.
+    /**
+     * Retrieve the number-value of the first node in document order
+     * returned by this XPath expression when evaluated in
+     * the given context.
      *
-     *  <p>
-     *  The number-value of the expression is determined per
-     *  the <code>number(..)</code> core function as defined
-     *  in the XPath specification. This means that if this
-     *  expression selects multiple nodes, the number-value
-     *  of the first node is returned.
-     *  </p>
+     * <p>
+     * The number-value of the expression is determined per
+     * the <code>number(..)</code> core function as defined
+     * in the XPath specification. This means that if this
+     * expression selects multiple nodes, the number-value
+     * of the first node is returned.
+     * </p>
      *
-     *  @param context the node, node-set or Context object for evaluation. This value can be null.
-     *
-     *  @return the number-value interpretation of this expression
-     *
-     *  @throws JaxenException if an error occurs while attempting
+     * @param context the node, node-set or Context object for evaluation. This value can be null.
+     * @return the number-value interpretation of this expression
+     * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
      */
     Number numberValueOf(Object context)
@@ -177,46 +173,41 @@ public interface XPath
     //     Selection
     // ----------------------------------------------------------------------
 
-    /** Select all nodes that are selectable by this XPath
-     *  expression. If multiple nodes match, multiple nodes
-     *  will be returned.
+    /**
+     * Select all nodes that are selectable by this XPath
+     * expression. If multiple nodes match, multiple nodes
+     * will be returned.
      *
-     *  <p>
-     *  <strong>NOTE:</strong> In most cases, nodes will be returned
-     *  in document-order, as defined by the XML Canonicalization
-     *  specification. The exception occurs when using XPath
-     *  expressions involving the <code>union</code> operator
-     *  (denoted with the pipe '|' character).
-     *  </p>
+     * <p>
+     * <strong>NOTE:</strong> In most cases, nodes will be returned
+     * in document-order, as defined by the XML Canonicalization
+     * specification. The exception occurs when using XPath
+     * expressions involving the <code>union</code> operator
+     * (denoted with the pipe '|' character).
+     * </p>
      *
-     *  @see #selectSingleNode
-     *
-     *  @param context the node, node-set or Context object for evaluation. 
-     *     This value can be null.
-     *
-     *  @return the node-set of all items selected by this XPath expression
-     *
-     *  @throws JaxenException if an error occurs while attempting
+     * @param context the node, node-set or Context object for evaluation.
+     *     This value can be null
+     * @return the node-set of all items selected by this XPath expression
+     * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
+     * @see #selectSingleNode
      */
     List selectNodes(Object context)
         throws JaxenException;
 
-    /** 
-     *  <p>
-     *  Return the first node in document order that is selected by this 
-     *  XPath expression.
-     *  </p>
+    /**
+     * <p>
+     * Return the first node in document order that is selected by this
+     * XPath expression.
+     * </p>
      *
-     *  @see #selectNodes
-     *
-     *  @param context the node, node-set or Context object for evaluation. 
-     *     This value can be null.
-     *
-     *  @return the first node in document order selected by this XPath expression
-     *
-     *  @throws JaxenException if an error occurs while attempting
+     * @param context the node, node-set or Context object for evaluation.
+     *     This value can be null
+     * @return the first node in document order selected by this XPath expression
+     * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
+     * @see #selectNodes
      */
     Object selectSingleNode(Object context)
         throws JaxenException;
@@ -225,27 +216,27 @@ public interface XPath
     //     Helpers
     // ----------------------------------------------------------------------
 
-    /** Add a namespace prefix-to-URI mapping for this XPath
-     *  expression.
+    /**
+     * Add a namespace prefix-to-URI mapping for this XPath
+     * expression.
      *
-     *  <p>
-     *  Namespace prefix-to-URI mappings in an XPath are independent
-     *  of those used within any document.  Only the mapping explicitly
-     *  added to this XPath will be available for resolving the
-     *  XPath expression.
-     *  </p>
+     * <p>
+     * Namespace prefix-to-URI mappings in an XPath are independent
+     * of those used within any document.  Only the mapping explicitly
+     * added to this XPath will be available for resolving the
+     * XPath expression.
+     * </p>
      *
-     *  <p>
-     *  This is a convenience method for adding mappings to the
-     *  default {@link NamespaceContext} in place for this XPath.
-     *  If you have installed a specific custom <code>NamespaceContext</code>,
-     *  then this method will throw a <code>JaxenException</code>.
-     *  </p>
+     * <p>
+     * This is a convenience method for adding mappings to the
+     * default {@link NamespaceContext} in place for this XPath.
+     * If you have installed a specific custom <code>NamespaceContext</code>,
+     * then this method will throw a <code>JaxenException</code>.
+     * </p>
      *
-     *  @param prefix the namespace prefix
-     *  @param uri the namespace URI
-     *
-     *  @throws JaxenException if a <code>NamespaceContext</code>
+     * @param prefix the namespace prefix
+     * @param uri the namespace URI
+     * @throws JaxenException if a <code>NamespaceContext</code>
      *          used by this XPath has been explicitly installed
      */
     void addNamespace(String prefix,
@@ -256,119 +247,120 @@ public interface XPath
     //     Properties
     // ----------------------------------------------------------------------
     
-    /** Set a <code>NamespaceContext</code> for  this
-     *  XPath expression.
+    /**
+     * Set a <code>NamespaceContext</code> for  this
+     * XPath expression.
      *
-     *  <p>
-     *  A <code>NamespaceContext</code> is responsible for translating
-     *  namespace prefixes within the expression into namespace URIs.
-     *  </p>
+     * <p>
+     * A <code>NamespaceContext</code> is responsible for translating
+     * namespace prefixes within the expression into namespace URIs.
+     * </p>
      *
-     *  @see NamespaceContext
-     *  @see NamespaceContext#translateNamespacePrefixToUri
-     *
-     *  @param namespaceContext the <code>NamespaceContext</code> to
+     * @param namespaceContext the <code>NamespaceContext</code> to
      *         install for this expression
+     * @see NamespaceContext
+     * @see NamespaceContext#translateNamespacePrefixToUri
      */
     void setNamespaceContext(NamespaceContext namespaceContext);
 
-    /** Set a <code>FunctionContext</code> for  this XPath
-     *  expression.
+    /**
+     * Set a <code>FunctionContext</code> for  this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>FunctionContext</code> is responsible for resolving
-     *  all function calls used within the expression.
-     *  </p>
+     * <p>
+     * A <code>FunctionContext</code> is responsible for resolving
+     * all function calls used within the expression.
+     * </p>
      *
-     *  @see FunctionContext
-     *  @see FunctionContext#getFunction
-     *
-     *  @param functionContext the <code>FunctionContext</code> to
+     * @param functionContext the <code>FunctionContext</code> to
      *         install for this expression
+     * @see FunctionContext
+     * @see FunctionContext#getFunction
      */
     void setFunctionContext(FunctionContext functionContext);
 
-    /** Set a <code>VariableContext</code> for this XPath
-     *  expression.
+    /**
+     * Set a <code>VariableContext</code> for this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>VariableContext</code> is responsible for resolving
-     *  all variables referenced within the expression.
-     *  </p>
+     * <p>
+     * A <code>VariableContext</code> is responsible for resolving
+     * all variables referenced within the expression.
+     * </p>
      *
-     *  @see VariableContext
-     *  @see VariableContext#getVariableValue
-     *
-     *  @param variableContext the <code>VariableContext</code> to
-     *         install for this expression.
+     * @param variableContext the <code>VariableContext</code> to
+     *         install for this expression
+     * @see VariableContext
+     * @see VariableContext#getVariableValue
      */
     void setVariableContext(VariableContext variableContext);
 
-    /** Retrieve the <code>NamespaceContext</code> used by this XPath
-     *  expression.
+    /**
+     * Retrieve the <code>NamespaceContext</code> used by this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>FunctionContext</code> is responsible for resolving
-     *  all function calls used within the expression.
-     *  </p>
+     * <p>
+     * A <code>FunctionContext</code> is responsible for resolving
+     * all function calls used within the expression.
+     * </p>
      *
-     *  <p>
-     *  If this XPath expression has not previously had a <code>NamespaceContext</code>
-     *  installed, a new default <code>NamespaceContext</code> will be created,
-     *  installed and returned.
-     *  </p>
+     * <p>
+     * If this XPath expression has not previously had a <code>NamespaceContext</code>
+     * installed, a new default <code>NamespaceContext</code> will be created,
+     * installed and returned.
+     * </p>
      *
-     *  @see NamespaceContext
-     *
-     *  @return the <code>NamespaceContext</code> used by this expression
+     * @return the <code>NamespaceContext</code> used by this expression
+     * @see NamespaceContext
      */
     NamespaceContext getNamespaceContext();
 
-    /** Retrieve the <code>FunctionContext</code> used by this XPath
-     *  expression.
+    /**
+     * Retrieve the <code>FunctionContext</code> used by this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>FunctionContext</code> is responsible for resolving
-     *  all function calls used within the expression.
-     *  </p>
+     * <p>
+     * A <code>FunctionContext</code> is responsible for resolving
+     * all function calls used within the expression.
+     * </p>
      *
-     *  <p>
-     *  If this XPath expression has not previously had a <code>FunctionContext</code>
-     *  installed, a new default <code>FunctionContext</code> will be created,
-     *  installed and returned.
-     *  </p>
+     * <p>
+     * If this XPath expression has not previously had a <code>FunctionContext</code>
+     * installed, a new default <code>FunctionContext</code> will be created,
+     * installed and returned.
+     * </p>
      *
-     *  @see FunctionContext
-     *
-     *  @return the <code>FunctionContext</code> used by this expression
+     * @return the <code>FunctionContext</code> used by this expression
+     * @see FunctionContext
      */
     FunctionContext getFunctionContext();
 
-    /** Retrieve the <code>VariableContext</code> used by this XPath
-     *  expression.
+    /**
+     * Retrieve the <code>VariableContext</code> used by this XPath
+     * expression.
      *
-     *  <p>
-     *  A <code>VariableContext</code> is responsible for resolving
-     *  all variables referenced within the expression.
-     *  </p>
+     * <p>
+     * A <code>VariableContext</code> is responsible for resolving
+     * all variables referenced within the expression.
+     * </p>
      *
-     *  <p>
-     *  If this XPath expression has not previously had a <code>VariableContext</code>
-     *  installed, a new default <code>VariableContext</code> will be created,
-     *  installed and returned.
-     *  </p>
+     * <p>
+     * If this XPath expression has not previously had a <code>VariableContext</code>
+     * installed, a new default <code>VariableContext</code> will be created,
+     * installed and returned.
+     * </p>
      *
-     *  @see VariableContext
-     *  
-     *  @return the <code>VariableContext</code> used by this expression
+     * @return the <code>VariableContext</code> used by this expression
+     * @see VariableContext
      */
     VariableContext getVariableContext();
     
 
-    /** Retrieve the XML object-model-specific {@link Navigator} 
-     *  used to evaluate this XPath expression.
+    /**
+     * Retrieve the XML object-model-specific {@link Navigator}
+     * used to evaluate this XPath expression.
      *
-     *  @return the implementation-specific <code>Navigator</code>
+     * @return the implementation-specific <code>Navigator</code>
      */
     Navigator getNavigator();
 }
