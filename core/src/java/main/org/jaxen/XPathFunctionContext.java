@@ -81,7 +81,8 @@ import org.jaxen.function.ext.LowerFunction;
 import org.jaxen.function.ext.UpperFunction;
 import org.jaxen.function.xslt.DocumentFunction;
 
-/** A <code>FunctionContext</code> implementing the core XPath
+/**
+ * A <code>FunctionContext</code> implementing the core XPath
  *  function library, plus Jaxen extensions.
  *
  *  <p>
@@ -92,10 +93,10 @@ import org.jaxen.function.xslt.DocumentFunction;
  *
  *  <p>
  *  This class is re-entrant and thread-safe.  If using the
- *  default instance, it is inadvisable to call 
+ *  default instance, it is inadvisable to call
  *  {@link #registerFunction(String, String, Function)}
  *  as that will extend the global function context, affecting other
- *  users. 
+ *  users.
  *  </p>
  *
  *  <p>
@@ -109,27 +110,28 @@ import org.jaxen.function.xslt.DocumentFunction;
  *     <li>ends-with(..)</li>
  *  </ul>
  *
- *  @see FunctionContext
- *  @see org.jaxen.function
- *  @see org.jaxen.function.xslt
- *  @see org.jaxen.function.ext
- *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @see FunctionContext
+ * @see org.jaxen.function
+ * @see org.jaxen.function.xslt
+ * @see org.jaxen.function.ext
  */
 public class XPathFunctionContext extends SimpleFunctionContext
 {
     private static XPathFunctionContext instance = new XPathFunctionContext();
 
-    /** Retrieve the default function context
+    /**
+     * Retrieve the default function context.
      *
-     *  @return the default function context
+     * @return the default function context
      */
     public static FunctionContext getInstance()
     {
         return instance;
     }
 
-    /** Create a new XPath function context.
+    /**
+     * Create a new XPath function context.
      *  All core XPath and Jaxen extension functions are registered.
      */
     public XPathFunctionContext()
@@ -137,9 +139,10 @@ public class XPathFunctionContext extends SimpleFunctionContext
         this(true);
     }
 
-    /** Create a new XPath function context.
+    /**
+     * Create a new XPath function context.
      *  All core XPath functions are registered.
-     *  
+     *
      * @param includeExtensionFunctions if true extension functions are included;
      *     if false, they aren't
      */

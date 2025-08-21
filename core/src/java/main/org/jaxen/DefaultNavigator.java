@@ -62,7 +62,8 @@ import org.jaxen.util.PrecedingAxisIterator;
 import org.jaxen.util.PrecedingSiblingAxisIterator;
 import org.jaxen.util.SelfAxisIterator;
 
-/** Default implementation of {@link Navigator}.
+/**
+ * Default implementation of {@link Navigator}.
  *
  *  <p>
  *  This implementation is an abstract class, since
@@ -78,16 +79,16 @@ import org.jaxen.util.SelfAxisIterator;
  *  implementations.
  *  </p>
  *
- *  @author bob mcwhirter (bob@werken.com)
- *  @author Erwin Bolwidt (ejb@klomp.org)
+ * @author bob mcwhirter (bob@werken.com)
+ * @author Erwin Bolwidt (ejb@klomp.org)
  */
 public abstract class DefaultNavigator implements Navigator
 {
 
-    /** 
+    /**
      * Throws <code>UnsupportedAxisException</code>.
      * Subclasses should override this method.
-     * 
+     *
      * @param contextNode the node to start from
      * @return never returns
      * @throws UnsupportedAxisException always
@@ -106,10 +107,10 @@ public abstract class DefaultNavigator implements Navigator
                                            this );
     }
 
-    /** 
+    /**
      * Throws <code>UnsupportedAxisException</code>.
      * Subclasses should override this method.
-     * 
+     *
      * @param contextNode the node to start from
      * @return never returns
      * @throws UnsupportedAxisException always
@@ -175,10 +176,10 @@ public abstract class DefaultNavigator implements Navigator
         throw new UnsupportedAxisException("attribute");
     }
 
-    /** 
-     * Throws <code>UnsupportedAxisException</code>. Subclasses that 
+    /**
+     * Throws <code>UnsupportedAxisException</code>. Subclasses that
      * support the namespace axis must override this method.
-     * 
+     *
      * @param contextNode the node to start from
      * @return never returns
      * @throws UnsupportedAxisException always
@@ -214,9 +215,9 @@ public abstract class DefaultNavigator implements Navigator
                                                this );
     }
 
-    /** 
+    /**
      * Returns null.
-     * 
+     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -225,9 +226,9 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
     
-    /** 
+    /**
      * Returns null.
-     * 
+     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -236,9 +237,9 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
 
-    /** 
+    /**
      * Returns null.
-     * 
+     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -247,9 +248,9 @@ public abstract class DefaultNavigator implements Navigator
         return null;
     }
 
-    /** 
+    /**
      * Returns null.
-     * 
+     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -297,7 +298,7 @@ public abstract class DefaultNavigator implements Navigator
     }
     
     /**
-     * Default inefficient implementation. Subclasses 
+     * Default inefficient implementation. Subclasses
      * should override this method.
      *
      * @param contextNode the node whose parent to return
@@ -315,8 +316,8 @@ public abstract class DefaultNavigator implements Navigator
     }
 
     /**
-     *  Default implementation that always returns null. Override in subclass
-     *  if the subclass can load documents. 
+     * Default implementation that always returns null. Override in subclass
+     *  if the subclass can load documents.
      *
      * @param url the URL of the document to load
      * @return null
@@ -329,12 +330,12 @@ public abstract class DefaultNavigator implements Navigator
     }
 
     /**
-     *  Default implementation that cannot find elements. Override in subclass
+     * Default implementation that cannot find elements. Override in subclass
      *  if subclass knows about attribute types.
      *
-     *  @param contextNode a node from the document in which to look for the id
-     *  @param elementId id to look for
-     *  @return null
+     * @param contextNode a node from the document in which to look for the id
+     * @param elementId id to look for
+     * @return null
      */
     public Object getElementById(Object contextNode, String elementId)
     {

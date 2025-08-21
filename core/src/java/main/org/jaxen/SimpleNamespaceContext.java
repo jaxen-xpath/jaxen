@@ -54,7 +54,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- *  Provides mappings from namespace prefix to namespace URI to the XPath
+ * Provides mappings from namespace prefix to namespace URI to the XPath
  *  engine.
  */
 public class SimpleNamespaceContext implements NamespaceContext, Serializable
@@ -74,14 +74,13 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
     }
 
     /**
-     * Creates a new namespace context pre-populated with the specified bindings. 
-     * 
+     * Creates a new namespace context pre-populated with the specified bindings.
+     *
      * @param namespaces the initial namespace bindings in scope. The keys in this
      *     must be strings containing the prefixes and the values are strings
      *     containing the namespace URIs.
-     *     
-     * @throws NullPointerException if the argument is null   
-     * @throws ClassCastException if any keys or values in the map are not strings   
+     * @throws ClassCastException if any keys or values in the map are not strings
+     * @throws NullPointerException if the argument is null
      */
     public SimpleNamespaceContext(Map namespaces)
     {
@@ -97,15 +96,15 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
     }
 
     /**
-     *  Adds all the namespace declarations that are in scope on the given
+     * Adds all the namespace declarations that are in scope on the given
      *  element. In the case of an XSLT stylesheet, this would be the element
      *  that has the XPath expression in one of its attributes; e.g.
      *  <code>&lt;xsl:if test="condition/xpath/expression"&gt;</code>.
      *
-     *  @param nav  the navigator for use in conjunction with
+     * @param nav  the navigator for use in conjunction with
      *              <code>element</code>
-     *  @param element the element to copy the namespaces from
-     *  @throws UnsupportedAxisException if the navigator does not support the 
+     * @param element the element to copy the namespaces from
+     * @throws UnsupportedAxisException if the navigator does not support the
      *     namespace axis
      */
     public void addElementNamespaces( Navigator nav, Object element )
@@ -126,7 +125,7 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
     // ???? What if prefix or URI is null, or both?
     /**
      * Binds a prefix to a URI in this context.
-     * 
+     *
      * @param prefix the namespace prefix
      * @param URI    the namespace URI
      */

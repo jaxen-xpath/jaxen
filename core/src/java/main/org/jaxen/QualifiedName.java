@@ -49,10 +49,11 @@ package org.jaxen;
 
 import java.io.Serializable;
 
-/** A local name (that matches the XML NCName production) and a namespace URI
+/**
+ * A local name (that matches the XML NCName production) and a namespace URI
  *  with which the local name is qualified.
  *
- *  @author Erwin Bolwidt ( ejb@klomp.org )
+ * @author Erwin Bolwidt ( ejb@klomp.org )
  */
 class QualifiedName implements Serializable
 {
@@ -62,11 +63,12 @@ class QualifiedName implements Serializable
     private String namespaceURI;
     private String localName;
 
-    /** Constructs a QualifiedName object.
+    /**
+     * Constructs a QualifiedName object.
      *
-     *  @param namespaceURI namespace URI that qualifies the name, or
+     * @param namespaceURI namespace URI that qualifies the name, or
      *                      <code>null</code> for default namespace
-     *  @param localName    local name that is qualified by the namespace uri;
+     * @param localName    local name that is qualified by the namespace uri;
      *                      must not be <code>null</code>
      */
     QualifiedName( String namespaceURI, String localName )
@@ -95,7 +97,7 @@ class QualifiedName implements Serializable
     }
     
     /**
-     * @return James Clark's namespace form
+     * @return james Clark's namespace form
      */
     String getClarkForm() {
         if ("".equals(namespaceURI)) return localName;
@@ -103,4 +105,3 @@ class QualifiedName implements Serializable
     }
     
 }
-

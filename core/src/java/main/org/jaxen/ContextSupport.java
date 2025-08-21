@@ -36,23 +36,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import java.io.Serializable;
 
-/** 
- *  Supporting context information for resolving
+/**
+ * Supporting context information for resolving
  *  namespace prefixes, functions, and variables.
- * 
+ *
  *  <p>
  *  <strong>NOTE:</strong> This class is not typically used directly,
  *  but is exposed for writers of implementation-specific
  *  XPath packages.
  *  </p>
  *
- *  @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
- *  @see org.jaxen.jdom.JDOMXPath   XPath for JDOM
- *  @see org.jaxen.dom.DOMXPath     XPath for W3C DOM
- *
- *  @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
- *
- *  @version $Id$
+ * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
+ * @version $Id$
+ * @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
+ * @see org.jaxen.jdom.JDOMXPath XPath for JDOM
+ * @see org.jaxen.dom.DOMXPath XPath for W3C DOM
  */
 public class ContextSupport implements Serializable {
 
@@ -74,19 +72,21 @@ public class ContextSupport implements Serializable {
     //     Constructors
     // ----------------------------------------------------------------------
     
-    /** Construct an empty <code>ContextSupport</code>.
+    /**
+     * Construct an empty <code>ContextSupport</code>.
      */
     public ContextSupport()
     {
         // intentionally left blank
     }
 
-    /** Create a new ContextSupport object.
+    /**
+     * Create a new ContextSupport object.
      *
-     *  @param namespaceContext the NamespaceContext
-     *  @param functionContext the FunctionContext
-     *  @param variableContext the VariableContext
-     *  @param navigator the model navigator
+     * @param namespaceContext the NamespaceContext
+     * @param functionContext the FunctionContext
+     * @param variableContext the VariableContext
+     * @param navigator the model navigator
      */
     public ContextSupport(NamespaceContext namespaceContext,
                           FunctionContext functionContext,
@@ -104,63 +104,70 @@ public class ContextSupport implements Serializable {
     //     Instance methods
     // ----------------------------------------------------------------------
 
-    /** Set the <code>NamespaceContext</code>.
+    /**
+     * Set the <code>NamespaceContext</code>.
      *
-     *  @param namespaceContext the namespace context
+     * @param namespaceContext the namespace context
      */
     public void setNamespaceContext(NamespaceContext namespaceContext)
     {
         this.namespaceContext = namespaceContext;
     }
 
-    /** Retrieve the <code>NamespaceContext</code>.
+    /**
+     * Retrieve the <code>NamespaceContext</code>.
      *
-     *  @return the namespace context
+     * @return the namespace context
      */
     public NamespaceContext getNamespaceContext()
     {
         return this.namespaceContext;
     }
 
-    /** Set the <code>FunctionContext</code>.
+    /**
+     * Set the <code>FunctionContext</code>.
      *
-     *  @param functionContext the function context
+     * @param functionContext the function context
      */
     public void setFunctionContext(FunctionContext functionContext)
     {
         this.functionContext  = functionContext;
     }
 
-    /** Retrieve the <code>FunctionContext</code>.
+    /**
+     * Retrieve the <code>FunctionContext</code>.
      *
-     *  @return the function context
+     * @return the function context
      */
     public FunctionContext getFunctionContext()
     {
         return this.functionContext;
     }
 
-    /** Set the <code>VariableContext</code>.
+    /**
+     * Set the <code>VariableContext</code>.
      *
-     *  @param variableContext the variable context
+     * @param variableContext the variable context
      */
     public void setVariableContext(VariableContext variableContext)
     {
         this.variableContext  = variableContext;
     }
 
-    /** Retrieve the <code>VariableContext</code>.
+    /**
+     * Retrieve the <code>VariableContext</code>.
      *
-     *  @return the variable context
+     * @return the variable context
      */
     public VariableContext getVariableContext()
     {
         return this.variableContext;
     }
 
-    /** Retrieve the <code>Navigator</code>.
+    /**
+     * Retrieve the <code>Navigator</code>.
      *
-     *  @return the navigator
+     * @return the navigator
      */
     public Navigator getNavigator()
     {
@@ -169,11 +176,11 @@ public class ContextSupport implements Serializable {
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-    /** Translate a namespace prefix to its URI.
+    /**
+     * Translate a namespace prefix to its URI.
      *
-     *  @param prefix The prefix
-     *
-     *  @return the namespace URI mapped to the prefix
+     * @param prefix the prefix
+     * @return the namespace URI mapped to the prefix
      */
     public String translateNamespacePrefixToUri(String prefix)
     {
@@ -191,15 +198,14 @@ public class ContextSupport implements Serializable {
         return null;
     }
 
-    /** Retrieve a variable value.
+    /**
+     * Retrieve a variable value.
      *
-     *  @param namespaceURI the function namespace URI
-     *  @param prefix the function prefix
-     *  @param localName the function name
-     *
-     *  @return the variable value.
-     *
-     *  @throws UnresolvableException if unable to locate a bound variable.
+     * @param namespaceURI the function namespace URI
+     * @param prefix the function prefix
+     * @param localName the function name
+     * @return the variable value
+     * @throws UnresolvableException if unable to locate a bound variable
      */
     public Object getVariableValue( String namespaceURI,
                                     String prefix,
@@ -218,15 +224,14 @@ public class ContextSupport implements Serializable {
         }
     }
 
-    /** Retrieve a <code>Function</code>.
+    /**
+     * Retrieve a <code>Function</code>.
      *
-     *  @param namespaceURI the function namespace URI
-     *  @param prefix the function prefix
-     *  @param localName the function name
-     *
-     *  @return the function object
-     *
-     *  @throws UnresolvableException if unable to locate a bound function
+     * @param namespaceURI the function namespace URI
+     * @param prefix the function prefix
+     * @param localName the function name
+     * @return the function object
+     * @throws UnresolvableException if unable to locate a bound function
      */
     public Function getFunction( String namespaceURI,
                                  String prefix,

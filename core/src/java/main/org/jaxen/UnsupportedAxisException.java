@@ -49,7 +49,7 @@
 
 package org.jaxen;
 
-/** 
+/**
  * Indicates attempt to evaluate an XPath axis that
  * is unsupported by the current object-model. If this is thrown
  * the XPath expressions cannot be evaluated correctly, unless there is a fallback
@@ -57,16 +57,17 @@ package org.jaxen;
  * and ignore it, nor should navigators throw it to indicate that
  * an axis is exhausted: instead return an empty iterator.
  *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
 public class UnsupportedAxisException extends JaxenException
 {
 
     private static final long serialVersionUID = 3385500112257420949L;
 
-    /** Create a new UnsupportedAxisException.
+    /**
+     * Create a new UnsupportedAxisException.
      *
-     *  @param message the error message
+     * @param message the error message
      */
     public UnsupportedAxisException(String message)
     {

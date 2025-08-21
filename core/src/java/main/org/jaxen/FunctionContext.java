@@ -48,7 +48,8 @@
 
 package org.jaxen;
 
-/** Implemented by classes that know how to resolve XPath function names and
+/**
+ * Implemented by classes that know how to resolve XPath function names and
  *  namespaces to implementations of these functions.
  *
  *  <p>
@@ -56,13 +57,13 @@ package org.jaxen;
  *  functions may be installed and available to XPath expression writers.
  *  </p>
  *
- *  @see XPathFunctionContext
- *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @see XPathFunctionContext
  */
 public interface FunctionContext
 {
-    /** An implementation should return a <code>Function</code> implementation object
+    /**
+     * An implementation should return a <code>Function</code> implementation object
      *  based on the namespace URI and local name of the function-call
      *  expression.
      *
@@ -73,18 +74,17 @@ public interface FunctionContext
      *  The prefix may otherwise be completely ignored.
      *  </p>
      *
-     *  @param namespaceURI  the namespace URI to which the prefix parameter
+     * @param namespaceURI  the namespace URI to which the prefix parameter
      *                       is bound in the XPath expression. If the function
      *                       call expression had no prefix, the namespace URI
      *                       is <code>null</code>.
-     *  @param prefix        the prefix that was used in the function call
+     * @param prefix        the prefix that was used in the function call
      *                       expression
-     *  @param localName     the local name of the function-call expression.
+     * @param localName     the local name of the function-call expression.
      *                       If there is no prefix, then this is the whole
-     *                       name of the function.
-     *
-     *  @return  a Function implementation object.
-     *  @throws UnresolvableException  when the function cannot be resolved
+     *                       name of the function
+     * @return a Function implementation object
+     * @throws UnresolvableException  when the function cannot be resolved
      */
     Function getFunction( String namespaceURI,
                           String prefix,
