@@ -52,9 +52,8 @@ package org.jaxen.util;
 import java.util.AbstractList;
 
 /**
- * A utility class that implements singleton lists
- * (to avoid dependency on JDK 1.3). Many operations 
- * including <code>add()</code> and <code>remove()</code> throw
+ * A utility class that implements singleton lists.
+ * Many operations including <code>add()</code> and <code>remove()</code> throw
  * UnsupportedOperationExceptions. 
  * 
  * @version 1.2b12
