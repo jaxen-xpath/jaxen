@@ -52,15 +52,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Simple default implementation for <code>VariableContext</code>.
+/**
+ * Simple default implementation for <code>VariableContext</code>.
  *
- *  <p>
- *  This is a simple table-based key-lookup implementation
- *  for <code>VariableContext</code> which can be programmatically
- *  extended by setting additional variables.
- *  </p>
+ * <p>
+ * This is a simple table-based key-lookup implementation
+ * for <code>VariableContext</code> which can be programmatically
+ * extended by setting additional variables.
+ * </p>
  *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  */
 public class SimpleVariableContext implements VariableContext, Serializable
 {
@@ -69,33 +70,35 @@ public class SimpleVariableContext implements VariableContext, Serializable
     /** Table of variable bindings. */
     private Map<QualifiedName, Object> variables;
 
-    /** Construct.
+    /**
+     * Construct.
      *
-     *  <p>
-     *  Create a new empty variable context.
-     *  </p>
+     * <p>
+     * Create a new empty variable context.
+     * </p>
      */
     public SimpleVariableContext()
     {
         variables = new HashMap<QualifiedName, Object>();
     }
 
-    /** Set the value associated with a variable.
+    /**
+     * Set the value associated with a variable.
      *
-     *  <p>
-     *  This method sets a variable that is 
-     *  associated with a particular namespace.
-     *  These variables appear such as <code>$prefix:foo</code>
-     *  in an XPath expression.  Prefix to URI resolution
-     *  is the responsibility of a <code>NamespaceContext</code>.
-     *  Variables within a <code>VariableContext</code> are
-     *  referred to purely based upon their namespace URI,
-     *  if any.
-     *  </p>
+     * <p>
+     * This method sets a variable that is
+     * associated with a particular namespace.
+     * These variables appear such as <code>$prefix:foo</code>
+     * in an XPath expression.  Prefix to URI resolution
+     * is the responsibility of a <code>NamespaceContext</code>.
+     * Variables within a <code>VariableContext</code> are
+     * referred to purely based upon their namespace URI,
+     * if any.
+     * </p>
      *
-     *  @param namespaceURI the namespace URI of the variable
-     *  @param localName the local name of the variable
-     *  @param value The value to be bound to the variable
+     * @param namespaceURI the namespace URI of the variable
+     * @param localName the local name of the variable
+     * @param value the value to be bound to the variable
      */
     public void setVariableValue( String namespaceURI,
                                   String localName,
@@ -105,17 +108,18 @@ public class SimpleVariableContext implements VariableContext, Serializable
                             value );
     }
 
-    /** Set the value associated with a variable.
+    /**
+     * Set the value associated with a variable.
      *
-     *  <p>
-     *  This method sets a variable that is <strong>not</strong>
-     *  associated with any particular namespace.
-     *  These variables look like <code>$foo</code>
-     *  in an XPath expression.
-     *  </p>
+     * <p>
+     * This method sets a variable that is <strong>not</strong>
+     * associated with any particular namespace.
+     * These variables look like <code>$foo</code>
+     * in an XPath expression.
+     * </p>
      *
-     *  @param localName the local name of the variable
-     *  @param value the value to be bound to the variable
+     * @param localName the local name of the variable
+     * @param value the value to be bound to the variable
      */
     public void setVariableValue( String localName,
                                   Object value )

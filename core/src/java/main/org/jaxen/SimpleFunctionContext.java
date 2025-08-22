@@ -50,59 +50,60 @@ package org.jaxen;
 
 import java.util.HashMap;
 
-/** Simple default implementation of <code>FunctionContext</code>.
+/**
+ * Simple default implementation of <code>FunctionContext</code>.
  *
- *  <p>
- *  This is a simple table-based key-lookup implementation
- *  for <code>FunctionContext</code> which can be programmatically
- *  extended by registering additional functions.
- *  </p>
+ * <p>
+ * This is a simple table-based key-lookup implementation
+ * for <code>FunctionContext</code> which can be programmatically
+ * extended by registering additional functions.
+ * </p>
  *
- *  @see XPathFunctionContext
- *
- *  @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
+ * @see XPathFunctionContext
  */
 public class SimpleFunctionContext implements FunctionContext
 {
     /** Table of functions. */
     private HashMap<QualifiedName, Function> functions;
 
-    /** 
-     *  <p>
-     *  Construct an empty function context.
-     *  </p>
+    /**
+     * <p>
+     * Construct an empty function context.
+     * </p>
      */
     public SimpleFunctionContext()
     {
         this.functions = new HashMap<QualifiedName, Function>();
     }
 
-    /** Register a new function.
+    /**
+     * Register a new function.
      *
-     *  <p>
-     *  By registering a new function, any XPath expression
-     *  that utilizes this <code>FunctionContext</code> may
-     *  refer to and use the new function.
-     *  </p>
+     * <p>
+     * By registering a new function, any XPath expression
+     * that utilizes this <code>FunctionContext</code> may
+     * refer to and use the new function.
+     * </p>
      *
-     *  <p>
-     *  Functions may exist either in a namespace or not.
-     *  Namespace prefix-to-URI resolution is the responsibility
-     *  of a {@link NamespaceContext}.  Within this <code>FunctionContext</code>
-     *  functions are only referenced using the URI, <strong>not</strong>
-     *  the prefix.
-     *  </p>
+     * <p>
+     * Functions may exist either in a namespace or not.
+     * Namespace prefix-to-URI resolution is the responsibility
+     * of a {@link NamespaceContext}.  Within this <code>FunctionContext</code>
+     * functions are only referenced using the URI, <strong>not</strong>
+     * the prefix.
+     * </p>
      *
-     *  <p>
-     *  The namespace URI of a function may be <code>null</code>
-     *  to indicate that it exists without a namespace.
-     *  </p>
+     * <p>
+     * The namespace URI of a function may be <code>null</code>
+     * to indicate that it exists without a namespace.
+     * </p>
      *
-     *  @param namespaceURI the namespace URI of the function to
+     * @param namespaceURI the namespace URI of the function to
      *         be registered with this context
-     *  @param localName the non-prefixed local portion of the
+     * @param localName the non-prefixed local portion of the
      *         function to be registered with this context
-     *  @param function a {@link Function} implementation object
+     * @param function a {@link Function} implementation object
      *         to be used when evaluating the function
      */
     public void registerFunction(String namespaceURI,
