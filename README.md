@@ -33,3 +33,9 @@ dependencies {
   compile 'jaxen:jaxen:2.0.0'
 }
 ```
+
+## Development and API Compatibility
+
+Jaxen includes automated API compatibility checking using Animal Sniffer to ensure code only uses APIs available in Java 1.5. This helps maintain backward compatibility and prevents accidental introduction of newer APIs.
+
+See [API_COMPATIBILITY.md](API_COMPATIBILITY.md) for detailed information about the API compatibility checking system.

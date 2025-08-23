@@ -56,6 +56,31 @@
           </archive>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>check-api-signature</id>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <signature>
+                <groupId>org.codehaus.mojo.signature</groupId>
+                <artifactId>java15</artifactId>
+                <version>1.0</version>
+              </signature>
+              <ignores>
+                <!-- Allow internal packages to use newer APIs if needed -->
+                <ignore>org.jaxen.saxpath.base.*</ignore>
+                <ignore>org.jaxen.pattern.*</ignore>
+              </ignores>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
