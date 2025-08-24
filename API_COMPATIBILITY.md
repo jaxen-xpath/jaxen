@@ -181,8 +181,8 @@ Both plugins run automatically in CI/CD pipelines (CircleCI), ensuring that all 
 When the Japicmp plugin detects API changes, consider these guidelines:
 
 ### Allowed Changes (Won't Break Build)
-- Adding new public methods/classes
-- Adding optional parameters with defaults
+- Adding new concrete public methods to classes
+- Adding new public classes
 - Expanding method visibility (private → public)
 
 ### Breaking Changes (Will Break Build) 
@@ -191,6 +191,8 @@ When the Japicmp plugin detects API changes, consider these guidelines:
 - Reducing method visibility (public → private)
 - Changing return types
 - Adding checked exceptions
+- Adding new abstract methods to classes
+- Adding new methods to interfaces
 
 ### Workarounds for Legitimate API Changes
 If you need to make breaking changes for a new major version:
