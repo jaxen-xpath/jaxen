@@ -56,6 +56,85 @@
           </archive>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>check-api-signature</id>
+            <phase>test</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <signature>
+                <groupId>org.codehaus.mojo.signature</groupId>
+                <artifactId>java15</artifactId>
+                <version>1.0</version>
+              </signature>
+              <ignores>
+                <!-- Allow internal packages to use newer APIs if needed -->
+                <ignore>org.jaxen.saxpath.base.*</ignore>
+                <ignore>org.jaxen.pattern.*</ignore>
+              </ignores>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <!-- Jaxen API Compatibility Checker - detects changes to jaxen's own public API -->
+      <plugin>
+        <groupId>com.github.siom79.japicmp</groupId>
+        <artifactId>japicmp-maven-plugin</artifactId>
+        <version>0.23.1</version>
+        <executions>
+          <execution>
+            <id>check-jaxen-api-compatibility</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>cmp</goal>
+            </goals>
+            <configuration>
+              <parameter>
+                <breakBuildOnModifications>true</breakBuildOnModifications>
+                <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
+                <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
+                <onlyModified>true</onlyModified>
+                <onlyBinaryIncompatible>false</onlyBinaryIncompatible>
+                <includeSynthetic>false</includeSynthetic>
+                <!-- Include only public API packages -->
+                <includes>
+                  <include>org.jaxen.*</include>
+                </includes>
+                <!-- Exclude internal implementation packages -->
+                <excludes>
+                  <exclude>org.jaxen.saxpath.base.*</exclude>
+                  <exclude>org.jaxen.pattern.*</exclude>
+                  <exclude>org.jaxen.util.*</exclude>
+                  <exclude>org.jaxen.jdom.*</exclude>
+                  <exclude>org.jaxen.dom.*</exclude>
+                  <exclude>org.jaxen.dom4j.*</exclude>
+                  <exclude>org.jaxen.xom.*</exclude>
+                </excludes>
+                <!-- Only enforce on public API changes -->
+                <accessModifier>public</accessModifier>
+              </parameter>
+              <oldVersion>
+                <dependency>
+                  <groupId>jaxen</groupId>
+                  <artifactId>jaxen</artifactId>
+                  <version>2.0.0</version>
+                </dependency>
+              </oldVersion>
+              <newVersion>
+                <file>
+                  <path>${project.build.directory}/${project.build.finalName}.jar</path>
+                </file>
+              </newVersion>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
