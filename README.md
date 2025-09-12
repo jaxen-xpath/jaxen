@@ -44,3 +44,14 @@ Jaxen includes comprehensive automated API compatibility checking:
 This dual approach helps maintain backward compatibility and prevents accidental introduction of breaking changes.
 
 See [API_COMPATIBILITY.md](API_COMPATIBILITY.md) for detailed information about the API compatibility checking system.
+
+## Reproducible Builds
+
+Jaxen supports [reproducible builds](https://reproducible-builds.org/), ensuring that building the same source code with the same build environment produces byte-for-byte identical artifacts. This is achieved by using a fixed timestamp (`project.build.outputTimestamp`) in the Maven build configuration.
+
+To verify reproducible builds work correctly, you can run:
+```bash
+./test-reproducible-build.sh
+```
+
+This script builds the project twice and compares the resulting artifacts to ensure they are identical.
