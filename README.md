@@ -34,6 +34,18 @@ dependencies {
 }
 ```
 
+## Building from Source
+
+To build Jaxen from source, you need Java 8+ and Maven 3.6.3+. The project includes a Maven wrapper for convenience:
+
+```bash
+# Using Maven wrapper (recommended)
+./mvnw clean test
+
+# Or using system Maven if installed
+mvn clean test
+```
+
 ## Development and API Compatibility
 
 Jaxen includes comprehensive automated API compatibility checking:
