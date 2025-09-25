@@ -64,13 +64,13 @@ public interface VariableReferenceExpr extends Expr
      * 
      * @return the namespace prefix of the variable
      */
-    public String getPrefix();
+    String getPrefix();
     
     /**
      * Returns the local name of the variable. 
      * 
      * @return the local name of the variable
      */
-    public String getVariableName();
+    String getVariableName();
 
 }
