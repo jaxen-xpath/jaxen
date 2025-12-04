@@ -199,7 +199,6 @@
         <version>3.13.0</version>
         <configuration>
           <debug>true</debug>
-          <optimize>true</optimize>
           <showDeprecation>true</showDeprecation>
           <source>1.5</source>
           <target>1.5</target>
