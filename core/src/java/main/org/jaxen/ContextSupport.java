@@ -48,8 +48,6 @@ import java.io.Serializable;
  *
  * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  * @version $Id$
- * @see org.jaxen.dom4j.Dom4jXPath
- * @see org.jaxen.jdom.JDOMXPath
  * @see org.jaxen.dom.DOMXPath
  */
 public class ContextSupport implements Serializable {

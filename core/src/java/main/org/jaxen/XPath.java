@@ -50,8 +50,6 @@ import java.util.List;
  *
  * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
- * @see org.jaxen.dom4j.Dom4jXPath
- * @see org.jaxen.jdom.JDOMXPath
  * @see org.jaxen.dom.DOMXPath
  */
 public interface XPath

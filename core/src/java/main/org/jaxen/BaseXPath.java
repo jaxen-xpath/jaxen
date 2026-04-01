@@ -78,8 +78,6 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
- * @see org.jaxen.dom4j.Dom4jXPath
- * @see org.jaxen.jdom.JDOMXPath
  * @see org.jaxen.dom.DOMXPath
  */
 public class BaseXPath implements XPath, Serializable
