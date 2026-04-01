@@ -1,0 +1,23 @@
+name: Create Issues from TODO Comments
+
+# Run this workflow manually (once) to convert every TODO/FIXME/XXX/HACK
+# comment found in the Java source files into a tracked GitHub issue.
+# Subsequent runs skip issues that already exist, so it is safe to re-run.
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-todo-issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create GitHub issues for TODO/FIXME/XXX comments
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/create_todo_issues.py
