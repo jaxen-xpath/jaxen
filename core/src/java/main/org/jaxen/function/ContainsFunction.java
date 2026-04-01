@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -57,7 +57,7 @@ import org.jaxen.Navigator;
 /**
  *  <p><b>4.2</b> <code><i>boolean</i> contains(<i>string</i>,<i>string</i>)</code></p>
  *  
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * The <b>contains</b> function returns true if the first argument 
  * string contains the second argument string, and otherwise returns false.
  * </blockquote>

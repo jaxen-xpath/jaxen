@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -61,7 +61,7 @@ import org.jaxen.Navigator;
  * <code><i>string</i> namespace-uri(<i>node-set?</i>)</code>
  * </p>
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * <p>
  * The <b>namespace-uri</b>
  * function returns the namespace URI of the <a

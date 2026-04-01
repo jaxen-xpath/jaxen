@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -65,7 +65,7 @@ import org.jaxen.JaxenException;
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://www.xom.nu/">The XOM website</a>
+ * @see <a href="https://www.xom.nu/">The XOM website</a>
  *
  * @version $Revision$
  */

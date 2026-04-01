@@ -28,7 +28,7 @@
       <p>Let's suppose you want to write an 
         extension function that finds the minimum of a set of numeric values. 
         We'll call this extension function min() and put it in the 
-       http://exslt.org/math namespace. (This is actually an extension function defined by the EXSLT library at http://www.exslt.org/math/functions/min/math.min.html) We'll use the prefix math in this document but the prefix can change as long as the URI is correct.
+       http://exslt.org/math namespace. (This is actually an extension function defined by the EXSLT library at https://www.exslt.org/math/functions/min/math.min.html) We'll use the prefix math in this document but the prefix can change as long as the URI is correct.
       </p>
 
       <p>

@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -62,7 +62,7 @@ import org.jaxen.UnsupportedAxisException;
  * <b>4.3</b> <code><i>boolean</i> lang(<i>string</i>)</code>
  * </p>
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath#function-lang">
+ * <blockquote cite="https://www.w3.org/TR/xpath#function-lang">
  * <p>
  * The <b>lang</b> function returns true or false depending on whether
  * the language of the context node as specified by

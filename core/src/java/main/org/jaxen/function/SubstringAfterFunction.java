@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.2</b> <code><i>string</i> substring-after(<i>string</i>,<i>string</i>)</code></p> 
  * 
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * The <b>substring-after</b> function returns the substring of the first argument string 
  * that follows the first occurrence of the second argument string in the first 
  * argument string, or the empty string if the first argument string does not contain the second argument string. 

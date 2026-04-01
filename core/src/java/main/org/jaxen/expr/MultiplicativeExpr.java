@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -48,7 +48,7 @@ package org.jaxen.expr;
 
 /**
  * Represents an XPath multiplicative expression. This is 
- * <a href='http://www.w3.org/TR/xpath#NT-MultiplicativeExpr'>production 26</a> in the 
+ * <a href='https://www.w3.org/TR/xpath#NT-MultiplicativeExpr'>production 26</a> in the 
  * <a href="https://www.w3.org/TR/xpath">XPath 1.0 specification</a>:
  * 
  * <table><tr valign="baseline">

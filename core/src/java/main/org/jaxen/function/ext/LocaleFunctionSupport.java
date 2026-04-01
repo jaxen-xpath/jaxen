@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -105,7 +105,7 @@ public abstract class LocaleFunctionSupport implements Function
     
     /** 
      * Tries to find a Locale instance by name using 
-     * <a href="http://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a>
+     * <a href="https://www.ietf.org/rfc/rfc3066.txt" target="_top">RFC 3066</a>
      * language tags such as 'en', 'en-US', 'en-US-Brooklyn'.
      *
      * @param localeText the RFC 3066 language tag

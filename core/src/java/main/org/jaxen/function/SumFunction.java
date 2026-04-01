@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://www.jaxen.org/>.
  * 
  * $Id$
  */
@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
 /**
  * <p><b>4.4</b> <code><i>number</i> sum(<i>node-set</i>)</code> </p>
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath#function-sum">
+ * <blockquote cite="https://www.w3.org/TR/xpath#function-sum">
  * The sum function returns the sum, for each node in the argument node-set, 
  * of the result of converting the string-values of the node to a number.
  * </blockquote>
