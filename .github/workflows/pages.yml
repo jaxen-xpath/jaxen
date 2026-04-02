@@ -31,6 +31,8 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Build site
         run: mvn --batch-mode site site:stage -Dmaven.javadoc.skip=true -Djapicmp.skip=true
