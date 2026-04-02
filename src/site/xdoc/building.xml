@@ -84,7 +84,8 @@
         <li>Tag the release in Github.</li>
         <li>And then a miracle occurs to upload to Maven Central.</li>
         <li>
-          Upload site and binaries to cafeconleche.org/jaxen.
+          The site is automatically published to <a href="https://jaxen-xpath.github.io/jaxen/">GitHub Pages</a>
+          via the <code>pages.yml</code> GitHub Actions workflow when changes are pushed to master.
         </li>
       </ol>
 
