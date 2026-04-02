@@ -30,7 +30,7 @@ jobs:
           distribution: temurin
           cache: maven
 
-      # Java 11 does not support -source/-target 1.5, so we compile with Java 8
+      # Java 11 and later do not support -source/-target 1.5, so we compile with Java 8
       # but run the tests with the target Java version.
       - name: Set up JDK 8 for compilation
         if: matrix.java != '8'
