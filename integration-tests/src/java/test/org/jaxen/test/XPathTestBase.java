@@ -710,17 +710,25 @@ public abstract class XPathTestBase extends TestCase
         }
     }
 
-    /* TODO
-    This context should work, but needs a fixed version of saxpath to parse the right-hand side
-    of the greater-than expression.
-    <context select="/numbers/set[2]">
-      <valueOf select="1 &gt; nr/@value">false</valueOf>
-      <valueOf select="55 &gt; nr/@value">false</valueOf>
-      <valueOf select="55 &gt;= nr/@value">true</valueOf>
-      <valueOf select="1000000 &gt; nr/@value">true</valueOf>
-    </context>
-    
-    */
+    public void testid54082b() throws JaxenException
+    {
+        Navigator nav = getNavigator();
+        String url = "xml/numbers.xml";
+        log("Document [" + url + "]");
+        Object document = nav.getDocument(url);
+        XPath contextpath = new BaseXPath("/numbers/set[2]", nav);
+        log("Initial Context :: " + contextpath);
+        List list = contextpath.selectNodes(document);
+        Iterator iter = list.iterator();
+        while (iter.hasNext())
+        {
+            Object context = iter.next();
+            assertValueOfXPath("false", context, "1 > nr/@value");
+            assertValueOfXPath("false", context, "55 > nr/@value");
+            assertValueOfXPath("true", context, "55 >= nr/@value");
+            assertValueOfXPath("true", context, "1000000 > nr/@value");
+        }
+    }
     /** 
      * test sibling axes 
      */
