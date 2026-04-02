@@ -57,7 +57,7 @@ import org.jaxen.Navigator;
 /**
  *  <p><b>4.2</b> <code><i>boolean</i> contains(<i>string</i>,<i>string</i>)</code></p>
  *  
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * The <b>contains</b> function returns true if the first argument 
  * string contains the second argument string, and otherwise returns false.
  * </blockquote>

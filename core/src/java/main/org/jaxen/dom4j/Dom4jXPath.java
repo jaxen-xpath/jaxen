@@ -66,7 +66,7 @@ import org.jaxen.JaxenException;
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://dom4j.org/">The dom4j website</a>
+ * @see <a href="https://dom4j.github.io/">The dom4j website</a>
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstachan@apache.org">James Strachan</a>

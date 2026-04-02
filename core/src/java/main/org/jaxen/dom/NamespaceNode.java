@@ -724,7 +724,7 @@ public class NamespaceNode implements Node
      */
     public String lookupPrefix(String namespaceURI) {
         // This could be fully implemented even in Java 1.4. See
-        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // https://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
         // It hardly seems worth the effort though.
         
         try {
@@ -774,7 +774,7 @@ public class NamespaceNode implements Node
      */
     public String lookupNamespaceURI(String prefix) {
         // This could be fully implemented even in Java 1.4. See
-        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // https://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
         // It hardly seems worth the effort though.
         
         try {
