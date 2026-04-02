@@ -1,4 +1,4 @@
-<stylesheet	xmlns="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:var="http://jaxen.org/test-harness/var">
+<stylesheet	xmlns="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:var="https://github.com/jaxen-xpath/jaxen/test-harness/var">
 <!-- this is what I used to generate XPathTestBase. After generating I fixed the illegal strings (its quicker
 than fixing the xsl for that few errors) and reformatted the code. Its unlikely this code will be needed
 again, its just in cvs for completeness -->
@@ -29,19 +29,19 @@ again, its just in cvs for completeness -->
  *
  * 3. The name "Jaxen" must not be used to endorse or promote products
  *    derived from this software without prior written permission.  For
- *    written permission, please contact license@jaxen.org.
+ *    written permission, please contact https://github.com/jaxen-xpath/jaxen/.
  *
  * 4. Products derived from this software may not be called "Jaxen", nor
  *    may "Jaxen" appear in their name, without prior written permission
- *    from the Jaxen Project Management (pm@jaxen.org).
+ *    from the Jaxen Project Management (https://github.com/jaxen-xpath/jaxen/).
  *
  * In addition, we request (but do not require) that you include in the
  * end-user documentation provided with the redistribution and/or in the
  * software itself an acknowledgement equivalent to the following:
  *     "This product includes software developed by the
- *      Jaxen Project (http://www.jaxen.org/)."
+ *      Jaxen Project (https://github.com/jaxen-xpath/jaxen/)."
  * Alternatively, the acknowledgment may be graphical using the logos
- * available at http://www.jaxen.org/
+ * available at https://github.com/jaxen-xpath/jaxen/
  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -61,7 +61,7 @@ again, its just in cvs for completeness -->
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter &lt;bob@werken.com> and
  * James Strachan &lt;jstrachan@apache.org>.  For more information on the
- * Jaxen Project, please see &lt;http://www.jaxen.org/>.
+ * Jaxen Project, please see &lt;https://github.com/jaxen-xpath/jaxen/>.
  *
  * $Id: XPathTestBase.java,v 1.32 2005/06/15 23:52:40 bewins Exp $
  */
@@ -80,7 +80,7 @@ import java.util.List;
 
 public abstract class XPathTestBase extends TestCase
 {
-    protected static String VAR_URI   = "http://jaxen.org/test-harness/var";
+    protected static String VAR_URI   = "https://github.com/jaxen-xpath/jaxen/test-harness/var";
     protected static String TESTS_XML = "xml/test/tests.xml";
 
     protected static boolean verbose = true;
@@ -292,10 +292,10 @@ public abstract class XPathTestBase extends TestCase
             <text>
         getContextSupport().setNamespaceContext( nsContext );</text>
         </if>
-        <if test="@*[namespace-uri() = 'http://jaxen.org/test-harness/var']">
+        <if test="@*[namespace-uri() = 'https://github.com/jaxen-xpath/jaxen/test-harness/var']">
         <text>
         SimpleVariableContext varContext = new SimpleVariableContext();</text>
-            <for-each select="@*[namespace-uri() = 'http://jaxen.org/test-harness/var']">
+            <for-each select="@*[namespace-uri() = 'https://github.com/jaxen-xpath/jaxen/test-harness/var']">
                 <text>
         varContext.setVariableValue(null, "</text><value-of select="local-name()"/><text>", "</text><value-of select="."/><text>" );</text>
            </for-each>
