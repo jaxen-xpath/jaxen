@@ -10,7 +10,7 @@
   <name>Jaxen</name>
   <version>2.0.0</version>
   <description>Jaxen is a universal XPath 1.0 engine for Java.</description>
-  <url>https://www.cafeconleche.org/jaxen</url>
+  <url>https://jaxen-xpath.github.io/jaxen/</url>
   <licenses>
     <license>
       <name>BSD License 2.0</name>
@@ -186,7 +186,7 @@
 
   <organization>
     <name>The Jaxen Project</name>
-    <url>https://www.cafeconleche.org/jaxen</url>
+    <url>https://jaxen-xpath.github.io/jaxen/</url>
   </organization>
 
 
@@ -378,17 +378,6 @@
   <reporting>
     <plugins>
       <plugin>
-        <artifactId>maven-changelog-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <type>date</type>
-          <dates>
-            <date>2007-05-06</date>
-          </dates>
-          <outputEncoding>UTF-8</outputEncoding>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${project.javadoc.version}</version>
@@ -503,8 +492,8 @@
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <site>
-      <id>Cafe Con Leche</id>
-      <url>scp://login.ibiblio.org/xml/jaxen/</url>
+      <id>github-pages</id>
+      <url>https://jaxen-xpath.github.io/jaxen/</url>
     </site>
   </distributionManagement>
 
