@@ -65,7 +65,7 @@ import org.jaxen.JaxenException;
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://jdom.org/">The JDOM website</a>
+ * @see <a href="https://jdom.org/">The JDOM website</a>
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstachan@apache.org">James Strachan</a>

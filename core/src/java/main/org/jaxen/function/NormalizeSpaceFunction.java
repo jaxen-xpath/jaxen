@@ -60,7 +60,7 @@ import org.jaxen.Navigator;
  * <b>4.2</b> <code><i>string</i> normalize-space(<i>string</i>)</code>
  * </p>
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath#function-normalize-space"> 
+ * <blockquote cite="https://www.w3.org/TR/xpath#function-normalize-space"> 
  * The <b>normalize-space</b> function
  * returns the argument string with whitespace normalized by stripping
  * leading and trailing whitespace and replacing sequences of whitespace

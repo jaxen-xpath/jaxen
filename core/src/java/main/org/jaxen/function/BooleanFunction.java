@@ -60,7 +60,7 @@ import org.jaxen.Navigator;
  * <b>4.3</b> <code><i>boolean</i> boolean(<i>object</i>)</code>
  * </p>
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath#section-Boolean-Functions">
+ * <blockquote cite="https://www.w3.org/TR/xpath#section-Boolean-Functions">
  * <p>
  * The <b><a href="https://www.w3.org/TR/xpath#function-boolean" target="_top">boolean</a></b>
  * function converts its argument to a boolean as follows:
