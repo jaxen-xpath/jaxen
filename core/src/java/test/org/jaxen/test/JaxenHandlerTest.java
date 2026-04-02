@@ -125,7 +125,6 @@ public class JaxenHandlerTest extends TestCase
 
         try
         {
-            // XXX Jiffie solution?
             XPathReader reader = XPathReaderFactory.createReader();
             JaxenHandler handler = new JaxenHandler();
             handler.setXPathFactory( new DefaultXPathFactory() );
