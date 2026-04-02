@@ -68,7 +68,6 @@ public class Axis
     
     private Axis() {}
     
-    // XXX Ultimately these should use the type-safe enum pattern instead
     /** Marker for an invalid axis */
     public final static int INVALID_AXIS       =  0;
 
