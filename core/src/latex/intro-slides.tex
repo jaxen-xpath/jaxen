@@ -51,7 +51,7 @@
         \tiny{\emph{The Werken Company}}\\
         \tiny{\texttt{bob@werken.com}}}
 
-\MyLogo{\emph{http://jaxen.org/}}
+\MyLogo{\emph{https://github.com/jaxen-xpath/jaxen/}}
 
 \leftheader{\emph{Jaxen}}
 
@@ -251,7 +251,7 @@ name and namespace.
 
 \begin{codelisting}
 \hifade{<\hiblue{article} id="mcw03"
-         \hiblue{xmlns="http://jaxen.org/example-ns/"}>}
+         \hiblue{xmlns="https://github.com/jaxen-xpath/jaxen/example-ns/"}>}
 \end{codelisting}
 
 %% ----------------------------------------------------------------------
@@ -274,7 +274,7 @@ its own name and namespace.
 
 \begin{codelisting}
 \hifade{<article \hiblue{id="mcw03"} 
-         xmlns="http://jaxen.org/example-ns/">}
+         xmlns="https://github.com/jaxen-xpath/jaxen/example-ns/">}
 \end{codelisting}
 
 %% ----------------------------------------------------------------------
@@ -319,7 +319,7 @@ content of the comments themselves.
 \hiblue{<!--
   || Comment on the Document information item
   -->}
-<journal xmlns=\"http://jaxen.org/example-ns/\">
+<journal xmlns=\"https://github.com/jaxen-xpath/jaxen/example-ns/\">
     \hiblue{<!-- 
       || Comment on the Element information item for <journal>
       -->}
@@ -342,8 +342,8 @@ items represent all XML namespace bindings in effect at the scope of
 the element.
 
 \begin{codelisting}
-\hifade{<journal \hiblue{xmlns="http://jaxen.org/example-ns-1/"}>
-    <art:article \hiblue{xmlns:art="http://jaxen.org/example-ns-2"}>
+\hifade{<journal \hiblue{xmlns="https://github.com/jaxen-xpath/jaxen/example-ns-1/"}>
+    <art:article \hiblue{xmlns:art="https://github.com/jaxen-xpath/jaxen/example-ns-2"}>
 }
 \end{codelisting}
 
@@ -1166,7 +1166,7 @@ exist in different namespaces.  These are considered unique.
   soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
    <soap:Body>
        <\hiblue{mail:Envelope} 
-         \hiblue{xmlns:mail="http://jaxen.org/example-ns/mail/"}>
+         \hiblue{xmlns:mail="https://github.com/jaxen-xpath/jaxen/example-ns/mail/"}>
          <mail:to>bob@werken.com</mail:to> 
        <\hiblue{/mail:Envelope}>
    </soap:Body>
@@ -1178,7 +1178,7 @@ Here, two different \tag{Envelope} tags exist.
 One exists in the
 \bemph{http://schemas.xmlsoap.org/soap/envelope} namespace
 while
-the other is in the \bemph{http://jaxen.org/example-ns/mail/}
+the other is in the \bemph{https://github.com/jaxen-xpath/jaxen/example-ns/mail/}
 namespace.
 
 %% ----------------------------------------------------------------------
