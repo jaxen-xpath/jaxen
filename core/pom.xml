@@ -12,7 +12,7 @@
   </parent>
 
   <artifactId>jaxen</artifactId>
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
   <name>jaxen</name>
   <description>Jaxen is a universal XPath engine for Java.</description>
 
@@ -49,7 +49,8 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
         <configuration>
-          <archive>  
+          <archive>
+            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
             <manifestEntries>
               <Automatic-Module-Name>org.jaxen</Automatic-Module-Name>
             </manifestEntries>
