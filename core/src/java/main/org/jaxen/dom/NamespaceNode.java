@@ -620,7 +620,7 @@ public class NamespaceNode implements Node
         try {
             Class[] args = new Class[0];
             Method getBaseURI = clazz.getMethod("getBaseURI", args);
-            String base = (String) getBaseURI.invoke(this.getParentNode(), args);
+            String base = (String) getBaseURI.invoke(this.getParentNode(), (Object[]) args);
             return base;
         }
         catch (Exception ex) {
@@ -732,7 +732,7 @@ public class NamespaceNode implements Node
             Class[] argTypes = {String.class};
             Method lookupPrefix = clazz.getMethod("lookupPrefix", argTypes);
             String[] args = {namespaceURI};
-            String result = (String) lookupPrefix.invoke(parent, args);
+            String result = (String) lookupPrefix.invoke(parent, (Object[]) args);
             return result;
         }
         catch (NoSuchMethodException ex) {
@@ -782,7 +782,7 @@ public class NamespaceNode implements Node
             Class[] argTypes = {String.class};
             Method lookupNamespaceURI = clazz.getMethod("lookupNamespaceURI", argTypes);
             String[] args = {prefix};
-            String result = (String) lookupNamespaceURI.invoke(parent, args);
+            String result = (String) lookupNamespaceURI.invoke(parent, (Object[]) args);
             return result;
         }
         catch (NoSuchMethodException ex) {
