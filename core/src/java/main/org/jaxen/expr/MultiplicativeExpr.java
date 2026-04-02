@@ -48,7 +48,7 @@ package org.jaxen.expr;
 
 /**
  * Represents an XPath multiplicative expression. This is 
- * <a href='http://www.w3.org/TR/xpath#NT-MultiplicativeExpr'>production 26</a> in the 
+ * <a href='https://www.w3.org/TR/xpath#NT-MultiplicativeExpr'>production 26</a> in the 
  * <a href="https://www.w3.org/TR/xpath">XPath 1.0 specification</a>:
  * 
  * <table><tr valign="baseline">

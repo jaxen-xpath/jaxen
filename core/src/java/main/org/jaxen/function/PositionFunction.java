@@ -58,7 +58,7 @@ import org.jaxen.FunctionCallException;
  * <p><b>4.1</b> <code><i>number</i> position()</code></p>
  *
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * The position function returns a number equal to the context position from the expression evaluation context.
  * </blockquote>
  * 

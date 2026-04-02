@@ -57,7 +57,7 @@ import org.jaxen.Navigator;
 
 /**
  *  <p><b>4.4</b> <code><i>number</i> ceiling(<i>number</i>)</code></p>
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  *
  * <p>The ceiling function returns the smallest 
  *   (closest to negative infinity) number that is not less 

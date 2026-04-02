@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  *   <p><b>4.1</b> <code><i>string</i> local-name(<i>node-set?</i>)</code></p> 
  *  
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * The <b>local-name</b> function returns the local part of the 
  * expanded-name of the node in the argument node-set that is first in document order. 
  * If the argument node-set is empty or the first node has no expanded-name, an 
