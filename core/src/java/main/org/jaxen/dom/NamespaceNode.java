@@ -55,7 +55,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import org.jaxen.pattern.Pattern;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -108,15 +107,11 @@ public class NamespaceNode implements Node
 {
 
     /**
-     * Constant: this is a NamespaceNode.
+     * 13, the same as DOM 3's type for XPathNamespace.
      *
      * @see #getNodeType
      */
-    public final static short NAMESPACE_NODE = Pattern.NAMESPACE_NODE;
-
-    // FIXME "Note: Numeric codes up to 200 are reserved to W3C for possible future use."
-    // We should be using higher codes. Here we're using 13, the same as DOM 3's type for XPathNamespace.
-    // However, that's only a note not a recommendation.
+    public final static short NAMESPACE_NODE = 13;
 
     /**
      * Create a new NamespaceNode.
