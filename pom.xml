@@ -233,9 +233,9 @@
         <configuration>
           <instructions>
             <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
-            <Bundle-SymbolicName>org.jaxen</Bundle-SymbolicName>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
-            <Export-Package>!org.jaxen.saxpath.base,!org.jaxen.saxpath.helpers,!org.jaxen.pattern,!org.jaxen.util,org.jaxen.*;version=${project.version}</Export-Package>
+            <Export-Package>org.jaxen.*;version=${project.version}</Export-Package>
           </instructions>
         </configuration>
       </plugin>
