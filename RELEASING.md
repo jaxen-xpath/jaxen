@@ -2,7 +2,9 @@
 * You will need to install GPG and set up GPG credentials
 * You will need permissions on Sonatype OSSRH to release jaxen.
 
-Send a PR removing the SNAPSHOT from the version. Do not merge this yet.
+Send a PR removing the SNAPSHOT from the version and updating the
+`project.build.outputTimestamp` property in `pom.xml` to the current date/time
+in ISO 8601 format (e.g. `2026-04-06T00:00:00Z`). Do not merge this yet.
 
 In the jaxen directory:
 
