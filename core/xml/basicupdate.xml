@@ -26,7 +26,7 @@
   </xu:if>
 
   <xu:variable
-    xmlns:private="http://www.jaxen.org/private"
+    xmlns:private="https://github.com/jaxen-xpath/jaxen/private"
     name="private:twice">
     <cracker/>
     <!-- champagne -->
@@ -37,7 +37,7 @@
   
   <xu:insert-after
     select="/foo/bar"
-    xmlns:private="http://www.jaxen.org/private"
+    xmlns:private="https://github.com/jaxen-xpath/jaxen/private"
     >
     <xu:value-of select="$private:twice"/>
     <xu:value-of select="$private:twice"/>

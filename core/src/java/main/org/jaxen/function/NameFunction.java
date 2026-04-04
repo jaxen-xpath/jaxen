@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -59,7 +59,7 @@ import org.jaxen.Navigator;
  * <p><b>4.1</b> <code><i>string</i> name(<i>node-set?</i>)</code> </p>
  *  
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath">
+ * <blockquote cite="https://www.w3.org/TR/xpath">
  * The <b>name</b> function returns a string containing a QName representing 
  * the expanded-name of the node in the argument node-set that is first in document order. 
  * The QName must represent the expanded-name with respect to the namespace declarations 

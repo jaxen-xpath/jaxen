@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<document url="https://www.cafeconleche.org/jaxen/extensions.xml">
+<document url="https://jaxen-xpath.github.io/jaxen/extensions.xml">
 
   <properties>
     <author>Elliotte Rusty Harold</author>
@@ -17,9 +17,9 @@
 
       <p>
       Whereas standard functions have unqualified names (string(), count(), boolean(), etc.), 
-      extension functions generally belong to  a namespace and have prefixed names like 
-       saxon:evaluate or exslt:tokenize. (the bundled Jaxen extension functions in 
-       org.jaxen.function.ext do not yet have a namespace. This is a bug.
+      extension functions generally belong to a namespace and have prefixed names like 
+       saxon:evaluate or exslt:tokenize. (The bundled Jaxen extension functions in 
+       org.jaxen.function.ext do not have a namespace. This is a bug.
       Please don't emulate it with your own extension functions.) 
       </p>
     </section>
@@ -28,7 +28,9 @@
       <p>Let's suppose you want to write an 
         extension function that finds the minimum of a set of numeric values. 
         We'll call this extension function min() and put it in the 
-       http://exslt.org/math namespace. (This is actually an extension function defined by the EXSLT library at http://www.exslt.org/math/functions/min/math.min.html) We'll use the prefix math in this document but the prefix can change as long as the URI is correct.
+       http://exslt.org/math namespace. (This is actually an extension function defined
+        by the EXSLT library at https://exslt.github.io/math/functions/min/.)
+        We'll use the prefix math in this document, but the prefix can change as long as the URI is correct.
       </p>
 
       <p>
@@ -44,7 +46,8 @@ In Jaxen terms a number is a java.lang.Double and a node-set is a java.util.List
 
 <p>
 Each extension function is implemented by a single class. 
-This class can belong to any package. It must have a no-args constructor and implement the org.jaxen.Function interface. This interface declares a single method,
+This class can belong to any package. It must have a no-args constructor and implement the org.jaxen.Function interface.
+  This interface declares a single method,
 call:
 </p>
 
@@ -55,10 +58,10 @@ public interface Function {
 }</source>
 
 <p>For the math:min function we'll need to iterate through the list, convert each one to 
-a numeric value, and then finds the minimum. Some casting is required;
+a numeric value, and then find the minimum. Some casting is required,
 but mostly we just iterate through the list while comparing each member of 
-the list to  the current minimum value. If the next value is smaller, then 
-we replace the old minimum value with the new minimum value. Finally we return a new
+the list to the current minimum value. If the next value is smaller, then 
+we replace the old minimum value with the new minimum value. Finally, we return a new
 Double object containing the minimum value. 
 Here's the code:
 </p>

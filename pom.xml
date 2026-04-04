@@ -10,7 +10,7 @@
   <name>Jaxen</name>
   <version>2.0.0</version>
   <description>Jaxen is a universal XPath 1.0 engine for Java.</description>
-  <url>https://www.cafeconleche.org/jaxen</url>
+  <url>https://jaxen-xpath.github.io/jaxen/</url>
   <licenses>
     <license>
       <name>BSD License 2.0</name>
@@ -91,7 +91,7 @@
       <id>proyal</id>
       <name>Peter Royal</name>
       <email>peter.royal@pobox.com</email>
-      <url>http://fotap.org/~osi</url>
+      <url>https://fotap.org/~osi</url>
     </developer>
     <developer>
       <id>ssanders</id>
@@ -187,7 +187,7 @@
 
   <organization>
     <name>The Jaxen Project</name>
-    <url>https://www.cafeconleche.org/jaxen</url>
+    <url>https://jaxen-xpath.github.io/jaxen/</url>
   </organization>
 
 
@@ -200,7 +200,6 @@
         <version>3.13.0</version>
         <configuration>
           <debug>true</debug>
-          <optimize>true</optimize>
           <showDeprecation>true</showDeprecation>
           <source>1.5</source>
           <target>1.5</target>
@@ -223,7 +222,15 @@
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <version>${project.felix.version}</version>
-        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <instructions>
             <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
@@ -353,22 +360,32 @@
         <artifactId>maven-deploy-plugin</artifactId>
         <version>3.1.2</version>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>1.23</version>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java15</artifactId>
+            <version>1.0</version>
+          </signature>
+        </configuration>
+        <executions>
+          <execution>
+            <id>check-java-1.5-api</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
   <reporting>
     <plugins>
-      <plugin>
-        <artifactId>maven-changelog-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <type>date</type>
-          <dates>
-            <date>2007-05-06</date>
-          </dates>
-          <outputEncoding>UTF-8</outputEncoding>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -484,8 +501,8 @@
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <site>
-      <id>Cafe Con Leche</id>
-      <url>scp://login.ibiblio.org/xml/jaxen/</url>
+      <id>github-pages</id>
+      <url>https://jaxen-xpath.github.io/jaxen/</url>
     </site>
   </distributionManagement>
 

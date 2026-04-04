@@ -36,7 +36,9 @@ dependencies {
 
 ## Reproducible Builds
 
-Jaxen supports [Maven reproducible builds](https://maven.apache.org/guides/mini/guide-reproducible-builds.html). This means that building the same source code multiple times will produce bit-for-bit identical artifacts, enabling better security and verification of releases.
+Jaxen supports [Maven reproducible builds](https://maven.apache.org/guides/mini/guide-reproducible-builds.html).
+This means that building the same source code multiple times will produce bit-for-bit identical artifacts,
+enabling better security and verification of releases.
 
 To verify that builds are reproducible, you can run the included verification script:
 
@@ -45,3 +47,27 @@ To verify that builds are reproducible, you can run the included verification sc
 ```
 
 The reproducible build timestamp is configured in the `project.build.outputTimestamp` property in the main `pom.xml`.
+
+=======
+## Building from Source
+
+To build Jaxen from source, you need Java 8+ and Maven 3.6.3+. The project includes a Maven wrapper for convenience:
+
+```bash
+# Using Maven wrapper (recommended)
+./mvnw clean test
+
+# Or using system Maven if installed
+mvn clean test
+```
+
+## Development and API Compatibility
+
+Jaxen includes comprehensive automated API compatibility checking:
+
+1. **Java API Compatibility**: Uses Animal Sniffer to ensure code only uses APIs available in Java 1.5
+2. **Jaxen API Protection**: Uses Japicmp to detect breaking changes to jaxen's own public API
+
+This dual approach helps maintain backward compatibility and prevents accidental introduction of breaking changes.
+
+See [API_COMPATIBILITY.md](API_COMPATIBILITY.md) for detailed information about the API compatibility checking system.

@@ -41,7 +41,7 @@
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
  * $Id$
  */
@@ -49,6 +49,10 @@
 
 
 package org.jaxen.saxpath;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jaxen.JaxenRuntimeException;
 
@@ -64,7 +68,6 @@ public class Axis
     
     private Axis() {}
     
-    // XXX Ultimately these should use the type-safe enum pattern instead
     /** Marker for an invalid axis */
     public final static int INVALID_AXIS       =  0;
 
@@ -106,6 +109,26 @@ public class Axis
 
     /** The <code>ancestor-or-self</code> axis */
     public final static int ANCESTOR_OR_SELF   = 13;
+
+    private static final Map<String, Integer> AXIS_NAMES;
+
+    static {
+        Map<String, Integer> map = new HashMap<String, Integer>(18);
+        map.put( "child",              CHILD );
+        map.put( "descendant",         DESCENDANT );
+        map.put( "parent",             PARENT );
+        map.put( "ancestor",           ANCESTOR );
+        map.put( "following-sibling",  FOLLOWING_SIBLING );
+        map.put( "preceding-sibling",  PRECEDING_SIBLING );
+        map.put( "following",          FOLLOWING );
+        map.put( "preceding",          PRECEDING );
+        map.put( "attribute",          ATTRIBUTE );
+        map.put( "namespace",          NAMESPACE );
+        map.put( "self",               SELF );
+        map.put( "descendant-or-self", DESCENDANT_OR_SELF );
+        map.put( "ancestor-or-self",   ANCESTOR_OR_SELF );
+        AXIS_NAMES = Collections.unmodifiableMap( map );
+    }
 
     /**
      * <p>
@@ -174,74 +197,11 @@ public class Axis
      */
     public static int lookup(String axisName)
     {
-        
-        // XXX All these equals calls are a small HotSpot;
-        // Need to replace this with a static HashMap
-        if ( "child".equals( axisName ) )
+        Integer code = AXIS_NAMES.get( axisName );
+        if ( code != null )
         {
-            return CHILD;
+            return code;
         }
-
-        if ( "descendant".equals( axisName ) )
-        {
-            return DESCENDANT;
-        }
-
-        if ( "parent".equals( axisName ) )
-        {
-            return PARENT;
-        }
-
-        if ( "ancestor".equals( axisName ) )
-        {
-            return ANCESTOR;
-        }
-
-        if ( "following-sibling".equals( axisName ) )
-        {
-            return FOLLOWING_SIBLING;
-        }
-
-        if ( "preceding-sibling".equals( axisName ) )
-        {
-            return PRECEDING_SIBLING;
-        }
-
-        if ( "following".equals( axisName ) )
-        {
-            return FOLLOWING;
-        }
-
-        if ( "preceding".equals( axisName ) )
-        {
-            return PRECEDING;
-        }
-
-        if ( "attribute".equals( axisName ) )
-        {
-            return ATTRIBUTE;
-        }
-
-        if ( "namespace".equals( axisName ) )
-        {
-            return NAMESPACE;
-        }
-
-        if ( "self".equals( axisName ) )
-        {
-            return SELF;
-        }
-
-        if ( "descendant-or-self".equals( axisName ) )
-        {
-            return DESCENDANT_OR_SELF;
-        }
-
-        if ( "ancestor-or-self".equals( axisName ) )
-        {
-            return ANCESTOR_OR_SELF;
-        }
-
         return INVALID_AXIS;
     }
 }

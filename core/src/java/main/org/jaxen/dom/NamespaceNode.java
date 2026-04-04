@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -55,7 +55,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import org.jaxen.pattern.Pattern;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -108,15 +107,11 @@ public class NamespaceNode implements Node
 {
 
     /**
-     * Constant: this is a NamespaceNode.
+     * 13, the same as DOM 3's type for XPathNamespace.
      *
      * @see #getNodeType
      */
-    public final static short NAMESPACE_NODE = Pattern.NAMESPACE_NODE;
-
-    // FIXME "Note: Numeric codes up to 200 are reserved to W3C for possible future use."
-    // We should be using higher codes. Here we're using 13, the same as DOM 3's type for XPathNamespace.
-    // However, that's only a note not a recommendation.
+    public final static short NAMESPACE_NODE = 13;
 
     /**
      * Create a new NamespaceNode.
@@ -620,7 +615,7 @@ public class NamespaceNode implements Node
         try {
             Class[] args = new Class[0];
             Method getBaseURI = clazz.getMethod("getBaseURI", args);
-            String base = (String) getBaseURI.invoke(this.getParentNode(), args);
+            String base = (String) getBaseURI.invoke(this.getParentNode(), (Object[]) args);
             return base;
         }
         catch (Exception ex) {
@@ -724,7 +719,7 @@ public class NamespaceNode implements Node
      */
     public String lookupPrefix(String namespaceURI) {
         // This could be fully implemented even in Java 1.4. See
-        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // https://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
         // It hardly seems worth the effort though.
         
         try {
@@ -732,7 +727,7 @@ public class NamespaceNode implements Node
             Class[] argTypes = {String.class};
             Method lookupPrefix = clazz.getMethod("lookupPrefix", argTypes);
             String[] args = {namespaceURI};
-            String result = (String) lookupPrefix.invoke(parent, args);
+            String result = (String) lookupPrefix.invoke(parent, (Object[]) args);
             return result;
         }
         catch (NoSuchMethodException ex) {
@@ -774,7 +769,7 @@ public class NamespaceNode implements Node
      */
     public String lookupNamespaceURI(String prefix) {
         // This could be fully implemented even in Java 1.4. See
-        // http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
+        // https://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/namespaces-algorithms.html#lookupNamespaceURIAlgo
         // It hardly seems worth the effort though.
         
         try {
@@ -782,7 +777,7 @@ public class NamespaceNode implements Node
             Class[] argTypes = {String.class};
             Method lookupNamespaceURI = clazz.getMethod("lookupNamespaceURI", argTypes);
             String[] args = {prefix};
-            String result = (String) lookupNamespaceURI.invoke(parent, args);
+            String result = (String) lookupNamespaceURI.invoke(parent, (Object[]) args);
             return result;
         }
         catch (NoSuchMethodException ex) {

@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -66,7 +66,7 @@ import org.jaxen.JaxenException;
  * </pre>
  *
  * @see BaseXPath
- * @see <a href="http://dom4j.org/">The dom4j website</a>
+ * @see <a href="https://dom4j.github.io/">The dom4j website</a>
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstachan@apache.org">James Strachan</a>

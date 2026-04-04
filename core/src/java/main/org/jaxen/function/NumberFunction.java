@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -60,7 +60,7 @@ import org.jaxen.Navigator;
  * <b>4.4</b> <code><i>number</i> number(<i>object</i>)</code>
  * 
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath#function-number">
+ * <blockquote cite="https://www.w3.org/TR/xpath#function-number">
  * <p>
  * The <b>number</b> function converts
  * its argument to a number as follows:

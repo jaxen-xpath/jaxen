@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tests xmlns:var="http://jaxen.org/test-harness/var">
+<tests xmlns:var="https://github.com/jaxen-xpath/jaxen/test-harness/var">
     <!-- test for jaxen-24 -->
    <document url="xml/jaxen24.xml">
        <context select="/body/div">

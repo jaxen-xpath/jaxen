@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -63,7 +63,7 @@ import org.jaxen.Navigator;
  * <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code>
  * </p>
  * 
- * <blockquote cite="http://www.w3.org/TR/xpath#function-translate">
+ * <blockquote cite="https://www.w3.org/TR/xpath#function-translate">
  * <p>
  * The <b><a href="https://www.w3.org/TR/xpath#function-translate">translate</a></b> function
  * returns the first argument string with occurrences of characters in

@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -78,9 +78,7 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
- * @see org.jaxen.dom4j.Dom4jXPath XPath for dom4j
- * @see org.jaxen.jdom.JDOMXPath XPath for JDOM
- * @see org.jaxen.dom.DOMXPath XPath for W3C DOM
+ * @see org.jaxen.dom.DOMXPath
  */
 public class BaseXPath implements XPath, Serializable
 {

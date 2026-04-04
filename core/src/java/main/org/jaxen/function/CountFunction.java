@@ -40,7 +40,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <http://www.jaxen.org/>.
+ * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
  * $Id$
  */
@@ -56,7 +56,7 @@ import org.jaxen.FunctionCallException;
 /**
  *  <p><b>4.1</b> <code><i>number</i> count(<i>node-set</i>)</code></p> 
  *  
- * <blockquote cite="http://www.w3.org/TR/xpath#function-count">
+ * <blockquote cite="https://www.w3.org/TR/xpath#function-count">
  * The <b>count</b> function returns the number of nodes in the argument node-set.
  * </blockquote>
  * @author bob mcwhirter (bob @ werken.com)

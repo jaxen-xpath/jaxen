@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<document url="https://www.cafeconleche.org/jaxen/status.html">
+<document url="https://jaxen-xpath.github.io/jaxen/status.html">
 
   <properties>
     <author email="bob.mcwhirter@redhat.com">bob mcwhirter</author>
@@ -14,7 +14,7 @@
    <section name="Jaxen 2.0.0">
 
       <p>
-         Jaxen 2.0.0 (BETA) requires Java 1.5 or later. 
+         Jaxen 2.0.0 requires Java 1.5 or later. 
       </p>
 
       <p>
@@ -255,7 +255,7 @@
       <p> ancestor::* and ancestor-or-self::* axes no longer include the document node</p>
       <p> NaN is handled properly.</p>
       <p> The mod operator works on floating point numbers.</p>
-      <p>Navigators are now included for <a href="http://www.xom.nu">XOM</a>, HTML DOM, and JavaBeans. These are experimental and may not be included in the final release.
+      <p>Navigators are now included for <a href="https://xom.nu">XOM</a>, HTML DOM, and JavaBeans. These are experimental and may not be included in the final release.
       </p>
     </section>   
     
@@ -334,12 +334,12 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         <li>Implement a GenericXPath which could use reflection on the nodes passed into it to
           choose the Navigator to use. So the same GenericXPath instance could be used
           to evaluate XPaths on any object. This feature would be particularly useful
-          in <a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">JSTL</a> 
+          in <a href="https://tomcat.apache.org/taglibs/">JSTL</a> 
           since it would allow web developers to mix and match any
           all XML models.
         </li>
         <li>Jaxen is already pretty 
-        <a href="http://dom4j.org/benchmarks/xpath/index.html">fast</a>,
+        <a href="https://dom4j.github.io/benchmarks/xpath/index.html">fast</a>,
         but we are sure it could use some more tuning.
         </li>
         <li>selectSingleNode() and possibly the *ValueOf() methods should be return-fast
@@ -352,8 +352,8 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
         </li>
         <li>Any Locale specific functions, such as <code>upper-case()</code> 
           and <code>lowercase-case()</code> could well follow the example of
-          <a href="http://www.w3.org/TR/xquery-operators/#func-upper-case">XSLT 2.0</a>
-          by using the <a href="http://www.unicode.org/unicode/reports/tr21/">Unicode case mappings</a>
+          <a href="https://www.w3.org/TR/xquery-operators/#func-upper-case">XSLT 2.0</a>
+          by using the <a href="https://www.unicode.org/unicode/reports/tr21/">Unicode case mappings</a>
         </li>
       </ul>
     </section>
