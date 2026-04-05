@@ -22,8 +22,10 @@ to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 # Create a new key (use key type RSA, 4096 bits, no expiry, any name/email)
 gpg --full-generate-key
 
-# Note the 16-hex-char key ID shown at the end of the output, then:
+# Note the 16-hex-char key ID shown at the end of the output, then publish
+# the public key to multiple keyservers so Sonatype OSSRH can verify it:
 gpg --keyserver keyserver.ubuntu.com --send-keys <KEY_ID>
+gpg --keyserver keys.openpgp.org     --send-keys <KEY_ID>
 
 # Export the private key in ASCII-armour form to store as a secret
 gpg --armor --export-secret-keys <KEY_ID>
@@ -32,8 +34,10 @@ gpg --armor --export-secret-keys <KEY_ID>
 Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
 header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
 
-The key's public half must be uploaded to a public keyserver (e.g.
-`keyserver.ubuntu.com`) so that Maven Central can verify signatures.
+Sonatype OSSRH verifies artifact signatures by looking up the signing key on
+public keyservers.  Uploading to `keyserver.ubuntu.com` and `keys.openpgp.org`
+is sufficient — no additional registration of the key with Sonatype is required.
+Allow a few minutes for the key to propagate before running your first release.
 
 #### Repository secrets
 
@@ -49,6 +53,10 @@ Before the workflow can run you must add the following secrets in
 | `RELEASE_TOKEN`   | GitHub Personal Access Token with `Contents: write` scope; required when `master` is a protected branch so the workflow can push the post-release version-bump commit directly. Omit if the branch is not protected. |
 
 ### Running a release
+
+Only GitHub users with **write access** (or higher) to this repository can
+trigger `workflow_dispatch` workflows.  Repository owners and admins always
+qualify; add outside collaborators as needed before attempting a release.
 
 1. Go to **Actions → Release → Run workflow** on GitHub.
 2. Fill in the two inputs:
