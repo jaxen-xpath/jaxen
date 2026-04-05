@@ -13,13 +13,37 @@ triggered manually from the GitHub Actions UI.  The workflow:
 
 ### One-time repository setup
 
+#### GPG signing key
+
+You do **not** need to upload your personal GPG key.  It is strongly recommended
+to create a dedicated signing key whose sole purpose is signing Jaxen releases:
+
+```
+# Create a new key (use key type RSA, 4096 bits, no expiry, any name/email)
+gpg --full-generate-key
+
+# Note the 16-hex-char key ID shown at the end of the output, then:
+gpg --keyserver keyserver.ubuntu.com --send-keys <KEY_ID>
+
+# Export the private key in ASCII-armour form to store as a secret
+gpg --armor --export-secret-keys <KEY_ID>
+```
+
+Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
+header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
+
+The key's public half must be uploaded to a public keyserver (e.g.
+`keyserver.ubuntu.com`) so that Maven Central can verify signatures.
+
+#### Repository secrets
+
 Before the workflow can run you must add the following secrets in
 **Settings → Secrets and variables → Actions**:
 
 | Secret name       | Description |
 |-------------------|-------------|
-| `GPG_PRIVATE_KEY` | ASCII-armoured GPG private key used to sign artifacts (`gpg --armor --export-secret-keys KEY_ID`) |
-| `GPG_PASSPHRASE`  | Passphrase for the GPG key |
+| `GPG_PRIVATE_KEY` | ASCII-armoured private key of the **dedicated** release signing key (see above) |
+| `GPG_PASSPHRASE`  | Passphrase for that signing key |
 | `OSSRH_USERNAME`  | Sonatype OSSRH username |
 | `OSSRH_TOKEN`     | Sonatype OSSRH token (or password) |
 | `RELEASE_TOKEN`   | GitHub Personal Access Token with `Contents: write` scope; required when `master` is a protected branch so the workflow can push the post-release version-bump commit directly. Omit if the branch is not protected. |
