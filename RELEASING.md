@@ -39,6 +39,36 @@ public keyservers.  Uploading to `keyserver.ubuntu.com` and `keys.openpgp.org`
 is sufficient — no additional registration of the key with Sonatype is required.
 Allow a few minutes for the key to propagate before running your first release.
 
+#### OSSRH credentials
+
+It is strongly recommended to use a **Sonatype User Token** rather than your
+account password.  User tokens are scoped to publishing, can be revoked at any
+time without changing your account credentials, and expose no other account
+privileges if leaked.
+
+To generate a User Token:
+1. Log in to [OSSRH](https://oss.sonatype.org/#welcome).
+2. Click your username (top-right) → **Profile**.
+3. In the left panel choose **User Token**.
+4. Click **Access User Token** and copy the *username* and *password* values shown.
+
+Use the token username as `OSSRH_USERNAME` and the token password as
+`OSSRH_TOKEN` in the secrets below.
+
+#### Security of GitHub Actions secrets
+
+GitHub Actions secrets are encrypted at rest using libsodium sealed boxes and
+are never printed in workflow logs — GitHub automatically redacts any value that
+matches a stored secret.  Secrets are only injected into the workflow process
+environment; they are never written to disk and are not accessible to forked
+repositories.  The blast radius of a compromised secret is further limited by the
+fact that only users with **write access** can trigger this workflow.
+
+If you suspect a secret has been exposed, revoke and replace it:
+* **OSSRH token** — generate a new User Token in OSSRH and update the secret.
+* **GPG key** — revoke the key on the keyservers and generate a replacement.
+* **RELEASE_TOKEN** — delete and regenerate the GitHub PAT.
+
 #### Repository secrets
 
 Before the workflow can run you must add the following secrets in
@@ -48,8 +78,8 @@ Before the workflow can run you must add the following secrets in
 |-------------------|-------------|
 | `GPG_PRIVATE_KEY` | ASCII-armoured private key of the **dedicated** release signing key (see above) |
 | `GPG_PASSPHRASE`  | Passphrase for that signing key |
-| `OSSRH_USERNAME`  | Sonatype OSSRH username |
-| `OSSRH_TOKEN`     | Sonatype OSSRH token (or password) |
+| `OSSRH_USERNAME`  | Sonatype OSSRH **User Token** username (see above — not your account username) |
+| `OSSRH_TOKEN`     | Sonatype OSSRH **User Token** password (see above — not your account password) |
 | `RELEASE_TOKEN`   | GitHub Personal Access Token with `Contents: write` scope; required when `master` is a protected branch so the workflow can push the post-release version-bump commit directly. Omit if the branch is not protected. |
 
 ### Running a release
