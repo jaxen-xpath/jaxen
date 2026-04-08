@@ -1,0 +1,100 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: 'Version to release (e.g. 2.0.1)'
+        required: true
+        type: string
+      developmentVersion:
+        description: 'Next development version after the release (e.g. 2.0.2-SNAPSHOT)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release ${{ inputs.releaseVersion }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # A Personal Access Token (PAT) stored as RELEASE_TOKEN is required to push the
+          # version-bump commit and tag back to the protected master branch.  If the branch
+          # is not protected you can remove this line and the workflow will use the default
+          # GITHUB_TOKEN instead.
+          token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: temurin
+          cache: maven
+          # Configures settings.xml with the Sonatype OSSRH server entry so Maven can
+          # authenticate when deploying to the staging repository.
+          server-id: ossrh
+          server-username: OSSRH_USERNAME
+          server-password: OSSRH_TOKEN
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: GPG_PASSPHRASE
+
+      - name: Configure git identity
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Set release version
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          mvn --batch-mode versions:set \
+            -DnewVersion=${{ inputs.releaseVersion }} \
+            -DgenerateBackupPoms=false \
+            -DprocessAllModules=true
+          # Update the reproducible-build timestamp to the current moment.
+          sed -i "s|<project.build.outputTimestamp>.*</project.build.outputTimestamp>|<project.build.outputTimestamp>${TIMESTAMP}</project.build.outputTimestamp>|" pom.xml
+
+      - name: Build, sign, and stage to Maven Central
+        run: mvn --batch-mode deploy -Prelease -DskipTests
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_TOKEN:    ${{ secrets.OSSRH_TOKEN }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Commit release version and tag
+        run: |
+          git add pom.xml core/pom.xml integration-tests/pom.xml
+          git commit -m "Release ${{ inputs.releaseVersion }}"
+          git tag -a "v${{ inputs.releaseVersion }}" -m "Release ${{ inputs.releaseVersion }}"
+
+      - name: Set next development version
+        run: |
+          mvn --batch-mode versions:set \
+            -DnewVersion=${{ inputs.developmentVersion }} \
+            -DgenerateBackupPoms=false \
+            -DprocessAllModules=true
+
+      - name: Commit next development version
+        run: |
+          git add pom.xml core/pom.xml integration-tests/pom.xml
+          git commit -m "Prepare for next development iteration ${{ inputs.developmentVersion }}"
+
+      - name: Push commits and tag to master
+        run: |
+          git push origin master
+          git push origin "v${{ inputs.releaseVersion }}"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ inputs.releaseVersion }}" \
+            --title "${{ inputs.releaseVersion }}" \
+            --generate-notes \
+            --verify-tag
