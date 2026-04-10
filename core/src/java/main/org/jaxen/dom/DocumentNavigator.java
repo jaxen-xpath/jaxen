@@ -55,6 +55,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import org.jaxen.DefaultNavigator;
@@ -258,6 +259,14 @@ public class DocumentNavigator extends DefaultNavigator
                 protected Node getNextNode (Node node) {
                     return node.getPreviousSibling();
                 }
+                // Preceding-sibling iterates backwards, so enter transparent
+                // nodes via their last child and advance using previous sibling.
+                protected Node getFirstTransparentChild (Node transparentNode) {
+                    return transparentNode.getLastChild();
+                }
+                protected Node getNextInsideTransparent (Node node) {
+                    return node.getPreviousSibling();
+                }
             };
     }
 
@@ -296,6 +305,13 @@ public class DocumentNavigator extends DefaultNavigator
                         if (n == null) return getFirstNode(node.getParentNode());
                         else return n;
                     }
+                }
+                // The following axis already performs depth-first traversal
+                // via getNextNode (which tries getFirstChild first), so we
+                // disable the general transparent-node descent to avoid
+                // re-visiting entity-reference children.
+                protected Node getFirstTransparentChild (Node transparentNode) {
+                    return null;
                 }
             };
     }
@@ -874,16 +890,16 @@ public class DocumentNavigator extends DefaultNavigator
     ////////////////////////////////////////////////////////////////////
 
 
-    // FIXME: needs to recurse into
-    // DocumentFragment and EntityReference
-    // to use their children.
-
     /**
      * A generic iterator over DOM nodes.
      *
      * <p>Concrete subclasses must implement the {@link #getFirstNode}
      * and {@link #getNextNode} methods for a specific iteration
      * strategy.</p>
+     *
+     * <p>DocumentFragment and EntityReference nodes are transparent:
+     * their children are iterated in-place rather than the nodes
+     * themselves being returned.</p>
      */
     abstract class NodeIterator
     implements Iterator
@@ -898,9 +914,7 @@ public class DocumentNavigator extends DefaultNavigator
         public NodeIterator (Node contextNode)
         {
             node = getFirstNode(contextNode);
-            while (!isXPathNode(node)) {
-                node = getNextNode(node);
-            }
+            advance();
         }
 
         public boolean hasNext ()
@@ -912,10 +926,8 @@ public class DocumentNavigator extends DefaultNavigator
         {
             if (node == null) throw new NoSuchElementException();
             Node ret = node;
-            node = getNextNode(node);
-            while (!isXPathNode(node)) {
-                node = getNextNode(node);
-            }
+            node = stepForward(node);
+            advance();
             return ret;
         }
 
@@ -953,29 +965,99 @@ public class DocumentNavigator extends DefaultNavigator
 
 
         /**
-         * Test whether a DOM node is usable by XPath.
+         * Get the first child of a transparent node (DocumentFragment or
+         * EntityReference) to visit when descending into it.
          *
-         * @param node the DOM node to test
-         * @return true if the node is usable, false if it should be skipped
+         * <p>The default implementation returns the node's first child,
+         * suitable for forward iteration.  Subclasses that iterate
+         * backward (e.g. the preceding-sibling axis) should override
+         * this method to return the node's last child instead.</p>
+         *
+         * <p>Returning {@code null} disables transparent-node descent
+         * for this iterator (useful when the subclass's
+         * {@link #getNextNode} already handles depth-first traversal,
+         * as the following axis does).</p>
+         *
+         * @param transparentNode a DocumentFragment or EntityReference node
+         * @return the child node to start iterating, or null to skip descent
          */
-        private boolean isXPathNode (Node node)
+        protected Node getFirstTransparentChild (Node transparentNode)
         {
-            // null is usable, because it means end
-            if (node == null) return true;
+            return transparentNode.getFirstChild();
+        }
 
-            switch (node.getNodeType()) {
-                case Node.DOCUMENT_FRAGMENT_NODE:
-                case Node.DOCUMENT_TYPE_NODE:
-                case Node.ENTITY_NODE:
-                case Node.ENTITY_REFERENCE_NODE:
-                case Node.NOTATION_NODE:
-                    return false;
-                default:
-                    return true;
+
+        /**
+         * Advance to the next sibling while iterating inside a
+         * transparent node.
+         *
+         * <p>The default returns the next sibling, suitable for forward
+         * iteration.  Subclasses that iterate backward should override
+         * this to return the previous sibling.</p>
+         *
+         * @param node the current node inside the transparent ancestor
+         * @return the sibling to visit next, or null if there are no more
+         */
+        protected Node getNextInsideTransparent (Node node)
+        {
+            return node.getNextSibling();
+        }
+
+
+        /**
+         * Move one step from the current node, accounting for any
+         * transparent ancestor (DocumentFragment / EntityReference) nodes
+         * that are currently being expanded.
+         */
+        private Node stepForward (Node current)
+        {
+            if (!transparentAncestors.isEmpty()) {
+                Node next = getNextInsideTransparent(current);
+                if (next != null) return next;
+                // Exhausted siblings inside this transparent node; pop and
+                // continue from the transparent node's own "next" position.
+                Node transparent = (Node) transparentAncestors.removeFirst();
+                return stepForward(transparent);
+            }
+            return getNextNode(current);
+        }
+
+
+        /**
+         * Advance past non-XPath nodes, recursing into DocumentFragment and
+         * EntityReference nodes to expose their children in the iteration.
+         */
+        private void advance ()
+        {
+            while (node != null) {
+                switch (node.getNodeType()) {
+                    case Node.DOCUMENT_FRAGMENT_NODE:
+                    case Node.ENTITY_REFERENCE_NODE: {
+                        Node firstChild = getFirstTransparentChild(node);
+                        if (firstChild != null) {
+                            // Descend into the transparent node.
+                            transparentAncestors.addFirst(node);
+                            node = firstChild;
+                            break; // re-enter loop to evaluate firstChild
+                        }
+                        // Empty transparent node – step over it.
+                        node = stepForward(node);
+                        break;
+                    }
+                    case Node.DOCUMENT_TYPE_NODE:
+                    case Node.ENTITY_NODE:
+                    case Node.NOTATION_NODE:
+                        node = stepForward(node);
+                        break;
+                    default:
+                        return; // valid XPath node
+                }
             }
         }
 
         private Node node;
+        /** Stack of transparent ancestors currently being expanded. */
+        private final LinkedList transparentAncestors = new LinkedList();
     }
 
 
