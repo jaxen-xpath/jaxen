@@ -116,9 +116,11 @@ public class DOM3NamespaceTest extends TestCase {
     }
     
     
-    // XXX need to distinguish these two cases
-    public void testIsEqualNode() {
+    public void testIsEqualNodeWithDifferentNamespaceNodes() {
         assertFalse(rootNS.isEqualNode(xmlNS));
+    }
+
+    public void testIsEqualNodeWithSameNamespaceNode() {
         assertTrue(rootNS.isEqualNode(rootNS));
     }
     
