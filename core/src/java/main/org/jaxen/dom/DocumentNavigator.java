@@ -1008,16 +1008,19 @@ public class DocumentNavigator extends DefaultNavigator
          * Move one step from the current node, accounting for any
          * transparent ancestor (DocumentFragment / EntityReference) nodes
          * that are currently being expanded.
+         *
+         * <p>Implemented iteratively to avoid stack overflow in the
+         * (pathological) case of many consecutive empty transparent
+         * ancestor nodes.</p>
          */
         private Node stepForward (Node current)
         {
-            if (!transparentAncestors.isEmpty()) {
+            while (!transparentAncestors.isEmpty()) {
                 Node next = getNextInsideTransparent(current);
                 if (next != null) return next;
                 // Exhausted siblings inside this transparent node; pop and
                 // continue from the transparent node's own "next" position.
-                Node transparent = (Node) transparentAncestors.removeFirst();
-                return stepForward(transparent);
+                current = (Node) transparentAncestors.removeFirst();
             }
             return getNextNode(current);
         }
