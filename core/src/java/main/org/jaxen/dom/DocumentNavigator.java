@@ -1020,7 +1020,7 @@ public class DocumentNavigator extends DefaultNavigator
                 if (next != null) return next;
                 // Exhausted siblings inside this transparent node; pop and
                 // continue from the transparent node's own "next" position.
-                current = (Node) transparentAncestors.removeFirst();
+                current = transparentAncestors.removeFirst();
             }
             return getNextNode(current);
         }
@@ -1060,7 +1060,7 @@ public class DocumentNavigator extends DefaultNavigator
 
         private Node node;
         /** Stack of transparent ancestors currently being expanded. */
-        private final LinkedList transparentAncestors = new LinkedList();
+        private final LinkedList<Node> transparentAncestors = new LinkedList<Node>();
     }
 
 

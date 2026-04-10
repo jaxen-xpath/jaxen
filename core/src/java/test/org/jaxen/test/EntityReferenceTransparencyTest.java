@@ -163,10 +163,10 @@ public class EntityReferenceTransparencyTest extends TestCase {
     // Helper: collect all nodes returned by an iterator into a List
     // ---------------------------------------------------------------
 
-    private static List iteratorToList(Iterator iter) {
-        List result = new ArrayList();
+    private static List<Node> iteratorToList(Iterator iter) {
+        List<Node> result = new ArrayList<Node>();
         while (iter.hasNext()) {
-            result.add(iter.next());
+            result.add((Node) iter.next());
         }
         return result;
     }
