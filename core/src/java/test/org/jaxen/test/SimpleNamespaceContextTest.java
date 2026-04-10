@@ -132,6 +132,18 @@ public class SimpleNamespaceContextTest extends TestCase
         assertEquals("http://www.example.org/", context.translateNamespacePrefixToUri("pre"));
     }
  
+    public void testXmlPrefixAlwaysResolves() {
+        SimpleNamespaceContext context = new SimpleNamespaceContext();
+        assertEquals("http://www.w3.org/XML/1998/namespace",
+                context.translateNamespacePrefixToUri("xml"));
+    }
+
+    public void testXmlPrefixAlwaysResolvesEvenWhenEmpty() {
+        SimpleNamespaceContext context = new SimpleNamespaceContext(new HashMap<Object, Object>());
+        assertEquals("http://www.w3.org/XML/1998/namespace",
+                context.translateNamespacePrefixToUri("xml"));
+    }
+
     public void testSerialization() throws IOException, ClassNotFoundException {
         
         // construct test object
