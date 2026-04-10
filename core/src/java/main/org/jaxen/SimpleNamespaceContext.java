@@ -62,7 +62,6 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
     
 
     private static final long serialVersionUID = -808928409643497762L;
-    // XXX should this prebind the xml prefix?
     private Map<String, String> namespaces;
 
     /**
