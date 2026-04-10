@@ -135,6 +135,9 @@ public class SimpleNamespaceContext implements NamespaceContext, Serializable
 
     public String translateNamespacePrefixToUri(String prefix)
     {
+        if ("xml".equals(prefix)) {
+            return "http://www.w3.org/XML/1998/namespace";
+        }
         if ( this.namespaces.containsKey( prefix ) )
         {
             return this.namespaces.get( prefix );
