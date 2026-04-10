@@ -126,5 +126,29 @@ public class DOM3NamespaceTest extends TestCase {
         assertFalse(rootNS.isSameNode(xmlNS));
         assertTrue(rootNS.isSameNode(rootNS));
     }
-    
+
+    public void testSetAndGetUserData() {
+        assertNull(xmlNS.getUserData("key1"));
+        Object result = xmlNS.setUserData("key1", "value1", null);
+        assertNull(result);
+        assertEquals("value1", xmlNS.getUserData("key1"));
+    }
+
+    public void testSetUserDataReturnsOldValue() {
+        rootNS.setUserData("key", "first", null);
+        Object old = rootNS.setUserData("key", "second", null);
+        assertEquals("first", old);
+        assertEquals("second", rootNS.getUserData("key"));
+    }
+
+    public void testGetUserDataMissingKeyReturnsNull() {
+        assertNull(attributeNS.getUserData("nonexistent"));
+    }
+
+    public void testSetUserDataNullRemovesEntry() {
+        xmlNS.setUserData("key", "value", null);
+        xmlNS.setUserData("key", null, null);
+        assertNull(xmlNS.getUserData("key"));
+    }
+
 }

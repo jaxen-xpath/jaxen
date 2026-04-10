@@ -826,7 +826,6 @@ public class NamespaceNode implements Node
     }
 
     
-    // XXX userdata needs testing
     private HashMap<String, Object> userData = new HashMap<String, Object>();
 
     /**
