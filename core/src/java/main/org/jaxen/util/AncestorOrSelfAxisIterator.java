@@ -80,7 +80,6 @@ public class AncestorOrSelfAxisIterator implements Iterator
     public AncestorOrSelfAxisIterator(Object contextNode,
                                       Navigator navigator)
     {
-        // XXX should we throw a NullPointerException here if contextNode is null?
         this.contextNode = contextNode;
         this.navigator = navigator;
     }
