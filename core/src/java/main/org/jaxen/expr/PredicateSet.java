@@ -173,7 +173,9 @@ public class PredicateSet implements Serializable
         List nodes2Filter = contextNodeSet;
         // apply all predicates
         while(predIter.hasNext()) {
+            Predicate pred = predIter.next();
             final int nodes2FilterSize = nodes2Filter.size();
+            List<Object> filteredNodes = new ArrayList<Object>(nodes2FilterSize);
             // Set up a context with a list to hold each node
             Context predContext = new Context(support);
             List<Object> tempList = new ArrayList<Object>(1);
@@ -185,16 +187,15 @@ public class PredicateSet implements Serializable
                 tempList.clear();
                 tempList.add(contextNode);
                 predContext.setNodeSet(tempList);
-                // ????
                 predContext.setPosition(i + 1);
                 predContext.setSize(nodes2FilterSize);
-                Object predResult = ((Predicate)predIter.next()).evaluate(predContext);
+                Object predResult = pred.evaluate(predContext);
                 if (predResult instanceof Number) {
                     // Here we assume nodes are in forward or reverse order
                     // as appropriate for axis
                     int proximity = ((Number) predResult).intValue();
                     if (proximity == (i + 1)) {
-                        return true;
+                        filteredNodes.add(contextNode);
                     }
                 }
                 else {
@@ -202,13 +203,17 @@ public class PredicateSet implements Serializable
                         BooleanFunction.evaluate(predResult,
                                                 predContext.getNavigator());
                     if (includes.booleanValue()) {
-                        return true;
+                        filteredNodes.add(contextNode);
                     }
                 }
             }
+            if (filteredNodes.isEmpty()) {
+                return false;
+            }
+            nodes2Filter = filteredNodes;
         }
         
-        return false;
+        return !nodes2Filter.isEmpty();
     }
    
     
