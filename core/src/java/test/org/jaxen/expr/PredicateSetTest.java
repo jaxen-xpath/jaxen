@@ -128,7 +128,7 @@ public class PredicateSetTest extends TestCase {
      * the predicate iterator before all nodes are processed, causing
      * a {@code NoSuchElementException}.
      */
-    public void testAnyMatchingNodeCrashesWithMoreNodesThanPredicates()
+    public void testAnyMatchingNodeHandlesMoreNodesThanPredicates()
             throws JaxenException {
 
         // Neither predicate matches any early node, so the inner loop
