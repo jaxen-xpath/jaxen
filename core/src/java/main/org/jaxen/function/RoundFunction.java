@@ -128,6 +128,14 @@ public class RoundFunction implements Function
         }
 
         double value = d.doubleValue();
+        if (value >= -0.5d && value < 0.0d)
+        {
+            return Double.valueOf( -0.0d );
+        }
+        if (Double.doubleToLongBits(value) == Double.doubleToLongBits(-0.0d))
+        {
+            return Double.valueOf( -0.0d );
+        }
         return Double.valueOf( Math.round( value ) );
     }
 }
