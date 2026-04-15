@@ -62,7 +62,7 @@ import junit.framework.TestCase;
  * </p>
  * 
  * @author Elliotte Rusty Harold
- * @version 1.2.1
+ * @version 2.0.1
  *
  */
 public class CommentNodeTest extends TestCase {
