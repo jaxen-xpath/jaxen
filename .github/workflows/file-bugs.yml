@@ -65,7 +65,7 @@ jobs:
             --title "NumberFunction accepts non-XPath number strings (exponential notation, Infinity, leading +)" \
             --body "## Bug
 
-          \`NumberFunction.evaluate()\` delegates string-to-number conversion to \`Double.valueOf()\`, which is more permissive than the XPath 1.0 Number production. Java\`s \`Double.valueOf()\` accepts exponential notation (\`1e5\`), a leading \`+\` sign (\`+1\`), and the strings \`Infinity\` and \`-Infinity\`, none of which are valid XPath numbers.
+          \`NumberFunction.evaluate()\` delegates string-to-number conversion to \`Double.valueOf()\`, which is more permissive than the XPath 1.0 Number production. \`Double.valueOf()\` in Java accepts exponential notation (\`1e5\`), a leading \`+\` sign (\`+1\`), and the strings \`Infinity\` and \`-Infinity\`, none of which are valid XPath numbers.
 
           ## XPath 1.0 Spec Requirement
 
