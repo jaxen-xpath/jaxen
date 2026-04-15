@@ -5,7 +5,7 @@
  *
  * ====================================================================
  *
- * Copyright 2000-2002 bob mcwhirter & James Strachan.
+ * Copyright 2007 Elliotte Rusty Harold
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,38 +47,42 @@
 
 
 
-package org.jaxen.expr;
+package org.jaxen.test;
 
-import org.jaxen.ContextSupport;
-import org.jaxen.Navigator;
-import org.jaxen.expr.iter.IterableAxis;
+import javax.xml.parsers.ParserConfigurationException;
 
-public class DefaultCommentNodeStep extends DefaultStep implements CommentNodeStep
-{
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
 
-    private static final long serialVersionUID = 4340788283861875606L;
-    DefaultCommentNodeStep(IterableAxis axis, PredicateSet predicateSet)
-    {
-        super( axis, predicateSet );
-    }
+import junit.framework.TestCase;
 
-    @Override
-    public String toString()
-    {
-        return "[(DefaultCommentNodeStep): " + getAxis() + "]";
-    }
+/**
+ * <p>
+ *  Test for comment node-steps.
+ * </p>
+ * 
+ * @author Elliotte Rusty Harold
+ * @version 1.2.1
+ *
+ */
+public class CommentNodeTest extends TestCase {
 
-    public String getText()
-    {
-        return getAxisName() + "::comment()" + super.getText();
-    }
+    public void testGetText() 
+      throws JaxenException, ParserConfigurationException {
+     
+         DOMXPath xpath = new DOMXPath("comment()");
+         String expr = xpath.getRootExpr().getText();
+         assertEquals("child::comment()", expr);
+     
+   }
 
-    public boolean matches(Object node,
-                           ContextSupport contextSupport)
-    {
-        Navigator nav = contextSupport.getNavigator();
-
-        return nav.isComment( node );
-    }
-
+    public void testGetTextWithPredicate() 
+      throws JaxenException, ParserConfigurationException {
+    
+        DOMXPath xpath = new DOMXPath("comment()[1 = 1]");
+        String expr = xpath.getRootExpr().getText();
+        assertEquals("child::comment()[(1.0 = 1.0)]", expr);
+    
+    } 
+    
 }
