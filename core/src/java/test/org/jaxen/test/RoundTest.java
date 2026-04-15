@@ -137,4 +137,25 @@ public class RoundTest extends TestCase {
         
     }    
 
+    public void testRoundNegativePointFiveReturnsNegativeZero() throws JaxenException {
+        XPath xpath = new DOMXPath("round(-0.5)");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(0.0, result.doubleValue(), 0.0);
+        assertEquals(Double.doubleToLongBits(-0.0d), Double.doubleToLongBits(result.doubleValue()));
+    }
+
+    public void testRoundNegativeZeroReturnsNegativeZero() throws JaxenException {
+        XPath xpath = new DOMXPath("round(-0)");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(0.0, result.doubleValue(), 0.0);
+        assertEquals(Double.doubleToLongBits(-0.0d), Double.doubleToLongBits(result.doubleValue()));
+    }
+
+    public void testRoundNegativePointThreeReturnsNegativeZero() throws JaxenException {
+        XPath xpath = new DOMXPath("round(-0.3)");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(0.0, result.doubleValue(), 0.0);
+        assertEquals(Double.doubleToLongBits(-0.0d), Double.doubleToLongBits(result.doubleValue()));
+    }
+
 }
