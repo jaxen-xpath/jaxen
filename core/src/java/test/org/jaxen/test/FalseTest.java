@@ -105,9 +105,12 @@ public class FalseTest extends TestCase {
 
     public void testEmptyNodeSetLessThanOrEqualToFalse() throws JaxenException
     {
+        // Per XPath 1.0 Section 3.4, relational operators do not have
+        // special boolean+node-set handling. Empty node-set has no node
+        // satisfying the comparison, so the result is false.
         XPath xpath = new DOMXPath( "/nonexistent<=false()" );
         Boolean result = (Boolean) xpath.evaluate(doc);
-        assertTrue(result.booleanValue());
+        assertFalse(result.booleanValue());
     } 
 
     public void testEmptyNodeSetLessThanFalse() throws JaxenException
@@ -119,16 +122,22 @@ public class FalseTest extends TestCase {
 
     public void testFalseLessThanOrEqualToEmptyNodeSet() throws JaxenException
     {
+        // Per XPath 1.0 Section 3.4, relational operators do not have
+        // special boolean+node-set handling. Empty node-set has no node
+        // satisfying the comparison, so the result is false.
         XPath xpath = new DOMXPath( "false()<=/nonexistent" );
         Boolean result = (Boolean) xpath.evaluate(doc);
-        assertTrue(result.booleanValue());
+        assertFalse(result.booleanValue());
     }
     
     public void testFalseGreaterThanOrEqualToEmptyNodeSet() throws JaxenException
     {
+        // Per XPath 1.0 Section 3.4, relational operators do not have
+        // special boolean+node-set handling. Empty node-set has no node
+        // satisfying the comparison, so the result is false.
         XPath xpath = new DOMXPath( "false()>=/nonexistent" );
         Boolean result = (Boolean) xpath.evaluate(doc);
-        assertTrue(result.booleanValue());
+        assertFalse(result.booleanValue());
     } 
     
     public void testFalseGreaterThaEmptyNodeSet() throws JaxenException
