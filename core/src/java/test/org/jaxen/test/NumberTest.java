@@ -163,4 +163,44 @@ public class NumberTest extends TestCase {
         assertTrue(NumberFunction.isNaN(0.0 / 0.0));
     }     
     
+    public void testExponentialNotationReturnsNaN() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('1e5')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(Double.valueOf(Double.NaN), result);
+        
+    }
+
+    public void testLeadingPlusSignReturnsNaN() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('+1')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(Double.valueOf(Double.NaN), result);
+        
+    }
+
+    public void testInfinityStringReturnsNaN() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('Infinity')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(Double.valueOf(Double.NaN), result);
+        
+    }
+
+    public void testNegativeInfinityStringReturnsNaN() 
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('-Infinity')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(Double.valueOf(Double.NaN), result);
+        
+    }
+
 }

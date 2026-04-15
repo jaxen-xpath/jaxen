@@ -177,7 +177,11 @@ public class NumberFunction implements Function
         }
         else if ( obj instanceof String )
         {
-            String str = (String) obj;
+            String str = ((String) obj).trim();
+            if ( ! isXPathNumber( str ) )
+            {
+                return Double.NaN;
+            }
             try
             {
                 Double doubleValue = Double.valueOf( str );        
@@ -235,5 +239,45 @@ public class NumberFunction implements Function
     {
         return val.equals( Double.NaN );
     }  
-  
+
+    /**
+     * Checks whether the trimmed string matches the XPath 1.0 Number production:
+     * optional minus sign followed by <code>Digits ('.' Digits?)?</code> or <code>'.' Digits</code>.
+     *
+     * @param str the trimmed string to check
+     * @return true if the string is a valid XPath number, false otherwise
+     */
+    private static boolean isXPathNumber(String str) {
+        int len = str.length();
+        if (len == 0) {
+            return false;
+        }
+        int i = 0;
+        if (str.charAt(i) == '-') {
+            i++;
+            if (i >= len) {
+                return false;
+            }
+        }
+        boolean hasDigitsBeforeDot = false;
+        while (i < len && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+            hasDigitsBeforeDot = true;
+            i++;
+        }
+        if (i < len && str.charAt(i) == '.') {
+            i++;
+            boolean hasDigitsAfterDot = false;
+            while (i < len && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+                hasDigitsAfterDot = true;
+                i++;
+            }
+            if (!hasDigitsBeforeDot && !hasDigitsAfterDot) {
+                return false;
+            }
+        } else if (!hasDigitsBeforeDot) {
+            return false;
+        }
+        return i == len;
+    }
+
 }
