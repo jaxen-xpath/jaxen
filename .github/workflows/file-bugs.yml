@@ -1,0 +1,245 @@
+name: File Bug Reports
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/file-bugs.yml'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  file-bugs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: File bug reports
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "RoundFunction returns positive zero instead of negative zero for values in [-0.5, 0)" \
+            --body "## Bug
+
+          \`RoundFunction.evaluate()\` uses \`Math.round()\` which returns a \`long\`. Since \`long\` cannot represent negative zero, \`round(-0.5)\` and \`round(-0.0)\` both incorrectly return \`0.0\` (positive zero) instead of \`-0.0\` (negative zero).
+
+          ## XPath 1.0 Spec Requirement
+
+          [Section 4.4](https://www.w3.org/TR/xpath#function-round):
+          > If the argument is negative zero, then negative zero is returned. If the argument is less than zero, but greater than or equal to -0.5, then negative zero is returned.
+
+          ## Location
+
+          \`core/src/java/main/org/jaxen/function/RoundFunction.java\`, line 131:
+          \`\`\`java
+          return Double.valueOf( Math.round( value ) );
+          \`\`\`
+
+          ## Reproduction
+
+          \`\`\`java
+          // round(-0.5) should return -0.0 but returns 0.0
+          DOMXPath xpath = new DOMXPath(\"round(-0.5)\");
+          Double result = (Double) xpath.evaluate(doc);
+          // 1.0 / result should be -Infinity (negative zero) but is Infinity (positive zero)
+          \`\`\`
+
+          ## Fix
+
+          Add explicit handling before the \`Math.round()\` call:
+          \`\`\`java
+          if (value >= -0.5d && value < 0.0d) {
+              // XPath spec: values in [-0.5, 0) return negative zero
+              return Double.valueOf(-0.0d);
+          }
+          if (Double.doubleToLongBits(value) == Double.doubleToLongBits(-0.0d)) {
+              return Double.valueOf(-0.0d);
+          }
+          return Double.valueOf(Math.round(value));
+          \`\`\`"
+
+          gh issue create \
+            --title "NumberFunction accepts non-XPath number strings (exponential notation, Infinity, leading +)" \
+            --body "## Bug
+
+          \`NumberFunction.evaluate()\` delegates string-to-number conversion to \`Double.valueOf()\`, which is more permissive than the XPath 1.0 Number production. \`Double.valueOf()\` in Java accepts exponential notation (\`1e5\`), a leading \`+\` sign (\`+1\`), and the strings \`Infinity\` and \`-Infinity\`, none of which are valid XPath numbers.
+
+          ## XPath 1.0 Spec Requirement
+
+          [Section 4.4](https://www.w3.org/TR/xpath#function-number): The string-to-number conversion accepts only strings matching: optional whitespace, optional minus sign, \`Digits ('.' Digits?)? | '.' Digits\`, optional whitespace. All other strings must convert to NaN.
+
+          The [Number production](https://www.w3.org/TR/xpath#NT-Number) is:
+          > \`Number ::= Digits ('.' Digits?)? | '.' Digits\`
+
+          ## Location
+
+          \`core/src/java/main/org/jaxen/function/NumberFunction.java\`, lines 180-189:
+          \`\`\`java
+          String str = (String) obj;
+          try {
+              Double doubleValue = Double.valueOf( str );
+              return doubleValue;
+          } catch (NumberFormatException e) {
+              return Double.NaN;
+          }
+          \`\`\`
+
+          ## Reproduction
+
+          \`\`\`java
+          // All should return NaN per XPath spec, but return numbers instead
+          number('1e5')    // returns 100000.0, should be NaN
+          number('+1')     // returns 1.0, should be NaN
+          number('Infinity') // returns Infinity, should be NaN
+          \`\`\`
+
+          ## Fix
+
+          Validate the string against the XPath Number production before calling \`Double.valueOf()\`:
+          \`\`\`java
+          String str = ((String) obj).trim();
+          if (!str.matches(\"-?([0-9]+(\\\\.[0-9]*)?|\\\\.[0-9]+)\")) {
+              return Double.NaN;
+          }
+          try {
+              return Double.valueOf(str);
+          } catch (NumberFormatException e) {
+              return Double.NaN;
+          }
+          \`\`\`"
+
+          gh issue create \
+            --title "DefaultCommentNodeStep.getText() omits predicates from XPath text representation" \
+            --body "## Bug
+
+          \`DefaultCommentNodeStep.getText()\` does not call \`super.getText()\`, so any predicates on a comment node test are silently dropped from the serialized XPath expression.
+
+          For example, \`child::comment()[1]\` would serialize as \`child::comment()\` without the \`[1]\` predicate.
+
+          ## Comparison With Sibling Classes
+
+          Every other node-step class correctly appends \`super.getText()\` (which returns the predicate text):
+
+          - \`DefaultTextNodeStep\`: \`return getAxisName() + \"::text()\" + super.getText();\`
+          - \`DefaultAllNodeStep\`: \`return getAxisName() + \"::node()\" + super.getText();\`
+          - \`DefaultProcessingInstructionNodeStep\`: appends \`super.getText()\` at the end
+
+          ## Location
+
+          \`core/src/java/main/org/jaxen/expr/DefaultCommentNodeStep.java\`, line 73:
+          \`\`\`java
+          public String getText() {
+              return getAxisName() + \"::comment()\";
+          }
+          \`\`\`
+
+          ## Fix
+
+          \`\`\`java
+          public String getText() {
+              return getAxisName() + \"::comment()\" + super.getText();
+          }
+          \`\`\`"
+
+          gh issue create \
+            --title "PredicateSet.anyMatchingNode() advances predicate iterator inside the wrong loop" \
+            --body "## Bug
+
+          In \`PredicateSet.anyMatchingNode()\`, the predicate iterator \`predIter.next()\` is called inside the inner node-iteration loop instead of in the outer predicate loop. This means the iterator advances once per node instead of once per predicate.
+
+          If the node set has more nodes than there are predicates, this throws \`NoSuchElementException\`. If the node set has fewer nodes than predicates, later predicates are never evaluated.
+
+          ## Location
+
+          \`core/src/java/main/org/jaxen/expr/PredicateSet.java\`, lines 170-208:
+          \`\`\`java
+          Iterator<Predicate> predIter = predicates.iterator();
+          List nodes2Filter = contextNodeSet;
+          while(predIter.hasNext()) {
+              // ...
+              for (int i = 0; i < nodes2FilterSize; ++i) {
+                  // ...
+                  // BUG: predIter.next() called here, inside the node loop
+                  Object predResult = ((Predicate)predIter.next()).evaluate(predContext);
+          \`\`\`
+
+          Compare with \`evaluatePredicates()\` (line 237) which correctly calls \`predIter.next()\` once per predicate in the outer loop:
+          \`\`\`java
+          while(predIter.hasNext()) {
+              nodes2Filter = applyPredicate((Predicate)predIter.next(), nodes2Filter, support);
+          }
+          \`\`\`
+
+          ## Reproduction
+
+          Any XPath expression with multiple predicates evaluated via \`anyMatchingNode\` (used by \`evaluateAsBoolean\`) where the node set has more nodes than predicates will crash. For example, evaluating a path with two predicates against a node set of three nodes.
+
+          ## Fix
+
+          Extract the predicate before the inner loop:
+          \`\`\`java
+          while(predIter.hasNext()) {
+              Predicate pred = predIter.next();
+              final int nodes2FilterSize = nodes2Filter.size();
+              List<Object> filteredNodes = new ArrayList<Object>();
+              // ...
+              for (int i = 0; i < nodes2FilterSize; ++i) {
+                  // ...
+                  Object predResult = pred.evaluate(predContext);
+                  // ... add matching nodes to filteredNodes
+              }
+              if (filteredNodes.isEmpty()) return false;
+              nodes2Filter = filteredNodes;
+          }
+          return !nodes2Filter.isEmpty();
+          \`\`\`"
+
+          gh issue create \
+            --title "DefaultRelationalExpr incorrectly handles boolean-vs-nodeset comparisons" \
+            --body "## Bug
+
+          \`DefaultRelationalExpr.evaluate()\` has special handling (lines 83-100) that converts a node-set to a boolean when the other operand is a boolean, then compares the two booleans as numbers. This is incorrect for relational operators (\`<\`, \`<=\`, \`>\`, \`>=\`).
+
+          The XPath 1.0 spec defines special boolean+node-set handling only for equality operators (\`=\`, \`!=\`). For relational operators, the boolean should be converted to a number and compared against each node's string-value converted to a number individually.
+
+          ## XPath 1.0 Spec Requirement
+
+          [Section 3.4](https://www.w3.org/TR/xpath#booleans): For relational operators when one operand is a node-set, the comparison is true if there is a node in the node-set such that comparing its string-value (converted to number) with the other operand (converted to number) is true. There is no special boolean conversion rule for relational operators — only for \`=\` and \`!=\`.
+
+          ## Location
+
+          \`core/src/java/main/org/jaxen/expr/DefaultRelationalExpr.java\`, lines 83-100:
+          \`\`\`java
+          if (isBoolean(rhsValue) && isSet(lhsValue)) {
+              List left = convertToList( lhsValue );
+              if (left.isEmpty()) {
+                  return evaluateObjectObject(rhsValue, Boolean.FALSE, nav) ? ...;
+              } else {
+                  return evaluateObjectObject(rhsValue, Boolean.TRUE, nav) ? ...;
+              }
+          }
+          \`\`\`
+
+          ## Example of Incorrect Behavior
+
+          Given \`<root><item>0</item><item>2</item></root>\`:
+
+          - \`//item < true()\` — Current: converts node-set to \`true\` (non-empty), compares \`true < true\` → \`1.0 < 1.0\` → \`false\`
+          - Correct: checks each node: \`number('0') < number(true())\` → \`0.0 < 1.0\` → \`true\`
+
+          ## Fix
+
+          Remove lines 83-100. The existing \`eitherIsSet\` handler at line 103 will then correctly handle this case by comparing each node's string-value individually via \`evaluateSetSet\`, which calls \`evaluateObjectObject\` converting both sides to numbers."
+
+      - name: Delete this workflow file
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/file-bugs.yml
+          git commit -m "chore: remove bug-filing workflow after issues were created"
+          git push
