@@ -55,7 +55,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import org.jaxen.DefaultNavigator;
@@ -1020,7 +1020,7 @@ public class DocumentNavigator extends DefaultNavigator
                 if (next != null) return next;
                 // Exhausted siblings inside this transparent node; pop and
                 // continue from the transparent node's own "next" position.
-                current = transparentAncestors.removeFirst();
+                current = transparentAncestors.remove(transparentAncestors.size() - 1);
             }
             return getNextNode(current);
         }
@@ -1039,7 +1039,7 @@ public class DocumentNavigator extends DefaultNavigator
                         Node firstChild = getFirstTransparentChild(node);
                         if (firstChild != null) {
                             // Descend into the transparent node.
-                            transparentAncestors.addFirst(node);
+                            transparentAncestors.add(node);
                             node = firstChild;
                             break; // re-enter loop to evaluate firstChild
                         }
@@ -1060,7 +1060,7 @@ public class DocumentNavigator extends DefaultNavigator
 
         private Node node;
         /** Stack of transparent ancestors currently being expanded. */
-        private final LinkedList<Node> transparentAncestors = new LinkedList<Node>();
+        private final ArrayList<Node> transparentAncestors = new ArrayList<Node>();
     }
 
 
