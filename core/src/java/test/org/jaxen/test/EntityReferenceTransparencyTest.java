@@ -4,7 +4,7 @@
  *
  * ====================================================================
  *
- * Copyright 2024 Jaxen Project.
+ * Copyright 2026 Jaxen Project.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
