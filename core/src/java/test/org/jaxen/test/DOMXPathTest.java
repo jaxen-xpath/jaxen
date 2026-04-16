@@ -64,6 +64,7 @@ import org.jaxen.SimpleVariableContext;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -493,6 +494,50 @@ public class DOMXPathTest extends TestCase
         assertEquals(a, result.get(0));
         assertEquals(c, result.get(1));
     }
-    
+
+    // DocumentFragment transparency: after appending a fragment its children become
+    // direct children of the target element (DOM moves them), so count should include them.
+    public void testDocumentFragmentChildAxisTransparency()
+      throws JaxenException {
+
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+
+        // Build a DocumentFragment with two children and append to root.
+        // Per DOM spec, appendChild(fragment) moves the fragment's children
+        // directly into root, so x and y end up as direct children of root.
+        DocumentFragment frag = doc.createDocumentFragment();
+        frag.appendChild(doc.createElement("x"));
+        frag.appendChild(doc.createElement("y"));
+        root.appendChild(frag);
+
+        XPath xpath = new DOMXPath("count(*)");
+        Number result = xpath.numberValueOf(root);
+        assertEquals(2, result.intValue());
+    }
+
+    // EntityReference transparency: empty entity references (no children) are skipped.
+    public void testEmptyEntityReferenceIsSkipped()
+      throws JaxenException, ParserConfigurationException {
+
+        DocumentBuilderFactory localFactory = DocumentBuilderFactory.newInstance();
+        localFactory.setExpandEntityReferences(false);
+        Document localDoc = localFactory.newDocumentBuilder().newDocument();
+
+        Element root = localDoc.createElement("root");
+        localDoc.appendChild(root);
+
+        // Create an entity reference (no children in standard JAXP implementation).
+        Node entityRef = localDoc.createEntityReference("amp");
+        root.appendChild(entityRef);
+        Element after = localDoc.createElement("after");
+        root.appendChild(after);
+
+        // The entity reference (empty) should be skipped; only <after> counts.
+        XPath xpath = new DOMXPath("count(*)");
+        Number result = xpath.numberValueOf(root);
+        assertEquals(1, result.intValue());
+    }
+
      
 }
