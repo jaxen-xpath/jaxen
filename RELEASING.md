@@ -24,9 +24,6 @@ to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 gpg --full-generate-key
 ```
 
-When prompted, choose a strong passphrase and note it down — you will store it
-as the `GPG_PASSPHRASE` secret in a later step.
-
 ```
 # The output will show a "pub" block and a "sub" block, each followed by a
 # long hex fingerprint.  Copy the fingerprint from the "pub" line (the primary
