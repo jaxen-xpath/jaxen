@@ -18,24 +18,33 @@ triggered manually from the GitHub Actions UI.  The workflow:
 You do **not** need to upload your personal GPG key.  It is strongly recommended
 to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 
-```
-# Create a new key (select "RSA and RSA" (option 1), 4096 bits, no expiry, any name/email)
-gpg --full-generate-key
+1. **Generate a new key** (select "RSA and RSA" (option 1), 4096 bits, no
+   expiry, any name/email):
 
-# The output will show a "pub" block and a "sub" block, each followed by a
-# long hex fingerprint.  Copy the fingerprint from the "pub" line (the primary
-# key, not the "sub" subkey) — it is 40 hex characters and can be used as
-# <KEY_ID> in the commands below.
-#
-# Publish the public key to a keyserver so Sonatype OSSRH can verify it:
-gpg --keyserver keys.openpgp.org --send-keys <KEY_ID>
+   ```
+   gpg --full-generate-key
+   ```
 
-# Export the private key in ASCII-armour form to store as a secret
-gpg --armor --export-secret-keys <KEY_ID>
-```
+2. **Copy the key ID.**  The output will show a `pub` block and a `sub` block,
+   each followed by a long hex fingerprint.  Copy the fingerprint from the
+   `pub` line (the primary key, not the `sub` subkey) — it is 40 hex
+   characters.  Use this value wherever `KEY_ID` appears below.
 
-Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
-header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
+3. **Publish the public key** to a keyserver so Sonatype OSSRH can verify
+   signatures:
+
+   ```
+   gpg --keyserver keys.openpgp.org --send-keys KEY_ID
+   ```
+
+4. **Export the private key** in ASCII-armour form:
+
+   ```
+   gpg --armor --export-secret-keys KEY_ID
+   ```
+
+   Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
+   header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
 
 Sonatype OSSRH verifies artifact signatures by looking up the signing key on
 public keyservers.  Uploading to `keys.openpgp.org` is sufficient — no
