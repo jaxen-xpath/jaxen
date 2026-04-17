@@ -38,9 +38,7 @@ gpg --armor --export-secret-keys <KEY_ID>
 ```
 
 Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
-header and footer) as the value of the `GPG_PRIVATE_KEY` secret.
-Store the passphrase you chose during key creation as the `GPG_PASSPHRASE` secret.
-Both secrets are added in the **Repository secrets** section below.
+header and footer) — you will store it as the `GPG_PRIVATE_KEY` secret below.
 
 The Central Publishing Portal verifies artifact signatures by looking up the
 signing key on public keyservers.  Uploading to `keys.openpgp.org` is
@@ -79,7 +77,9 @@ If you suspect a secret has been exposed, revoke and replace it:
 #### Repository secrets
 
 Before the workflow can run you must add the following secrets in
-**Settings → Secrets and variables → Actions**:
+**Settings → Secrets and variables → Actions**.  Use the ASCII-armored private
+key exported above as `GPG_PRIVATE_KEY` and the passphrase you chose during key
+creation as `GPG_PASSPHRASE`:
 
 | Secret name        | Description |
 |--------------------|-------------|
