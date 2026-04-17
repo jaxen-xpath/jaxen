@@ -19,7 +19,7 @@ You do **not** need to upload your personal GPG key.  It is strongly recommended
 to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 
 ```
-# Create a new key (use key type RSA, 4096 bits, no expiry, any name/email)
+# Create a new key (select "RSA and RSA" (option 1), 4096 bits, no expiry, any name/email)
 gpg --full-generate-key
 
 # Note the 16-hex-char key ID shown at the end of the output, then publish
