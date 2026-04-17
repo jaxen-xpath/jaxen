@@ -52,8 +52,8 @@ is *not* protected this secret can be omitted.
 3. Set a meaningful **Token name** (e.g. `jaxen-release`).
 4. Under **Repository access** choose **Only select repositories** and pick
    `jaxen-xpath/jaxen`.
-5. Under **Permissions → Repository permissions** set **Contents** to
-   **Read and write**.
+5. Click **Add Permissions**, select **Repository permissions**, find
+   **Contents**, and set it to **Read and write**.
 6. Click **Generate token** and copy the value immediately — it is shown only
    once.
 
