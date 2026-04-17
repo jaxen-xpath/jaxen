@@ -37,15 +37,6 @@ to create a dedicated signing key whose sole purpose is signing Jaxen releases:
    gpg --keyserver keys.openpgp.org --send-keys KEY_ID
    ```
 
-4. **Export the private key** in ASCII-armour form:
-
-   ```
-   gpg --armor --export-secret-keys KEY_ID
-   ```
-
-   Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
-   header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
-
 Sonatype OSSRH verifies artifact signatures by looking up the signing key on
 public keyservers.  Uploading to `keys.openpgp.org` is sufficient — no
 additional registration of the key with Sonatype is required.
@@ -88,11 +79,21 @@ Before the workflow can run you must add the following secrets in
 
 | Secret name       | Description |
 |-------------------|-------------|
-| `GPG_PRIVATE_KEY` | ASCII-armoured private key of the **dedicated** release signing key (see above) |
+| `GPG_PRIVATE_KEY` | ASCII-armoured private key of the **dedicated** release signing key — export it with the command below |
 | `GPG_PASSPHRASE`  | Passphrase for that signing key |
 | `OSSRH_USERNAME`  | Sonatype OSSRH **User Token** username (see above — not your account username) |
 | `OSSRH_TOKEN`     | Sonatype OSSRH **User Token** password (see above — not your account password) |
 | `RELEASE_TOKEN`   | GitHub Personal Access Token with `Contents: write` scope; required when `master` is a protected branch so the workflow can push the post-release version-bump commit directly. Omit if the branch is not protected. |
+
+To obtain the `GPG_PRIVATE_KEY` value, export the private key created earlier
+in ASCII-armour form (using the same `KEY_ID` from the GPG signing key steps):
+
+```
+gpg --armor --export-secret-keys KEY_ID
+```
+
+Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
+header and footer) and store it as the `GPG_PRIVATE_KEY` secret.
 
 ### Running a release
 
