@@ -60,6 +60,13 @@ jobs:
           # Update the reproducible-build timestamp to the current moment.
           sed -i "s|<project.build.outputTimestamp>.*</project.build.outputTimestamp>|<project.build.outputTimestamp>${TIMESTAMP}</project.build.outputTimestamp>|" pom.xml
 
+      - name: Update README.md with release version
+        run: |
+          sed -i "s|The current version is \*[^*]*\*|The current version is *${{ inputs.releaseVersion }}*|" README.md
+          # Update only the <version> tag that follows the jaxen <artifactId> line
+          sed -i '/<artifactId>jaxen<\/artifactId>/{n;s|<version>[^<]*</version>|<version>${{ inputs.releaseVersion }}</version>|}' README.md
+          sed -i "s|compile 'jaxen:jaxen:[^']*'|compile 'jaxen:jaxen:${{ inputs.releaseVersion }}'|" README.md
+
       - name: Build, sign, and deploy to Central Publishing Portal
         run: mvn --batch-mode deploy -Prelease -DskipTests
         env:
@@ -69,7 +76,7 @@ jobs:
 
       - name: Commit release version and tag
         run: |
-          git add pom.xml core/pom.xml integration-tests/pom.xml
+          git add pom.xml core/pom.xml integration-tests/pom.xml README.md
           git commit -m "Release ${{ inputs.releaseVersion }}"
           git tag -a "v${{ inputs.releaseVersion }}" -m "Release ${{ inputs.releaseVersion }}"
 
