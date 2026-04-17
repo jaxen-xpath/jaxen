@@ -174,10 +174,7 @@ mvn test -X
 
 ## CI/CD Integration
 
-The project uses CircleCI with a simple configuration:
-- **Build command**: `mvn test` (no compiler overrides in CI)
-- **Java version**: OpenJDK 8 (cimg/openjdk:8.0.322)
-- **Maven cache**: Enabled for dependencies
+The project uses GitHub actions  with a simple configuration.
 
 If CI fails but local builds work, verify the Java compatibility flags are properly set.
 
@@ -185,7 +182,7 @@ If CI fails but local builds work, verify the Java compatibility flags are prope
 
 See `RELEASING.md` for complete release instructions. Key requirements:
 - GPG credentials for signing
-- Sonatype OSSRH permissions
+- Sonatype Central Publishing Portal permissions
 - Version management via GitHub PRs
 
 ## Key Files for Reference
@@ -203,3 +200,7 @@ See `RELEASING.md` for complete release instructions. Key requirements:
 - `.circleci/config.yml` - CI configuration
 
 Always validate your changes work correctly by running the full test suite and manual functional tests before committing.
+
+## Code Style
+
+Use American English spelling.
