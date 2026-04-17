@@ -75,7 +75,7 @@ If you suspect a secret has been exposed, revoke and replace it:
 #### Repository secrets
 
 Before the workflow can run you must add the following secrets in
-**Settings → Secrets and variables → Actions**:
+[**Settings → Secrets and variables → Actions**](https://github.com/jaxen-xpath/jaxen/settings/secrets/actions):
 
 | Secret name        | Description |
 |--------------------|-------------|
@@ -91,7 +91,7 @@ Only GitHub users with **write access** (or higher) to this repository can
 trigger `workflow_dispatch` workflows.  Repository owners and admins always
 qualify; add outside collaborators as needed before attempting a release.
 
-1. Go to **Actions → Release → Run workflow** on GitHub.
+1. Go to [**Actions → Release → Run workflow**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
 2. Fill in the two inputs:
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
@@ -151,7 +151,7 @@ $ git push origin vX.Y.Z
 
 Bump `master` to the next SNAPSHOT version in all pom.xml files and push.
 
-Create a GitHub release in the form `vX.Y.Z`.
+Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in the form `vX.Y.Z`.
 
 Once the binary is available on Maven Central, run `mvn site:stage` and upload
 the generated content to IBiblio.
