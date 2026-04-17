@@ -74,8 +74,8 @@ If you suspect a secret has been exposed, revoke and replace it:
 
 #### Repository secrets
 
-Before the workflow can run you must add the following secrets in
-[**Settings → Secrets and variables → Actions**](https://github.com/jaxen-xpath/jaxen/settings/secrets/actions):
+Before the workflow can run you must add the following **repository** secrets in
+[**Settings → Secrets and variables → Actions → Repository secrets**](https://github.com/jaxen-xpath/jaxen/settings/secrets/actions):
 
 | Secret name        | Description |
 |--------------------|-------------|
