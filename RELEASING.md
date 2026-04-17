@@ -30,13 +30,7 @@ gpg --full-generate-key
 #
 # Publish the public key to a keyserver so the Central Portal can verify it:
 gpg --keyserver keys.openpgp.org --send-keys <KEY_ID>
-
-# Export the private key in ASCII-armour form to store as a secret
-gpg --armor --export-secret-keys <KEY_ID>
 ```
-
-Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
-header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
 
 The Central Publishing Portal verifies artifact signatures by looking up the
 signing key on public keyservers.  Uploading to `keys.openpgp.org` is
@@ -106,7 +100,17 @@ If you suspect a secret has been exposed, revoke and replace it:
 #### Repository secrets
 
 Before the workflow can run you must add the following **repository** secrets in
-[**Settings → Secrets and variables → Actions → Repository secrets**](https://github.com/jaxen-xpath/jaxen/settings/secrets/actions):
+[**Settings → Secrets and variables → Actions → Repository secrets**](https://github.com/jaxen-xpath/jaxen/settings/secrets/actions).
+
+Export the GPG private key now so you can paste it immediately into the secret:
+
+```
+gpg --armor --export-secret-keys <KEY_ID>
+```
+
+Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
+header and footer) as the value of the `GPG_PRIVATE_KEY` secret in the table
+below.
 
 | Secret name        | Description |
 |--------------------|-------------|
