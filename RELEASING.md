@@ -19,13 +19,16 @@ You do **not** need to upload your personal GPG key.  It is strongly recommended
 to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 
 ```
-# Create a new key (use key type RSA, 4096 bits, no expiry, any name/email)
+# Create a new key (select "RSA and RSA" (option 1), 4096 bits, no expiry, any name/email)
 gpg --full-generate-key
 
-# Note the 16-hex-char key ID shown at the end of the output, then publish
-# the public key to multiple keyservers so Sonatype OSSRH can verify it:
-gpg --keyserver keyserver.ubuntu.com --send-keys <KEY_ID>
-gpg --keyserver keys.openpgp.org     --send-keys <KEY_ID>
+# The output will show a "pub" block and a "sub" block, each followed by a
+# long hex fingerprint.  Copy the fingerprint from the "pub" line (the primary
+# key, not the "sub" subkey) — it is 40 hex characters and can be used as
+# <KEY_ID> in the commands below.
+#
+# Publish the public key to a keyserver so Sonatype OSSRH can verify it:
+gpg --keyserver keys.openpgp.org --send-keys <KEY_ID>
 
 # Export the private key in ASCII-armour form to store as a secret
 gpg --armor --export-secret-keys <KEY_ID>
@@ -35,8 +38,8 @@ Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
 header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
 
 Sonatype OSSRH verifies artifact signatures by looking up the signing key on
-public keyservers.  Uploading to `keyserver.ubuntu.com` and `keys.openpgp.org`
-is sufficient — no additional registration of the key with Sonatype is required.
+public keyservers.  Uploading to `keys.openpgp.org` is sufficient — no
+additional registration of the key with Sonatype is required.
 Allow a few minutes for the key to propagate before running your first release.
 
 #### OSSRH credentials
