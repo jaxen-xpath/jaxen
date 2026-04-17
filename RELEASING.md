@@ -75,7 +75,7 @@ If you suspect a secret has been exposed, revoke and replace it:
 #### Repository secrets
 
 Before the workflow can run you must add the following secrets as
-**repository** secrets (not environment or organisation secrets) in
+**repository** secrets (not environment or organization secrets) in
 **Settings → Secrets and variables → Actions → Repository secrets**:
 
 | Secret name        | Description |
