@@ -36,7 +36,7 @@ as the `GPG_PASSPHRASE` secret in a later step.
 # Publish the public key to a keyserver so the Central Portal can verify it:
 gpg --keyserver keys.openpgp.org --send-keys <KEY_ID>
 
-# Export the private key in ASCII-armour form to store as a secret:
+# Export the private key in ASCII-armor form to store as a secret:
 gpg --armor --export-secret-keys <KEY_ID>
 ```
 
@@ -86,7 +86,7 @@ Before the workflow can run you must add the following secrets in
 
 | Secret name        | Description |
 |--------------------|-------------|
-| `GPG_PRIVATE_KEY`  | ASCII-armoured private key of the **dedicated** release signing key (see above) |
+| `GPG_PRIVATE_KEY`  | ASCII-armored private key of the **dedicated** release signing key (see above) |
 | `GPG_PASSPHRASE`   | Passphrase for that signing key |
 | `CENTRAL_USERNAME` | Central Publishing Portal **User Token** username (see above — not your account username) |
 | `CENTRAL_TOKEN`    | Central Publishing Portal **User Token** password (see above — not your account password) |
