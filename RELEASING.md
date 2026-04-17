@@ -43,6 +43,37 @@ signing key on public keyservers.  Uploading to `keys.openpgp.org` is
 sufficient — no additional registration of the key with Sonatype is required.
 Allow a few minutes for the key to propagate before running your first release.
 
+#### GitHub Personal Access Token (`RELEASE_TOKEN`)
+
+A GitHub Personal Access Token (PAT) with the **Contents: write** permission is
+needed when `master` is a protected branch, so the workflow can push the
+post-release version-bump commit and the `vX.Y.Z` tag directly.  If the branch
+is *not* protected this secret can be omitted.
+
+**Fine-grained PAT (recommended)**
+
+1. Go to **GitHub → Settings → Developer settings →
+   [Personal access tokens → Fine-grained tokens](https://github.com/settings/tokens?type=beta)**.
+2. Click **Generate new token**.
+3. Set a meaningful **Token name** (e.g. `jaxen-release`).
+4. Under **Repository access** choose **Only select repositories** and pick
+   `jaxen-xpath/jaxen`.
+5. Under **Permissions → Repository permissions** set **Contents** to
+   **Read and write**.
+6. Click **Generate token** and copy the value immediately — it is shown only
+   once.
+
+**Classic PAT (alternative)**
+
+1. Go to **GitHub → Settings → Developer settings →
+   [Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)**.
+2. Click **Generate new token (classic)**.
+3. Give it a descriptive **Note** (e.g. `jaxen-release`).
+4. Select the **`repo`** scope (which includes `Contents: write`).
+5. Click **Generate token** and copy the value immediately.
+
+Store the token as the `RELEASE_TOKEN` secret (see the table below).
+
 #### Central Portal credentials
 
 To publish artifacts you need a token from the
