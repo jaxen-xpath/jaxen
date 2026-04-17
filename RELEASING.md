@@ -27,9 +27,8 @@ gpg --full-generate-key
 # key, not the "sub" subkey) — it is 40 hex characters and can be used as
 # <KEY_ID> in the commands below.
 #
-# Publish the public key to multiple keyservers so Sonatype OSSRH can verify it:
-gpg --keyserver keyserver.ubuntu.com --send-keys <KEY_ID>
-gpg --keyserver keys.openpgp.org     --send-keys <KEY_ID>
+# Publish the public key to a keyserver so Sonatype OSSRH can verify it:
+gpg --keyserver keys.openpgp.org --send-keys <KEY_ID>
 
 # Export the private key in ASCII-armour form to store as a secret
 gpg --armor --export-secret-keys <KEY_ID>
@@ -39,8 +38,8 @@ Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
 header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
 
 Sonatype OSSRH verifies artifact signatures by looking up the signing key on
-public keyservers.  Uploading to `keyserver.ubuntu.com` and `keys.openpgp.org`
-is sufficient — no additional registration of the key with Sonatype is required.
+public keyservers.  Uploading to `keys.openpgp.org` is sufficient — no
+additional registration of the key with Sonatype is required.
 Allow a few minutes for the key to propagate before running your first release.
 
 #### OSSRH credentials
