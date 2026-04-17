@@ -37,11 +37,11 @@ jobs:
           java-version: '8'
           distribution: temurin
           cache: maven
-          # Configures settings.xml with the Sonatype OSSRH server entry so Maven can
-          # authenticate when deploying to the staging repository.
-          server-id: ossrh
-          server-username: OSSRH_USERNAME
-          server-password: OSSRH_TOKEN
+          # Configures settings.xml with the Central Publishing Portal server entry so
+          # Maven can authenticate when deploying artifacts.
+          server-id: central
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_TOKEN
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
 
@@ -60,12 +60,12 @@ jobs:
           # Update the reproducible-build timestamp to the current moment.
           sed -i "s|<project.build.outputTimestamp>.*</project.build.outputTimestamp>|<project.build.outputTimestamp>${TIMESTAMP}</project.build.outputTimestamp>|" pom.xml
 
-      - name: Build, sign, and stage to Maven Central
+      - name: Build, sign, and deploy to Central Publishing Portal
         run: mvn --batch-mode deploy -Prelease -DskipTests
         env:
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_TOKEN:    ${{ secrets.OSSRH_TOKEN }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_TOKEN:    ${{ secrets.CENTRAL_TOKEN }}
+          GPG_PASSPHRASE:   ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Commit release version and tag
         run: |
