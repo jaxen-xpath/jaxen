@@ -22,21 +22,28 @@ to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 ```
 # Create a new key (select "RSA and RSA" (option 1), 4096 bits, no expiry, any name/email)
 gpg --full-generate-key
+```
 
+When prompted, choose a strong passphrase and note it down — you will store it
+as the `GPG_PASSPHRASE` secret in a later step.
+
+```
 # The output will show a "pub" block and a "sub" block, each followed by a
 # long hex fingerprint.  Copy the fingerprint from the "pub" line (the primary
 # key, not the "sub" subkey) — it is 40 hex characters and can be used as
 # <KEY_ID> in the commands below.
-#
+
 # Publish the public key to a keyserver so the Central Portal can verify it:
 gpg --keyserver keys.openpgp.org --send-keys <KEY_ID>
 
-# Export the private key in ASCII-armour form to store as a secret
+# Export the private key in ASCII-armour form to store as a secret:
 gpg --armor --export-secret-keys <KEY_ID>
 ```
 
 Copy the full output (including the `-----BEGIN PGP PRIVATE KEY BLOCK-----`
-header and footer) as the value of the `GPG_PRIVATE_KEY` secret below.
+header and footer) as the value of the `GPG_PRIVATE_KEY` secret.
+Store the passphrase you chose during key creation as the `GPG_PASSPHRASE` secret.
+Both secrets are added in the **Repository secrets** section below.
 
 The Central Publishing Portal verifies artifact signatures by looking up the
 signing key on public keyservers.  Uploading to `keys.openpgp.org` is
