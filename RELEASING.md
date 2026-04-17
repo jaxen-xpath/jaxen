@@ -126,11 +126,13 @@ Only GitHub users with **write access** (or higher) to this repository can
 trigger `workflow_dispatch` workflows.  Repository owners and admins always
 qualify; add outside collaborators as needed before attempting a release.
 
-1. Go to [**Actions → Release → Run workflow**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
-2. Fill in the two inputs:
+1. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
+2. Click the **Run workflow** dropdown (top-right of the workflow runs list).
+3. Ensure **Branch: master** is selected.
+4. Fill in the two inputs:
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
-3. Click **Run workflow**.
+5. Click the green **Run workflow** button.
 
 The workflow uploads the artifacts to the
 [Central Publishing Portal](https://central.sonatype.com/).  Once it completes
