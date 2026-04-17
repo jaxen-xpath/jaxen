@@ -6,11 +6,13 @@ triggered manually from the GitHub Actions UI.  The workflow:
 
 1. Sets the POM version to the chosen release version.
 2. Updates the `project.build.outputTimestamp` property (reproducible builds).
-3. Builds and GPG-signs the artifacts, then uploads them to the
+3. Updates `README.md` with the new release version (dependency snippets and
+   current-version text).
+4. Builds and GPG-signs the artifacts, then uploads them to the
    [Central Publishing Portal](https://central.sonatype.com/).
-4. Commits the release version and creates a `vX.Y.Z` git tag.
-5. Bumps the POM version to the next development SNAPSHOT on `master`.
-6. Pushes the commits and tag, then creates a GitHub release.
+5. Commits the release version and creates a `vX.Y.Z` git tag.
+6. Bumps the POM version to the next development SNAPSHOT on `master`.
+7. Pushes the commits and tag, then creates a GitHub release.
 
 ### One-time repository setup
 
@@ -170,8 +172,9 @@ If the automated workflow cannot be used, you will need:
 $ export GPG_TTY=$(tty)
 $ git checkout master
 $ git pull
-# Set the release version (e.g. 2.0.1) in all pom.xml files and update
-# project.build.outputTimestamp to the current UTC time in pom.xml, then commit.
+# Set the release version (e.g. 2.0.1) in all pom.xml files, update
+# project.build.outputTimestamp to the current UTC time in pom.xml, and update
+# README.md with the new version, then commit.
 $ mvn install -Prelease
 $ mvn deploy -Prelease
 ```
