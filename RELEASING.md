@@ -22,8 +22,12 @@ to create a dedicated signing key whose sole purpose is signing Jaxen releases:
 # Create a new key (select "RSA and RSA" (option 1), 4096 bits, no expiry, any name/email)
 gpg --full-generate-key
 
-# Note the 16-hex-char key ID shown at the end of the output, then publish
-# the public key to multiple keyservers so Sonatype OSSRH can verify it:
+# The output will show a "pub" block and a "sub" block, each followed by a
+# long hex fingerprint.  Copy the fingerprint from the "pub" line (the primary
+# key, not the "sub" subkey) — it is 40 hex characters and can be used as
+# <KEY_ID> in the commands below.
+#
+# Publish the public key to multiple keyservers so Sonatype OSSRH can verify it:
 gpg --keyserver keyserver.ubuntu.com --send-keys <KEY_ID>
 gpg --keyserver keys.openpgp.org     --send-keys <KEY_ID>
 
