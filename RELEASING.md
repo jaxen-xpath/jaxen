@@ -141,14 +141,6 @@ The workflow uploads the artifacts to the
 successfully, log in to [central.sonatype.com](https://central.sonatype.com/)
 and verify the deployment, then publish it.
 
-Once the binary is available on Maven Central, regenerate the project site:
-
-```
-mvn site:stage
-```
-
-Upload the generated content to IBiblio as before.
-
 ---
 
 ## Version conventions
@@ -193,6 +185,19 @@ Bump `master` to the next SNAPSHOT version in all pom.xml files and push.
 
 Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in the form `vX.Y.Z`.
 
-Once the binary is available on Maven Central, run `mvn site:stage` and upload
-the generated content to IBiblio.
+## Publish the Site
+
+
+Update the release notes on the GitHub tag and in src/site/xdoc/releases.xml.
+The GitHub release will prepopulate with a list of PR titles, but you'll 
+usually want to summarize the important points manually.
+
+Regenerate the project site:
+
+```
+mvn site:stage
+```
+
+Upload the generated content to IBiblio using sftp.
+
 
