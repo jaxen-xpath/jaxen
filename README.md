@@ -34,6 +34,18 @@ dependencies {
 }
 ```
 
+## Building from Source
+
+To build Jaxen from source, you need Java 8+ and Maven 3.6.3+. The project includes a Maven wrapper for convenience:
+
+```bash
+# Using Maven wrapper (recommended)
+./mvnw clean test
+
+# Or using system Maven if installed
+mvn clean test
+```
+
 ## Reproducible Builds
 
 Jaxen supports [Maven reproducible builds](https://maven.apache.org/guides/mini/guide-reproducible-builds.html).
@@ -48,18 +60,6 @@ To verify that builds are reproducible, you can run the included verification sc
 
 The reproducible build timestamp is configured in the `project.build.outputTimestamp` property in the main `pom.xml`.
 
-=======
-## Building from Source
-
-To build Jaxen from source, you need Java 8+ and Maven 3.6.3+. The project includes a Maven wrapper for convenience:
-
-```bash
-# Using Maven wrapper (recommended)
-./mvnw clean test
-
-# Or using system Maven if installed
-mvn clean test
-```
 
 ## Development and API Compatibility
 
