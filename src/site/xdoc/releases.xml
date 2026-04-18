@@ -10,8 +10,15 @@
     <section name="Official Builds">
 
 
+
 <p>
-The current version is 2.0.0. 2.0.0 now requires Java 1.5 or later, 
+The current version is 2.0.1. This release is completely API compatible with version 2.0.0.
+It fixes several bugs in XPath evaluation and makes builds automated, immutable, and reproducible
+to resist supply chain and MITM attacks.
+</p>
+
+<p>
+2.0.0 now requires Java 1.5 or later, 
 and marks the third party models for XOM, JDOM, and dom4j optional
 so dependency trees should be much smaller.
 Although this is a major release, it's almost completely API compatible and should be a drop-in
