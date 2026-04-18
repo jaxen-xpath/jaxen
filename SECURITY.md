@@ -22,3 +22,4 @@ If it's some security tool logging a warning, that is 95% likely not to be a sec
 If you can find one, none are currently known to exist:
 
 * XPath expressions that cause infinite loops in the parser or exponential performance problems.
+* XPath expressions that throw unexpected runtime exceptions. E.g. if you're passing null directly to a method via an API call,  an exception is expected. However, if you're querying a non-null document with a non-null XPath expression and you get a `NullPointerException` or `IndexOutOfBoundsException`, that is at least a bug, and maybe a security issue.
