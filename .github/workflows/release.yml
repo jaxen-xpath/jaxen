@@ -67,6 +67,15 @@ jobs:
           sed -i '/<artifactId>jaxen<\/artifactId>/{n;s|<version>[^<]*</version>|<version>${{ inputs.releaseVersion }}</version>|}' README.md
           sed -i "s|compile 'jaxen:jaxen:[^']*'|compile 'jaxen:jaxen:${{ inputs.releaseVersion }}'|" README.md
 
+      - name: Update index.xml files with release version
+        run: |
+          for f in src/site/xdoc/index.xml core/src/site/xdoc/index.xml; do
+            sed -i "s|The current version is <strong>[^<]*</strong>|The current version is <strong>${{ inputs.releaseVersion }}</strong>|" "$f"
+            sed -i '/<artifactId>jaxen<\/artifactId>/{n;s|<version>[^<]*</version>|<version>${{ inputs.releaseVersion }}</version>|}' "$f"
+          done
+          sed -i "s|compile 'jaxen:jaxen:[^']*'|compile 'jaxen:jaxen:${{ inputs.releaseVersion }}'|" src/site/xdoc/index.xml
+          sed -i "s|compile 'jaxen:jaxen-core:[^']*'|compile 'jaxen:jaxen-core:${{ inputs.releaseVersion }}'|" core/src/site/xdoc/index.xml
+
       - name: Build, sign, and deploy to Central Publishing Portal
         run: mvn --batch-mode deploy -Prelease -DskipTests
         env:
@@ -76,7 +85,7 @@ jobs:
 
       - name: Commit release version and tag
         run: |
-          git add pom.xml core/pom.xml integration-tests/pom.xml README.md
+          git add pom.xml core/pom.xml integration-tests/pom.xml README.md src/site/xdoc/index.xml core/src/site/xdoc/index.xml
           git commit -m "Release ${{ inputs.releaseVersion }}"
           git tag -a "v${{ inputs.releaseVersion }}" -m "Release ${{ inputs.releaseVersion }}"
 

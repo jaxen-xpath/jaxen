@@ -6,8 +6,8 @@ triggered manually from the GitHub Actions UI.  The workflow:
 
 1. Sets the POM version to the chosen release version.
 2. Updates the `project.build.outputTimestamp` property (reproducible builds).
-3. Updates `README.md` with the new release version (dependency snippets and
-   current-version text).
+3. Updates `README.md` and the `index.xml` site pages with the new release version
+   (dependency snippets and current-version text).
 4. Builds and GPG-signs the artifacts, then uploads them to the
    [Central Publishing Portal](https://central.sonatype.com/).
 5. Commits the release version and creates a `vX.Y.Z` git tag.
@@ -174,7 +174,7 @@ $ git checkout master
 $ git pull
 # Set the release version (e.g. 2.0.1) in all pom.xml files, update
 # project.build.outputTimestamp to the current UTC time in pom.xml, and update
-# README.md with the new version, then commit.
+# README.md and the index.xml site pages with the new version, then commit.
 $ mvn install -Prelease
 $ mvn deploy -Prelease
 ```
