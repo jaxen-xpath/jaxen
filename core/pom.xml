@@ -83,6 +83,11 @@
         </executions>
       </plugin>
       
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+      </plugin>
+
       <!-- Jaxen API Compatibility Checker - detects changes to jaxen's own public API -->
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
