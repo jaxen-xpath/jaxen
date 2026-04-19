@@ -416,7 +416,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.25.0</version>
+        <version>3.28.0</version>
         <configuration>
           <sourceEncoding>utf-8</sourceEncoding>
           <targetJdk>1.5</targetJdk>
