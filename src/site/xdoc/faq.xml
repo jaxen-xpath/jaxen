@@ -3,11 +3,10 @@
 
   <properties>
     <author email="bob.mcwhirter@redhat.com">bob mcwhirter</author>
-    <title>FAQ</title>
+    <title>Frequently Asked Questions</title>
   </properties>
 
   <body>
-    <title>Frequently Asked Questions</title>
     
     <section name="What is jaxen?">
       <p>
