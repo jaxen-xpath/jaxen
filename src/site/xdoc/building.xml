@@ -12,11 +12,11 @@
     <section name="Compiling">
       <p>
         Jaxen's build system is <a href="https://maven.apache.org/">Maven 3</a>. 
-        To compile Jaxen, install Maven. Then at the shell 
-        prompt inside the top-level jaxen directory, type "mvn compile":
+        At the shell 
+        prompt inside the top-level jaxen directory, type "./mvnw compile":
       </p>
       
-      <p><samp>$ mvn compile</samp></p>
+      <p><samp>$ ./mvnw compile</samp></p>
       
       <p>
         You'll likely see some deprecation warnings. Don't worry about these. 
@@ -24,17 +24,17 @@
       </p>
       
       <p>
-        To run the unit tests, type "mvn test":
+        To run the unit tests, type "./mvnw test":
       </p>
       
-      <p><samp>$ mvn test</samp></p>
+      <p><samp>$ ./mvnw test</samp></p>
       
       <p>
         To build a jar file at the shell 
-        prompt type "mvn package":
+        prompt type "./mvnw package":
       </p>
       
-      <p><samp>$ mvn package</samp></p>
+      <p><samp>$ ./mvnw package</samp></p>
       
       <p>
         This runs the unit tests as well. The jar file will appear in the target directory. <!--   If any are failing and you still want to 
@@ -46,51 +46,29 @@
       
       
       <p>
-        To generate javadoc, type "mvn javadoc:javadoc":
+        To generate javadoc, type "./mvnw javadoc:javadoc":
       </p>
       
-      <p><samp>$ mvn javadoc:javadoc</samp></p>
+      <p><samp>$ ./mvnw javadoc:javadoc</samp></p>
       
       <p>
         To generate the complete documentation for the site, including 
-        code coverage measurements, static code analysis, and more, type "mvn site":
+        code coverage measurements, static code analysis, and more, type "./mvnw site":
       </p>
       
-      <p><samp>$ mvn site</samp></p>
+      <p><samp>$ ./mvnw site</samp></p>
       
       <p>
        Again the output appears in the target folder. 
       </p>
       
      <p>
-        To remove build artifacts, type "mvn clean":
+        To remove build artifacts, type "./mvnw clean":
       </p>
       
-      <p><samp>$ mvn clean</samp></p>
-      
+      <p><samp>$ ./mvnw clean</samp></p>
       
     </section>
-
-    <section name="Publishing a Release">
-      <p>
-       To prepare jaxen for release:
-      </p>
-     
-      <ol>
-        <li>Update xdocs/releases.xml, xdocs/status.xml, and xdocs/index.xml with the new version number and information.</li>        
-        <li>Update pom.xml and INSTALL with the new version number.</li>    
-        <li>Make sure all changes are committed.</li>   
-        <li>Check that all tests pass by running <samp>mvn test</samp>.</li> 
-        <li>Tag the release in Github.</li>
-        <li>And then a miracle occurs to upload to Maven Central.</li>
-        <li>
-          The site is automatically published to <a href="https://jaxen-xpath.github.io/jaxen/">GitHub Pages</a>
-          via the <code>pages.yml</code> GitHub Actions workflow when changes are pushed to master.
-        </li>
-      </ol>
-
-    </section>
-
 
   </body>
 </document>
