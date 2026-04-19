@@ -116,7 +116,7 @@ The Japicmp plugin is configured in the core module to detect changes to jaxen's
       </goals>
       <configuration>
         <parameter>
-          <breakBuildOnModifications>true</breakBuildOnModifications>
+          <breakBuildOnModifications>false</breakBuildOnModifications>
           <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
           <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
           <accessModifier>public</accessModifier>

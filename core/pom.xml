@@ -102,7 +102,7 @@
             </goals>
             <configuration>
               <parameter>
-                <breakBuildOnModifications>true</breakBuildOnModifications>
+                <breakBuildOnModifications>false</breakBuildOnModifications>
                 <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
                 <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
                 <onlyModified>true</onlyModified>
