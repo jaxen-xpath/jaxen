@@ -70,4 +70,4 @@ jobs:
           cache: maven
 
       - name: Build site
-        run: mvn --batch-mode site
+        run: mvn --batch-mode site -Djapicmp.skip=true
