@@ -371,6 +371,7 @@
             </execution>
           </executions>
           <configuration>
+            <skip>true</skip>
             <instructions>
               <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
               <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
