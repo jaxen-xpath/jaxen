@@ -7,7 +7,6 @@
   </properties>
 
   <body>
-    <title>Writing Jaxen Extension Functions</title>
     
     <section name="What is an extension function?">
       <p>
