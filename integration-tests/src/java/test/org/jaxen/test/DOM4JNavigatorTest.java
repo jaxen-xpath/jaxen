@@ -81,6 +81,11 @@ public class DOM4JNavigatorTest extends XPathTestBase
     {
         return reader.read( url );
     }
+
+    protected XPath createXPath(String xpath) throws JaxenException
+    {
+        return new Dom4jXPath(xpath);
+    }
     
     /**
      * reported as JAXEN-104.

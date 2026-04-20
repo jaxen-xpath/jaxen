@@ -49,7 +49,10 @@
 package org.jaxen.test;
 
 import org.jaxen.Navigator;
+import org.jaxen.XPath;
+import org.jaxen.JaxenException;
 import org.jaxen.xom.DocumentNavigator;
+import org.jaxen.xom.XOMXPath;
 import nu.xom.Builder;
 
 public class XOMNavigatorTest extends XPathTestBase
@@ -69,5 +72,10 @@ public class XOMNavigatorTest extends XPathTestBase
     public Object getDocument(String url) throws Exception
     {
         return this.builder.build( url );
+    }
+
+    protected XPath createXPath(String xpath) throws JaxenException
+    {
+        return new XOMXPath(xpath);
     }
 }

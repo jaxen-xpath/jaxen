@@ -53,6 +53,8 @@ import java.util.List;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
+import org.jaxen.jdom.JDOMXPath;
+import org.jaxen.XPath;
 import org.jaxen.jdom.DocumentNavigator;
 import org.jaxen.jdom.JDOMXPath;
 import org.jdom.Document;
@@ -77,6 +79,11 @@ public class JDOMNavigatorTest extends XPathTestBase
     public Object getDocument(String url) throws Exception
     {
         return this.builder.build( url );
+    }
+
+    protected XPath createXPath(String xpath) throws JaxenException
+    {
+        return new JDOMXPath(xpath);
     }
     
     

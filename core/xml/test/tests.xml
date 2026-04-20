@@ -624,12 +624,9 @@
     <context select="/">
       <!-- NOTE: /a/b/c selects elements in no namespace only! -->
       <test select="/a/b/c" count="0"/>
-      <!--
-        The following test uses an unbound prefix 'x' and should throw an exception.
-        Addresses issue JAXEN-18.
-        Turns out this isn't really tested as the test didn't fail when the exception wasn't thrown.
+      <!-- The following test uses an unbound prefix 'x' and should throw an exception.
+           Addresses issue JAXEN-18. -->
       <test select="/x:a/x:b/x:c" count="0" exception="true"/>
-      -->
     </context>
     <context select="/"
 	     xmlns:prefix="https://example.org/">
