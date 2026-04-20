@@ -1,7 +1,6 @@
 package org.jaxen;
 
 /*
- $Id$
 
  Copyright 2003 The Werken Company. All Rights Reserved.
  

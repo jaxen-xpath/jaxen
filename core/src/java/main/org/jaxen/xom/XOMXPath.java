@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 
@@ -71,9 +67,6 @@ import org.jaxen.JaxenException;
  */
 public class XOMXPath extends BaseXPath
 {
-    /**
-     * 
-     */
     private static final long serialVersionUID = -5332108546921857671L;
 
     /** Construct given an XPath expression string.
