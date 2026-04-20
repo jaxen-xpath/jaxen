@@ -1,8 +1,5 @@
 package org.jaxen;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
 /*
  * $Header: $
  * $Revision: $
