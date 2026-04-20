@@ -90,7 +90,7 @@ public class DOM4JNavigatorTest extends XPathTestBase
     public void testConcurrentModification() throws FunctionCallException, UnsupportedAxisException
     {
         Navigator nav = new DocumentNavigator();
-        Object document = nav.getDocument("xml/testNamespaces.xml");
+        Object document = nav.getDocument("../core/xml/testNamespaces.xml");
         Iterator descendantOrSelfAxisIterator = nav.getDescendantOrSelfAxisIterator(document);
         while (descendantOrSelfAxisIterator.hasNext()) {
             Object node = descendantOrSelfAxisIterator.next();
