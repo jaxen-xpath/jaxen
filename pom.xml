@@ -418,6 +418,9 @@
         <groupId>org.openclover</groupId>
         <artifactId>clover-maven-plugin</artifactId>
         <version>4.5.2</version>
+        <configuration>
+          <aggregate>true</aggregate>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
