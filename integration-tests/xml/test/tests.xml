@@ -633,6 +633,10 @@
     </context>
     <context select="/"
 	     xmlns:dummy="http://dummyNamespace/">
+      <test select="/dummy:a/dummy:b/dummy:c" count="0"/>
+    </context>
+    <context select="/"
+	     xmlns:dummy="https://example.org/">
       <test select="/dummy:a/dummy:b/dummy:c" count="1"/>
     </context>
   </document>
