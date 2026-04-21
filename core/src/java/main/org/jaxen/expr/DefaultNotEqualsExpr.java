@@ -52,7 +52,7 @@ package org.jaxen.expr;
 class DefaultNotEqualsExpr extends DefaultEqualityExpr 
   {
   /**
-     * 
+     *
      */
     private static final long serialVersionUID = -8001267398136979152L;
 

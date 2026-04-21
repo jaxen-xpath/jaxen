@@ -88,7 +88,7 @@ import java.util.Map;
 public class DocumentNavigator extends org.jaxen.DefaultNavigator
 {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 3159311338575942877L;
 

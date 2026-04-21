@@ -1,9 +1,6 @@
 package org.jaxen;
 
 /*
- * $Header: $
- * $Revision: $
- * $Date: $
  *
  * ====================================================================
  *
@@ -45,7 +42,6 @@ package org.jaxen;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id: $
 */
 
 /**

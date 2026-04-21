@@ -72,7 +72,7 @@ import org.jaxen.JaxenException;
 public class XOMXPath extends BaseXPath
 {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -5332108546921857671L;
 

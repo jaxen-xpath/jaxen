@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -222,7 +217,6 @@ public abstract class XPathTestBase extends TestCase
         }
         assertEquals(25, count);
     }
-
 
     /**
      *  test for jaxen-24

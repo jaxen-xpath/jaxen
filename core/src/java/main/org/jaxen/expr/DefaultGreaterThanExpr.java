@@ -50,7 +50,7 @@ package org.jaxen.expr;
 class DefaultGreaterThanExpr extends DefaultRelationalExpr
   {
   /**
-     * 
+     *
      */
     private static final long serialVersionUID = 6379252220540222867L;
 
