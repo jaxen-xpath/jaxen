@@ -62,7 +62,6 @@ again, its just in cvs for completeness -->
  *
  */
 
-
 package org.jaxen;
 
 import junit.framework.TestCase;

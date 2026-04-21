@@ -41,7 +41,6 @@
  *
  */
 
-
 package org.jaxen.test;
 
 import junit.framework.TestCase;
@@ -218,7 +217,6 @@ public abstract class XPathTestBase extends TestCase
         }
         assertEquals(25, count);
     }
-
 
     /**
      *  test for jaxen-24

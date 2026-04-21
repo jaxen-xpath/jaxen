@@ -1,4 +1,7 @@
 /*
+ * $Header$
+ * $Revision$
+ * $Date$
  *
  * ====================================================================
  *
@@ -40,6 +43,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
+ * $Id$
  */
 
 package org.jaxen.saxpath.base;

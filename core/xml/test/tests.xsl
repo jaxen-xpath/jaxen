@@ -6,6 +6,9 @@ again, its just in cvs for completeness -->
     <template match="/">
         <text>
             /*
+ * $Header: /home/projects/jaxen/scm/jaxen/src/java/test/org/jaxen/XPathTestBase.java,v 1.32 2005/06/15 23:52:40 bewins Exp $
+ * $Revision: 1.32 $
+ * $Date: 2005/06/15 23:52:40 $
  *
  * ====================================================================
  *
@@ -60,6 +63,7 @@ again, its just in cvs for completeness -->
  * James Strachan &lt;jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see &lt;https://github.com/jaxen-xpath/jaxen/>.
  *
+ * $Id: XPathTestBase.java,v 1.32 2005/06/15 23:52:40 bewins Exp $
  */
 
 

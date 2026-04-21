@@ -1,6 +1,9 @@
 package org.jaxen.jdom;
 
 /*
+ * $Header$
+ * $Revision$
+ * $Date$
  *
  * ====================================================================
  *
@@ -42,6 +45,7 @@ package org.jaxen.jdom;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
+ * $Id$
 */
 
 import java.util.HashMap;
@@ -82,6 +86,9 @@ import org.jdom.input.SAXBuilder;
  */
 public class DocumentNavigator extends DefaultNavigator implements NamedAccessNavigator
 {
+    /**
+     *
+     */
     private static final long serialVersionUID = -1636727587303584165L;
 
     /** Singleton implementation.
