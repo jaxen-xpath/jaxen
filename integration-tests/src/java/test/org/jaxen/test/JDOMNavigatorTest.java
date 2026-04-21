@@ -78,6 +78,11 @@ public class JDOMNavigatorTest extends XPathTestBase
     {
         return this.builder.build( url );
     }
+
+    protected XPath createXPath(String xpath) throws JaxenException
+    {
+        return new JDOMXPath(xpath);
+    }
     
     
     public void testNullNamespace() throws JaxenException {

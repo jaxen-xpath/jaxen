@@ -52,6 +52,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.jaxen.Navigator;
+import org.jaxen.XPath;
+import org.jaxen.JaxenException;
+import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.DocumentNavigator;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -83,6 +86,11 @@ public class DOMNavigatorTest extends XPathTestBase
     public Object getDocument(String url) throws Exception
     {
         return builder.parse( url );
+    }
+
+    protected XPath createXPath(String xpath) throws JaxenException
+    {
+        return new DOMXPath(xpath);
     }
     
     public void testGetAttributeQNameOnElement() {
