@@ -207,7 +207,7 @@ public abstract class XPathTestBase extends TestCase
     public void testGetNodeType() throws FunctionCallException, UnsupportedAxisException
     {
         Navigator nav = getNavigator();
-        Object document = nav.getDocument("xml/testNamespaces.xml");
+        Object document = nav.getDocument("../core/xml/testNamespaces.xml");
         int count = 0;
         Iterator descendantOrSelfAxisIterator = nav.getDescendantOrSelfAxisIterator(document);
         while (descendantOrSelfAxisIterator.hasNext())
@@ -230,7 +230,7 @@ public abstract class XPathTestBase extends TestCase
     public void testJaxen24() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/jaxen24.xml";
+        String url = "../core/xml/jaxen24.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/body/div");
@@ -251,7 +251,7 @@ public abstract class XPathTestBase extends TestCase
     public void testJaxen58() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/jaxen24.xml";
+        String url = "../core/xml/jaxen24.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -274,7 +274,7 @@ public abstract class XPathTestBase extends TestCase
     public void testJaxen3() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -291,7 +291,7 @@ public abstract class XPathTestBase extends TestCase
     public void testStringFunction1() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root");
@@ -308,7 +308,7 @@ public abstract class XPathTestBase extends TestCase
     public void testStringFunction2() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a");
@@ -325,7 +325,7 @@ public abstract class XPathTestBase extends TestCase
     public void testStringFunction3() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/c");
@@ -345,7 +345,7 @@ public abstract class XPathTestBase extends TestCase
     public void testJaxen3dupe() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/jaxen3.xml";
+        String url = "../core/xml/jaxen3.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -365,7 +365,7 @@ public abstract class XPathTestBase extends TestCase
     public void testForParserErrors() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/numbers.xml";
+        String url = "../core/xml/numbers.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -406,7 +406,7 @@ public abstract class XPathTestBase extends TestCase
     public void testUnderscoresInNames() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/underscore.xml";
+        String url = "../core/xml/underscore.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -433,7 +433,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNodesetEqualsString() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -451,7 +451,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNodesetEqualsNumber() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/numbers.xml";
+        String url = "../core/xml/numbers.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -476,7 +476,7 @@ public abstract class XPathTestBase extends TestCase
     public void testIntegerArithmetic() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/numbers.xml";
+        String url = "../core/xml/numbers.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -525,7 +525,7 @@ public abstract class XPathTestBase extends TestCase
     public void testFloatingPointArithmetic() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/numbers.xml";
+        String url = "../core/xml/numbers.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -557,7 +557,7 @@ public abstract class XPathTestBase extends TestCase
     public void testPrecedingSiblingAxis() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/pi2.xml";
+        String url = "../core/xml/pi2.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/a/c");
@@ -581,7 +581,7 @@ public abstract class XPathTestBase extends TestCase
     public void testVariableLookup() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/id.xml";
+        String url = "../core/xml/id.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -606,7 +606,7 @@ public abstract class XPathTestBase extends TestCase
     public void testAttributeParent() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/id.xml";
+        String url = "../core/xml/id.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -628,7 +628,7 @@ public abstract class XPathTestBase extends TestCase
     public void testAttributeAsContext() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/id.xml";
+        String url = "../core/xml/id.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/foo/@id");
@@ -645,7 +645,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid53992() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/pi.xml";
+        String url = "../core/xml/pi.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -668,7 +668,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54032() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/evaluate.xml";
+        String url = "../core/xml/evaluate.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -690,7 +690,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54082() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/numbers.xml";
+        String url = "../core/xml/numbers.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/numbers/set[1]");
@@ -713,7 +713,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54082b() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/numbers.xml";
+        String url = "../core/xml/numbers.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/numbers/set[2]");
@@ -735,7 +735,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54145() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/axis.xml";
+        String url = "../core/xml/axis.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root");
@@ -752,7 +752,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54156() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/axis.xml";
+        String url = "../core/xml/axis.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a/a.3");
@@ -769,7 +769,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54168() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/axis.xml";
+        String url = "../core/xml/axis.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a/a.3");
@@ -786,7 +786,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54180() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/axis.xml";
+        String url = "../core/xml/axis.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -804,7 +804,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54197() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/axis.xml";
+        String url = "../core/xml/axis.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -822,7 +822,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54219() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -842,7 +842,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54249() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[1]");
@@ -860,7 +860,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54266() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[2]/servlet-name");
@@ -877,7 +877,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54278() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[2]/servlet-name");
@@ -897,7 +897,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54298() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -946,7 +946,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54467() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/*");
@@ -976,7 +976,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54522() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/nitf.xml";
+        String url = "../core/xml/nitf.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/nitf/head/docdata");
@@ -993,7 +993,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54534() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/nitf.xml";
+        String url = "../core/xml/nitf.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/nitf/head");
@@ -1014,7 +1014,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54570() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/nitf.xml";
+        String url = "../core/xml/nitf.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1035,7 +1035,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54614() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/moreover.xml";
+        String url = "../core/xml/moreover.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1086,7 +1086,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNodeTypes() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/contents.xml";
+        String url = "../core/xml/contents.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1112,7 +1112,7 @@ public abstract class XPathTestBase extends TestCase
     public void testPositioning() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/fibo.xml";
+        String url = "../core/xml/fibo.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1134,7 +1134,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54853() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1162,7 +1162,7 @@ public abstract class XPathTestBase extends TestCase
     public void testid54932() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app");
@@ -1182,7 +1182,7 @@ public abstract class XPathTestBase extends TestCase
     public void testCountFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/much_ado.xml";
+        String url = "../core/xml/much_ado.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1206,7 +1206,7 @@ public abstract class XPathTestBase extends TestCase
     public void testCountFunctionMore() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/much_ado.xml";
+        String url = "../core/xml/much_ado.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/PLAY/ACT[2]/SCENE[1]");
@@ -1233,7 +1233,7 @@ public abstract class XPathTestBase extends TestCase
     public void testCorrectPredicateApplication() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/much_ado.xml";
+        String url = "../core/xml/much_ado.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1253,7 +1253,7 @@ public abstract class XPathTestBase extends TestCase
     public void testAxisNodeOrdering() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1276,7 +1276,7 @@ public abstract class XPathTestBase extends TestCase
     public void testDocumentFunction1() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/text.xml";
+        String url = "../core/xml/text.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1286,10 +1286,10 @@ public abstract class XPathTestBase extends TestCase
         while (iter.hasNext())
         {
             Object context = iter.next();
-                Object result = assertCountXPath2(1, context, "document('xml/web.xml')");
+                Object result = assertCountXPath2(1, context, "document('../core/xml/web.xml')");
                 assertValueOfXPath("snoop", result, "/web-app/servlet[1]/servlet-name");
                 assertValueOfXPath("snoop", result, "/web-app/servlet[1]/servlet-name/text()");
-            assertValueOfXPath("snoop", context, "document('xml/web.xml')/web-app/servlet[1]/servlet-name");
+            assertValueOfXPath("snoop", context, "document('../core/xml/web.xml')/web-app/servlet[1]/servlet-name");
         }
     }
 
@@ -1300,7 +1300,7 @@ public abstract class XPathTestBase extends TestCase
     public void testDocumentFunctionContextExample() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/text.xml";
+        String url = "../core/xml/text.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/foo/bar/cheese[1]");
@@ -1311,14 +1311,14 @@ public abstract class XPathTestBase extends TestCase
         {
             Object context = iter.next();
             assertValueOfXPath("3foo3", context, "concat(./@id,'foo',@id)");
-            assertValueOfXPath("3snoop3", context, "concat(./@id,document('xml/web.xml')/web-app/servlet[1]/servlet-name,./@id)");
+            assertValueOfXPath("3snoop3", context, "concat(./@id,document('../core/xml/web.xml')/web-app/servlet[1]/servlet-name,./@id)");
         }
     }
 
     public void testDocumentFunctionActual() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/message.xml";
+        String url = "../core/xml/message.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1329,7 +1329,7 @@ public abstract class XPathTestBase extends TestCase
         {
             Object context = iter.next();
             assertValueOfXPath("Pruefgebiete", context, "/message/body/data/items/item[name/text()='parentinfo']/value");
-            assertValueOfXPath("Pruefgebiete", context, "document('xml/message.xml')/message/body/data/items/item[name/text()='parentinfo']/value");
+            assertValueOfXPath("Pruefgebiete", context, "document('../core/xml/message.xml')/message/body/data/items/item[name/text()='parentinfo']/value");
         }
     }
 
@@ -1339,7 +1339,7 @@ public abstract class XPathTestBase extends TestCase
     public void testAbsoluteLocationPaths() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a");
@@ -1362,7 +1362,7 @@ public abstract class XPathTestBase extends TestCase
     public void testTranslateFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1388,7 +1388,7 @@ public abstract class XPathTestBase extends TestCase
     public void testSubstringFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1415,7 +1415,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNormalizeSpaceFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/simple.xml";
+        String url = "../core/xml/simple.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1441,7 +1441,7 @@ public abstract class XPathTestBase extends TestCase
     public void testStringExtensionFunctions() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/web.xml";
+        String url = "../core/xml/web.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[1]");
@@ -1467,7 +1467,7 @@ public abstract class XPathTestBase extends TestCase
     public void testLangFunction() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/lang.xml";
+        String url = "../core/xml/lang.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1494,7 +1494,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespacesAgain() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/namespaces.xml";
+        String url = "../core/xml/namespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1528,7 +1528,7 @@ public abstract class XPathTestBase extends TestCase
     public void testPrefixDoesntMatter() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/namespaces.xml";
+        String url = "../core/xml/namespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1549,7 +1549,7 @@ public abstract class XPathTestBase extends TestCase
     public void testCDATASectionsAreIncludedInTextNodes() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/cdata.xml";
+        String url = "../core/xml/cdata.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextPath = createXPath("/p/text()");
@@ -1568,7 +1568,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespaces() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/namespaces.xml";
+        String url = "../core/xml/namespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1595,7 +1595,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNoNamespace() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/defaultNamespace.xml";
+        String url = "../core/xml/defaultNamespace.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1617,7 +1617,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespaceResolution() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/defaultNamespace.xml";
+        String url = "../core/xml/defaultNamespace.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1637,7 +1637,7 @@ public abstract class XPathTestBase extends TestCase
     public void testTextNodes() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/text.xml";
+        String url = "../core/xml/text.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1655,7 +1655,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespaceNodeCounts1() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/testNamespaces.xml";
+        String url = "../core/xml/testNamespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1679,7 +1679,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespaceNodeCounts() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/testNamespaces.xml";
+        String url = "../core/xml/testNamespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/Template/Application1");
@@ -1705,7 +1705,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespaceNodesHaveParent() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/testNamespaces.xml";
+        String url = "../core/xml/testNamespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
@@ -1726,7 +1726,7 @@ public abstract class XPathTestBase extends TestCase
     public void testNamespaceNodeAsContext() throws JaxenException
     {
         Navigator nav = getNavigator();
-        String url = "xml/testNamespaces.xml";
+        String url = "../core/xml/testNamespaces.xml";
         log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/Template/namespace::xml");
