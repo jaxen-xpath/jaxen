@@ -54,8 +54,7 @@ jaxen/                          # Root directory
 │   ├── src/java/test/          # Unit tests (85 test classes)
 │   └── src/java/samples/       # Demo code (DOMDemo, Dom4jDemo, JDOMDemo)
 ├── integration-tests/          # Integration test module
-│   ├── src/java/test/          # Navigator tests for DOM/JDOM/DOM4J/XOM
-│   └── xml/                    # Test XML files
+│   └── src/java/test/          # Navigator tests for DOM/JDOM/DOM4J/XOM
 ├── pom.xml                     # Parent Maven configuration
 ├── README.md                   # Basic project info
 └── RELEASING.md                # Release process documentation
@@ -159,7 +158,7 @@ mvn test -X
    
 3. **Test failures in integration-tests**
    - Verify all XML object model dependencies are available (JDOM, DOM4J, XOM)
-   - Check XML test files in `integration-tests/xml/` are accessible
+   - Check XML test files in `core/xml/` (referenced via `../core/xml/`) are accessible
 
 ### Dependency Information
 - **JUnit**: 3.8.2 (older version, affects test writing style)
@@ -191,7 +190,7 @@ See `RELEASING.md` for complete release instructions. Key requirements:
 - `core/src/java/main/org/jaxen/BaseXPath.java` - Main XPath implementation
 - `core/src/java/main/org/jaxen/Navigator.java` - Object model navigation interface
 - `core/src/java/main/org/jaxen/function/` - XPath function implementations
-- `integration-tests/xml/` - XML test files for validation
+- `core/xml/` - XML test files for validation
 
 ### Configuration Files  
 - `pom.xml` - Maven build configuration (parent)
