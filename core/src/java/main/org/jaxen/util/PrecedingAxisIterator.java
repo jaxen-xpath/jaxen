@@ -1,9 +1,6 @@
 package org.jaxen.util;
 
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -45,7 +42,6 @@ package org.jaxen.util;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
 */
 
 import org.jaxen.JaxenConstants;
@@ -112,7 +108,6 @@ public class PrecedingAxisIterator implements Iterator
         this.childrenOrSelf = JaxenConstants.EMPTY_LIST_ITERATOR;
         this.stack = new ArrayList<Object>();
     }
-
 
     /**
      * Returns true if there are any preceding nodes remaining; false otherwise.
@@ -206,7 +201,6 @@ public class PrecedingAxisIterator implements Iterator
             }
         }
     }
-
 
     /**
      * This operation is not supported.

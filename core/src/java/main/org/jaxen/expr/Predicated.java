@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,10 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
-
 
 package org.jaxen.expr;
 
@@ -64,16 +58,14 @@ public interface Predicated extends Serializable
      * @param predicate the predicate to add
      */
     void addPredicate(Predicate predicate);
-    
-    
+
     /**
      * Returns a possibly empty list of predicates.
      * 
      * @return the list of predicates
      */
     List getPredicates();
-    
-    
+
     /**
      * Returns a possibly empty set of predicates.
      * 

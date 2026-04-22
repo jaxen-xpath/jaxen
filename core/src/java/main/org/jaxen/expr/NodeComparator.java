@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 package org.jaxen.expr;
 
@@ -52,11 +48,9 @@ import java.util.Iterator;
 import org.jaxen.Navigator;
 import org.jaxen.UnsupportedAxisException;
 
-
 class NodeComparator implements Comparator<Object> {
     
     private Navigator navigator;
-
 
     NodeComparator(Navigator navigator) {
         this.navigator = navigator;
@@ -137,7 +131,6 @@ class NodeComparator implements Comparator<Object> {
             return 0; // ???? should I throw an exception instead?
         }
     }
-    
 
     private boolean isNonChild(Object o) {
         return navigator.isAttribute(o) || navigator.isNamespace(o);

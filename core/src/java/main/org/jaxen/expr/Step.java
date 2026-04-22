@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.expr;
@@ -111,7 +107,6 @@ public interface Step extends Predicated
      */
     Iterator axisIterator(Object contextNode,
                           ContextSupport support) throws UnsupportedAxisException;
-    
 
     /**
      * For each node in the given context calls matches() for every node on the

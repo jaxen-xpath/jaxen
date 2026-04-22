@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -82,7 +78,6 @@ public class NamespaceURITest extends TestCase {
         builder = factory.newDocumentBuilder();
         doc = builder.parse( "xml/basic.xml" );
     }
-
 
     public NamespaceURITest(String name) {
         super(name);

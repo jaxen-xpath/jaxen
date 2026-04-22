@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -111,6 +106,5 @@ public class DOM4JNavigatorTest extends XPathTestBase
         XPath xpath = new Dom4jXPath("/foo");
         xpath.selectSingleNode(doc);
     }    
-    
-    
+
 }

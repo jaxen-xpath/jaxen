@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -355,8 +350,7 @@ public class DOMXPathTest extends TestCase
         assertEquals(1, result.size());
         
     }
-    
-     
+
     // Jaxen-22
     public void testJaxen22() 
       throws JaxenException, ParserConfigurationException, SAXException, IOException {
@@ -368,7 +362,6 @@ public class DOMXPathTest extends TestCase
         Object result = xpath.evaluate(doc);
         assertEquals("d", result);
     }
-    
 
     public void testJaxen207() 
       throws JaxenException {
@@ -432,7 +425,6 @@ public class DOMXPathTest extends TestCase
                 + "contains($FinResp, \"SL_Purchasing_Inquiry\")");
     }
 
-
     public void testImplictCastFromTextInARelationalExpression() 
       throws JaxenException, ParserConfigurationException, SAXException, IOException {
         XPath implicitCast = new DOMXPath("//lat[(text() >= 37)]");
@@ -445,8 +437,7 @@ public class DOMXPathTest extends TestCase
         List<?> implicitResult = implicitCast.selectNodes(document);
         assertEquals(1, implicitResult.size());
     }
-    
-     
+
     public void testImplictCastFromCommentInARelationalExpression() 
       throws JaxenException, ParserConfigurationException, SAXException, IOException {
           XPath implicitCast = new DOMXPath("//lat[(comment() >= 37)]");
@@ -459,7 +450,6 @@ public class DOMXPathTest extends TestCase
           List<?> implicitResult = implicitCast.selectNodes(document);
           assertEquals(1, implicitResult.size());
     }
-  
 
     public void testImplictCastFromProcessingInstructionInARelationalExpression() 
       throws JaxenException, ParserConfigurationException, SAXException, IOException {
@@ -539,5 +529,4 @@ public class DOMXPathTest extends TestCase
         assertEquals(1, result.intValue());
     }
 
-     
 }

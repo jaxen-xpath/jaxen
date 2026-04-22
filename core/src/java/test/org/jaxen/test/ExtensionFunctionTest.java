@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -78,7 +74,6 @@ public class ExtensionFunctionTest extends TestCase {
         doc = builder.newDocument();
     }
 
-
     public ExtensionFunctionTest(String name) {
         super(name);
     }
@@ -100,8 +95,7 @@ public class ExtensionFunctionTest extends TestCase {
         }
         
     }
-    
-    
+
     public void testRegisterExtensionFunction() throws JaxenException {
         
         SimpleFunctionContext fc = new XPathFunctionContext(false);
@@ -131,11 +125,9 @@ public class ExtensionFunctionTest extends TestCase {
         
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(Double.valueOf(2), result);
-       
-        
+
     }
-    
-    
+
     public void testJaxen47() throws SAXPathException {
        org.jaxen.dom.DocumentNavigator.getInstance().parseXPath("a:b()");
     }

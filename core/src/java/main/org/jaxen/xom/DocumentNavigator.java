@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,12 +40,9 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
 
-
 package org.jaxen.xom;
-
 
 import nu.xom.Attribute;
 import nu.xom.Comment;
@@ -87,9 +81,7 @@ import java.util.Map;
  */
 public class DocumentNavigator extends org.jaxen.DefaultNavigator
 {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 3159311338575942877L;
 
     public boolean isAttribute(Object o) {

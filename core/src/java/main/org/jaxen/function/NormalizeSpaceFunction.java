@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -78,7 +73,6 @@ import org.jaxen.Navigator;
  */
 public class NormalizeSpaceFunction implements Function
 {
-
 
     /**
      * Create a new <code>NormalizeSpaceFunction</code> object.
@@ -165,8 +159,7 @@ public class NormalizeSpaceFunction implements Function
 
         return new String(buffer, 0, lastWrite);
     }
-    
-    
+
     private static boolean isXMLSpace(char c) {
         return c == ' ' || c == '\n' || c == '\r' || c == '\t';
     }

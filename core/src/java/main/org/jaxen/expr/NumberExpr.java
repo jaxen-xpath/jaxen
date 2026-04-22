@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,7 +40,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
 package org.jaxen.expr;
 
@@ -57,8 +53,7 @@ package org.jaxen.expr;
  */
 public interface NumberExpr extends Expr
 {
-    
-    
+
     /**
      * Returns a <code>java.lang.Double</code> representing the number.
      * 

@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -140,7 +136,6 @@ public class TranslateFunctionTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("abdb", result);
     }   
-    
 
     public void testTranslateNonBMPChars2() throws JaxenException
     {
@@ -148,7 +143,6 @@ public class TranslateFunctionTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("abdb", result);
     }   
-    
 
     public void testTranslateWithNonBMPChars() throws JaxenException
     {
@@ -156,7 +150,6 @@ public class TranslateFunctionTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("ab\uD834\uDD00", result);
     }   
-    
 
     public void testTranslateWithNonBMPChars2() throws JaxenException
     {
@@ -164,7 +157,6 @@ public class TranslateFunctionTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("ab\uD834\uDD00", result);
     }   
-    
 
     public void testTranslateWithMalformedSurrogatePair() throws JaxenException
     {
@@ -177,7 +169,6 @@ public class TranslateFunctionTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
     }   
-    
 
     public void testTranslateWithMissingLowSurrogate() throws JaxenException
     {
@@ -190,7 +181,6 @@ public class TranslateFunctionTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
     }   
-    
 
     public void testTranslateWithExtraCharsInReplacementString() throws JaxenException
     {
@@ -198,6 +188,5 @@ public class TranslateFunctionTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("abd", result);
     }   
-    
 
 }

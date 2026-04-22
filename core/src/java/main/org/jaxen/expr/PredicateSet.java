@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,10 +40,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
-
-
 
 package org.jaxen.expr;
 
@@ -215,10 +209,7 @@ public class PredicateSet implements Serializable
         
         return !nodes2Filter.isEmpty();
     }
-   
-    
-    
-    
+
    /**
     * <p>Returns all of the supplied nodes that satisfy 
     * all the predicates in the set. </p>

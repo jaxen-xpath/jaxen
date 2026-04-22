@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.pattern;
@@ -81,8 +77,7 @@ public class LocationPathPattern extends Pattern {
 
     /** Whether this lcoation path is absolute or not */
     private boolean absolute;
-    
-    
+
     public LocationPathPattern()   
     {
     }
@@ -247,7 +242,6 @@ public class LocationPathPattern extends Pattern {
         }
         return nodeTest.getPriority();
     }
-
 
     public short getMatchType() 
     {

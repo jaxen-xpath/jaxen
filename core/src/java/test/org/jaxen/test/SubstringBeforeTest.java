@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -76,7 +72,6 @@ public class SubstringBeforeTest extends TestCase {
         doc = builder.newDocument();
         doc.appendChild(doc.createElement("root"));
     }
-
 
     public SubstringBeforeTest(String name) {
         super(name);
@@ -116,16 +111,14 @@ public class SubstringBeforeTest extends TestCase {
         String result = (String) xpath.evaluate( doc );
         assertEquals("", result);
     }    
-  
-  
+
     public void testSubstringBeforeString3() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring-before('1234567890', '456')" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("123", result);
     }    
-  
-  
+
     public void testEmptyStringSubstringBeforeNonEmptyString() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring-before('', 'a')" );

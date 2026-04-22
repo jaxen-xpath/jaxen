@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.pattern;
 
@@ -72,7 +67,6 @@ import org.jaxen.expr.UnionExpr;
 import org.jaxen.saxpath.Axis;
 import org.jaxen.saxpath.XPathReader;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
-
 
 /** <code>PatternParser</code> is a helper class for parsing
   * XSLT patterns

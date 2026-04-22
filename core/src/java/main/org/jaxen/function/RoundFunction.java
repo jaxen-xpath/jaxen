@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -80,8 +75,7 @@ public class RoundFunction implements Function
      * Create a new <code>RoundFunction</code> object.
      */
     public RoundFunction() {}
-    
-    
+
     /** Returns the nearest integer to the number.
      *
      * @param context the context at the point in the

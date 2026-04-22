@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,13 +39,9 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
-
-
 package org.jaxen.expr;
-
 
 /**
  * Represents a binary expression. 
@@ -67,7 +60,6 @@ public interface BinaryExpr extends Expr
      */
     Expr getLHS();
 
-    
     /**
      * Returns the right-hand side of the binary expression.
      * 

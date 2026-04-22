@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,13 +39,9 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
-
-
 package org.jaxen.test;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -82,10 +75,8 @@ import junit.framework.TestCase;
 public class SimpleNamespaceContextTest extends TestCase
 {
 
-	
 	private final Map<Object, Object> map = new HashMap<Object, Object>();
 
-	
     /**
      * Need to make sure that changing the map after it's used to create the 
      * namespace context does not affect the context. i.e.

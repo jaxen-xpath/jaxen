@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -76,7 +72,6 @@ public class ArithmeticTest extends TestCase {
         doc.appendChild(a);
     }
 
-
     public ArithmeticTest(String name) {
         super(name);
     }
@@ -89,7 +84,6 @@ public class ArithmeticTest extends TestCase {
         
     }    
 
-    
    public void testNumbersThatBeginWithADecimalPoint2() 
       throws JaxenException {
         
@@ -107,7 +101,6 @@ public class ArithmeticTest extends TestCase {
         assertFalse(result.booleanValue());
         
     }    
-   
 
    public void testNegativeZeroNotEqualsZero() 
       throws JaxenException {
@@ -117,8 +110,7 @@ public class ArithmeticTest extends TestCase {
         assertFalse(result.booleanValue());
         
    }    
-   
-   
+
    public void testNegativeZeroEqualsZero() 
       throws JaxenException {
         
@@ -127,8 +119,7 @@ public class ArithmeticTest extends TestCase {
         assertTrue(result.booleanValue());
         
    }    
-   
-   
+
    public void testZeroNotGreaterThanNegativeZero() 
       throws JaxenException {
      
@@ -156,7 +147,6 @@ public class ArithmeticTest extends TestCase {
 
    } 
 
-   
    public void testNegativeZeroNotLessThanZero() 
       throws JaxenException {
      
@@ -165,7 +155,6 @@ public class ArithmeticTest extends TestCase {
      assertFalse(result.booleanValue());
      
    }   
-   
 
    public void testNaNNotEqualsString() 
       throws JaxenException {
@@ -175,7 +164,6 @@ public class ArithmeticTest extends TestCase {
         assertTrue(result.booleanValue());
         
    }    
-   
 
    public void testNaNEqualsString() 
       throws JaxenException {
@@ -195,5 +183,4 @@ public class ArithmeticTest extends TestCase {
         
    }  
 
-    
 }

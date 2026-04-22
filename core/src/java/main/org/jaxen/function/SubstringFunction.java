@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -148,7 +145,6 @@ public class SubstringFunction implements Function
      */
     public SubstringFunction() {}
 
-    
     /** Returns a substring of an XPath string-value by character index.
      *
      * @param context the context at the point in the

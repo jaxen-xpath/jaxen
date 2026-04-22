@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,10 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
-
 
 package org.jaxen.test;
 
@@ -74,7 +68,6 @@ import junit.framework.TestCase;
 public class DefaultXPathExprTest extends TestCase
 {
 
-    
     // http://jira.codehaus.org/browse/JAXEN-40
     public void testJAXEN40() throws JaxenException, ParserConfigurationException {
         
@@ -102,7 +95,6 @@ public class DefaultXPathExprTest extends TestCase
         
     }
 
-    
     // http://jira.codehaus.org/browse/JAXEN-160
     public void testJAXEN160GetText()
     throws JaxenException, ParserConfigurationException {

@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,11 +39,9 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
-
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -54,7 +49,6 @@ import java.io.StringWriter;
 import org.jaxen.JaxenException;
 
 import junit.framework.TestCase;
-
 
 /**
  * @author Elliotte Rusty Harold

@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -116,8 +111,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(3, numberValue.doubleValue(), 0.00001);
         
     }
-    
-    
+
     public void testParentOfSelection() throws JaxenException {
         /*
         html
@@ -150,9 +144,6 @@ public class BaseXPathTest extends TestCase {
         assertEquals(a2, result.get(0));
     }
 
-
-    
-    
     public void testEvaluateString() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("string(/*)");
@@ -162,8 +153,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals("", stringValue);
         
     }
-    
-    
+
     public void testNumberValueOfEmptyNodeSetIsNaN() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("/x");
@@ -173,8 +163,7 @@ public class BaseXPathTest extends TestCase {
         assertTrue(numberValue.isNaN());
         
     }
-    
-    
+
     public void testPathWithParentheses() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("(/root)/child");
@@ -187,8 +176,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(child, xpath.selectSingleNode(doc));
         
     }
-    
-    
+
     public void testEvaluateWithMultiNodeAnswer() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("(/descendant-or-self::node())");
@@ -198,8 +186,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(2, result.size());
         
     }
-    
-    
+
     public void testValueOfEmptyListIsEmptyString() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("/element");
@@ -221,7 +208,6 @@ public class BaseXPathTest extends TestCase {
         
     }
 
-    
     public void testAncestorAxis() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ancestor::*");
@@ -238,8 +224,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(parent, result.get(1));
         
     }    
-    
-    
+
     public void testPrecedingSiblingAxisIsInDocumentOrder() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("preceding-sibling::*");
@@ -258,8 +243,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(child2, result.get(1));
         
     }    
-    
-    
+
     public void testPrecedingAxisIsInDocumentOrder() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("preceding::*");
@@ -283,8 +267,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(child2, result.get(2));
         
     }    
-    
-    
+
     public void testPrecedingAxisWithPositionalPredicate() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("preceding::*[1]");
@@ -302,8 +285,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(child2, result.get(0));
         
     }    
-    
-    
+
     public void testAncestorAxisWithPositionalPredicate() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ancestor::*[1]");
@@ -321,8 +303,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(child2, result.get(0));
         
     }    
-    
-    
+
     public void testAncestorOrSelfAxis() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("ancestor-or-self::*");
@@ -340,8 +321,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(child, result.get(2));
         
     }    
-    
-    
+
     // test case for JAXEN-55
     public void testAbbreviatedDoubleSlashAxis() throws JaxenException {
         
@@ -371,8 +351,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x4, result.get(3));
         
     }    
-    
-    
+
     // test case for JAXEN-55
     public void testAncestorFollowedByChildren() throws JaxenException {
         
@@ -402,8 +381,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x4, result.get(3));
         
     }    
-    
-    
+
     // test case for JAXEN-55
     public void testDescendantAxis() throws JaxenException {
         
@@ -703,8 +681,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x4, result.get(3));
         
     }    
-    
-    
+
     public void testDuplicateNodes() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("//x | //*");
@@ -1024,28 +1001,24 @@ public class BaseXPathTest extends TestCase {
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(4, result.intValue());
     }
-    
-    
+
     public void testMostComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+1+2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(5, result.intValue());
     }
-    
-    
+
     public void testSimplerArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(1, result.intValue());
     }
-    
-    
+
     public void testNotEqualsDifferentTypes() throws JaxenException {
         XPath xpath = new DOMXPath("1.5 != \"foo\"");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result);
     }
-    
 
     public void testNotEqualsDifferentTypesReverse() throws JaxenException {
         XPath xpath = new DOMXPath("\"foo\" != 3.5");
@@ -1112,8 +1085,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(b, result.get(0));
    
     }
-    
-    
+
     public void testJaxen107FromFile() throws JaxenException, SAXException, IOException {
         
         doc = builder.parse(new File("xml/testNamespaces.xml"));
@@ -1171,8 +1143,7 @@ public class BaseXPathTest extends TestCase {
         assertTrue(out.toByteArray().length > 0);
         
     }
-    
-    
+
     // JAXEN-206
     public void testMismatchedDepthsInContext()
       throws JaxenException {

@@ -1,6 +1,3 @@
-/* $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -41,7 +38,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 package org.jaxen.test;
 
@@ -75,8 +71,7 @@ public class FollowingAxisIteratorTest extends TestCase {
         iterator = new FollowingAxisIterator(doc, new org.jaxen.dom.DocumentNavigator());
         
     }
-    
-    
+
     public void testNoInfiniteLoops() {
      
         try {
@@ -87,7 +82,6 @@ public class FollowingAxisIteratorTest extends TestCase {
         }
         
     }
-
 
     public void testRemove() {
         

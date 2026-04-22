@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -77,12 +73,9 @@ public class CeilingTest extends TestCase {
         doc.appendChild(a);
     }
 
-
     public CeilingTest(String name) {
         super(name);
     }
-
-
 
     public void testCeiling() throws JaxenException {
         

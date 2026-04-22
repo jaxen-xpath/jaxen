@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -102,14 +97,12 @@ public class LangFunction implements Function
     private static final String LANG_LOCALNAME = "lang";
     private static final String XMLNS_URI = 
         "http://www.w3.org/XML/1998/namespace";
-    
 
     /**
      * Create a new <code>LangFunction</code> object.
      */
     public LangFunction() {}
-    
-    
+
     /**
      * <p>
      * Determines whether or not the context node is written in the language specified

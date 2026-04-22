@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,10 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
-
 
 package org.jaxen.test;
 
@@ -85,8 +79,7 @@ public class VariableContextTest extends TestCase
         root.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", "http://www.example.org/");
               
     }
-    
- 
+
     public void testUnresolvableVariable() throws JaxenException {
         
         DOMXPath xpath = new DOMXPath("$a/root");

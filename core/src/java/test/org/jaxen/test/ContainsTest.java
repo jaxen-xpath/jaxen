@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -76,7 +72,6 @@ public class ContainsTest extends TestCase {
         doc = builder.newDocument();
         doc.appendChild(doc.createElement("root"));
     }
-
 
     public ContainsTest(String name) {
         super(name);
@@ -116,8 +111,7 @@ public class ContainsTest extends TestCase {
         Boolean result = (Boolean) xpath.evaluate( doc );
         assertEquals(Boolean.FALSE, result);
     }    
-  
-  
+
     public void testEmptyStringContainsNonEmptyString() throws JaxenException
     {
         XPath xpath = new DOMXPath( "contains('', 'a')" );

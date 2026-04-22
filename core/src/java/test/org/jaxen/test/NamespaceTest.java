@@ -1,6 +1,3 @@
-/* $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -41,7 +38,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 package org.jaxen.test;
 
@@ -103,8 +99,7 @@ public class NamespaceTest extends TestCase {
         // 1 for xml prefix on root; 1 for foo prefix on child; 1 for xml prefix on child
    
     }
-    
-    
+
     public void testNamespaceAxis() throws JaxenException {
         
         Element root = doc.createElement("root");
@@ -117,8 +112,7 @@ public class NamespaceTest extends TestCase {
         assertEquals(2, result.size());
    
     }
-    
-    
+
     public void testUnprefixedNamespaceAxis() throws JaxenException {
         
         Element root = doc.createElement("root");
@@ -131,8 +125,7 @@ public class NamespaceTest extends TestCase {
         assertEquals(2, result.size());
    
     }   
-    
-    
+
     public void testNamespaceNodesReadFromAttributes() throws JaxenException {
         
         Element root = doc.createElement("root");
@@ -147,8 +140,7 @@ public class NamespaceTest extends TestCase {
         assertEquals(2, result.size());
    
     }   
-    
-    
+
     public void testUnboundNamespaceUsedInXPathExpression() throws JaxenException {
         
         Element root = doc.createElementNS("http://www.example.org/", "root");
@@ -163,8 +155,7 @@ public class NamespaceTest extends TestCase {
         }
    
     }   
-    
-    
+
     public void testQueryDefaultNamespace() throws JaxenException {
         
         Element root = doc.createElementNS("http://www.example.org/", "root");
@@ -175,8 +166,7 @@ public class NamespaceTest extends TestCase {
         assertEquals(1, result.size());
    
     }   
-    
-    
+
     public void testQueryDefaultNamespaceWithContext() throws JaxenException {
         
         Element root = doc.createElementNS("http://www.example.org/", "root");
@@ -189,6 +179,5 @@ public class NamespaceTest extends TestCase {
         assertEquals(1, result.size());
    
     }   
-    
-    
+
 }

@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,10 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
-
 
 package org.jaxen.expr;
 
@@ -62,8 +56,7 @@ import org.jaxen.JaxenException;
  */
 public interface Expr extends Serializable
 {
-    
-    
+
     /**
      * Returns a String containing the XPath expression.
      * 
@@ -80,8 +73,7 @@ public interface Expr extends Serializable
      * @return the simplified expression
      */
     Expr   simplify();
-    
-    
+
     /**
      * Evaluate the expression in the given context, and return the result.
      * The result will be a <code>java.lang.Double</code> for expressions that 

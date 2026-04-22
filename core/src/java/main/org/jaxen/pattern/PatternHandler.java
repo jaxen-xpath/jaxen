@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.pattern;
 
@@ -107,9 +102,6 @@ public class PatternHandler extends JaxenHandler
         return this.pattern;
     }
 
-    
-    
-    
     public void endXPath()
     {
         this.pattern = (Pattern) pop();
@@ -238,7 +230,6 @@ public class PatternHandler extends JaxenHandler
         }
     }
 
-    
     public void startNameStep(int axis,
                               String prefix,
                               String localName)
@@ -314,7 +305,6 @@ public class PatternHandler extends JaxenHandler
             }
         }
     }
-    
 
     public void startUnionExpr()
     {

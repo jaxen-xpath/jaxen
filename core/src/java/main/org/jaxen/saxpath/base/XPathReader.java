@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,9 +40,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
-
 
 package org.jaxen.saxpath.base;
 
@@ -907,7 +902,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
         }
     } 
 
-    
     private void additiveExpr() throws SAXPathException
     {
         multiplicativeExpr();
@@ -997,7 +991,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
         }
 
-        
     }
 
     private void unionExpr() throws SAXPathException
@@ -1034,7 +1027,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             return token;
         }
 
-        
         XPathSyntaxException ex = createSyntaxException( "Expected: " + TokenTypes.getTokenText( tokenType ) );
         throw ex;
     }

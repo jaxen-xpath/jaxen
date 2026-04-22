@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -79,7 +75,6 @@ public class NumberTest extends TestCase {
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.newDocument();
     }
-
 
     public NumberTest(String name) {
         super(name);
@@ -132,7 +127,6 @@ public class NumberTest extends TestCase {
         assertEquals(1.0, NumberFunction.evaluate(new Boolean(true), navigator).doubleValue(), tolerance);
     }
 
-
     public void testNumberFunctionRequiresAtMostOneArgument() 
       throws JaxenException {
         
@@ -147,8 +141,7 @@ public class NumberTest extends TestCase {
         }
         
     }     
-    
-    
+
     public void testNumberFunctionAppliedToNonNumericString() 
       throws JaxenException {
         

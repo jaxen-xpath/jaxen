@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,17 +39,13 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
-
 
 package org.jaxen.expr;
 
 import java.io.Serializable;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
-
 
 /**
  * Represents an XPath predicate such as <code>[position() = last()]</code>.

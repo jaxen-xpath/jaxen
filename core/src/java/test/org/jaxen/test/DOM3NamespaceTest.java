@@ -1,6 +1,3 @@
-/* $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -41,7 +38,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 package org.jaxen.test;
 
@@ -59,12 +55,10 @@ import org.w3c.dom.*;
 import junit.framework.TestCase;
 
 public class DOM3NamespaceTest extends TestCase {
-    
-    
+
     private NamespaceNode xmlNS;
     private NamespaceNode rootNS;
     private NamespaceNode attributeNS;
-    
 
     public DOM3NamespaceTest(String name) {
         super(name);
@@ -93,8 +87,7 @@ public class DOM3NamespaceTest extends TestCase {
         }
         
     }     
-    
-    
+
     public void testGetTextContent() {
         assertEquals("http://www.w3.org/XML/1998/namespace", xmlNS.getTextContent());
     }
@@ -109,13 +102,11 @@ public class DOM3NamespaceTest extends TestCase {
             assertEquals(DOMException.NO_MODIFICATION_ALLOWED_ERR, ex.code);
         }
     }
-    
-    
+
     public void testGetFeature() {
         assertNull(attributeNS.getFeature("name", "value"));
     }
-    
-    
+
     public void testIsEqualNodeWithDifferentNamespaceNodes() {
         assertFalse(rootNS.isEqualNode(xmlNS));
     }

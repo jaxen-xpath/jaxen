@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,11 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
-
-
-
 
 package org.jaxen.test;
 
@@ -309,7 +302,6 @@ class ConformanceXPathHandler implements XPathHandler
     public int hashCode() {
         return this.events.hashCode();
     }
-    
 
     @Override
     public String toString()

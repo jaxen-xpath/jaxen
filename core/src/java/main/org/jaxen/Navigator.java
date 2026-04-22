@@ -1,9 +1,6 @@
 package org.jaxen;
 
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -45,7 +42,6 @@ package org.jaxen;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
 */
 
 import java.io.Serializable;
@@ -468,7 +464,6 @@ public interface Navigator extends Serializable
      */
     String getNamespacePrefix(Object ns);
 
-    
     /**
      * Translate a namespace prefix to a namespace URI, <strong>possibly</strong>
      * considering a particular element node.

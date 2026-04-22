@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,15 +40,12 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
 
 package org.jaxen.expr;
 
-
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
-
 
 class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
@@ -69,16 +63,13 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         return this.filterExpr;
     }
 
-
     public void setFilterExpr(Expr filterExpr) {
         this.filterExpr = filterExpr;
     }
 
-
     public LocationPath getLocationPath() {
         return this.locationPath;
     }
-
 
     public String toString() {
         if (getLocationPath() != null) {
@@ -87,7 +78,6 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
         return "[(DefaultPathExpr): " + getFilterExpr() + "]";
     }
-
 
     public String getText() {
         StringBuilder builder = new StringBuilder();
@@ -104,7 +94,6 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         return builder.toString();
     }
 
-
     public Expr simplify() {
         if (getFilterExpr() != null) {
             setFilterExpr(getFilterExpr().simplify());
@@ -117,7 +106,6 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         if (getFilterExpr() == null && getLocationPath() == null) {
             return null;
         }
-
 
         if (getLocationPath() == null) {
             return getFilterExpr();

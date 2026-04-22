@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,17 +39,14 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
-
 
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
 
 import junit.framework.TestCase;
-
 
 /**
  * @author Elliotte Rusty Harold
@@ -81,6 +75,5 @@ public class FunctionCallExceptionTest extends TestCase {
         assertEquals(ex, rex.getCause());
         
     }    
-  
 
 }

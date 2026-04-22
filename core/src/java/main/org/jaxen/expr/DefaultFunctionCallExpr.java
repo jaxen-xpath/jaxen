@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,7 +40,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
 
 package org.jaxen.expr;
@@ -76,7 +72,6 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
         this.parameters.add(parameter);
     }
 
-
     public List getParameters()
     {
         return this.parameters;
@@ -91,7 +86,6 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
     {
         return this.functionName;
     }
-
 
     public String getText()
     {
@@ -144,7 +138,6 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
 
         return this;
     }
-
 
     public String toString()
     {

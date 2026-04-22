@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -71,7 +66,6 @@ public class TrueFunction implements Function
      */
     public TrueFunction() {}
 
-    
     /** Returns <code>Boolean.TRUE</code>
      *
      * @param context ignored

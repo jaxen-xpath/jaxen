@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -43,7 +40,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
 
 package org.jaxen.saxpath.helpers;
@@ -71,8 +67,7 @@ public class XPathReaderFactory
     protected static final String DEFAULT_DRIVER = "org.jaxen.saxpath.base.XPathReader";
     
     private XPathReaderFactory() {}
-    
-    
+
     /** Create an <code>XPathReader</code> using the value of
      *  the <code>org.saxpath.driver</code> system property.
      *

@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,10 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
-
 
 package org.jaxen.expr;
 
@@ -54,7 +48,6 @@ import java.util.List;
 
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
-
 
 /**
  * A wrapper around an XPath expression. 
@@ -69,8 +62,7 @@ public interface XPathExpr extends Serializable
      * @return the wrapped Expr object
      */
     Expr getRootExpr();
-    
-    
+
     /**
      * Changes the wrapped expression object.
      * 
@@ -92,8 +84,7 @@ public interface XPathExpr extends Serializable
      * Jaxen does not currently perform any simplification.
      */
     void simplify();
-    
-    
+
     /**
      * Evaluates the expression and returns a list containing the resulting nodes,
      * or a singleton list containing a <code>Double</code>, <code>String</code>, 

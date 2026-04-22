@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -118,7 +113,6 @@ public class XPathReaderTest extends TestCase
 
     // --------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------
-
 
     public void testPaths() throws SAXPathException
     {
@@ -432,14 +426,12 @@ public class XPathReaderTest extends TestCase
         assertEquals(10.5, result.doubleValue(), 0.000001);
     }
 
-
     public void testNoSpaceAfterMod() throws JaxenException 
     {
         XPath xpath = new DOMXPath( "105 mod10" );
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(5, result.intValue());
     }
-
 
     public void testNoSpaceAfterPlus() throws JaxenException 
     {

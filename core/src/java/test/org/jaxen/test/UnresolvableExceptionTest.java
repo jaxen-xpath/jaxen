@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,11 +39,9 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
-
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -57,7 +52,6 @@ import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 
 import junit.framework.TestCase;
-
 
 /**
  * @author Elliotte Rusty Harold
@@ -90,8 +84,7 @@ public class UnresolvableExceptionTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
     }    
- 
-  
+
     public void testUnresolvableFunction() throws JaxenException {
         
         try {
@@ -103,7 +96,5 @@ public class UnresolvableExceptionTest extends TestCase {
             assertNotNull(ex.getMessage());
         }
     }    
- 
-  
 
 }

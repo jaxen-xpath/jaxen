@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.pattern;
@@ -77,8 +73,7 @@ public class NodeTypeTest extends NodeTest {
     
     public static final NodeTypeTest NAMESPACE_TEST 
         = new NodeTypeTest( NAMESPACE_NODE );
-    
-    
+
     private short nodeType;
     
     public NodeTypeTest(short nodeType)   
@@ -97,7 +92,6 @@ public class NodeTypeTest extends NodeTest {
     {
         return -0.5;
     }
-
 
     public short getMatchType() 
     {

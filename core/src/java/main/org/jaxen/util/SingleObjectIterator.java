@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.util;
 
@@ -72,7 +67,6 @@ public class SingleObjectIterator implements Iterator
         this.object = object;
         this.seen   = false;
     }
-
 
     /**
      * Returns true if this iterator's element has not yet been seen; false if it has.

@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 ////////////////////////////////////////////////////////////////////
@@ -61,7 +57,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.UserDataHandler;
-
 
 /**
  * Extension DOM2/DOM3 node type for a namespace node.
@@ -127,7 +122,6 @@ public class NamespaceNode implements Node
         this.value = value;
     }
 
-
     /**
      * Constructor.
      *
@@ -152,12 +146,9 @@ public class NamespaceNode implements Node
         this.value = attribute.getNodeValue();
     }
 
-
-
     ////////////////////////////////////////////////////////////////////
     // Implementation of org.w3c.dom.Node.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * Get the namespace prefix.
@@ -169,7 +160,6 @@ public class NamespaceNode implements Node
         return name;
     }
 
-
     /**
      * Get the namespace URI.
      *
@@ -179,7 +169,6 @@ public class NamespaceNode implements Node
     {
         return value;
     }
-
 
     /**
      * Change the namespace URI (always fails).
@@ -192,7 +181,6 @@ public class NamespaceNode implements Node
         disallowModification();
     }
 
-
     /**
      * Get the node type.
      *
@@ -202,7 +190,6 @@ public class NamespaceNode implements Node
     {
         return NAMESPACE_NODE;
     }
-
 
     /**
      * Get the parent node.
@@ -218,7 +205,6 @@ public class NamespaceNode implements Node
         return parent;
     }
 
-
     /**
      * Get the list of child nodes.
      *
@@ -228,7 +214,6 @@ public class NamespaceNode implements Node
     {
         return new EmptyNodeList();
     }
-
 
     /**
      * Get the first child node.
@@ -240,7 +225,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Get the last child node.
      *
@@ -250,7 +234,6 @@ public class NamespaceNode implements Node
     {
         return null;
     }
-
 
     /**
      * Get the previous sibling node.
@@ -262,7 +245,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Get the next sibling node.
      *
@@ -272,7 +254,6 @@ public class NamespaceNode implements Node
     {
         return null;
     }
-
 
     /**
      * Get the attribute nodes.
@@ -284,7 +265,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Get the owner document.
      *
@@ -295,7 +275,6 @@ public class NamespaceNode implements Node
         if (parent == null) return null;
         return parent.getOwnerDocument();
     }
-
 
     /**
      * Insert a new child node (always fails).
@@ -313,7 +292,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Replace a child node (always fails).
      *
@@ -329,7 +307,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Remove a child node (always fails).
      *
@@ -343,7 +320,6 @@ public class NamespaceNode implements Node
         disallowModification();
         return null;
     }
-
 
     /**
      * Append a new child node (always fails).
@@ -359,7 +335,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Test for child nodes.
      *
@@ -369,7 +344,6 @@ public class NamespaceNode implements Node
     {
         return false;
     }
-
 
     /**
      * Create a copy of this node.
@@ -383,7 +357,6 @@ public class NamespaceNode implements Node
         return new NamespaceNode(parent, name, value);
     }
 
-
     /**
      * Normalize the text descendants of this node.
      *
@@ -394,7 +367,6 @@ public class NamespaceNode implements Node
     {
     // no op
     }
-
 
     /**
      * Test if a DOM2 feature is supported. (None are.)
@@ -408,7 +380,6 @@ public class NamespaceNode implements Node
         return false;
     }
 
-
     /**
      * Get the namespace URI of this node.
      *
@@ -421,7 +392,6 @@ public class NamespaceNode implements Node
     {
        return null;
     }
-
 
     /**
      * Get the namespace prefix of this node.
@@ -437,7 +407,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-
     /**
      * Change the namespace prefix of this node (always fails).
      *
@@ -450,7 +419,6 @@ public class NamespaceNode implements Node
         disallowModification();
     }
 
-
     /**
      * Get the XPath name of the namespace node;; i.e. the
      * namespace prefix.
@@ -462,7 +430,6 @@ public class NamespaceNode implements Node
         return name;
     }
 
-
     /**
      * Test if this node has attributes.
      *
@@ -472,7 +439,6 @@ public class NamespaceNode implements Node
     {
         return false;
     }
-
 
     /**
      * Throw a NO_MODIFICATION_ALLOWED_ERR DOMException.
@@ -485,12 +451,9 @@ public class NamespaceNode implements Node
                    "Namespace node may not be modified");
     }
 
-
-
     ////////////////////////////////////////////////////////////////////
     // Override default methods from java.lang.Object.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * Generate a hash code for a namespace node.
@@ -501,7 +464,6 @@ public class NamespaceNode implements Node
     {
         return hashCode(parent) + hashCode(name) + hashCode(value);
     }
-
 
     /**
      * Test for equivalence with another object.
@@ -527,7 +489,6 @@ public class NamespaceNode implements Node
         }
     }
 
-
     /**
      * Helper method for generating a hash code.
      *
@@ -539,7 +500,6 @@ public class NamespaceNode implements Node
     {
         return (o == null ? 0 : o.hashCode());
     }
-
 
     /**
      * Helper method for comparing two objects.
@@ -555,7 +515,6 @@ public class NamespaceNode implements Node
           (a != null && a.equals(b)));
     }
 
-
     ////////////////////////////////////////////////////////////////////
     // Internal state.
     ////////////////////////////////////////////////////////////////////
@@ -564,12 +523,9 @@ public class NamespaceNode implements Node
     private String name;
     private String value;
 
-
-
     ////////////////////////////////////////////////////////////////////
     // Inner class: empty node list.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * A node list with no members.
@@ -588,8 +544,7 @@ public class NamespaceNode implements Node
         {
             return 0;
         }
-    
-    
+
         /**
          * @see NodeList#item
          */
@@ -623,7 +578,6 @@ public class NamespaceNode implements Node
         }
     }
 
-
     /**
      * Compare relative position of this node to another nbode. (Always fails).
      * This method is included solely for compatibility with the superclass.
@@ -641,7 +595,6 @@ public class NamespaceNode implements Node
         throw ex;
     }
 
-
     /**
      * Return the namespace URI.
      *
@@ -651,7 +604,6 @@ public class NamespaceNode implements Node
     public String getTextContent() {
         return value;
     }
-
 
     /**
      * Change the value of this node (always fails).
@@ -663,7 +615,6 @@ public class NamespaceNode implements Node
     public void setTextContent(String textContent) throws DOMException {
         disallowModification();
     }
-
 
     /**
      * Returns true if and only if this object represents the same XPath namespace node
@@ -707,7 +658,6 @@ public class NamespaceNode implements Node
         
     }
 
-
     /**
      * Return the prefix bound to this namespace URI within the scope
      * of this node. 
@@ -742,7 +692,6 @@ public class NamespaceNode implements Node
         
     }
 
-
     /**
      * Return true if the specified URI is the default namespace in
      * scope (always fails). This method is included solely for 
@@ -756,7 +705,6 @@ public class NamespaceNode implements Node
     public boolean isDefaultNamespace(String namespaceURI) {
         return namespaceURI.equals(this.lookupNamespaceURI(null));
     }
-
 
     /**
      * Return the namespace URI mapped to the specified
@@ -791,7 +739,6 @@ public class NamespaceNode implements Node
         }
     }
 
-
     /**
      * Returns true if this object binds the same prefix to the same URI.
      * That is, this object has the same prefix and URI as the argument.
@@ -815,7 +762,6 @@ public class NamespaceNode implements Node
         return false;
     }
 
-
     /**
      * Returns the value of the requested feature. Always returns null.
      * 
@@ -825,7 +771,6 @@ public class NamespaceNode implements Node
         return null;
     }
 
-    
     private HashMap<String, Object> userData = new HashMap<String, Object>();
 
     /**
@@ -843,7 +788,6 @@ public class NamespaceNode implements Node
         userData.put(key, data);
         return oldValue;
     }
-
 
     /**
      * Returns the user data associated with the given key. 

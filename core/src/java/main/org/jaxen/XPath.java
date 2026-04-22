@@ -1,7 +1,6 @@
 package org.jaxen;
 
 /*
- $Id$
 
  Copyright 2003 The Werken Company. All Rights Reserved.
  
@@ -144,7 +143,6 @@ public interface XPath
      */
     boolean booleanValueOf(Object context)
         throws JaxenException;
-    
 
     /**
      * Retrieve the number-value of the first node in document order
@@ -352,7 +350,6 @@ public interface XPath
      * @see VariableContext
      */
     VariableContext getVariableContext();
-    
 
     /**
      * Retrieve the XML object-model-specific {@link Navigator}

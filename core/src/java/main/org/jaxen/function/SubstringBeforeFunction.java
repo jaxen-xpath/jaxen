@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -74,13 +69,11 @@ import org.jaxen.Navigator;
 public class SubstringBeforeFunction implements Function
 {
 
-    
     /**
      * Create a new <code>SubstringBeforeFunction</code> object.
      */
     public SubstringBeforeFunction() {}
-    
-    
+
     /** 
      * Returns the part of the string-value of the first item in <code>args</code>
      * that comes before the string-value of the second item in <code>args</code>;

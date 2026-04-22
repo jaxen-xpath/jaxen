@@ -1,5 +1,4 @@
 /*
- $Id$
 
  Copyright 2005 Elliotte Rusty Harold. All Rights Reserved.
  
@@ -34,7 +33,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.jaxen.expr;
 
 import java.util.HashSet;
-
 
 /**
  * <p>
@@ -82,6 +80,5 @@ final class IdentitySet {
         }
 
     }
-
 
 }

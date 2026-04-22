@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -108,8 +103,7 @@ public class JDOMXPathTest extends TestCase
 
         assertFalse(iter.hasNext());
     }
-    
-    
+
     public void testGetDocumentNode() throws JaxenException, JDOMException, IOException
     {
         XPath xpath = new JDOMXPath( "/" );
@@ -144,8 +138,7 @@ public class JDOMXPathTest extends TestCase
         assertEquals( "\ntest\n" , t.getText() );
         
     }
-    
-    
+
     public void testJaxen53Text() throws JaxenException, JDOMException, IOException
     {
         XPath xpath = new JDOMXPath( "//data/text() " );

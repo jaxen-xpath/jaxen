@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -76,8 +71,7 @@ import org.jaxen.Navigator;
  */
 public class NameFunction implements Function
 {
-    
-    
+
     /**
      * Create a new <code>NameFunction</code> object.
      */

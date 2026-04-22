@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -105,8 +100,7 @@ public class TranslateFunction implements Function
      * Create a new <code>TranslateFunction</code> object.
      */
     public TranslateFunction() {}
-    
-    
+
     /** Returns a copy of the first argument in which
      * characters found in the second argument are replaced by
      * corresponding characters from the third argument.

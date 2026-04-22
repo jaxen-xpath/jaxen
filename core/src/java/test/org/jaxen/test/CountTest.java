@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -78,7 +74,6 @@ public class CountTest extends TestCase {
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.parse( "xml/basic.xml" );
     }
-
 
     public CountTest(String name) {
         super(name);
@@ -141,6 +136,5 @@ public class CountTest extends TestCase {
         assertEquals(1.0, result.doubleValue(), 0.00001);
         
     }  
-    
-    
+
 }

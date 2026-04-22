@@ -1,9 +1,6 @@
 package org.jaxen.dom;
 
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -45,7 +42,6 @@ package org.jaxen.dom;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
 */
 
 import javax.xml.parsers.DocumentBuilder;
@@ -98,7 +94,6 @@ import org.xml.sax.SAXException;
 public class DocumentNavigator extends DefaultNavigator
 {
 
-    
     ////////////////////////////////////////////////////////////////////
     // Constants.
     ////////////////////////////////////////////////////////////////////
@@ -107,12 +102,9 @@ public class DocumentNavigator extends DefaultNavigator
     
     private final static DocumentNavigator SINGLETON = new DocumentNavigator();
 
-
-    
     ////////////////////////////////////////////////////////////////////
     // Constructor.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * Default constructor.
@@ -120,7 +112,6 @@ public class DocumentNavigator extends DefaultNavigator
     public DocumentNavigator ()
     {
     }
-
 
     /**
      * Get a constant DocumentNavigator for efficiency.
@@ -132,12 +123,9 @@ public class DocumentNavigator extends DefaultNavigator
         return SINGLETON;
     }
 
-
-    
     ////////////////////////////////////////////////////////////////////
     // Implementation of org.jaxen.DefaultNavigator.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * Get an iterator over all of this node's children.
@@ -166,7 +154,6 @@ public class DocumentNavigator extends DefaultNavigator
         return JaxenConstants.EMPTY_ITERATOR;
 
     }
-
 
     /**
      * Get a (single-member) iterator over this node's parent.
@@ -202,8 +189,7 @@ public class DocumentNavigator extends DefaultNavigator
                 };
         }
     }
-    
-    
+
     /** 
      * Return the XPath parent of the supplied DOM node.
      * XPath has slightly different definition of parent than DOM does.
@@ -221,7 +207,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
         return node.getParentNode();
     }
-
 
     /**
      * Get an iterator over all following siblings.
@@ -241,7 +226,6 @@ public class DocumentNavigator extends DefaultNavigator
                 }
             };
     }
-
 
     /**
      * Get an iterator over all preceding siblings.
@@ -269,7 +253,6 @@ public class DocumentNavigator extends DefaultNavigator
                 }
             };
     }
-
 
     /**
      * Get an iterator over all following nodes, depth-first.
@@ -316,7 +299,6 @@ public class DocumentNavigator extends DefaultNavigator
             };
     }
 
-
     /**
      * Get an iterator over all attributes.
      *
@@ -332,7 +314,6 @@ public class DocumentNavigator extends DefaultNavigator
             return JaxenConstants.EMPTY_ITERATOR;
         }
     }
-
 
     /**
      * Get an iterator over all declared namespaces.
@@ -489,7 +470,6 @@ public class DocumentNavigator extends DefaultNavigator
         return null;
     }
 
-
     /**
      * Get the local name of an element.
      *
@@ -506,7 +486,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
         return null;
     }
-
 
     /**
      * Get the qualified name of an element.
@@ -527,7 +506,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
         return null;
     }
-
 
     /**
      * Get the namespace URI of an attribute.
@@ -550,7 +528,6 @@ public class DocumentNavigator extends DefaultNavigator
         return null;
     }
 
-
     /**
      * Get the local name of an attribute.
      *
@@ -567,7 +544,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
         return null;
     }
-
 
     /**
      * Get the qualified name of an attribute.
@@ -590,7 +566,6 @@ public class DocumentNavigator extends DefaultNavigator
         return null;
     }
 
-
     /**
      * Test if a node is a top-level document.
      *
@@ -603,7 +578,6 @@ public class DocumentNavigator extends DefaultNavigator
             (((Node)object).getNodeType() == Node.DOCUMENT_NODE);
     }
 
-
     /**
      * Test if a node is a namespace.
      *
@@ -614,7 +588,6 @@ public class DocumentNavigator extends DefaultNavigator
     {
         return (object instanceof NamespaceNode);
     }
-
 
     /**
      * Test if a node is an element.
@@ -627,7 +600,6 @@ public class DocumentNavigator extends DefaultNavigator
         return (object instanceof Node) &&
             (((Node)object).getNodeType() == Node.ELEMENT_NODE);
     }
-
 
     /**
      * Test if a node is an attribute. <code>xmlns</code> and 
@@ -644,7 +616,6 @@ public class DocumentNavigator extends DefaultNavigator
             && ! "http://www.w3.org/2000/xmlns/".equals(((Node) object).getNamespaceURI());
     }
 
-
     /**
      * Test if a node is a comment.
      *
@@ -656,7 +627,6 @@ public class DocumentNavigator extends DefaultNavigator
         return (object instanceof Node) &&
             (((Node)object).getNodeType() == Node.COMMENT_NODE);
     }
-
 
     /**
      * Test if a node is plain text.
@@ -679,7 +649,6 @@ public class DocumentNavigator extends DefaultNavigator
         }
     }
 
-
     /**
      * Test if a node is a processing instruction.
      *
@@ -691,7 +660,6 @@ public class DocumentNavigator extends DefaultNavigator
         return (object instanceof Node) &&
             (((Node)object).getNodeType() == Node.PROCESSING_INSTRUCTION_NODE);
     }
-
 
     /**
      * Get the string value of an element node.
@@ -709,7 +677,6 @@ public class DocumentNavigator extends DefaultNavigator
             return null;
         }
     }
-
 
     /**
      * Construct a node's string value recursively.
@@ -732,7 +699,6 @@ public class DocumentNavigator extends DefaultNavigator
         return builder;
     }
 
-
     /**
      * Get the string value of an attribute node.
      *
@@ -746,7 +712,6 @@ public class DocumentNavigator extends DefaultNavigator
         else return null;
     }
 
-
     /**
      * Get the string value of text.
      *
@@ -759,7 +724,6 @@ public class DocumentNavigator extends DefaultNavigator
         else return null;
     }
 
-
     /**
      * Get the string value of a comment node.
      *
@@ -771,7 +735,6 @@ public class DocumentNavigator extends DefaultNavigator
         if (isComment(object)) return ((Node)object).getNodeValue();
         else return null;
     }
-
 
     /**
      * Get the string value of a namespace node.
@@ -884,11 +847,9 @@ public class DocumentNavigator extends DefaultNavigator
         throw new ClassCastException(obj + " is not a processing instruction");
     }
 
-    
     ////////////////////////////////////////////////////////////////////
     // Inner class: iterate over DOM nodes.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * A generic iterator over DOM nodes.
@@ -904,7 +865,6 @@ public class DocumentNavigator extends DefaultNavigator
     abstract class NodeIterator
     implements Iterator
     {
-
 
         /**
          * Constructor.
@@ -936,7 +896,6 @@ public class DocumentNavigator extends DefaultNavigator
             throw new UnsupportedOperationException();
         }
 
-
         /**
          * Get the first node for iteration.
          *
@@ -948,7 +907,6 @@ public class DocumentNavigator extends DefaultNavigator
          * @see #getNextNode
          */
         protected abstract Node getFirstNode (Node contextNode);
-
 
         /**
          * Get the next node for iteration.
@@ -962,7 +920,6 @@ public class DocumentNavigator extends DefaultNavigator
          * @see #getFirstNode
          */
         protected abstract Node getNextNode (Node contextNode);
-
 
         /**
          * Get the first child of a transparent node (DocumentFragment or
@@ -986,7 +943,6 @@ public class DocumentNavigator extends DefaultNavigator
             return transparentNode.getFirstChild();
         }
 
-
         /**
          * Advance to the next sibling while iterating inside a
          * transparent node.
@@ -1002,7 +958,6 @@ public class DocumentNavigator extends DefaultNavigator
         {
             return node.getNextSibling();
         }
-
 
         /**
          * Move one step from the current node, accounting for any
@@ -1024,7 +979,6 @@ public class DocumentNavigator extends DefaultNavigator
             }
             return getNextNode(current);
         }
-
 
         /**
          * Advance past non-XPath nodes, recursing into DocumentFragment and
@@ -1063,12 +1017,9 @@ public class DocumentNavigator extends DefaultNavigator
         private final ArrayList<Node> transparentAncestors = new ArrayList<Node>();
     }
 
-
-    
     ////////////////////////////////////////////////////////////////////
     // Inner class: iterate over a DOM named node map.
     ////////////////////////////////////////////////////////////////////
-
 
     /**
      * An iterator over an attribute list.
@@ -1115,7 +1066,6 @@ public class DocumentNavigator extends DefaultNavigator
         {
             throw new UnsupportedOperationException();
         }
-
 
         private NamedNodeMap map;
         private int pos;

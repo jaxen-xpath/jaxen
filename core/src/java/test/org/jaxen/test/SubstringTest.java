@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -76,7 +72,6 @@ public class SubstringTest extends TestCase {
         doc.appendChild(doc.createElement("root"));
     }
 
-
     public SubstringTest(String name) {
         super(name);
     }
@@ -104,14 +99,12 @@ public class SubstringTest extends TestCase {
         assertEquals("234", result);
     }    
 
-
     public void testUnusualSubstring2() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring('12345', 0, 3)" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("12", result);
     }    
-
 
     public void testUnusualSubstring3() throws JaxenException
     {
@@ -141,47 +134,41 @@ public class SubstringTest extends TestCase {
         assertEquals("", result);
     }    
 
-  
     public void testSubstringOfNaN() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring(0 div 0, 2)" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("aN", result);
     }    
- 
-  
+
     public void testSubstringOfEmptyString() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring('', 2)" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("", result);
     }    
- 
-  
+
     public void testSubstringWithNegativeLength() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring('12345', 2, -3)" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("", result);
     }    
- 
-  
+
     public void testSubstringWithExcessiveLength() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring('12345', 2, 32)" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("2345", result);
     }    
- 
-  
+
     public void testSubstringWithNegativeLength2() throws JaxenException
     {
         XPath xpath = new DOMXPath( "substring('12345', 2, -1)" );
         String result = (String) xpath.evaluate( doc );
         assertEquals("", result);
     }    
- 
-  
+
     public void testSubstringFunctionRequiresAtLeastTwoArguments() 
       throws JaxenException {
         
@@ -238,8 +225,7 @@ public class SubstringTest extends TestCase {
         assertEquals("A\uD834\uDD00", result);
         
     }
-    
-    
+
     public void testStringLengthIndexesUnicodeCharactersNotJavaChars() 
       throws JaxenException {
    
@@ -248,8 +234,7 @@ public class SubstringTest extends TestCase {
         assertEquals("", result);
         
     }
-    
-    
+
     public void testStringLengthIndexesAndCountsUnicodeCharactersNotJavaChars() 
       throws JaxenException {
    
@@ -258,6 +243,5 @@ public class SubstringTest extends TestCase {
         assertEquals("12", result);
         
     }
-    
-    
+
 }

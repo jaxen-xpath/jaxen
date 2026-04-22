@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.pattern;
@@ -61,8 +57,7 @@ public class UnionPattern extends Pattern {
     private Pattern rhs;
     private short nodeType = ANY_NODE;
     private String matchesNodeName = null;
-    
-    
+
     public UnionPattern() 
     {
     }
@@ -73,8 +68,7 @@ public class UnionPattern extends Pattern {
         this.rhs = rhs;
         init();
     }
-    
-    
+
     public Pattern getLHS() 
     {
         return lhs;
@@ -96,8 +90,7 @@ public class UnionPattern extends Pattern {
         this.rhs = rhs;
         init();
     }
-    
-    
+
     // Pattern interface
     //-------------------------------------------------------------------------    
     
@@ -113,19 +106,16 @@ public class UnionPattern extends Pattern {
         return new Pattern[] { lhs, rhs };
     }
 
-    
     public short getMatchType() 
     {
         return nodeType;
     }
 
-
     public String getMatchesNodeName() 
     {
         return matchesNodeName;
     }
-    
-    
+
     public Pattern simplify() 
     {
         this.lhs = lhs.simplify();

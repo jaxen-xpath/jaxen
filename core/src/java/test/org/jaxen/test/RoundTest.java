@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -77,12 +73,10 @@ public class RoundTest extends TestCase {
         doc.appendChild(a);
     }
 
-
     public RoundTest(String name) {
         super(name);
     }
 
-    
     public void testRound() throws JaxenException {
         
         XPath xpath = new DOMXPath("round(1.5)");

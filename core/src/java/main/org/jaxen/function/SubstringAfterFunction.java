@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.function;
 
@@ -78,7 +73,6 @@ public class SubstringAfterFunction implements Function
      */
     public SubstringAfterFunction() {}
 
-
     /** 
      * Returns the part of the string-value of the first item in <code>args</code>
      * that follows the string-value of the second item in <code>args</code>;
@@ -106,7 +100,6 @@ public class SubstringAfterFunction implements Function
 
         throw new FunctionCallException( "substring-after() requires two arguments." );
     }
-
 
     /** 
      * Returns the part of <code>strArg</code> that follows the first occurence 

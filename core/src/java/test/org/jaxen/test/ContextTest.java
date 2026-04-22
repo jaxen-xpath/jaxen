@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,9 +39,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
-
 
 package org.jaxen.test;
 
@@ -147,7 +142,6 @@ public class ContextTest extends TestCase
         assertEquals( 0,
                       dupe.getNodeSet().size() );
 
-
         assertEquals( 4,
                       original.getNodeSet().size() );
 
@@ -166,7 +160,6 @@ public class ContextTest extends TestCase
         assertEquals( 2,
                       original.getPosition() );
     }    
-    
 
     public void testXMLPrefixIsAlwaysBound() 
       throws ParserConfigurationException, SAXException, IOException, JaxenException
@@ -184,7 +177,6 @@ public class ContextTest extends TestCase
 
     }    
 
-    
     public void testIsSerializable() throws IOException {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -194,7 +186,6 @@ public class ContextTest extends TestCase
         assertTrue(out.toByteArray().length > 0);
         
     }    
-    
-    
+
 }
 

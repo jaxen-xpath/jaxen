@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.pattern;
@@ -97,8 +93,7 @@ public abstract class Pattern {
     
     /** Matches no nodes */
     public static final short NO_NODE = 14;
-    
-    
+
     /** 
      * 
      * @param node ????
@@ -135,7 +130,6 @@ public abstract class Pattern {
         return null;
     }
 
-    
     /** 
      * Returns the type of node the pattern matches.
      * 
@@ -145,7 +139,6 @@ public abstract class Pattern {
     {
         return ANY_NODE;
     }
-
 
     /** For patterns which only match an ATTRIBUTE_NODE or an 
       * ELEMENT_NODE then this pattern may return the name of the
@@ -160,8 +153,7 @@ public abstract class Pattern {
     {
         return null;
     }
-    
-    
+
     public Pattern simplify() 
     {
         return this;
