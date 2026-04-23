@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 ////////////////////////////////////////////////////////////////////
@@ -60,40 +51,31 @@ import org.w3c.dom.UserDataHandler;
 
 /**
  * Extension DOM2/DOM3 node type for a namespace node.
- *
  * <p>This class implements the DOM2 and DOM3 {@link Node} interface
  * to allow namespace nodes to be included in the result
  * set of an XPath selectNodes operation, even though DOM does
  * not model namespaces in scope as separate nodes.</p>
- *
  * <p>
  * While all of the DOM2 methods are implemented with reasonable
  * defaults, there will be some unexpected surprises, so users are
  * advised to test for NamespaceNodes and filter them out from the
  * result sets as early as possible.
  * </p>
- *
  * <ol>
- *
  * <li>The {@link #getNodeType} method returns {@link #NAMESPACE_NODE},
  * which is not one of the usual DOM2 node types.  Generic code may
  * fall unexpectedly out of switch statements, for example.</li>
- *
  * <li>The {@link #getOwnerDocument} method returns the owner document
  * of the parent node, but that owner document will know nothing about
  * the namespace node.</li>
- *
  * <li>The {@link #isSupported} method always returns false.</li>
- *
  * <li>The DOM3 methods sometimes throw UnsupportedOperationException.
  *     They're here only to allow this class to be compiled with Java 1.5.
  *     Do not call or rely on them.</li>
  * </ol>
- *
  * <p>All attempts to modify a <code>NamespaceNode</code> will fail with a {@link
  * DOMException} ({@link
  * DOMException#NO_MODIFICATION_ALLOWED_ERR}).</p>
- *
  * @author David Megginson
  * @author Elliotte Rusty Harold
  * @see DocumentNavigator
@@ -103,14 +85,12 @@ public class NamespaceNode implements Node
 
     /**
      * 13, the same as DOM 3's type for XPathNamespace.
-     *
      * @see #getNodeType
      */
     public final static short NAMESPACE_NODE = 13;
 
     /**
      * Create a new NamespaceNode.
-     *
      * @param parent the DOM node to which the namespace is attached
      * @param name the namespace prefix
      * @param value the namespace URI
@@ -124,7 +104,6 @@ public class NamespaceNode implements Node
 
     /**
      * Constructor.
-     *
      * @param parent the DOM node to which the namespace is attached
      * @param attribute the DOM attribute object containing the
      *        namespace declaration
@@ -152,7 +131,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the namespace prefix.
-     *
      * @return the namespace prefix, or "" for the default namespace
      */
     public String getNodeName ()
@@ -162,7 +140,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the namespace URI.
-     *
      * @return the namespace URI
      */
     public String getNodeValue ()
@@ -172,7 +149,6 @@ public class NamespaceNode implements Node
 
     /**
      * Change the namespace URI (always fails).
-     *
      * @param value the new URI
      * @throws DOMException always
      */
@@ -183,7 +159,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the node type.
-     *
      * @return always {@link #NAMESPACE_NODE}.
      */
     public short getNodeType ()
@@ -193,11 +168,9 @@ public class NamespaceNode implements Node
 
     /**
      * Get the parent node.
-     *
      * <p>This method returns the element that was queried for Namespaces
      * in effect, <em>not</em> necessarily the actual element containing
      * the Namespace declaration.</p>
-     *
      * @return the parent node (not null)
      */
     public Node getParentNode ()
@@ -207,7 +180,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the list of child nodes.
-     *
      * @return an empty node list
      */
     public NodeList getChildNodes ()
@@ -217,7 +189,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the first child node.
-     *
      * @return null
      */
     public Node getFirstChild ()
@@ -227,7 +198,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the last child node.
-     *
      * @return null
      */
     public Node getLastChild ()
@@ -237,7 +207,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the previous sibling node.
-     *
      * @return null
      */
     public Node getPreviousSibling ()
@@ -247,7 +216,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the next sibling node.
-     *
      * @return null
      */
     public Node getNextSibling ()
@@ -257,7 +225,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the attribute nodes.
-     *
      * @return null
      */
     public NamedNodeMap getAttributes ()
@@ -267,7 +234,6 @@ public class NamespaceNode implements Node
 
     /**
      * Get the owner document.
-     *
      * @return the owner document <em>of the parent node</em>
      */
     public Document getOwnerDocument ()
@@ -278,7 +244,6 @@ public class NamespaceNode implements Node
 
     /**
      * Insert a new child node (always fails).
-     * 
      * @param newChild the node to add
      * @param refChild ignored
      * @return never
@@ -294,7 +259,6 @@ public class NamespaceNode implements Node
 
     /**
      * Replace a child node (always fails).
-     *
      * @param newChild the node to add
      * @param oldChild the child node to replace
      * @return never
@@ -309,7 +273,6 @@ public class NamespaceNode implements Node
 
     /**
      * Remove a child node (always fails).
-     *
      * @param oldChild the child node to remove
      * @return never
      * @throws DOMException always
@@ -323,7 +286,6 @@ public class NamespaceNode implements Node
 
     /**
      * Append a new child node (always fails).
-     *
      * @param newChild the node to add
      * @return never
      * @throws DOMException always
@@ -337,7 +299,6 @@ public class NamespaceNode implements Node
 
     /**
      * Test for child nodes.
-     *
      * @return false
      */
     public boolean hasChildNodes()
@@ -347,7 +308,6 @@ public class NamespaceNode implements Node
 
     /**
      * Create a copy of this node.
-     *
      * @param deep make a deep copy (no effect, since namespace nodes
      *        don't have children).
      * @return a new copy of this namespace node
@@ -359,7 +319,6 @@ public class NamespaceNode implements Node
 
     /**
      * Normalize the text descendants of this node.
-     *
      * <p>This method has no effect, since namespace nodes have no
      * descendants.</p>
      */
@@ -370,7 +329,6 @@ public class NamespaceNode implements Node
 
     /**
      * Test if a DOM2 feature is supported. (None are.)
-     *
      * @param feature the feature name
      * @param version the feature version
      * @return false
@@ -382,10 +340,8 @@ public class NamespaceNode implements Node
 
     /**
      * Get the namespace URI of this node.
-     *
      * <p>Namespace declarations are not themselves
      * Namespace-qualified.</p>
-     *
      * @return null
      */
     public String getNamespaceURI()
@@ -395,10 +351,8 @@ public class NamespaceNode implements Node
 
     /**
      * Get the namespace prefix of this node.
-     *
      * <p>Namespace declarations are not themselves
      * namespace-qualified.</p>
-     *
      * @return null
      * @see #getLocalName
      */
@@ -409,7 +363,6 @@ public class NamespaceNode implements Node
 
     /**
      * Change the namespace prefix of this node (always fails).
-     *
      * @param prefix the new prefix
      * @throws DOMException always thrown
      */
@@ -422,7 +375,6 @@ public class NamespaceNode implements Node
     /**
      * Get the XPath name of the namespace node;; i.e. the
      * namespace prefix.
-     *
      * @return the namespace prefix
      */
     public String getLocalName ()
@@ -432,7 +384,6 @@ public class NamespaceNode implements Node
 
     /**
      * Test if this node has attributes.
-     *
      * @return false
      */
     public boolean hasAttributes ()
@@ -442,7 +393,6 @@ public class NamespaceNode implements Node
 
     /**
      * Throw a NO_MODIFICATION_ALLOWED_ERR DOMException.
-     *
      * @throws DOMException always thrown
      */
     private void disallowModification () throws DOMException
@@ -457,7 +407,6 @@ public class NamespaceNode implements Node
 
     /**
      * Generate a hash code for a namespace node.
-     *
      * @return a hash code for this node
      */
     public int hashCode ()
@@ -467,10 +416,8 @@ public class NamespaceNode implements Node
 
     /**
      * Test for equivalence with another object.
-     *
      * <p>Two Namespace nodes are considered equivalent if their parents,
      * names, and values are equal.</p>
-     *
      * @param o the object to test for equality
      * @return true if the object is equivalent to this node, false
      *         otherwise
@@ -491,7 +438,6 @@ public class NamespaceNode implements Node
 
     /**
      * Helper method for generating a hash code.
-     *
      * @param o the object for generating a hash code (possibly null)
      * @return the object's hash code, or 0 if the object is null
      * @see java.lang.Object#hashCode
@@ -503,7 +449,6 @@ public class NamespaceNode implements Node
 
     /**
      * Helper method for comparing two objects.
-     *
      * @param a the first object to compare (possibly null)
      * @param b the second object to compare (possibly null)
      * @return true if the objects are equivalent or are both null
@@ -529,7 +474,6 @@ public class NamespaceNode implements Node
 
     /**
      * A node list with no members.
-     *
      * <p>This class is necessary for the {@link Node#getChildNodes}
      * method, which must return an empty node list rather than
      * null when there are no children.</p>
@@ -562,7 +506,6 @@ public class NamespaceNode implements Node
     /**
      * Return the base URI of the document containing this node. 
      * This only works in DOM 3.
-     *
      * @return null
      */
     public String getBaseURI() {
@@ -581,9 +524,7 @@ public class NamespaceNode implements Node
     /**
      * Compare relative position of this node to another nbode. (Always fails).
      * This method is included solely for compatibility with the superclass.
-     * 
      * @param other the node to compare to
-     *
      * @return never
      * @throws DOMException NOT_SUPPORTED_ERR
      */
@@ -597,7 +538,6 @@ public class NamespaceNode implements Node
 
     /**
      * Return the namespace URI.
-     *
      * @return the namespace URI
      * @see #getNodeValue
      */
@@ -608,7 +548,6 @@ public class NamespaceNode implements Node
     /**
      * Change the value of this node (always fails).
      * This method is included solely for compatibility with the superclass.
-     *
      * @param textContent the new content
      * @throws DOMException always
      */
@@ -620,7 +559,6 @@ public class NamespaceNode implements Node
      * Returns true if and only if this object represents the same XPath namespace node
      * as the argument; that is, they have the same parent, the same prefix, and the
      * same URI.
-     * 
      * @param other the node to compare to
      * @return true if this object represents the same XPath namespace node
      *     as other; false otherwise
@@ -661,9 +599,7 @@ public class NamespaceNode implements Node
     /**
      * Return the prefix bound to this namespace URI within the scope
      * of this node. 
-     * 
      * @param namespaceURI the URI to find a prefix binding for
-     *
      * @return a prefix matching this namespace URI
      * @throws UnsupportedOperationException in DOM 2
      */
@@ -696,9 +632,7 @@ public class NamespaceNode implements Node
      * Return true if the specified URI is the default namespace in
      * scope (always fails). This method is included solely for 
      * compatibility with the superclass.
-     * 
      * @param namespaceURI the URI to check
-     *
      * @return never
      * @throws UnsupportedOperationException always
      */
@@ -709,9 +643,7 @@ public class NamespaceNode implements Node
     /**
      * Return the namespace URI mapped to the specified
      * prefix within the scope of this namespace node.
-     * 
      * @param prefix the prefix to search for
-     *
      * @return the namespace URI mapped to this prefix
      * @throws UnsupportedOperationException in DOM 2
      */
@@ -742,7 +674,6 @@ public class NamespaceNode implements Node
     /**
      * Returns true if this object binds the same prefix to the same URI.
      * That is, this object has the same prefix and URI as the argument.
-     * 
      * @param arg the node to compare to
      * @return true if this object has the same prefix and URI as the argument; false otherwise
      */
@@ -764,7 +695,6 @@ public class NamespaceNode implements Node
 
     /**
      * Returns the value of the requested feature. Always returns null.
-     * 
      * @return null
      */
     public Object getFeature(String feature, String version) {
@@ -775,11 +705,9 @@ public class NamespaceNode implements Node
 
     /**
      * Associates an object with a key. 
-     * 
      * @param key the key by which the data will be retrieved
      * @param data the object to store with the key
      * @param handler ignored since namespace nodes cannot be imported, cloned, or renamed
-     * 
      * @return the value previously associated with this key; or null
      *     if there isn't any such previous value
      */
@@ -791,9 +719,7 @@ public class NamespaceNode implements Node
 
     /**
      * Returns the user data associated with the given key. 
-     * 
      * @param key the lookup key
-     * 
      * @return the object associated with the key; or null if no such object is available
      */
     public Object getUserData(String key) {

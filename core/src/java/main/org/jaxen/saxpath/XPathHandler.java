@@ -1,26 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -32,33 +24,28 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
  */
 
 package org.jaxen.saxpath;
 
 /** Interface for event-based XPath parsing.
- *
  *  <p>
  *  A {@link org.jaxen.saxpath.XPathReader} generates callbacks into
  *  an <code>XPathHandler</code> to allow for custom
  *  handling of the parse.
  *  </p>
- *
  *  <p>
  *  The callbacks very closely match the productions
  *  listed in the W3C XPath specification.  Gratuitous
  *  productions (e.g. Expr/startExpr()/endExpr()) are not
  *  included in this API.
  *  </p>
- *
  *  @author bob mcwhirter (bob@werken.com)
  */
 public interface XPathHandler
@@ -96,7 +83,6 @@ public interface XPathHandler
     void endRelativeLocationPath() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a name step.
-     *
      *  @param axis the axis of this step
      *  @param prefix the namespace prefix for the name to test,
      *         or the empty string if no prefix is specified
@@ -111,7 +97,6 @@ public interface XPathHandler
     void endNameStep() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a text() step.
-     *
      *  @param axis the axis of this step
      */
     void startTextNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
@@ -121,7 +106,6 @@ public interface XPathHandler
     void endTextNodeStep() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a comment() step.
-     *
      *  @param axis the axis of this step
      */
     void startCommentNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
@@ -131,7 +115,6 @@ public interface XPathHandler
     void endCommentNodeStep() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a node() step.
-     *
      *  @param axis the axis of this step
      */
     void startAllNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
@@ -141,7 +124,6 @@ public interface XPathHandler
     void endAllNodeStep() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a processing-instruction(...) step.
-     *
      *  @param axis the axis of this step
      *  @param name the name of the processing-instruction, or
      *         the empty string if none is specified
@@ -174,7 +156,6 @@ public interface XPathHandler
     void startOrExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the end of an 'or' expression.
-     *
      *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions
@@ -186,7 +167,6 @@ public interface XPathHandler
     void startAndExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the end of an 'and' expression.
-     *
      *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions
@@ -198,7 +178,6 @@ public interface XPathHandler
     void startEqualityExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the end of an equality ('=' or '!=') expression.
-     *
      *  @param equalityOperator the operator specific to this particular
      *         equality expression.  If null, this expression
      *         is only a pass-through, and should not actually
@@ -211,7 +190,6 @@ public interface XPathHandler
     void startRelationalExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a relational ('&lt;', '>', '&lt;=', or '>=') expression.
-     *
      *  @param relationalOperator the operator specific to this particular
      *         relational expression.  If NO_OP, this expression
      *         is only a pass-through, and should not actually
@@ -224,7 +202,6 @@ public interface XPathHandler
     void startAdditiveExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the end of an additive ('+' or '-') expression.
-     *
      *  @param additiveOperator the operator specific to this particular
      *         additive expression.   If NO_OP, this expression
      *         is only a pass-through, and should not actually
@@ -237,7 +214,6 @@ public interface XPathHandler
     void startMultiplicativeExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the start of a multiplicative ('*', 'div' or 'mod') expression.
-     *
      *  @param multiplicativeOperator the operator specific to this particular
      *         multiplicative expression.  If null, this expression
      *         is only a pass-through, and should not actually
@@ -250,7 +226,6 @@ public interface XPathHandler
     void startUnaryExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the end of a unary ('+' or '-') expression.
-     *
      *  @param unaryOperator the operator specific to this particular
      *         unary expression. If NO_OP, this expression is only
      *         a pass-through, and should not actually be instantiated.
@@ -264,7 +239,6 @@ public interface XPathHandler
     void startUnionExpr() throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of the end of a union ('|') expression.
-     *
      *  @param create flag that indicates if this expression
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions
@@ -272,25 +246,21 @@ public interface XPathHandler
     void endUnionExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a number expression.
-     *
      *  @param number the number value
      */
     void number(int number) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a number expression.
-     *
      *  @param number the number value
      */
     void number(double number) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a literal expression.
-     *
      *  @param literal the string literal value
      */
     void literal(String literal) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a variable-reference expression.
-     *
      *  @param prefix the namespace prefix of the variable
      *  @param variableName the local name of the variable
      */
@@ -298,7 +268,6 @@ public interface XPathHandler
                            String variableName) throws org.jaxen.saxpath.SAXPathException;
 
     /** Receive notification of a function call.
-     *
      *  @param prefix the namespace prefix of the function
      *  @param functionName the local name of the function
      */

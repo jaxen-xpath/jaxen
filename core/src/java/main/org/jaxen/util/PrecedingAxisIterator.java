@@ -1,28 +1,20 @@
 package org.jaxen.util;
 
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -34,14 +26,12 @@ package org.jaxen.util;
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
 */
 
 import org.jaxen.JaxenConstants;
@@ -60,7 +50,6 @@ import java.util.NoSuchElementException;
  * The "<code>preceding</code> axis contains all nodes in the same document as the context 
  * node that are before the context node in document order, excluding any ancestors 
  * and excluding attribute nodes and namespace nodes."
- * 
  * <p>
  * This implementation of '<code>preceding</code>' works like so:
  * the <code>preceding</code> axis includes preceding siblings of this node and 
@@ -68,7 +57,6 @@ import java.util.NoSuchElementException;
  * all preceding siblings of that ancestor, and their descendants. Finally, it
  * includes the ancestor nodes themselves.
  * </p>
- * 
  * <p>
  * The reversed <code>descendant-or-self</code> axes that are required are calculated using a
  * stack of reversed 'child-or-self' axes. When asked for a node, it is always taken
@@ -77,11 +65,9 @@ import java.util.NoSuchElementException;
  * of the node. Eventually this recurses down to the last descendant of any node, then works
  * back up to the root.
  * </p>
- * 
  * <p>
  * Most object models could provide a faster implementation of the reversed
  * 'children-or-self' used here.</p>
- * 
  * @version 2.0.0
  */
 public class PrecedingAxisIterator implements Iterator
@@ -95,7 +81,6 @@ public class PrecedingAxisIterator implements Iterator
 
     /**
      * Create a new <code>preceding</code> axis iterator.
-     * 
      * @param contextNode the node to start from
      * @param navigator the object model specific navigator
      */
@@ -111,9 +96,7 @@ public class PrecedingAxisIterator implements Iterator
 
     /**
      * Returns true if there are any preceding nodes remaining; false otherwise.
-     * 
      * @return true if any preceding nodes remain; false otherwise
-     * 
      * @see java.util.Iterator#hasNext()
      */
     public boolean hasNext()
@@ -173,11 +156,8 @@ public class PrecedingAxisIterator implements Iterator
 
     /**
      * Returns the next preceding node.
-     * 
      * @return the next preceding node
-     * 
      * @throws NoSuchElementException if no preceding nodes remain
-     * 
      * @see java.util.Iterator#next()
      */
     public Object next() throws NoSuchElementException
@@ -204,7 +184,6 @@ public class PrecedingAxisIterator implements Iterator
 
     /**
      * This operation is not supported.
-     * 
      * @throws UnsupportedOperationException always
      */
     public void remove() throws UnsupportedOperationException

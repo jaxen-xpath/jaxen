@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.function;
@@ -52,8 +43,6 @@ import org.jaxen.Navigator;
 
 /**
  * <p><b>4.1</b> <code><i>string</i> name(<i>node-set?</i>)</code> </p>
- *  
- * 
  * <blockquote cite="https://www.w3.org/TR/xpath">
  * The <b>name</b> function returns a string containing a QName representing 
  * the expanded-name of the node in the argument node-set that is first in document order. 
@@ -64,9 +53,7 @@ import org.jaxen.Navigator;
  * no expanded-name, an empty string is returned. 
  * If the argument it omitted, it defaults to a node-set with the context node as its only member.
  * </blockquote>
- * 
  * @author bob mcwhirter (bob @ werken.com)
- * 
  * @see <a href="https://www.w3.org/TR/xpath#function-name" target="_top">Section 4.1 of the XPath Specification</a>
  */
 public class NameFunction implements Function
@@ -80,13 +67,10 @@ public class NameFunction implements Function
     /**
      * Returns the name of the specified node or the name of the context node if 
      * no arguments are provided.
-     * 
      * @param context the context at the point in the
      *         expression where the function is called
      * @param args a <code>List</code> containing zero or one items
-     * 
      * @return a <code>String</code> containing the name
-     * 
      * @throws FunctionCallException if <code>args</code> has more than one item
      */
     public Object call(Context context,
@@ -109,12 +93,9 @@ public class NameFunction implements Function
 
     /**
      * Returns the name of <code>list.get(0)</code>
-     * 
      * @param list a list of nodes
      * @param nav the <code>Navigator</code> used to retrieve the name
-     * 
      * @return the name of <code>list.get(0)</code>
-     * 
      * @throws FunctionCallException if <code>list.get(0)</code> is not a node
      */
     public static String evaluate(List list,

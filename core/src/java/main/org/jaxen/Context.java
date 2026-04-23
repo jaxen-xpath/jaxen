@@ -1,24 +1,18 @@
 package org.jaxen;
 
 /*
-
  Copyright 2003 The Werken Company. All Rights Reserved.
- 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
-
   * Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
-
   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-
   * Neither the name of the Jaxen Project nor the names of its
     contributors may be used to endorse or promote products derived 
     from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -30,7 +24,6 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
  */
 
 import java.io.Serializable;
@@ -41,20 +34,17 @@ import java.util.List;
 /**
  * Wrapper around implementation-specific objects used
  * as the context of an expression evaluation.
- *
  * <p>
  * <strong>NOTE:</strong> This class is not typically used directly,
  * but is exposed for writers of implementation-specific
  * XPath packages.
  * </p>
- *
  * <p>
  * The <code>Context</code> bundles utilities together
  * for evaluation of the expression.  It wraps the provided
  * objects for ease-of-passage through the expression
  * <acronym title="Abstract Syntax Tree">AST</acronym>.
  * </p>
- *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @see ContextSupport
  * @see BaseXPath
@@ -86,7 +76,6 @@ public class Context implements Serializable {
 
     /**
      * Create a new context.
-     *
      * @param contextSupport the context-support
      */
     public Context(ContextSupport contextSupport)
@@ -105,16 +94,13 @@ public class Context implements Serializable {
      * <p>
      * Set the context node-set, and sets the current context size to the size
      * of this node-set. </p>
-     *
      * <p>The actual list is stored in this object. A copy
      * is not made. This list should not be modified in other code after
      * calling this method.</p>
-     *
      * <p>
      * After invoking this method, the client should immediately call
      * {@link #setSize(int) setSize} and {@link #setPosition(int) setPosition}.
      * </p>
-     *
      * @param nodeSet the context node-set
      */
     public void setNodeSet(List nodeSet)
@@ -128,7 +114,6 @@ public class Context implements Serializable {
      * Retrieve the context node-set.
      * This is a live list. It is not a copy.
      * Do not modify it.
-     *
      * @return the context node-set
      */
     public List getNodeSet()
@@ -138,7 +123,6 @@ public class Context implements Serializable {
 
     /**
      * Set the <code>ContextSupport</code>.
-     *
      * @param contextSupport the context-support
      */
     public void setContextSupport(ContextSupport contextSupport)
@@ -148,7 +132,6 @@ public class Context implements Serializable {
 
     /**
      * Retrieve the <code>ContextSupport</code>.
-     *
      * @return the context-support
      */
     public ContextSupport getContextSupport()
@@ -158,7 +141,6 @@ public class Context implements Serializable {
 
     /**
      * Retrieve the current <code>Navigator</code>.
-     *
      * @return the navigator
      */
     public Navigator getNavigator()
@@ -168,7 +150,6 @@ public class Context implements Serializable {
 
     /**
      * Translate a namespace prefix to its URI.
-     *
      * @param prefix the prefix
      * @return the namespace URI mapped to the prefix
      */
@@ -179,7 +160,6 @@ public class Context implements Serializable {
 
     /**
      * Retrieve a variable value.
-     *
      * @param namespaceURI the function namespace URI
      * @param prefix the function prefix
      * @param localName the function name
@@ -198,7 +178,6 @@ public class Context implements Serializable {
 
     /**
      * Retrieve a <code>Function</code>.
-     *
      * @param namespaceURI the function namespace URI
      * @param prefix the function prefix
      * @param localName the function name
@@ -221,7 +200,6 @@ public class Context implements Serializable {
 
     /**
      * Set the current size in the context node-set.
-     *
      * @param size the size
      */
     public void setSize(int size)
@@ -231,7 +209,6 @@ public class Context implements Serializable {
 
     /**
      * Retrieve the size of the current context node-set.
-     *
      * @return the size
      */
     public int getSize()
@@ -241,7 +218,6 @@ public class Context implements Serializable {
 
     /**
      * Set the current position in the context node-set.
-     *
      * @param position the position
      */
     public void setPosition(int position)
@@ -251,7 +227,6 @@ public class Context implements Serializable {
 
     /**
      * Retrieve current position in the context node-set.
-     *
      * @return the current position
      */
     public int getPosition()
@@ -265,7 +240,6 @@ public class Context implements Serializable {
 
     /**
      * Create a type-safe shallow copy.
-     *
      * @return the duplicate
      */
     public Context duplicate()

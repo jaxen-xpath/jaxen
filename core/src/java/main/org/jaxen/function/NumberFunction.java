@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.function;
@@ -54,16 +45,12 @@ import org.jaxen.Navigator;
 /**
  * <p>
  * <b>4.4</b> <code><i>number</i> number(<i>object</i>)</code>
- * 
- * 
  * <blockquote cite="https://www.w3.org/TR/xpath#function-number">
  * <p>
  * The <b>number</b> function converts
  * its argument to a number as follows:
  * </p>
- * 
  * <ul>
- * 
  * <li>
  * <p>
  * a string that consists of optional whitespace followed by an optional
@@ -73,37 +60,29 @@ import org.jaxen.Navigator;
  * value represented by the string; any other string is converted to NaN
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * boolean true is converted to 1; boolean false is converted to 0
  * </p>
  * </li>
- * 
  * <li>
- * 
  * <p>
  * a node-set is first converted to a string as if by a call to the <b><a
  * href="https://www.w3.org/TR/xpath#function-string" target="_top">string</a></b> function and then converted
  * in the same way as a string argument
  * </p>
- * 
  * </li>
- * 
  * <li>
  * <p>
  * an object of a type other than the four basic types is converted to a
  * number in a way that is dependent on that type
  * </p>
  * </li>
- * 
  * </ul>
- * 
  * <p>
  * If the argument is omitted, it defaults to a node-set with the
  * context node as its only member.
  * </p>
- * 
  * <blockquote> <b>NOTE: </b>The <b>number</b>
  * function should not be used for conversion of numeric data occurring
  * in an element in an XML document unless the element is of a type that
@@ -112,11 +91,8 @@ import org.jaxen.Navigator;
  * presentation to a user). In addition, the <b>number</b> function cannot be used
  * unless the language-neutral format used by the element is consistent
  * with the XPath syntax for a <a href="https://www.w3.org/TR/xpath#NT-Number">Number</a>.</blockquote>
- * 
  * </blockquote>
- * 
  * @author bob mcwhirter (bob @ werken.com)
- * 
  * @see <a href="https://www.w3.org/TR/xpath#function-number"
  *      target="_top">Section 4.4 of the XPath Specification</a>
  */
@@ -132,14 +108,11 @@ public class NumberFunction implements Function
      * Returns the number value of <code>args.get(0)</code>,
      * or the number value of the context node if <code>args</code>
      * is empty.
-     *
      * @param context the context at the point in the
      *         expression when the function is called
      * @param args a list containing the single item to be converted to a 
      *     <code>Double</code>
-     * 
      * @return a <code>Double</code>
-     * 
      * @throws FunctionCallException if <code>args</code> has more than one item
      */
     public Object call(Context context, List args) throws FunctionCallException
@@ -158,11 +131,9 @@ public class NumberFunction implements Function
 
     /** 
      * Returns the number value of <code>obj</code>.
-     *
      * @param obj the object to be converted to a number
      * @param nav the <code>Navigator</code> used to calculate the string-value
      *     of node-sets
-     * 
      * @return a <code>Double</code>
      */
     public static Double evaluate(Object obj, Navigator nav)
@@ -215,7 +186,6 @@ public class NumberFunction implements Function
   /**
    * Determines whether the argument is not a number (NaN) as defined
    * by IEEE 754.
-   * 
    * @param val the double to test
    * @return true if the value is NaN, false otherwise
    */
@@ -227,7 +197,6 @@ public class NumberFunction implements Function
   /**
    * Determines whether the argument is not a number (NaN) as defined
    * by IEEE 754.
-   * 
    * @param val the <code>Double</code> to test
    * @return true if the value is NaN, false otherwise
    */
@@ -239,7 +208,6 @@ public class NumberFunction implements Function
     /**
      * Checks whether the trimmed string matches the XPath 1.0 Number production:
      * optional minus sign followed by <code>Digits ('.' Digits?)?</code> or <code>'.' Digits</code>.
-     *
      * @param str the trimmed string to check
      * @return true if the string is a valid XPath number, false otherwise
      */

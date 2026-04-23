@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen;
@@ -58,13 +49,11 @@ import org.jaxen.util.SelfAxisIterator;
 
 /**
  * Default implementation of {@link Navigator}.
- *
  * <p>
  * This implementation is an abstract class, since
  * some required operations cannot be implemented without
  * additional knowledge of the object model.
  * </p>
- *
  * <p>
  * When possible, default method implementations build
  * upon each other, to reduce the number of methods required
@@ -72,7 +61,6 @@ import org.jaxen.util.SelfAxisIterator;
  * of course, may be overridden, to provide more-efficient
  * implementations.
  * </p>
- *
  * @author bob mcwhirter (bob@werken.com)
  * @author Erwin Bolwidt (ejb@klomp.org)
  */
@@ -82,7 +70,6 @@ public abstract class DefaultNavigator implements Navigator
     /**
      * Throws <code>UnsupportedAxisException</code>.
      * Subclasses should override this method.
-     *
      * @param contextNode the node to start from
      * @return never returns
      * @throws UnsupportedAxisException always
@@ -104,7 +91,6 @@ public abstract class DefaultNavigator implements Navigator
     /**
      * Throws <code>UnsupportedAxisException</code>.
      * Subclasses should override this method.
-     *
      * @param contextNode the node to start from
      * @return never returns
      * @throws UnsupportedAxisException always
@@ -171,7 +157,6 @@ public abstract class DefaultNavigator implements Navigator
     /**
      * Throws <code>UnsupportedAxisException</code>. Subclasses that
      * support the namespace axis must override this method.
-     *
      * @param contextNode the node to start from
      * @return never returns
      * @throws UnsupportedAxisException always
@@ -209,7 +194,6 @@ public abstract class DefaultNavigator implements Navigator
 
     /**
      * Returns null.
-     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -220,7 +204,6 @@ public abstract class DefaultNavigator implements Navigator
     
     /**
      * Returns null.
-     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -231,7 +214,6 @@ public abstract class DefaultNavigator implements Navigator
 
     /**
      * Returns null.
-     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -242,7 +224,6 @@ public abstract class DefaultNavigator implements Navigator
 
     /**
      * Returns null.
-     *
      * @param contextNode the node to start from
      * @return null
      */
@@ -292,7 +273,6 @@ public abstract class DefaultNavigator implements Navigator
     /**
      * Default inefficient implementation. Subclasses
      * should override this method.
-     *
      * @param contextNode the node whose parent to return
      * @return the parent node
      * @throws UnsupportedAxisException if the parent axis is not supported
@@ -310,7 +290,6 @@ public abstract class DefaultNavigator implements Navigator
     /**
      * Default implementation that always returns null. Override in subclass
      *  if the subclass can load documents.
-     *
      * @param url the URL of the document to load
      * @return null
      * @throws FunctionCallException if an error occurs while loading the
@@ -324,7 +303,6 @@ public abstract class DefaultNavigator implements Navigator
     /**
      * Default implementation that cannot find elements. Override in subclass
      * if subclass knows about attribute types.
-     *
      * @param contextNode a node from the document in which to look for the id
      * @param elementId id to look for
      * @return null

@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.function;
@@ -57,7 +48,6 @@ import org.jaxen.Navigator;
  * <b>4.2</b>
  * <code><i>string</i> translate(<i>string</i>,<i>string</i>,<i>string</i>)</code>
  * </p>
- * 
  * <blockquote cite="https://www.w3.org/TR/xpath#function-translate">
  * <p>
  * The <b><a href="https://www.w3.org/TR/xpath#function-translate">translate</a></b> function
@@ -76,16 +66,12 @@ import org.jaxen.Navigator;
  * replacement character. If the third argument string is longer than
  * the second argument string, then excess characters are ignored.
  * </p>
- * 
  * <blockquote> <b>NOTE: </b>The <b>translate</b> function is not a
  * sufficient solution for case conversion in all languages. A future
  * version of XPath may provide additional functions for case
  * conversion.</blockquote>
- * 
  * </blockquote>
- * 
  * @author Jan Dvorak ( jan.dvorak @ mathan.cz )
- * 
  * @see <a href="https://www.w3.org/TR/xpath#function-translate"
  *      target="_top">Section 4.2 of the XPath Specification</a>
  */
@@ -104,15 +90,12 @@ public class TranslateFunction implements Function
     /** Returns a copy of the first argument in which
      * characters found in the second argument are replaced by
      * corresponding characters from the third argument.
-     *
      * @param context the context at the point in the
      *         expression when the function is called
      * @param args a list that contains exactly three items
-     * 
      * @return a <code>String</code> built from <code>args.get(0)</code> 
      *     in which occurrences of characters in <code>args.get(1)</code> 
      *     are replaced by the corresponding characters in <code>args.get(2)</code> 
-     * 
      * @throws FunctionCallException if <code>args</code> does not have exactly three items
      */
     public Object call(Context context,
@@ -134,19 +117,15 @@ public class TranslateFunction implements Function
      * corresponding characters from <code>toArg</code>.
      * If necessary each argument is first converted to it string-value
      * as if by the XPath <code>string()</code> function.
-     * 
      * @param strArg the base string
      * @param fromArg the characters to be replaced
      * @param toArg the characters they will be replaced by
      * @param nav the <code>Navigator</code> used to calculate the string-values of the arguments.
-     * 
      * @return a copy of <code>strArg</code> in which
      *  characters found in <code>fromArg</code> are replaced by
      *  corresponding characters from <code>toArg</code>
-     *  
      * @throws FunctionCallException if one of the arguments is a malformed Unicode string;
      *     that is, if surrogate characters don't line up properly
-     * 
      */
     public static String evaluate(Object strArg,
                                   Object fromArg,

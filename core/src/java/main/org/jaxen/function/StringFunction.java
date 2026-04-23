@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.function;
@@ -61,16 +52,12 @@ import java.util.Locale;
  * <p>
  * <b>4.2</b> <code><i>string</i> string(<i>object</i>)</code>
  * </p>
- * 
- * 
  * <blockquote cite="https://www.w3.org/TR/xpath">
  * <p>
  * The <b>string</b> function converts
  * an object to a string as follows:
  * </p>
- * 
  * <ul>
- * 
  * <li>
  * <p>
  * A node-set is converted to a string by returning the <a
@@ -79,46 +66,36 @@ import java.util.Locale;
  * the node-set is empty, an empty string is returned.
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * A number is converted to a string as follows
  * </p>
- * 
  * <ul>
- * 
  * <li>
  * <p>
  * NaN is converted to the string <code>NaN</code>
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * positive zero is converted to the string <code>0</code>
  * </p>
  * </li>
- * 
  * <li>
- * 
  * <p>
  * negative zero is converted to the string <code>0</code>
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * positive infinity is converted to the string <code>Infinity</code>
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * negative infinity is converted to the string <code>-Infinity</code>
- * 
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * if the number is an integer, the number is represented in decimal
@@ -127,7 +104,6 @@ import java.util.Locale;
  * the number is negative
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * otherwise, the number is represented in decimal form as a Number including a decimal point with at least
@@ -140,37 +116,27 @@ import java.util.Locale;
  * needed to uniquely distinguish the number from all other IEEE 754
  * numeric values.
  * </p>
- * 
  * </li>
- * 
  * </ul>
- * 
  * </li>
- * 
  * <li>
  * <p>
  * The boolean false value is converted to the string <code>false</code>.
  * The boolean true value is converted to the string <code>true</code>.
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * An object of a type other than the four basic types is converted to a
  * string in a way that is dependent on that type.
  * </p>
- * 
  * </li>
- * 
  * </ul>
- * 
  * <p>
  * If the argument is omitted, it defaults to a node-set with the
  * context node as its only member.
  * </p>
- * 
  * </blockquote>
- * 
  * @author bob mcwhirter (bob @ werken.com)
  * @see <a href="https://www.w3.org/TR/xpath#function-string"
  *      target="_top">Section 4.2 of the XPath Specification</a>
@@ -197,13 +163,10 @@ public class StringFunction implements Function
     /**
      * Returns the string-value of <code>args.get(0)</code> 
      * or of the context node if <code>args</code> is empty.
-     * 
      * @param context the context at the point in the
      *         expression where the function is called
      * @param args list with zero or one element
-     * 
      * @return a <code>String</code> 
-     * 
      * @throws FunctionCallException if <code>args</code> has more than one item
      */    
     public Object call(Context context,
@@ -231,11 +194,9 @@ public class StringFunction implements Function
      * <code>String</code>, <code>Number</code>, or 
      * <code>Boolean</code>. For other types this function
      * returns the empty string. 
-     * 
      * @param obj the node, node-set, string, number, or boolean
      *      whose string-value is calculated
      * @param nav the navigator used to calculate the string-value
-     * 
      * @return a <code>String</code>. May be empty but is never null.
      */    
     public static String evaluate(Object obj,

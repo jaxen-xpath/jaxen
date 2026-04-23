@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.pattern;
@@ -54,7 +45,6 @@ import org.jaxen.saxpath.Axis;
 /** SAXPath <code>XPathHandler</code> implementation capable
  *  of building Jaxen expression trees which can walk various
  *  different object models.
- *
  *  @author bob mcwhirter (bob@werken.com)
  */
 public class PatternHandler extends JaxenHandler
@@ -66,12 +56,10 @@ public class PatternHandler extends JaxenHandler
     }
     
     /** Retrieve the simplified Jaxen Pattern expression tree.
-     *
      *  <p>
      *  This method is only valid once <code>XPathReader.parse(...)</code>
      *  successfully returned.
      *  </p>
-     *
      *  @return the Pattern expression tree
      */
     public Pattern getPattern()
@@ -81,12 +69,10 @@ public class PatternHandler extends JaxenHandler
 
     /** Retrieve the Jaxen Pattern expression tree, optionally
      *  simplified.
-     *
      *  <p>
      *  This method is only valid once <code>XPathReader.parse(...)</code>
      *  successfully returned.
      *  </p>
-     *  
      *  @param shouldSimplify ????
      *  @return the Pattern expression tree
      */
@@ -119,10 +105,10 @@ public class PatternHandler extends JaxenHandler
         //              | FilterExpr
         //              | FilterExpr / RelativeLocationPath
         //              | FilterExpr // RelativeLocationPath
-        //
+
         // If the current stack-frame has two items, it's a
         // FilterExpr and a LocationPath (of some flavor).
-        //
+
         // If the current stack-frame has one item, it's simply
         // a FilterExpr, and more than like boils down to a
         // primary expr of some flavor.  But that's for another

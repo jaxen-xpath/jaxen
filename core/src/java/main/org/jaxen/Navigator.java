@@ -1,28 +1,20 @@
 package org.jaxen;
 
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -34,14 +26,12 @@ package org.jaxen;
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
 */
 
 import java.io.Serializable;
@@ -52,7 +42,6 @@ import org.jaxen.saxpath.SAXPathException;
 /**
  * Interface for navigating around an arbitrary object
  * model, using XPath semantics.
- *
  * <p>
  * There is a method to obtain a <code>java.util.Iterator</code>,
  * for each axis specified by XPath.  If the target object model
@@ -60,10 +49,9 @@ import org.jaxen.saxpath.SAXPathException;
  * {@link UnsupportedAxisException} is to be thrown. If there are
  * no nodes on that axis, an empty iterator should be returned.
  * </p>
- *
  * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
- * @version $Id$
+ * @version
  */
 public interface Navigator extends Serializable
 {
@@ -74,7 +62,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>child</code>
      * XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the child axis are
@@ -86,7 +73,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>descendant</code>
      * XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the desscendant axis are
@@ -97,7 +83,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve an <code>Iterator</code> matching the <code>parent</code> XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the parent axis are
@@ -109,7 +94,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>ancestor</code>
      * XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the ancestor axis are
@@ -121,7 +105,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the
      * <code>following-sibling</code> XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the following-sibling axis are
@@ -133,7 +116,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the
      * <code>preceding-sibling</code> XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the preceding-sibling axis are
@@ -145,7 +127,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>following</code>
      * XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the following axis are
@@ -156,7 +137,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve an <code>Iterator</code> matching the <code>preceding</code> XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the preceding axis are
@@ -168,7 +148,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>attribute</code>
      * XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the attribute axis are
@@ -180,7 +159,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>namespace</code>
      * XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the namespace axis are
@@ -192,7 +170,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the <code>self</code> XPath
      * axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the self axis are
@@ -204,7 +181,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the
      * <code>descendant-or-self</code> XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the descendant-or-self axis are
@@ -216,7 +192,6 @@ public interface Navigator extends Serializable
     /**
      * Retrieve an <code>Iterator</code> matching the
      * <code>ancestor-or-self</code> XPath axis.
-     *
      * @param contextNode the original context node
      * @return an Iterator capable of traversing the axis, not null
      * @throws UnsupportedAxisException if the semantics of the ancestor-or-self axis are
@@ -231,7 +206,6 @@ public interface Navigator extends Serializable
 
     /**
      * Loads a document from the given URI.
-     *
      * @param uri the URI of the document to load
      * @return the document
      * @throws FunctionCallException if the document could not be loaded
@@ -241,7 +215,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns the document node that contains the given context node.
-     *
      * @param contextNode the context node
      * @return the document of the context node
      * @see #isDocument(Object)
@@ -250,12 +223,10 @@ public interface Navigator extends Serializable
     
     /**
      * Returns the parent of the given context node.
-     *
      * <p>
      * The parent of any node must either be a document
      * node or an element node.
      * </p>
-     *
      * @param contextNode the context node
      * @return the parent of the context node, or null if this is a document node
      * @throws UnsupportedAxisException if the parent axis is not
@@ -268,7 +239,6 @@ public interface Navigator extends Serializable
     
     /**
      * Retrieve the namespace URI of the given element node.
-     *
      * @param element the context element node
      * @return the namespace URI of the element node
      */
@@ -276,7 +246,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the local name of the given element node.
-     *
      * @param element the context element node
      * @return the local name of the element node
      */
@@ -284,7 +253,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the qualified name of the given element node.
-     *
      * @param element the context element node
      * @return the qualified name of the element node
      */
@@ -292,7 +260,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the namespace URI of the given attribute node.
-     *
      * @param attr the context attribute node
      * @return the namespace URI of the attribute node
      */
@@ -300,7 +267,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the local name of the given attribute node.
-     *
      * @param attr the context attribute node
      * @return the local name of the attribute node
      */
@@ -308,7 +274,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the qualified name of the given attribute node.
-     *
      * @param attr the context attribute node
      * @return the qualified name of the attribute node
      */
@@ -316,7 +281,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the target of a processing-instruction.
-     *
      * @param pi the context processing-instruction node
      * @return the target of the processing-instruction node
      */
@@ -324,7 +288,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the data of a processing-instruction.
-     *
      * @param pi the context processing-instruction node
      * @return the data of the processing-instruction node
      */
@@ -337,7 +300,6 @@ public interface Navigator extends Serializable
     /**
      * Returns whether the given object is a document node. A document node
      * is the node that is selected by the XPath expression <code>/</code>.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is a document node,
      *          else <code>false</code>
@@ -346,7 +308,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns whether the given object is an element node.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is an element node,
      *          else <code>false</code>
@@ -355,7 +316,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns whether the given object is an attribute node.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is an attribute node,
      *          else <code>false</code>
@@ -364,7 +324,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns whether the given object is a namespace node.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is a namespace node,
      *          else <code>false</code>
@@ -373,7 +332,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns whether the given object is a comment node.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is a comment node,
      *          else <code>false</code>
@@ -382,7 +340,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns whether the given object is a text node.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is a text node,
      *          else <code>false</code>
@@ -391,7 +348,6 @@ public interface Navigator extends Serializable
 
     /**
      * Returns whether the given object is a processing-instruction node.
-     *
      * @param object the object to test
      * @return <code>true</code> if the object is a processing-instruction node,
      *          else <code>false</code>
@@ -406,7 +362,6 @@ public interface Navigator extends Serializable
      * Retrieve the string-value of a comment node.
      * This may be the empty string if the comment is empty,
      * but must not be null.
-     *
      * @param comment the comment node
      * @return the string-value of the node
      */
@@ -416,7 +371,6 @@ public interface Navigator extends Serializable
      * Retrieve the string-value of an element node.
      * This may be the empty string if the element is empty,
      * but must not be null.
-     *
      * @param element the comment node
      * @return the string-value of the node
      */
@@ -426,7 +380,6 @@ public interface Navigator extends Serializable
      * Retrieve the string-value of an attribute node.
      * This should be the XML 1.0 normalized attribute value.
      * This may be the empty string but must not be null.
-     *
      * @param attr the attribute node
      * @return the string-value of the node
      */
@@ -436,7 +389,6 @@ public interface Navigator extends Serializable
      * Retrieve the string-value of a namespace node.
      * This is generally the namespace URI.
      * This may be the empty string but must not be null.
-     *
      * @param ns the namespace node
      * @return the string-value of the node
      */
@@ -446,7 +398,6 @@ public interface Navigator extends Serializable
      * Retrieve the string-value of a text node.
      * This must not be null and should not be the empty string.
      * The XPath data model does not allow empty text nodes.
-     *
      * @param text the text node
      * @return the string-value of the node
      */
@@ -458,7 +409,6 @@ public interface Navigator extends Serializable
 
     /**
      * Retrieve the namespace prefix of a namespace node.
-     *
      * @param ns the namespace node
      * @return the prefix associated with the node
      */
@@ -467,13 +417,11 @@ public interface Navigator extends Serializable
     /**
      * Translate a namespace prefix to a namespace URI, <strong>possibly</strong>
      * considering a particular element node.
-     *
      * <p>
      * Strictly speaking, prefix-to-URI translation should occur
      * irrespective of any element in the document.  This method
      * is provided to allow a non-conforming ease-of-use enhancement.
      * </p>
-     *
      * @param prefix the prefix to translate
      * @param element the element to consider during translation
      * @return the namespace URI associated with the prefix
@@ -485,7 +433,6 @@ public interface Navigator extends Serializable
     /**
      * Returns a parsed form of the given XPath string, which will be suitable
      * for queries on documents that use the same navigator as this one.
-     *
      * @param xpath the XPath expression
      * @return a new XPath expression object
      * @throws SAXPathException if the string is not a syntactically
@@ -500,7 +447,6 @@ public interface Navigator extends Serializable
      * Attributes with the name "ID" are not of type ID unless so defined.
      * Implementations that do not know whether attributes are of type ID or
      * not are expected to return null.
-     *
      * @param contextNode   a node from the document in which to look for the
      *                       id
      * @param elementId   id to look for
@@ -514,7 +460,6 @@ public interface Navigator extends Serializable
     /**
      * Returns a number that identifies the type of node that the given
      *  object represents in this navigator.
-     *
      * @param node ????
      * @return ????
      * @see org.jaxen.pattern.Pattern

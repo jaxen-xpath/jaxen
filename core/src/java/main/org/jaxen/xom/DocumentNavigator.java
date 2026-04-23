@@ -1,26 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2003 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -32,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
  */
 
 package org.jaxen.xom;
@@ -70,14 +60,11 @@ import java.util.Map;
 
 /**
  * Interface for navigating around the XOM object model.
- *
  * <p>
  * This class is not intended for direct usage, but is
  * used by the Jaxen engine during evaluation.
  * </p>
- *
  * @see XPath
- *
  */
 public class DocumentNavigator extends org.jaxen.DefaultNavigator
 {
@@ -112,8 +99,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return o instanceof Text;
     }
 
-    //
-    
     public String getAttributeName(Object o) {
         return (isAttribute(o) ? ((Attribute)o).getLocalName() : null);
     }
@@ -130,8 +115,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return (isAttribute(o) ? ((Attribute)o).getValue() : null);
     }
 
-    //
-    
     public String getCommentStringValue(Object o) {
         return (isComment(o) ? ((Comment)o).getValue() : null);
     }
@@ -152,8 +135,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return (o instanceof Node ? ((Node)o).getValue() : null);
     }
 
-    //
-    
     public String getNamespacePrefix(Object o) {
         if (isElement(o)) {
             return ((Element)o).getNamespacePrefix();
@@ -176,13 +157,9 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return null;
     }
 
-    //
-    
     public String getTextStringValue(Object o) {
         return (o instanceof Text ? ((Text)o).getValue() : null);
     }
-    
-    //
 
     public Object getDocument(String s) throws FunctionCallException {
         try {
@@ -202,8 +179,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return parent.getDocument();
     }
 
-    //
-    
     private abstract static class IndexIterator implements Iterator {
         private Object o = null;
         private int pos = 0, end = -1;
@@ -225,9 +200,7 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
             throw new UnsupportedOperationException();
         }
     }
-    
-    //
-    
+
     public Iterator getAttributeAxisIterator(Object o) {
         if (isElement(o)) {
             return new IndexIterator(o, 0, ((Element)o).getAttributeCount()) {
@@ -250,8 +223,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return JaxenConstants.EMPTY_ITERATOR;
     }
 
-    //
-
     public Iterator getParentAxisIterator(Object o) {
         Object parent = null;
         if (o instanceof Node) {
@@ -266,8 +237,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return (o instanceof Node ? ((Node)o).getParent() : null);
     }
 
-    //
-
     public Iterator getPrecedingAxisIterator(Object o) throws UnsupportedAxisException {
         return super.getPrecedingAxisIterator(o);
     }
@@ -275,8 +244,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public Iterator getPrecedingSiblingAxisIterator(Object o) throws UnsupportedAxisException {
         return super.getPrecedingSiblingAxisIterator(o);
     }
-    
-    //
 
     public String getProcessingInstructionData(Object o) {
         return (o instanceof ProcessingInstruction ? ((ProcessingInstruction)o).getValue() : null);
@@ -285,8 +252,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public String getProcessingInstructionTarget(Object o) {
         return (o instanceof ProcessingInstruction ? ((ProcessingInstruction)o).getTarget() : null);
     }
-
-    //
 
     public String translateNamespacePrefixToUri(String s, Object o) {
         Element element = null;
@@ -307,17 +272,12 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return null;
     }
 
-    //
-    
     public XPath parseXPath(String s) throws SAXPathException {
         return new BaseXPath(s, this);
     }
 
-    //
-    
     /** Wrapper for XOM namespace nodes to give them a parent,
      * as required by the XPath data model.
-     *
      *  @author Erwin Bolwidt
      */
     private static class XPathNamespace
@@ -360,8 +320,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         }
     }
 
-    //
-    
     private boolean addNamespaceForElement(Element elt, String uri, String prefix, Map map)
     {
         if (uri != null && uri.length() > 0 && (! map.containsKey(prefix))) {

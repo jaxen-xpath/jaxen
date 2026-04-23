@@ -1,24 +1,18 @@
 package org.jaxen;
 
 /*
-
  Copyright 2003 The Werken Company. All Rights Reserved.
- 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
-
   * Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
-
   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-
   * Neither the name of the Jaxen Project nor the names of its
     contributors may be used to endorse or promote products derived 
     from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -30,7 +24,6 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
  */
 
 import java.io.Serializable;
@@ -38,15 +31,13 @@ import java.io.Serializable;
 /**
  * Supporting context information for resolving
  * namespace prefixes, functions, and variables.
- *
  * <p>
  * <strong>NOTE:</strong> This class is not typically used directly,
  * but is exposed for writers of implementation-specific
  * XPath packages.
  * </p>
- *
  * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
- * @version $Id$
+ * @version
  * @see org.jaxen.dom.DOMXPath
  */
 public class ContextSupport implements Serializable {
@@ -79,7 +70,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Create a new ContextSupport object.
-     *
      * @param namespaceContext the NamespaceContext
      * @param functionContext the FunctionContext
      * @param variableContext the VariableContext
@@ -103,7 +93,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Set the <code>NamespaceContext</code>.
-     *
      * @param namespaceContext the namespace context
      */
     public void setNamespaceContext(NamespaceContext namespaceContext)
@@ -113,7 +102,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Retrieve the <code>NamespaceContext</code>.
-     *
      * @return the namespace context
      */
     public NamespaceContext getNamespaceContext()
@@ -123,7 +111,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Set the <code>FunctionContext</code>.
-     *
      * @param functionContext the function context
      */
     public void setFunctionContext(FunctionContext functionContext)
@@ -133,7 +120,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Retrieve the <code>FunctionContext</code>.
-     *
      * @return the function context
      */
     public FunctionContext getFunctionContext()
@@ -143,7 +129,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Set the <code>VariableContext</code>.
-     *
      * @param variableContext the variable context
      */
     public void setVariableContext(VariableContext variableContext)
@@ -153,7 +138,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Retrieve the <code>VariableContext</code>.
-     *
      * @return the variable context
      */
     public VariableContext getVariableContext()
@@ -163,7 +147,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Retrieve the <code>Navigator</code>.
-     *
      * @return the navigator
      */
     public Navigator getNavigator()
@@ -175,7 +158,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Translate a namespace prefix to its URI.
-     *
      * @param prefix the prefix
      * @return the namespace URI mapped to the prefix
      */
@@ -197,7 +179,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Retrieve a variable value.
-     *
      * @param namespaceURI the function namespace URI
      * @param prefix the function prefix
      * @param localName the function name
@@ -223,7 +204,6 @@ public class ContextSupport implements Serializable {
 
     /**
      * Retrieve a <code>Function</code>.
-     *
      * @param namespaceURI the function namespace URI
      * @param prefix the function prefix
      * @param localName the function name

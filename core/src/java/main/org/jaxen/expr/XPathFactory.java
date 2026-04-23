@@ -1,26 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -32,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
  */
 package org.jaxen.expr;
 
@@ -47,14 +37,12 @@ import org.jaxen.JaxenException;
 
 /**
  * An abstract factory used to create individual path component objects.
- *
  */
 public interface XPathFactory
 {
     
     /**
      * Create a new <code>XPathExpr</code> from an <code>Expr</code>.
-     * 
      * @param rootExpr the expression wrapped by the resulting XPathExpr
      * @return an XPathExpr wrapping the root expression
      * @throws JaxenException if expression evaluation fails
@@ -63,7 +51,6 @@ public interface XPathFactory
 
     /**
      * Create a new path expression.
-     * 
      * @param filterExpr the filter expression that starts the path expression
      * @param locationPath the location path that follows the filter expression
      * @return a path expression formed by concatenating the two arguments
@@ -74,7 +61,6 @@ public interface XPathFactory
 
     /**
      * Create a new empty relative location path.
-     * 
      * @return an empty relative location path
      * @throws JaxenException never
      */
@@ -82,7 +68,6 @@ public interface XPathFactory
 
     /**
      * Create a new empty absolute location path.
-     * 
      * @return an empty absolute location path
      * @throws JaxenException never
      */
@@ -90,7 +75,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath Or expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @return <code><i>lhs</i> or <i>rhs</i></code>
@@ -101,7 +85,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath And expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @return <code><i>lhs</i> and <i>rhs</i></code>
@@ -112,7 +95,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath equality expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @param equalityOperator <code>Operator.EQUALS</code> or <code>Operator.NOT_EQUALS</code>
@@ -126,7 +108,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath relational expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @param relationalOperator <code>Operator.LESS_THAN</code>, <code>Operator.GREATER_THAN</code>, 
@@ -140,7 +121,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath additive expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @param additiveOperator <code>Operator.ADD</code> or <code>Operator.SUBTRACT</code>
@@ -154,7 +134,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath multiplicative expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @param multiplicativeOperator <code>Operator.MULTIPLY</code>, 
@@ -169,7 +148,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath unary expression.  
-     * 
      * @param expr the expression to be negated
      * @param unaryOperator <code>Operator.NEGATIVE</code>
      * @return <code>- <i>expr</i></code> or <code><i>expr</i></code>
@@ -180,7 +158,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath union expression.  
-     * 
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
      * @return <code><i>lhs</i> | <i>rhs</i></code>
@@ -191,7 +168,6 @@ public interface XPathFactory
 
     /**
      * Returns a new XPath filter expression.  
-     * 
      * @param expr the basic expression to which the predicate will be added
      * @return the expression with an empty predicate set
      * @throws JaxenException if expression evaluation fails
@@ -200,7 +176,6 @@ public interface XPathFactory
 
     /**
      * Create a new function call expression.
-     * 
      * @param prefix the namespace prefix of the function
      * @param functionName the local name of the function 
      * @return a function with an empty argument list
@@ -211,7 +186,6 @@ public interface XPathFactory
 
     /**
      * Create a number expression.
-     * 
      * @param number the value
      * @return a number expression wrapping that value
      * @throws JaxenException if expression evaluation fails
@@ -220,7 +194,6 @@ public interface XPathFactory
 
     /**
      * Create a number expression.
-     * 
      * @param number the value
      * @return a number expression wrapping that value
      * @throws JaxenException if expression evaluation fails
@@ -229,7 +202,6 @@ public interface XPathFactory
 
     /**
      * Create a string literal expression.
-     * 
      * @param literal the value
      * @return a literal expression wrapping that value
      * @throws JaxenException if expression evaluation fails
@@ -238,7 +210,6 @@ public interface XPathFactory
 
     /**
      * Create a new variable reference expression.
-     * 
      * @param prefix the namespace prefix of the variable
      * @param variableName the local name of the variable 
      * @return a variable expression
@@ -249,7 +220,6 @@ public interface XPathFactory
 
     /**
      * Create a step with a named node-test.
-     * 
      * @param axis the axis to create the name-test on
      * @param prefix the namespace prefix for the test
      * @param localName the local name for the test
@@ -262,7 +232,6 @@ public interface XPathFactory
 
     /**
      * Create a step with a node() node-test.
-     * 
      * @param axis the axis to create the node-test on
      * @return an all node step
      * @throws JaxenException if <code>axis</code> is not one of the axis constants
@@ -271,7 +240,6 @@ public interface XPathFactory
 
     /**
      * Create a step with a <code>comment()</code> node-test.
-     * 
      * @param axis the axis to create the <code>comment()</code> node-test on
      * @return a comment node step
      * @throws JaxenException if <code>axis</code> is not one of the axis constants
@@ -280,7 +248,6 @@ public interface XPathFactory
 
     /**
      * Create a step with a <code>text()</code> node-test.
-     * 
      * @param axis the axis to create the <code>text()</code> node-test on
      * @return a text node step
      * @throws JaxenException if <code>axis</code> is not one of the axis constants
@@ -289,7 +256,6 @@ public interface XPathFactory
 
     /**
      * Create a step with a <code>processing-instruction()</code> node-test.
-     * 
      * @param axis the axis to create the <code>processing-instruction()</code> node-test on
      * @param name the target to match, may be empty
      * @return a processing instruction node step
@@ -300,7 +266,6 @@ public interface XPathFactory
 
     /**
      * Create from the supplied expression.
-     * 
      * @param predicateExpr the expression to evaluate in the predicate
      * @return a predicate
      * @throws JaxenException if expression evaluation fails
@@ -309,7 +274,6 @@ public interface XPathFactory
 
     /**
      * Create an empty predicate set. 
-     * 
      * @return an empty predicate set
      * @throws JaxenException never
      */

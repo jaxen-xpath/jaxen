@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.function;
@@ -52,8 +43,6 @@ import org.jaxen.Navigator;
 
 /**
  * <p><b>4.2</b> <code><i>string</i> substring-before(<i>string</i>,<i>string</i>)</code></p>
- * 
- * 
  * <blockquote cite="https://www.w3.org/TR/xpath#function-substring-before">
  * The substring-before function returns the substring of the first argument 
  * string that precedes the first occurrence of the second argument string 
@@ -61,9 +50,7 @@ import org.jaxen.Navigator;
  * first argument string does not contain the second argument string. 
  * For example, substring-before("1999/04/01","/") returns 1999.
  * </blockquote>
- * 
  * @author bob mcwhirter (bob @ werken.com)
- * 
  * @see <a href="https://www.w3.org/TR/xpath#function-substring-before" target="_top">Section 4.2 of the XPath Specification</a>
  */
 public class SubstringBeforeFunction implements Function
@@ -78,15 +65,12 @@ public class SubstringBeforeFunction implements Function
      * Returns the part of the string-value of the first item in <code>args</code>
      * that comes before the string-value of the second item in <code>args</code>;
      * or the empty string if the second string is not a substring of the first string.
-     *
      * @param context the context at the point in the
      *         expression when the function is called
      * @param args a list that contains two items
-     * 
      * @return a <code>String</code> containing that 
      *     part of the string-value of the first item in <code>args</code>
      *     that comes before the string-value of the second item in <code>args</code>
-     * 
      * @throws FunctionCallException if <code>args</code> does not have length two
      */
     public Object call(Context context,
@@ -106,15 +90,12 @@ public class SubstringBeforeFunction implements Function
      * Returns the part of <code>strArg</code> that precedes the first occurence 
      * of <code>matchArg</code>; or the empty string if the 
      * <code>strArg</code> does not contain <code>matchArg</code>
-     * 
      * @param strArg the string from which the substring is extracted
      * @param matchArg the string that marks the boundary of the substring
      * @param nav the <code>Navigator</code> used to calculate the string-values of
      *     the first two arguments
-     * 
      * @return a <code>String</code> containing the part of <code>strArg</code> that precedes the first occurence 
      * of <code>matchArg</code>
-     * 
      */
     public static String evaluate(Object strArg,
                                   Object matchArg,

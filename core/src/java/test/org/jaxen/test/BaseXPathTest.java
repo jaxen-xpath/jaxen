@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2005 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.test;
@@ -77,10 +68,8 @@ import junit.framework.TestCase;
  * <p>
  * Tests for org.jaxen.BaseXPath.
  * </p>
- * 
  * @author Elliotte Rusty Harold
  * @version 2.0
- *
  */
 public class BaseXPathTest extends TestCase {
 
@@ -147,69 +136,44 @@ public class BaseXPathTest extends TestCase {
     public void testEvaluateString() throws JaxenException {
         
         BaseXPath xpath = new DOMXPath("string(/*)");
-        
         doc.appendChild(doc.createElement("root"));
         String stringValue = (String) xpath.evaluate(doc);
         assertEquals("", stringValue);
-        
     }
-
     public void testNumberValueOfEmptyNodeSetIsNaN() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/x");
-        
         doc.appendChild(doc.createElement("root"));
         Double numberValue = (Double) xpath.numberValueOf(doc);
         assertTrue(numberValue.isNaN());
-        
     }
-
     public void testPathWithParentheses() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("(/root)/child");
-        
         Element root = doc.createElement("root");
         doc.appendChild(root);
         Element child = doc.createElement("child");
         root.appendChild(child);
-        
         assertEquals(child, xpath.selectSingleNode(doc));
-        
     }
-
     public void testEvaluateWithMultiNodeAnswer() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("(/descendant-or-self::node())");
-        
         doc.appendChild(doc.createElement("root"));
         List<?> result = (List) xpath.evaluate(doc);
         assertEquals(2, result.size());
-        
     }
-
     public void testValueOfEmptyListIsEmptyString() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/element");
         doc.appendChild(doc.createElement("root"));
-        
         String stringValue = xpath.stringValueOf(doc);
         assertEquals("", stringValue);
-        
     }
-
     public void testAllNodesQuery() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("//. | /");
         org.w3c.dom.Element root = doc.createElementNS("http://www.example.org/", "root");
         doc.appendChild(root);
-        
         String stringValue = xpath.stringValueOf(doc);
         assertEquals("", stringValue);
-        
     }
-
     public void testAncestorAxis() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("ancestor::*");
         org.w3c.dom.Element root = doc.createElementNS("", "root");
         org.w3c.dom.Element parent = doc.createElementNS("", "parent");
@@ -217,16 +181,12 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element child = doc.createElementNS("", "child");
         root.appendChild(parent);
         parent.appendChild(child);
-        
         List<?> result = xpath.selectNodes(child);
         assertEquals(2, result.size());
         assertEquals(root, result.get(0));   
         assertEquals(parent, result.get(1));
-        
     }    
-
     public void testPrecedingSiblingAxisIsInDocumentOrder() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("preceding-sibling::*");
         org.w3c.dom.Element root = doc.createElementNS("", "root");
         doc.appendChild(root);
@@ -236,16 +196,12 @@ public class BaseXPathTest extends TestCase {
         root.appendChild(child2);
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         root.appendChild(child3);
-        
         List<?> result = xpath.selectNodes(child3);
         assertEquals(2, result.size());
         assertEquals(child1, result.get(0));   
         assertEquals(child2, result.get(1));
-        
     }    
-
     public void testPrecedingAxisIsInDocumentOrder() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("preceding::*");
         org.w3c.dom.Element root = doc.createElementNS("", "root");
         doc.appendChild(root);
@@ -259,17 +215,13 @@ public class BaseXPathTest extends TestCase {
         parent2.appendChild(child2);
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         parent2.appendChild(child3);
-        
         List<?> result = xpath.selectNodes(child3);
         assertEquals(3, result.size());
         assertEquals(parent1, result.get(0));   
         assertEquals(child1, result.get(1));   
         assertEquals(child2, result.get(2));
-        
     }    
-
     public void testPrecedingAxisWithPositionalPredicate() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("preceding::*[1]");
         org.w3c.dom.Element root = doc.createElementNS("", "root");
         doc.appendChild(root);
@@ -279,15 +231,11 @@ public class BaseXPathTest extends TestCase {
         root.appendChild(child2);
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         root.appendChild(child3);
-        
         List<?> result = xpath.selectNodes(child3);
         assertEquals(1, result.size());  
         assertEquals(child2, result.get(0));
-        
     }    
-
     public void testAncestorAxisWithPositionalPredicate() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("ancestor::*[1]");
         org.w3c.dom.Element root = doc.createElementNS("", "root");
         doc.appendChild(root);
@@ -297,15 +245,11 @@ public class BaseXPathTest extends TestCase {
         child1.appendChild(child2);
         org.w3c.dom.Element child3 = doc.createElementNS("", "child3");
         child2.appendChild(child3);
-        
         List<?> result = xpath.selectNodes(child3);
         assertEquals(1, result.size());  
         assertEquals(child2, result.get(0));
-        
     }    
-
     public void testAncestorOrSelfAxis() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("ancestor-or-self::*");
         org.w3c.dom.Element root = doc.createElementNS("", "root");
         org.w3c.dom.Element parent = doc.createElementNS("", "parent");
@@ -313,18 +257,14 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element child = doc.createElementNS("", "child");
         root.appendChild(parent);
         parent.appendChild(child);
-        
         List<?> result = xpath.selectNodes(child);
         assertEquals(3, result.size());
         assertEquals(root, result.get(0));   
         assertEquals(parent, result.get(1));
         assertEquals(child, result.get(2));
-        
     }    
-
     // test case for JAXEN-55
     public void testAbbreviatedDoubleSlashAxis() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("//x");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
@@ -342,19 +282,15 @@ public class BaseXPathTest extends TestCase {
         x2.appendChild(doc.createTextNode("2"));
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
-        
         List<?> result = xpath.selectNodes(doc);
         assertEquals(4, result.size());
         assertEquals(x1, result.get(0));   
         assertEquals(x2, result.get(1));   
         assertEquals(x3, result.get(2));   
         assertEquals(x4, result.get(3));
-        
     }    
-
     // test case for JAXEN-55
     public void testAncestorFollowedByChildren() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/a/b/x/ancestor::*/child::x");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
@@ -701,14 +637,10 @@ public class BaseXPathTest extends TestCase {
         x2.appendChild(doc.createTextNode("2"));
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
-        
         List<?> result = xpath.selectNodes(doc);
         assertEquals(6, result.size());
-        
     }    
-       
     public void testUnionOfNodesWithNonNodes() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("count(//*) | //x ");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
@@ -726,7 +658,6 @@ public class BaseXPathTest extends TestCase {
         x2.appendChild(doc.createTextNode("2"));
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
-        
         try {
             xpath.selectNodes(doc);
             fail("Allowed union with non-node-set");
@@ -734,11 +665,8 @@ public class BaseXPathTest extends TestCase {
         catch (JaxenException ex) {
             assertNotNull(ex.getMessage());
         }
-        
     }    
-    
     public void testUnionOfEmptyNodeSetWithNonNodes() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("//y | count(//*)");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
@@ -750,7 +678,6 @@ public class BaseXPathTest extends TestCase {
         org.w3c.dom.Element x2 = doc.createElementNS("", "x");
         b.appendChild(x2);
         x2.appendChild(doc.createTextNode("2"));
-        
         try {
             xpath.selectNodes(doc);
             fail("Allowed union with non-node-set");
@@ -758,25 +685,18 @@ public class BaseXPathTest extends TestCase {
         catch (JaxenException ex) {
             assertNotNull(ex.getMessage());
         }
-        
     } 
-    
     public void testSelectSingleNodeSelectsNothing() 
       throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("id('p1')");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         doc.appendChild(a);
         Object result = xpath.selectSingleNode(doc);
         assertNull(result);
-        
     }  
-    
     public void testSAXPathExceptionThrownFromConstructor() {
-        
         System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
                             "java.lang.String" );
-        
         try {
             new DOMXPath("id('p1')");
         }
@@ -787,29 +707,21 @@ public class BaseXPathTest extends TestCase {
             System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
                             "" );
         }
-        
     }  
-    
     public void testBooleanValueOfEmptyNodeSetIsFalse() 
       throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/b/c");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         doc.appendChild(a);
         List<?> result = xpath.selectNodes(doc);
         assertFalse(xpath.booleanValueOf(result));
-        
     } 
-    
     public void testAddNamespaceWithNonSimpleNamespaceContext() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/b/c");
         xpath.setNamespaceContext(new NamespaceContext() {
-
             public String translateNamespacePrefixToUri(String prefix) {
                 return prefix;
             }
-            
         });
         try {
             xpath.addNamespace("pre", "foo");            
@@ -818,25 +730,19 @@ public class BaseXPathTest extends TestCase {
         catch (JaxenException ex) {
             assertNotNull(ex.getMessage());
         }
-        
     } 
-    
     public void testDebug() throws JaxenException {
         BaseXPath xpath = new DOMXPath("/b/c");
         assertEquals(
           "[(DefaultXPath): [(DefaultAbsoluteLocationPath): [(DefaultNameStep): b]/[(DefaultNameStep): c]]]", 
           xpath.debug()
         );
-        
     } 
-    
     public void testGetRootExpr() throws JaxenException {
         BaseXPath xpath = new DOMXPath("/b/c");
         assertTrue(xpath.getRootExpr() instanceof org.jaxen.expr.LocationPath);
     } 
-    
     public void testUnionUsesDocumentOrder() throws JaxenException {
-        
         BaseXPath xpath = new DOMXPath("/descendant::x | /a | /a/b");
         org.w3c.dom.Element a = doc.createElementNS("", "a");
         org.w3c.dom.Element b = doc.createElementNS("", "b");
@@ -854,7 +760,6 @@ public class BaseXPathTest extends TestCase {
         x2.appendChild(doc.createTextNode("2"));
         x3.appendChild(doc.createTextNode("3"));
         x4.appendChild(doc.createTextNode("4"));
-        
         List<?> result = xpath.selectNodes(doc);
         assertEquals(6, result.size());
         assertEquals(a, result.get(0));   
@@ -863,75 +768,62 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x2, result.get(3));   
         assertEquals(x3, result.get(4));   
         assertEquals(x4, result.get(5));
-        
     }
-    
     public void testArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(3, result.intValue());
     }
-    
     public void testLogicalAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("false() or true() and true() and false()");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testRelationalAssociativity3() throws JaxenException {
         XPath xpath = new DOMXPath("3 > 2 > 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testRelationalAssociativity4() throws JaxenException {
         XPath xpath = new DOMXPath("4 > 3 > 2 > 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testRelationalGTAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("5 > 4 > 3 > 2 > 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testRelationalLTAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("1 < 2 < 3 < 4 < 5");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     public void testRelationalLEAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("1 <= 2 <= 3 <= 4 <= 5");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     public void testRelationalGEAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("5 >= 4 >= 3 >= 2 >= 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testRelationalGEAssociativity3() throws JaxenException {
         XPath xpath = new DOMXPath("3 >= 2 >= 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     public void testRelationalGEAssociativity2() throws JaxenException {
         XPath xpath = new DOMXPath("2 >= 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     public void testRelationalGEAssociativity4() throws JaxenException {
         XPath xpath = new DOMXPath("4 >= 3 >= 2 >= 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
     public void testRelationalAssociativity5P() throws JaxenException {
@@ -939,13 +831,11 @@ public class BaseXPathTest extends TestCase {
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testInequalityAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("2 != 3 != 1 != 4 != 0");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
     public void testInequalityAssociativity5P() throws JaxenException {
@@ -953,13 +843,11 @@ public class BaseXPathTest extends TestCase {
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     public void testInequalityAssociativity5B() throws JaxenException {
         XPath xpath = new DOMXPath("2 != 3 != 1 != 4 != 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
     public void testInequalityAssociativity5BP() throws JaxenException {
@@ -967,13 +855,11 @@ public class BaseXPathTest extends TestCase {
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testEqualityAssociativity5() throws JaxenException {
         XPath xpath = new DOMXPath("2 = 3 = 1 = 4 = 0");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
     public void testEqualityAssociativity5P() throws JaxenException {
@@ -981,13 +867,11 @@ public class BaseXPathTest extends TestCase {
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result.booleanValue());
     }
-    
     public void testEqualityAssociativity5B() throws JaxenException {
         XPath xpath = new DOMXPath("2 = 3 = 1 = 4 = 1");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     // This is the same test but with parentheses to make explicit
     // how the previous test should be evaluated.
     public void testEqualityAssociativity5BP() throws JaxenException {
@@ -995,39 +879,32 @@ public class BaseXPathTest extends TestCase {
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertFalse(result.booleanValue());
     }
-    
     public void testMoreComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(4, result.intValue());
     }
-
     public void testMostComplexArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1+1+2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(5, result.intValue());
     }
-
     public void testSimplerArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("1-1+1");
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(1, result.intValue());
     }
-
     public void testNotEqualsDifferentTypes() throws JaxenException {
         XPath xpath = new DOMXPath("1.5 != \"foo\"");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result);
     }
-
     public void testNotEqualsDifferentTypesReverse() throws JaxenException {
         XPath xpath = new DOMXPath("\"foo\" != 3.5");
         Boolean result = (Boolean) xpath.evaluate(doc);
         assertTrue(result);
     }
-      
     public void testNamespaceNodesComeBeforeAttributeNodesInDocumentOrder() throws JaxenException {
-        
         org.w3c.dom.Element root = doc.createElementNS("http://www.example.org", "pre:b");
         doc.appendChild(root);
         root.setAttribute("name", "value");
@@ -1036,30 +913,24 @@ public class BaseXPathTest extends TestCase {
         assertEquals(((org.w3c.dom.Node) result.get(0)).getNodeType(), Pattern.NAMESPACE_NODE);
         assertEquals(((org.w3c.dom.Node) result.get(1)).getNodeType(), Pattern.NAMESPACE_NODE);
         assertEquals(((org.w3c.dom.Node) result.get(2)).getNodeType(), Node.ATTRIBUTE_NODE);
-        
         // now flip the order of the statement and retest
         xpath = new DOMXPath("/*/namespace::node() | /*/attribute::* ");
         result = xpath.selectNodes(doc);
         assertEquals(((org.w3c.dom.Node) result.get(0)).getNodeType(), Pattern.NAMESPACE_NODE);
         assertEquals(((org.w3c.dom.Node) result.get(1)).getNodeType(), Pattern.NAMESPACE_NODE);
         assertEquals(((org.w3c.dom.Node) result.get(2)).getNodeType(), Node.ATTRIBUTE_NODE);
-   
     }
-
     public void testJaxen97() throws JaxenException {
         // jaxen 97 claims this expression throws an exception.
         new DOMXPath("/aaa:element/text()");
     }
-
     public void testAttributeNodesOnParentComeBeforeNamespaceNodesInChildInDocumentOrder() 
      throws JaxenException {
-        
         org.w3c.dom.Element root = doc.createElement("root");
         doc.appendChild(root);
         root.setAttribute("name", "value");
         Element child = doc.createElementNS("http://www.example.org", "pre:child");
         root.appendChild(child);
-        
         XPath xpath = new DOMXPath("/*/*/namespace::node() | //attribute::* ");
         List<?> result = xpath.selectNodes(doc);
         assertEquals(3, result.size());

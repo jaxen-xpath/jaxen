@@ -1,22 +1,16 @@
 /*
-
  Copyright 2003 The Werken Company. All Rights Reserved.
- 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
-
   * Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
-
   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-
   * Neither the name of the Jaxen Project nor the names of its
     contributors may be used to endorse or promote products derived 
     from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -28,7 +22,6 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
  */
 package org.jaxen.expr.iter;
 
@@ -40,7 +33,6 @@ import org.jaxen.UnsupportedAxisException;
 
 /**
  * Provide access to the XPath axes.
- * 
  * @author Bob McWhirter
  * @author James Strachan
  * @author Stephen Colebourne
@@ -52,7 +44,6 @@ public abstract class IterableAxis implements Serializable {
 
     /**
      * Constructor.
-     * 
      * @param axisValue
      */
     public IterableAxis(int axisValue) {
@@ -61,7 +52,6 @@ public abstract class IterableAxis implements Serializable {
 
     /**
      * Gets the numeric constant for the axis.
-     * 
      * @return the axis value
      */
     public int value() {
@@ -70,7 +60,6 @@ public abstract class IterableAxis implements Serializable {
 
     /**
      * Gets the iterator for a specific XPath axis.
-     * 
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
      * @return an iterator for the axis 
@@ -80,7 +69,6 @@ public abstract class IterableAxis implements Serializable {
 
     /**
      * Gets the iterator for a specific XPath axis that supports named access.
-     *
      * @param contextNode  the current context node to work from
      * @param support  the additional context information
      * @param localName  the local name of the nodes to return
@@ -101,7 +89,6 @@ public abstract class IterableAxis implements Serializable {
 
     /**
      * Does this axis support named access?
-     * 
      * @param support  the additional context information
      * @return true if named access supported. If not, iterator() will be used.
      */

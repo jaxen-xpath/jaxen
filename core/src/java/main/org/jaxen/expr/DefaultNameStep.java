@@ -1,22 +1,16 @@
 /*
-
  Copyright 2003 The Werken Company. All Rights Reserved.
- 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
-
   * Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
-
   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-
   * Neither the name of the Jaxen Project nor the names of its
     contributors may be used to endorse or promote products derived 
     from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -28,7 +22,6 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
  */
 package org.jaxen.expr;
 
@@ -53,7 +46,6 @@ import org.jaxen.saxpath.Axis;
  * non-default-axis steps, such as "following-sibling::foo"
  * or "@foo", and namespace-aware steps, such
  * as "foo:bar".
- *
  * @author bob mcwhirter (bob@werken.com)
  * @author Stephen Colebourne
  */
@@ -83,7 +75,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Constructor.
-     * 
      * @param axis  the axis to work through
      * @param prefix  the name prefix
      * @param localName  the local name
@@ -103,7 +94,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Gets the namespace prefix.
-     * 
      * @return the prefix
      */
     public String getPrefix() {
@@ -112,7 +102,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Gets the local name.
-     * 
      * @return the local name
      */
     public String getLocalName() {
@@ -121,7 +110,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Does this step match any name? (i.e. Is it '*'?)
-     * 
      * @return true if it matches any name
      */
     public boolean isMatchesAnyName() {
@@ -130,7 +118,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Gets the step as a fully defined XPath.
-     * 
      * @return the full XPath for this step
      */
     public String getText() {
@@ -304,7 +291,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
     
     /**
      * Checks whether the node matches this step.
-     * 
      * @param node  the node to check
      * @param contextSupport  the context support
      * @return true if matches
@@ -374,7 +360,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Checks whether the URI represents a namespace.
-     * 
      * @param uri  the URI to check
      * @return true if non-null and non-empty
      */
@@ -384,7 +369,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
 
     /**
      * Compares two namespace URIs, handling null.
-     * 
      * @param uri1  the first URI
      * @param uri2  the second URI
      * @return true if equal, where null==""
@@ -404,7 +388,6 @@ public class DefaultNameStep extends DefaultStep implements NameStep {
     
     /**
      * Returns a full information debugging string.
-     * 
      * @return a debugging string
      */
     @Override

@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many 
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.function;
@@ -54,42 +45,34 @@ import org.jaxen.Navigator;
  * <p>
  * <b>4.3</b> <code><i>boolean</i> boolean(<i>object</i>)</code>
  * </p>
- * 
  * <blockquote cite="https://www.w3.org/TR/xpath#section-Boolean-Functions">
  * <p>
  * The <b><a href="https://www.w3.org/TR/xpath#function-boolean" target="_top">boolean</a></b>
  * function converts its argument to a boolean as follows:
  * </p>
- * 
  * <ul>
- * 
  * <li>
  * <p>
  * a number is true if and only if it is neither positive or negative
  * zero nor NaN
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * a node-set is true if and only if it is non-empty
  * </p>
  * </li>
- * 
  * <li>
  * <p>
  * a string is true if and only if its length is non-zero
  * </p>
  * </li>
- * 
  * <li>
- * 
  * <p>
  * an object of a type other than the four basic types is converted to a
  * boolean in a way that is dependent on that type
  * </p></li></ul>
  * </blockquote>
- * 
  * @author bob mcwhirter (bob @ werken.com)
  * @see <a href="https://www.w3.org/TR/xpath#function-boolean">Section 4.3 of the XPath Specification</a>
  */
@@ -102,15 +85,12 @@ public class BooleanFunction implements Function
     public BooleanFunction() {}
     
     /** Convert the argument to a <code>Boolean</code>
-     *
      * @param context the context at the point in the
      *         expression when the function is called
      * @param args a list with exactly one item which will be converted to a 
      *     <code>Boolean</code>
-     * 
      * @return the result of evaluating the function; 
      *     <code>Boolean.TRUE</code> or <code>Boolean.FALSE</code>
-     * 
      * @throws FunctionCallException if <code>args</code> has more or less than one item
      */
     public Object call(Context context,
@@ -127,7 +107,6 @@ public class BooleanFunction implements Function
     /** 
      * <p>Convert the argument <code>obj</code> to a <code>Boolean</code> 
      * according to the following rules:</p>
-     *
      * <ul>
      * <li>Lists are false if they're empty; true if they're not.</li>
      * <li>Booleans are false if they're false; true if they're true.</li>
@@ -135,10 +114,8 @@ public class BooleanFunction implements Function
      * <li>Numbers are false if they're 0 or NaN; true if they're not.</li>
      * <li>All other objects are true.</li>
      * </ul>
-     * 
      * @param obj the object to convert to a boolean
      * @param nav ignored
-     * 
      * @return <code>Boolean.TRUE</code> or <code>Boolean.FALSE</code>
      */
     public static Boolean evaluate(Object obj, Navigator nav)

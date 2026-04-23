@@ -1,25 +1,18 @@
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -31,14 +24,12 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
  */
 
 package org.jaxen.test;
@@ -74,7 +65,6 @@ public class XPathReaderTest extends TestCase
         "//attribute::*[.!='crunchy']",
         "'//*[contains(string(text()),\"yada yada\")]'",
     };
-
     private String[][] bogusPaths = {
         new String[]{"chyld::foo", "Expected valid axis name instead of [chyld]"},
         new String[]{"foo/tacos()", "Expected node-type"},
@@ -85,51 +75,38 @@ public class XPathReaderTest extends TestCase
         new String[]{"//", "Location path cannot end with //"},
         new String[]{"foo/$variable/foo", "Expected one of '.', '..', '@', '*', <QName>"}
     };
-
     public XPathReaderTest( String name )
     {
         super( name );
     }
-
     public void setUp() throws ParserConfigurationException, SAXException, IOException
     {
         this.reader = new XPathReader();
-
         this.actual = new ConformanceXPathHandler();
-
         this.reader.setXPathHandler( this.actual );
-        
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.parse( "xml/basic.xml" );
-
     }
-
     public void tearDown()
     {
         this.reader = null;
     }
-
     // --------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------
-
     public void testPaths() throws SAXPathException
     {
-
         for( int i = 0; i < paths.length; ++i )
         {
             reader.parse( paths[i] );
         }
     }
-
     public void testBogusPaths() throws SAXPathException
     {
-
         for( int i = 0; i < bogusPaths.length; ++i )
         {
             final String[] bogusPath = bogusPaths[i];
-
             try
             {
                 reader.parse( bogusPath[0] );
@@ -141,7 +118,6 @@ public class XPathReaderTest extends TestCase
             }
         }
     }
-
     public void testChildrenOfNumber() throws SAXPathException
     {
         try
@@ -154,7 +130,6 @@ public class XPathReaderTest extends TestCase
             assertEquals( "Node-set expected", e.getMessage() );
         }
     }
-
     public void testChildIsNumber() throws SAXPathException
     {
         try
@@ -166,12 +141,9 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Expected one of '.', '..', '@', '*', <QName>", e.getMessage() );
         }
-        
     }
-
     public void testNumberOrNumber()
     {
-
         try
         {
             XPath xpath = new DOMXPath( "4 | 5" );
@@ -183,10 +155,8 @@ public class XPathReaderTest extends TestCase
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
     }
-
     public void testStringOrNumber()
     {
-
         try
         {
             XPath xpath = new DOMXPath( "\"test\" | 5" );
@@ -198,10 +168,8 @@ public class XPathReaderTest extends TestCase
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
     }    
-    
     public void testStringOrString() 
     {
-
         try
         {
             XPath xpath = new DOMXPath( "\"test\" | \"festival\"" );
@@ -212,12 +180,9 @@ public class XPathReaderTest extends TestCase
         {
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
-        
     }    
-    
     public void testUnionofNodesAndNonNodes() 
     {
-
         try
         {
             XPath xpath = new DOMXPath( "count(//*) | //* " );
@@ -229,15 +194,12 @@ public class XPathReaderTest extends TestCase
             assertEquals( "Unions are only allowed over node-sets", e.getMessage() );
         }
     }    
-    
     public void testValidAxis() throws SAXPathException
     {
         reader.parse( "child::foo" );
     }
-
     public void testInvalidAxis() throws SAXPathException
     {
-
         try
         {
             reader.parse( "chyld::foo" );
@@ -247,9 +209,7 @@ public class XPathReaderTest extends TestCase
         {
             assertNotNull(ex.getMessage());
         }
-
     }
-
 /*    public void testSimpleNameStep() throws SAXPathException
     {
         this.text = "foo";
@@ -261,9 +221,7 @@ public class XPathReaderTest extends TestCase
         this.expected.endNameStep();
         assertEquals( this.expected,
           this.actual );
-
     } 
-
     public void testNameStepWithAxisAndPrefix() throws SAXPathException
     {
         this.text = "parent::foo:bar";
@@ -275,12 +233,9 @@ public class XPathReaderTest extends TestCase
         this.expected.endNameStep();
         assertEquals( this.expected,
           this.actual );
-
     }
-
     public void testNodeStepWithAxis() throws SAXPathException
     {
-
         this.text = "parent::node()";
         this.reader.setUpParse( this.text );
         this.reader.step();
@@ -288,9 +243,7 @@ public class XPathReaderTest extends TestCase
         this.expected.endAllNodeStep();
         assertEquals( this.expected,
           this.actual );
-
     }
-
     public void testProcessingInstructionStepWithName() throws SAXPathException
     {
         this.text = "parent::processing-instruction('cheese')";
@@ -302,7 +255,6 @@ public class XPathReaderTest extends TestCase
         assertEquals( this.expected,
           this.actual );
     }
-
     public void testProcessingInstructionStepNoName() throws SAXPathException
     {
         this.text = "parent::processing-instruction()";
@@ -313,12 +265,9 @@ public class XPathReaderTest extends TestCase
         this.expected.endProcessingInstructionNodeStep();
         assertEquals( this.expected,
           this.actual );
-
     }
-
     public void testAllNodeStep() throws SAXPathException
     {
-
         this.text = "parent::node()";
         this.reader.setUpParse( this.text );
         this.reader.step( );
@@ -326,12 +275,9 @@ public class XPathReaderTest extends TestCase
         this.expected.endAllNodeStep();
         assertEquals( this.expected,
           this.actual );
-
     }
-
     public void testTextNodeStep() throws SAXPathException
     {
-
         this.text = "parent::text()";
         this.reader.setUpParse( this.text );
         this.reader.step( );
@@ -339,12 +285,9 @@ public class XPathReaderTest extends TestCase
         this.expected.endTextNodeStep();
         assertEquals( this.expected,
           this.actual );
-
     }
-
     public void testCommentNodeStep() throws SAXPathException
     {
-
         this.text = "parent::comment()";
         this.reader.setUpParse( this.text );
         this.reader.step( );
@@ -352,7 +295,6 @@ public class XPathReaderTest extends TestCase
         this.expected.endCommentNodeStep();
         assertEquals( this.expected,
           this.actual );
-
     }*/
 
     public void testLocationPathStartsWithVariable() throws SAXPathException
@@ -371,7 +313,6 @@ public class XPathReaderTest extends TestCase
 
     /*public void testRelativeLocationPath() throws SAXPathException
     {
-
         this.text = "foo/bar/baz";
         this.reader.setUpParse( this.text );
         this.reader.locationPath( false );
@@ -391,12 +332,9 @@ public class XPathReaderTest extends TestCase
         this.expected.endRelativeLocationPath();
         assertEquals( this.expected,
           this.actual );
-
     }
-
     public void testAbsoluteLocationPath() throws SAXPathException
     {
-        
         this.text = "/foo/bar/baz";
         this.reader.setUpParse( this.text );
         this.reader.locationPath( true );
@@ -416,7 +354,6 @@ public class XPathReaderTest extends TestCase
         this.expected.endAbsoluteLocationPath();
         assertEquals( this.expected,
           this.actual );
-
     }*/
 
     public void testNoSpaceAfterDiv() throws JaxenException 

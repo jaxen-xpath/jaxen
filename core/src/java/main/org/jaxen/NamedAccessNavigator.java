@@ -1,22 +1,16 @@
 /*
-
  Copyright 2003 The Werken Company. All Rights Reserved.
- 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
-
   * Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
-
   * Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-
   * Neither the name of the Jaxen Project nor the names of its
     contributors may be used to endorse or promote products derived 
     from this software without specific prior written permission.
-
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -28,7 +22,6 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
  */
 package org.jaxen;
 
@@ -40,7 +33,6 @@ import java.util.Iterator;
  * <p>
  * This interface must only be implemented by those models that
  * can support this named access behavior.
- *
  * @author Stephen Colebourne
  */
 public interface NamedAccessNavigator extends Navigator {
@@ -54,7 +46,6 @@ public interface NamedAccessNavigator extends Navigator {
      * <p>
      * If the namespaceURI is null, no namespace should be used.
      * The prefix will never be null.
-     *
      * @param contextNode  the origin context node
      * @param localName  the local name of the children to return, always present
      * @param namespacePrefix  the prefix of the namespace of the children to return
@@ -77,7 +68,6 @@ public interface NamedAccessNavigator extends Navigator {
      * <p>
      * If the namespaceURI is null, no namespace should be used.
      * The prefix will never be null.
-     *
      * @param contextNode  the origin context node
      * @param localName  the local name of the attributes to return, always present
      * @param namespacePrefix  the prefix of the namespace of the attributes to return

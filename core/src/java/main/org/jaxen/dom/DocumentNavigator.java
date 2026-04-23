@@ -1,28 +1,20 @@
 package org.jaxen.dom;
 
 /*
- *
  * ====================================================================
- *
  * Copyright 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
- *
- *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * 
  *   * Redistributions of source code must retain the above copyright
  *     notice, this list of conditions and the following disclaimer.
- * 
  *   * Redistributions in binary form must reproduce the above copyright
  *     notice, this list of conditions and the following disclaimer in the
  *     documentation and/or other materials provided with the distribution.
- * 
  *   * Neither the name of the Jaxen Project nor the names of its
  *     contributors may be used to endorse or promote products derived 
  *     from this software without specific prior written permission.
- * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
  * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -34,14 +26,12 @@ package org.jaxen.dom;
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * ====================================================================
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the Jaxen Project and was originally
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
 */
 
 import javax.xml.parsers.DocumentBuilder;
@@ -68,26 +58,21 @@ import org.w3c.dom.ProcessingInstruction;
 import org.xml.sax.SAXException;
 
 /** Interface for navigating around the W3C DOM Level 2 object model.
- *
  *  <p>
  *  This class is not intended for direct usage, but is
  *  used by the Jaxen engine during evaluation.
  *  </p>
- *
  *  <p>This class implements the {@link org.jaxen.DefaultNavigator} interface
  *  for the Jaxen XPath library.  This adapter allows the Jaxen
  *  library to be used to execute XPath queries against any object tree
  *  that implements the DOM level 2 interfaces.</p>
- *
  *  <p>Note: DOM level 2 does not include a node representing an XPath
  *  namespace node.  This navigator will return namespace nodes
  *  as instances of the custom {@link NamespaceNode} class, and
  *  users will have to check result sets to locate and isolate
  *  these.</p>
- *
  *  @author David Megginson
  *  @author James Strachan
- *
  *  @see XPath
  *  @see NamespaceNode
  */
@@ -115,7 +100,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get a constant DocumentNavigator for efficiency.
-     *
      * @return a constant instance of a DocumentNavigator.
      */
     public static Navigator getInstance ()
@@ -129,7 +113,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get an iterator over all of this node's children.
-     *
      * @param contextNode the context node for the child axis.
      * @return a possibly-empty iterator (not null)
      */
@@ -157,7 +140,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get a (single-member) iterator over this node's parent.
-     *
      * @param contextNode the context node for the parent axis
      * @return a possibly-empty iterator (not null)
      */
@@ -194,9 +176,7 @@ public class DocumentNavigator extends DefaultNavigator
      * Return the XPath parent of the supplied DOM node.
      * XPath has slightly different definition of parent than DOM does.
      * In particular, the parent of an attribute is not null.
-     * 
      * @param child the child node
-     * 
      * @return the parent of the specified node; or null if
      *     the node does not have a parent
      */
@@ -210,7 +190,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get an iterator over all following siblings.
-     *
      * @param contextNode the context node for the sibling iterator
      * @return a possibly-empty iterator (not null)
      */
@@ -229,7 +208,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get an iterator over all preceding siblings.
-     *
      * @param contextNode the context node for the preceding sibling axis
      * @return a possibly-empty iterator (not null)
      */
@@ -256,7 +234,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get an iterator over all following nodes, depth-first.
-     *
      * @param contextNode the context node for the following axis
      * @return a possibly-empty iterator (not null)
      */
@@ -301,7 +278,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get an iterator over all attributes.
-     *
      * @param contextNode the context node for the attribute axis
      * @return a possibly-empty iterator (not null)
      */
@@ -317,12 +293,10 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get an iterator over all declared namespaces.
-     *
      * <p>Note: this iterator is not live: it takes a snapshot
      * and that snapshot remains static during the life of
      * the iterator (i.e. it won't reflect subsequent changes
      * to the DOM).</p>
-     * 
      * <p>
      * In the event that the DOM is inconsistent; for instance a 
      * <code>pre:foo</code> element is declared by DOM to be in the 
@@ -337,7 +311,6 @@ public class DocumentNavigator extends DefaultNavigator
      * http://www.b.com/ namespace--it is undefined which namespace
      * will be returned. 
      * </p>
-     *
      * @param contextNode the context node for the namespace axis
      * @return a possibly-empty iterator (not null)
      */
@@ -425,7 +398,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /** Returns a parsed form of the given XPath string, which will be suitable
      *  for queries on DOM documents.
-     *  
      * @param xpath the XPath expression
      * @return a parsed form of the given XPath string
      * @throws org.jaxen.saxpath.SAXPathException if the string is syntactically incorrect
@@ -437,7 +409,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the top-level document node.
-     *
      * @param contextNode any node in the document
      * @return the root node
      */
@@ -452,7 +423,6 @@ public class DocumentNavigator extends DefaultNavigator
     // This should be combined in a future version.
     /**
      * Get the namespace URI of an element.
-     *
      * @param element the target node
      * @return a string (possibly empty) if the node is an element,
      * and null otherwise
@@ -472,7 +442,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the local name of an element.
-     *
      * @param element the target node
      * @return a string representing the unqualified local name
      *     if the node is an element, or null otherwise
@@ -489,7 +458,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the qualified name of an element.
-     *
      * @param element the target node
      * @return a string representing the qualified (i.e. possibly
      *   prefixed) name if the argument is an element, or null otherwise
@@ -509,11 +477,8 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the namespace URI of an attribute.
-     *
      * @param attribute the target node
-     * 
      * @return the namespace name of the specified node
-     * 
      */
     public String getAttributeNamespaceUri (Object attribute)
     {
@@ -530,7 +495,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the local name of an attribute.
-     *
      * @param attribute the target node
      * @return a string representing the unqualified local name
      * if the node is an attribute, or null otherwise
@@ -547,9 +511,7 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the qualified name of an attribute.
-     *
      * @param attribute the target node
-     * 
      * @return a string representing the qualified (i.e. possibly
      * prefixed) name if the argument is an attribute, or null otherwise
      */
@@ -568,7 +530,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Test if a node is a top-level document.
-     *
      * @param object the target node
      * @return true if the node is the document root, false otherwise
      */
@@ -580,7 +541,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Test if a node is a namespace.
-     *
      * @param object the target node
      * @return true if the node is a namespace, false otherwise
      */
@@ -591,7 +551,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Test if a node is an element.
-     *
      * @param object the target node
      * @return true if the node is an element, false otherwise
      */
@@ -605,7 +564,6 @@ public class DocumentNavigator extends DefaultNavigator
      * Test if a node is an attribute. <code>xmlns</code> and 
      * <code>xmlns:pre</code> attributes do not count as attributes
      * for the purposes of XPath. 
-     *
      * @param object the target node
      * @return true if the node is an attribute, false otherwise
      */
@@ -618,7 +576,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Test if a node is a comment.
-     *
      * @param object the target node
      * @return true if the node is a comment, false otherwise
      */
@@ -630,7 +587,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Test if a node is plain text.
-     *
      * @param object the target node
      * @return true if the node is a text node, false otherwise
      */
@@ -651,7 +607,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Test if a node is a processing instruction.
-     *
      * @param object the target node
      * @return true if the node is a processing instruction, false otherwise
      */
@@ -663,7 +618,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the string value of an element node.
-     *
      * @param object the target node
      * @return the text inside the node and its descendants if the node
      * is an element, null otherwise
@@ -680,7 +634,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Construct a node's string value recursively.
-     *
      * @param node the current node
      * @param builder the builder for building the text
      * @return the builder passed as a parameter (for convenience)
@@ -701,7 +654,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the string value of an attribute node.
-     *
      * @param object the target node
      * @return the text of the attribute value if the node is an
      *     attribute, null otherwise
@@ -714,7 +666,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the string value of text.
-     *
      * @param object the target node
      * @return the string of text if the node is text, null otherwise
      */
@@ -726,7 +677,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the string value of a comment node.
-     *
      * @param object the target node
      * @return the text of the comment if the node is a comment, null otherwise
      */
@@ -738,7 +688,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the string value of a namespace node.
-     *
      * @param object the target node
      * @return the namespace URI as a (possibly empty) string if the
      *     node is a namespace node, null otherwise
@@ -751,7 +700,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the prefix value of a namespace node.
-     *
      * @param object the target node
      * @return the namespace prefix a (possibly empty) string if the
      *     node is a namespace node, null otherwise
@@ -764,7 +712,6 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Translate a namespace prefix to a URI.
-     * 
      * @param prefix the namespace prefix
      * @param element the namespace context
      * @return the namespace URI bound to the prefix in the scope of <code>element</code>;
@@ -782,12 +729,10 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Use JAXP to load a namespace aware document from a given URI.
-     *
      * @param uri the URI of the document to load
      * @return the new W3C DOM Level 2 Document instance
      * @throws FunctionCallException containing a nested exception
      *      if a problem occurs trying to parse the given document
-     *
      * @todo Possibly we could make the factory a thread local.
      */
     public Object getDocument(String uri) throws FunctionCallException
@@ -815,11 +760,9 @@ public class DocumentNavigator extends DefaultNavigator
     
     /**
      * Get the target of a processing instruction node.
-     * 
      * @param obj the processing instruction
      * @return the target of the processing instruction
      * @throws ClassCastException if obj is not a processing instruction
-     * 
      */
     public String getProcessingInstructionTarget(Object obj)
     {      
@@ -832,11 +775,9 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * Get the data of a processing instruction node.
-     * 
      * @param obj the processing instruction
      * @return the target of the processing instruction
      * @throws ClassCastException if obj is not a processing instruction
-     * 
      */
     public String getProcessingInstructionData(Object obj)
     {
@@ -853,11 +794,9 @@ public class DocumentNavigator extends DefaultNavigator
 
     /**
      * A generic iterator over DOM nodes.
-     *
      * <p>Concrete subclasses must implement the {@link #getFirstNode}
      * and {@link #getNextNode} methods for a specific iteration
      * strategy.</p>
-     *
      * <p>DocumentFragment and EntityReference nodes are transparent:
      * their children are iterated in-place rather than the nodes
      * themselves being returned.</p>
@@ -868,7 +807,6 @@ public class DocumentNavigator extends DefaultNavigator
 
         /**
          * Constructor.
-         *
          * @param contextNode the starting node
          */
         public NodeIterator (Node contextNode)
@@ -898,10 +836,8 @@ public class DocumentNavigator extends DefaultNavigator
 
         /**
          * Get the first node for iteration.
-         *
          * <p>This method must derive an initial node for iteration
          * from a context node.</p>
-         *
          * @param contextNode the starting node
          * @return the first node in the iteration
          * @see #getNextNode
@@ -910,10 +846,8 @@ public class DocumentNavigator extends DefaultNavigator
 
         /**
          * Get the next node for iteration.
-         *
          * <p>This method must locate a following node from the
          * current context node.</p>
-         *
          * @param contextNode the current node in the iteration
          * @return the following node in the iteration, or null
          * if there is none
@@ -924,17 +858,14 @@ public class DocumentNavigator extends DefaultNavigator
         /**
          * Get the first child of a transparent node (DocumentFragment or
          * EntityReference) to visit when descending into it.
-         *
          * <p>The default implementation returns the node's first child,
          * suitable for forward iteration.  Subclasses that iterate
          * backward (e.g. the preceding-sibling axis) should override
          * this method to return the node's last child instead.</p>
-         *
          * <p>Returning {@code null} disables transparent-node descent
          * for this iterator (useful when the subclass's
          * {@link #getNextNode} already handles depth-first traversal,
          * as the following axis does).</p>
-         *
          * @param transparentNode a DocumentFragment or EntityReference node
          * @return the child node to start iterating, or null to skip descent
          */
@@ -946,11 +877,9 @@ public class DocumentNavigator extends DefaultNavigator
         /**
          * Advance to the next sibling while iterating inside a
          * transparent node.
-         *
          * <p>The default returns the next sibling, suitable for forward
          * iteration.  Subclasses that iterate backward should override
          * this to return the previous sibling.</p>
-         *
          * @param node the current node inside the transparent ancestor
          * @return the sibling to visit next, or null if there are no more
          */
@@ -963,7 +892,6 @@ public class DocumentNavigator extends DefaultNavigator
          * Move one step from the current node, accounting for any
          * transparent ancestor (DocumentFragment / EntityReference) nodes
          * that are currently being expanded.
-         *
          * <p>Implemented iteratively to avoid stack overflow in the
          * (pathological) case of many consecutive empty transparent
          * ancestor nodes.</p>
@@ -1029,7 +957,6 @@ public class DocumentNavigator extends DefaultNavigator
 
         /**
          * Constructor.
-         *
          * @param parent the parent DOM element for the attributes.
          */
         AttributeIterator (Node parent)
@@ -1081,17 +1008,13 @@ public class DocumentNavigator extends DefaultNavigator
      *  schemas that declare attributes of type ID. When JAXP is used, you
      *  must call <code>setValidating(true)</code> on the
      *  DocumentBuilderFactory.
-     *
      *  @param object   a node from the document in which to look for the id
      *  @param elementId   id to look for
-     *
      *  @return   element whose ID is given by elementId, or null if no such
      *            element exists in the document or if the implementation
      *            does not know about attribute types
      *  @see   javax.xml.parsers.DocumentBuilderFactory
-     *  
      *  @throws ClassCastException if object is not an <code>org.w3c.dom.Node</code> object
-     *  
      */
     public Object getElementById(Object object, String elementId)
     {
