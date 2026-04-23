@@ -1,30 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": "openai",
-  "options": {
-    "baseURL": "http://localhost:11434/v1",
-    "apiKey": "ollama"
+  "provider": {
+    "openai": {
+      "baseURL": "http://localhost:11434/v1",
+      "apiKey": "ollama"
+    }
   },
-  "model": "qwen-32k",
+  "model": "openai/qwen-32k",
   "ignore": [
     "**/target/**",
     "**/*.class",
     "**/*.jar",
-    "**/*.war",
-    "**/*.ear",
     "**/build/**",
-    "**/.gradle/**",
-    "**/.settings/**",
-    "**/.classpath",
-    "**/.project",
     "**/.idea/**",
-    "**/*.iml",
-    "**/node_modules/**",
     "**/.DS_Store"
-  ],
-  "permission": {
-    "read": "allow",
-    "edit": "ask",
-    "bash": "ask"
-  }
+  ]
 }
