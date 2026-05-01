@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 package org.jaxen.expr;
 
@@ -58,7 +50,6 @@ package org.jaxen.expr;
  * <tr valign="baseline">
  * <td></td><td></td><td></td><td>| <a href="https://www.w3.org/TR/xpath#NT-EqualityExpr">EqualityExpr</a> '!=' <a href="https://www.w3.org/TR/xpath#NT-RelationalExpr">RelationalExpr</a></td><td></td></tr>
  * </table>
- * 
  */
 public interface EqualityExpr extends BinaryExpr{
 }

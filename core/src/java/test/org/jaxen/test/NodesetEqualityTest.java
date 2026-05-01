@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2008 Andrew Sales
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 package org.jaxen.test;
@@ -68,8 +60,6 @@ import org.w3c.dom.Element;
  * on the string-values of the two nodes is true</blockquote>
  * 
  * @author Andrew Sales
- *
- * $Id$
  */
 public class NodesetEqualityTest extends TestCase {
     private Document doc;

@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 
@@ -89,7 +81,6 @@ public class SingletonList extends AbstractList {
      * @return the only element in the list
      * 
      * @throws IndexOutOfBoundsException if index is not 0
-     * 
      */
     public Object get(int index) {
         if(index == 0) {

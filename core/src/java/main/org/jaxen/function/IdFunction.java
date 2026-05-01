@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 package org.jaxen.function;
@@ -124,7 +116,6 @@ public class IdFunction implements Function
      * @return a <code>List</code> containing the first node in document 
      *     with each of the specified IDs; or 
      *     an empty list if there are no such nodes
-     * 
      */
     public static List evaluate(List contextNodes, Object arg, Navigator nav)
     {

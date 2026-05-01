@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 
@@ -58,7 +50,6 @@ import org.jaxen.JaxenException;
  * <a href="https://www.w3.org/TR/xpath#NT-Expr">XPath 1.0 specification</a>:
  * 
  * <pre>[14]      Expr       ::=      OrExpr</pre>
- * 
  */
 public interface Expr extends Serializable
 {

@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 
@@ -115,7 +107,6 @@ public class StartsWithFunction implements Function
      * @return <code>Boolean.TRUE</code> if the string-value of <code>strArg</code>
      *     starts with the string-value of <code>matchArg</code>;
      *     otherwise <code>Boolean.FALSE</code>
-     * 
      */
     public static Boolean evaluate(Object strArg,
                                    Object matchArg,

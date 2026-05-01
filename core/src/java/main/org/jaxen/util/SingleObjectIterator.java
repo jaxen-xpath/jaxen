@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 
@@ -54,7 +46,6 @@ import java.util.NoSuchElementException;
 /**
  * Simple utility class that wraps an iterator around one object.
  * This is a little more efficent than creating a one-object list.
- *
  */
 public class SingleObjectIterator implements Iterator
 {

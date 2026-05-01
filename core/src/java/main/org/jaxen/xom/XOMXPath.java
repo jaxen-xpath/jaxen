@@ -1,10 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
- *
- * ====================================================================
- *
  * Copyright 2000-2003 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,8 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
- * $Id$
  */
 
 
@@ -66,13 +58,10 @@ import org.jaxen.JaxenException;
  *
  * @see BaseXPath
  * @see <a href="https://xom.nu/">The XOM website</a>
- *
- * @version $Revision$
  */
 public class XOMXPath extends BaseXPath
 {
     /**
-     *
      */
     private static final long serialVersionUID = -5332108546921857671L;
 

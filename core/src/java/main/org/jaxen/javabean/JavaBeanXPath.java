@@ -35,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.javabean;
@@ -65,7 +64,6 @@ import java.util.Iterator;
  * @see BaseXPath
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
- *
  */
 public class JavaBeanXPath extends BaseXPath
 {
