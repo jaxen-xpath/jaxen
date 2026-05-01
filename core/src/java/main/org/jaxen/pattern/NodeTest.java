@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.pattern;
@@ -52,7 +48,6 @@ package org.jaxen.pattern;
 /** <p><code>NodeTest</code> is a simple test on a node.</p>
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
-  * @version $Revision$
   * @deprecated will be removed in Jaxen 2.0
   */
 public abstract class NodeTest extends Pattern {

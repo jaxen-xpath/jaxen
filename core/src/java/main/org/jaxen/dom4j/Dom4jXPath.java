@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 
@@ -71,7 +67,6 @@ import org.jaxen.JaxenException;
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstachan@apache.org">James Strachan</a>
  *
- * @version $Revision$
  */
 public class Dom4jXPath extends BaseXPath
 {

@@ -1,7 +1,6 @@
 package org.jaxen;
 
 /*
- $Id$
 
  Copyright 2003 The Werken Company. All Rights Reserved.
  
@@ -47,7 +46,6 @@ import java.io.Serializable;
  * </p>
  *
  * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
- * @version $Id$
  * @see org.jaxen.dom.DOMXPath
  */
 public class ContextSupport implements Serializable {

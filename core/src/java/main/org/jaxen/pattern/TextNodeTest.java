@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 package org.jaxen.pattern;
@@ -52,7 +48,6 @@ import org.jaxen.Context;
 /** <p><code>TextNodeTest</code> matches any text node.</p>
   *
   * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
-  * @version $Revision$
   */
 public class TextNodeTest extends NodeTest {
     

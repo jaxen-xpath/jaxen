@@ -1,9 +1,6 @@
 package org.jaxen.dom;
 
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -45,7 +42,6 @@ package org.jaxen.dom;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
 */
 
 import javax.xml.parsers.DocumentBuilder;

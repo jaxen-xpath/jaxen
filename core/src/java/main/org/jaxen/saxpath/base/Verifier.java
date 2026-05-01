@@ -1,6 +1,5 @@
 /*-- 
  *
- * $Id$
  *
  * Copyright 2000-2004 Jason Hunter & Brett McLaughlin.
  * All rights reserved.

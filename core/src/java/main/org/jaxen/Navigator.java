@@ -1,9 +1,6 @@
 package org.jaxen;
 
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -45,7 +42,6 @@ package org.jaxen;
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  *
- * $Id$
 */
 
 import java.io.Serializable;
@@ -67,7 +63,6 @@ import org.jaxen.saxpath.SAXPathException;
  *
  * @author <a href="mailto:bob@eng.werken.com">bob mcwhirter</a>
  * @author <a href="mailto:jstrachan@apache.org">James Strachan</a>
- * @version $Id$
  */
 public interface Navigator extends Serializable
 {

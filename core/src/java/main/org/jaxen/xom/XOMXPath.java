@@ -1,7 +1,4 @@
 /*
- * $Header$
- * $Revision$
- * $Date$
  *
  * ====================================================================
  *
@@ -42,7 +39,6 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  * 
- * $Id$
  */
 
 
@@ -67,7 +63,6 @@ import org.jaxen.JaxenException;
  * @see BaseXPath
  * @see <a href="https://xom.nu/">The XOM website</a>
  *
- * @version $Revision$
  */
 public class XOMXPath extends BaseXPath
 {
