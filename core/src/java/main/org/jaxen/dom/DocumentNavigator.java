@@ -1,9 +1,6 @@
 package org.jaxen.dom;
 
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,7 +38,6 @@ package org.jaxen.dom;
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
 */
 
 import javax.xml.parsers.DocumentBuilder;
@@ -531,7 +527,6 @@ public class DocumentNavigator extends DefaultNavigator
      * @param attribute the target node
      * 
      * @return the namespace name of the specified node
-     * 
      */
     public String getAttributeNamespaceUri (Object attribute)
     {
@@ -852,7 +847,6 @@ public class DocumentNavigator extends DefaultNavigator
      * @param obj the processing instruction
      * @return the target of the processing instruction
      * @throws ClassCastException if obj is not a processing instruction
-     * 
      */
     public String getProcessingInstructionTarget(Object obj)
     {      
@@ -869,7 +863,6 @@ public class DocumentNavigator extends DefaultNavigator
      * @param obj the processing instruction
      * @return the target of the processing instruction
      * @throws ClassCastException if obj is not a processing instruction
-     * 
      */
     public String getProcessingInstructionData(Object obj)
     {
@@ -1137,7 +1130,6 @@ public class DocumentNavigator extends DefaultNavigator
      *  @see   javax.xml.parsers.DocumentBuilderFactory
      *  
      *  @throws ClassCastException if object is not an <code>org.w3c.dom.Node</code> object
-     *  
      */
     public Object getElementById(Object object, String elementId)
     {

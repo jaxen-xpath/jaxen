@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2007 Elliotte Rusty Harold
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 
@@ -59,7 +55,6 @@ import junit.framework.TestCase;
  * 
  * @author Elliotte Rusty Harold
  * @version 1.1.1
- *
  */
 public class ProcessingInstructionNodeTest extends TestCase {
 

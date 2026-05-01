@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 
@@ -71,7 +67,6 @@ import org.jaxen.Navigator;
  *  
  *  @see <a href="https://www.w3.org/TR/xpath#function-ceiling">Section 4.4 of the XPath Specification</a>
  *  @see <a href="https://www.w3.org/1999/11/REC-xpath-19991116-errata/">XPath Specification Errata</a>
- *  
  */
 public class CeilingFunction implements Function
 {

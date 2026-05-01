@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 
@@ -148,7 +144,6 @@ public class TranslateFunction implements Function
      *  
      * @throws FunctionCallException if one of the arguments is a malformed Unicode string;
      *     that is, if surrogate characters don't line up properly
-     * 
      */
     public static String evaluate(Object strArg,
                                   Object fromArg,

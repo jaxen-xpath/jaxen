@@ -1,6 +1,4 @@
 /*
- * ====================================================================
- *
  * Copyright 2026 Elliotte Rusty Harold
  * All rights reserved.
  *
@@ -57,7 +55,6 @@ import junit.framework.TestCase;
  * 
  * @author Elliotte Rusty Harold
  * @version 2.0.1
- *
  */
 public class CommentNodeTest extends TestCase {
 

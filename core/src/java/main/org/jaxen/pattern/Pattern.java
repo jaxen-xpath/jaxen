@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.pattern;
@@ -110,7 +106,6 @@ public abstract class Pattern {
      * @return 0.5; the default priority defined in XSLT
      * 
      * @see <a href="https://www.w3.org/TR/xslt#conflict" target="_top">Section 5.5 of the XSLT specification</a>
-      * 
       */
     public double getPriority() 
     {

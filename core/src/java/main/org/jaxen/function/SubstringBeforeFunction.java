@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 
@@ -117,7 +113,6 @@ public class SubstringBeforeFunction implements Function
      * 
      * @return a <code>String</code> containing the part of <code>strArg</code> that precedes the first occurence 
      * of <code>matchArg</code>
-     * 
      */
     public static String evaluate(Object strArg,
                                   Object matchArg,

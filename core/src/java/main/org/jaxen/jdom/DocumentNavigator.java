@@ -1,9 +1,6 @@
 package org.jaxen.jdom;
 
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,7 +38,6 @@ package org.jaxen.jdom;
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
 */
 
 import java.util.HashMap;
@@ -83,7 +79,6 @@ import org.jdom.input.SAXBuilder;
 public class DocumentNavigator extends DefaultNavigator implements NamedAccessNavigator
 {
     /**
-     *
      */
     private static final long serialVersionUID = -1636727587303584165L;
 

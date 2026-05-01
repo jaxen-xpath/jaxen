@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2003 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -39,7 +36,6 @@
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
  */
 
 
@@ -79,12 +75,10 @@ import java.util.Map;
  * </p>
  *
  * @see XPath
- *
  */
 public class DocumentNavigator extends org.jaxen.DefaultNavigator
 {
     /**
-     *
      */
     private static final long serialVersionUID = 3159311338575942877L;
 

@@ -1,9 +1,6 @@
 package org.jaxen;
 
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2005 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -41,7 +38,6 @@ package org.jaxen;
  * created by bob mcwhirter <bob@werken.com> and
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- *
 */
 
 import java.io.Serializable;

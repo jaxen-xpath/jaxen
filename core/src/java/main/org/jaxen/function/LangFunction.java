@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 
@@ -118,7 +114,6 @@ public class LangFunction implements Function
      * @return a <code>Boolean</code> indicating whether the context node is written in
      *     the specified language
      * @throws FunctionCallException if <code>args</code> does not have length one
-     * 
      */
     public Object call(Context context,
                        List args) throws FunctionCallException

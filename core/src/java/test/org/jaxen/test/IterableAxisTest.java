@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2006 Elliotte Rusty Harold
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.test;
@@ -53,7 +49,6 @@ import org.xml.sax.SAXException;
 /**
  * @author Elliotte Rusty Harold
  * @version 1.1b12
- * 
  */
 public class IterableAxisTest extends TestCase {
 

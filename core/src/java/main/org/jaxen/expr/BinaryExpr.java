@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2000-2002 bob mcwhirter & James Strachan.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 
@@ -51,7 +47,6 @@ package org.jaxen.expr;
  * This does not match anything in the XPath 1.0 grammar, but in Jaxen
  * it includes the usual binary operations such as addition, multiplication,
  * logical and, logical or, and so forth.
- * 
  */
 public interface BinaryExpr extends Expr
 {

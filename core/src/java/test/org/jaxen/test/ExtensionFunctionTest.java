@@ -1,7 +1,4 @@
 /*
- *
- * ====================================================================
- *
  * Copyright 2005, 2006 Elliotte Rusty Harold.
  * All rights reserved.
  *
@@ -38,7 +35,6 @@
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
- * 
  */
 
 package org.jaxen.test;
@@ -60,7 +56,6 @@ import org.w3c.dom.Document;
 
 /**
  * @author Elliotte Rusty Harold
- *
  */
 public class ExtensionFunctionTest extends TestCase {
 
