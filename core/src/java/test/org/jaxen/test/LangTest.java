@@ -101,6 +101,30 @@ public class LangTest extends TestCase {
         
     }    
 
+    public void testLangFunctionTraversesAncestorAxis() 
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("//*[lang('en')]");
+        Element root = doc.createElementNS("", "root");
+        Element a = doc.createElementNS("", "a");
+        Element b = doc.createElementNS("", "b");
+        Element c = doc.createElementNS("", "c");
+        Element d = doc.createElementNS("", "d");
+        a.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:lang", "en");
+        doc.appendChild(root);
+        root.appendChild(a);
+        root.appendChild(d);
+        a.appendChild(b);
+        b.appendChild(c);
+        
+        List<?> result = xpath.selectNodes(doc);
+        assertEquals(3, result.size());
+        assertEquals(a, result.get(0));
+        assertEquals(b, result.get(1));
+        assertEquals(c, result.get(2));
+        
+    }    
+
     public void testLangFunctionSelectsNothing() 
       throws JaxenException {
         
