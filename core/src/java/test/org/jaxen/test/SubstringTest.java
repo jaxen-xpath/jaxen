@@ -249,6 +249,54 @@ public class SubstringTest extends TestCase {
         assertEquals("12", result);
         
     }
-    
-    
+
+    // Tests for NaN and floating-point edge cases (XPath 1.0 spec section 4.2)
+    // See: https://github.com/jaxen-xpath/jaxen/issues/2 (substring floating-point edge cases)
+
+    // Issue #2 claims substring("text", NaN, 3) returns a non-empty string.
+    // Per the XPath spec, when $start is NaN the result must be the empty string.
+    public void testSubstringWithNaNStartAndLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath("substring('text', 0 div 0, 3)");
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }
+
+    // When $start is NaN in the 2-argument form the result must also be the empty string.
+    public void testSubstringWithNaNStartNoLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath("substring('text', 0 div 0)");
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }
+
+    // When $length is +Infinity and $start is a positive finite value,
+    // the spec requires all characters from $start onwards to be returned.
+    public void testSubstringWithPositiveStartAndInfiniteLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath("substring('12345', 2, 1 div 0)");
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("2345", result);
+    }
+
+    // When $start is -Infinity in the 2-argument form, every character position
+    // satisfies position >= round(-Infinity), so the whole string must be returned.
+    public void testSubstringWithNegativeInfinityStartNoLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath("substring('text', -1 div 0)");
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("text", result);
+    }
+
+    // When $start is -Infinity and $length is +Infinity, IEEE 754 arithmetic gives
+    // round(-Inf) + round(+Inf) = -Inf + Inf = NaN. No character position satisfies
+    // "position < NaN", so the result must be the empty string, as specified in the
+    // XPath 1.0 spec section 4.2 examples.
+    public void testSubstringWithNegativeInfinityStartAndInfiniteLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath("substring('12345', -1 div 0, 1 div 0)");
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }
+
 }
