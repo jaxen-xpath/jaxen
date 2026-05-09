@@ -132,6 +132,12 @@ public class NamespaceTest extends TestCase {
         for (Object node : result) {
             assertEquals("http://www.w3.org/XML/1998/namespace", ((Node) node).getNodeValue());
         }
+        
+        assertEquals(1, new DOMXPath("/root/namespace::xml").selectNodes(parsed).size());
+        assertEquals(1, new DOMXPath("/root/child/namespace::xml").selectNodes(parsed).size());
+        XPath prefixedChild = new DOMXPath("/root/foo:child/namespace::xml");
+        prefixedChild.addNamespace("foo", "http://www.example.org");
+        assertEquals(1, prefixedChild.selectNodes(parsed).size());
    
     }
     
