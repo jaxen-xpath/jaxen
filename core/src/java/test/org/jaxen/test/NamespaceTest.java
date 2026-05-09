@@ -38,6 +38,7 @@
  */
 package org.jaxen.test;
 
+import java.io.StringReader;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -50,6 +51,8 @@ import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
 import junit.framework.TestCase;
 
@@ -108,6 +111,21 @@ public class NamespaceTest extends TestCase {
         XPath xpath = new DOMXPath("namespace::node()");
         List<?> result = xpath.selectNodes(child);
         assertEquals(2, result.size());
+   
+    }
+    
+    public void testImplicitXmlNamespaceAxisFromParsedDocument() throws Exception {
+        
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        org.w3c.dom.Document parsed = factory.newDocumentBuilder().parse(
+            new InputSource(new StringReader("<root><child/><foo:child xmlns:foo='http://www.example.org'/></root>"))
+        );
+        
+        XPath xpath = new DOMXPath("//namespace::xml");
+        List<?> result = xpath.selectNodes(parsed);
+        assertEquals(3, result.size());
+        assertEquals("http://www.w3.org/XML/1998/namespace", ((Node) result.get(0)).getNodeValue());
    
     }
     
