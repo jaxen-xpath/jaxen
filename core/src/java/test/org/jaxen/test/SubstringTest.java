@@ -251,8 +251,9 @@ public class SubstringTest extends TestCase {
     }
 
     // Tests for NaN and floating-point edge cases (XPath 1.0 spec section 4.2)
+    // See: https://github.com/jaxen-xpath/jaxen/issues/2 (substring floating-point edge cases)
 
-    // The bug report claims substring("text", NaN, 3) returns a non-empty string.
+    // Issue #2 claims substring("text", NaN, 3) returns a non-empty string.
     // Per the XPath spec, when $start is NaN the result must be the empty string.
     public void testSubstringWithNaNStartAndLength() throws JaxenException
     {
@@ -261,7 +262,7 @@ public class SubstringTest extends TestCase {
         assertEquals("", result);
     }
 
-    // When $start is NaN in the 2-argument form the result must also be "".
+    // When $start is NaN in the 2-argument form the result must also be the empty string.
     public void testSubstringWithNaNStartNoLength() throws JaxenException
     {
         XPath xpath = new DOMXPath("substring('text', 0 div 0)");
