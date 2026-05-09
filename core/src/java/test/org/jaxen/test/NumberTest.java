@@ -149,6 +149,26 @@ public class NumberTest extends TestCase {
         assertEquals(Double.valueOf(Double.NaN), result);
         
     }     
+
+    public void testEmptyStringReturnsNaN()
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(Double.valueOf(Double.NaN), result);
+        
+    }
+
+    public void testWhitespaceOnlyStringReturnsNaN()
+      throws JaxenException {
+        
+        XPath xpath = new DOMXPath("number('   \n\t  ')");
+        
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(Double.valueOf(Double.NaN), result);
+        
+    }
     
     public void testIsNan() {
         assertTrue(NumberFunction.isNaN(0.0 / 0.0));
