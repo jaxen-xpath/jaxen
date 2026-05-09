@@ -367,20 +367,20 @@
         <artifactId>clover-maven-plugin</artifactId>
         <version>4.5.2</version>
         <executions>
-                <execution>
-                    <id>clover-instrumentation</id>
-                    <phase>pre-site</phase>
-                    <goals>
-                        <goal>instrument-test</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>clover-aggregation</id>
-                    <phase>pre-site</phase>
-                    <goals>
-                        <goal>aggregate</goal>
-                    </goals>
-                </execution>
+          <execution>
+            <id>clover-instrumentation</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>instrument-test</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>clover-aggregation</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>aggregate</goal>
+              </goals>
+          </execution>
         </executions>
       </plugin>
     </plugins>
@@ -485,7 +485,7 @@
           <plugin>
             <groupId>org.sonatype.central</groupId>
             <artifactId>central-publishing-maven-plugin</artifactId>
-            <version>1.2.0</version>
+            <version>0.10.0</version>
             <extensions>true</extensions>
             <configuration>
               <publishingServerId>central</publishingServerId>
