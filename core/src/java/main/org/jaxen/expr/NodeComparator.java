@@ -140,9 +140,9 @@ class NodeComparator implements Comparator<Object> {
 
         // attributes and namespaces sort before child nodes 
         if (isNonChild(sib1)) {
-            return 1;
-        } else if (isNonChild(sib2)) {
             return -1;
+        } else if (isNonChild(sib2)) {
+            return 1;
         }
         
         Iterator following = navigator.getFollowingSiblingAxisIterator(sib1);
