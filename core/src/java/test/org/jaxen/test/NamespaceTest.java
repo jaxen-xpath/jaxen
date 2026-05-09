@@ -118,14 +118,20 @@ public class NamespaceTest extends TestCase {
         
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
+        String xml = "<root>"
+            + "<child/>"
+            + "<foo:child xmlns:foo='http://www.example.org'/>"
+            + "</root>";
         org.w3c.dom.Document parsed = factory.newDocumentBuilder().parse(
-            new InputSource(new StringReader("<root><child/><foo:child xmlns:foo='http://www.example.org'/></root>"))
+            new InputSource(new StringReader(xml))
         );
         
         XPath xpath = new DOMXPath("//namespace::xml");
         List<?> result = xpath.selectNodes(parsed);
         assertEquals(3, result.size());
-        assertEquals("http://www.w3.org/XML/1998/namespace", ((Node) result.get(0)).getNodeValue());
+        for (Object node : result) {
+            assertEquals("http://www.w3.org/XML/1998/namespace", ((Node) node).getNodeValue());
+        }
    
     }
     
