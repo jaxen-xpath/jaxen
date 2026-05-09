@@ -1064,6 +1064,28 @@ public class BaseXPathTest extends TestCase {
    
     }
 
+    public void testAttributeNodesComeBeforeChildNodesOfSameElementInUnionDocumentOrder()
+     throws JaxenException {
+        // Per XPath 1.0 spec, attribute nodes of an element come before that
+        // element's child nodes in document order.  The union operator must
+        // produce a node-set in strict document order, so the attribute should
+        // appear before the child element regardless of which side of the union
+        // it was specified on.
+        org.w3c.dom.Element root = doc.createElement("root");
+        doc.appendChild(root);
+        root.setAttribute("attr", "value");
+        org.w3c.dom.Element child = doc.createElement("child");
+        root.appendChild(child);
+
+        // Child is the LHS (evaluated first), attribute is the RHS.
+        // After document-order sorting the attribute must still come first.
+        XPath xpath = new DOMXPath("/root/child | /root/@attr");
+        List<?> result = xpath.selectNodes(doc);
+        assertEquals(2, result.size());
+        assertEquals(Node.ATTRIBUTE_NODE, ((Node) result.get(0)).getNodeType());
+        assertEquals(child, result.get(1));
+    }
+
     public void testJaxen97() throws JaxenException {
         // jaxen 97 claims this expression throws an exception.
         new DOMXPath("/aaa:element/text()");
