@@ -292,4 +292,16 @@ public class SubstringTest extends TestCase {
         assertEquals("text", result);
     }
 
+    // When $start is -Infinity and $length is +Infinity, IEEE 754 arithmetic gives
+    // round(-Inf) + round(+Inf) = -Inf + Inf = NaN. No character position satisfies
+    // "position < NaN", so the result must be the empty string. Any fix for the
+    // -Infinity start case must preserve this constraint and still return "".
+    // This is also specified in the XPath 1.0 spec section 4.2 examples.
+    public void testSubstringWithNegativeInfinityStartAndInfiniteLength() throws JaxenException
+    {
+        XPath xpath = new DOMXPath("substring('12345', -1 div 0, 1 div 0)");
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("", result);
+    }
+
 }
