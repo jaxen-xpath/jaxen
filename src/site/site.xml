@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
-name="jaxen: universal Java XPath 1.0 engine">
+<site xmlns="http://maven.apache.org/SITE/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SITE/2.1.0 https://maven.apache.org/xsd/site-2.1.0.xsd"
+  name="jaxen: universal Java XPath 1.0 engine">
 
-  <bannerLeft>
-    <name>Jaxen</name>
-  </bannerLeft>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>2.1.0</version>
+  </skin>
+
+  <bannerLeft name="Jaxen"/>
 
   <body>
     <menu name="jaxen">
@@ -22,4 +26,4 @@ name="jaxen: universal Java XPath 1.0 engine">
     <footer>Copyright 2001-2026 The Jaxen Project. All Rights Reserved.</footer>
   </body>
   
-</project>
+</site>
