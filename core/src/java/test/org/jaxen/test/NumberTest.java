@@ -156,7 +156,7 @@ public class NumberTest extends TestCase {
         XPath xpath = new DOMXPath("number('')");
         
         Double result = (Double) xpath.evaluate(doc);
-        assertEquals(Double.valueOf(Double.NaN), result);
+        assertTrue(Double.isNaN(result.doubleValue()));
         
     }
 
@@ -166,7 +166,7 @@ public class NumberTest extends TestCase {
         XPath xpath = new DOMXPath("number('   \n\t  ')");
         
         Double result = (Double) xpath.evaluate(doc);
-        assertEquals(Double.valueOf(Double.NaN), result);
+        assertTrue(Double.isNaN(result.doubleValue()));
         
     }
     
