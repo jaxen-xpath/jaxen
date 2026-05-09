@@ -181,38 +181,41 @@ public class SubstringFunction implements Function
         if (d1.isNaN()){
             return "";
         }
-        // Round the value and subtract 1 as Java strings are zero based
-        int start = RoundFunction.evaluate(d1, nav).intValue() - 1;
 
-        int substringLength = stringLength;
-        if (argc == 3){
+        // Use double arithmetic throughout to comply with IEEE 754 (XPath spec section 4.2).
+        // Converting infinity values directly to int overflows: Double.POSITIVE_INFINITY.intValue()
+        // yields Integer.MAX_VALUE and Double.NEGATIVE_INFINITY.intValue() yields Integer.MIN_VALUE,
+        // both of which corrupt subsequent index arithmetic. Keeping the values as doubles lets
+        // Java propagate infinities correctly (e.g. -Infinity + Infinity = NaN means no character
+        // position qualifies and the result must be the empty string).
+        double roundedStart = RoundFunction.evaluate(d1, nav);
+        double roundedEnd;
+        if (argc == 3) {
             Double d2 = NumberFunction.evaluate(args.get(2), nav);
-
-            if (!d2.isNaN()){
-                substringLength = RoundFunction.evaluate(d2, nav ).intValue();
-            }
-            else {
-                substringLength = 0;
-            }
+            roundedEnd = roundedStart + RoundFunction.evaluate(d2, nav);
         }
-        
-        if (substringLength < 0) return "";
-
-        int end = start + substringLength;
-        if (argc == 2) end = stringLength;
-            
-        // negative start is treated as 0
-        if ( start < 0){
-            start = 0;
+        else {
+            roundedEnd = Double.POSITIVE_INFINITY;
         }
-        else if (start > stringLength){
+
+        // NaN end means no character position satisfies both interval predicates.
+        if (Double.isNaN(roundedEnd)) {
             return "";
         }
 
-        if (end > stringLength){
-            end = stringLength;
-        }
-        else if (end < start) return "";
+        // Convert XPath 1-based positions to Java 0-based indices, clamping safely.
+        // At this point roundedStart and roundedEnd are finite or ±Infinity (NaN is already handled).
+        // Setting start to stringLength when roundedStart exceeds the string causes end <= start below,
+        // which returns the empty string as required.
+        int start = (roundedStart <= 1.0) ? 0
+                  : (roundedStart > stringLength) ? stringLength
+                  : (int) roundedStart - 1;
+
+        int end = (roundedEnd <= 1.0) ? 0
+                : (roundedEnd == Double.POSITIVE_INFINITY || roundedEnd > stringLength + 1.0) ? stringLength
+                : (int) roundedEnd - 1;
+
+        if (end <= start) return "";
         
         if (stringLength == str.length()) {
             // easy case; no surrogate pairs
