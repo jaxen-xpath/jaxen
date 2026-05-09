@@ -1,10 +1,13 @@
 package org.jaxen.test;
 
+import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.jaxen.JaxenException;
+import org.jaxen.javabean.DocumentNavigator;
+import org.jaxen.javabean.Element;
 import org.jaxen.javabean.JavaBeanXPath;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 
@@ -37,6 +40,23 @@ public class JavaBeanNavigatorTest
         List result = (List) xpath.evaluate( bob );
         assertEquals(3, result.size());
         
+    }
+    
+    public void testNamespaceAxisIncludesImplicitXmlNamespace() {
+        DocumentNavigator navigator = (DocumentNavigator) DocumentNavigator.getInstance();
+        Iterator<?> namespaceAxis = navigator.getNamespaceAxisIterator(new Element(null, "root", new Object()));
+        assertTrue(namespaceAxis.hasNext());
+        Object xmlNamespace = namespaceAxis.next();
+        assertEquals("xml", navigator.getNamespacePrefix(xmlNamespace));
+        assertEquals("http://www.w3.org/XML/1998/namespace",
+                navigator.getNamespaceStringValue(xmlNamespace));
+        assertFalse(namespaceAxis.hasNext());
+    }
+    
+    public void testSelectImplicitXmlNamespace() throws JaxenException {
+        JavaBeanXPath xpath = new JavaBeanXPath("namespace::xml");
+        List result = xpath.selectNodes(new Object());
+        assertEquals(1, result.size());
     }
 
 }
