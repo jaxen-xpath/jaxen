@@ -490,6 +490,7 @@
             <configuration>
               <publishingServerId>central</publishingServerId>
               <autoPublish>false</autoPublish>
+              <deploymentName>Jaxen ${project.version}</deploymentName>
             </configuration>
           </plugin>
         </plugins>
