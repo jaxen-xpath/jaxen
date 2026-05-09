@@ -44,7 +44,8 @@ public class JavaBeanNavigatorTest
     
     public void testNamespaceAxisIncludesImplicitXmlNamespace() {
         DocumentNavigator navigator = (DocumentNavigator) DocumentNavigator.getInstance();
-        Iterator<?> namespaceAxis = navigator.getNamespaceAxisIterator(new Element(null, "root", new Object()));
+        Person bob = new Person( "bob", 30 );
+        Iterator<?> namespaceAxis = navigator.getNamespaceAxisIterator(new Element(null, "root", bob));
         assertTrue(namespaceAxis.hasNext());
         Object xmlNamespace = namespaceAxis.next();
         assertEquals("xml", navigator.getNamespacePrefix(xmlNamespace));
@@ -55,8 +56,9 @@ public class JavaBeanNavigatorTest
     
     public void testSelectImplicitXmlNamespace() throws JaxenException {
         JavaBeanXPath xpath = new JavaBeanXPath("namespace::xml");
-        List result = xpath.selectNodes(new Object());
-        assertEquals(1, result.size());
+        Person bob = new Person( "bob", 30 );
+        List<?> xmlNamespaceNodes = xpath.selectNodes(bob);
+        assertEquals(1, xmlNamespaceNodes.size());
     }
 
 }
