@@ -272,8 +272,6 @@ public class SubstringTest extends TestCase {
 
     // When $length is +Infinity and $start is a positive finite value,
     // the spec requires all characters from $start onwards to be returned.
-    // Jaxen converts +Infinity to Integer.MAX_VALUE and then (start + MAX_VALUE)
-    // overflows to a negative number, causing an incorrect empty-string result.
     public void testSubstringWithPositiveStartAndInfiniteLength() throws JaxenException
     {
         XPath xpath = new DOMXPath("substring('12345', 2, 1 div 0)");
@@ -283,8 +281,6 @@ public class SubstringTest extends TestCase {
 
     // When $start is -Infinity in the 2-argument form, every character position
     // satisfies position >= round(-Infinity), so the whole string must be returned.
-    // Jaxen converts -Infinity to Integer.MIN_VALUE and then subtracts 1,
-    // which overflows to Integer.MAX_VALUE, causing an incorrect empty-string result.
     public void testSubstringWithNegativeInfinityStartNoLength() throws JaxenException
     {
         XPath xpath = new DOMXPath("substring('text', -1 div 0)");
@@ -294,9 +290,8 @@ public class SubstringTest extends TestCase {
 
     // When $start is -Infinity and $length is +Infinity, IEEE 754 arithmetic gives
     // round(-Inf) + round(+Inf) = -Inf + Inf = NaN. No character position satisfies
-    // "position < NaN", so the result must be the empty string. Any fix for the
-    // -Infinity start case must preserve this constraint and still return "".
-    // This is also specified in the XPath 1.0 spec section 4.2 examples.
+    // "position < NaN", so the result must be the empty string, as specified in the
+    // XPath 1.0 spec section 4.2 examples.
     public void testSubstringWithNegativeInfinityStartAndInfiniteLength() throws JaxenException
     {
         XPath xpath = new DOMXPath("substring('12345', -1 div 0, 1 div 0)");
