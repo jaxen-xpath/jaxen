@@ -12,7 +12,10 @@ or Java beans as XML, thus enabling you to query these trees with XPath too.
 
 The current version is *2.0.2*. This release requires Java 1.5 or later.
 If you're still using Java 1.4 or earlier, try Jaxen 1.2.0. 
-If you're still using Java 1.3 or earlier, try Jaxen 1.1.6. 
+If you're still using Java 1.3 or earlier, try Jaxen 1.1.6.
+There are bug fixes in 2.0.x that are not available in earlier releases,
+and these will not be backported unless someone funds that work,
+so if you really need support for older JDKs budget accordingly.
 
 ## Adding Jaxen to your build
 
