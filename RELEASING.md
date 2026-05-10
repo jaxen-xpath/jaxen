@@ -187,8 +187,8 @@ Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in 
 
 ## Publish the Site
 
-
-Update the release notes on the GitHub tag and in src/site/xdoc/releases.xml.
+Update the release notes on the GitHub tag and in src/site/xdoc/releases.xml
+and src/site/xdoc/status.xml.
 The GitHub release will prepopulate with a list of PR titles, but you'll 
 usually want to summarize the important points manually.
 
