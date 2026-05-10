@@ -16,9 +16,11 @@
         2.0.2 fixes two bugs in XPath conformance. 
       </p>
 
-    <li>The <code>substring()</code> function now corrctly handles Nan and Inf values.</li>
-    <li>The union operator <code>|</code> now correctly sorts attribute nodes before child nodes.</li>
-
+    <ul>
+      <li>The <code>substring()</code> function now handles Nan and Inf values according to spec.</li>
+      <li>The union operator <code>|</code> now correctly sorts attribute nodes before child nodes.</li>
+     </ul>
+       
     </section>
       
 
