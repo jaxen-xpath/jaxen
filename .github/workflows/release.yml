@@ -108,6 +108,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "v${{ inputs.releaseVersion }}" \
+            "core/target/jaxen-${{ inputs.releaseVersion }}-src.zip" \
+            "core/target/jaxen-${{ inputs.releaseVersion }}-src.tar.gz" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-src.tar.bz2" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-bin.zip" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-bin.tar.gz" \

@@ -17,6 +17,8 @@ triggered manually from the GitHub Actions UI.  The workflow:
    * `core/target/jaxen-X.Y.Z-bin.zip`
    * `core/target/jaxen-X.Y.Z-bin.tar.gz`
    * `core/target/jaxen-X.Y.Z-bin.tar.bz2`
+   * `core/target/jaxen-X.Y.Z-src.zip`
+   * `core/target/jaxen-X.Y.Z-src.tar.gz`
    * `core/target/jaxen-X.Y.Z-src.tar.bz2`
 
 ### One-time repository setup
