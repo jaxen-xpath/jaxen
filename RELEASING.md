@@ -12,7 +12,12 @@ triggered manually from the GitHub Actions UI.  The workflow:
    [Central Publishing Portal](https://central.sonatype.com/).
 5. Commits the release version and creates a `vX.Y.Z` git tag.
 6. Bumps the POM version to the next development SNAPSHOT on `master`.
-7. Pushes the commits and tag, then creates a GitHub release.
+7. Pushes the commits and tag, then creates a GitHub release with attached
+   release archives:
+   * `core/target/jaxen-X.Y.Z-bin.zip`
+   * `core/target/jaxen-X.Y.Z-bin.tar.gz`
+   * `core/target/jaxen-X.Y.Z-bin.tar.bz2`
+   * `core/target/jaxen-X.Y.Z-src.tar.bz2`
 
 ### One-time repository setup
 
@@ -188,7 +193,11 @@ Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in 
 ## Publish the Site
 
 Update the release notes on the GitHub tag and in src/site/xdoc/releases.xml
-and src/site/xdoc/status.xml.
+and src/site/xdoc/status.xml. In `releases.xml`, use GitHub release asset
+URLs in the form:
+
+`https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`
+
 The GitHub release will prepopulate with a list of PR titles, but you'll 
 usually want to summarize the important points manually.
 
