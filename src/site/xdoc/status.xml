@@ -10,6 +10,43 @@
     
     <section name="Change History">
 
+   <section name="Jaxen 2.0.2">
+
+      <p>
+        2.0.2 fixes two bugs in XPath conformance. 
+      </p>
+
+    <li>The <code>substring()</code> function now corrctly handles Nan and Inf values.</li>
+    <li>The union operator <code>|</code> now correctly sorts attribute nodes before child nodes.</li>
+
+    </section>
+      
+
+   <section name="Jaxen 2.0.1">
+
+
+      <p>
+        2.0.1 fixes several bugs in XPath conformance. 
+      </p>
+
+      <p>The build is now fully byte-per-byte reproducible. 
+        If you use the same JDK on the same platform to compile, 
+        you'll get the same bytes out every time. This is a prerequisite for
+        hash-based defenses against supply chain and MITM attacks.</p>
+
+<p>The release has been mostly automated. It's not quite a one-click deploy but it's close.</p>
+
+<p>Several bugs in XPath conformance detected by Claude Sonnet 4.6 were fixed:</p>
+     
+    <li>The <code>round()</code> function returns negative zero for values between -0.5 and -0.0.</li>
+    <li>The <code>number()</code> function rejects some strings Java recognizes as a number but XPath does not.</li>
+    <li><code>anyMatchingNode()</code> and <code>evaluateAsBoolean()</code> no longer throw <code>NoSuchElementException</code> when evaluating an XPath expression with multiple predicates and more nodes than predicates.</li>
+    <li><code>DefaultCommentNodeStep.getText()</code> includes predicates. (This one's very unlikely to have any effect on XPath queries or evaluation.)</li>
+
+<p>The DOMNavigator can now search inside entity reference and document fragment nodes.</p>
+
+    </section>
+      
 
    <section name="Jaxen 2.0.0">
 
