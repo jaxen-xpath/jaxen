@@ -190,7 +190,7 @@ Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in 
 Update the release notes on the GitHub tag and in src/site/xdoc/releases.xml
 and src/site/xdoc/status.xml.
 The GitHub release will prepopulate with a list of PR titles, but you'll 
-usually want to summarize the important points manually.
+want to summarize the important points manually.
 
 Regenerate the project site:
 
@@ -199,5 +199,8 @@ mvn site:stage
 ```
 
 Upload the generated content to IBiblio using sftp.
+
+Upload the binaries from core/target into the dist directory on IBiblio. 
+(You probably need to generate these locally from the tag.)
 
 
