@@ -19,7 +19,7 @@
     <ul>
       <li>The <code>substring()</code> function now handles Nan and Inf values according to spec.</li>
       <li>The union operator <code>|</code> now correctly sorts attribute nodes before child nodes.</li>
-     </ul
+     </ul>
        
     </section>
       
