@@ -22,10 +22,8 @@ namespace and attribute nodes in union operations.
       <ul>
         <li><a href="dist/jaxen-2.0.2-bin.zip">2.0.2  binaries in zip format.</a></li>
         <li><a href="dist/jaxen-2.0.2-bin.tar.gz">2.0.2 binaries in tar/gz format.</a></li>
-        <li><a href="dist/jaxen-2.0.2-bin.tar.bz2">2.0.2 binaries in bz2 format.</a></li>
-        <li><a href="dist/jaxen-2.0.2-src.zip">2.0.2 sources in zip format.</a></li>
-        <li><a href="dist/jaxen-2.0.2-src.tar.gz">2.0.2 sources in tar/gz format.</a></li>
-        <li><a href="dist/jaxen-2.0.2-src.tar.bz2">2.0.2 sources in bz2 format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/archive/refs/tags/v2.0.2.zip">2.0.2 sources in zip format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/archive/refs/tags/v2.0.2.tar.gz">2.0.2 sources in tar/gz format.</a></li>
       </ul>
 
 
