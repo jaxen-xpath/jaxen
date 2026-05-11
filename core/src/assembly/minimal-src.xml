@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 https://maven.apache.org/xsd/assembly-2.1.0.xsd">
+
+  <!--
+    Minimal source bundle: contains only the production Java sources under
+    jaxen-${version}/core/src/java/main/
+    No pom.xml files, no tests, no samples.
+    Intended for projects (e.g. XOM) that vendor Jaxen source directly.
+  -->
+
+  <id>minimal-src</id>
+
+  <formats>
+    <format>zip</format>
+    <format>tar.gz</format>
+    <format>tar.bz2</format>
+  </formats>
+
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <baseDirectory>jaxen-${project.version}</baseDirectory>
+
+  <fileSets>
+    <fileSet>
+      <directory>${project.basedir}/src/java/main</directory>
+      <outputDirectory>core/src/java/main</outputDirectory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+
+</assembly>

@@ -111,6 +111,9 @@ jobs:
             "core/target/jaxen-${{ inputs.releaseVersion }}-src.zip" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-src.tar.gz" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-src.tar.bz2" \
+            "core/target/jaxen-${{ inputs.releaseVersion }}-minimal-src.zip" \
+            "core/target/jaxen-${{ inputs.releaseVersion }}-minimal-src.tar.gz" \
+            "core/target/jaxen-${{ inputs.releaseVersion }}-minimal-src.tar.bz2" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-bin.zip" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-bin.tar.gz" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-bin.tar.bz2" \
