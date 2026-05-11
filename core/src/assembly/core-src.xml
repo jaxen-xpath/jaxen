@@ -4,13 +4,13 @@
           xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 https://maven.apache.org/xsd/assembly-2.1.0.xsd">
 
   <!--
-    Minimal source bundle: contains only the production Java sources under
-    jaxen-${version}/core/src/java/main/
+    Core source bundle: contains only the production Java sources under
+    jaxen-${version}/core/src/
     No pom.xml files, no tests, no samples.
     Intended for projects (e.g. XOM) that vendor Jaxen source directly.
   -->
 
-  <id>minimal-src</id>
+  <id>core-src</id>
 
   <formats>
     <format>zip</format>
@@ -24,7 +24,7 @@
   <fileSets>
     <fileSet>
       <directory>${project.basedir}/src/java/main</directory>
-      <outputDirectory>core/src/java/main</outputDirectory>
+      <outputDirectory>core/src</outputDirectory>
       <includes>
         <include>**/*</include>
       </includes>

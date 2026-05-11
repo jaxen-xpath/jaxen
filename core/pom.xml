@@ -58,7 +58,7 @@
             <configuration>
               <tarLongFileMode>posix</tarLongFileMode>
               <descriptors>
-                <descriptor>src/assembly/minimal-src.xml</descriptor>
+                <descriptor>src/assembly/core-src.xml</descriptor>
               </descriptors>
             </configuration>
           </execution>
