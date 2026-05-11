@@ -4,9 +4,9 @@
   name="jaxen: universal Java XPath 1.0 engine">
 
   <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-fluido-skin</artifactId>
-    <version>2.1.0</version>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>maven-site-skin</artifactId>
+    <version>1.1</version>
   </skin>
 
   <bannerLeft name="Jaxen"/>
