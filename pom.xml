@@ -193,6 +193,14 @@
   <build>
     <sourceDirectory>src/java/main</sourceDirectory>
     <testSourceDirectory>src/java/test</testSourceDirectory>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
