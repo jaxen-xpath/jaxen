@@ -106,8 +106,8 @@ public class PositionTest extends TestCase {
     {
         XPath xpath = new DOMXPath( "//item[1.5]" );
         List<?> result = xpath.selectNodes( doc );
-        assertEquals("Predicate [1.5] must not match any node (1.5 != 1 and 1.5 != 2 in IEEE 754)",
-                0, result.size());
+        assertTrue("Predicate [1.5] must not match any node (1.5 != 1 and 1.5 != 2 in IEEE 754)",
+                result.isEmpty());
     }
 
     /**
@@ -117,8 +117,8 @@ public class PositionTest extends TestCase {
     {
         XPath xpath = new DOMXPath( "//item[2.5]" );
         List<?> result = xpath.selectNodes( doc );
-        assertEquals("Predicate [2.5] must not match any node (2.5 != 2 and 2.5 != 3 in IEEE 754)",
-                0, result.size());
+        assertTrue("Predicate [2.5] must not match any node (2.5 != 2 and 2.5 != 3 in IEEE 754)",
+                result.isEmpty());
     }
 
     /**
