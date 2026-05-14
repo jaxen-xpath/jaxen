@@ -199,4 +199,16 @@ public class IdTest extends TestCase {
         
     }    
 
+    public void testIdFunctionDoesNotDuplicateNodesForRepeatedIds()
+      throws JaxenException, SAXException, IOException {
+
+        BaseXPath xpath = new DOMXPath("id('p1 p1')");
+        String text = "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]><root><a id='p1'/></root>";
+        StringReader reader = new StringReader(text);
+        InputSource in = new InputSource(reader);
+        Document doc = builder.parse(in);
+        List<?> result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+    }
+
 }
