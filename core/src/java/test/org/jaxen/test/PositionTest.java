@@ -39,6 +39,8 @@
 
 package org.jaxen.test;
 
+import java.util.List;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -50,6 +52,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * @author Elliotte Rusty Harold
@@ -64,7 +67,11 @@ public class PositionTest extends TestCase {
         factory.setNamespaceAware(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
         doc = builder.newDocument();
-        doc.appendChild(doc.createElement("root"));
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        root.appendChild(doc.createElement("item"));
+        root.appendChild(doc.createElement("item"));
+        root.appendChild(doc.createElement("item"));
     }
 
 
@@ -84,6 +91,45 @@ public class PositionTest extends TestCase {
         {
             assertEquals("position() does not take any arguments.", e.getMessage());
         }
-    }    
+    }
+
+    /**
+     * Per XPath 1.0 section 2.4, when a predicate evaluates to a number, the
+     * predicate is true only if that number equals the context position using
+     * IEEE 754 floating-point equality. A non-integer value like 1.5 should
+     * never equal any integer position, so no nodes should be selected.
+     *
+     * The buggy implementation calls intValue() which truncates 1.5 to 1,
+     * incorrectly matching position 1.
+     */
+    public void testNonIntegerNumericPredicateSelectsNoNodes() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "//item[1.5]" );
+        List<?> result = xpath.selectNodes( doc );
+        assertTrue("Predicate [1.5] must not match any node (1.5 != 1 and 1.5 != 2 in IEEE 754)",
+                result.isEmpty());
+    }
+
+    /**
+     * Verify the symmetric case: [2.5] should likewise select nothing.
+     */
+    public void testNonIntegerNumericPredicateSelectsNoNodes2() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "//item[2.5]" );
+        List<?> result = xpath.selectNodes( doc );
+        assertTrue("Predicate [2.5] must not match any node (2.5 != 2 and 2.5 != 3 in IEEE 754)",
+                result.isEmpty());
+    }
+
+    /**
+     * Sanity check: an integer-valued predicate (e.g. [1.0]) must still
+     * select the node at that position, because 1.0 == 1.0 under IEEE 754.
+     */
+    public void testIntegerValuedNumericPredicateSelectsCorrectNode() throws JaxenException
+    {
+        XPath xpath = new DOMXPath( "//item[1.0]" );
+        List<?> result = xpath.selectNodes( doc );
+        assertEquals("Predicate [1.0] must select exactly the first node", 1, result.size());
+    }
 
 }

@@ -185,8 +185,9 @@ public class PredicateSet implements Serializable
                 if (predResult instanceof Number) {
                     // Here we assume nodes are in forward or reverse order
                     // as appropriate for axis
-                    int proximity = ((Number) predResult).intValue();
-                    if (proximity == (i + 1)) {
+                    // Use IEEE 754 floating-point equality per XPath 1.0 section 2.4
+                    double proximity = ((Number) predResult).doubleValue();
+                    if (proximity == (double)(i + 1)) {
                         filteredNodes.add(contextNode);
                     }
                 }
@@ -260,8 +261,9 @@ public class PredicateSet implements Serializable
             if (predResult instanceof Number) {
                 // Here we assume nodes are in forward or reverse order
                 // as appropriate for axis
-                int proximity = ((Number) predResult).intValue();
-                if (proximity == (i + 1)) {
+                // Use IEEE 754 floating-point equality per XPath 1.0 section 2.4
+                double proximity = ((Number) predResult).doubleValue();
+                if (proximity == (double)(i + 1)) {
                     filteredNodes.add(contextNode);
                 }
             }
