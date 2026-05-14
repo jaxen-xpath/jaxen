@@ -199,7 +199,7 @@ public class IdTest extends TestCase {
         
     }    
 
-    public void testIdFunctionDeduplicatesRepeatedIds()
+    public void testIdFunctionWithDuplicateIdsReturnsUniqueNodes()
       throws JaxenException, SAXException, IOException {
 
         BaseXPath xpath = new DOMXPath("id('p1 p1')");
