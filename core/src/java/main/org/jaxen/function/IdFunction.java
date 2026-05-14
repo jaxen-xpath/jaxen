@@ -122,7 +122,7 @@ public class IdFunction implements Function
     {
         if (contextNodes.size() == 0) return Collections.EMPTY_LIST;
       
-        List nodes = new ArrayList();
+        List<Object> nodes = new ArrayList<Object>();
 
         Object contextNode = contextNodes.get(0);
 
@@ -150,7 +150,7 @@ public class IdFunction implements Function
 
         IdentityHashMap<Object, Boolean> unique = new IdentityHashMap<Object, Boolean>();
         List<Object> uniqueNodes = new ArrayList<Object>(nodes.size());
-        Iterator iter = nodes.iterator();
+        Iterator<Object> iter = nodes.iterator();
         while (iter.hasNext()) {
             Object node = iter.next();
             if (!unique.containsKey(node)) {
