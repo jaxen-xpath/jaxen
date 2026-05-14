@@ -148,8 +148,8 @@ public class IdFunction implements Function
             return nodes;
         }
 
-        IdentityHashMap unique = new IdentityHashMap();
-        List uniqueNodes = new ArrayList(nodes.size());
+        IdentityHashMap<Object, Boolean> unique = new IdentityHashMap<Object, Boolean>();
+        List<Object> uniqueNodes = new ArrayList<Object>(nodes.size());
         Iterator iter = nodes.iterator();
         while (iter.hasNext()) {
             Object node = iter.next();
