@@ -211,4 +211,16 @@ public class IdTest extends TestCase {
         assertEquals(1, result.size());
     }
 
+    public void testIdFunctionNodeSetArgumentWithDuplicateIdsReturnsUniqueNodes()
+      throws JaxenException, SAXException, IOException {
+
+        BaseXPath xpath = new DOMXPath("id(//id)");
+        String text = "<!DOCTYPE root [<!ATTLIST a id ID #REQUIRED>]><root><id>p1</id><id>p1</id><a id='p1'/></root>";
+        StringReader reader = new StringReader(text);
+        InputSource in = new InputSource(reader);
+        Document doc = builder.parse(in);
+        List<?> result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+    }
+
 }

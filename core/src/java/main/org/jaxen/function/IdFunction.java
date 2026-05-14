@@ -41,6 +41,7 @@ package org.jaxen.function;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -143,8 +144,22 @@ public class IdFunction implements Function
                 }
             }
         }
-        return nodes;
+        if (nodes.size() < 2) {
+            return nodes;
+        }
+
+        IdentityHashMap unique = new IdentityHashMap();
+        List uniqueNodes = new ArrayList(nodes.size());
+        Iterator iter = nodes.iterator();
+        while (iter.hasNext()) {
+            Object node = iter.next();
+            if (!unique.containsKey(node)) {
+                unique.put(node, Boolean.TRUE);
+                uniqueNodes.add(node);
+            }
+        }
+
+        return uniqueNodes;
     }
     
 }
-
