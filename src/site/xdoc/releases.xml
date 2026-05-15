@@ -10,24 +10,35 @@
     <section name="Official Builds">
 
 <p>
-The current version is 2.0.2. This release is completely API compatible with version 2.0.0.
-It fixes two bugs in XPath evaluation: one involving proper handling of NaN and Inf 
-values in the <code>substring</code> function and one correctly ordering
-attribute nodes before child nodes in union operations. 
+The current version is 2.0.3. This release is completely API compatible with version 2.0.0.
 </p>
+
       
       <ul>
-        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.2/jaxen-2.0.2-bin.zip">2.0.2  binaries in zip format.</a></li>
-        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.2/jaxen-2.0.2-bin.tar.gz">2.0.2 binaries in tar/gz format.</a></li>
-        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.2/jaxen-2.0.2-bin.tar.bz2">2.0.2 binaries in bz2 format.</a></li>
-        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.2/jaxen-2.0.2-src.zip">2.0.2 sources in zip format.</a></li>
-        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.2/jaxen-2.0.2-src.tar.gz">2.0.2 sources in tar/gz format.</a></li>
-        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.2/jaxen-2.0.2-src.tar.bz2">2.0.2 sources in bz2 format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.3/jaxen-2.0.3-bin.zip">2.0.3 binaries in zip format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.3/jaxen-2.0.3-bin.tar.gz">2.0.3 binaries in tar/gz format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.3/jaxen-2.0.3-bin.tar.bz2">2.0.3 binaries in bz2 format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.3/jaxen-2.0.3-src.zip">2.0.3 sources in zip format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.3/jaxen-2.0.3-src.tar.gz">2.0.3 sources in tar/gz format.</a></li>
+        <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.3/jaxen-2.0.3-src.tar.bz2">2.0.3 sources in bz2 format.</a></li>
       </ul>
 
 <p>
+Version 2.0.3 fixed two bugs in XPath evaluation: one involving the use of decimal numbers in predicates
+and one deduplicating nodes in the uncommon case where duplicate IDs appeared within the argument to the <code>id()</code> function.
+</p>
+
+      
+<p>
+Version 2.0.2 fixed two bugs in XPath evaluation: one involving proper handling of NaN and Inf 
+values in the <code>substring</code> function and one correctly ordering
+attribute nodes before child nodes in union operations. 
+</p>
+
+
+<p>
 Version 2.0.1 fixed several bugs in XPath evaluation.
-It also makes builds automated, immutable, and reproducible
+It also made builds automated, immutable, and reproducible
 to resist supply chain and MITM attacks.
 </p>
    
