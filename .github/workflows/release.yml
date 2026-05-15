@@ -73,8 +73,11 @@ jobs:
           sed -i '/<artifactId>jaxen<\/artifactId>/{n;s|<version>[^<]*</version>|<version>${{ inputs.releaseVersion }}</version>|}' src/site/xdoc/index.xml
           sed -i "s|compile 'jaxen:jaxen:[^']*'|compile 'jaxen:jaxen:${{ inputs.releaseVersion }}'|" src/site/xdoc/index.xml
 
-      - name: Build, sign, and deploy to Central Publishing Portal
-        run: mvn --batch-mode deploy -Prelease -DskipTests
+      - name: Run tests
+        run: mvn --batch-mode test
+
+      - name: Build, sign, and deploy jaxen-parent and core artifacts to Central Publishing Portal
+        run: mvn --batch-mode -pl .,core deploy -Prelease -DskipTests
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_TOKEN:    ${{ secrets.CENTRAL_TOKEN }}
