@@ -23,6 +23,9 @@
           matching nodes are only included once each instead of once per argument.</li>
      </ul>
 
+    <p>It also stopped publishing the integration tests subproject to Maven Central.</p>
+
+
     </section>
       
       
