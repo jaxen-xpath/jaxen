@@ -23,7 +23,7 @@
           matching nodes are only included once each instead of once per argument.</li>
      </ul>
 
-    <p>It also stopped publishing the integration tests subproject to Maven Central.</p>
+    <p>It also stopped publishing the integration tests subproject (jaxen:jaxen-integration) to Maven Central.</p>
 
 
     </section>
@@ -389,7 +389,7 @@ upper-case( @foo, 'es-ES-Traditional_WIN' )
 
     <section name="To Do List">
       <ul>
-        <li>Implement a GenericXPath which could use reflection on the nodes passed into it to
+        <li>Implement a <code>GenericXPath</code> which could use reflection on the nodes passed into it to
           choose the Navigator to use. So the same GenericXPath instance could be used
           to evaluate XPaths on any object. This feature would be particularly useful
           in <a href="https://tomcat.apache.org/taglibs/">JSTL</a> 
