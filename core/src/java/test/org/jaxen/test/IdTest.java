@@ -223,7 +223,7 @@ public class IdTest extends TestCase {
         assertEquals(1, result.size());
     }
     
-    public void testIdFunctionWithMultipleIdAttributesOnSameElementReturnsUniqueNode()
+    public void testIdWithDualIdAttributesReturnsUniqueNode()
       throws JaxenException, SAXException, IOException {
 
         BaseXPath xpath = new DOMXPath("id('p1 p2')");
