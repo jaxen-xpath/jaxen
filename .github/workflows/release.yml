@@ -76,8 +76,8 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode test
 
-      - name: Build, sign, and deploy release artifacts to Central Publishing Portal
-        run: mvn --batch-mode -pl core -am deploy -Prelease -DskipTests
+      - name: Build, sign, and deploy jaxen-parent and core artifacts to Central Publishing Portal
+        run: mvn --batch-mode -pl .,core deploy -Prelease -DskipTests
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_TOKEN:    ${{ secrets.CENTRAL_TOKEN }}
