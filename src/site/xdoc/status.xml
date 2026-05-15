@@ -10,6 +10,22 @@
     
     <section name="Change History">
 
+
+   <section name="Jaxen 2.0.3">
+
+      <p>
+        2.0.3 fixes two bugs in XPath conformance.
+      </p>
+
+    <ul>
+      <li>Decimal numbers in positional predicates with non-zero fractional parts no longer select any nodes.</li>
+      <li>In the uncommon case where an ID is repeated in the arguments to the <code>id()</code> function,
+          matching nodes are only included once each instead of once per argument.</li>
+     </ul>
+
+    </section>
+      
+      
    <section name="Jaxen 2.0.2">
 
       <p>
