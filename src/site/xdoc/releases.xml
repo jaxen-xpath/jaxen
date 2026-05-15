@@ -25,7 +25,7 @@ The current version is 2.0.3. This release is completely API compatible with ver
 
 <p>
 Version 2.0.3 fixed two bugs in XPath evaluation: one involving the use of decimal numbers in predicates
-and one deduplicating nodes in the uncommon case where an ID was repeated in the arguments to the <code>id()</code> function.
+and one deduplicating nodes in the uncommon case where duplicate IDs appeared within the argument to the <code>id()</code> function.
 </p>
 
       
