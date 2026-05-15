@@ -222,5 +222,18 @@ public class IdTest extends TestCase {
         List<?> result = xpath.selectNodes(doc);
         assertEquals(1, result.size());
     }
+    
+    public void testIdFunctionWithMultipleIdAttributesOnSameElementReturnsUniqueNode()
+      throws JaxenException, SAXException, IOException {
+
+        BaseXPath xpath = new DOMXPath("id('p1 p2')");
+        String text = "<!DOCTYPE root [<!ATTLIST a id1 ID #REQUIRED>"
+                + "<!ATTLIST a id2 ID #REQUIRED>]><root><a id1='p1' id2='p2'/></root>";
+        StringReader reader = new StringReader(text);
+        InputSource in = new InputSource(reader);
+        Document doc = builder.parse(in);
+        List<?> result = xpath.selectNodes(doc);
+        assertEquals(1, result.size());
+    }
 
 }
