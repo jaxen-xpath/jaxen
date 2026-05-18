@@ -35,6 +35,7 @@
       <version>1.4.2</version>
       <optional>true</optional>
     </dependency>
+    <!-- Needed on Java 7/8 because XOM 1.4.2 transitively pulls Xerces classes that reference org.w3c.dom.ElementTraversal. -->
     <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>
