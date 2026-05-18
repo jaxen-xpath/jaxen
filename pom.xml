@@ -27,7 +27,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputTimestamp>2026-05-15T12:28:09Z</project.build.outputTimestamp>
-    <project.javadoc.version>3.10.1</project.javadoc.version>
+    <project.javadoc.version>3.12.0</project.javadoc.version>
     <maven.compiler.source>1.5</maven.compiler.source>
     <maven.compiler.target>1.5</maven.compiler.target>
   </properties>
