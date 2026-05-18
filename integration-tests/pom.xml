@@ -38,11 +38,13 @@
       <groupId>xom</groupId>
       <artifactId>xom</artifactId>
       <version>1.4.2</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>
       <version>1.4.01</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>dom4j</groupId>
