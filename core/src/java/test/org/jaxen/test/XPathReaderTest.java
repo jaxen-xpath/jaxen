@@ -459,4 +459,17 @@ public class XPathReaderTest extends TestCase
         assertTrue(result.booleanValue());
     }
     
+    public void testManyUnaryMinuses() throws JaxenException
+    {
+        StringBuilder buf = new StringBuilder(10001);
+        for (int i = 0; i < 10000; i++)
+        {
+            buf.append('-');
+        }
+        buf.append('1');
+        XPath xpath = new DOMXPath(buf.toString());
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(1.0, result.doubleValue(), 0.000001);
+    }
+    
 }

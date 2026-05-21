@@ -80,10 +80,22 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
-        Number number = NumberFunction.evaluate( getExpr().evaluate( context ),
+        int count = 0;
+        Expr current = this;
+        while (current instanceof UnaryExpr)
+        {
+            count++;
+            current = ((UnaryExpr) current).getExpr();
+        }
+
+        Number number = NumberFunction.evaluate( current.evaluate( context ),
                                                  context.getNavigator() );
 
-        return Double.valueOf( number.doubleValue() * -1 );
+        if ((count & 1) == 1)
+        {
+            return Double.valueOf( number.doubleValue() * -1 );
+        }
+        return number;
     }
     
 }
