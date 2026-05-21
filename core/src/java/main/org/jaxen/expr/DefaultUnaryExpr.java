@@ -73,7 +73,12 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 
     public Expr simplify()
     {
-        expr = expr.simplify();
+        DefaultUnaryExpr innermost = this;
+        while (innermost.expr instanceof DefaultUnaryExpr)
+        {
+            innermost = (DefaultUnaryExpr) innermost.expr;
+        }
+        innermost.expr = innermost.expr.simplify();
 
         return this;
     }
