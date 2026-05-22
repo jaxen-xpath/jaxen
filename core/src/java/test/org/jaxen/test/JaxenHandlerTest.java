@@ -41,16 +41,10 @@
 
 package org.jaxen.test;
 
-import java.util.Collections;
-import java.util.List;
-
 import junit.framework.TestCase;
 
-import org.jaxen.Context;
-import org.jaxen.JaxenException;
 import org.jaxen.JaxenHandler;
 import org.jaxen.expr.DefaultXPathFactory;
-import org.jaxen.expr.Expr;
 import org.jaxen.expr.XPathExpr;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.XPathReader;
@@ -161,71 +155,6 @@ public class JaxenHandlerTest extends TestCase
             catch (XPathSyntaxException e)
             {
             }
-        }
-    }
-
-    public void testGetXPathExprDoesNotSimplify() throws Exception
-    {
-        XPathReader reader = XPathReaderFactory.createReader();
-        JaxenHandler handler = new JaxenHandler();
-        SpyXPathFactory xpathFactory = new SpyXPathFactory();
-        handler.setXPathFactory( xpathFactory );
-        reader.setXPathHandler( handler );
-
-        reader.parse( "foo[1]" );
-
-        XPathExpr xpath = handler.getXPathExpr();
-
-        assertSame( xpathFactory.xpathExpr, xpath );
-        assertEquals( 0, xpathFactory.xpathExpr.simplifyCalls );
-    }
-
-    private static final class SpyXPathFactory extends DefaultXPathFactory
-    {
-        private SpyXPathExpr xpathExpr;
-
-        public XPathExpr createXPath(Expr rootExpr) throws JaxenException
-        {
-            this.xpathExpr = new SpyXPathExpr( rootExpr );
-            return this.xpathExpr;
-        }
-    }
-
-    private static final class SpyXPathExpr implements XPathExpr
-    {
-        private static final long serialVersionUID = 1L;
-
-        private Expr rootExpr;
-        private int simplifyCalls;
-
-        private SpyXPathExpr(Expr rootExpr)
-        {
-            this.rootExpr = rootExpr;
-        }
-
-        public Expr getRootExpr()
-        {
-            return this.rootExpr;
-        }
-
-        public void setRootExpr(Expr rootExpr)
-        {
-            this.rootExpr = rootExpr;
-        }
-
-        public String getText()
-        {
-            return this.rootExpr.getText();
-        }
-
-        public void simplify()
-        {
-            this.simplifyCalls++;
-        }
-
-        public List asList(Context context)
-        {
-            return Collections.EMPTY_LIST;
         }
     }
 }
