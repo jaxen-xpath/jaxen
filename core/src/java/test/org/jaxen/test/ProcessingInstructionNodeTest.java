@@ -63,7 +63,7 @@ public class ProcessingInstructionNodeTest extends TestCase {
      
          DOMXPath xpath = new DOMXPath("processing-instruction()");
          String expr = xpath.getRootExpr().getText();
-         assertEquals("child::processing-instruction()", expr);
+         assertEquals("/child::processing-instruction()", expr);
      
    }
 
@@ -72,7 +72,7 @@ public class ProcessingInstructionNodeTest extends TestCase {
      
         DOMXPath xpath = new DOMXPath("processing-instruction('foo')");
         String expr = xpath.getRootExpr().getText();
-        assertEquals("child::processing-instruction('foo')", expr);
+        assertEquals("/child::processing-instruction('foo')", expr);
      
    }
     
@@ -81,7 +81,7 @@ public class ProcessingInstructionNodeTest extends TestCase {
    
        DOMXPath xpath = new DOMXPath("processing-instruction('foo')[1 = 1]");
        String expr = xpath.getRootExpr().getText();
-       assertEquals("child::processing-instruction('foo')[(1.0 = 1.0)]", expr);
+       assertEquals("/child::processing-instruction('foo')[(1.0 = 1.0)]", expr);
    
    } 
     
