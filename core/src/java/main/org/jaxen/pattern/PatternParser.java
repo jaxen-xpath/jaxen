@@ -97,8 +97,7 @@ public class PatternParser
             reader.setXPathHandler( handler );
             reader.parse( text );
 
-            Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
-            return pattern.simplify();
+            return convertExpr( handler.getXPathExpr().getRootExpr() );
         }
     }
     
@@ -285,4 +284,3 @@ public class PatternParser
     }
 
 }
-
