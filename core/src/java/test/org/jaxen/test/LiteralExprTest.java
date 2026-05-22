@@ -88,5 +88,18 @@ public class LiteralExprTest extends TestCase
           baseXPath2.getRootExpr().getText());
         
     }
+    
+    public void testUnterminatedLiteralIsRejected()
+    {
+        try
+        {
+            new DOMXPath( "'unterminated" );
+            fail( "Should have thrown JaxenException for 'unterminated" );
+        }
+        catch (JaxenException e)
+        {
+            assertNotNull( e.getMessage() );
+        }
+    }
 
 }
