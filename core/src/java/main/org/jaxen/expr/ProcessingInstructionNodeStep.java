@@ -48,5 +48,5 @@ public interface ProcessingInstructionNodeStep extends Step
      * 
      * @return the target of the processing instruction
      */
-    public String getName();
+    String getName();
 }
