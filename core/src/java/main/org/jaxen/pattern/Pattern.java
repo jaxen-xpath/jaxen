@@ -151,7 +151,7 @@ public abstract class Pattern {
         return null;
     }
     
-    
+    @Deprecated
     public Pattern simplify() 
     {
         return this;

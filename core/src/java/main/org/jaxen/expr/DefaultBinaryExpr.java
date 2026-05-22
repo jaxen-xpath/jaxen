@@ -83,12 +83,4 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
     {
         return "[" + getClass().getName() + ": " + getLHS() + ", " + getRHS() + "]";
     }
-
-    public Expr simplify()
-    {
-        setLHS( getLHS().simplify() );
-        setRHS( getRHS().simplify() );
-
-        return this;
-    }
 }

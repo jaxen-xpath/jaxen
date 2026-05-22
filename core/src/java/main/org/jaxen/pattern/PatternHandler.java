@@ -62,7 +62,7 @@ public class PatternHandler extends JaxenHandler
     {
     }
     
-    /** Retrieve the simplified Jaxen Pattern expression tree.
+    /** Retrieve the Jaxen Pattern expression tree.
      *
      *  <p>
      *  This method is only valid once <code>XPathReader.parse(...)</code>
@@ -76,32 +76,21 @@ public class PatternHandler extends JaxenHandler
         return getPattern( true );
     }
 
-    /** Retrieve the Jaxen Pattern expression tree, optionally
-     *  simplified.
+    /** Retrieve the Jaxen Pattern expression tree.
      *
      *  <p>
      *  This method is only valid once <code>XPathReader.parse(...)</code>
      *  successfully returned.
      *  </p>
      *  
-     *  @param shouldSimplify ????
+     *  @param shouldSimplify ignored
      *  @return the Pattern expression tree
      */
     public Pattern getPattern(boolean shouldSimplify)
     {
-        if ( shouldSimplify && ! this.simplified )
-        {
-            //System.err.println("simplifying....");
-            this.pattern.simplify();
-            this.simplified = true;
-        }
-
         return this.pattern;
     }
 
-    
-    
-    
     public void endXPath()
     {
         this.pattern = (Pattern) pop();

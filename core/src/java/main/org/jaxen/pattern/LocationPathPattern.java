@@ -70,7 +70,7 @@ public class LocationPathPattern extends Pattern {
     /** The filters to match against */
     private List filters;
 
-    /** Whether this lcoation path is absolute or not */
+    /** Whether this location path is absolute or not */
     private boolean absolute;
     
     
@@ -81,33 +81,6 @@ public class LocationPathPattern extends Pattern {
     public LocationPathPattern(NodeTest nodeTest)   
     {
         this.nodeTest = nodeTest;
-    }
-
-    public Pattern simplify()
-    {
-        if ( parentPattern != null )
-        {
-            parentPattern = parentPattern.simplify();
-        }
-        if ( ancestorPattern != null )
-        {
-            ancestorPattern = ancestorPattern.simplify();
-        }
-        if ( filters == null )
-        {
-            if ( parentPattern == null && ancestorPattern == null )
-            {
-                return nodeTest;
-            }
-            if ( parentPattern != null && ancestorPattern == null )
-            {
-                if ( nodeTest instanceof AnyNodeTest )
-                {
-                    return parentPattern;
-                }
-            }
-        }
-        return this;
     }
     
     /** Adds a filter to this pattern

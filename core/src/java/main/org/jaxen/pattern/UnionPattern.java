@@ -116,15 +116,6 @@ public class UnionPattern extends Pattern {
         return matchesNodeName;
     }
     
-    
-    public Pattern simplify() 
-    {
-        this.lhs = lhs.simplify();
-        this.rhs = rhs.simplify();
-        init();
-        return this;
-    }
-    
     public String getText() 
     {
         return lhs.getText() + " | " + rhs.getText();

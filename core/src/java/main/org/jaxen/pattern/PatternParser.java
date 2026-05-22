@@ -98,7 +98,7 @@ public class PatternParser
             reader.parse( text );
 
             Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
-            return pattern.simplify();
+            return pattern;
         }
     }
     
