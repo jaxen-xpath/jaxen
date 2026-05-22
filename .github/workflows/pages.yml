@@ -37,6 +37,18 @@ jobs:
       - name: Build site
         run: mvn --batch-mode site site:stage -Dmaven.javadoc.skip=true -Djapicmp.skip=true
 
+      - name: Remove JavaScript from published pages
+        run: |
+          python - <<'PY'
+          import pathlib
+          import re
+          for html in pathlib.Path("target/staging").rglob("*.html"):
+              content = html.read_text(encoding="utf-8")
+              content = re.sub(r"(?is)<script\\b[^>]*>.*?</script>", "", content)
+              html.write_text(content, encoding="utf-8")
+          PY
+          find target/staging -type d -name js -prune -exec rm -rf {} +
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
