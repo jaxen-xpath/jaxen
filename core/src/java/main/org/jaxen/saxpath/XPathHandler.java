@@ -37,9 +37,7 @@
  * James Strachan <jstrachan@apache.org>.  For more information on the
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
  */
-
-
-
+ 
 
 package org.jaxen.saxpath;
 
@@ -65,35 +63,35 @@ public interface XPathHandler
 {
     /** Receive notification of the start of an XPath expression parse.
      */
-    void startXPath() throws org.jaxen.saxpath.SAXPathException;
+    void startXPath() throws SAXPathException;
 
     /** Receive notification of the end of an XPath expression parse.
      */
-    void endXPath() throws org.jaxen.saxpath.SAXPathException;
+    void endXPath() throws SAXPathException;
 
     /** Receive notification of the start of a path expression.
      */
-    void startPathExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startPathExpr() throws SAXPathException;
 
     /** Receive notification of the end of a path expression.
      */
-    void endPathExpr() throws org.jaxen.saxpath.SAXPathException;
+    void endPathExpr() throws SAXPathException;
 
     /** Receive notification of the start of an absolute location path expression.
      */
-    void startAbsoluteLocationPath() throws org.jaxen.saxpath.SAXPathException;
+    void startAbsoluteLocationPath() throws SAXPathException;
 
     /** Receive notification of the end of an absolute location path expression.
      */
-    void endAbsoluteLocationPath() throws org.jaxen.saxpath.SAXPathException;
+    void endAbsoluteLocationPath() throws SAXPathException;
 
     /** Receive notification of the start of a relative location path expression.
      */
-    void startRelativeLocationPath() throws org.jaxen.saxpath.SAXPathException;
+    void startRelativeLocationPath() throws SAXPathException;
 
     /** Receive notification of the end of a relative location path expression.
      */
-    void endRelativeLocationPath() throws org.jaxen.saxpath.SAXPathException;
+    void endRelativeLocationPath() throws SAXPathException;
 
     /** Receive notification of the start of a name step.
      *
@@ -104,41 +102,41 @@ public interface XPathHandler
      */
     void startNameStep(int axis,
                        String prefix,
-                       String localName) throws org.jaxen.saxpath.SAXPathException;
+                       String localName) throws SAXPathException;
 
     /** Receive notification of the end of a NameStep
      */
-    void endNameStep() throws org.jaxen.saxpath.SAXPathException;
+    void endNameStep() throws SAXPathException;
 
     /** Receive notification of the start of a text() step.
      *
      *  @param axis the axis of this step
      */
-    void startTextNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
+    void startTextNodeStep(int axis) throws SAXPathException;
 
     /** Receive notification of the end of a text() step.
      */
-    void endTextNodeStep() throws org.jaxen.saxpath.SAXPathException;
+    void endTextNodeStep() throws SAXPathException;
 
     /** Receive notification of the start of a comment() step.
      *
      *  @param axis the axis of this step
      */
-    void startCommentNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
+    void startCommentNodeStep(int axis) throws SAXPathException;
 
     /** Receive notification of the end of a comment() step.
      */
-    void endCommentNodeStep() throws org.jaxen.saxpath.SAXPathException;
+    void endCommentNodeStep() throws SAXPathException;
 
     /** Receive notification of the start of a node() step.
      *
      *  @param axis the axis of this step
      */
-    void startAllNodeStep(int axis) throws org.jaxen.saxpath.SAXPathException;
+    void startAllNodeStep(int axis) throws SAXPathException;
 
     /** Receive notification of the end of a node() step.
      */
-    void endAllNodeStep() throws org.jaxen.saxpath.SAXPathException;
+    void endAllNodeStep() throws SAXPathException;
 
     /** Receive notification of the start of a processing-instruction(...) step.
      *
@@ -147,31 +145,31 @@ public interface XPathHandler
      *         the empty string if none is specified
      */
     void startProcessingInstructionNodeStep(int axis,
-                                            String name) throws org.jaxen.saxpath.SAXPathException;
+                                            String name) throws SAXPathException;
 
     /** Receive notification of the end of a processing-instruction(...) step.
      */
-    void endProcessingInstructionNodeStep() throws org.jaxen.saxpath.SAXPathException;
+    void endProcessingInstructionNodeStep() throws SAXPathException;
 
     /** Receive notification of the start of a predicate.
      */
-    void startPredicate() throws org.jaxen.saxpath.SAXPathException;
+    void startPredicate() throws SAXPathException;
 
     /** Receive notification of the end of a predicate.
      */
-    void endPredicate() throws org.jaxen.saxpath.SAXPathException;
+    void endPredicate() throws SAXPathException;
 
     /** Receive notification of the start of a filter expression.
      */
-    void startFilterExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startFilterExpr() throws SAXPathException;
 
     /** Receive notification of the end of a filter expression.
      */
-    void endFilterExpr() throws org.jaxen.saxpath.SAXPathException;
+    void endFilterExpr() throws SAXPathException;
 
     /** Receive notification of the start of an 'or' expression.
      */
-    void startOrExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startOrExpr() throws SAXPathException;
 
     /** Receive notification of the end of an 'or' expression.
      *
@@ -179,11 +177,11 @@ public interface XPathHandler
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions
      */
-    void endOrExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
+    void endOrExpr(boolean create) throws SAXPathException;
 
     /** Receive notification of the start of an 'and' expression.
      */
-    void startAndExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startAndExpr() throws SAXPathException;
 
     /** Receive notification of the end of an 'and' expression.
      *
@@ -191,11 +189,11 @@ public interface XPathHandler
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions
      */
-    void endAndExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
+    void endAndExpr(boolean create) throws SAXPathException;
 
     /** Receive notification of the start of an equality ('=' or '!=') expression.
      */
-    void startEqualityExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startEqualityExpr() throws SAXPathException;
 
     /** Receive notification of the end of an equality ('=' or '!=') expression.
      *
@@ -204,11 +202,11 @@ public interface XPathHandler
      *         is only a pass-through, and should not actually
      *         be instantiated.
      */
-    void endEqualityExpr(int equalityOperator) throws org.jaxen.saxpath.SAXPathException;
+    void endEqualityExpr(int equalityOperator) throws SAXPathException;
 
     /** Receive notification of the start of a relational ('&lt;', '>', '&lt;=', or '>=') expression.
      */
-    void startRelationalExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startRelationalExpr() throws SAXPathException;
 
     /** Receive notification of the start of a relational ('&lt;', '>', '&lt;=', or '>=') expression.
      *
@@ -217,11 +215,11 @@ public interface XPathHandler
      *         is only a pass-through, and should not actually
      *         be instantiated.
      */
-    void endRelationalExpr(int relationalOperator) throws org.jaxen.saxpath.SAXPathException;
+    void endRelationalExpr(int relationalOperator) throws SAXPathException;
 
     /** Receive notification of the start of an additive ('+' or '-') expression.
      */
-    void startAdditiveExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startAdditiveExpr() throws SAXPathException;
 
     /** Receive notification of the end of an additive ('+' or '-') expression.
      *
@@ -230,11 +228,11 @@ public interface XPathHandler
      *         is only a pass-through, and should not actually
      *         be instantiated.
      */
-    void endAdditiveExpr(int additiveOperator) throws org.jaxen.saxpath.SAXPathException;
+    void endAdditiveExpr(int additiveOperator) throws SAXPathException;
 
     /** Receive notification of the start of a multiplicative ('*', 'div' or 'mod') expression.
      */
-    void startMultiplicativeExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startMultiplicativeExpr() throws SAXPathException;
 
     /** Receive notification of the start of a multiplicative ('*', 'div' or 'mod') expression.
      *
@@ -243,11 +241,11 @@ public interface XPathHandler
      *         is only a pass-through, and should not actually
      *         be instantiated.
      */
-    void endMultiplicativeExpr(int multiplicativeOperator) throws org.jaxen.saxpath.SAXPathException;
+    void endMultiplicativeExpr(int multiplicativeOperator) throws SAXPathException;
 
     /** Receive notification of the start of a unary ('+' or '-') expression.
      */
-    void startUnaryExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startUnaryExpr() throws SAXPathException;
 
     /** Receive notification of the end of a unary ('+' or '-') expression.
      *
@@ -257,11 +255,11 @@ public interface XPathHandler
      *         If not {@link org.jaxen.saxpath.Operator#NO_OP}, it will 
      *         always be {@link org.jaxen.saxpath.Operator#NEGATIVE}.
      */
-    void endUnaryExpr(int unaryOperator) throws org.jaxen.saxpath.SAXPathException;
+    void endUnaryExpr(int unaryOperator) throws SAXPathException;
 
     /** Receive notification of the start of a union ('|') expression.
      */
-    void startUnionExpr() throws org.jaxen.saxpath.SAXPathException;
+    void startUnionExpr() throws SAXPathException;
 
     /** Receive notification of the end of a union ('|') expression.
      *
@@ -269,25 +267,25 @@ public interface XPathHandler
      *         should truly be instantiated, or if it was just
      *         a pass-through, based upon the grammar productions
      */
-    void endUnionExpr(boolean create) throws org.jaxen.saxpath.SAXPathException;
+    void endUnionExpr(boolean create) throws SAXPathException;
 
     /** Receive notification of a number expression.
      *
      *  @param number the number value
      */
-    void number(int number) throws org.jaxen.saxpath.SAXPathException;
+    void number(int number) throws SAXPathException;
 
     /** Receive notification of a number expression.
      *
      *  @param number the number value
      */
-    void number(double number) throws org.jaxen.saxpath.SAXPathException;
+    void number(double number) throws SAXPathException;
 
     /** Receive notification of a literal expression.
      *
      *  @param literal the string literal value
      */
-    void literal(String literal) throws org.jaxen.saxpath.SAXPathException;
+    void literal(String literal) throws SAXPathException;
 
     /** Receive notification of a variable-reference expression.
      *
@@ -295,7 +293,7 @@ public interface XPathHandler
      *  @param variableName the local name of the variable
      */
     void variableReference(String prefix,
-                           String variableName) throws org.jaxen.saxpath.SAXPathException;
+                           String variableName) throws SAXPathException;
 
     /** Receive notification of a function call.
      *
@@ -303,9 +301,9 @@ public interface XPathHandler
      *  @param functionName the local name of the function
      */
     void startFunction(String prefix,
-                       String functionName) throws org.jaxen.saxpath.SAXPathException;
+                       String functionName) throws SAXPathException;
 
     /** Receive notification of the end of a function call
      */
-    void endFunction() throws org.jaxen.saxpath.SAXPathException;
+    void endFunction() throws SAXPathException;
 }
