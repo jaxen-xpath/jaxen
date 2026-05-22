@@ -748,6 +748,7 @@ class XPathLexer
     {
         Token token = null;
     
+        int tokenStart = this.currentPosition;
         char match  = LA(1);
     
         consume();
@@ -766,6 +767,14 @@ class XPathLexer
                                    this.currentPosition );
             }
             consume();
+        }
+
+        if ( token == null )
+        {
+            token = new Token( TokenTypes.ERROR,
+                               getXPath(),
+                               tokenStart,
+                               this.currentPosition );
         }
     
         return token;
