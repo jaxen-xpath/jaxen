@@ -63,7 +63,7 @@ public class CommentNodeTest extends TestCase {
      
          DOMXPath xpath = new DOMXPath("comment()");
          String expr = xpath.getRootExpr().getText();
-         assertEquals("/child::comment()", expr);
+         assertEquals("child::comment()", expr);
      
    }
 
@@ -72,7 +72,7 @@ public class CommentNodeTest extends TestCase {
     
         DOMXPath xpath = new DOMXPath("comment()[1 = 1]");
         String expr = xpath.getRootExpr().getText();
-        assertEquals("/child::comment()[(1.0 = 1.0)]", expr);
+        assertEquals("child::comment()[(1.0 = 1.0)]", expr);
     
     } 
     

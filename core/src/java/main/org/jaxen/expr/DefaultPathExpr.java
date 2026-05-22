@@ -89,7 +89,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         }
 
         if (getLocationPath() != null) {
-            if (!getLocationPath().getSteps().isEmpty()) builder.append("/");
+            if (getFilterExpr() != null && !getLocationPath().getSteps().isEmpty()) builder.append("/");
             builder.append(getLocationPath().getText());
         }
 
