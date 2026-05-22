@@ -98,7 +98,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
     public Object evaluate(Context context) throws JaxenException {
         Object results = null;
-        Context pathContext = null;
+        Context pathContext = context;
         if (getFilterExpr() != null) {
             results = getFilterExpr().evaluate(context);
             pathContext = new Context(context.getContextSupport());
