@@ -68,7 +68,26 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 
     public String getText()
     {
-        return "-(" + getExpr().getText() + ")";
+        int count = 0;
+        Expr current = this;
+        while (current instanceof UnaryExpr)
+        {
+            count++;
+            current = ((UnaryExpr) current).getExpr();
+        }
+
+        String currentText = current.getText();
+        StringBuffer text = new StringBuffer(currentText.length() + (count * 3));
+        for (int i = 0; i < count; i++)
+        {
+            text.append("-(");
+        }
+        text.append(currentText);
+        for (int i = 0; i < count; i++)
+        {
+            text.append(')');
+        }
+        return text.toString();
     }
 
     public Expr simplify()
