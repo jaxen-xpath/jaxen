@@ -972,24 +972,20 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void unaryExpr() throws SAXPathException
     {
-        switch ( LA(1) )
+        int count = 0;
+        while (LA(1) == TokenTypes.MINUS)
         {
-            case TokenTypes.MINUS:
-            {
-                getXPathHandler().startUnaryExpr();
-                match( TokenTypes.MINUS );
-                unaryExpr();
-                getXPathHandler().endUnaryExpr( Operator.NEGATIVE );
-                break;
-            }
-            default:
-            {
-                unionExpr();
-                break;
-            }
+            getXPathHandler().startUnaryExpr();
+            match( TokenTypes.MINUS );
+            count++;
         }
 
-        
+        unionExpr();
+
+        for (int i = 0; i < count; i++)
+        {
+            getXPathHandler().endUnaryExpr( Operator.NEGATIVE );
+        }
     }
 
     private void unionExpr() throws SAXPathException

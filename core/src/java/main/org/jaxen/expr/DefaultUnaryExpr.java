@@ -68,22 +68,58 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
 
     public String getText()
     {
-        return "-(" + getExpr().getText() + ")";
+        int count = 0;
+        Expr current = this;
+        while (current instanceof UnaryExpr)
+        {
+            count++;
+            current = ((UnaryExpr) current).getExpr();
+        }
+
+        String currentText = current.getText();
+        StringBuffer text = new StringBuffer(currentText.length() + (count * 3));
+        for (int i = 0; i < count; i++)
+        {
+            text.append("-(");
+        }
+        text.append(currentText);
+        for (int i = 0; i < count; i++)
+        {
+            text.append(')');
+        }
+        return text.toString();
     }
 
     public Expr simplify()
     {
-        expr = expr.simplify();
+        DefaultUnaryExpr innermost = this;
+        while (innermost.expr instanceof DefaultUnaryExpr)
+        {
+            innermost = (DefaultUnaryExpr) innermost.expr;
+        }
+        innermost.expr = innermost.expr.simplify();
 
         return this;
     }
 
     public Object evaluate(Context context) throws JaxenException
     {
-        Number number = NumberFunction.evaluate( getExpr().evaluate( context ),
+        int count = 0;
+        Expr current = this;
+        while (current instanceof UnaryExpr)
+        {
+            count++;
+            current = ((UnaryExpr) current).getExpr();
+        }
+
+        Number number = NumberFunction.evaluate( current.evaluate( context ),
                                                  context.getNavigator() );
 
-        return Double.valueOf( number.doubleValue() * -1 );
+        if ((count & 1) == 1)
+        {
+            return Double.valueOf( number.doubleValue() * -1 );
+        }
+        return number;
     }
     
 }
