@@ -266,16 +266,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
 
     //
 
-    public Iterator getPrecedingAxisIterator(Object o) throws UnsupportedAxisException {
-        return super.getPrecedingAxisIterator(o);
-    }
-
-    public Iterator getPrecedingSiblingAxisIterator(Object o) throws UnsupportedAxisException {
-        return super.getPrecedingSiblingAxisIterator(o);
-    }
-    
-    //
-
     public String getProcessingInstructionData(Object o) {
         return (o instanceof ProcessingInstruction ? ((ProcessingInstruction)o).getValue() : null);
     }
