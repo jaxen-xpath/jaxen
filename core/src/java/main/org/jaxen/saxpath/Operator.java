@@ -52,76 +52,76 @@ public interface Operator
      * the XPath grammar, even though it has neither a plus, 
      * minus, multiplication, or other sign.
      */
-    final static int NO_OP               =  0;
+    int NO_OP               =  0;
     
     // Equality
     /**
      * The equal to operator <code>=</code>. This is equivalent to <code>==</code>
      * in Java. This is a comparison operator, not an assignment operator.
      */
-    final static int EQUALS              =  1;
+    int EQUALS              =  1;
     
     /**
      * The not equal to operator <code>!=</code>
      */
-    final static int NOT_EQUALS          =  2;
+    int NOT_EQUALS          =  2;
     
     // Relational
     /**
      * The less-than operator <code>&lt;</code>
      */
-    final static int LESS_THAN           =  3;
+    int LESS_THAN           =  3;
     
     /**
      * The less-than-or-equal-to operator <code>&lt;=</code>
      */
-    final static int LESS_THAN_EQUALS    =  4;
+    int LESS_THAN_EQUALS    =  4;
 
     /**
      * The greater-than operator <code>></code>
      */
-    final static int GREATER_THAN        =  5;
+    int GREATER_THAN        =  5;
 
     /**
      * The greater-than or equals operator <code>>=</code>
      */
-    final static int GREATER_THAN_EQUALS =  6;
+    int GREATER_THAN_EQUALS =  6;
     
     // Additive
 
     /**
      * The addition operator <code>+</code>
      */
-    final static int ADD                 =  7;
+    int ADD                 =  7;
 
     /**
      * The subtraction operator <code>-</code>
      */
-    final static int SUBTRACT            =  8;
+    int SUBTRACT            =  8;
 
     // Multiplicative
 
     /**
      * The multiplication operator <code>*</code>
      */
-    final static int MULTIPLY            =  9;
+    int MULTIPLY            =  9;
 
     /**
      * The remainder operator <code>mod</code>. This is equivalent to
      * <code>%</code> in Java. 
      */
-    final static int MOD                 = 10;
+    int MOD                 = 10;
 
     /**
      * The floating point division operator <code>div</code>.  This is equivalent to
      * <code>/</code> in Java. 
      */
-    final static int DIV                 = 11;
+    int DIV                 = 11;
 
     // Unary
 
     /**
      * Unary <code>-</code>
      */
-    final static int NEGATIVE            = 12;
+    int NEGATIVE            = 12;
 }
