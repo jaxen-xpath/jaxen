@@ -75,9 +75,9 @@ class DefaultPredicate implements Predicate
         return "[(DefaultPredicate): " + getExpr() + "]";
     }
 
+    @Deprecated
     public void simplify()
     {
-        setExpr( getExpr().simplify() );
     }
 
     public Object evaluate(Context context) throws JaxenException

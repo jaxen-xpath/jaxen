@@ -82,6 +82,7 @@ public interface XPathExpr extends Serializable
      * <code>//para</code>. In practice, this is usually a noop.
      * Jaxen does not currently perform any simplification.
      */
+    @Deprecated
     void simplify();
     
     

@@ -77,11 +77,6 @@ class DefaultXPathExpr implements XPathExpr
         return getRootExpr().getText();
     }
 
-    public void simplify()
-    {
-        setRootExpr( getRootExpr().simplify() );
-    }
-
     public List asList(Context context) throws JaxenException
     {
         Expr expr = getRootExpr();
@@ -89,4 +84,9 @@ class DefaultXPathExpr implements XPathExpr
         List result = DefaultExpr.convertToList( value );
         return result;
     }
+
+	@Override
+	@Deprecated
+	public void simplify() {		
+	}
 }

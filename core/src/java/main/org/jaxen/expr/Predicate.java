@@ -71,10 +71,11 @@ public interface Predicate extends Serializable
     void setExpr(Expr expr);
 
     /**
-     * Simplify the expression in this predicate.
+     * In practice, this is a no-op. 
      * 
-     * @see Expr#simplify()
+     * @deprecated to be removed in Jaxen 3
      */
+    @Deprecated
     void simplify();
 
     /**

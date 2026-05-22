@@ -118,25 +118,6 @@ class DefaultFunctionCallExpr extends DefaultExpr implements FunctionCallExpr
         return builder.toString();
     }
 
-    public Expr simplify()
-    {
-        List paramExprs = getParameters();
-        int paramSize = paramExprs.size();
-
-        List newParams = new ArrayList(paramSize);
-
-        for (int i = 0; i < paramSize; ++i)
-        {
-            Expr eachParam = (Expr) paramExprs.get(i);
-
-            newParams.add(eachParam.simplify());
-        }
-
-        this.parameters = newParams;
-
-        return this;
-    }
-
 
     public String toString()
     {

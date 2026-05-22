@@ -96,32 +96,6 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         return builder.toString();
     }
 
-
-    public Expr simplify() {
-        if (getFilterExpr() != null) {
-            setFilterExpr(getFilterExpr().simplify());
-        }
-
-        if (getLocationPath() != null) {
-            getLocationPath().simplify();
-        }
-
-        if (getFilterExpr() == null && getLocationPath() == null) {
-            return null;
-        }
-
-
-        if (getLocationPath() == null) {
-            return getFilterExpr();
-        }
-
-        if (getFilterExpr() == null) {
-            return getLocationPath();
-        }
-
-        return this;
-    }
-
     public Object evaluate(Context context) throws JaxenException {
         Object results = null;
         Context pathContext = null;
