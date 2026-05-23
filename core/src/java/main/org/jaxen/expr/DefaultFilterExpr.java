@@ -100,6 +100,11 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
         return text;
     }
 
+    /**
+     * This is one of the few (only?) simplify methods that does anything.
+     * If this filter expression does not have any predicates, then the filter expression
+     * is replaced by its underlying expression.  
+     */
     public Expr simplify()
     {
         this.predicates.simplify();
@@ -109,6 +114,8 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
             this.expr = this.expr.simplify();
         }
 
+        // TODO this changes the AST. If there are no predicates, the filter expression can be changed to just expr 
+        // instead of a filter expression that contains both an expression and predicates.  
         if ( this.predicates.getPredicates().size() == 0 )
         {
             return getExpr();
@@ -157,7 +164,7 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
         {
             List newresults = getPredicateSet().evaluatePredicates( (List) results,
                                     context.getContextSupport() );
-        results = newresults;
+            results = newresults;
         }
 
         return results;

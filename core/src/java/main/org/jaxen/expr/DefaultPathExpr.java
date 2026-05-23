@@ -99,6 +99,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
     public Expr simplify() {
         if (getFilterExpr() != null) {
+        	// TODO this changes a filter expression to a number expression
             setFilterExpr(getFilterExpr().simplify());
         }
 
