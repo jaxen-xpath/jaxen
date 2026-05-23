@@ -148,6 +148,7 @@ class ExprComparator implements Comparator {
                     }
                     break;
                 case TYPE_FILTER_EXPR:
+                	// TODO implement this
                     if (true)
                         throw new RuntimeException("Not yet implemented!");
                     break;
