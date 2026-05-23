@@ -148,9 +148,14 @@ class ExprComparator implements Comparator {
                     }
                     break;
                 case TYPE_FILTER_EXPR:
-                	// TODO implement this
-                    if (true)
-                        throw new RuntimeException("Not yet implemented!");
+                    FilterExpr filterExpr1 = (FilterExpr)o1;
+                    FilterExpr filterExpr2 = (FilterExpr)o2;
+                    if (filterExpr1.getPredicates().isEmpty() && filterExpr2.getPredicates().isEmpty()) {
+                        cmp = compare(filterExpr1.getExpr(), filterExpr2.getExpr());
+                    }
+                    else { // TODO implement this
+                        throw new RuntimeException("Predicate comparison not yet implemented!");
+                    }
                     break;
                 case TYPE_FUNCTION_CALL_EXPR:
                     FunctionCallExpr functionCallExpr1 = (FunctionCallExpr)o1;

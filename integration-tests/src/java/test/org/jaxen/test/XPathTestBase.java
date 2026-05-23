@@ -42,6 +42,7 @@ package org.jaxen.test;
 import junit.framework.TestCase;
 
 import org.jaxen.*;
+import org.jaxen.expr.Expr;
 import org.jaxen.function.StringFunction;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
 import org.jaxen.pattern.Pattern;
@@ -166,8 +167,9 @@ public abstract class XPathTestBase extends TestCase
 
     private void assertExprGetTextIdempotent(BaseXPath xpath) throws JaxenException
     {
-        assertEquals(0, ExprComparator.EXPR_COMPARATOR.compare(xpath.getRootExpr(), 
-          new BaseXPath(xpath.getRootExpr().getText(), null).getRootExpr()));
+        Expr rootExpr = xpath.getRootExpr();
+        Expr rootExpr2 = new BaseXPath(rootExpr.getText(), null).getRootExpr();
+        assertEquals(0, ExprComparator.EXPR_COMPARATOR.compare(rootExpr, rootExpr2));
     }
     
     private Context getContext(Object contextNode)
