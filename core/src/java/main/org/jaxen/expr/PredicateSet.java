@@ -137,6 +137,11 @@ public class PredicateSet implements Serializable
 
         return stringBuilder.toString();
     }
+    
+    @Override
+    public String toString() {
+    	return "org.jaxen.expr.PredicateSet " + getText();
+    }
 
     /**
      * <p>Returns true if any of the supplied nodes satisfy 
