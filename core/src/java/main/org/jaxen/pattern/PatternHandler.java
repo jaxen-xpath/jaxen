@@ -98,9 +98,6 @@ public class PatternHandler extends JaxenHandler
         return this.pattern;
     }
 
-    
-    
-    
     public void endXPath()
     {
         this.pattern = (Pattern) pop();        

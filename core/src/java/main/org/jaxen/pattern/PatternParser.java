@@ -73,7 +73,6 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
   */
 public class PatternParser 
 {
-    private static final boolean TRACE = false;
     private static final boolean USE_HANDLER = false;
     public static Pattern parse(String text) throws JaxenException, org.jaxen.saxpath.SAXPathException
     {
@@ -103,12 +102,7 @@ public class PatternParser
     }
     
     protected static Pattern convertExpr(Expr expr) throws JaxenException 
-    {
-        if ( TRACE )
-        {
-            System.out.println( "Converting: " + expr + " into a pattern." );
-        }
-        
+    {   
         if ( expr instanceof LocationPath )
         {
             return convertExpr( (LocationPath) expr );
