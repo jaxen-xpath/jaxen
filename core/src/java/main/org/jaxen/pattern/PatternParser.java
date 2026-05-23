@@ -74,32 +74,18 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
 public class PatternParser 
 {
     private static final boolean TRACE = false;
-    private static final boolean USE_HANDLER = false;
+
     public static Pattern parse(String text) throws JaxenException, org.jaxen.saxpath.SAXPathException
     {
-        if ( USE_HANDLER )
-        {
-            XPathReader reader = XPathReaderFactory.createReader();
-            PatternHandler handler = new PatternHandler();       
-            
-            handler.setXPathFactory( new DefaultXPathFactory() );            
-            reader.setXPathHandler( handler );
-            reader.parse( text );
-            
-            return handler.getPattern();
-        }
-        else
-        {
-            XPathReader reader = XPathReaderFactory.createReader();
-            JaxenHandler handler = new JaxenHandler();
-            
-            handler.setXPathFactory( new DefaultXPathFactory() );            
-            reader.setXPathHandler( handler );
-            reader.parse( text );
+        XPathReader reader = XPathReaderFactory.createReader();
+        JaxenHandler handler = new JaxenHandler();
 
-            Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
-            return pattern.simplify();
-        }
+        handler.setXPathFactory( new DefaultXPathFactory() );            
+        reader.setXPathHandler( handler );
+        reader.parse( text );
+
+        Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
+        return pattern.simplify();
     }
     
     protected static Pattern convertExpr(Expr expr) throws JaxenException 
@@ -285,4 +271,3 @@ public class PatternParser
     }
 
 }
-
