@@ -69,7 +69,9 @@ public interface Expr extends Serializable
      * Jaxen does not currently perform any simplification.
      * 
      * @return the simplified expression
+     * @deprecated never really implemented, and will be removed in Jaxen 3
      */
+    @Deprecated
     Expr   simplify();
     
     
