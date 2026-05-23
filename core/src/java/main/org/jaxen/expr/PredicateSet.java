@@ -102,7 +102,9 @@ public class PredicateSet implements Serializable
 
     /**
      * Simplify each of the predicates in the list.
+     * @deprecated never really implemented, and will be removed in Jaxen 3
      */
+    @Deprecated
     public void simplify()
     {
         Iterator<Predicate>  predIter = this.predicates.iterator();

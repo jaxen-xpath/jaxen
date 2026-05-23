@@ -74,7 +74,9 @@ public interface Predicate extends Serializable
      * Simplify the expression in this predicate.
      * 
      * @see Expr#simplify()
+     * @deprecated never really implemented, and will be removed in Jaxen 3
      */
+    @Deprecated
     void simplify();
 
     /**
