@@ -11,6 +11,34 @@
     <section name="Change History">
 
 
+   <section name="Jaxen 2.0.4">
+
+      <p>
+        Most importantly version 2.0.4 removes recursive algorithms from the 
+        core parser. This enables Jaxen to handle much larger and more complex XPath expressions.
+        It also makes Jaxen far more resistant to stack overflows and DOS attacks. 
+        It's very telling that despite these issues existing in the code since the inception of the project,
+        and even being called out in the security notes for the last few years,
+        no one has ever noticed or reported this as a security issue. Instead there's a steady 
+        trickle of complaints about transitive dependencies that aren't Jaxen's fault
+        and issues about billion laughs attacks and external entity loading which are not
+        in Jaxen's purview. Most issue reporting is just security theater: someone
+        runs a badly designed scanner across the codebase and reports all its
+        false and misattributed positives. No one is actually reading and thinking deeply
+        about the code. 
+      </p>
+
+      <p>
+        2.0.4 deprecates the simplify method. This was barely used and not really effective
+        even if it was fully implemented. There's just not a lot to be gained by optimizing
+        XPath 1.0 expressions. In practice, most real world queries are very simple to 
+        start with and often aren't reused, so optimizations don't save measurable time on evaluation.
+      </p>
+
+
+    </section>
+      
+
    <section name="Jaxen 2.0.3">
 
       <p>
