@@ -25,7 +25,7 @@ The current version is 2.0.3. This release is completely API compatible with ver
 
 <p>
 Version 2.0.4 fixed a bug in XPath parser precedence so expressions that combine the union
-operator with additive expressions are now evaluated according to the XPath 1.0 grammar.
+operator with additive expressions are now evaluated correctly.
 </p>
 
 <p>
