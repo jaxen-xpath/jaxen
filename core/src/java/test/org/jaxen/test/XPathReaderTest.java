@@ -471,5 +471,16 @@ public class XPathReaderTest extends TestCase
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(1.0, result.doubleValue(), 0.000001);
     }
-    
+
+    public void testManyUnionExpressions() throws SAXPathException
+    {
+        StringBuilder buf = new StringBuilder();
+        buf.append("foo");
+        for (int i = 0; i < 10000; i++)
+        {
+            buf.append(" | foo");
+        }
+        reader.parse(buf.toString());
+    }
+
 }

@@ -990,24 +990,15 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void unionExpr() throws SAXPathException
     {
-        getXPathHandler().startUnionExpr();
-
         pathExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.PIPE)
         {
-            case TokenTypes.PIPE:
-            {
-                match( TokenTypes.PIPE );
-                create = true;
-                expr();
-                break;
-            }
+            match( TokenTypes.PIPE );
+            getXPathHandler().startUnionExpr();
+            pathExpr();
+            getXPathHandler().endUnionExpr( true );
         }
-
-        getXPathHandler().endUnionExpr( create );
     }
 
     private Token match(int tokenType) throws XPathSyntaxException
