@@ -523,26 +523,52 @@ public class XPathReaderTest extends TestCase
         reader.parse("foo | bar | count(baz)");
     }
 
-    public void testManyOrExpressions() throws SAXPathException
+    public void testManyOrExpressions() throws Exception
     {
-        StringBuilder buf = new StringBuilder();
-        buf.append("true()");
+        // Regression test: the original recursive orExpr() caused
+        // StackOverflowError on long 'or' chains. The while-loop
+        // rewrite handles any number of repetitions in the parser.
+        // Use 10000 terms for parser stress test, then a smaller
+        // chain for evaluation correctness.
+        StringBuilder parserBuf = new StringBuilder();
+        parserBuf.append("true()");
         for (int i = 0; i < 10000; i++)
         {
-            buf.append(" or true()");
+            parserBuf.append(" or true()");
         }
-        reader.parse(buf.toString());
+        reader.parse(parserBuf.toString());
+        StringBuilder evalBuf = new StringBuilder();
+        evalBuf.append("true()");
+        for (int i = 0; i < 100; i++)
+        {
+            evalBuf.append(" or true()");
+        }
+        XPath xpath = new DOMXPath(evalBuf.toString());
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
     }
 
-    public void testManyAndExpressions() throws SAXPathException
+    public void testManyAndExpressions() throws Exception
     {
-        StringBuilder buf = new StringBuilder();
-        buf.append("true()");
+        // Regression test: the original recursive andExpr() caused
+        // StackOverflowError on long 'and' chains. The while-loop
+        // rewrite handles any number of repetitions.
+        StringBuilder parserBuf = new StringBuilder();
+        parserBuf.append("true()");
         for (int i = 0; i < 10000; i++)
         {
-            buf.append(" and true()");
+            parserBuf.append(" and true()");
         }
-        reader.parse(buf.toString());
+        reader.parse(parserBuf.toString());
+        StringBuilder evalBuf = new StringBuilder();
+        evalBuf.append("true()");
+        for (int i = 0; i < 100; i++)
+        {
+            evalBuf.append(" and true()");
+        }
+        XPath xpath = new DOMXPath(evalBuf.toString());
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
     }
 
     public void testOrAndPassthrough() throws JaxenException
