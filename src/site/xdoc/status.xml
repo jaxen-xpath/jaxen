@@ -31,7 +31,7 @@
       <p>
         2.0.4 deprecates the <code>simplify</code> method. This was barely used and not really effective
         even if it was fully implemented. There's just not a lot to be gained by optimizing
-        XPath 1.0 expressions. In practice, most real world queries are very simple to 
+        XPath 1.0 expressions. In practice, most real-world queries are very simple to 
         start with and often aren't reused, so optimizations don't save measurable time on evaluation.
       </p>
 
