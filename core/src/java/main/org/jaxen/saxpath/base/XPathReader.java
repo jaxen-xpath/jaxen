@@ -774,46 +774,45 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void orExpr() throws SAXPathException
     {
-        getXPathHandler().startOrExpr();
-        
+        // Parse left operand, then use a while loop for any number of
+        // 'or' AndExpr repetitions. This avoids the recursion and
+        // resulting stack overflow of the original right-recursive
+        // implementation. Per the XPath 1.0 grammar (OrExpr ::= AndExpr
+        // ('or' AndExpr)*), the right-hand side is AndExpr, and or is
+        // left-associative. When no 'or' operator is present, no
+        // startOrExpr()/endOrExpr() callbacks are emitted.
+
         andExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.OR)
         {
-            case TokenTypes.OR:
-            {
-                create = true;
-                match( TokenTypes.OR );
-                orExpr();
-                break;
-            }
+            match( TokenTypes.OR );
+            getXPathHandler().startOrExpr();
+            andExpr();
+            getXPathHandler().endOrExpr( true );
         }
-
-        getXPathHandler().endOrExpr( create );
     }
 
     private void andExpr() throws SAXPathException
     {
-        getXPathHandler().startAndExpr();
+        // Parse left operand, then use a while loop for any number of
+        // 'and' EqualityExpr repetitions. This avoids the recursion and
+        // resulting stack overflow of the original right-recursive
+        // implementation. Per the XPath 1.0 grammar (AndExpr ::=
+        // EqualityExpr ('and' EqualityExpr)*), the right-hand side is
+        // EqualityExpr, and and is left-associative. When no 'and'
+        // operator is present, no startAndExpr()/endAndExpr() callbacks
+        // are emitted.
 
         equalityExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.AND)
         {
-            case TokenTypes.AND:
-            {
-                create = true;
-                match( TokenTypes.AND );
-                andExpr();
-                break;
-            }
+            match( TokenTypes.AND );
+            getXPathHandler().startAndExpr();
+            equalityExpr();
+            getXPathHandler().endAndExpr( true );
         }
-
-        getXPathHandler().endAndExpr( create );
     }
 
     private void equalityExpr() throws SAXPathException
