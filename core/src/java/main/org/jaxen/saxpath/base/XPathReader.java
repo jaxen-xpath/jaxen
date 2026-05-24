@@ -1002,7 +1002,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             {
                 match( TokenTypes.PIPE );
                 create = true;
-                expr();
+                unionExpr();
                 break;
             }
         }
