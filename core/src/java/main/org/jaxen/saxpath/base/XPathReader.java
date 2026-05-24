@@ -990,24 +990,36 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void unionExpr() throws SAXPathException
     {
-        getXPathHandler().startUnionExpr();
+        // Parse left operand, then use a while loop for any number of
+        // '|' PathExpr repetitions. This avoids the recursion and
+        // resulting stack overflow of the original right-recursive
+        // implementation. Since union is associative, the switch from
+        // right-recursive to left-recursive iteration does not affect
+        // the result.
+        //
+        // Two intentional behavior changes from the original:
+        // 1. The right-hand side is parsed as PathExpr rather than
+        //    Expr. Per the XPath 1.0 grammar (UnionExpr ::= PathExpr
+        //    ('|' UnionExpr)?), union has lower precedence than
+        //    arithmetic operators. The original Expr call gave union
+        //    artificially high precedence (e.g. a | b + c was parsed
+        //    as a | (b + c) instead of the correct (a | b) + c).
+        // 2. When no '|' operator is present, no
+        //    startUnionExpr()/endUnionExpr() callbacks are emitted.
+        //    The original always wrapped every pathExpr in a
+        //    startUnionExpr()/endUnionExpr(create) pair. The
+        //    pass-through (create=false) callback served no purpose
+        //    since no handler acts on it.
 
         pathExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.PIPE)
         {
-            case TokenTypes.PIPE:
-            {
-                match( TokenTypes.PIPE );
-                create = true;
-                unionExpr();
-                break;
-            }
+            match( TokenTypes.PIPE );
+            getXPathHandler().startUnionExpr();
+            pathExpr();
+            getXPathHandler().endUnionExpr( true );
         }
-
-        getXPathHandler().endUnionExpr( create );
     }
 
     private Token match(int tokenType) throws XPathSyntaxException

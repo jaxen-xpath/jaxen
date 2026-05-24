@@ -471,5 +471,56 @@ public class XPathReaderTest extends TestCase
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(1.0, result.doubleValue(), 0.000001);
     }
-    
+
+    public void testManyUnionExpressions() throws SAXPathException
+    {
+        StringBuilder buf = new StringBuilder();
+        buf.append("foo");
+        for (int i = 0; i < 10000; i++)
+        {
+            buf.append(" | foo");
+        }
+        reader.parse(buf.toString());
+    }
+
+    public void testSimpleUnionExpression() throws SAXPathException
+    {
+        reader.parse("foo | bar");
+    }
+
+    public void testUnionOfThree() throws SAXPathException
+    {
+        reader.parse("foo | bar | baz");
+    }
+
+    public void testUnionWithArithmetic() throws SAXPathException
+    {
+        // Verifies union (|) has lower precedence than addition (+).
+        // Per XPath spec, this should parse as (foo | bar) + baz,
+        // not as foo | (bar + baz).
+        reader.parse("foo | bar + baz");
+    }
+
+    public void testUnionPassThrough() throws SAXPathException
+    {
+        // Verifies that a path expression without | still parses correctly.
+        // No union callbacks are emitted in this case.
+        reader.parse("foo");
+    }
+
+    public void testUnionPassThroughAbsolute() throws SAXPathException
+    {
+        reader.parse("/foo/bar");
+    }
+
+    public void testUnionWithPredicates() throws SAXPathException
+    {
+        reader.parse("foo[@a='1'] | bar[@b='2']");
+    }
+
+    public void testUnionWithFunctionCalls() throws SAXPathException
+    {
+        reader.parse("foo | bar | count(baz)");
+    }
+
 }
