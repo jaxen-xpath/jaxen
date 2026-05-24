@@ -545,25 +545,37 @@ public class XPathReaderTest extends TestCase
         reader.parse(buf.toString());
     }
 
-    public void testOrAndPassthrough() throws SAXPathException
+    public void testOrAndPassthrough() throws JaxenException
     {
-        reader.parse("true()");
+        XPath xpath = new DOMXPath("true()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
     }
 
-    public void testSimpleOr() throws SAXPathException
+    public void testSimpleOr() throws JaxenException
     {
-        reader.parse("true() or false()");
+        XPath xpath = new DOMXPath("true() or false()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
     }
 
-    public void testSimpleAnd() throws SAXPathException
+    public void testSimpleAnd() throws JaxenException
     {
-        reader.parse("true() and false()");
+        XPath xpath = new DOMXPath("true() and false()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertFalse(result);
     }
 
-    public void testMixedOrAnd() throws SAXPathException
+    public void testMixedOrAnd() throws JaxenException
     {
-        // Verifies 'and' binds tighter than 'or' per XPath grammar
-        reader.parse("true() or false() and true()");
+        // Verifies 'and' binds tighter than 'or' per XPath grammar.
+        // false() and false() or true() should parse as
+        // (false() and false()) or true() = false() or true() = true.
+        // If 'or' bound tighter, it would be
+        // false() and (false() or true()) = false() and true() = false.
+        XPath xpath = new DOMXPath("false() and false() or true()");
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
     }
 
 }
