@@ -244,6 +244,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     {
 
         getXPathHandler().startFilterExpr();
+        boolean predicatesParsed = false;
 
         switch ( LA(1) )
         {
@@ -261,9 +262,17 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
             case TokenTypes.LEFT_PAREN:
             {
-                match( TokenTypes.LEFT_PAREN );
-                expr();
-                match( TokenTypes.RIGHT_PAREN );
+                if (canFlattenParenthesizedFilterExpr())
+                {
+                    parenthesizedFilterExpr();
+                    predicatesParsed = true;
+                }
+                else
+                {
+                    match( TokenTypes.LEFT_PAREN );
+                    expr();
+                    match( TokenTypes.RIGHT_PAREN );
+                }
                 break;
             }
             case TokenTypes.IDENTIFIER:
@@ -278,9 +287,113 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
         }
 
-        predicates();
+        if (!predicatesParsed)
+        {
+            predicates();
+        }
 
         getXPathHandler().endFilterExpr();
+    }
+
+    private void parenthesizedFilterExpr() throws SAXPathException
+    {
+        int nestedFilterCount = 0;
+
+        match( TokenTypes.LEFT_PAREN );
+
+        while (LA(1) == TokenTypes.LEFT_PAREN)
+        {
+            getXPathHandler().startFilterExpr();
+            match( TokenTypes.LEFT_PAREN );
+            nestedFilterCount++;
+        }
+
+        expr();
+
+        for (int i = nestedFilterCount; i >= 0; i--)
+        {
+            match( TokenTypes.RIGHT_PAREN );
+            predicates();
+
+            if (i > 0)
+            {
+                getXPathHandler().endFilterExpr();
+            }
+        }
+    }
+
+    private boolean canFlattenParenthesizedFilterExpr()
+    {
+        if (LA(2) != TokenTypes.LEFT_PAREN)
+        {
+            return false;
+        }
+
+        int leadingParens = 0;
+        while (LT(leadingParens + 1).getTokenType() == TokenTypes.LEFT_PAREN)
+        {
+            leadingParens++;
+        }
+
+        int parenDepth = 0;
+        int bracketDepth = 0;
+
+        for (int i = 1; true; i++)
+        {
+            int type = LT(i).getTokenType();
+
+            if (type == TokenTypes.EOF)
+            {
+                return false;
+            }
+
+            if (type == TokenTypes.LEFT_BRACKET)
+            {
+                bracketDepth++;
+                continue;
+            }
+            if (type == TokenTypes.RIGHT_BRACKET)
+            {
+                if (bracketDepth > 0)
+                {
+                    bracketDepth--;
+                }
+                continue;
+            }
+
+            if (bracketDepth > 0)
+            {
+                continue;
+            }
+
+            if (type == TokenTypes.LEFT_PAREN)
+            {
+                parenDepth++;
+            }
+            else if (type == TokenTypes.RIGHT_PAREN)
+            {
+                parenDepth--;
+                if (parenDepth < 0)
+                {
+                    return false;
+                }
+
+                if (parenDepth >= 1 && parenDepth < leadingParens)
+                {
+                    int next = LT(i + 1).getTokenType();
+                    if (next != TokenTypes.RIGHT_PAREN
+                        && next != TokenTypes.LEFT_BRACKET)
+                    {
+                        return false;
+                    }
+                }
+
+                if (parenDepth == 0)
+                {
+                    return true;
+                }
+            }
+        }
     }
 
     private void variableReference() throws SAXPathException

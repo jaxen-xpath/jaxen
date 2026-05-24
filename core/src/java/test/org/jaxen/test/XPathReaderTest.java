@@ -571,6 +571,38 @@ public class XPathReaderTest extends TestCase
         assertTrue(result);
     }
 
+    public void testManyNestedParenthesizedExpressions() throws Exception
+    {
+        // Regression test: deeply nested parenthesized expressions
+        // previously recursed through filterExpr() -> expr() and
+        // could overflow the stack in the parser.
+        StringBuilder parserBuf = new StringBuilder();
+        for (int i = 0; i < 10000; i++)
+        {
+            parserBuf.append('(');
+        }
+        parserBuf.append("true()");
+        for (int i = 0; i < 10000; i++)
+        {
+            parserBuf.append(')');
+        }
+        reader.parse(parserBuf.toString());
+
+        StringBuilder evalBuf = new StringBuilder();
+        for (int i = 0; i < 100; i++)
+        {
+            evalBuf.append('(');
+        }
+        evalBuf.append("true()");
+        for (int i = 0; i < 100; i++)
+        {
+            evalBuf.append(')');
+        }
+        XPath xpath = new DOMXPath(evalBuf.toString());
+        Boolean result = (Boolean) xpath.evaluate(doc);
+        assertTrue(result);
+    }
+
     public void testOrAndPassthrough() throws JaxenException
     {
         XPath xpath = new DOMXPath("true()");
