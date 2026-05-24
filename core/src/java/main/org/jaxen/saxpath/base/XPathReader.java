@@ -775,7 +775,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     private void orExpr() throws SAXPathException
     {
         // Parse left operand, then use a while loop for any number of
-        // 'or' EqualityExpr repetitions. This avoids the recursion and
+        // 'or' AndExpr repetitions. This avoids the recursion and
         // resulting stack overflow of the original right-recursive
         // implementation. Per the XPath 1.0 grammar (OrExpr ::= AndExpr
         // ('or' AndExpr)*), the right-hand side is AndExpr, and or is
