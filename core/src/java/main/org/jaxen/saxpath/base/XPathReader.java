@@ -262,8 +262,17 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
             case TokenTypes.LEFT_PAREN:
             {
-                parenthesizedFilterExpr();
-                predicatesParsed = true;
+                if (canFlattenParenthesizedFilterExpr())
+                {
+                    parenthesizedFilterExpr();
+                    predicatesParsed = true;
+                }
+                else
+                {
+                    match( TokenTypes.LEFT_PAREN );
+                    expr();
+                    match( TokenTypes.RIGHT_PAREN );
+                }
                 break;
             }
             case TokenTypes.IDENTIFIER:
@@ -309,6 +318,80 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             if (i > 0)
             {
                 getXPathHandler().endFilterExpr();
+            }
+        }
+    }
+
+    private boolean canFlattenParenthesizedFilterExpr()
+    {
+        if (LA(2) != TokenTypes.LEFT_PAREN)
+        {
+            return false;
+        }
+
+        int leadingParens = 0;
+        while (LT(leadingParens + 1).getTokenType() == TokenTypes.LEFT_PAREN)
+        {
+            leadingParens++;
+        }
+
+        int parenDepth = 0;
+        int bracketDepth = 0;
+
+        for (int i = 1; true; i++)
+        {
+            int type = LT(i).getTokenType();
+
+            if (type == TokenTypes.EOF)
+            {
+                return false;
+            }
+
+            if (type == TokenTypes.LEFT_BRACKET)
+            {
+                bracketDepth++;
+                continue;
+            }
+            if (type == TokenTypes.RIGHT_BRACKET)
+            {
+                if (bracketDepth > 0)
+                {
+                    bracketDepth--;
+                }
+                continue;
+            }
+
+            if (bracketDepth > 0)
+            {
+                continue;
+            }
+
+            if (type == TokenTypes.LEFT_PAREN)
+            {
+                parenDepth++;
+            }
+            else if (type == TokenTypes.RIGHT_PAREN)
+            {
+                parenDepth--;
+                if (parenDepth < 0)
+                {
+                    return false;
+                }
+
+                if (parenDepth >= 1 && parenDepth < leadingParens)
+                {
+                    int next = LT(i + 1).getTokenType();
+                    if (next != TokenTypes.RIGHT_PAREN
+                        && next != TokenTypes.LEFT_BRACKET)
+                    {
+                        return false;
+                    }
+                }
+
+                if (parenDepth == 0)
+                {
+                    return true;
+                }
             }
         }
     }
