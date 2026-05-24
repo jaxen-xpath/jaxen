@@ -244,6 +244,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     {
 
         getXPathHandler().startFilterExpr();
+        boolean predicatesParsed = false;
 
         switch ( LA(1) )
         {
@@ -261,9 +262,8 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
             case TokenTypes.LEFT_PAREN:
             {
-                match( TokenTypes.LEFT_PAREN );
-                expr();
-                match( TokenTypes.RIGHT_PAREN );
+                parenthesizedFilterExpr();
+                predicatesParsed = true;
                 break;
             }
             case TokenTypes.IDENTIFIER:
@@ -278,9 +278,39 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
         }
 
-        predicates();
+        if (!predicatesParsed)
+        {
+            predicates();
+        }
 
         getXPathHandler().endFilterExpr();
+    }
+
+    private void parenthesizedFilterExpr() throws SAXPathException
+    {
+        int nestedFilterCount = 0;
+
+        match( TokenTypes.LEFT_PAREN );
+
+        while (LA(1) == TokenTypes.LEFT_PAREN)
+        {
+            getXPathHandler().startFilterExpr();
+            match( TokenTypes.LEFT_PAREN );
+            nestedFilterCount++;
+        }
+
+        expr();
+
+        for (int i = nestedFilterCount; i >= 0; i--)
+        {
+            match( TokenTypes.RIGHT_PAREN );
+            predicates();
+
+            if (i > 0)
+            {
+                getXPathHandler().endFilterExpr();
+            }
+        }
     }
 
     private void variableReference() throws SAXPathException
