@@ -880,6 +880,29 @@ public class BaseXPathTest extends TestCase {
         
     }
     
+    public void testUnionPrecedenceWithAdditiveExpression() throws JaxenException {
+        
+        Element root = doc.createElementNS("", "root");
+        doc.appendChild(root);
+        Element a = doc.createElementNS("", "a");
+        a.appendChild(doc.createTextNode("2"));
+        root.appendChild(a);
+        Element b = doc.createElementNS("", "b");
+        b.appendChild(doc.createTextNode("9"));
+        root.appendChild(b);
+        
+        XPath xpath = new DOMXPath("/root/a | /root/b + 1");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(3, result.intValue());
+        
+        // This is the same test but with parentheses to make explicit
+        // how the previous test should be evaluated.
+        xpath = new DOMXPath("(/root/a | /root/b) + 1");
+        result = (Double) xpath.evaluate(doc);
+        assertEquals(3, result.intValue());
+        
+    }
+    
     public void testArithmeticAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("2+1-1+1");
         Double result = (Double) xpath.evaluate(doc);
