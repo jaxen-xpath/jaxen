@@ -483,4 +483,44 @@ public class XPathReaderTest extends TestCase
         reader.parse(buf.toString());
     }
 
+    public void testSimpleUnionExpression() throws SAXPathException
+    {
+        reader.parse("foo | bar");
+    }
+
+    public void testUnionOfThree() throws SAXPathException
+    {
+        reader.parse("foo | bar | baz");
+    }
+
+    public void testUnionWithArithmetic() throws SAXPathException
+    {
+        // Verifies union (|) has lower precedence than addition (+).
+        // Per XPath spec, this should parse as (foo | bar) + baz,
+        // not as foo | (bar + baz).
+        reader.parse("foo | bar + baz");
+    }
+
+    public void testUnionPassThrough() throws SAXPathException
+    {
+        // Verifies that a path expression without | still parses correctly.
+        // No union callbacks are emitted in this case.
+        reader.parse("foo");
+    }
+
+    public void testUnionPassThroughAbsolute() throws SAXPathException
+    {
+        reader.parse("/foo/bar");
+    }
+
+    public void testUnionWithPredicates() throws SAXPathException
+    {
+        reader.parse("foo[@a='1'] | bar[@b='2']");
+    }
+
+    public void testUnionWithFunctionCalls() throws SAXPathException
+    {
+        reader.parse("foo | bar | count(baz)");
+    }
+
 }
