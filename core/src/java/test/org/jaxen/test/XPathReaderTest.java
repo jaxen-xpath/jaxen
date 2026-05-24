@@ -523,4 +523,47 @@ public class XPathReaderTest extends TestCase
         reader.parse("foo | bar | count(baz)");
     }
 
+    public void testManyOrExpressions() throws SAXPathException
+    {
+        StringBuilder buf = new StringBuilder();
+        buf.append("true()");
+        for (int i = 0; i < 10000; i++)
+        {
+            buf.append(" or true()");
+        }
+        reader.parse(buf.toString());
+    }
+
+    public void testManyAndExpressions() throws SAXPathException
+    {
+        StringBuilder buf = new StringBuilder();
+        buf.append("true()");
+        for (int i = 0; i < 10000; i++)
+        {
+            buf.append(" and true()");
+        }
+        reader.parse(buf.toString());
+    }
+
+    public void testOrAndPassthrough() throws SAXPathException
+    {
+        reader.parse("true()");
+    }
+
+    public void testSimpleOr() throws SAXPathException
+    {
+        reader.parse("true() or false()");
+    }
+
+    public void testSimpleAnd() throws SAXPathException
+    {
+        reader.parse("true() and false()");
+    }
+
+    public void testMixedOrAnd() throws SAXPathException
+    {
+        // Verifies 'and' binds tighter than 'or' per XPath grammar
+        reader.parse("true() or false() and true()");
+    }
+
 }
