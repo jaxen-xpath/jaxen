@@ -81,8 +81,9 @@ public class PatternParser
         reader.setXPathHandler( handler );
         reader.parse( text );
 
+        handler.getXPathExpr().simplify();
         Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
-        return pattern;
+        return pattern.simplify();
     }
     
     protected static Pattern convertExpr(Expr expr) throws JaxenException 
