@@ -138,7 +138,9 @@ public class JaxenHandler implements XPathHandler
      *
      * @param shouldSimplify ignored
      * @return the XPath expression tree
+     * @deprecated use {@link #getXPathExpr()}
      */
+    @Deprecated
     public XPathExpr getXPathExpr(boolean shouldSimplify)
     {
         return this.xpath;
