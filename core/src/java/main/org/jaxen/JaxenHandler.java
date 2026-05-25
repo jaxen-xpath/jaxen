@@ -68,6 +68,11 @@ public class JaxenHandler implements XPathHandler
 {
     private XPathFactory xpathFactory;
     private XPathExpr    xpath;
+
+    /**
+     * ????
+     */
+    protected boolean simplified;
     
     /**
      * This may be changed to an ArrayList in the future (i.e. version &gt;= 1.2).
