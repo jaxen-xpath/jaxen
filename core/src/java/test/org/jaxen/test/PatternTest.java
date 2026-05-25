@@ -10,7 +10,6 @@ import org.jaxen.pattern.AnyNodeTest;
 import org.jaxen.pattern.LocationPathPattern;
 import org.jaxen.pattern.NameTest;
 import org.jaxen.pattern.NamespaceTest;
-import org.jaxen.pattern.NodeTest;
 import org.jaxen.pattern.NodeTypeTest;
 import org.jaxen.pattern.Pattern;
 import org.jaxen.pattern.PatternParser;
