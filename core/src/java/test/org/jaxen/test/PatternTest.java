@@ -6,7 +6,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.Context;
 import org.jaxen.ContextSupport;
-import org.jaxen.JaxenException;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.dom.DocumentNavigator;
 import org.jaxen.pattern.AnyNodeTest;
@@ -41,7 +40,7 @@ public class PatternTest extends TestCase {
 
     // --- Parsing and metadata tests ---
 
-    public void testAnyNode() throws JaxenException, SAXPathException {
+    public void testAnyNode() throws SAXPathException {
         Pattern pattern = PatternParser.parse("*");
         assertEquals("child()", pattern.getText());
         assertTrue(pattern instanceof NodeTypeTest);
@@ -51,7 +50,7 @@ public class PatternTest extends TestCase {
         assertNull(pattern.getUnionPatterns());
     }
 
-    public void testNamePattern() throws JaxenException, SAXPathException {
+    public void testNamePattern() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo");
         assertTrue(pattern instanceof NameTest);
         assertEquals("foo", pattern.getText());
@@ -60,7 +59,7 @@ public class PatternTest extends TestCase {
         assertNull(pattern.getMatchesNodeName());
     }
 
-    public void testAttributeName() throws JaxenException, SAXPathException {
+    public void testAttributeName() throws SAXPathException {
         Pattern pattern = PatternParser.parse("@foo");
         assertTrue(pattern instanceof NameTest);
         assertEquals("@foo", pattern.getText());
@@ -68,21 +67,21 @@ public class PatternTest extends TestCase {
         assertEquals(0.0, pattern.getPriority(), 0.001);
     }
 
-    public void testNamespacePattern() throws JaxenException, SAXPathException {
+    public void testNamespacePattern() throws SAXPathException {
         Pattern pattern = PatternParser.parse("pre:foo");
         assertTrue(pattern instanceof NameTest);
         assertEquals("foo", pattern.getText());
         assertEquals(Pattern.ELEMENT_NODE, pattern.getMatchType());
     }
 
-    public void testNamespaceWildcard() throws JaxenException, SAXPathException {
+    public void testNamespaceWildcard() throws SAXPathException {
         Pattern pattern = PatternParser.parse("pre:*");
         assertTrue(pattern instanceof NamespaceTest);
         assertEquals("pre:", pattern.getText());
         assertEquals(-0.25, pattern.getPriority(), 0.001);
     }
 
-    public void testAttributeWildcard() throws JaxenException, SAXPathException {
+    public void testAttributeWildcard() throws SAXPathException {
         Pattern pattern = PatternParser.parse("@*");
         assertTrue(pattern instanceof NodeTypeTest);
         assertEquals("@*", pattern.getText());
@@ -90,7 +89,7 @@ public class PatternTest extends TestCase {
         assertEquals(-0.5, pattern.getPriority(), 0.001);
     }
 
-    public void testTextNode() throws JaxenException, SAXPathException {
+    public void testTextNode() throws SAXPathException {
         Pattern pattern = PatternParser.parse("text()");
         assertTrue(pattern instanceof TextNodeTest);
         assertEquals("text()", pattern.getText());
@@ -98,7 +97,7 @@ public class PatternTest extends TestCase {
         assertEquals(-0.5, pattern.getPriority(), 0.001);
     }
 
-    public void testCommentNode() throws JaxenException, SAXPathException {
+    public void testCommentNode() throws SAXPathException {
         Pattern pattern = PatternParser.parse("comment()");
         assertTrue(pattern instanceof NodeTypeTest);
         assertEquals("comment()", pattern.getText());
@@ -106,7 +105,7 @@ public class PatternTest extends TestCase {
         assertEquals(-0.5, pattern.getPriority(), 0.001);
     }
 
-    public void testProcessingInstruction() throws JaxenException, SAXPathException {
+    public void testProcessingInstruction() throws SAXPathException {
         Pattern pattern = PatternParser.parse("processing-instruction()");
         assertTrue(pattern instanceof NodeTypeTest);
         assertEquals("processing-instruction()", pattern.getText());
@@ -114,7 +113,7 @@ public class PatternTest extends TestCase {
         assertEquals(-0.5, pattern.getPriority(), 0.001);
     }
 
-    public void testTextRoundTrip() throws JaxenException, SAXPathException {
+    public void testTextRoundTrip() throws SAXPathException {
         String[] patterns = {
             "foo",
             "@foo",
@@ -130,68 +129,68 @@ public class PatternTest extends TestCase {
         }
     }
 
-    public void testGetTextOfWildcard() throws JaxenException, SAXPathException {
+    public void testGetTextOfWildcard() throws SAXPathException {
         Pattern pattern = PatternParser.parse("*");
         assertEquals("child()", pattern.getText());
     }
 
-    public void testGetTextOfDescendantPath() throws JaxenException, SAXPathException {
+    public void testGetTextOfDescendantPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo//bar");
         assertEquals("foo/child()//bar", pattern.getText());
     }
 
-    public void testGetTextOfAbsolutePath() throws JaxenException, SAXPathException {
+    public void testGetTextOfAbsolutePath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("/foo/bar");
         assertEquals("//foo/bar", pattern.getText());
     }
 
-    public void testGetTextOfUnionPattern() throws JaxenException, SAXPathException {
+    public void testGetTextOfUnionPattern() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo | bar");
         assertEquals("foo | bar", pattern.getText());
     }
 
-    public void testGetTextOfPredicate() throws JaxenException, SAXPathException {
+    public void testGetTextOfPredicate() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo[1]");
         assertEquals("foo[[1.0]]", pattern.getText());
     }
 
-    public void testGetTextOfPredicateWithPath() throws JaxenException, SAXPathException {
+    public void testGetTextOfPredicateWithPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo[@bar]");
         assertEquals("foo[[attribute::bar]]", pattern.getText());
     }
 
-    public void testGetTextOfUnionWithPredicate() throws JaxenException, SAXPathException {
+    public void testGetTextOfUnionWithPredicate() throws SAXPathException {
         Pattern pattern = PatternParser.parse("a[1] | b[2]");
         assertEquals("a[[1.0]] | b[[2.0]]", pattern.getText());
     }
 
-    public void testChildPath() throws JaxenException, SAXPathException {
+    public void testChildPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo/bar");
         assertTrue("expected LocationPathPattern but got " + pattern.getClass().getName(),
             pattern instanceof LocationPathPattern);
         assertEquals("foo/bar", pattern.getText());
     }
 
-    public void testDescendantPath() throws JaxenException, SAXPathException {
+    public void testDescendantPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo//bar");
         assertTrue(pattern instanceof LocationPathPattern);
         assertEquals("foo/child()//bar", pattern.getText());
     }
 
-    public void testAbsolutePath() throws JaxenException, SAXPathException {
+    public void testAbsolutePath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("/foo/bar");
         assertTrue(pattern instanceof LocationPathPattern);
         assertEquals("//foo/bar", pattern.getText());
     }
 
-    public void testRootPattern() throws JaxenException, SAXPathException {
+    public void testRootPattern() throws SAXPathException {
         Pattern pattern = PatternParser.parse("/");
         assertTrue(pattern instanceof NodeTypeTest);
         assertEquals("/", pattern.getText());
         assertEquals(Pattern.DOCUMENT_NODE, pattern.getMatchType());
     }
 
-    public void testUnionPattern() throws JaxenException, SAXPathException {
+    public void testUnionPattern() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo | bar");
         assertTrue("expected UnionPattern but got " + pattern.getClass().getName(),
             pattern instanceof UnionPattern);
@@ -205,40 +204,40 @@ public class PatternTest extends TestCase {
         assertEquals("bar", unionPatterns[1].getText());
     }
 
-    public void testUnionWithPath() throws JaxenException, SAXPathException {
+    public void testUnionWithPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo/bar | baz");
         assertEquals("foo/bar | baz", pattern.getText());
         assertTrue(pattern instanceof UnionPattern);
     }
 
-    public void testPredicate() throws JaxenException, SAXPathException {
+    public void testPredicate() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo[1]");
         assertEquals("foo[[1.0]]", pattern.getText());
     }
 
-    public void testPredicateWithPath() throws JaxenException, SAXPathException {
+    public void testPredicateWithPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("foo[@bar]");
         assertEquals("foo[[attribute::bar]]", pattern.getText());
     }
 
-    public void testMultiStepPath() throws JaxenException, SAXPathException {
+    public void testMultiStepPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("a/b/c");
         assertTrue(pattern instanceof LocationPathPattern);
         assertEquals("a/b/c", pattern.getText());
     }
 
-    public void testDeepPath() throws JaxenException, SAXPathException {
+    public void testDeepPath() throws SAXPathException {
         Pattern pattern = PatternParser.parse("a/b/c/d/e");
         assertEquals("a/b/c/d/e", pattern.getText());
     }
 
-    public void testUnionOfThreePatterns() throws JaxenException, SAXPathException {
+    public void testUnionOfThreePatterns() throws SAXPathException {
         Pattern pattern = PatternParser.parse("a | b | c");
         assertTrue(pattern instanceof UnionPattern);
         assertEquals("a | b | c", pattern.getText());
     }
 
-    public void testUnionWithPredicate() throws JaxenException, SAXPathException {
+    public void testUnionWithPredicate() throws SAXPathException {
         Pattern pattern = PatternParser.parse("a[1] | b[2]");
         assertTrue(pattern instanceof UnionPattern);
         assertEquals("a[[1.0]] | b[[2.0]]", pattern.getText());
@@ -284,19 +283,19 @@ public class PatternTest extends TestCase {
 
     // --- AnyNodeTest matches ---
 
-    public void testAnyNodeTestMatchesElement() throws ParserConfigurationException, JaxenException {
+    public void testAnyNodeTestMatchesElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         AnyNodeTest pattern = AnyNodeTest.getInstance();
         assertTrue(pattern.matches(doc.getDocumentElement(), context));
     }
 
-    public void testAnyNodeTestMatchesDocument() throws ParserConfigurationException, JaxenException {
+    public void testAnyNodeTestMatchesDocument() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         AnyNodeTest pattern = AnyNodeTest.getInstance();
         assertTrue(pattern.matches(doc, context));
     }
 
-    public void testAnyNodeTestMatchesAttribute() throws ParserConfigurationException, JaxenException {
+    public void testAnyNodeTestMatchesAttribute() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         AnyNodeTest pattern = AnyNodeTest.getInstance();
         Element b = (Element) doc.getDocumentElement()
@@ -304,7 +303,7 @@ public class PatternTest extends TestCase {
         assertTrue(pattern.matches(b.getAttributeNode("id"), context));
     }
 
-    public void testAnyNodeTestMatchesText() throws ParserConfigurationException, JaxenException {
+    public void testAnyNodeTestMatchesText() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         AnyNodeTest pattern = AnyNodeTest.getInstance();
         Element c = (Element) doc.getDocumentElement()
@@ -312,7 +311,7 @@ public class PatternTest extends TestCase {
         assertTrue(pattern.matches(c.getFirstChild(), context));
     }
 
-    public void testAnyNodeTestMatchesComment() throws ParserConfigurationException, JaxenException {
+    public void testAnyNodeTestMatchesComment() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         AnyNodeTest pattern = AnyNodeTest.getInstance();
         Element a = (Element) doc.getDocumentElement()
@@ -324,7 +323,7 @@ public class PatternTest extends TestCase {
 
     // --- NameTest matches ---
 
-    public void testNameTestMatchesElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNameTestMatchesElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("a");
         Element a = (Element) doc.getDocumentElement()
@@ -332,7 +331,7 @@ public class PatternTest extends TestCase {
         assertTrue("pattern 'a' should match element <a>", pattern.matches(a, context));
     }
 
-    public void testNameTestDoesNotMatchDifferentElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNameTestDoesNotMatchDifferentElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("a");
         Element b = (Element) doc.getDocumentElement()
@@ -340,7 +339,7 @@ public class PatternTest extends TestCase {
         assertFalse("pattern 'a' should not match element <b>", pattern.matches(b, context));
     }
 
-    public void testNameTestDoesNotMatchTextNode() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNameTestDoesNotMatchTextNode() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("c");
         Element c = (Element) doc.getDocumentElement()
@@ -349,7 +348,7 @@ public class PatternTest extends TestCase {
             pattern.matches(c.getFirstChild(), context));
     }
 
-    public void testNameTestMatchesAttribute() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNameTestMatchesAttribute() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("@id");
         Element b = (Element) doc.getDocumentElement()
@@ -358,7 +357,7 @@ public class PatternTest extends TestCase {
             pattern.matches(b.getAttributeNode("id"), context));
     }
 
-    public void testNameTestDoesNotMatchDifferentAttribute() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNameTestDoesNotMatchDifferentAttribute() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("@id");
         Element a = (Element) doc.getDocumentElement()
@@ -369,7 +368,7 @@ public class PatternTest extends TestCase {
 
     // --- NodeTypeTest matches ---
 
-    public void testNodeTypeTestElementMatchesElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNodeTypeTestElementMatchesElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("*");
         Element a = (Element) doc.getDocumentElement()
@@ -377,7 +376,7 @@ public class PatternTest extends TestCase {
         assertTrue(pattern.matches(a, context));
     }
 
-    public void testNodeTypeTestElementDoesNotMatchText() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNodeTypeTestElementDoesNotMatchText() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("*");
         Element c = (Element) doc.getDocumentElement()
@@ -386,7 +385,7 @@ public class PatternTest extends TestCase {
             pattern.matches(c.getFirstChild(), context));
     }
 
-    public void testNodeTypeTestAttributeMatchesAttribute() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNodeTypeTestAttributeMatchesAttribute() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("@*");
         Element b = (Element) doc.getDocumentElement()
@@ -395,14 +394,14 @@ public class PatternTest extends TestCase {
             pattern.matches(b.getAttributeNode("id"), context));
     }
 
-    public void testNodeTypeTestAttributeDoesNotMatchElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testNodeTypeTestAttributeDoesNotMatchElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("@*");
         assertFalse("pattern '@*' should not match element",
             pattern.matches(doc.getDocumentElement(), context));
     }
 
-    public void testTextNodeTestMatchesText() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testTextNodeTestMatchesText() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("text()");
         Element c = (Element) doc.getDocumentElement()
@@ -411,14 +410,14 @@ public class PatternTest extends TestCase {
             pattern.matches(c.getFirstChild(), context));
     }
 
-    public void testTextNodeTestDoesNotMatchElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testTextNodeTestDoesNotMatchElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("text()");
         assertFalse("text() should not match element",
             pattern.matches(doc.getDocumentElement(), context));
     }
 
-    public void testCommentTestMatchesComment() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testCommentTestMatchesComment() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("comment()");
         Element a = (Element) doc.getDocumentElement()
@@ -429,14 +428,14 @@ public class PatternTest extends TestCase {
             pattern.matches(comment, context));
     }
 
-    public void testCommentTestDoesNotMatchElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testCommentTestDoesNotMatchElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("comment()");
         assertFalse("comment() should not match element",
             pattern.matches(doc.getDocumentElement(), context));
     }
 
-    public void testProcessingInstructionTestMatchesPI() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testProcessingInstructionTestMatchesPI() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("processing-instruction()");
         Element a = (Element) doc.getDocumentElement()
@@ -447,7 +446,7 @@ public class PatternTest extends TestCase {
             pattern.matches(pi, context));
     }
 
-    public void testProcessingInstructionDoesNotMatchElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testProcessingInstructionDoesNotMatchElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("processing-instruction()");
         assertFalse("processing-instruction() should not match element",
@@ -456,7 +455,7 @@ public class PatternTest extends TestCase {
 
     // --- LocationPathPattern matches ---
 
-    public void testChildLocationPathMatches() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testChildLocationPathMatches() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("root/a");
         Element a = (Element) doc.getDocumentElement()
@@ -465,7 +464,7 @@ public class PatternTest extends TestCase {
             pattern.matches(a, context));
     }
 
-    public void testChildLocationPathDoesNotMatchNonChild() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testChildLocationPathDoesNotMatchNonChild() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("root/a");
         Element b = (Element) doc.getDocumentElement()
@@ -474,7 +473,7 @@ public class PatternTest extends TestCase {
             pattern.matches(b, context));
     }
 
-    public void testDescendantLocationPathMatches() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testDescendantLocationPathMatches() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("root//c");
         Element c = (Element) doc.getDocumentElement()
@@ -483,7 +482,7 @@ public class PatternTest extends TestCase {
             pattern.matches(c, context));
     }
 
-    public void testTwoStepChildPathMatches() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testTwoStepChildPathMatches() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("root/a/b");
         Element b = (Element) doc.getDocumentElement()
@@ -492,7 +491,7 @@ public class PatternTest extends TestCase {
             pattern.matches(b, context));
     }
 
-    public void testTwoStepChildPathDoesNotMatchWrongAncestor() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testTwoStepChildPathDoesNotMatchWrongAncestor() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("root/a/d");
         Element d = (Element) doc.getDocumentElement()
@@ -503,7 +502,7 @@ public class PatternTest extends TestCase {
 
     // --- UnionPattern matches ---
 
-    public void testUnionPatternMatchesLHS() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testUnionPatternMatchesLHS() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("a | nonexistent");
         Element a = (Element) doc.getDocumentElement()
@@ -512,7 +511,7 @@ public class PatternTest extends TestCase {
             pattern.matches(a, context));
     }
 
-    public void testUnionPatternMatchesRHS() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testUnionPatternMatchesRHS() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("nonexistent | b");
         Element b = (Element) doc.getDocumentElement()
@@ -521,7 +520,7 @@ public class PatternTest extends TestCase {
             pattern.matches(b, context));
     }
 
-    public void testUnionPatternDoesNotMatchUnlisted() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testUnionPatternDoesNotMatchUnlisted() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("a | b");
         Element c = (Element) doc.getDocumentElement()
@@ -532,14 +531,14 @@ public class PatternTest extends TestCase {
 
     // --- Edge cases ---
 
-    public void testMatchDocumentNode() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testMatchDocumentNode() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("/");
         assertTrue("pattern '/' should match document node",
             pattern.matches(doc, context));
     }
 
-    public void testDocumentPatternDoesNotMatchElement() throws ParserConfigurationException, JaxenException, SAXPathException {
+    public void testDocumentPatternDoesNotMatchElement() throws ParserConfigurationException, SAXPathException {
         Document doc = buildDocument();
         Pattern pattern = PatternParser.parse("/");
         assertFalse("pattern '/' should not match element",
