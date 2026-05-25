@@ -16,10 +16,6 @@ import junit.framework.TestCase;
 
 public class PatternTest extends TestCase {
 
-    public PatternTest(String name) {
-        super(name);
-    }
-
     public void testAnyNode() throws Exception {
         Pattern pattern = PatternParser.parse("*");
         assertEquals("child()", pattern.getText());
