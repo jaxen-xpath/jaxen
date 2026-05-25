@@ -11,8 +11,9 @@ triggered manually from the GitHub Actions UI.  The workflow:
 4. Builds and GPG-signs the artifacts, then uploads them to the
    [Central Publishing Portal](https://central.sonatype.com/).
 5. Commits the release version and creates a `vX.Y.Z` git tag.
-6. Bumps the POM version to the next development SNAPSHOT on `master`.
-7. Pushes the commits and tag, then creates a GitHub release with attached
+6. Bumps the POM version to the next development SNAPSHOT.
+7. Pushes the tag and a release branch, opens a pull request targeting `master`,
+   then creates a GitHub release with attached
    release archives:
    * `core/target/jaxen-X.Y.Z-bin.zip`
    * `core/target/jaxen-X.Y.Z-bin.tar.gz`
@@ -47,37 +48,6 @@ signing key on public keyservers.  Uploading to `keys.openpgp.org` is
 sufficient — no additional registration of the key with Sonatype is required.
 Allow a few minutes for the key to propagate before running your first release.
 
-#### GitHub Personal Access Token (`RELEASE_TOKEN`)
-
-A GitHub Personal Access Token (PAT) with the **Contents: write** permission is
-needed when `master` is a protected branch, so the workflow can push the
-post-release version-bump commit and the `vX.Y.Z` tag directly.  If the branch
-is *not* protected this secret can be omitted.
-
-**Fine-grained PAT (recommended)**
-
-1. Go to **GitHub → Settings → Developer settings →
-   [Personal access tokens → Fine-grained tokens](https://github.com/settings/tokens?type=beta)**.
-2. Click **Generate new token**.
-3. Set a meaningful **Token name** (e.g. `jaxen-release`).
-4. Under **Repository access** choose **Only select repositories** and pick
-   `jaxen-xpath/jaxen`.
-5. Click **Add Permissions**, find **Contents** in the dropdown, and
-   set it to **Read and write**.
-6. Click **Generate token** and copy the value immediately — it is shown only
-   once.
-
-**Classic PAT (alternative)**
-
-1. Go to **GitHub → Settings → Developer settings →
-   [Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)**.
-2. Click **Generate new token (classic)**.
-3. Give it a descriptive **Note** (e.g. `jaxen-release`).
-4. Select the **`repo`** scope (which includes `Contents: write`).
-5. Click **Generate token** and copy the value immediately.
-
-Store the token as the `RELEASE_TOKEN` secret (see the table below).
-
 #### Central Portal credentials
 
 To publish artifacts you need a token from the
@@ -105,7 +75,6 @@ If you suspect a secret has been exposed, revoke and replace it:
 * **Central Portal token** — generate a new token in the
   [Central Publishing Portal](https://central.sonatype.com/) and update the secret.
 * **GPG key** — revoke the key on the keyservers and generate a replacement.
-* **RELEASE_TOKEN** — delete and regenerate the GitHub PAT.
 
 #### Repository secrets
 
@@ -128,7 +97,6 @@ below.
 | `GPG_PASSPHRASE`   | Passphrase for that signing key |
 | `CENTRAL_USERNAME` | Central Publishing Portal **User Token** username (see above — not your account username) |
 | `CENTRAL_TOKEN`    | Central Publishing Portal **User Token** password (see above — not your account password) |
-| `RELEASE_TOKEN`    | GitHub Personal Access Token with `Contents: write` scope; required when `master` is a protected branch so the workflow can push the post-release version-bump commit directly. Omit if the branch is not protected. |
 
 ### Running a release
 
@@ -148,6 +116,10 @@ The workflow uploads the artifacts to the
 [Central Publishing Portal](https://central.sonatype.com/).  Once it completes
 successfully, log in to [central.sonatype.com](https://central.sonatype.com/)
 and verify the deployment, then publish it.
+
+When the workflow reaches the git handoff stage, it pushes the release tag and
+opens a pull request from `release/X.Y.Z` into `master` with the release and
+post-release version-bump commits. Merge that PR to update `master`.
 
 ---
 
@@ -211,5 +183,4 @@ mvn site:stage
 ```
 
 Upload the generated content to IBiblio using sftp.
-
 
