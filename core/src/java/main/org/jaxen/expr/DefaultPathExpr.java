@@ -80,6 +80,10 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
             return "[(DefaultPathExpr): " + getLocationPath() + "]";
         }
 
+        if (getFilterExpr() == null) {
+            return "[(DefaultPathExpr)]";
+        }
+
         return "[(DefaultPathExpr): " + getFilterExpr() + "]";
     }
 
