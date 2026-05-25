@@ -82,7 +82,7 @@ public class PatternParser
         reader.parse( text );
 
         Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
-        return pattern
+        return pattern;
     }
     
     protected static Pattern convertExpr(Expr expr) throws JaxenException 
