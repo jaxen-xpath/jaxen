@@ -73,41 +73,20 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
   */
 public class PatternParser 
 {
-    private static final boolean TRACE = false;
-    private static final boolean USE_HANDLER = false;
     public static Pattern parse(String text) throws JaxenException, org.jaxen.saxpath.SAXPathException
     {
-        if ( USE_HANDLER )
-        {
-            XPathReader reader = XPathReaderFactory.createReader();
-            PatternHandler handler = new PatternHandler();       
-            
-            handler.setXPathFactory( new DefaultXPathFactory() );            
-            reader.setXPathHandler( handler );
-            reader.parse( text );
-            
-            return handler.getPattern();
-        }
-        else
-        {
-            XPathReader reader = XPathReaderFactory.createReader();
-            JaxenHandler handler = new JaxenHandler();
-            
-            handler.setXPathFactory( new DefaultXPathFactory() );            
-            reader.setXPathHandler( handler );
-            reader.parse( text );
+        XPathReader reader = XPathReaderFactory.createReader();
+        JaxenHandler handler = new JaxenHandler();
+        handler.setXPathFactory( new DefaultXPathFactory() );            
+        reader.setXPathHandler( handler );
+        reader.parse( text );
 
-            return convertExpr( handler.getXPathExpr().getRootExpr() );
-        }
+        Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
+        return pattern
     }
     
     protected static Pattern convertExpr(Expr expr) throws JaxenException 
-    {
-        if ( TRACE )
-        {
-            System.out.println( "Converting: " + expr + " into a pattern." );
-        }
-        
+    {   
         if ( expr instanceof LocationPath )
         {
             return convertExpr( (LocationPath) expr );
@@ -137,7 +116,6 @@ public class PatternParser
     protected static LocationPathPattern convertExpr(LocationPath locationPath) throws JaxenException
     {
         LocationPathPattern answer = new LocationPathPattern();        
-        //answer.setAbsolute( locationPath.isAbsolute() );
         List steps = locationPath.getSteps();
         
         // go through steps backwards

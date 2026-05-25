@@ -885,6 +885,27 @@ public class BaseXPathTest extends TestCase {
         Double result = (Double) xpath.evaluate(doc);
         assertEquals(3, result.intValue());
     }
+
+    public void testUnionPrecedenceWithAdditiveExpression() throws JaxenException {
+        
+        Element root = doc.createElementNS("", "root");
+        doc.appendChild(root);
+        Element a = doc.createElementNS("", "a");
+        a.appendChild(doc.createTextNode("2"));
+        root.appendChild(a);
+        Element b = doc.createElementNS("", "b");
+        b.appendChild(doc.createTextNode("9"));
+        root.appendChild(b);
+        
+        XPath xpath = new DOMXPath("/root/a | /root/b + 1");
+        Double result = (Double) xpath.evaluate(doc);
+        assertEquals(3, result.intValue());
+        
+        xpath = new DOMXPath("(/root/a | /root/b) + 1");
+        result = (Double) xpath.evaluate(doc);
+        assertEquals(3, result.intValue());
+        
+    }
     
     public void testLogicalAssociativity() throws JaxenException {
         XPath xpath = new DOMXPath("false() or true() and true() and false()");

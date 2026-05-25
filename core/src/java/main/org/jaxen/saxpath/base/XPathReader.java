@@ -244,6 +244,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     {
 
         getXPathHandler().startFilterExpr();
+        boolean predicatesParsed = false;
 
         switch ( LA(1) )
         {
@@ -261,9 +262,17 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
             case TokenTypes.LEFT_PAREN:
             {
-                match( TokenTypes.LEFT_PAREN );
-                expr();
-                match( TokenTypes.RIGHT_PAREN );
+                if (canFlattenParenthesizedFilterExpr())
+                {
+                    parenthesizedFilterExpr();
+                    predicatesParsed = true;
+                }
+                else
+                {
+                    match( TokenTypes.LEFT_PAREN );
+                    expr();
+                    match( TokenTypes.RIGHT_PAREN );
+                }
                 break;
             }
             case TokenTypes.IDENTIFIER:
@@ -278,9 +287,113 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
             }
         }
 
-        predicates();
+        if (!predicatesParsed)
+        {
+            predicates();
+        }
 
         getXPathHandler().endFilterExpr();
+    }
+
+    private void parenthesizedFilterExpr() throws SAXPathException
+    {
+        int nestedFilterCount = 0;
+
+        match( TokenTypes.LEFT_PAREN );
+
+        while (LA(1) == TokenTypes.LEFT_PAREN)
+        {
+            getXPathHandler().startFilterExpr();
+            match( TokenTypes.LEFT_PAREN );
+            nestedFilterCount++;
+        }
+
+        expr();
+
+        for (int i = nestedFilterCount; i >= 0; i--)
+        {
+            match( TokenTypes.RIGHT_PAREN );
+            predicates();
+
+            if (i > 0)
+            {
+                getXPathHandler().endFilterExpr();
+            }
+        }
+    }
+
+    private boolean canFlattenParenthesizedFilterExpr()
+    {
+        if (LA(2) != TokenTypes.LEFT_PAREN)
+        {
+            return false;
+        }
+
+        int leadingParens = 0;
+        while (LT(leadingParens + 1).getTokenType() == TokenTypes.LEFT_PAREN)
+        {
+            leadingParens++;
+        }
+
+        int parenDepth = 0;
+        int bracketDepth = 0;
+
+        for (int i = 1; true; i++)
+        {
+            int type = LT(i).getTokenType();
+
+            if (type == TokenTypes.EOF)
+            {
+                return false;
+            }
+
+            if (type == TokenTypes.LEFT_BRACKET)
+            {
+                bracketDepth++;
+                continue;
+            }
+            if (type == TokenTypes.RIGHT_BRACKET)
+            {
+                if (bracketDepth > 0)
+                {
+                    bracketDepth--;
+                }
+                continue;
+            }
+
+            if (bracketDepth > 0)
+            {
+                continue;
+            }
+
+            if (type == TokenTypes.LEFT_PAREN)
+            {
+                parenDepth++;
+            }
+            else if (type == TokenTypes.RIGHT_PAREN)
+            {
+                parenDepth--;
+                if (parenDepth < 0)
+                {
+                    return false;
+                }
+
+                if (parenDepth >= 1 && parenDepth < leadingParens)
+                {
+                    int next = LT(i + 1).getTokenType();
+                    if (next != TokenTypes.RIGHT_PAREN
+                        && next != TokenTypes.LEFT_BRACKET)
+                    {
+                        return false;
+                    }
+                }
+
+                if (parenDepth == 0)
+                {
+                    return true;
+                }
+            }
+        }
     }
 
     private void variableReference() throws SAXPathException
@@ -774,46 +887,45 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void orExpr() throws SAXPathException
     {
-        getXPathHandler().startOrExpr();
-        
+        // Parse left operand, then use a while loop for any number of
+        // 'or' AndExpr repetitions. This avoids the recursion and
+        // resulting stack overflow of the original right-recursive
+        // implementation. Per the XPath 1.0 grammar (OrExpr ::= AndExpr
+        // ('or' AndExpr)*), the right-hand side is AndExpr, and or is
+        // left-associative. When no 'or' operator is present, no
+        // startOrExpr()/endOrExpr() callbacks are emitted.
+
         andExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.OR)
         {
-            case TokenTypes.OR:
-            {
-                create = true;
-                match( TokenTypes.OR );
-                orExpr();
-                break;
-            }
+            match( TokenTypes.OR );
+            getXPathHandler().startOrExpr();
+            andExpr();
+            getXPathHandler().endOrExpr( true );
         }
-
-        getXPathHandler().endOrExpr( create );
     }
 
     private void andExpr() throws SAXPathException
     {
-        getXPathHandler().startAndExpr();
+        // Parse left operand, then use a while loop for any number of
+        // 'and' EqualityExpr repetitions. This avoids the recursion and
+        // resulting stack overflow of the original right-recursive
+        // implementation. Per the XPath 1.0 grammar (AndExpr ::=
+        // EqualityExpr ('and' EqualityExpr)*), the right-hand side is
+        // EqualityExpr, and and is left-associative. When no 'and'
+        // operator is present, no startAndExpr()/endAndExpr() callbacks
+        // are emitted.
 
         equalityExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.AND)
         {
-            case TokenTypes.AND:
-            {
-                create = true;
-                match( TokenTypes.AND );
-                andExpr();
-                break;
-            }
+            match( TokenTypes.AND );
+            getXPathHandler().startAndExpr();
+            equalityExpr();
+            getXPathHandler().endAndExpr( true );
         }
-
-        getXPathHandler().endAndExpr( create );
     }
 
     private void equalityExpr() throws SAXPathException
@@ -990,24 +1102,36 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
 
     private void unionExpr() throws SAXPathException
     {
-        getXPathHandler().startUnionExpr();
+        // Parse left operand, then use a while loop for any number of
+        // '|' PathExpr repetitions. This avoids the recursion and
+        // resulting stack overflow of the original right-recursive
+        // implementation. Since union is associative, the switch from
+        // right-recursive to left-recursive iteration does not affect
+        // the result.
+        //
+        // Two intentional behavior changes from the original:
+        // 1. The right-hand side is parsed as PathExpr rather than
+        //    Expr. Per the XPath 1.0 grammar (UnionExpr ::= PathExpr
+        //    ('|' UnionExpr)?), union has lower precedence than
+        //    arithmetic operators. The original Expr call gave union
+        //    artificially high precedence (e.g. a | b + c was parsed
+        //    as a | (b + c) instead of the correct (a | b) + c).
+        // 2. When no '|' operator is present, no
+        //    startUnionExpr()/endUnionExpr() callbacks are emitted.
+        //    The original always wrapped every pathExpr in a
+        //    startUnionExpr()/endUnionExpr(create) pair. The
+        //    pass-through (create=false) callback served no purpose
+        //    since no handler acts on it.
 
         pathExpr();
 
-        boolean create = false;
-
-        switch ( LA(1) )
+        while (LA(1) == TokenTypes.PIPE)
         {
-            case TokenTypes.PIPE:
-            {
-                match( TokenTypes.PIPE );
-                create = true;
-                expr();
-                break;
-            }
+            match( TokenTypes.PIPE );
+            getXPathHandler().startUnionExpr();
+            pathExpr();
+            getXPathHandler().endUnionExpr( true );
         }
-
-        getXPathHandler().endUnionExpr( create );
     }
 
     private Token match(int tokenType) throws XPathSyntaxException

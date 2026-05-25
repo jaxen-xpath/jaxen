@@ -91,22 +91,14 @@ public class PatternHandler extends JaxenHandler
         return this.pattern;
     }
 
-    
-    
-    
     public void endXPath()
     {
-        this.pattern = (Pattern) pop();
-
-        System.out.println( "stack is: " + stack );
-        
+        this.pattern = (Pattern) pop();        
         popFrame();
     }
 
     public void endPathExpr()
     {
-        //System.err.println("endPathExpr()");
-
         // PathExpr ::=   LocationPath
         //              | FilterExpr
         //              | FilterExpr / RelativeLocationPath
@@ -116,46 +108,17 @@ public class PatternHandler extends JaxenHandler
         // FilterExpr and a LocationPath (of some flavor).
         //
         // If the current stack-frame has one item, it's simply
-        // a FilterExpr, and more than like boils down to a
+        // a FilterExpr, and more than likely boils down to a
         // primary expr of some flavor.  But that's for another
         // method...
 
         LinkedList frame = popFrame();
-        
-        System.out.println( "endPathExpr(): " + frame );
-            
+                    
         push( frame.removeFirst() );
-/*        
-        LocationPathPattern locationPath = new LocationPathPattern();
-        push( locationPath );
-        while (! frame.isEmpty() )
-        {
-            Object filter = frame.removeLast();
-            if ( filter instanceof NodeTest ) 
-            {
-                locationPath.setNodeTest( (NodeTest) filter );
-            }
-            else if ( filter instanceof FilterExpr )
-            {
-                locationPath.addFilter( (FilterExpr) filter );
-            }
-            else if ( filter instanceof LocationPathPattern ) 
-            {
-                LocationPathPattern parent = (LocationPathPattern) filter;
-                locationPath.setParentPattern( parent );
-                locationPath = parent;
-            }
-            else if ( filter != null ) 
-            {
-                throw new JaxenException( "Unknown filter: " + filter );
-            }
-        }
-*/
     }
 
     public void startAbsoluteLocationPath()
     {
-        //System.err.println("startAbsoluteLocationPath()");
         pushFrame();
 
         push( createAbsoluteLocationPath() );
@@ -163,13 +126,11 @@ public class PatternHandler extends JaxenHandler
     
     public void endAbsoluteLocationPath() throws JaxenException
     {
-        //System.err.println("endAbsoluteLocationPath()");
         endLocationPath();
     }
 
     public void startRelativeLocationPath()
     {
-        //System.err.println("startRelativeLocationPath()");
         pushFrame();
 
         push( createRelativeLocationPath() );
@@ -177,17 +138,14 @@ public class PatternHandler extends JaxenHandler
 
     public void endRelativeLocationPath() throws JaxenException
     {
-        //System.err.println("endRelativeLocationPath()");
         endLocationPath();
     }
 
     protected void endLocationPath() throws JaxenException
     {
-        // start at the back, its the main pattern then add everything else as 
+        // start at the back, it's the main pattern then add everything else as 
         LinkedList list = popFrame();
         
-        System.out.println( "endLocationPath: " + list );
-
         LocationPathPattern locationPath = (LocationPathPattern) list.removeFirst();
         push( locationPath );
         boolean doneNodeTest = false;
@@ -227,7 +185,6 @@ public class PatternHandler extends JaxenHandler
                               String prefix,
                               String localName)
     {
-        //System.err.println("startNameStep(" + axis + ", " + prefix + ", " + localName + ")");
         pushFrame();
 
         short nodeType = Pattern.ELEMENT_NODE;            
@@ -253,7 +210,6 @@ public class PatternHandler extends JaxenHandler
 
     public void startTextNodeStep(int axis)
     {
-        //System.err.println("startTextNodeStep()");
         pushFrame();
         
         push( new NodeTypeTest( Pattern.TEXT_NODE ) );
@@ -261,7 +217,6 @@ public class PatternHandler extends JaxenHandler
     
     public void startCommentNodeStep(int axis)
     {
-        //System.err.println("startCommentNodeStep()");
         pushFrame();
 
         push( new NodeTypeTest( Pattern.COMMENT_NODE ) );
@@ -269,7 +224,6 @@ public class PatternHandler extends JaxenHandler
 
     public void startAllNodeStep(int axis)
     {
-        //System.err.println("startAllNodeStep()");
         pushFrame();
 
         push( AnyNodeTest.getInstance() );
@@ -278,7 +232,6 @@ public class PatternHandler extends JaxenHandler
     public void startProcessingInstructionNodeStep(int axis,
                                                    String name)
     {
-        //System.err.println("startProcessingInstructionStep()");
         pushFrame();
 
         // XXXX: should we throw an exception if name is present?            
@@ -291,28 +244,18 @@ public class PatternHandler extends JaxenHandler
         if ( ! list.isEmpty() ) 
         {
             push( list.removeFirst() );
-            
-            if ( ! list.isEmpty() )
-            {
-                System.out.println( "List should now be empty!" + list );
-            }
         }
     }
     
 
     public void startUnionExpr()
     {
-        //System.err.println("startUnionExpr()");
     }
 
     public void endUnionExpr(boolean create) throws JaxenException
     {
-        //System.err.println("endUnionExpr()");
-
         if ( create )
         {
-            //System.err.println("makeUnionExpr");
-
             Expr rhs = (Expr) pop();
             Expr lhs = (Expr) pop();
 
