@@ -74,7 +74,10 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
     public String toString() {
         if (getLocationPath() != null) {
-            return "[(DefaultPathExpr): " + getFilterExpr() + ", " + getLocationPath() + "]";
+            if (getFilterExpr() != null) {
+                return "[(DefaultPathExpr): " + getFilterExpr() + ", " + getLocationPath() + "]";
+            }
+            return "[(DefaultPathExpr): " + getLocationPath() + "]";
         }
 
         return "[(DefaultPathExpr): " + getFilterExpr() + "]";
