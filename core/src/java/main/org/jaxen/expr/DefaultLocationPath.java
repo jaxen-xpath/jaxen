@@ -71,18 +71,6 @@ abstract class DefaultLocationPath extends DefaultExpr implements LocationPath
         return this.steps;
     }
 
-    public Expr simplify()
-    {
-        Iterator stepIter = getSteps().iterator();
-        Step eachStep = null;
-        while (stepIter.hasNext())
-        {
-            eachStep = (Step) stepIter.next();
-            eachStep.simplify();
-        }
-        return this;
-    }
-
     public String getText()
     {
         StringBuilder builder = new StringBuilder();
