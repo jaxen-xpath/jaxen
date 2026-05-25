@@ -168,7 +168,7 @@ public abstract class XPathTestBase extends TestCase
     {
         BaseXPath reparsed = new BaseXPath(xpath.getRootExpr().getText(), null);
         assertNotNull(reparsed.getRootExpr());
-        assertNotNull(reparsed.getRootExpr().getText());
+        assertEquals(xpath.getRootExpr().getText(), reparsed.getRootExpr().getText());
     }
     
     private Context getContext(Object contextNode)
