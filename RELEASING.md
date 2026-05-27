@@ -111,14 +111,13 @@ qualify; add outside collaborators as needed before attempting a release.
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
 5. Click the green **Run workflow** button.
-6. When the workflow completes, open and merge the automatically created pull
-   request from `release/X.Y.Z` into `master` to land the release and
-   post-release version-bump commits.
-
-The workflow uploads the artifacts to the
-[Central Publishing Portal](https://central.sonatype.com/). Once it completes
-successfully, log in to [central.sonatype.com](https://central.sonatype.com/)
-and verify the deployment, then publish it.
+6. Wait for the workflow deployment to appear in the
+   [Central Publishing Portal](https://central.sonatype.com/) and confirm it
+   passes validation.
+7. Merge the automatically created pull request from `release/X.Y.Z` into
+   `master` to land the release and post-release version-bump commits.
+8. Publish the validated deployment in
+   [Central Publishing Portal](https://central.sonatype.com/).
 
 ---
 
