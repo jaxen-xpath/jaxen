@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   release:
@@ -25,10 +26,8 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          # A Personal Access Token (PAT) stored as RELEASE_TOKEN is required to push the
-          # version-bump commit and tag back to the protected master branch.  If the branch
-          # is not protected you can remove this line and the workflow will use the default
-          # GITHUB_TOKEN instead.
+          # If RELEASE_TOKEN is defined we use it; otherwise the workflow uses GITHUB_TOKEN.
+          # The workflow now pushes a release branch and opens a PR to protected master.
           token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 8
@@ -101,10 +100,27 @@ jobs:
           git add pom.xml core/pom.xml integration-tests/pom.xml
           git commit -m "Prepare for next development iteration ${{ inputs.developmentVersion }}"
 
-      - name: Push commits and tag to master
+      - name: Push tag and release branch
         run: |
-          git push origin master
           git push origin "v${{ inputs.releaseVersion }}"
+          git push origin HEAD:"release/${{ inputs.releaseVersion }}"
+
+      - name: Create pull request for next development iteration
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_BRANCH="release/${{ inputs.releaseVersion }}"
+          EXISTING_PR="$(gh pr list --base master --head "${RELEASE_BRANCH}" --state open --json number --jq '.[0].number')"
+
+          if [ -n "${EXISTING_PR}" ]; then
+            echo "Pull request #${EXISTING_PR} already exists for ${RELEASE_BRANCH}"
+          else
+            gh pr create \
+              --base master \
+              --head "${RELEASE_BRANCH}" \
+              --title "Release ${{ inputs.releaseVersion }}: commit release and prepare ${{ inputs.developmentVersion }}" \
+              --body "This PR was opened automatically by the release workflow after publishing version ${{ inputs.releaseVersion }}.\n\nIt includes the release commit and the post-release version bump to ${{ inputs.developmentVersion }}."
+          fi
 
       - name: Create GitHub release
         env:
