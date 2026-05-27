@@ -115,11 +115,15 @@ jobs:
           if [ -n "${EXISTING_PR}" ]; then
             echo "Pull request #${EXISTING_PR} already exists for ${RELEASE_BRANCH}"
           else
+            PR_BODY=$(printf '%s\n\n%s\n\n%s' \
+              "This PR was opened automatically by the release workflow after deploying version ${{ inputs.releaseVersion }} to the [Central Publishing Portal](https://central.sonatype.com/publishing/deployments)." \
+              "It includes the release commit and the post-release version bump to ${{ inputs.developmentVersion }}." \
+              "Before merging this PR, publish the release in the [Central Publishing Portal](https://central.sonatype.com/publishing/deployments).")
             gh pr create \
               --base master \
               --head "${RELEASE_BRANCH}" \
               --title "Release ${{ inputs.releaseVersion }}: commit release and prepare ${{ inputs.developmentVersion }}" \
-              --body "This PR was opened automatically by the release workflow after publishing version ${{ inputs.releaseVersion }}.\n\nIt includes the release commit and the post-release version bump to ${{ inputs.developmentVersion }}."
+              --body "${PR_BODY}"
           fi
 
       - name: Create GitHub release
