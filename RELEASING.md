@@ -110,13 +110,16 @@ qualify; add outside collaborators as needed before attempting a release.
 4. Fill in the two inputs:
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
-5. Click the green **Run workflow** button.
-6. Wait for the workflow deployment to appear in the
+5. Before running the workflow, update release notes in
+   `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
+   release asset links in `releases.xml`, and commit the changes on `master`.
+6. Click the green **Run workflow** button.
+7. Wait for the workflow deployment to appear in the
    [Central Publishing Portal](https://central.sonatype.com/) and confirm it
    passes validation.
-7. Merge the automatically created pull request from `release/X.Y.Z` into
+8. Merge the automatically created pull request from `release/X.Y.Z` into
    `master` to land the release and post-release version-bump commits.
-8. Publish the validated deployment in
+9. Publish the validated deployment in
    [Central Publishing Portal](https://central.sonatype.com/).
 
 ---
@@ -165,9 +168,10 @@ Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in 
 
 ## Publish the Site
 
-Update the release notes on the GitHub tag and in src/site/xdoc/releases.xml
-and src/site/xdoc/status.xml. In `releases.xml`, use GitHub release asset
-URLs in the form:
+Update the release notes on the GitHub tag.
+
+When editing `src/site/xdoc/releases.xml` in step 5 above, use GitHub release
+asset URLs in the form:
 
 `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`
 
