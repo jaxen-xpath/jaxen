@@ -111,15 +111,14 @@ qualify; add outside collaborators as needed before attempting a release.
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
 5. Click the green **Run workflow** button.
+6. When the workflow completes, open and merge the automatically created pull
+   request from `release/X.Y.Z` into `master` to land the release and
+   post-release version-bump commits.
 
 The workflow uploads the artifacts to the
-[Central Publishing Portal](https://central.sonatype.com/).  Once it completes
+[Central Publishing Portal](https://central.sonatype.com/). Once it completes
 successfully, log in to [central.sonatype.com](https://central.sonatype.com/)
 and verify the deployment, then publish it.
-
-When the workflow reaches the git handoff stage, it pushes the release tag and
-opens a pull request from `release/X.Y.Z` into `master` with the release and
-post-release version-bump commits. Merge that PR to update `master`.
 
 ---
 
@@ -183,4 +182,3 @@ mvn site:stage
 ```
 
 Upload the generated content to IBiblio using sftp.
-
