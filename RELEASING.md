@@ -104,15 +104,15 @@ Only GitHub users with **write access** (or higher) to this repository can
 trigger `workflow_dispatch` workflows.  Repository owners and admins always
 qualify; add outside collaborators as needed before attempting a release.
 
-1. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
-2. Click the **Run workflow** dropdown (top-right of the workflow runs list).
-3. Ensure **Branch: master** is selected.
-4. Fill in the two inputs:
-   * **Version to release** – the version being released, e.g. `2.0.1`
-   * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
-5. Before running the workflow, update release notes in
+1. Before running the workflow, update release notes in
    `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
    release asset links in `releases.xml`, and commit the changes on `master`.
+2. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
+3. Click the **Run workflow** dropdown (top-right of the workflow runs list).
+4. Ensure **Branch: master** is selected.
+5. Fill in the two inputs:
+   * **Version to release** – the version being released, e.g. `2.0.1`
+   * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
 6. Click the green **Run workflow** button.
 7. Wait for the workflow deployment to appear in the
    [Central Publishing Portal](https://central.sonatype.com/) and confirm it
@@ -170,7 +170,7 @@ Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in 
 
 Update the release notes on the GitHub tag.
 
-When editing `src/site/xdoc/releases.xml` in step 5 above, use GitHub release
+When editing `src/site/xdoc/releases.xml` in step 1 above, use GitHub release
 asset URLs in the form:
 
 `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`
