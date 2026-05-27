@@ -121,6 +121,16 @@ public class XPathReaderTest extends TestCase
         }
     }
 
+    public void testDeepOrExpressionDoesNotOverflow() throws SAXPathException
+    {
+        reader.parse( booleanExpression( "or", 20000 ) );
+    }
+
+    public void testDeepAndExpressionDoesNotOverflow() throws SAXPathException
+    {
+        reader.parse( booleanExpression( "and", 20000 ) );
+    }
+
     public void testBogusPaths() throws SAXPathException
     {
 
@@ -138,6 +148,20 @@ public class XPathReaderTest extends TestCase
                 assertEquals( bogusPath[1], e.getMessage() );
             }
         }
+    }
+
+    private String booleanExpression(String operator, int count)
+    {
+        StringBuffer result = new StringBuffer( "true()" );
+
+        for ( int i = 1; i < count; i++ )
+        {
+            result.append( ' ' );
+            result.append( operator );
+            result.append( " true()" );
+        }
+
+        return result.toString();
     }
 
     public void testChildrenOfNumber() throws SAXPathException
