@@ -57,11 +57,6 @@ class DefaultEqualsExpr extends DefaultEqualityExpr {
     return "=";
     }
 
-  @Override
-  public String toString()
-  {
-    return "[(DefaultEqualsExpr): " + getLHS() + ", " + getRHS() + "]";
-  }
   
   @Override
   protected boolean evaluateObjectObject( Object lhs, Object rhs )

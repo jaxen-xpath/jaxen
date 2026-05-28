@@ -43,6 +43,7 @@ package org.jaxen.expr;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
 {
@@ -79,12 +80,57 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
 
     public String getText()
     {
-        return "(" + getLHS().getText() + " " + getOperator() + " " + getRHS().getText() +")";
+        return buildText(false);
     }
 
     public String toString()
     {
-        return "[" + getClass().getName() + ": " + getLHS() + ", " + getRHS() + "]";
+        return buildText(true);
+    }
+
+    private String buildText(boolean useToString)
+    {
+        Stack<Expr> stack1 = new Stack<Expr>();
+        Stack<Expr> stack2 = new Stack<Expr>();
+
+        stack1.push(this);
+        while (!stack1.isEmpty())
+        {
+            Expr node = stack1.pop();
+            stack2.push(node);
+            if (node instanceof DefaultBinaryExpr)
+            {
+                DefaultBinaryExpr bin = (DefaultBinaryExpr) node;
+                stack1.push(bin.getLHS());
+                stack1.push(bin.getRHS());
+            }
+        }
+
+        Stack<String> resultStack = new Stack<String>();
+        while (!stack2.isEmpty())
+        {
+            Expr node = stack2.pop();
+            if (node instanceof DefaultBinaryExpr)
+            {
+                DefaultBinaryExpr bin = (DefaultBinaryExpr) node;
+                String rhs = resultStack.pop();
+                String lhs = resultStack.pop();
+                if (useToString)
+                {
+                    resultStack.push("[" + bin.getClass().getName() + ": " + lhs + ", " + rhs + "]");
+                }
+                else
+                {
+                    resultStack.push("(" + lhs + " " + bin.getOperator() + " " + rhs + ")");
+                }
+            }
+            else
+            {
+                resultStack.push(useToString ? node.toString() : node.getText());
+            }
+        }
+
+        return resultStack.pop();
     }
 
     protected List<Expr> flattenChain()

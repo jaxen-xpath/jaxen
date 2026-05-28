@@ -50,9 +50,4 @@ abstract class DefaultMultiplicativeExpr extends DefaultArithExpr
         super( lhs,
                rhs );
     }
-
-    public String toString()
-    {
-        return "[(DefaultMultiplicativeExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
 }

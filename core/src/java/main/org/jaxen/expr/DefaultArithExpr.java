@@ -50,9 +50,4 @@ abstract class DefaultArithExpr extends DefaultBinaryExpr
                rhs );
     }
 
-    public String toString()
-    {
-        return "[(DefaultArithExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
-
 }

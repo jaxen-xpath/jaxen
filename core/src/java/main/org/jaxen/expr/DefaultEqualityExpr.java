@@ -55,10 +55,6 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityE
     super( lhs, rhs );
     }
 
-  public String toString()
-    {
-    return "[(DefaultEqualityExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
   
   public Object evaluate( Context context ) throws JaxenException
     {
