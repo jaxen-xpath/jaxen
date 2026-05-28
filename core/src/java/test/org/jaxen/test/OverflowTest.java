@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 bob mcwhirter & James Strachan.
+ * Copyright 2026 the Jaxen Project
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ====================================================================
- * This software consists of voluntary contributions made by many 
- * individuals on behalf of the Jaxen Project and was originally 
- * created by bob mcwhirter <bob@werken.com> and 
- * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Jaxen Project.
+ * For more information on the Jaxen Project, please see
+ * <https://github.com/jaxen-xpath/jaxen/>.
  */
 package org.jaxen.test;
 
