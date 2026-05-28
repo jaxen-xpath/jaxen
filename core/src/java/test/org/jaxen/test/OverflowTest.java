@@ -111,12 +111,10 @@ public class OverflowTest extends TestCase
     public void testDeepGetText() throws JaxenException
     {
         StringBuilder expression = new StringBuilder(TERMS * 3);
-        for (int i = 1; i <= TERMS; i++)
+        expression.append(1);
+        for (int i = 2; i <= TERMS; i++)
         {
-            if (i > 1)
-            {
-                expression.append('+');
-            }
+            expression.append('+');
             expression.append(i);
         }
 
@@ -131,12 +129,10 @@ public class OverflowTest extends TestCase
     public void testDeepToString() throws JaxenException
     {
         StringBuilder expression = new StringBuilder(TERMS * 3);
-        for (int i = 1; i <= TERMS; i++)
+        expression.append(1);
+        for (int i = 2; i <= TERMS; i++)
         {
-            if (i > 1)
-            {
-                expression.append('+');
-            }
+            expression.append('+');
             expression.append(i);
         }
 
