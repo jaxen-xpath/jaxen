@@ -37,14 +37,35 @@
  */
 package org.jaxen.test;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import junit.framework.TestCase;
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DocumentNavigator;
+import org.jaxen.pattern.Pattern;
+import org.jaxen.pattern.PatternParser;
+import org.jaxen.saxpath.SAXPathException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class OverflowTest extends TestCase
 {
 
     private static final int TERMS = 10000;
+
+    private Context context;
+
+    @Override
+    public void setUp()
+    {
+        ContextSupport support = new ContextSupport(
+            null, null, null, DocumentNavigator.getInstance());
+        context = new Context(support);
+    }
 
     public void testManyAdditions() throws JaxenException
     {
@@ -171,5 +192,31 @@ public class OverflowTest extends TestCase
 
         Boolean result = (Boolean) new DOMXPath(expression.toString()).evaluate(null);
         assertEquals(Boolean.TRUE, result);
+    }
+
+    public void testDeepLocationPathMatches() throws Exception
+    {
+        int steps = 10000;
+        StringBuilder patternBuilder = new StringBuilder(steps * 2);
+        for (int i = 0; i < steps; i++)
+        {
+            if (i > 0) patternBuilder.append('/');
+            patternBuilder.append('a');
+        }
+        Pattern pattern = PatternParser.parse(patternBuilder.toString());
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element current = doc.createElement("a");
+        doc.appendChild(current);
+        for (int i = 1; i < steps; i++)
+        {
+            Element child = doc.createElement("a");
+            current.appendChild(child);
+            current = child;
+        }
+
+        assertTrue(pattern.matches(current, context));
     }
 }

@@ -157,25 +157,39 @@ public class LocationPathPattern extends Pattern {
     {
         Navigator navigator = context.getNavigator();
 
-/*        
-        if ( isAbsolute() )
-        {
-            node = navigator.getDocumentNode( node );
-        }
-*/
         if (! nodeTest.matches(node, context) )
         {
             return false;
         }
-        
-        if (parentPattern != null) 
+
+        // Walk the parentPattern chain iteratively instead of recursively
+        LocationPathPattern pattern = this;
+        Object currentNode = node;
+
+        while (pattern.parentPattern instanceof LocationPathPattern)
         {
-            Object parent = navigator.getParentNode( node );
-            if ( parent == null ) 
+            LocationPathPattern parent = (LocationPathPattern) pattern.parentPattern;
+            currentNode = navigator.getParentNode( currentNode );
+            if ( currentNode == null )
             {
                 return false;
             }
-            if ( ! parentPattern.matches( parent, context ) ) 
+            if ( ! parent.nodeTest.matches( currentNode, context ) )
+            {
+                return false;
+            }
+            pattern = parent;
+        }
+
+        // Handle a non-LocationPathPattern parent (rare; won't chain further)
+        if (pattern.parentPattern != null)
+        {
+            currentNode = navigator.getParentNode( currentNode );
+            if ( currentNode == null )
+            {
+                return false;
+            }
+            if ( ! pattern.parentPattern.matches( currentNode, context ) )
             {
                 return false;
             }
@@ -200,18 +214,16 @@ public class LocationPathPattern extends Pattern {
                 ancestor = navigator.getParentNode( ancestor );
             }
         }
-        
-        if (filters != null) 
+
+        if (filters != null)
         {
             List list = Collections.singletonList(node);
 
             context.setNodeSet( list );
-            
-            // XXXX: filters aren't positional, so should we clone context?
 
             boolean answer = true;
 
-            for (Iterator iter = filters.iterator(); iter.hasNext(); ) 
+            for (Iterator iter = filters.iterator(); iter.hasNext(); )
             {
                 FilterExpr filter = (FilterExpr) iter.next();
 
