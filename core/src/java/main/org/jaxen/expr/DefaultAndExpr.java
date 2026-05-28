@@ -39,6 +39,7 @@
 
 package org.jaxen.expr;
 
+import java.util.List;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
 import org.jaxen.Navigator;
@@ -70,23 +71,16 @@ class DefaultAndExpr extends DefaultLogicalExpr
     
     public Object evaluate(Context context) throws JaxenException
     {
+        List<Expr> operands = flattenChain();
         Navigator nav = context.getNavigator();
-        Boolean lhsValue = BooleanFunction.evaluate( getLHS().evaluate( context ), nav );
-
-        if ( !lhsValue.booleanValue() )
+        for (int i = operands.size() - 1; i >= 0; i--)
         {
-            return Boolean.FALSE;
+            Boolean value = BooleanFunction.evaluate( operands.get(i).evaluate( context ), nav );
+            if ( !value.booleanValue() )
+            {
+                return Boolean.FALSE;
+            }
         }
-
-        // Short circuits are required in XPath. "The right operand is not 
-        // evaluated if the left operand evaluates to false."
-        Boolean rhsValue = BooleanFunction.evaluate( getRHS().evaluate( context ), nav );
-
-        if ( !rhsValue.booleanValue() )
-        {
-            return Boolean.FALSE;
-        }
-
         return Boolean.TRUE;
     }
 

@@ -41,6 +41,9 @@
 
 package org.jaxen.expr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
 {
     private Expr lhs;
@@ -84,11 +87,43 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
         return "[" + getClass().getName() + ": " + getLHS() + ", " + getRHS() + "]";
     }
 
+    protected List<Expr> flattenChain()
+    {
+        List<Expr> operands = new ArrayList<Expr>();
+        Expr current = this;
+
+        while (current instanceof DefaultBinaryExpr
+                && current.getClass() == this.getClass())
+        {
+            DefaultBinaryExpr binaryExpr = (DefaultBinaryExpr) current;
+            operands.add(binaryExpr.getRHS());
+            current = binaryExpr.getLHS();
+        }
+        operands.add(current);
+
+        return operands;
+    }
+
     public Expr simplify()
     {
-        setLHS( getLHS().simplify() );
-        setRHS( getRHS().simplify() );
+        List<DefaultBinaryExpr> chain = new ArrayList<DefaultBinaryExpr>();
+        Expr current = this;
+        while (current instanceof DefaultBinaryExpr)
+        {
+            DefaultBinaryExpr binaryExpr = (DefaultBinaryExpr) current;
+            chain.add(binaryExpr);
+            current = binaryExpr.getLHS();
+        }
 
-        return this;
+        Expr simplified = current.simplify();
+        for (int i = chain.size() - 1; i >= 0; i--)
+        {
+            DefaultBinaryExpr binaryExpr = chain.get(i);
+            binaryExpr.setLHS(simplified);
+            binaryExpr.setRHS(binaryExpr.getRHS().simplify());
+            simplified = binaryExpr;
+        }
+
+        return simplified;
     }
 }
