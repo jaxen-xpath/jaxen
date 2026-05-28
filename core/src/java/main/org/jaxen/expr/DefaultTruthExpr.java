@@ -52,12 +52,6 @@ abstract class DefaultTruthExpr extends DefaultBinaryExpr
                rhs );
     }
 
-    @Override
-    public String toString()
-    {
-        return "[(DefaultTruthExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
-
     protected boolean bothAreSets(Object lhs,
                                   Object rhs)
     {

@@ -63,11 +63,6 @@ class DefaultAndExpr extends DefaultLogicalExpr
         return "and";
     }
 
-    @Override
-    public String toString()
-    {
-        return "[(DefaultAndExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
     
     public Object evaluate(Context context) throws JaxenException
     {

@@ -80,6 +80,16 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
 
     public String getText()
     {
+        return buildText(false);
+    }
+
+    public String toString()
+    {
+        return buildText(true);
+    }
+
+    private String buildText(boolean useToString)
+    {
         Stack<Expr> stack1 = new Stack<Expr>();
         Stack<Expr> stack2 = new Stack<Expr>();
 
@@ -105,20 +115,22 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
                 DefaultBinaryExpr bin = (DefaultBinaryExpr) node;
                 String rhs = resultStack.pop();
                 String lhs = resultStack.pop();
-                resultStack.push("(" + lhs + " " + bin.getOperator() + " " + rhs + ")");
+                if (useToString)
+                {
+                    resultStack.push("[" + bin.getClass().getName() + ": " + lhs + ", " + rhs + "]");
+                }
+                else
+                {
+                    resultStack.push("(" + lhs + " " + bin.getOperator() + " " + rhs + ")");
+                }
             }
             else
             {
-                resultStack.push(node.getText());
+                resultStack.push(useToString ? node.toString() : node.getText());
             }
         }
 
         return resultStack.pop();
-    }
-
-    public String toString()
-    {
-        return "[" + getClass().getName() + ": " + getLHS() + ", " + getRHS() + "]";
     }
 
     protected List<Expr> flattenChain()

@@ -65,12 +65,6 @@ class DefaultOrExpr extends DefaultLogicalExpr
         return "or";
     }
 
-    @Override
-    public String toString()
-    {
-        return "[(DefaultOrExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
-
     public Object evaluate(Context context) throws JaxenException
     {
         List<Expr> operands = flattenChain();

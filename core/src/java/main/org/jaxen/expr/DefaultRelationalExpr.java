@@ -55,12 +55,6 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr implements Relatio
     super( lhs, rhs );
     }
   
-  @Override
-  public String toString()
-    {
-    return "[(DefaultRelationalExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
-
   public Object evaluate( Context context ) throws JaxenException
     {
     List<Expr> operands = flattenChain();

@@ -108,6 +108,46 @@ public class OverflowTest extends TestCase
         assertEquals(Boolean.FALSE, result);
     }
 
+    public void testDeepGetText() throws JaxenException
+    {
+        StringBuilder expression = new StringBuilder(TERMS * 3);
+        for (int i = 1; i <= TERMS; i++)
+        {
+            if (i > 1)
+            {
+                expression.append('+');
+            }
+            expression.append(i);
+        }
+
+        DOMXPath xpath = new DOMXPath(expression.toString());
+        String text = xpath.getRootExpr().getText();
+
+        assertNotNull(text);
+        assertTrue(text.startsWith("("));
+        assertTrue(text.endsWith(")"));
+    }
+
+    public void testDeepToString() throws JaxenException
+    {
+        StringBuilder expression = new StringBuilder(TERMS * 3);
+        for (int i = 1; i <= TERMS; i++)
+        {
+            if (i > 1)
+            {
+                expression.append('+');
+            }
+            expression.append(i);
+        }
+
+        DOMXPath xpath = new DOMXPath(expression.toString());
+        String text = xpath.getRootExpr().toString();
+
+        assertNotNull(text);
+        assertTrue(text.startsWith("["));
+        assertTrue(text.endsWith("]"));
+    }
+
     public void testManyEqualities() throws JaxenException
     {
         StringBuilder expression = new StringBuilder(TERMS * 4);

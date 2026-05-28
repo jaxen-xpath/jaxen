@@ -67,12 +67,6 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         return "|";
     }
 
-    @Override
-    public String toString()
-    {
-        return "[(DefaultUnionExpr): " + getLHS() + ", " + getRHS() + "]";
-    }
-
     public Object evaluate(Context context) throws JaxenException
     {
         List<Expr> operands = flattenChain();
