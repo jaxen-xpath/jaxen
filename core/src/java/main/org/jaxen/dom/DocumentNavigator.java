@@ -703,7 +703,7 @@ public class DocumentNavigator extends DefaultNavigator
 
 
     /**
-     * Construct a node's string value recursively.
+     * Construct a node's string value.
      *
      * @param node the current node
      * @param builder the builder for building the text
@@ -711,15 +711,23 @@ public class DocumentNavigator extends DefaultNavigator
      */
     private StringBuilder getStringValue (Node node, StringBuilder builder)
     {
-        if (isText(node)) {
-            builder.append(node.getNodeValue());
-        } else {
-            NodeList children = node.getChildNodes();
-            int length = children.getLength();
-            for (int i = 0; i < length; i++) {
-                getStringValue(children.item(i), builder);
+        ArrayList<Node> stack = new ArrayList<Node>();
+        stack.add(node);
+
+        while (!stack.isEmpty()) {
+            Node current = stack.remove(stack.size() - 1);
+
+            if (isText(current)) {
+                builder.append(current.getNodeValue());
+            }
+            else {
+                NodeList children = current.getChildNodes();
+                for (int i = children.getLength() - 1; i >= 0; i--) {
+                    stack.add(children.item(i));
+                }
             }
         }
+
         return builder;
     }
 
