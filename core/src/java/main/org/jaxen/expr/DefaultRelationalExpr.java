@@ -63,48 +63,15 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr implements Relatio
 
   public Object evaluate( Context context ) throws JaxenException
     {
-    Object lhsValue = getLHS().evaluate( context );
-    Object rhsValue = getRHS().evaluate( context );
+    List<Expr> operands = flattenChain();
     Navigator nav = context.getNavigator();
-
-    if( bothAreSets( lhsValue, rhsValue ) )
-      {
-      return evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
-      }
-    
-    if (isBoolean(rhsValue) && isSet(lhsValue)) {
-        List left = convertToList( lhsValue );
-        if (left.isEmpty()) {
-            return evaluateObjectObject(rhsValue, Boolean.FALSE, nav) ? Boolean.TRUE : Boolean.FALSE;
-        }
-        else {
-            return evaluateObjectObject(rhsValue, Boolean.TRUE, nav) ? Boolean.TRUE : Boolean.FALSE;
-        }
+    Object lhsValue = operands.get(operands.size() - 1).evaluate( context );
+    for (int i = operands.size() - 2; i >= 0; i--)
+    {
+      Object rhsValue = operands.get(i).evaluate( context );
+      lhsValue = evaluateComparison( lhsValue, rhsValue, nav );
     }
-    else if (isBoolean(lhsValue) && isSet(rhsValue)) {
-        List right = convertToList( rhsValue );
-        if (right.isEmpty()) {
-            return evaluateObjectObject(lhsValue, Boolean.FALSE, nav) ? Boolean.TRUE : Boolean.FALSE;
-        }
-        else {
-            return evaluateObjectObject(lhsValue, Boolean.TRUE, nav) ? Boolean.TRUE : Boolean.FALSE;
-        }
-    }
-    
-
-    if( eitherIsSet( lhsValue, rhsValue ) )
-      {
-      if( isSet( lhsValue ) )
-        {        
-        return evaluateSetSet( (List) lhsValue, convertToList( rhsValue ), nav );              
-        }
-      else
-        {
-        return evaluateSetSet( convertToList( lhsValue ), (List) rhsValue, nav );              
-        }
-      }
-    
-    return evaluateObjectObject( lhsValue, rhsValue, nav ) ? Boolean.TRUE : Boolean.FALSE;
+    return lhsValue;
     }
 
   private Object evaluateSetSet( List lhsSet, List rhsSet, Navigator nav )
@@ -150,6 +117,46 @@ abstract class DefaultRelationalExpr extends DefaultTruthExpr implements Relatio
     return evaluateDoubleDouble( lhsNum, rhsNum );
     }
   
+  private Boolean evaluateComparison( Object lhsValue, Object rhsValue, Navigator nav )
+    {
+    if( bothAreSets( lhsValue, rhsValue ) )
+      {
+      return (Boolean) evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
+      }
+    
+    if (isBoolean(rhsValue) && isSet(lhsValue)) {
+        List left = convertToList( lhsValue );
+        if (left.isEmpty()) {
+            return evaluateObjectObject(rhsValue, Boolean.FALSE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+        else {
+            return evaluateObjectObject(rhsValue, Boolean.TRUE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+    }
+    else if (isBoolean(lhsValue) && isSet(rhsValue)) {
+        List right = convertToList( rhsValue );
+        if (right.isEmpty()) {
+            return evaluateObjectObject(lhsValue, Boolean.FALSE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+        else {
+            return evaluateObjectObject(lhsValue, Boolean.TRUE, nav) ? Boolean.TRUE : Boolean.FALSE;
+        }
+    }
+    
+    if( eitherIsSet( lhsValue, rhsValue ) )
+      {
+      if( isSet( lhsValue ) )
+        {        
+        return (Boolean) evaluateSetSet( (List) lhsValue, convertToList( rhsValue ), nav );              
+        }
+      else
+        {
+        return (Boolean) evaluateSetSet( convertToList( lhsValue ), (List) rhsValue, nav );              
+        }
+      }
+    
+    return evaluateObjectObject( lhsValue, rhsValue, nav ) ? Boolean.TRUE : Boolean.FALSE;
+    }
+  
   protected abstract boolean evaluateDoubleDouble( Double lhs, Double rhs );    
   }
-

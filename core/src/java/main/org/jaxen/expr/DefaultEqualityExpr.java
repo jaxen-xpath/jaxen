@@ -62,39 +62,15 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityE
   
   public Object evaluate( Context context ) throws JaxenException
     {
-    Object lhsValue = getLHS().evaluate( context );
-    Object rhsValue = getRHS().evaluate( context );
-    
-    if( lhsValue == null || rhsValue == null ) {
-      return Boolean.FALSE;
-    }
-    
+    List<Expr> operands = flattenChain();
     Navigator nav = context.getNavigator();
-
-    if( bothAreSets(lhsValue, rhsValue) ) {
-      return evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
-    }
-    else if (isSet(lhsValue ) && isBoolean(rhsValue)) {
-        Boolean lhsBoolean = ((List) lhsValue).isEmpty() ? Boolean.FALSE : Boolean.TRUE;
-        Boolean rhsBoolean = (Boolean) rhsValue;
-        return Boolean.valueOf(evaluateObjectObject( lhsBoolean, rhsBoolean, nav ) );
-    }
-    else if (isBoolean(lhsValue ) && isSet(rhsValue)) {
-        Boolean lhsBoolean = (Boolean) lhsValue;
-        Boolean rhsBoolean = ((List) rhsValue).isEmpty() ? Boolean.FALSE : Boolean.TRUE;
-        return Boolean.valueOf(evaluateObjectObject( lhsBoolean, rhsBoolean, nav ) );
-    }
-    else if (eitherIsSet(lhsValue, rhsValue) ) {
-      if (isSet(lhsValue)) {
-        return evaluateSetSet( (List) lhsValue, convertToList(rhsValue), nav );                
-      }
-      else {
-        return evaluateSetSet( convertToList(lhsValue), (List) rhsValue, nav );                                
-      }
-    }  
-    else {
-      return Boolean.valueOf(evaluateObjectObject( lhsValue, rhsValue, nav ) );
+    Object lhsValue = operands.get(operands.size() - 1).evaluate( context );
+    for (int i = operands.size() - 2; i >= 0; i--)
+    {
+      Object rhsValue = operands.get(i).evaluate( context );
+      lhsValue = evaluateComparison( lhsValue, rhsValue, nav );
     }    
+    return lhsValue;
   }
   
   private Boolean evaluateSetSet( List lhsSet, List rhsSet, Navigator nav )
@@ -147,6 +123,38 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityE
                                                             nav ) );
       }
     }
+  
+  private Boolean evaluateComparison( Object lhsValue, Object rhsValue, Navigator nav )
+    {
+    if( lhsValue == null || rhsValue == null ) {
+      return Boolean.FALSE;
+    }
+    
+    if( bothAreSets(lhsValue, rhsValue) ) {
+      return evaluateSetSet( (List) lhsValue, (List) rhsValue, nav );
+    }
+    else if (isSet(lhsValue ) && isBoolean(rhsValue)) {
+        Boolean lhsBoolean = ((List) lhsValue).isEmpty() ? Boolean.FALSE : Boolean.TRUE;
+        Boolean rhsBoolean = (Boolean) rhsValue;
+        return Boolean.valueOf(evaluateObjectObject( lhsBoolean, rhsBoolean, nav ) );
+    }
+    else if (isBoolean(lhsValue ) && isSet(rhsValue)) {
+        Boolean lhsBoolean = (Boolean) lhsValue;
+        Boolean rhsBoolean = ((List) rhsValue).isEmpty() ? Boolean.FALSE : Boolean.TRUE;
+        return Boolean.valueOf(evaluateObjectObject( lhsBoolean, rhsBoolean, nav ) );
+    }
+    else if (eitherIsSet(lhsValue, rhsValue) ) {
+      if (isSet(lhsValue)) {
+        return evaluateSetSet( (List) lhsValue, convertToList(rhsValue), nav );                
+      }
+      else {
+        return evaluateSetSet( convertToList(lhsValue), (List) rhsValue, nav );                                
+      }
+    }  
+    else {
+      return Boolean.valueOf(evaluateObjectObject( lhsValue, rhsValue, nav ) );
+    }
+  }
   
   protected abstract boolean evaluateObjectObject( Object lhs, Object rhs );
   }

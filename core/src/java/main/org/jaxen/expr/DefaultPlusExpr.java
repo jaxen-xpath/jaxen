@@ -40,8 +40,10 @@
 
 package org.jaxen.expr;
 
+import java.util.List;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
 import org.jaxen.function.NumberFunction;
 
 class DefaultPlusExpr extends DefaultAdditiveExpr
@@ -62,14 +64,15 @@ class DefaultPlusExpr extends DefaultAdditiveExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
-        Number lhsValue = NumberFunction.evaluate( getLHS().evaluate( context ),
-                                                   context.getNavigator() );
-        Number rhsValue = NumberFunction.evaluate( getRHS().evaluate( context ),
-                                                   context.getNavigator() );
-
-        double result = lhsValue.doubleValue() + rhsValue.doubleValue();
-
-        return Double.valueOf( result );        
+        Navigator nav = context.getNavigator();
+        List<Expr> operands = flattenChain();
+        double result = 0.0;
+        for (int i = operands.size() - 1; i >= 0; i--)
+        {
+            Number value = NumberFunction.evaluate( operands.get(i).evaluate( context ), nav );
+            result += value.doubleValue();
+        }
+        return Double.valueOf( result );
     }
     
 }

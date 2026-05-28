@@ -40,8 +40,10 @@
 
 package org.jaxen.expr;
 
+import java.util.List;
 import org.jaxen.Context;
 import org.jaxen.JaxenException;
+import org.jaxen.Navigator;
 import org.jaxen.function.NumberFunction;
 
 class DefaultDivExpr extends DefaultMultiplicativeExpr
@@ -63,13 +65,15 @@ class DefaultDivExpr extends DefaultMultiplicativeExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
-        Number lhsValue = NumberFunction.evaluate( getLHS().evaluate( context ),
-                                                   context.getNavigator() );
-        Number rhsValue = NumberFunction.evaluate( getRHS().evaluate( context ),
-                                                   context.getNavigator() );
-
-        double result = lhsValue.doubleValue() / rhsValue.doubleValue();
-
+        Navigator nav = context.getNavigator();
+        List<Expr> operands = flattenChain();
+        int index = operands.size() - 1;
+        double result = NumberFunction.evaluate( operands.get(index).evaluate( context ), nav ).doubleValue();
+        for (index = index - 1; index >= 0; index--)
+        {
+            Number rhsValue = NumberFunction.evaluate( operands.get(index).evaluate( context ), nav );
+            result /= rhsValue.doubleValue();
+        }
         return Double.valueOf( result );
     }
 

@@ -75,27 +75,23 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
 
     public Object evaluate(Context context) throws JaxenException
     {
+        List<Expr> operands = flattenChain();
         List<Object> results = new ArrayList<Object>();
+        Set<Object> unique = new HashSet<Object>();
 
         try {
-            List<Object> lhsResults = (List<Object>) getLHS().evaluate( context );
-            List<Object> rhsResults = (List<Object>) getRHS().evaluate( context );
-    
-            Set<Object> unique = new HashSet<Object>();
-    
-            results.addAll( lhsResults );
-            unique.addAll( lhsResults );
-    
-            Iterator<Object> rhsIter = rhsResults.iterator();
-    
-            while ( rhsIter.hasNext() )
+            for (int i = operands.size() - 1; i >= 0; i--)
             {
-                Object each = rhsIter.next();
-    
-                if ( ! unique.contains( each ) )
+                List<Object> operandResults = (List<Object>) operands.get(i).evaluate( context );
+                Iterator<Object> operandIter = operandResults.iterator();
+                while ( operandIter.hasNext() )
                 {
-                    results.add( each );
-                    unique.add( each );
+                    Object each = operandIter.next();
+                    if ( !unique.contains( each ) )
+                    {
+                        results.add( each );
+                        unique.add( each );
+                    }
                 }
             }
             
@@ -109,4 +105,3 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
     }
     
 }
-
