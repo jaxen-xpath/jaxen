@@ -1051,7 +1051,6 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
         {
             switch ( la )
             {
-                case TokenTypes.STAR:
                 case TokenTypes.STAR_OPERATOR:
                 {
                     match( TokenTypes.STAR_OPERATOR );
