@@ -40,20 +40,30 @@
 
 package org.jaxen.test;
 
+import java.util.Iterator;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.jaxen.JaxenException;
+import org.jaxen.UnsupportedAxisException;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.DocumentNavigator;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 public class DOMNavigatorTest extends XPathTestBase
 {    
+    private static final String XMLNS_URI = "http://www.w3.org/2000/xmlns/";
+    
     
     private DocumentBuilder builder;
     
@@ -158,6 +168,78 @@ public class DOMNavigatorTest extends XPathTestBase
             assertNotNull(ex.getMessage());
         }
     }
-    
-    
+
+    public void testGetAttributeAxisIteratorSkipsManyLeadingNamespaceDeclarations() throws UnsupportedAxisException {
+        Navigator nav = getNavigator();
+        final int xmlnsCount = 50000;
+        final Node[] attributes = new Node[xmlnsCount + 1];
+        for (int i = 0; i < xmlnsCount; i++) {
+            attributes[i] = createAttributeNode(XMLNS_URI);
+        }
+        final Node realAttribute = createAttributeNode(null);
+        attributes[xmlnsCount] = realAttribute;
+        final NamedNodeMap map = createNamedNodeMap(attributes);
+        Element root = createElementWithAttributes(map);
+
+        Iterator iterator = nav.getAttributeAxisIterator(root);
+        try {
+            assertTrue(iterator.hasNext());
+            assertSame(realAttribute, iterator.next());
+            assertFalse(iterator.hasNext());
+        }
+        catch (StackOverflowError err) {
+            fail("Stack overflow while skipping xmlns:* attributes");
+        }
+    }
+
+    private static Element createElementWithAttributes(final NamedNodeMap attributes) {
+        InvocationHandler handler = new InvocationHandler() {
+            public Object invoke(Object proxy, Method method, Object[] args) {
+                if ("getAttributes".equals(method.getName())) {
+                    return attributes;
+                }
+                if ("getNodeType".equals(method.getName())) {
+                    return Short.valueOf(Node.ELEMENT_NODE);
+                }
+                return null;
+            }
+        };
+        return (Element) Proxy.newProxyInstance(Element.class.getClassLoader(),
+                new Class[] {Element.class}, handler);
+    }
+
+    private static Node createAttributeNode(final String namespaceUri) {
+        InvocationHandler handler = new InvocationHandler() {
+            public Object invoke(Object proxy, Method method, Object[] args) {
+                if ("getNamespaceURI".equals(method.getName())) {
+                    return namespaceUri;
+                }
+                return null;
+            }
+        };
+        return (Node) Proxy.newProxyInstance(Node.class.getClassLoader(),
+                new Class[] {Node.class}, handler);
+    }
+
+    private static NamedNodeMap createNamedNodeMap(final Node[] attributes) {
+        InvocationHandler handler = new InvocationHandler() {
+            public Object invoke(Object proxy, Method method, Object[] args) {
+                if ("getLength".equals(method.getName())) {
+                    return Integer.valueOf(attributes.length);
+                }
+                if ("item".equals(method.getName())) {
+                    int index = ((Integer) args[0]).intValue();
+                    if (index < 0 || index >= attributes.length) {
+                        return null;
+                    }
+                    return attributes[index];
+                }
+                return null;
+            }
+        };
+        return (NamedNodeMap) Proxy.newProxyInstance(NamedNodeMap.class.getClassLoader(),
+                new Class[] {NamedNodeMap.class}, handler);
+    }
+     
+     
 }
