@@ -123,9 +123,14 @@ public class NumberTest extends TestCase {
         assertEquals(1.0, NumberFunction.evaluate(new Boolean(true), navigator).doubleValue(), tolerance);
     }
 
-    public void testNullNavigatorDoesNotThrowOnUnknownObjectType() {
-        Double result = NumberFunction.evaluate(new Object(), null);
-        assertTrue(Double.isNaN(result.doubleValue()));
+    public void testNullNavigatorThrowsExceptionOnUnknownObjectType() {
+        try {
+            NumberFunction.evaluate(new Object(), null);
+            fail("Expected NullPointerException");
+        }
+        catch (NullPointerException ex) {
+            assertNotNull(ex);
+        }
     }
 
 
