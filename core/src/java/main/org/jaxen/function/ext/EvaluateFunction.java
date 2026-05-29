@@ -94,6 +94,8 @@ public class EvaluateFunction implements Function
         catch ( org.jaxen.saxpath.SAXPathException e ) {
             throw new FunctionCallException(e.toString());
         }
+        catch (StackOverflowError e) {
+            throw new FunctionCallException(e);
+        }
     }
 }
-
