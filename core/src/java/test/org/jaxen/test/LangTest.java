@@ -350,6 +350,15 @@ public class LangTest extends TestCase {
         assertEquals(Boolean.FALSE, result);
         
     }
+    
+    public void testLangFunctionWithNullContextNode()
+      throws JaxenException {
+        
+        BaseXPath xpath = new DOMXPath("lang('en')");
+        Boolean result = (Boolean) xpath.evaluate(null);
+        assertEquals(Boolean.FALSE, result);
+        
+    }
 
     public void testLangFunctionRequiresOneArgument() 
       throws JaxenException {

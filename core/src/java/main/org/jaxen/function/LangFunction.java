@@ -140,7 +140,11 @@ public class LangFunction implements Function
         if (contextNodes.isEmpty()) {
             return Boolean.FALSE;
         }
-        return evaluate(contextNodes.get(0), 
+        Object contextNode = contextNodes.get(0);
+        if (contextNode == null) {
+            return Boolean.FALSE;
+        }
+        return evaluate(contextNode, 
             StringFunction.evaluate(lang, nav), nav)
             ? Boolean.TRUE : Boolean.FALSE;
     }
