@@ -346,17 +346,27 @@ public class LangTest extends TestCase {
         Context context = new Context(support);
         context.setNodeSet(Collections.EMPTY_LIST);
         
-        Boolean result = (Boolean) new LangFunction().call(context, Collections.singletonList("en"));
-        assertEquals(Boolean.FALSE, result);
+        try {
+            new LangFunction().call(context, Collections.singletonList("en"));
+            fail("Allowed lang() with empty context node-set");
+        }
+        catch (FunctionCallException success) {
+            assertNotNull(success.getMessage());
+        }
         
     }
     
     public void testLangFunctionWithNullContextNode()
       throws JaxenException {
         
-        BaseXPath xpath = new DOMXPath("lang('en')");
-        Boolean result = (Boolean) xpath.evaluate(null);
-        assertEquals(Boolean.FALSE, result);
+        try {
+            BaseXPath xpath = new DOMXPath("lang('en')");
+            xpath.evaluate(null);
+            fail("Allowed lang() with null context node");
+        }
+        catch (FunctionCallException success) {
+            assertNotNull(success.getMessage());
+        }
         
     }
 
