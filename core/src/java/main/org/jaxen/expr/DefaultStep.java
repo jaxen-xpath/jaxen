@@ -138,6 +138,9 @@ public abstract class DefaultStep implements Step
                  * see any attributes or namespaces
                  */
             Iterator<?> axisNodeIter = axis.iterator(eachContextNode, support);
+            if (axisNodeIter == null || !axisNodeIter.hasNext()) {
+                continue;
+            }
             while ( axisNodeIter.hasNext() )
             {
                 Object eachAxisNode = axisNodeIter.next();
