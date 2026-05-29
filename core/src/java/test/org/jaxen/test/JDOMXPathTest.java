@@ -195,5 +195,23 @@ public class JDOMXPathTest extends TestCase
         assertEquals( 4, results.size() );
 
     }
+
+    public void testStringValueOfDeeplyNestedElement() throws JaxenException
+    {
+        XPath xpath = new JDOMXPath("string(/a)");
+
+        Element root = new Element("a");
+        Document document = new Document(root);
+        Element current = root;
+        for (int i = 0; i < 6000; i++) {
+            Element child = new Element("a");
+            current.addContent(child);
+            current = child;
+        }
+        current.addContent(new Text("value"));
+
+        String result = (String) xpath.evaluate(document);
+        assertEquals("value", result);
+    }
     
 }
