@@ -53,14 +53,22 @@ import org.jaxen.saxpath.helpers.DefaultXPathHandler;
 /** Implementation of SAXPath's <code>XPathReader</code> which
  *  generates callbacks to an <code>XPathHandler</code>.
  *
+ *  <p>Predicate nesting (e.g. {@code a[b[c[…]]]}) is limited to
+ *  200 levels. Expressions that exceed the limit receive a
+ *  {@link org.jaxen.saxpath.SAXPathException} with a descriptive
+ *  message instead of an uncontrolled {@link StackOverflowError}.</p>
+ *
  *  @author bob mcwhirter (bob@werken.com)
  */
 public class XPathReader implements org.jaxen.saxpath.XPathReader
 {
+    private static final int MAX_PREDICATE_DEPTH = 200;
+
     private ArrayList<Token>  tokens;
     private XPathLexer lexer;
 
     private XPathHandler handler;
+    private int predicateDepth;
     
     private static XPathHandler defaultHandler = new DefaultXPathHandler();
 
@@ -107,6 +115,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     {
         this.tokens = new ArrayList<Token>();
         this.lexer = new XPathLexer( xpath );
+        this.predicateDepth = 0;
     }
 
     private void pathExpr() throws SAXPathException
@@ -864,15 +873,27 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     
     void predicate() throws SAXPathException
     {
-        getXPathHandler().startPredicate();
-        
-        match( TokenTypes.LEFT_BRACKET );
-        
-        predicateExpr();
+        if ( predicateDepth >= MAX_PREDICATE_DEPTH )
+        {
+            throw createSyntaxException( "Predicate nesting depth exceeds limit of " + MAX_PREDICATE_DEPTH );
+        }
+        predicateDepth++;
+        try
+        {
+            getXPathHandler().startPredicate();
 
-        match( TokenTypes.RIGHT_BRACKET );
+            match( TokenTypes.LEFT_BRACKET );
 
-        getXPathHandler().endPredicate();
+            predicateExpr();
+
+            match( TokenTypes.RIGHT_BRACKET );
+
+            getXPathHandler().endPredicate();
+        }
+        finally
+        {
+            predicateDepth--;
+        }
     }
 
     private void predicateExpr() throws SAXPathException
