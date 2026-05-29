@@ -53,17 +53,21 @@ import org.jaxen.saxpath.helpers.DefaultXPathHandler;
 /** Implementation of SAXPath's <code>XPathReader</code> which
  *  generates callbacks to an <code>XPathHandler</code>.
  *
+ *  <p>Predicate nesting (e.g. {@code a[b[c[…]]]}) is limited to
+ *  {@value #MAX_PREDICATE_DEPTH} levels. Each additional nesting level
+ *  adds roughly 18 stack frames through the recursive-descent parser;
+ *  beyond ~490 levels the default JVM thread stack is exhausted. The
+ *  limit is safely below that threshold while still far exceeding any
+ *  predicate nesting depth found in practice. Expressions that exceed
+ *  the limit receive a {@link org.jaxen.saxpath.SAXPathException} with
+ *  a descriptive message instead of an uncontrolled
+ *  {@link StackOverflowError}.</p>
+ *
  *  @author bob mcwhirter (bob@werken.com)
  */
 public class XPathReader implements org.jaxen.saxpath.XPathReader
 {
-    /**
-     * Maximum allowed nesting depth for predicates. Each additional
-     * nesting level adds roughly 18 stack frames; 200 levels is well
-     * within the default JVM stack while still far exceeding any
-     * legitimate XPath expression.
-     */
-    public static final int MAX_PREDICATE_DEPTH = 200;
+    static final int MAX_PREDICATE_DEPTH = 200;
 
     private ArrayList<Token>  tokens;
     private XPathLexer lexer;

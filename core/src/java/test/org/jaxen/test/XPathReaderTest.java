@@ -643,7 +643,8 @@ public class XPathReaderTest extends TestCase
         // ~12 recursive stack frames through the
         // expr() -> ... -> predicateExpr() -> expr() cycle.
         // The fix adds a depth limit so a SAXPathException is thrown instead.
-        int depth = XPathReader.MAX_PREDICATE_DEPTH + 10;
+        // 210 exceeds the internal limit of 200.
+        int depth = 210;
         StringBuilder buf = new StringBuilder("a");
         for (int i = 0; i < depth; i++)
         {
