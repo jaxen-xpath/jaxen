@@ -13,3 +13,4 @@ RemoteSystemsTempFiles/
 .idea
 .factorypath
 .apt_generated/
+.aider*
