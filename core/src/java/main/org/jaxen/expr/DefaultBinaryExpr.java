@@ -42,8 +42,12 @@
 package org.jaxen.expr;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+
+import org.jaxen.Context;
+import org.jaxen.JaxenException;
 
 abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
 {
@@ -131,6 +135,86 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
         }
 
         return resultStack.pop();
+    }
+
+    /**
+     * Evaluates this binary expression tree iteratively using an explicit
+     * work stack, avoiding recursion across distinct operator types that could
+     * otherwise overflow the call stack for deeply nested expressions.
+     * 
+     * <p>Each {@code DefaultBinaryExpr} node expands into its flattened operand
+     * list via {@link #flattenChain()}, and the resulting values are combined by
+     * {@link #evaluateChain(List, Context)}.  Non-binary sub-expressions are
+     * evaluated with their own {@code evaluate} implementations.
+     */
+    public Object evaluate(Context context) throws JaxenException
+    {
+        Stack<Object> workStack = new Stack<Object>();
+        Stack<Object> resultStack = new Stack<Object>();
+
+        workStack.push(this);
+
+        while (!workStack.isEmpty())
+        {
+            Object item = workStack.pop();
+
+            if (item instanceof EvalFrame)
+            {
+                EvalFrame frame = (EvalFrame) item;
+                Object[] vals = new Object[frame.count];
+                for (int i = frame.count - 1; i >= 0; i--)
+                {
+                    vals[i] = resultStack.pop();
+                }
+                resultStack.push(frame.expr.evaluateChain(Arrays.asList(vals), context));
+            }
+            else if (item instanceof DefaultBinaryExpr)
+            {
+                DefaultBinaryExpr bin = (DefaultBinaryExpr) item;
+                List<Expr> operands = bin.flattenChain();
+                // Push the combine frame first so it fires after all operands are evaluated.
+                workStack.push(new EvalFrame(bin, operands.size()));
+                // Push operands in reverse index order so operands.get(0) is processed first.
+                for (int i = operands.size() - 1; i >= 0; i--)
+                {
+                    workStack.push(operands.get(i));
+                }
+            }
+            else
+            {
+                Expr expr = (Expr) item;
+                resultStack.push(expr.evaluate(context));
+            }
+        }
+
+        return resultStack.pop();
+    }
+
+    /**
+     * Combines a list of pre-evaluated operand values according to this
+     * operator's semantics.  The {@code values} list mirrors the list
+     * returned by {@link #flattenChain()}: {@code values.get(values.size()-1)}
+     * is the left-most (highest-precedence) operand.
+     *
+     * @param values  the already-evaluated operand values, in the same order
+     *                as the list produced by {@code flattenChain()}
+     * @param context the evaluation context
+     * @return the result of applying this operator to the operand values
+     */
+    protected abstract Object evaluateChain(List<Object> values, Context context)
+            throws JaxenException;
+
+    /** Carry state on the work stack for combining evaluated operands. */
+    private static final class EvalFrame
+    {
+        final DefaultBinaryExpr expr;
+        final int count;
+
+        EvalFrame(DefaultBinaryExpr expr, int count)
+        {
+            this.expr = expr;
+            this.count = count;
+        }
     }
 
     protected List<Expr> flattenChain()

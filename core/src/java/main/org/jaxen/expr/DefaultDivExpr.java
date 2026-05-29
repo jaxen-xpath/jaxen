@@ -63,15 +63,14 @@ class DefaultDivExpr extends DefaultMultiplicativeExpr
         return "div";
     }
 
-    public Object evaluate(Context context) throws JaxenException
+    public Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
         Navigator nav = context.getNavigator();
-        List<Expr> operands = flattenChain();
-        int index = operands.size() - 1;
-        double result = NumberFunction.evaluate( operands.get(index).evaluate( context ), nav ).doubleValue();
+        int index = values.size() - 1;
+        double result = NumberFunction.evaluate( values.get(index), nav ).doubleValue();
         for (index = index - 1; index >= 0; index--)
         {
-            Number rhsValue = NumberFunction.evaluate( operands.get(index).evaluate( context ), nav );
+            Number rhsValue = NumberFunction.evaluate( values.get(index), nav );
             result /= rhsValue.doubleValue();
         }
         return Double.valueOf( result );
