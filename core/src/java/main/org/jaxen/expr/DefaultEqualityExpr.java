@@ -55,17 +55,14 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityE
     super( lhs, rhs );
     }
 
-  
-  public Object evaluate( Context context ) throws JaxenException
+  Object evaluateChain( List<Object> values, Context context ) throws JaxenException
     {
-    List<Expr> operands = flattenChain();
     Navigator nav = context.getNavigator();
-    Object lhsValue = operands.get(operands.size() - 1).evaluate( context );
-    for (int i = operands.size() - 2; i >= 0; i--)
+    Object lhsValue = values.get(values.size() - 1);
+    for (int i = values.size() - 2; i >= 0; i--)
     {
-      Object rhsValue = operands.get(i).evaluate( context );
-      lhsValue = evaluateComparison( lhsValue, rhsValue, nav );
-    }    
+      lhsValue = evaluateComparison( lhsValue, values.get(i), nav );
+    }
     return lhsValue;
   }
   

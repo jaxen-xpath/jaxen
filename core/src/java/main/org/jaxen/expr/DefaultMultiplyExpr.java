@@ -62,14 +62,13 @@ class DefaultMultiplyExpr extends DefaultMultiplicativeExpr
         return "*";
     }
 
-    public Object evaluate( Context context ) throws JaxenException
+    Object evaluateChain( List<Object> values, Context context ) throws JaxenException
     {
         Navigator nav = context.getNavigator();
-        List<Expr> operands = flattenChain();
         double result = 1.0;
-        for (int i = operands.size() - 1; i >= 0; i--)
+        for (int i = values.size() - 1; i >= 0; i--)
         {
-            Number value = NumberFunction.evaluate( operands.get(i).evaluate( context ), nav );
+            Number value = NumberFunction.evaluate( values.get(i), nav );
             result *= value.doubleValue();
         }
         return Double.valueOf( result );

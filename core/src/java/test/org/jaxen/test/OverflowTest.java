@@ -37,9 +37,19 @@
  */
 package org.jaxen.test;
 
+import java.util.Collections;
+
 import junit.framework.TestCase;
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
 import org.jaxen.JaxenException;
+import org.jaxen.SimpleNamespaceContext;
+import org.jaxen.SimpleVariableContext;
+import org.jaxen.XPathFunctionContext;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DocumentNavigator;
+import org.jaxen.expr.DefaultXPathFactory;
+import org.jaxen.expr.Expr;
 
 public class OverflowTest extends TestCase
 {
@@ -171,5 +181,47 @@ public class OverflowTest extends TestCase
 
         Boolean result = (Boolean) new DOMXPath(expression.toString()).evaluate(null);
         assertEquals(Boolean.TRUE, result);
+    }
+
+    /**
+     * Tests that a deeply nested expression spanning many distinct operator
+     * types (alternating {@code and} and {@code or}) can be evaluated without
+     * overflowing the call stack.  Before the iterative evaluator was
+     * introduced, each cross-operator boundary added one JVM frame; at
+     * {@link #TERMS} nesting levels this reliably produced a
+     * {@code StackOverflowError}.
+     *
+     * <p>The expression tree is built programmatically rather than via the
+     * XPath parser so that the parser's own recursive descent (which also
+     * recurses per parenthesis level) does not obscure the evaluator fix.
+     */
+    public void testDeepMixedOperators() throws Exception
+    {
+        // Build a right-associative alternating and/or tree TERMS levels deep:
+        //   1 and (1 or (1 and (1 or (... 1 ...))))
+        // All leaf values are 1 (boolean-true), so the whole expression is true.
+        DefaultXPathFactory factory = new DefaultXPathFactory();
+        Expr expr = factory.createNumberExpr( 1 );
+        for ( int i = 0; i < TERMS - 1; i++ )
+        {
+            Expr lhs = factory.createNumberExpr( 1 );
+            expr = ( i % 2 == 0 )
+                ? factory.createAndExpr( lhs, expr )
+                : factory.createOrExpr( lhs, expr );
+        }
+
+        // Set up a minimal evaluation context backed by DocumentNavigator so
+        // that BooleanFunction.evaluate() has a non-null navigator available.
+        ContextSupport support = new ContextSupport(
+            new SimpleNamespaceContext(),
+            XPathFunctionContext.getInstance(),
+            new SimpleVariableContext(),
+            DocumentNavigator.getInstance()
+        );
+        Context context = new Context( support );
+        context.setNodeSet( Collections.EMPTY_LIST );
+
+        Object result = expr.evaluate( context );
+        assertEquals( Boolean.TRUE, result );
     }
 }

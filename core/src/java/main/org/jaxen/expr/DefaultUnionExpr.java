@@ -67,16 +67,15 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         return "|";
     }
 
-    public Object evaluate(Context context) throws JaxenException
+    Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
-        List<Expr> operands = flattenChain();
         List<Object> results = new ArrayList<Object>();
         Set<Object> unique = new HashSet<Object>();
 
         try {
-            for (int i = operands.size() - 1; i >= 0; i--)
+            for (int i = values.size() - 1; i >= 0; i--)
             {
-                List<Object> operandResults = (List<Object>) operands.get(i).evaluate( context );
+                List<Object> operandResults = (List<Object>) values.get(i);
                 Iterator<Object> operandIter = operandResults.iterator();
                 while ( operandIter.hasNext() )
                 {

@@ -64,13 +64,12 @@ class DefaultAndExpr extends DefaultLogicalExpr
     }
 
     
-    public Object evaluate(Context context) throws JaxenException
+    Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
-        List<Expr> operands = flattenChain();
         Navigator nav = context.getNavigator();
-        for (int i = operands.size() - 1; i >= 0; i--)
+        for (int i = values.size() - 1; i >= 0; i--)
         {
-            Boolean value = BooleanFunction.evaluate( operands.get(i).evaluate( context ), nav );
+            Boolean value = BooleanFunction.evaluate( values.get(i), nav );
             if ( !value.booleanValue() )
             {
                 return Boolean.FALSE;
