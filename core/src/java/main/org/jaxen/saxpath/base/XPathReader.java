@@ -57,10 +57,19 @@ import org.jaxen.saxpath.helpers.DefaultXPathHandler;
  */
 public class XPathReader implements org.jaxen.saxpath.XPathReader
 {
+    /**
+     * Maximum allowed nesting depth for predicates. Each additional
+     * nesting level adds roughly 18 stack frames; 200 levels is well
+     * within the default JVM stack while still far exceeding any
+     * legitimate XPath expression.
+     */
+    public static final int MAX_PREDICATE_DEPTH = 200;
+
     private ArrayList<Token>  tokens;
     private XPathLexer lexer;
 
     private XPathHandler handler;
+    private int predicateDepth;
     
     private static XPathHandler defaultHandler = new DefaultXPathHandler();
 
@@ -107,6 +116,7 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     {
         this.tokens = new ArrayList<Token>();
         this.lexer = new XPathLexer( xpath );
+        this.predicateDepth = 0;
     }
 
     private void pathExpr() throws SAXPathException
@@ -864,15 +874,27 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
     
     void predicate() throws SAXPathException
     {
-        getXPathHandler().startPredicate();
-        
-        match( TokenTypes.LEFT_BRACKET );
-        
-        predicateExpr();
+        if ( predicateDepth >= MAX_PREDICATE_DEPTH )
+        {
+            throw createSyntaxException( "Predicate nesting depth exceeds limit of " + MAX_PREDICATE_DEPTH );
+        }
+        predicateDepth++;
+        try
+        {
+            getXPathHandler().startPredicate();
 
-        match( TokenTypes.RIGHT_BRACKET );
+            match( TokenTypes.LEFT_BRACKET );
 
-        getXPathHandler().endPredicate();
+            predicateExpr();
+
+            match( TokenTypes.RIGHT_BRACKET );
+
+            getXPathHandler().endPredicate();
+        }
+        finally
+        {
+            predicateDepth--;
+        }
     }
 
     private void predicateExpr() throws SAXPathException

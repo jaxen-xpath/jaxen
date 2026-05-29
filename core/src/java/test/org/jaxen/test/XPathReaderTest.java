@@ -636,4 +636,50 @@ public class XPathReaderTest extends TestCase
         assertTrue(result);
     }
 
+    public void testDeeplyNestedPredicatesThrowsSAXPathException() throws SAXPathException
+    {
+        // Regression test: deeply nested predicates such as a[b[c[d[...]]]]
+        // previously caused a StackOverflowError because each '[' pair added
+        // ~12 recursive stack frames through the
+        // expr() -> ... -> predicateExpr() -> expr() cycle.
+        // The fix adds a depth limit so a SAXPathException is thrown instead.
+        int depth = XPathReader.MAX_PREDICATE_DEPTH + 10;
+        StringBuilder buf = new StringBuilder("a");
+        for (int i = 0; i < depth; i++)
+        {
+            buf.append("[b");
+        }
+        buf.append("[1]");
+        for (int i = 0; i < depth; i++)
+        {
+            buf.append("]");
+        }
+        try
+        {
+            reader.parse(buf.toString());
+            fail("Should have thrown SAXPathException for predicate nesting depth of " + depth);
+        }
+        catch (SAXPathException e)
+        {
+            assertTrue(e.getMessage().contains("Predicate nesting depth exceeds limit"));
+        }
+    }
+
+    public void testModeratelyNestedPredicatesParseSuccessfully() throws SAXPathException
+    {
+        // Verify that predicate nesting well below the limit still parses.
+        int depth = 10;
+        StringBuilder buf = new StringBuilder("a");
+        for (int i = 0; i < depth; i++)
+        {
+            buf.append("[b");
+        }
+        buf.append("[1]");
+        for (int i = 0; i < depth; i++)
+        {
+            buf.append("]");
+        }
+        reader.parse(buf.toString());
+    }
+
 }
