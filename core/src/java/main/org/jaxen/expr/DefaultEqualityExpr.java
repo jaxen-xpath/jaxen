@@ -55,7 +55,7 @@ abstract class DefaultEqualityExpr extends DefaultTruthExpr implements EqualityE
     super( lhs, rhs );
     }
 
-  protected Object evaluateChain( List<Object> values, Context context ) throws JaxenException
+  Object evaluateChain( List<Object> values, Context context ) throws JaxenException
     {
     Navigator nav = context.getNavigator();
     Object lhsValue = values.get(values.size() - 1);

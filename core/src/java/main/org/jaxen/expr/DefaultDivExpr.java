@@ -63,7 +63,7 @@ class DefaultDivExpr extends DefaultMultiplicativeExpr
         return "div";
     }
 
-    protected Object evaluateChain(List<Object> values, Context context) throws JaxenException
+    Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
         Navigator nav = context.getNavigator();
         int index = values.size() - 1;

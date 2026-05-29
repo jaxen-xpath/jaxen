@@ -201,7 +201,7 @@ abstract class DefaultBinaryExpr extends DefaultExpr implements BinaryExpr
      * @param context the evaluation context
      * @return the result of applying this operator to the operand values
      */
-    protected abstract Object evaluateChain(List<Object> values, Context context)
+    abstract Object evaluateChain(List<Object> values, Context context)
             throws JaxenException;
 
     /** Carry state on the work stack for combining evaluated operands. */

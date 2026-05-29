@@ -65,7 +65,7 @@ class DefaultOrExpr extends DefaultLogicalExpr
         return "or";
     }
 
-    protected Object evaluateChain(List<Object> values, Context context) throws JaxenException
+    Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
         Navigator nav = context.getNavigator();
         for (int i = values.size() - 1; i >= 0; i--)
