@@ -75,6 +75,7 @@ public class BaseXPath implements XPath, Serializable
 {
 
     private static final long serialVersionUID = -1993731281300293168L;
+    private static final String STACK_OVERFLOW_MESSAGE = "XPath expression is too deeply nested";
 
     /** Original expression text. */
     private final String exprText;
@@ -112,6 +113,10 @@ public class BaseXPath implements XPath, Serializable
         catch (SAXPathException e)
         {
             throw new JaxenException( e );
+        }
+        catch (StackOverflowError e)
+        {
+            throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
         }
 
         this.exprText = xpathExpr;
@@ -649,9 +654,15 @@ public class BaseXPath implements XPath, Serializable
      */
     protected List selectNodesForContext(Context context) throws JaxenException
     {
-        List list = this.xpath.asList( context );
-        return list;
-        
+        try
+        {
+            List list = this.xpath.asList( context );
+            return list;
+        }
+        catch (StackOverflowError e)
+        {
+            throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
+        }
     }
  
 

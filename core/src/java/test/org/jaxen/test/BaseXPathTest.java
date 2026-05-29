@@ -44,6 +44,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -53,12 +54,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jaxen.BaseXPath;
+import org.jaxen.Context;
 import org.jaxen.JaxenException;
 import org.jaxen.NamespaceContext;
 import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.DocumentNavigator;
+import org.jaxen.expr.Expr;
+import org.jaxen.expr.XPathExpr;
 import org.jaxen.dom.NamespaceNode;
 import org.jaxen.pattern.Pattern;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
@@ -1225,6 +1229,45 @@ public class BaseXPathTest extends TestCase {
         context.add(c);
         List<?> result = xpath.selectNodes(context);
         assertEquals(z, result.get(0));
+    }
+
+    public void testStackOverflowErrorInEvaluationIsWrappedAsJaxenException() throws Exception {
+        BaseXPath xpath = new DOMXPath("1");
+        Field xpathField = BaseXPath.class.getDeclaredField("xpath");
+        xpathField.setAccessible(true);
+        xpathField.set(xpath, new StackOverflowXPathExpr());
+
+        try {
+            xpath.evaluate(doc);
+            fail("Expected JaxenException");
+        }
+        catch (JaxenException ex) {
+            assertEquals("XPath expression is too deeply nested", ex.getMessage());
+            assertTrue(ex.getCause() instanceof StackOverflowError);
+        }
+    }
+
+    private static final class StackOverflowXPathExpr implements XPathExpr {
+
+        private static final long serialVersionUID = 1L;
+
+        public Expr getRootExpr() {
+            return null;
+        }
+
+        public void setRootExpr(Expr rootExpr) {
+        }
+
+        public String getText() {
+            return "1";
+        }
+
+        public void simplify() {
+        }
+
+        public List asList(Context context) throws JaxenException {
+            throw new StackOverflowError();
+        }
     }
     
 }
