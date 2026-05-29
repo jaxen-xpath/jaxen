@@ -85,29 +85,55 @@ public class LocationPathPattern extends Pattern {
 
     public Pattern simplify()
     {
-        if ( parentPattern != null )
-        {
-            parentPattern = parentPattern.simplify();
-        }
         if ( ancestorPattern != null )
         {
             ancestorPattern = ancestorPattern.simplify();
         }
-        if ( filters == null )
+
+        List<LocationPathPattern> chain = new ArrayList<LocationPathPattern>();
+        chain.add(this);
+        LocationPathPattern p = this;
+        while (p.parentPattern instanceof LocationPathPattern)
         {
-            if ( parentPattern == null && ancestorPattern == null )
+            p = (LocationPathPattern) p.parentPattern;
+            if (p.ancestorPattern != null)
             {
-                return nodeTest;
+                p.ancestorPattern = p.ancestorPattern.simplify();
             }
-            if ( parentPattern != null && ancestorPattern == null )
+            chain.add(p);
+        }
+
+        Pattern result = chain.get(chain.size() - 1).parentPattern;
+        if (result != null)
+        {
+            result = result.simplify();
+        }
+
+        for (int i = chain.size() - 1; i >= 0; i--)
+        {
+            LocationPathPattern pattern = chain.get(i);
+
+            if (pattern.filters == null)
             {
-                if ( nodeTest instanceof AnyNodeTest )
+                if (result == null && pattern.ancestorPattern == null)
                 {
-                    return parentPattern;
+                    result = pattern.nodeTest;
+                    continue;
+                }
+                if (result != null && pattern.ancestorPattern == null)
+                {
+                    if (pattern.nodeTest instanceof AnyNodeTest)
+                    {
+                        continue;
+                    }
                 }
             }
+
+            pattern.parentPattern = result;
+            result = pattern;
         }
-        return this;
+
+        return result;
     }
     
     /** Adds a filter to this pattern
