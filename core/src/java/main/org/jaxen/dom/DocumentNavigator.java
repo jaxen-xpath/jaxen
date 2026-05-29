@@ -1098,14 +1098,13 @@ public class DocumentNavigator extends DefaultNavigator
 
         public Object next ()
         {
-            Node attr = map.item(pos++);
-            if (attr == null) throw new NoSuchElementException();
-            else if ("http://www.w3.org/2000/xmlns/".equals(attr.getNamespaceURI())) {
-              // XPath doesn't consider namespace declarations to be attributes 
-              // so skip it and go to the next one
-              return next();
+            while (true) {
+                Node attr = map.item(pos++);
+                if (attr == null) throw new NoSuchElementException();
+                else if (! "http://www.w3.org/2000/xmlns/".equals(attr.getNamespaceURI())) {
+                    return attr;
+                }
             }
-            else return attr;
         }
 
         public void remove ()
