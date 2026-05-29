@@ -162,12 +162,21 @@ public class LocationPathPattern extends Pattern {
             return false;
         }
 
-        // Walk the parentPattern chain iteratively instead of recursively
+        // Collect the chain of all LocationPathPatterns from innermost to outermost
+        List<LocationPathPattern> chain = new ArrayList<LocationPathPattern>(8);
+        List<Object> chainNodes = new ArrayList<Object>(8);
         LocationPathPattern pattern = this;
         Object currentNode = node;
 
-        while (pattern.parentPattern instanceof LocationPathPattern)
+        while (true)
         {
+            chain.add(pattern);
+            chainNodes.add(currentNode);
+
+            if (!(pattern.parentPattern instanceof LocationPathPattern))
+            {
+                break;
+            }
             LocationPathPattern parent = (LocationPathPattern) pattern.parentPattern;
             currentNode = navigator.getParentNode( currentNode );
             if ( currentNode == null )
@@ -195,50 +204,50 @@ public class LocationPathPattern extends Pattern {
             }
         }
 
-        if (ancestorPattern != null) {
-            Object ancestor = navigator.getParentNode( node );
-            while (true)
-            {
-                if ( ancestorPattern.matches( ancestor, context ) )
-                {
-                    break;
-                }
-                if ( ancestor == null )
-                {
-                    return false;
-                }
-                if ( navigator.isDocument( ancestor ) )
-                {
-                    return false;
-                }
-                ancestor = navigator.getParentNode( ancestor );
-            }
-        }
-
-        if (filters != null)
+        // Process ancestorPattern and filters from outermost to innermost,
+        // mirroring the post-order work the recursive matches() would do
+        for (int i = chain.size() - 1; i >= 0; i--)
         {
-            List list = Collections.singletonList(node);
+            LocationPathPattern p = chain.get(i);
+            Object n = chainNodes.get(i);
 
-            context.setNodeSet( list );
-
-            boolean answer = true;
-
-            for (Iterator iter = filters.iterator(); iter.hasNext(); )
+            if (p.ancestorPattern != null)
             {
-                FilterExpr filter = (FilterExpr) iter.next();
-
-                if ( ! filter.asBoolean( context ) )
+                Object ancestor = navigator.getParentNode( n );
+                while (true)
                 {
-                    answer = false;
-                    break;
+                    if ( p.ancestorPattern.matches( ancestor, context ) )
+                    {
+                        break;
+                    }
+                    if ( ancestor == null )
+                    {
+                        return false;
+                    }
+                    if ( navigator.isDocument( ancestor ) )
+                    {
+                        return false;
+                    }
+                    ancestor = navigator.getParentNode( ancestor );
                 }
             }
-            // restore context
 
-            context.setNodeSet( list );
-
-            return answer;
+            if (p.filters != null)
+            {
+                List list = Collections.singletonList( n );
+                context.setNodeSet( list );
+                for (Iterator iter = p.filters.iterator(); iter.hasNext(); )
+                {
+                    FilterExpr filter = (FilterExpr) iter.next();
+                    if ( ! filter.asBoolean( context ) )
+                    {
+                        return false;
+                    }
+                }
+                context.setNodeSet( list );
+            }
         }
+
         return true;
     }
     

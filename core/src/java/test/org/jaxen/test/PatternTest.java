@@ -545,4 +545,85 @@ public class PatternTest extends TestCase {
             pattern.matches(doc.getDocumentElement(), context));
     }
 
+    // --- Intermediate-step ancestorPattern and filter tests ---
+
+    public void testIntermediateFilterMatches() throws Exception {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element a = doc.createElement("a");
+        a.setAttribute("x", "1");
+        root.appendChild(a);
+        Element b = doc.createElement("b");
+        a.appendChild(b);
+
+        ContextSupport support = new ContextSupport(
+            null, null, null, DocumentNavigator.getInstance());
+        Context ctx = new Context(support);
+
+        Pattern pattern = PatternParser.parse("root/a[@x]/b");
+        assertTrue("root/a[@x]/b should match <b> when parent <a> has @x",
+            pattern.matches(b, ctx));
+    }
+
+    public void testIntermediateFilterDoesNotMatch() throws Exception {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element a = doc.createElement("a");
+        root.appendChild(a);
+        Element b = doc.createElement("b");
+        a.appendChild(b);
+
+        ContextSupport support = new ContextSupport(
+            null, null, null, DocumentNavigator.getInstance());
+        Context ctx = new Context(support);
+
+        Pattern pattern = PatternParser.parse("root/a[@x]/b");
+        assertFalse("root/a[@x]/b should NOT match <b> when parent <a> lacks @x",
+            pattern.matches(b, ctx));
+    }
+
+    public void testIntermediateDescendantMatches() throws Exception {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element x = doc.createElement("x");
+        root.appendChild(x);
+        Element b = doc.createElement("b");
+        x.appendChild(b);
+        Element c = doc.createElement("c");
+        b.appendChild(c);
+
+        ContextSupport support = new ContextSupport(
+            null, null, null, DocumentNavigator.getInstance());
+        Context ctx = new Context(support);
+
+        Pattern pattern = PatternParser.parse("root//b/c");
+        assertTrue("root//b/c should match <c> when <b> is descendant of <root>",
+            pattern.matches(c, ctx));
+    }
+
+    public void testIntermediateDescendantDoesNotMatch() throws Exception {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = builder.newDocument();
+        Element root = doc.createElement("root");
+        doc.appendChild(root);
+        Element a = doc.createElement("a");
+        root.appendChild(a);
+        Element c = doc.createElement("c");
+        a.appendChild(c);
+
+        ContextSupport support = new ContextSupport(
+            null, null, null, DocumentNavigator.getInstance());
+        Context ctx = new Context(support);
+
+        Pattern pattern = PatternParser.parse("root//b/c");
+        assertFalse("root//b/c should NOT match <c> when <b> is absent from ancestor chain",
+            pattern.matches(c, ctx));
+    }
+
 }
