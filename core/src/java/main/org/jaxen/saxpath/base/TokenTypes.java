@@ -122,7 +122,7 @@ class TokenTypes
             case STAR:
                 return "*";
             case STAR_OPERATOR:
-                    return "*";
+                return "*";
             case DIV:
                 return "div";
             case MOD:
