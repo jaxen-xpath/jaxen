@@ -40,6 +40,7 @@ package org.jaxen.jdom;
  * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
 */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -471,26 +472,29 @@ public class DocumentNavigator extends DefaultNavigator implements NamedAccessNa
         Element elem = (Element) obj;
 
         StringBuilder builder = new StringBuilder();
+        ArrayList stack = new ArrayList();
+        stack.add(elem.getContent().iterator());
 
-        List     content     = elem.getContent();
-        Iterator contentIter = content.iterator();
-        Object   each        = null;
+        while ( !stack.isEmpty() ) {
+            Iterator contentIter = (Iterator) stack.get(stack.size() - 1);
+            if ( contentIter.hasNext() ) {
+                Object each = contentIter.next();
 
-        while ( contentIter.hasNext() )
-        {
-            each = contentIter.next();
-
-            if ( each instanceof Text )
-            {
-                builder.append( ((Text)each).getText() );
+                if ( each instanceof Text )
+                {
+                    builder.append( ((Text)each).getText() );
+                }
+                else if ( each instanceof CDATA )
+                {
+                    builder.append( ((CDATA)each).getText() );
+                }
+                else if ( each instanceof Element )
+                {
+                    stack.add(((Element) each).getContent().iterator());
+                }
             }
-            else if ( each instanceof CDATA )
-            {
-                builder.append( ((CDATA)each).getText() );
-            }
-            else if ( each instanceof Element )
-            {
-                builder.append( getElementStringValue( each ) );
+            else {
+                stack.remove(stack.size() - 1);
             }
         }
 

@@ -183,4 +183,22 @@ public class StringTest extends TestCase {
         }
         
     }
+    
+    public void testStringValueOfDeeplyNestedElement() throws JaxenException {
+
+        XPath xpath = new DOMXPath("string(/a)");
+
+        org.w3c.dom.Element root = doc.createElementNS("", "a");
+        doc.appendChild(root);
+        org.w3c.dom.Element current = root;
+        for (int i = 0; i < 6000; i++) {
+            org.w3c.dom.Element child = doc.createElementNS("", "a");
+            current.appendChild(child);
+            current = child;
+        }
+        current.appendChild(doc.createTextNode("value"));
+
+        String result = (String) xpath.evaluate(doc);
+        assertEquals("value", result);
+    }
 }
