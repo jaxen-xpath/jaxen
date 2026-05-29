@@ -67,7 +67,7 @@ class DefaultUnionExpr extends DefaultBinaryExpr implements UnionExpr
         return "|";
     }
 
-    public Object evaluateChain(List<Object> values, Context context) throws JaxenException
+    protected Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
         List<Object> results = new ArrayList<Object>();
         Set<Object> unique = new HashSet<Object>();

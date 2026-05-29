@@ -62,7 +62,7 @@ class DefaultPlusExpr extends DefaultAdditiveExpr
         return "+";
     }
 
-    public Object evaluateChain(List<Object> values, Context context) throws JaxenException
+    protected Object evaluateChain(List<Object> values, Context context) throws JaxenException
     {
         Navigator nav = context.getNavigator();
         double result = 0.0;

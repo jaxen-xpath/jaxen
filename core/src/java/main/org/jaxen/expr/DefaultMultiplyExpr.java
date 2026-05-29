@@ -62,7 +62,7 @@ class DefaultMultiplyExpr extends DefaultMultiplicativeExpr
         return "*";
     }
 
-    public Object evaluateChain( List<Object> values, Context context ) throws JaxenException
+    protected Object evaluateChain( List<Object> values, Context context ) throws JaxenException
     {
         Navigator nav = context.getNavigator();
         double result = 1.0;
