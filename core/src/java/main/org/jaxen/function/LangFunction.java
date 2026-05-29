@@ -137,6 +137,9 @@ public class LangFunction implements Function
     private static Boolean evaluate(List contextNodes, Object lang, Navigator nav)
       throws UnsupportedAxisException
     {
+        if (contextNodes.isEmpty()) {
+            return Boolean.FALSE;
+        }
         return evaluate(contextNodes.get(0), 
             StringFunction.evaluate(lang, nav), nav)
             ? Boolean.TRUE : Boolean.FALSE;
@@ -182,4 +185,3 @@ public class LangFunction implements Function
     }
     
 }
-
