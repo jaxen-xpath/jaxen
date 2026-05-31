@@ -48,7 +48,6 @@ import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.DocumentNavigator;
 import org.jaxen.pattern.Pattern;
 import org.jaxen.pattern.PatternParser;
-import org.jaxen.saxpath.SAXPathException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
