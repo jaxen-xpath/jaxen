@@ -123,7 +123,7 @@ public class NumberTest extends TestCase {
         assertEquals(1.0, NumberFunction.evaluate(new Boolean(true), navigator).doubleValue(), tolerance);
     }
 
-    public void testNullNavigatorThrowsExceptionOnUnknownObjectType() {
+    public void testEvaluateThrowsNullPointExceptionOnNullNavigator() {
         try {
             NumberFunction.evaluate(new Object(), null);
             fail("Expected NullPointerException");
