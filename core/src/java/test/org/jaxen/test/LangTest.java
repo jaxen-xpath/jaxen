@@ -40,6 +40,7 @@
 package org.jaxen.test;
 
 import java.util.List;
+import java.util.Collections;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,9 +49,16 @@ import javax.xml.parsers.ParserConfigurationException;
 import junit.framework.TestCase;
 
 import org.jaxen.BaseXPath;
+import org.jaxen.Context;
+import org.jaxen.ContextSupport;
 import org.jaxen.FunctionCallException;
 import org.jaxen.JaxenException;
+import org.jaxen.SimpleFunctionContext;
+import org.jaxen.SimpleNamespaceContext;
+import org.jaxen.SimpleVariableContext;
 import org.jaxen.dom.DOMXPath;
+import org.jaxen.dom.DocumentNavigator;
+import org.jaxen.function.LangFunction;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -325,6 +333,42 @@ public class LangTest extends TestCase {
         assertEquals(0, result.size());
         
     }    
+
+    public void testLangFunctionWithEmptyContextNodeSet() 
+      throws JaxenException {
+        
+        ContextSupport support = new ContextSupport(
+            new SimpleNamespaceContext(),
+            new SimpleFunctionContext(),
+            new SimpleVariableContext(),
+            DocumentNavigator.getInstance()
+        );
+        Context context = new Context(support);
+        context.setNodeSet(Collections.EMPTY_LIST);
+        
+        try {
+            new LangFunction().call(context, Collections.singletonList("en"));
+            fail("Allowed lang() with empty context node-set");
+        }
+        catch (FunctionCallException success) {
+            assertNotNull(success.getMessage());
+        }
+        
+    }
+    
+    public void testLangFunctionWithNullContextNode()
+      throws JaxenException {
+        
+        try {
+            BaseXPath xpath = new DOMXPath("lang('en')");
+            xpath.evaluate(null);
+            fail("Allowed lang() with null context node");
+        }
+        catch (FunctionCallException success) {
+            assertNotNull(success.getMessage());
+        }
+        
+    }
 
     public void testLangFunctionRequiresOneArgument() 
       throws JaxenException {

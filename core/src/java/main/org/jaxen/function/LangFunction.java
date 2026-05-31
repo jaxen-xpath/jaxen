@@ -135,9 +135,16 @@ public class LangFunction implements Function
     }
 
     private static Boolean evaluate(List contextNodes, Object lang, Navigator nav)
-      throws UnsupportedAxisException
+      throws UnsupportedAxisException, FunctionCallException
     {
-        return evaluate(contextNodes.get(0), 
+        if (contextNodes.isEmpty()) {
+            throw new FunctionCallException("lang() requires a non-empty context node-set.");
+        }
+        Object contextNode = contextNodes.get(0);
+        if (contextNode == null) {
+            throw new FunctionCallException("lang() requires a non-null context node.");
+        }
+        return evaluate(contextNode, 
             StringFunction.evaluate(lang, nav), nav)
             ? Boolean.TRUE : Boolean.FALSE;
     }
@@ -182,4 +189,3 @@ public class LangFunction implements Function
     }
     
 }
-
