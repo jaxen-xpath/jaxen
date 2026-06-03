@@ -367,6 +367,15 @@ public class XPathReader implements org.jaxen.saxpath.XPathReader
                 {
                     bracketDepth--;
                 }
+
+                if (bracketDepth == 0 && parenDepth >= 1 && parenDepth < leadingParens)
+                {
+                    int next = LT(i + 1).getTokenType();
+                    if (next != TokenTypes.RIGHT_PAREN && next != TokenTypes.LEFT_BRACKET)
+                    {
+                        return false;
+                    }
+                }
                 continue;
             }
 
