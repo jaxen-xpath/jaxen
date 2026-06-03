@@ -842,7 +842,7 @@ public class BaseXPathTest extends TestCase {
     public void testDebug() throws JaxenException {
         BaseXPath xpath = new DOMXPath("/b/c");
         assertEquals(
-          "[(DefaultXPath): [(DefaultAbsoluteLocationPath): [(DefaultNameStep): b]/[(DefaultNameStep): c]]]", 
+          "[(DefaultXPath): [(DefaultPathExpr): [(DefaultAbsoluteLocationPath): [(DefaultNameStep): b]/[(DefaultNameStep): c]]]]", 
           xpath.debug()
         );
         
@@ -850,7 +850,9 @@ public class BaseXPathTest extends TestCase {
     
     public void testGetRootExpr() throws JaxenException {
         BaseXPath xpath = new DOMXPath("/b/c");
-        assertTrue(xpath.getRootExpr() instanceof org.jaxen.expr.LocationPath);
+        assertTrue(xpath.getRootExpr() instanceof org.jaxen.expr.PathExpr);
+        assertTrue(((org.jaxen.expr.PathExpr) xpath.getRootExpr()).getLocationPath()
+          instanceof org.jaxen.expr.LocationPath);
     } 
     
     public void testUnionUsesDocumentOrder() throws JaxenException {
