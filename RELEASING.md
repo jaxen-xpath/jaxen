@@ -10,7 +10,7 @@ qualify; add outside collaborators as needed before attempting a release.
    `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
    release asset links in `releases.xml` using URLs in the form
    `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`.
-   Make a PR and merge the changes to master. 
+   Make a PR and merge the changes to master.
 2. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
 3. Click the **Run workflow** dropdown (top-right of the workflow runs list).
 4. Ensure **Branch: master** is selected.
