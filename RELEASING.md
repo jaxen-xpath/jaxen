@@ -4,7 +4,7 @@
 
 Only GitHub users with **write access** (or higher) to this repository can
 trigger `workflow_dispatch` workflows.  Repository owners and admins always
-qualify; add outside collaborators as needed before attempting a release.
+qualify. Add outside collaborators as needed before attempting a release.
 
 1. Update version number in `src/site/xdoc/index.xml`. Update release notes in
    `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
@@ -25,7 +25,8 @@ qualify; add outside collaborators as needed before attempting a release.
 8. Merge the automatically created pull request from `release/X.Y.Z` into
    `master` to land the release and post-release version-bump commits.
 9. Publish the validated deployment in
-10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll
+10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll
+
 10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll 
 usually want to summarize the important points manually.
 11. Regenerate the project site:
