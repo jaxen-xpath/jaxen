@@ -10,7 +10,8 @@ qualify; add outside collaborators as needed before attempting a release.
    `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
    release asset links in `releases.xml` using URLs in the form
    `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`.
-   Make a PR and merge the changes to master.
+   Make a PR and merge the changes to master.
+
 2. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
 3. Click the **Run workflow** dropdown (top-right of the workflow runs list).
 4. Ensure **Branch: master** is selected.
@@ -24,7 +25,7 @@ qualify; add outside collaborators as needed before attempting a release.
 8. Merge the automatically created pull request from `release/X.Y.Z` into
    `master` to land the release and post-release version-bump commits.
 9. Publish the validated deployment in
-   [Central Publishing Portal](https://central.sonatype.com/).
+10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll
 10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll 
 usually want to summarize the important points manually.
 11. Regenerate the project site:
