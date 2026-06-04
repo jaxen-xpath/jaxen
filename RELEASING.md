@@ -1,5 +1,43 @@
 
-## Automated release process (recommended)
+
+## Releasing
+
+Only GitHub users with **write access** (or higher) to this repository can
+trigger `workflow_dispatch` workflows.  Repository owners and admins always
+qualify. Add outside collaborators as needed before attempting a release.
+
+1. Update version number in `src/site/xdoc/index.xml`. Update release notes in
+   `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
+   release asset links in `releases.xml` using URLs in the form
+   `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`.
+   Make a PR and merge the changes to master.
+
+2. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
+3. Click the **Run workflow** dropdown (top-right of the workflow runs list).
+4. Ensure **Branch: master** is selected.
+5. Fill in the two inputs:
+   * **Version to release** – the version being released, e.g. `2.0.1`
+   * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
+6. Click the green **Run workflow** button.
+7. Wait for the workflow deployment to appear in the
+   [Central Publishing Portal](https://central.sonatype.com/) and confirm it
+   passes validation.
+8. Merge the automatically created pull request from `release/X.Y.Z` into
+   `master` to land the release and post-release version-bump commits.
+9. Publish the validated deployment in
+10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll
+
+10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll 
+usually want to summarize the important points manually.
+11. Regenerate the project site:
+
+```
+mvn site site:stage
+```
+
+12. Upload the generated content to IBiblio using sftp.
+
+## GitHub Actions workflow
 
 Releases are performed through the **Release** GitHub Actions workflow, which is
 triggered manually from the GitHub Actions UI.  The workflow:
@@ -98,32 +136,6 @@ below.
 | `CENTRAL_USERNAME` | Central Publishing Portal **User Token** username (see above — not your account username) |
 | `CENTRAL_TOKEN`    | Central Publishing Portal **User Token** password (see above — not your account password) |
 
-### Running a release
-
-Only GitHub users with **write access** (or higher) to this repository can
-trigger `workflow_dispatch` workflows.  Repository owners and admins always
-qualify; add outside collaborators as needed before attempting a release.
-
-1. Update version number in `src/site/xdoc/index.xml`. Update release notes in
-   `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
-   release asset links in `releases.xml` using URLs in the form
-   `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`.
-   Make a PR and merge the changes to master. 
-2. Go to [**Actions → Release**](https://github.com/jaxen-xpath/jaxen/actions/workflows/release.yml) on GitHub.
-3. Click the **Run workflow** dropdown (top-right of the workflow runs list).
-4. Ensure **Branch: master** is selected.
-5. Fill in the two inputs:
-   * **Version to release** – the version being released, e.g. `2.0.1`
-   * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
-6. Click the green **Run workflow** button.
-7. Wait for the workflow deployment to appear in the
-   [Central Publishing Portal](https://central.sonatype.com/) and confirm it
-   passes validation.
-8. Merge the automatically created pull request from `release/X.Y.Z` into
-   `master` to land the release and post-release version-bump commits.
-9. Publish the validated deployment in
-   [Central Publishing Portal](https://central.sonatype.com/).
-
 ---
 
 ## Version conventions
@@ -168,17 +180,4 @@ Bump `master` to the next SNAPSHOT version in all pom.xml files and push.
 
 Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in the form `vX.Y.Z`.
 
-## Publish the Site
 
-Update the release notes on the GitHub tag.
-
-The GitHub release will prepopulate with a list of PR titles, but you'll 
-usually want to summarize the important points manually.
-
-Regenerate the project site:
-
-```
-mvn site:stage
-```
-
-Upload the generated content to IBiblio using sftp.
