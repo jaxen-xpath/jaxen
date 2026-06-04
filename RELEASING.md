@@ -32,7 +32,7 @@ usually want to summarize the important points manually.
 11. Regenerate the project site:
 
 ```
-mvn site:site site:stage
+mvn site site:stage
 ```
 
 12. Upload the generated content to IBiblio using sftp.
