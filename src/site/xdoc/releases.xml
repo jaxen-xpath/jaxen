@@ -24,7 +24,7 @@ The current version is 2.0.5. This release is completely API compatible with ver
       </ul>
 
 <p>
-Version 2.0.5 fixed a bug in XPath parser precedence so expressions that combine the union
+Version 2.0.4 fixed a bug in XPath parser precedence so expressions that combine the union
 operator with additive expressions are now evaluated correctly. It also deprecated the simplify
 method and replaced recursive algorithms to enable Jaxen to handle longer and more
 complex queries while preventing one class of denial-of-service attacks.
