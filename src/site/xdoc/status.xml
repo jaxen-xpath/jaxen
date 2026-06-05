@@ -10,8 +10,12 @@
     
     <section name="Change History">
 
+      <section name="Jaxen 2.0.6">
+        <p>Version 2.0.6 fixes one bug in the new iterative algorithms that incorrectly evaluated some parenthesizedf XPath expressions
+          like ((//A)[2]//B)[1]/C
+        </p>
+      </section>
       
-
       <section name="Jaxen 2.0.5">
         <p>Version 2.0.5 replaces still more recursive algorithms from the 
         core parser. This enables Jaxen to handle even larger and more complex XPath expressions.</p>
