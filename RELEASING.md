@@ -44,7 +44,7 @@ triggered manually from the GitHub Actions UI.  The workflow:
 
 1. Sets the POM version to the chosen release version.
 2. Updates the `project.build.outputTimestamp` property (reproducible builds).
-3. Updates `README.md` and the `index.xml` site pages with the new release version
+3. Updates `README.md` and the `index.xml`/`releases.xml` site pages with the new release version
    (dependency snippets and current-version text).
 4. Builds and GPG-signs the artifacts, then uploads them to the
    [Central Publishing Portal](https://central.sonatype.com/).
@@ -179,5 +179,4 @@ $ git push origin vX.Y.Z
 Bump `master` to the next SNAPSHOT version in all pom.xml files and push.
 
 Create a [GitHub release](https://github.com/jaxen-xpath/jaxen/releases/new) in the form `vX.Y.Z`.
-
 

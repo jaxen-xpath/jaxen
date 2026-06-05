@@ -71,6 +71,9 @@ jobs:
           sed -i "s|The current version is <strong>[^<]*</strong>|The current version is <strong>${{ inputs.releaseVersion }}</strong>|" src/site/xdoc/index.xml
           sed -i '/<artifactId>jaxen<\/artifactId>/{n;s|<version>[^<]*</version>|<version>${{ inputs.releaseVersion }}</version>|}' src/site/xdoc/index.xml
           sed -i "s|compile 'jaxen:jaxen:[^']*'|compile 'jaxen:jaxen:${{ inputs.releaseVersion }}'|" src/site/xdoc/index.xml
+          sed -i "0,/The current version is [0-9.]*\\./s//The current version is ${{ inputs.releaseVersion }}./" src/site/xdoc/releases.xml
+          sed -i '/<ul>/,/<\/ul>/ s|releases/download/v[0-9.]*/jaxen-[0-9.]*-|releases/download/v${{ inputs.releaseVersion }}/jaxen-${{ inputs.releaseVersion }}-|g' src/site/xdoc/releases.xml
+          sed -E -i '/<ul>/,/<\/ul>/ s#>[0-9.]* (binaries|sources)#>${{ inputs.releaseVersion }} \1#g' src/site/xdoc/releases.xml
 
       - name: Run tests
         run: mvn --batch-mode test
@@ -84,7 +87,7 @@ jobs:
 
       - name: Commit release version and tag
         run: |
-          git add pom.xml core/pom.xml integration-tests/pom.xml README.md src/site/xdoc/index.xml
+          git add pom.xml core/pom.xml integration-tests/pom.xml README.md src/site/xdoc/index.xml src/site/xdoc/releases.xml
           git commit -m "Release ${{ inputs.releaseVersion }}"
           git tag -a "v${{ inputs.releaseVersion }}" -m "Release ${{ inputs.releaseVersion }}"
 
