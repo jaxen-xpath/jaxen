@@ -70,6 +70,7 @@ public class XPathReaderTest extends TestCase
         "$varname[@a='1']",
         "//attribute::*[.!='crunchy']",
         "'//*[contains(string(text()),\"yada yada\")]'",
+        "((//AST_NODE_TYPE_A)[2]//AST_NODE_TYPE_B)[1]/AST_NODE_TYPE_C"
     };
 
     private String[][] bogusPaths = {
