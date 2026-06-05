@@ -133,6 +133,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Determine the previous release tag so --notes-start-tag scopes the
+          # auto-generated release notes to only PRs since that tag.
+          PREV_TAG=$(git describe --abbrev=0 --tags "v${{ inputs.releaseVersion }}^" 2>/dev/null || true)
+          NOTES_OPTS=()
+          if [ -n "${PREV_TAG}" ]; then
+            NOTES_OPTS+=(--notes-start-tag "${PREV_TAG}")
+          fi
           gh release create "v${{ inputs.releaseVersion }}" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-src.zip" \
             "core/target/jaxen-${{ inputs.releaseVersion }}-src.tar.gz" \
@@ -143,4 +150,5 @@ jobs:
             "core/target/jaxen-${{ inputs.releaseVersion }}-bin.tar.bz2" \
             --title "${{ inputs.releaseVersion }}" \
             --generate-notes \
+            "${NOTES_OPTS[@]}" \
             --verify-tag
