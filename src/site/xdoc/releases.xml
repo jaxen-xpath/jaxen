@@ -23,6 +23,17 @@ The current version is 2.0.5. This release is completely API compatible with ver
         <li><a href="https://github.com/jaxen-xpath/jaxen/releases/download/v2.0.5/jaxen-2.0.5-src.tar.bz2">2.0.5 sources in tar.bz2 format.</a></li>
       </ul>
 
+
+ <p>Version 2.0.6 fixes one bug in the new iterative algorithms that incorrectly evaluated some parenthesized XPath expressions like ((//A)[2]//B)[1]/C.</p>
+
+ <p>Version 2.0.5 replaced still more recursive algorithms from the 
+ core parser. This enables Jaxen to handle even larger and more complex XPath expressions.
+ For the recursive code that remains, higher level evaluation and parsing now catches stack overflow
+ errors if they do occur, and wraps them inside a regular checked <code>JaxenException</code>
+ so it won't bring down the entire program. This should be fairly robust and complete
+ protection against DoS attacks on recursive code, even with arbitrary untrusted input.
+ </p>
+      
 <p>
 Version 2.0.4 fixed a bug in XPath parser precedence so expressions that combine the union
 operator with additive expressions are now evaluated correctly. It also deprecated the simplify
