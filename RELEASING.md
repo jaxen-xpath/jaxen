@@ -6,8 +6,7 @@ Only GitHub users with **write access** (or higher) to this repository can
 trigger `workflow_dispatch` workflows.  Repository owners and admins always
 qualify. Add outside collaborators as needed before attempting a release.
 
-1. Update version number in `src/site/xdoc/index.xml`. Update release notes in
-   `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
+1. Update release notes in `src/site/xdoc/releases.xml` and `src/site/xdoc/status.xml`, including
    release asset links in `releases.xml` using URLs in the form
    `https://github.com/jaxen-xpath/jaxen/releases/download/vX.Y.Z/jaxen-X.Y.Z-<artifact>`.
    Make a PR and merge the changes to master.
@@ -32,7 +31,8 @@ usually want to summarize the important points manually.
 11. Regenerate the project site:
 
 ```
-mvn site site:stage
+mvn site site:stage
+
 ```
 
 12. Upload the generated content to IBiblio using sftp.
