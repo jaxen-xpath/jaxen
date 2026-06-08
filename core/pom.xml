@@ -32,7 +32,7 @@
     <dependency>
       <groupId>xom</groupId>
       <artifactId>xom</artifactId>
-      <version>1.4.2</version>
+      <version>1.4.4</version>
       <optional>true</optional>
     </dependency>
     <!-- Needed on Java 7/8 because XOM 1.4.2 transitively pulls Xerces classes that reference org.w3c.dom.ElementTraversal. -->
