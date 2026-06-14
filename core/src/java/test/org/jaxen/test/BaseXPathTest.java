@@ -807,6 +807,32 @@ public class BaseXPathTest extends TestCase {
         }
         
     }  
+
+    public void testRuntimeExceptionInConstructorIsWrappedAsJaxenException() {
+        String previous = System.getProperty(XPathReaderFactory.DRIVER_PROPERTY);
+        System.setProperty(XPathReaderFactory.DRIVER_PROPERTY,
+                           RuntimeExceptionXPathReader.class.getName());
+
+        try {
+            new DOMXPath("id('p1')");
+            fail("Expected JaxenException");
+        }
+        catch (JaxenException ex) {
+            assertTrue(ex.getMessage().indexOf("This is a bug in Jaxen") >= 0);
+            assertTrue(ex.getMessage().indexOf("report the bug on GitHub") >= 0);
+            assertTrue(ex.getMessage().indexOf("id('p1')") >= 0);
+            assertTrue(ex.getCause() instanceof NullPointerException);
+        }
+        finally {
+            if (previous == null) {
+                System.clearProperty(XPathReaderFactory.DRIVER_PROPERTY);
+            }
+            else {
+                System.setProperty(XPathReaderFactory.DRIVER_PROPERTY, previous);
+            }
+        }
+
+    }
     
     public void testBooleanValueOfEmptyNodeSetIsFalse() 
       throws JaxenException {
@@ -1233,9 +1259,7 @@ public class BaseXPathTest extends TestCase {
 
     public void testStackOverflowErrorInEvaluationIsWrappedAsJaxenException() throws Exception {
         BaseXPath xpath = new DOMXPath("1");
-        Field xpathField = BaseXPath.class.getDeclaredField("xpath");
-        xpathField.setAccessible(true);
-        xpathField.set(xpath, new StackOverflowXPathExpr());
+        setXPathExpr(xpath, new StackOverflowXPathExpr());
 
         try {
             xpath.evaluate(doc);
@@ -1244,6 +1268,43 @@ public class BaseXPathTest extends TestCase {
         catch (JaxenException ex) {
             assertEquals("XPath expression is too deeply nested", ex.getMessage());
             assertTrue(ex.getCause() instanceof StackOverflowError);
+        }
+    }
+
+    public void testRuntimeExceptionInEvaluationIsWrappedAsJaxenException() throws Exception {
+        BaseXPath xpath = new DOMXPath("1");
+        setXPathExpr(xpath, new RuntimeExceptionXPathExpr());
+
+        try {
+            xpath.evaluate(doc);
+            fail("Expected JaxenException");
+        }
+        catch (JaxenException ex) {
+            assertTrue(ex.getMessage().indexOf("This is a bug in Jaxen") >= 0);
+            assertTrue(ex.getMessage().indexOf("report the bug on GitHub") >= 0);
+            assertTrue(ex.getMessage().indexOf("\"1\"") >= 0);
+            assertTrue(ex.getCause() instanceof NullPointerException);
+        }
+    }
+
+    private void setXPathExpr(BaseXPath xpath, XPathExpr expr) throws NoSuchFieldException,
+            IllegalAccessException {
+        Field xpathField = BaseXPath.class.getDeclaredField("xpath");
+        xpathField.setAccessible(true);
+        xpathField.set(xpath, expr);
+    }
+
+    public static final class RuntimeExceptionXPathReader implements org.jaxen.saxpath.XPathReader {
+
+        public void parse(String xpath) {
+            throw new NullPointerException("broken parser");
+        }
+
+        public void setXPathHandler(org.jaxen.saxpath.XPathHandler handler) {
+        }
+
+        public org.jaxen.saxpath.XPathHandler getXPathHandler() {
+            return null;
         }
     }
 
@@ -1267,6 +1328,29 @@ public class BaseXPathTest extends TestCase {
 
         public List asList(Context context) throws JaxenException {
             throw new StackOverflowError();
+        }
+    }
+
+    private static final class RuntimeExceptionXPathExpr implements XPathExpr {
+
+        private static final long serialVersionUID = 1L;
+
+        public Expr getRootExpr() {
+            return null;
+        }
+
+        public void setRootExpr(Expr rootExpr) {
+        }
+
+        public String getText() {
+            return "1";
+        }
+
+        public void simplify() {
+        }
+
+        public List asList(Context context) throws JaxenException {
+            throw new NullPointerException("broken evaluator");
         }
     }
     
