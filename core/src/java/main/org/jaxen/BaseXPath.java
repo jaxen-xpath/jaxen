@@ -76,6 +76,14 @@ public class BaseXPath implements XPath, Serializable
 
     private static final long serialVersionUID = -1993731281300293168L;
     private static final String STACK_OVERFLOW_MESSAGE = "XPath expression is too deeply nested";
+    private static final String PARSING_RUNTIME_MESSAGE =
+        "Unexpected runtime exception while parsing XPath expression \"%s\". "
+        + "This is a bug in Jaxen. Please report the bug on GitHub with the stack trace "
+        + "and XPath expression.";
+    private static final String EVALUATION_RUNTIME_MESSAGE =
+        "Unexpected runtime exception while evaluating XPath expression \"%s\". "
+        + "This is a bug in Jaxen. Please report the bug on GitHub with the stack trace "
+        + "and XPath expression.";
 
     /** Original expression text. */
     private final String exprText;
@@ -98,6 +106,7 @@ public class BaseXPath implements XPath, Serializable
      */
     protected BaseXPath(String xpathExpr) throws JaxenException
     {
+        this.exprText = xpathExpr;
         try
         {
             XPathReader reader = XPathReaderFactory.createReader();
@@ -114,12 +123,14 @@ public class BaseXPath implements XPath, Serializable
         {
             throw new JaxenException( e );
         }
+        catch (RuntimeException e)
+        {
+            throw createRuntimeException(PARSING_RUNTIME_MESSAGE, e);
+        }
         catch (StackOverflowError e)
         {
             throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
         }
-
-        this.exprText = xpathExpr;
     }
 
     /**
@@ -663,6 +674,19 @@ public class BaseXPath implements XPath, Serializable
         {
             throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
         }
+        catch (ClassCastException e)
+        {
+            throw e;
+        }
+        catch (RuntimeException e)
+        {
+            throw createRuntimeException(EVALUATION_RUNTIME_MESSAGE, e);
+        }
+    }
+
+    private JaxenException createRuntimeException(String message, RuntimeException cause)
+    {
+        return new JaxenException(String.format(message, String.valueOf(this.exprText)), cause);
     }
  
 
