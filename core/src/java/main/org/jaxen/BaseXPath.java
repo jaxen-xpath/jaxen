@@ -98,7 +98,6 @@ public class BaseXPath implements XPath, Serializable
      */
     protected BaseXPath(String xpathExpr) throws JaxenException
     {
-        this.exprText = xpathExpr;
         try
         {
             XPathReader reader = XPathReaderFactory.createReader();
@@ -118,8 +117,9 @@ public class BaseXPath implements XPath, Serializable
         catch (RuntimeException e)
         {
             String message =
-                "Unexpected runtime exception while parsing XPath expression \""
-                + String.valueOf(this.exprText)
+                "Unexpected " + e.getClass().getSimpleName()
+                + " while parsing XPath expression \""
+                + xpathExpr
                 + "\". This is a bug in Jaxen. Please report the bug at "
                 + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
                 + "and XPath expression.";
@@ -129,6 +129,7 @@ public class BaseXPath implements XPath, Serializable
         {
             throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
         }
+        this.exprText = xpathExpr;
     }
 
     /**
@@ -675,7 +676,9 @@ public class BaseXPath implements XPath, Serializable
         catch (ClassCastException e)
         {
             // TODO: Investigate whether preserving this ClassCastException for
-            // invalid non-node contexts is still the right compatibility behavior.
+            // invalid non-node contexts is still the right compatibility behavior;
+            // evaluate(Object) documents ClassCastException here, so keep the
+            // existing contract until a compatibility review decides otherwise.
             throw e;
         }
         catch (RuntimeException e)
@@ -687,8 +690,9 @@ public class BaseXPath implements XPath, Serializable
     private JaxenException wrapRuntimeException(RuntimeException cause)
     {
         String message =
-            "Unexpected runtime exception while evaluating XPath expression \""
-            + String.valueOf(this.exprText)
+            "Unexpected " + cause.getClass().getSimpleName()
+            + " while evaluating XPath expression \""
+            + this.exprText
             + "\". This is a bug in Jaxen. Please report the bug at "
             + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
             + "and XPath expression.";

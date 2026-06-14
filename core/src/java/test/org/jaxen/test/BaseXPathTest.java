@@ -820,6 +820,7 @@ public class BaseXPathTest extends TestCase {
         catch (JaxenException ex) {
             assertTrue(ex.getMessage().indexOf("This is a bug in Jaxen") >= 0);
             assertTrue(ex.getMessage().indexOf("https://github.com/jaxen-xpath/jaxen/issues") >= 0);
+            assertTrue(ex.getMessage().indexOf("NullPointerException") >= 0);
             assertTrue(ex.getMessage().indexOf("id('p1')") >= 0);
             assertTrue(ex.getCause() instanceof NullPointerException);
         }
@@ -1282,6 +1283,7 @@ public class BaseXPathTest extends TestCase {
         catch (JaxenException ex) {
             assertTrue(ex.getMessage().indexOf("This is a bug in Jaxen") >= 0);
             assertTrue(ex.getMessage().indexOf("https://github.com/jaxen-xpath/jaxen/issues") >= 0);
+            assertTrue(ex.getMessage().indexOf("NullPointerException") >= 0);
             assertTrue(ex.getMessage().indexOf("\"1\"") >= 0);
             assertTrue(ex.getCause() instanceof NullPointerException);
         }
