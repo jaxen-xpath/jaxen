@@ -59,10 +59,14 @@ import org.jaxen.JaxenException;
 import org.jaxen.NamespaceContext;
 import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.XPath;
+import org.jaxen.XPathStackOverflowException;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.DocumentNavigator;
 import org.jaxen.expr.Expr;
 import org.jaxen.expr.XPathExpr;
+import org.jaxen.saxpath.SAXPathException;
+import org.jaxen.saxpath.XPathHandler;
+import org.jaxen.saxpath.XPathReader;
 import org.jaxen.dom.NamespaceNode;
 import org.jaxen.pattern.Pattern;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
@@ -806,7 +810,32 @@ public class BaseXPathTest extends TestCase {
                             "" );
         }
         
-    }  
+    }
+
+    public void testStackOverflowErrorInParsingIsWrappedAsXPathStackOverflowException() {
+        String oldDriver = System.getProperty(XPathReaderFactory.DRIVER_PROPERTY);
+        System.setProperty(XPathReaderFactory.DRIVER_PROPERTY, StackOverflowXPathReader.class.getName());
+
+        try {
+            new DOMXPath("id('p1')");
+            fail("Expected XPathStackOverflowException");
+        }
+        catch (XPathStackOverflowException ex) {
+            assertEquals("XPath expression is too deeply nested while parsing", ex.getMessage());
+            assertTrue(ex.getCause() instanceof StackOverflowError);
+        }
+        catch (JaxenException ex) {
+            fail("Expected XPathStackOverflowException but got " + ex.getClass().getName());
+        }
+        finally {
+            if (oldDriver == null) {
+                System.clearProperty(XPathReaderFactory.DRIVER_PROPERTY);
+            }
+            else {
+                System.setProperty(XPathReaderFactory.DRIVER_PROPERTY, oldDriver);
+            }
+        }
+    }
     
     public void testBooleanValueOfEmptyNodeSetIsFalse() 
       throws JaxenException {
@@ -1231,7 +1260,7 @@ public class BaseXPathTest extends TestCase {
         assertEquals(z, result.get(0));
     }
 
-    public void testStackOverflowErrorInEvaluationIsWrappedAsJaxenException() throws Exception {
+    public void testStackOverflowErrorInEvaluationIsWrappedAsXPathStackOverflowException() throws Exception {
         BaseXPath xpath = new DOMXPath("1");
         Field xpathField = BaseXPath.class.getDeclaredField("xpath");
         xpathField.setAccessible(true);
@@ -1242,7 +1271,8 @@ public class BaseXPathTest extends TestCase {
             fail("Expected JaxenException");
         }
         catch (JaxenException ex) {
-            assertEquals("XPath expression is too deeply nested", ex.getMessage());
+            assertTrue(ex instanceof XPathStackOverflowException);
+            assertEquals("XPath expression is too deeply nested while evaluating", ex.getMessage());
             assertTrue(ex.getCause() instanceof StackOverflowError);
         }
     }
@@ -1266,6 +1296,23 @@ public class BaseXPathTest extends TestCase {
         }
 
         public List asList(Context context) throws JaxenException {
+            throw new StackOverflowError();
+        }
+    }
+
+    public static final class StackOverflowXPathReader implements XPathReader {
+
+        private XPathHandler handler;
+
+        public XPathHandler getXPathHandler() {
+            return this.handler;
+        }
+
+        public void setXPathHandler(XPathHandler handler) {
+            this.handler = handler;
+        }
+
+        public void parse(String xpath) throws SAXPathException {
             throw new StackOverflowError();
         }
     }
