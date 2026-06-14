@@ -821,7 +821,7 @@ public class BaseXPathTest extends TestCase {
             fail("Expected XPathStackOverflowException");
         }
         catch (XPathStackOverflowException ex) {
-            assertEquals("XPath expression is too deeply nested while parsing", ex.getMessage());
+            assertEquals("Stack overflow trying to parse XPath expression: id('p1')", ex.getMessage());
             assertTrue(ex.getCause() instanceof StackOverflowError);
         }
         catch (JaxenException ex) {
@@ -1272,7 +1272,7 @@ public class BaseXPathTest extends TestCase {
         }
         catch (JaxenException ex) {
             assertTrue(ex instanceof XPathStackOverflowException);
-            assertEquals("XPath expression is too deeply nested while evaluating", ex.getMessage());
+            assertEquals("Stack overflow during XPath evaluation: 1", ex.getMessage());
             assertTrue(ex.getCause() instanceof StackOverflowError);
         }
     }

@@ -53,26 +53,8 @@ public class XPathStackOverflowException extends JaxenException
      * @param message the detail message
      * @param rootCause the stack overflow root cause
      */
-    public XPathStackOverflowException(String message, StackOverflowError rootCause)
+    XPathStackOverflowException(String message, StackOverflowError rootCause)
     {
-        super(requireMessage(message), requireCause(rootCause));
-    }
-
-    private static String requireMessage(String message)
-    {
-        if (message == null)
-        {
-            throw new NullPointerException("message");
-        }
-        return message;
-    }
-
-    private static StackOverflowError requireCause(StackOverflowError rootCause)
-    {
-        if (rootCause == null)
-        {
-            throw new NullPointerException("rootCause");
-        }
-        return rootCause;
+        super(message, rootCause);
     }
 }
