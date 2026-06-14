@@ -10,6 +10,10 @@
     
     <section name="Change History">
 
+      <section name="Jaxen 2.1.0">
+        <p>Stack overflow exceptions now include the XPath expression that caused the problem.</p>
+      </section>
+
       <section name="Jaxen 2.0.6">
         <p>Version 2.0.6 fixes one bug in the new iterative algorithms that incorrectly evaluated some parenthesized XPath expressions like ((//A)[2]//B)[1]/C.</p>
       </section>
