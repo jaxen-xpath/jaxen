@@ -1242,7 +1242,7 @@ public class BaseXPathTest extends TestCase {
             fail("Expected JaxenException");
         }
         catch (JaxenException ex) {
-            assertEquals("XPath expression is too deeply nested: 1", ex.getMessage());
+            assertEquals("Stack overflow while evaluating 1", ex.getMessage());
             assertTrue(ex.getCause() instanceof StackOverflowError);
         }
     }
