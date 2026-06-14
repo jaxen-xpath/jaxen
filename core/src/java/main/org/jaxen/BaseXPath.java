@@ -76,14 +76,6 @@ public class BaseXPath implements XPath, Serializable
 
     private static final long serialVersionUID = -1993731281300293168L;
     private static final String STACK_OVERFLOW_MESSAGE = "XPath expression is too deeply nested";
-    private static final String PARSING_RUNTIME_MESSAGE =
-        "Unexpected runtime exception while parsing XPath expression \"%s\". "
-        + "This is a bug in Jaxen. Please report the bug on GitHub with the stack trace "
-        + "and XPath expression.";
-    private static final String EVALUATION_RUNTIME_MESSAGE =
-        "Unexpected runtime exception while evaluating XPath expression \"%s\". "
-        + "This is a bug in Jaxen. Please report the bug on GitHub with the stack trace "
-        + "and XPath expression.";
 
     /** Original expression text. */
     private final String exprText;
@@ -125,7 +117,13 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (RuntimeException e)
         {
-            throw createRuntimeException(PARSING_RUNTIME_MESSAGE, e);
+            String message =
+                "Unexpected runtime exception while parsing XPath expression \""
+                + String.valueOf(this.exprText)
+                + "\". This is a bug in Jaxen. Please report the bug at "
+                + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
+                + "and XPath expression.";
+            throw new JaxenException(message, e);
         }
         catch (StackOverflowError e)
         {
@@ -676,17 +674,25 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (ClassCastException e)
         {
+            // TODO: Investigate whether preserving this ClassCastException for
+            // invalid non-node contexts is still the right compatibility behavior.
             throw e;
         }
         catch (RuntimeException e)
         {
-            throw createRuntimeException(EVALUATION_RUNTIME_MESSAGE, e);
+            throw wrapRuntimeException(e);
         }
     }
 
-    private JaxenException createRuntimeException(String message, RuntimeException cause)
+    private JaxenException wrapRuntimeException(RuntimeException cause)
     {
-        return new JaxenException(String.format(message, String.valueOf(this.exprText)), cause);
+        String message =
+            "Unexpected runtime exception while evaluating XPath expression \""
+            + String.valueOf(this.exprText)
+            + "\". This is a bug in Jaxen. Please report the bug at "
+            + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
+            + "and XPath expression.";
+        return new JaxenException(message, cause);
     }
  
 
