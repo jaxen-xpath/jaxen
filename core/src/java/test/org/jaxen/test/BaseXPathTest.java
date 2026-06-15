@@ -1209,7 +1209,7 @@ public class BaseXPathTest extends TestCase {
     }
     
     public void testNonNodeContext() throws JaxenException {
-        
+
         org.w3c.dom.Element a = doc.createElementNS("http://www.a.com/", "a:foo");
         doc.appendChild(a);
         Text b = doc.createTextNode("ready");
@@ -1220,8 +1220,8 @@ public class BaseXPathTest extends TestCase {
             xpath.evaluate("String");
             fail("Allowed String as context");
         }
-        catch (ClassCastException ex) {
-            // success
+        catch (JaxenException ex) {
+            assertTrue(ex.getCause() instanceof ClassCastException);
         }
    
     }

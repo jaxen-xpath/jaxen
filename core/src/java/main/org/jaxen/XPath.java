@@ -103,13 +103,13 @@ public interface XPath
      * <p>
      * The string-value of the expression is determined per
      * the <code>string(..)</code> core function as defined
-     * in the XPath specification.  This means that an expression
-     * that selects more than one nodes will return the string value
-     * of the first node in the node set..
+     * in the XPath specification. This means that an expression
+     * that selects more than one node will return the string value
+     * of the first node in the node set.
      * </p>
      *
      * @param context the node, node-set or Context object for evaluation.
-     *     This value can be null
+     *     This value can be null.
      * @return the string-value interpretation of this expression
      * @throws JaxenException if an error occurs while attempting
      *          to evaluate the expression
