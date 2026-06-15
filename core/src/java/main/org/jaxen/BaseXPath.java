@@ -63,8 +63,7 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
  * <p>
  * If you want to adapt the Jaxen engine to traverse your own
  * object model, then this is a good base class to derive from.
- * Typically you only really need to provide your own
- * {@link org.jaxen.Navigator} implementation.
+ * Typically, you only need to provide your own {@link org.jaxen.Navigator} implementation.
  * </p>
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
