@@ -1270,9 +1270,8 @@ public class BaseXPathTest extends TestCase {
             xpath.evaluate(doc);
             fail("Expected JaxenException");
         }
-        catch (JaxenException ex) {
-            assertTrue(ex instanceof XPathStackOverflowException);
-            assertEquals("Stack overflow during XPath evaluation: 1", ex.getMessage());
+        catch (XPathStackOverflowException ex) {
+            assertEquals("Stack overflow while evaluating 1", ex.getMessage());
             assertTrue(ex.getCause() instanceof StackOverflowError);
         }
     }
