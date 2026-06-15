@@ -609,14 +609,8 @@ public class BaseXPath implements XPath, Serializable
     {
         return navigator;
     }
-    
-    
-
-
 
     //     Factory methods for default contexts
-
-
 
     /**
      * Create a default <code>FunctionContext</code>.
@@ -649,17 +643,15 @@ public class BaseXPath implements XPath, Serializable
     }
     
     /**
-     * Select all nodes that match this XPath
-     *  expression on the given Context object.
-     *  If multiple nodes match, multiple nodes
-     *  will be returned in document-order, as defined by the XPath
-     *  specification. If the expression selects a non-node-set
-     *  (i.e. a number, boolean, or string) then a List
-     *  containing just that one object is returned.
+     * Select all nodes that match this XPath expression on the given Context object.
+     * If multiple nodes match, multiple nodes
+     * will be returned in document-order, as defined by the XPath
+     * specification. If the expression selects a non-node-set
+     * (that is, a number, boolean, or string) then a List
+     * containing just that one object is returned.
      *
      * @param context the Context which gets evaluated
-     * @return the node-set of all items selected
-     *          by this XPath expression
+     * @return the node-set of all items selected by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     protected List selectNodesForContext(Context context) throws JaxenException
@@ -672,14 +664,6 @@ public class BaseXPath implements XPath, Serializable
         catch (StackOverflowError e)
         {
             throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
-        }
-        catch (ClassCastException e)
-        {
-            // TODO: Investigate whether preserving this ClassCastException for
-            // invalid non-node contexts is still the right compatibility behavior;
-            // evaluate(Object) documents ClassCastException here, so keep the
-            // existing contract until a compatibility review decides otherwise.
-            throw e;
         }
         catch (RuntimeException e)
         {
