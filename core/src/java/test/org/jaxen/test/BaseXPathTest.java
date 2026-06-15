@@ -87,7 +87,7 @@ import junit.framework.TestCase;
  */
 public class BaseXPathTest extends TestCase {
 
-    private static final class StackOverflowXPathReader implements XPathReader {
+    public static final class StackOverflowXPathReader implements XPathReader {
 
         private XPathHandler handler;
 
@@ -1330,7 +1330,7 @@ public class BaseXPathTest extends TestCase {
         xpathField.set(xpath, expr);
     }
 
-    private static final class RuntimeExceptionXPathReader implements org.jaxen.saxpath.XPathReader {
+    public static final class RuntimeExceptionXPathReader implements org.jaxen.saxpath.XPathReader {
 
         public void parse(String xpath) {
             throw new NullPointerException("broken parser");
@@ -1387,6 +1387,8 @@ public class BaseXPathTest extends TestCase {
 
         public List asList(Context context) throws JaxenException {
             throw new NullPointerException("broken evaluator");
-    }
+        }
     
+}
+
 }
