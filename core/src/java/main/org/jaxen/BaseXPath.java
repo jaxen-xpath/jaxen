@@ -119,7 +119,7 @@ public class BaseXPath implements XPath, Serializable
                 "Unexpected " + e.getClass().getSimpleName()
                 + " while parsing XPath expression \""
                 + xpathExpr
-                + "\". This is a bug in Jaxen. Please report the bug at "
+                + "\". This is a bug in Jaxen or the navigator you're using. Please report the bug at "
                 + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
                 + "and XPath expression.";
             throw new JaxenException(message, e);
