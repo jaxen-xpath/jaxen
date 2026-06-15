@@ -24,6 +24,12 @@ The current version is 2.0.6. This release is completely API compatible with ver
       </ul>
 
 
+ <p>Version 2.1.0 introduces <code>XPathStackOverflowException</code> to distinguish stack
+overflows during XPath parsing from stack overflows during XPath evaluation. Furthermore,
+for security unexpected runtime exceptions (which indicate bugs
+in Jaxen or its navigator) are wrapped in JaxenException to
+avoid unexpectedly bringing down the entire program.</p>
+
  <p>Version 2.0.6 fixes one bug in the new iterative algorithms that incorrectly evaluated some parenthesized XPath expressions like ((//A)[2]//B)[1]/C.</p>
 
  <p>Version 2.0.5 replaced still more recursive algorithms from the 
