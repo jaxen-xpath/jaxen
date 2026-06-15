@@ -115,7 +115,7 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (StackOverflowError e)
         {
-            throw new JaxenException("XPath expression is too deeply nested: " + xpathExpr, e);
+            throw new XPathStackOverflowException("XPath expression is too deeply nested: " + xpathExpr, e);
         }
 
         this.exprText = xpathExpr;
@@ -660,7 +660,7 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (StackOverflowError e)
         {
-            throw new JaxenException("Stack overflow while evaluating " + exprText, e);
+            throw new XPathStackOverflowException("Stack overflow while evaluating " + exprText, e);
         }
     }
  

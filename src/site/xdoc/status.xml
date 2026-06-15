@@ -11,7 +11,11 @@
     <section name="Change History">
 
       <section name="Jaxen 2.1.0">
-        <p>Version 2.1.0 improves the handling and reporting of stack overflows and other unexpected runtime exceptions. Stack overflow exceptions now include the XPath expression that caused the problem.</p>
+        <p>Version 2.1.0 improves the handling and reporting of stack overflows
+        and other unexpected runtime exceptions. It introduces <code>XPathStackOverflowException</code> 
+        (a subclass of <code>JaxenException</code>) to distinguish stack overflows 
+        during XPath parsing and evaluation from other XPath exceptions.
+        Stack overflow exception messages now include the XPath expression that caused the problem.</p>
       </section>
 
       <section name="Jaxen 2.0.6">
