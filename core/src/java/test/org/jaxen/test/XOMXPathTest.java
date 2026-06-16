@@ -40,6 +40,7 @@
 
 package org.jaxen.test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -75,7 +76,7 @@ public class XOMXPathTest extends TestCase
 
         Builder builder = new Builder();
 
-        Document doc = builder.build( BASIC_XML );
+        Document doc = builder.build( new File(BASIC_XML) );
 
         List results = xpath.selectNodes( doc );
 

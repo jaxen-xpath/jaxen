@@ -40,6 +40,8 @@
 
 package org.jaxen.test;
 
+import java.io.File;
+
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.jaxen.JaxenException;
@@ -63,7 +65,7 @@ public class XOMNavigatorTest extends XPathTestBase
 
     public Object getDocument(String url) throws Exception
     {
-        return this.builder.build( url );
+        return this.builder.build( new File(url) );
     }
 
     protected XPath createXPath(String xpath) throws JaxenException

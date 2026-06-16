@@ -65,6 +65,7 @@ import org.jaxen.saxpath.SAXPathException;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.File;
 
 /**
  * Interface for navigating around the XOM object model.
@@ -184,7 +185,12 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
 
     public Object getDocument(String s) throws FunctionCallException {
         try {
-            return new Builder(new NodeFactory()).build(s);
+            Builder builder = new Builder(new NodeFactory());
+            File file = new File(s);
+            if (file.exists()) {
+                return builder.build(file);
+            }
+            return builder.build(s);
         } catch (Exception pe) {
             throw new FunctionCallException(pe);
         }
