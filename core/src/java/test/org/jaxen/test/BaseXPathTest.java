@@ -34,9 +34,8 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
+ * Jaxen Project, see <https://github.com/jaxen-xpath/jaxen/>.
  */
-
 
 package org.jaxen.test;
 
@@ -59,10 +58,14 @@ import org.jaxen.JaxenException;
 import org.jaxen.NamespaceContext;
 import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.XPath;
+import org.jaxen.XPathStackOverflowException;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.dom.DocumentNavigator;
 import org.jaxen.expr.Expr;
 import org.jaxen.expr.XPathExpr;
+import org.jaxen.saxpath.SAXPathException;
+import org.jaxen.saxpath.XPathHandler;
+import org.jaxen.saxpath.XPathReader;
 import org.jaxen.dom.NamespaceNode;
 import org.jaxen.pattern.Pattern;
 import org.jaxen.saxpath.helpers.XPathReaderFactory;
@@ -84,6 +87,23 @@ import junit.framework.TestCase;
  */
 public class BaseXPathTest extends TestCase {
 
+    public static final class StackOverflowXPathReader implements XPathReader {
+
+        private XPathHandler handler;
+
+        public XPathHandler getXPathHandler() {
+            return this.handler;
+        }
+
+        public void setXPathHandler(XPathHandler handler) {
+            this.handler = handler;
+        }
+
+        public void parse(String xpath) throws SAXPathException {
+            throw new StackOverflowError();
+        }
+    }
+    
     private org.w3c.dom.Document doc;
     private DocumentBuilder builder;
 
@@ -634,8 +654,7 @@ public class BaseXPathTest extends TestCase {
         List<?> result = xpath.selectNodes(x3);
         assertEquals(2, result.size());
         assertEquals(a1, result.get(0));   
-        assertEquals(a2, result.get(1)); 
-        
+        assertEquals(a2, result.get(1));
     }    
     
     // test for Jaxen-83
@@ -650,7 +669,6 @@ public class BaseXPathTest extends TestCase {
         
         List<?> result = xpath.selectNodes(doc);
         assertEquals(0, result.size()); 
-        
     }
     
     // test to make sure Jaxen-83 fix doesn't go too far
@@ -664,8 +682,7 @@ public class BaseXPathTest extends TestCase {
         doc.appendChild(a);
         
         List<?> result = xpath.selectNodes(doc);
-        assertEquals(1, result.size());   
-        
+        assertEquals(1, result.size());
     } 
     
     // another Jaxen-55 test to try to pin down exactly what does
@@ -696,7 +713,6 @@ public class BaseXPathTest extends TestCase {
         assertEquals(x2, result.get(1));   
         assertEquals(x3, result.get(2));   
         assertEquals(x4, result.get(3));
-        
     }    
     
     
@@ -790,11 +806,8 @@ public class BaseXPathTest extends TestCase {
         
     }  
     
-    public void testSAXPathExceptionThrownFromConstructor() {
-        
-        System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
-                            "java.lang.String" );
-        
+    public void testSAXPathExceptionThrownFromConstructor() { 
+        System.setProperty( XPathReaderFactory.DRIVER_PROPERTY, "java.lang.String" );
         try {
             new DOMXPath("id('p1')");
         }
@@ -802,11 +815,60 @@ public class BaseXPathTest extends TestCase {
             assertNotNull(e.getMessage());
         }
         finally {
-            System.setProperty( XPathReaderFactory.DRIVER_PROPERTY,
-                            "" );
+            System.setProperty( XPathReaderFactory.DRIVER_PROPERTY, "" );
         }
-        
     }  
+
+    public void testRuntimeExceptionInConstructorIsWrappedAsJaxenException() {
+        String previous = System.getProperty(XPathReaderFactory.DRIVER_PROPERTY);
+        System.setProperty(XPathReaderFactory.DRIVER_PROPERTY,
+                           RuntimeExceptionXPathReader.class.getName());
+
+        try {
+            new DOMXPath("id('p1')");
+            fail("Expected JaxenException");
+        }
+        catch (JaxenException ex) {
+            assertTrue(ex.getMessage().indexOf("This is a bug in Jaxen") >= 0);
+            assertTrue(ex.getMessage().indexOf("https://github.com/jaxen-xpath/jaxen/issues") >= 0);
+            assertTrue(ex.getMessage().indexOf("NullPointerException") >= 0);
+            assertTrue(ex.getMessage().indexOf("id('p1')") >= 0);
+            assertTrue(ex.getCause() instanceof NullPointerException);
+        }
+        finally {
+            if (previous == null) {
+                System.clearProperty(XPathReaderFactory.DRIVER_PROPERTY);
+            }
+            else {
+                System.setProperty(XPathReaderFactory.DRIVER_PROPERTY, previous);
+            }
+        }
+    }
+
+    public void testStackOverflowErrorInParsingIsWrappedInXPathStackOverflowException() {
+        String oldDriver = System.getProperty(XPathReaderFactory.DRIVER_PROPERTY);
+        System.setProperty(XPathReaderFactory.DRIVER_PROPERTY, StackOverflowXPathReader.class.getName());
+
+        try {
+            new DOMXPath("id('p1')");
+            fail("Expected XPathStackOverflowException");
+        }
+        catch (XPathStackOverflowException ex) {
+            assertEquals("XPath expression is too deeply nested: id('p1')", ex.getMessage());
+            assertTrue(ex.getCause() instanceof StackOverflowError);
+        }
+        catch (JaxenException ex) {
+            fail("Expected XPathStackOverflowException but got " + ex.getClass().getName());
+        }
+        finally {
+            if (oldDriver == null) {
+                System.clearProperty(XPathReaderFactory.DRIVER_PROPERTY);
+            }
+            else {
+                System.setProperty(XPathReaderFactory.DRIVER_PROPERTY, oldDriver);
+            }
+        }
+    }
     
     public void testBooleanValueOfEmptyNodeSetIsFalse() 
       throws JaxenException {
@@ -1086,7 +1148,6 @@ public class BaseXPathTest extends TestCase {
         assertEquals(((org.w3c.dom.Node) result.get(0)).getNodeType(), Pattern.NAMESPACE_NODE);
         assertEquals(((org.w3c.dom.Node) result.get(1)).getNodeType(), Pattern.NAMESPACE_NODE);
         assertEquals(((org.w3c.dom.Node) result.get(2)).getNodeType(), Node.ATTRIBUTE_NODE);
-   
     }
 
     public void testAttributeNodesComeBeforeChildNodesOfSameElementInUnionDocumentOrder()
@@ -1182,7 +1243,7 @@ public class BaseXPathTest extends TestCase {
     }
     
     public void testNonNodeContext() throws JaxenException {
-        
+
         org.w3c.dom.Element a = doc.createElementNS("http://www.a.com/", "a:foo");
         doc.appendChild(a);
         Text b = doc.createTextNode("ready");
@@ -1193,8 +1254,8 @@ public class BaseXPathTest extends TestCase {
             xpath.evaluate("String");
             fail("Allowed String as context");
         }
-        catch (ClassCastException ex) {
-            // success
+        catch (JaxenException ex) {
+            assertTrue(ex.getCause() instanceof ClassCastException);
         }
    
     }
@@ -1231,19 +1292,55 @@ public class BaseXPathTest extends TestCase {
         assertEquals(z, result.get(0));
     }
 
-    public void testStackOverflowErrorInEvaluationIsWrappedAsJaxenException() throws Exception {
+    public void testStackOverflowErrorInEvaluationIsWrappedAsXPathStackOverflowException() throws Exception {
         BaseXPath xpath = new DOMXPath("1");
-        Field xpathField = BaseXPath.class.getDeclaredField("xpath");
-        xpathField.setAccessible(true);
-        xpathField.set(xpath, new StackOverflowXPathExpr());
+        setXPathExpr(xpath, new StackOverflowXPathExpr());
+
+        try {
+            xpath.evaluate(doc);
+            fail("Expected JaxenException");
+        }
+        catch (XPathStackOverflowException ex) {
+            assertEquals("Stack overflow while evaluating 1", ex.getMessage());
+            assertTrue(ex.getCause() instanceof StackOverflowError);
+        }
+    }
+
+    public void testRuntimeExceptionInEvaluationIsWrappedAsJaxenException() throws Exception {
+        BaseXPath xpath = new DOMXPath("1");
+        setXPathExpr(xpath, new RuntimeExceptionXPathExpr());
 
         try {
             xpath.evaluate(doc);
             fail("Expected JaxenException");
         }
         catch (JaxenException ex) {
-            assertEquals("XPath expression is too deeply nested", ex.getMessage());
-            assertTrue(ex.getCause() instanceof StackOverflowError);
+            assertTrue(ex.getMessage().indexOf("This is a bug in Jaxen") >= 0);
+            assertTrue(ex.getMessage().indexOf("https://github.com/jaxen-xpath/jaxen/issues") >= 0);
+            assertTrue(ex.getMessage().indexOf("NullPointerException") >= 0);
+            assertTrue(ex.getMessage().indexOf("\"1\"") >= 0);
+            assertTrue(ex.getCause() instanceof NullPointerException);
+        }
+    }
+
+    private void setXPathExpr(BaseXPath xpath, XPathExpr expr) throws NoSuchFieldException,
+            IllegalAccessException {
+        Field xpathField = BaseXPath.class.getDeclaredField("xpath");
+        xpathField.setAccessible(true);
+        xpathField.set(xpath, expr);
+    }
+
+    public static final class RuntimeExceptionXPathReader implements org.jaxen.saxpath.XPathReader {
+
+        public void parse(String xpath) {
+            throw new NullPointerException("broken parser");
+        }
+
+        public void setXPathHandler(org.jaxen.saxpath.XPathHandler handler) {
+        }
+
+        public org.jaxen.saxpath.XPathHandler getXPathHandler() {
+            return null;
         }
     }
 
@@ -1269,5 +1366,29 @@ public class BaseXPathTest extends TestCase {
             throw new StackOverflowError();
         }
     }
+
+    private static final class RuntimeExceptionXPathExpr implements XPathExpr {
+
+        private static final long serialVersionUID = 1L;
+
+        public Expr getRootExpr() {
+            return null;
+        }
+
+        public void setRootExpr(Expr rootExpr) {
+        }
+
+        public String getText() {
+            return "1";
+        }
+
+        public void simplify() {
+        }
+
+        public List asList(Context context) throws JaxenException {
+            throw new NullPointerException("broken evaluator");
+        }
     
+}
+
 }

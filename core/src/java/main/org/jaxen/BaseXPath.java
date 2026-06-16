@@ -63,8 +63,7 @@ import org.jaxen.saxpath.helpers.XPathReaderFactory;
  * <p>
  * If you want to adapt the Jaxen engine to traverse your own
  * object model, then this is a good base class to derive from.
- * Typically you only really need to provide your own
- * {@link org.jaxen.Navigator} implementation.
+ * Typically, you only need to provide your own {@link org.jaxen.Navigator} implementation.
  * </p>
  *
  * @author <a href="mailto:bob@werken.com">bob mcwhirter</a>
@@ -75,7 +74,6 @@ public class BaseXPath implements XPath, Serializable
 {
 
     private static final long serialVersionUID = -1993731281300293168L;
-    private static final String STACK_OVERFLOW_MESSAGE = "XPath expression is too deeply nested";
 
     /** Original expression text. */
     private final String exprText;
@@ -114,11 +112,21 @@ public class BaseXPath implements XPath, Serializable
         {
             throw new JaxenException( e );
         }
+        catch (RuntimeException e)
+        {
+            String message =
+                "Unexpected " + e.getClass().getSimpleName()
+                + " while parsing XPath expression \""
+                + xpathExpr
+                + "\". This is a bug in Jaxen or the navigator you're using. Please report the bug at "
+                + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
+                + "and XPath expression.";
+            throw new JaxenException(message, e);
+        }
         catch (StackOverflowError e)
         {
-            throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
+            throw new XPathStackOverflowException("XPath expression is too deeply nested: " + xpathExpr, e);
         }
-
         this.exprText = xpathExpr;
     }
 
@@ -599,14 +607,8 @@ public class BaseXPath implements XPath, Serializable
     {
         return navigator;
     }
-    
-    
-
-
 
     //     Factory methods for default contexts
-
-
 
     /**
      * Create a default <code>FunctionContext</code>.
@@ -639,17 +641,15 @@ public class BaseXPath implements XPath, Serializable
     }
     
     /**
-     * Select all nodes that match this XPath
-     *  expression on the given Context object.
-     *  If multiple nodes match, multiple nodes
-     *  will be returned in document-order, as defined by the XPath
-     *  specification. If the expression selects a non-node-set
-     *  (i.e. a number, boolean, or string) then a List
-     *  containing just that one object is returned.
+     * Select all nodes that match this XPath expression on the given Context object.
+     * If multiple nodes match, multiple nodes
+     * will be returned in document-order, as defined by the XPath
+     * specification. If the expression selects a non-node-set
+     * (that is, a number, boolean, or string) then a List
+     * containing just that one object is returned.
      *
      * @param context the Context which gets evaluated
-     * @return the node-set of all items selected
-     *          by this XPath expression
+     * @return the node-set of all items selected by this XPath expression
      * @throws JaxenException if an XPath error occurs during expression evaluation
      */
     protected List selectNodesForContext(Context context) throws JaxenException
@@ -661,8 +661,24 @@ public class BaseXPath implements XPath, Serializable
         }
         catch (StackOverflowError e)
         {
-            throw new JaxenException(STACK_OVERFLOW_MESSAGE, e);
+            throw new XPathStackOverflowException("Stack overflow while evaluating " + exprText, e);
         }
+        catch (RuntimeException e)
+        {
+            throw wrapRuntimeException(e);
+        }
+    }
+
+    private JaxenException wrapRuntimeException(RuntimeException cause)
+    {
+        String message =
+            "Unexpected " + cause.getClass().getSimpleName()
+            + " while evaluating XPath expression \""
+            + this.exprText
+            + "\". This is a bug in Jaxen. Please report the bug at "
+            + "https://github.com/jaxen-xpath/jaxen/issues with the stack trace "
+            + "and XPath expression.";
+        return new JaxenException(message, cause);
     }
  
 
