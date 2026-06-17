@@ -34,7 +34,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
+ * Jaxen Project, see <https://github.com/jaxen-xpath/jaxen/>.
  */
 
 
@@ -58,8 +58,6 @@ import org.jaxen.xom.XOMXPath;
 public class XOMXPathTest extends TestCase
 {
 
-    private static final String BASIC_XML = "xml/basic.xml";
-
     public XOMXPathTest(String name)
     {
         super( name );
@@ -76,7 +74,7 @@ public class XOMXPathTest extends TestCase
 
         Builder builder = new Builder();
 
-        Document doc = builder.build( new File(BASIC_XML) );
+        Document doc = builder.build( new File("xml/basic.xml") );
 
         List results = xpath.selectNodes( doc );
 
