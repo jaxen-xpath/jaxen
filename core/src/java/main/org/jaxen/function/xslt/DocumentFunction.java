@@ -34,7 +34,7 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
+ * Jaxen Project, see <https://github.com/jaxen-xpath/jaxen/>.
  */
 
 
@@ -62,12 +62,11 @@ public class DocumentFunction implements Function
         if (args.size() == 1)
         {
             Navigator nav = context.getNavigator();
-
-            String    url = StringFunction.evaluate( args.get( 0 ),
-                                                     nav );
-
-            return evaluate( url,
-                             nav );
+            String url = StringFunction.evaluate( args.get( 0 ), nav );
+            // TODO per XSLT spec this needs to be absolutized against the context base URI
+            
+            
+            return evaluate( url, nav );
         }
 
         throw new FunctionCallException( "document() requires one argument." );
