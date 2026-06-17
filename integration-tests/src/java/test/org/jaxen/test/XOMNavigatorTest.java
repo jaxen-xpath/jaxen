@@ -34,12 +34,13 @@
  * individuals on behalf of the Jaxen Project and was originally 
  * created by bob mcwhirter <bob@werken.com> and 
  * James Strachan <jstrachan@apache.org>.  For more information on the 
- * Jaxen Project, please see <https://github.com/jaxen-xpath/jaxen/>.
+ * Jaxen Project, see <https://github.com/jaxen-xpath/jaxen/>.
  */
 
 
 package org.jaxen.test;
 
+import java.io.File;
 import org.jaxen.Navigator;
 import org.jaxen.XPath;
 import org.jaxen.JaxenException;
@@ -61,9 +62,9 @@ public class XOMNavigatorTest extends XPathTestBase
         return new DocumentNavigator();
     }
 
-    public Object getDocument(String url) throws Exception
+    public Object getDocument(String path) throws Exception
     {
-        return this.builder.build( url );
+        return this.builder.build( new File(path) );
     }
 
     protected XPath createXPath(String xpath) throws JaxenException

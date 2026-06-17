@@ -78,8 +78,7 @@ import java.util.Map;
  */
 public class DocumentNavigator extends org.jaxen.DefaultNavigator
 {
-    /**
-     */
+
     private static final long serialVersionUID = 3159311338575942877L;
 
     public boolean isAttribute(Object o) {
@@ -109,8 +108,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public boolean isText(Object o) {
         return o instanceof Text;
     }
-
-    //
     
     public String getAttributeName(Object o) {
         return (isAttribute(o) ? ((Attribute)o).getLocalName() : null);
@@ -127,8 +124,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public String getAttributeStringValue(Object o) {
         return (isAttribute(o) ? ((Attribute)o).getValue() : null);
     }
-
-    //
     
     public String getCommentStringValue(Object o) {
         return (isComment(o) ? ((Comment)o).getValue() : null);
@@ -149,8 +144,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public String getElementStringValue(Object o) {
         return (o instanceof Node ? ((Node)o).getValue() : null);
     }
-
-    //
     
     public String getNamespacePrefix(Object o) {
         if (isElement(o)) {
@@ -173,14 +166,10 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         }
         return null;
     }
-
-    //
     
     public String getTextStringValue(Object o) {
         return (o instanceof Text ? ((Text)o).getValue() : null);
     }
-    
-    //
 
     public Object getDocument(String s) throws FunctionCallException {
         try {
@@ -199,8 +188,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         }
         return parent.getDocument();
     }
-
-    //
     
     private abstract static class IndexIterator implements Iterator {
         private Object o = null;
@@ -224,8 +211,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         }
     }
     
-    //
-    
     public Iterator getAttributeAxisIterator(Object o) {
         if (isElement(o)) {
             return new IndexIterator(o, 0, ((Element)o).getAttributeCount()) {
@@ -248,8 +233,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return JaxenConstants.EMPTY_ITERATOR;
     }
 
-    //
-
     public Iterator getParentAxisIterator(Object o) {
         Object parent = null;
         if (o instanceof Node) {
@@ -264,8 +247,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         return (o instanceof Node ? ((Node)o).getParent() : null);
     }
 
-    //
-
     public Iterator getPrecedingAxisIterator(Object o) throws UnsupportedAxisException {
         return super.getPrecedingAxisIterator(o);
     }
@@ -273,8 +254,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public Iterator getPrecedingSiblingAxisIterator(Object o) throws UnsupportedAxisException {
         return super.getPrecedingSiblingAxisIterator(o);
     }
-    
-    //
 
     public String getProcessingInstructionData(Object o) {
         return (o instanceof ProcessingInstruction ? ((ProcessingInstruction)o).getValue() : null);
@@ -283,8 +262,6 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
     public String getProcessingInstructionTarget(Object o) {
         return (o instanceof ProcessingInstruction ? ((ProcessingInstruction)o).getTarget() : null);
     }
-
-    //
 
     public String translateNamespacePrefixToUri(String s, Object o) {
         Element element = null;
@@ -304,14 +281,10 @@ public class DocumentNavigator extends org.jaxen.DefaultNavigator
         }
         return null;
     }
-
-    //
     
     public XPath parseXPath(String s) throws SAXPathException {
         return new BaseXPath(s, this);
     }
-
-    //
     
     /** Wrapper for XOM namespace nodes to give them a parent,
      * as required by the XPath data model.
