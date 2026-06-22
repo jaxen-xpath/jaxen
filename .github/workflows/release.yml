@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           # If RELEASE_TOKEN is defined we use it; otherwise the workflow uses GITHUB_TOKEN.
