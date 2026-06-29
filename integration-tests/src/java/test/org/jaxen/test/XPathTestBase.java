@@ -67,13 +67,11 @@ public abstract class XPathTestBase extends TestCase
         this.contextSupport = null;
         System.setProperty(XPathReaderFactory.DRIVER_PROPERTY,
                 "");
-        log("-----------------------------");
     }
 
     public void log(String text)
     {
-        log(verbose,
-                text);
+        log(verbose, text);
     }
 
     private void log(boolean actualVerbose,
@@ -89,14 +87,8 @@ public abstract class XPathTestBase extends TestCase
 
     private Object assertCountXPath2(int expectedSize, Object context, String xpathStr) throws JaxenException
     {
-        log(debug,
-                "  Select :: " + xpathStr);
         XPath xpath = createXPath(xpathStr);
         List results = xpath.selectNodes(getContext(context));
-        log(debug,
-                "    Expected Size :: " + expectedSize);
-        log(debug,
-                "    Result Size   :: " + results.size());
         if (expectedSize != results.size())
         {
             log(debug,
@@ -125,17 +117,12 @@ public abstract class XPathTestBase extends TestCase
     {
         try
         {
-            log(debug,
-                    "  Select :: " + xpathStr);
             XPath xpath = createXPath(xpathStr);
-            List results = xpath.selectNodes(getContext(context));
-            log(debug,
-                    "    Result Size   :: " + results.size());
+            xpath.selectNodes(getContext(context));
             fail("An exception was expected.");
         }
         catch (JaxenException e)
         {
-            log(debug, "    Caught expected exception " + e.getMessage());
         }
     }
 
@@ -145,12 +132,6 @@ public abstract class XPathTestBase extends TestCase
             Object node = xpath.evaluate(getContext(context));
             String result = StringFunction.evaluate(node,
                     getNavigator());
-            log(debug,
-                    "  Select :: " + xpathStr);
-            log(debug,
-                    "    Expected :: " + expected);
-            log(debug,
-                    "    Result   :: " + result);
             if (!expected.equals(result))
             {
                 log(debug,
@@ -221,10 +202,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/jaxen24.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/body/div");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -242,10 +221,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/jaxen24.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -265,10 +242,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -282,10 +257,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -299,10 +272,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -316,10 +287,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/c");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -336,10 +305,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/jaxen3.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -356,10 +323,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/numbers.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -397,10 +362,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/underscore.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -424,10 +387,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -442,10 +403,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/numbers.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -467,10 +426,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/numbers.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -480,34 +437,24 @@ public abstract class XPathTestBase extends TestCase
             assertValueOfXPath("true", context, "(1 + 8 * 2) = 17");
             assertValueOfXPath("true", context, "(7 - 3 + 1) = 5");
             assertValueOfXPath("true", context, "(8 - 4 + 5 - 6) = 3");
-            /** left-assoc tests, comments show WRONG evaluation
-            */
-            /** 3 - 2 - 1 != 2
-            */
+            /** left-assoc tests, comments show WRONG evaluation */
+            /** 3 - 2 - 1 != 2 */
             assertValueOfXPath("0", context, "3 - 2 - 1");
-            /** 8 div 4 div 2 != 4
-            */
+            /** 8 div 4 div 2 != 4 */
             assertValueOfXPath("1", context, "8 div 4 div 2");
-            /** 3 mod 5 mod 7 != 1
-            */
+            /** 3 mod 5 mod 7 != 1 */
             assertValueOfXPath("3", context, "3 mod 7 mod 5");
-            /** 1=(2=2) is true
-            */
+            /** 1=(2=2) is true */
             assertValueOfXPath("false", context, "1 = 2 = 2");
-            /**  2!=(3!=1) => 2!=1 => true, (2!=3)!=1 => 1!=1 => false
-            */
+            /**  2!=(3!=1) => 2!=1 => true, (2!=3)!=1 => 1!=1 => false */
             assertValueOfXPath("false", context, "2 != 3 != 1");
-            /** 3 > (2 > 1) is true
-            */
+            /** 3 > (2 > 1) is true */
             assertValueOfXPath("false", context, "3 > 2 > 1");
-            /** 3 >= (2 >= 2) is true
-            */
+            /** 3 >= (2 >= 2) is true */
             assertValueOfXPath("false", context, "3 >= 2 >= 2");
-            /** 1 < (2 < 3) is false
-            */
+            /** 1 < (2 < 3) is false */
             assertValueOfXPath("true", context, "1 < 2 < 3");
-            /** 0 <= (2 <= 3) is true
-            */
+            /** 0 <= (2 <= 3) is true */
             assertValueOfXPath("true", context, "2 <= 2 <= 3");
         }
     }
@@ -516,10 +463,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/numbers.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -548,10 +493,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/pi2.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/a/c");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -572,10 +515,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/id.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         SimpleVariableContext varContext = new SimpleVariableContext();
         varContext.setVariableValue(null, "foobar", "foobar");
@@ -597,10 +538,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/id.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -619,10 +558,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/id.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/foo/@id");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -636,10 +573,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/pi.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -659,10 +594,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/evaluate.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -681,10 +614,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/numbers.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/numbers/set[1]");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -704,10 +635,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/numbers.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/numbers/set[2]");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -726,10 +655,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/axis.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -743,10 +670,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/axis.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a/a.3");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -760,10 +685,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/axis.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a/a.3");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -777,10 +700,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/axis.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -795,10 +716,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/axis.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -813,10 +732,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -833,10 +750,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[1]");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -851,10 +766,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[2]/servlet-name");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -868,10 +781,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[2]/servlet-name");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -888,10 +799,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -937,10 +846,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/*");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -967,10 +874,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/nitf.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/nitf/head/docdata");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -984,10 +889,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/nitf.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/nitf/head");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1005,10 +908,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/nitf.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1026,10 +927,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/moreover.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1077,10 +976,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/contents.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1103,10 +1000,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/fibo.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1125,10 +1020,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1153,10 +1046,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1173,10 +1064,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/much_ado.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1197,10 +1086,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/much_ado.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/PLAY/ACT[2]/SCENE[1]");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1224,10 +1111,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/much_ado.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1244,10 +1129,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1267,10 +1150,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/text.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1291,10 +1172,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/text.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/foo/bar/cheese[1]");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1309,10 +1188,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/message.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1330,10 +1207,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/root/a");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1353,10 +1228,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1379,10 +1252,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1406,10 +1277,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/simple.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1432,10 +1301,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/web.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/web-app/servlet[1]");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1458,10 +1325,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/lang.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1485,10 +1350,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/namespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
         nsContext.addNamespace("alias", "http://fooNamespace/");
@@ -1519,10 +1382,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/namespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
         nsContext.addNamespace("foo", "http://somethingElse/");
@@ -1540,10 +1401,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/cdata.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextPath = createXPath("/p/text()");
-        log("Initial Context :: " + contextPath);
         List list = contextPath.selectNodes(document);
         // Depending on the object model, there can be anywhere from 
         // 1 to 3 nodes returned here.
@@ -1559,10 +1418,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/namespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
         nsContext.addNamespace("alias", "http://fooNamespace/");
@@ -1586,10 +1443,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/defaultNamespace.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1608,10 +1463,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/defaultNamespace.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
         nsContext.addNamespace("prefix", "https://example.org/");
@@ -1628,10 +1481,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/text.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1646,10 +1497,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/testNamespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1670,10 +1519,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/testNamespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/Template/Application1");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1696,10 +1543,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/testNamespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
@@ -1717,10 +1562,8 @@ public abstract class XPathTestBase extends TestCase
     {
         Navigator nav = getNavigator();
         String url = "../core/xml/testNamespaces.xml";
-        log("Document [" + url + "]");
         Object document = nav.getDocument(url);
         XPath contextpath = createXPath("/Template/namespace::xml");
-        log("Initial Context :: " + contextpath);
         List list = contextpath.selectNodes(document);
         Iterator iter = list.iterator();
         while (iter.hasNext())
