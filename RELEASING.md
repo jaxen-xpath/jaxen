@@ -38,8 +38,7 @@ triggered manually from the GitHub Actions UI.  The workflow:
 2. Updates the `project.build.outputTimestamp` property (reproducible builds).
 3. Updates `README.md` and the `index.xml`/`releases.xml` site pages with the new release version
    (dependency snippets and current-version text).
-4. Builds and GPG-signs the artifacts, then uploads and auto-publishes them to
-   Maven Central via the Central Publishing Portal.
+4. Builds and GPG-signs the artifacts, then uploads and publishes them to Maven Central.
 5. Commits the release version and creates a `vX.Y.Z` git tag.
 6. Bumps the POM version to the next development SNAPSHOT.
 7. Pushes the tag and a release branch, opens a pull request targeting `master`,
