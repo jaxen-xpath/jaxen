@@ -15,23 +15,20 @@ qualify. Add outside collaborators as needed before attempting a release.
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
 6. Click the green **Run workflow** button.
-7. Wait for the workflow deployment to appear in the
-   [Central Publishing Portal](https://central.sonatype.com/) and confirm it
-   passes validation.
+7. Wait for the workflow to complete. The deployment is auto-published to
+   Maven Central via the Central Publishing Portal.
 8. Merge the automatically created pull request from `release/X.Y.Z` into
    `master` to land the release and post-release version-bump commits.
-9. Publish the validated deployment in the
-   [Central Publishing Portal](https://central.sonatype.com/).
-10. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll 
+9. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll 
 usually want to summarize the important points manually.
-11. Check out the release tag locally and regenerate the project site:
+10. Check out the release tag locally and regenerate the project site:
 
 ```
 mvn site site:stage
 
 ```
 
-12. Upload the generated content to IBiblio using sftp.
+11. Upload the generated content to IBiblio using sftp.
 
 ## GitHub Actions workflow
 
@@ -42,8 +39,8 @@ triggered manually from the GitHub Actions UI.  The workflow:
 2. Updates the `project.build.outputTimestamp` property (reproducible builds).
 3. Updates `README.md` and the `index.xml`/`releases.xml` site pages with the new release version
    (dependency snippets and current-version text).
-4. Builds and GPG-signs the artifacts, then uploads them to the
-   [Central Publishing Portal](https://central.sonatype.com/).
+4. Builds and GPG-signs the artifacts, then uploads and auto-publishes them to
+   Maven Central via the Central Publishing Portal.
 5. Commits the release version and creates a `vX.Y.Z` git tag.
 6. Bumps the POM version to the next development SNAPSHOT.
 7. Pushes the tag and a release branch, opens a pull request targeting `master`,
@@ -161,9 +158,6 @@ $ git pull
 $ mvn install -Prelease
 $ mvn deploy -Prelease
 ```
-
-Log in to [central.sonatype.com](https://central.sonatype.com/) and publish the
-deployment.
 
 Tag the release commit:
 
