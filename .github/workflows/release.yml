@@ -119,7 +119,7 @@ jobs:
             echo "Pull request #${EXISTING_PR} already exists for ${RELEASE_BRANCH}"
           else
             PR_BODY=$(printf '%s\n\n%s' \
-              "This PR was opened automatically by the release workflow after deploying and auto-publishing version ${{ inputs.releaseVersion }} to Maven Central." \
+              "This PR was opened by the release workflow after publishing version ${{ inputs.releaseVersion }} to Maven Central." \
               "It includes the release commit and the post-release version bump to ${{ inputs.developmentVersion }}.")
             gh pr create \
               --base master \
