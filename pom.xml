@@ -495,7 +495,7 @@
             <extensions>true</extensions>
             <configuration>
               <publishingServerId>central</publishingServerId>
-              <autoPublish>false</autoPublish>
+              <autoPublish>true</autoPublish>
               <deploymentName>Jaxen ${project.version}</deploymentName>
             </configuration>
           </plugin>
