@@ -15,8 +15,7 @@ qualify. Add outside collaborators as needed before attempting a release.
    * **Version to release** – the version being released, e.g. `2.0.1`
    * **Next development version** – the next SNAPSHOT version, e.g. `2.0.2-SNAPSHOT`
 6. Click the green **Run workflow** button.
-7. Wait for the workflow to complete. The deployment is auto-published to
-   Maven Central via the Central Publishing Portal.
+7. Wait for the workflow to complete. The deployment is auto-published to Maven Central.
 8. Merge the automatically created pull request from `release/X.Y.Z` into
    `master` to land the release and post-release version-bump commits.
 9. Update the release notes on the GitHub tag. The GitHub release is populated with a list of PR titles, but you'll 
