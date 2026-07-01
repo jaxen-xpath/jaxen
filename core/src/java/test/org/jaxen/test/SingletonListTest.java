@@ -40,16 +40,15 @@ package org.jaxen.test;
 
 import java.util.List;
 
-import org.jaxen.util.SingletonList;
-
 import junit.framework.TestCase;
 
 @Deprecated
+@SuppressWarnings("deprecation")
 public class SingletonListTest extends TestCase {
 
     public void testIndexOutOfBoundsException() {
      
-        List<?> list = new SingletonList(new Object());
+        List<?> list = new org.jaxen.util.SingletonList(new Object());
         try {
             list.get(1);
             fail("Got element 1");

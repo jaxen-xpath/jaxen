@@ -53,6 +53,7 @@ import junit.framework.TestSuite;
  */
 public class UtilTests {
     
+    @SuppressWarnings("deprecation")
     public static Test suite() {
         
         TestSuite result = new TestSuite();
