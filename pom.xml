@@ -367,7 +367,7 @@
       <plugin>
         <groupId>org.openclover</groupId>
         <artifactId>clover-maven-plugin</artifactId>
-        <version>4.5.2</version>
+        <version>5.1.0</version>
         <configuration>
           <generateHtml>true</generateHtml>
           <generateXml>true</generateXml>
@@ -444,7 +444,7 @@
       <plugin>
         <groupId>org.openclover</groupId>
         <artifactId>clover-maven-plugin</artifactId>
-        <version>4.5.2</version>
+        <version>5.1.0</version>
         <configuration>
           <aggregate>true</aggregate>
           <generateHtml>true</generateHtml>
