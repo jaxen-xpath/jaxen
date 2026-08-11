@@ -53,6 +53,7 @@ import org.jaxen.XPath;
 import org.jaxen.dom.DOMXPath;
 import org.jaxen.saxpath.SAXPathException;
 import org.jaxen.saxpath.base.XPathReader;
+import org.jaxen.saxpath.helpers.DefaultXPathHandler;
 import org.jaxen.saxpath.XPathSyntaxException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -122,6 +123,18 @@ public class XPathReaderTest extends TestCase
         }
     }
 
+    public void testDeepOrExpressionDoesNotOverflow() throws SAXPathException
+    {
+        reader.setXPathHandler( new DefaultXPathHandler() );
+        reader.parse( booleanExpression( "or", 20000 ) );
+    }
+
+    public void testDeepAndExpressionDoesNotOverflow() throws SAXPathException
+    {
+        reader.setXPathHandler( new DefaultXPathHandler() );
+        reader.parse( booleanExpression( "and", 20000 ) );
+    }
+
     public void testBogusPaths() throws SAXPathException
     {
 
@@ -139,6 +152,20 @@ public class XPathReaderTest extends TestCase
                 assertEquals( bogusPath[1], e.getMessage() );
             }
         }
+    }
+
+    private String booleanExpression(String operator, int count)
+    {
+        StringBuffer result = new StringBuffer( "true()" );
+
+        for ( int i = 1; i < count; i++ )
+        {
+            result.append( ' ' );
+            result.append( operator );
+            result.append( " true()" );
+        }
+
+        return result.toString();
     }
 
     public void testChildrenOfNumber() throws SAXPathException
