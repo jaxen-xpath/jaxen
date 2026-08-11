@@ -74,7 +74,14 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
     public String toString() {
         if (getLocationPath() != null) {
-            return "[(DefaultPathExpr): " + getFilterExpr() + ", " + getLocationPath() + "]";
+            if (getFilterExpr() != null) {
+                return "[(DefaultPathExpr): " + getFilterExpr() + ", " + getLocationPath() + "]";
+            }
+            return "[(DefaultPathExpr): " + getLocationPath() + "]";
+        }
+
+        if (getFilterExpr() == null) {
+            return "[(DefaultPathExpr)]";
         }
 
         return "[(DefaultPathExpr): " + getFilterExpr() + "]";
@@ -89,7 +96,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
         }
 
         if (getLocationPath() != null) {
-            if (!getLocationPath().getSteps().isEmpty()) builder.append("/");
+            if (getFilterExpr() != null && !getLocationPath().getSteps().isEmpty()) builder.append("/");
             builder.append(getLocationPath().getText());
         }
 
@@ -124,7 +131,7 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
 
     public Object evaluate(Context context) throws JaxenException {
         Object results = null;
-        Context pathContext = null;
+        Context pathContext = context;
         if (getFilterExpr() != null) {
             results = getFilterExpr().evaluate(context);
             pathContext = new Context(context.getContextSupport());
@@ -137,4 +144,3 @@ class DefaultPathExpr extends DefaultExpr implements PathExpr {
     }
     
 }
-

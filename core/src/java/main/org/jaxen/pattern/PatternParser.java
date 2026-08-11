@@ -77,11 +77,11 @@ public class PatternParser
     {
         XPathReader reader = XPathReaderFactory.createReader();
         JaxenHandler handler = new JaxenHandler();
-
         handler.setXPathFactory( new DefaultXPathFactory() );            
         reader.setXPathHandler( handler );
         reader.parse( text );
 
+        handler.getXPathExpr().simplify();
         Pattern pattern = convertExpr( handler.getXPathExpr().getRootExpr() );
         return pattern.simplify();
     }
@@ -117,7 +117,6 @@ public class PatternParser
     protected static LocationPathPattern convertExpr(LocationPath locationPath) throws JaxenException
     {
         LocationPathPattern answer = new LocationPathPattern();        
-        //answer.setAbsolute( locationPath.isAbsolute() );
         List steps = locationPath.getSteps();
         
         // go through steps backwards
