@@ -75,11 +75,7 @@ public class PredicateSetTest extends TestCase {
         // (//item)[@class='a'][@type='x'] is a FilterExpr with two predicates.
         // //item matches 3 nodes, which is more than the 2 predicates.
         DOMXPath xpath = new DOMXPath("(//item)[@class='a'][@type='x']");
-        Expr rootExpr = xpath.getRootExpr();
-        assertTrue("Expected a FilterExpr, got " + rootExpr.getClass().getName(),
-                rootExpr instanceof FilterExpr);
-
-        FilterExpr filterExpr = (FilterExpr) rootExpr;
+        FilterExpr filterExpr = getFilterExpr(xpath);
         // Verify the expression has two predicates
         assertEquals(2, filterExpr.getPredicates().size());
 
@@ -107,10 +103,7 @@ public class PredicateSetTest extends TestCase {
 
         // No item has both class="b" and type="y"
         DOMXPath xpath = new DOMXPath("(//item)[@class='b'][@type='y']");
-        Expr rootExpr = xpath.getRootExpr();
-        assertTrue(rootExpr instanceof FilterExpr);
-
-        FilterExpr filterExpr = (FilterExpr) rootExpr;
+        FilterExpr filterExpr = getFilterExpr(xpath);
         ContextSupport support = new ContextSupport(
                 new SimpleNamespaceContext(),
                 XPathFunctionContext.getInstance(),
@@ -135,10 +128,7 @@ public class PredicateSetTest extends TestCase {
         // tries to call predIter.next() a third time for the third node,
         // but only two predicates exist.
         DOMXPath xpath = new DOMXPath("(//item)[@class='c'][@type='z']");
-        Expr rootExpr = xpath.getRootExpr();
-        assertTrue(rootExpr instanceof FilterExpr);
-
-        FilterExpr filterExpr = (FilterExpr) rootExpr;
+        FilterExpr filterExpr = getFilterExpr(xpath);
         ContextSupport support = new ContextSupport(
                 new SimpleNamespaceContext(),
                 XPathFunctionContext.getInstance(),
@@ -162,5 +152,22 @@ public class PredicateSetTest extends TestCase {
         DOMXPath xpath = new DOMXPath("(//item)[@class='a'][@type='x']");
         List<?> result = xpath.selectNodes(doc);
         assertEquals("Only the first item should match both predicates", 1, result.size());
+    }
+
+    private static FilterExpr getFilterExpr(DOMXPath xpath)
+    {
+        Expr rootExpr = xpath.getRootExpr();
+        if (rootExpr instanceof FilterExpr)
+        {
+            return (FilterExpr) rootExpr;
+        }
+
+        assertTrue("Expected a FilterExpr or PathExpr, got " + rootExpr.getClass().getName(),
+                rootExpr instanceof PathExpr);
+
+        Expr filterExpr = ((PathExpr) rootExpr).getFilterExpr();
+        assertTrue("Expected a FilterExpr, got " + filterExpr.getClass().getName(),
+                filterExpr instanceof FilterExpr);
+        return (FilterExpr) filterExpr;
     }
 }

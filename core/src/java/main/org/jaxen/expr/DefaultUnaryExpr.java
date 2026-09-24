@@ -90,18 +90,6 @@ class DefaultUnaryExpr extends DefaultExpr implements UnaryExpr
         return text.toString();
     }
 
-    public Expr simplify()
-    {
-        DefaultUnaryExpr innermost = this;
-        while (innermost.expr instanceof DefaultUnaryExpr)
-        {
-            innermost = (DefaultUnaryExpr) innermost.expr;
-        }
-        innermost.expr = innermost.expr.simplify();
-
-        return this;
-    }
-
     public Object evaluate(Context context) throws JaxenException
     {
         int count = 0;
