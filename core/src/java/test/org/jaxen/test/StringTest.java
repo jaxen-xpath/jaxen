@@ -120,6 +120,10 @@ public class StringTest extends TestCase {
     public void testStringValueOfNullWithNonNullNavigator() {
         assertEquals("", StringFunction.evaluate(null, new DocumentNavigator()));
     }
+
+    public void testStringValueOfNullWithNullIntolerantNavigator() {
+        assertEquals("", StringFunction.evaluate(null, new NullIntolerantNavigator()));
+    }
     
     public void testStringValueOfNamespaceNode() 
       throws JaxenException {
@@ -200,5 +204,17 @@ public class StringTest extends TestCase {
 
         String result = (String) xpath.evaluate(doc);
         assertEquals("value", result);
+    }
+
+    private static class NullIntolerantNavigator extends DocumentNavigator {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public boolean isElement(Object obj) {
+            if (obj == null) {
+                throw new IllegalArgumentException("null not allowed");
+            }
+            return super.isElement(obj);
+        }
     }
 }

@@ -258,7 +258,7 @@ public class StringFunction implements Function
                 obj = list.get(0);
             }
             
-            if (nav != null) {
+            if (nav != null && obj != null) {
                 // This stack of instanceof really suggests there's 
                 // a failure to take advantage of polymorphism here
                 if (nav.isElement(obj))
