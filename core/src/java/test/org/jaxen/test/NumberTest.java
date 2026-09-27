@@ -123,6 +123,16 @@ public class NumberTest extends TestCase {
         assertEquals(1.0, NumberFunction.evaluate(new Boolean(true), navigator).doubleValue(), tolerance);
     }
 
+    public void testEvaluateThrowsNullPointExceptionOnNullNavigator() {
+        try {
+            NumberFunction.evaluate(new Object(), null);
+            fail("Expected NullPointerException");
+        }
+        catch (NullPointerException ex) {
+            assertNotNull(ex);
+        }
+    }
+
 
     public void testNumberFunctionRequiresAtMostOneArgument() 
       throws JaxenException {
