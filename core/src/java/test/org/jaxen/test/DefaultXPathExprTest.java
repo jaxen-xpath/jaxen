@@ -109,10 +109,11 @@ public class DefaultXPathExprTest extends TestCase
       
       DOMXPath xpath = new DOMXPath("$var1/foo");
       Expr expr = xpath.getRootExpr();
-      assertEquals(
-        "[(DefaultPathExpr): [(DefaultVariableReferenceExpr): var1], [(DefaultRelativeLocationPath): [(DefaultNameStep): foo]]]", 
-        expr.toString()
-      );
+      String expression = expr.toString();
+      assertTrue(expression.startsWith(
+        "[(DefaultPathExpr): [(DefaultFilterExpr): expr: [(DefaultVariableReferenceExpr): var1] predicates: org.jaxen.expr.PredicateSet@"));
+      assertTrue(expression.endsWith(
+        " ], [(DefaultRelativeLocationPath): [(DefaultNameStep): foo]]]"));
     }
 
 }

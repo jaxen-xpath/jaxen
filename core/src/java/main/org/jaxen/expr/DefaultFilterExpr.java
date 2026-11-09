@@ -100,23 +100,6 @@ public class DefaultFilterExpr extends DefaultExpr implements FilterExpr, Predic
         return text;
     }
 
-    public Expr simplify()
-    {
-        this.predicates.simplify();
-
-        if ( this.expr != null ) 
-        {
-            this.expr = this.expr.simplify();
-        }
-
-        if ( this.predicates.getPredicates().size() == 0 )
-        {
-            return getExpr();
-        }
-
-        return this;
-    }
-
     /** Returns true if the current filter matches at least one of the context nodes
      */
     public boolean asBoolean(Context context) throws JaxenException 

@@ -68,12 +68,12 @@ public class JaxenHandler implements XPathHandler
 {
     private XPathFactory xpathFactory;
     private XPathExpr    xpath;
-    
+
     /**
      * ????
      */
     protected boolean simplified;
-
+    
     /**
      * This may be changed to an ArrayList in the future (i.e. version &gt;= 1.2).
      * You really shouldn't be accessing this field directly, but
@@ -114,7 +114,7 @@ public class JaxenHandler implements XPathHandler
     }
 
     /**
-     * Retrieve the simplified Jaxen XPath expression tree.
+     * Retrieve the Jaxen XPath expression tree.
      *
      * <p>
      * This method is only valid once <code>XPathReader.parse(...)</code>
@@ -125,35 +125,29 @@ public class JaxenHandler implements XPathHandler
      */
     public XPathExpr getXPathExpr()
     {
-        return getXPathExpr( true );
+        return getXPathExpr( false );
     }
 
     /**
-     * Retrieve the Jaxen XPath expression tree, optionally
-     * simplified.
+     * Retrieve the Jaxen XPath expression tree.
      *
      * <p>
      * This method is only valid once <code>XPathReader.parse(...)</code>
      * successfully returned.
      * </p>
      *
-     * @param shouldSimplify ????
+     * @param shouldSimplify ignored
      * @return the XPath expression tree
+     * @deprecated use {@link #getXPathExpr()}
      */
+    @Deprecated
     public XPathExpr getXPathExpr(boolean shouldSimplify)
     {
-        if ( shouldSimplify && ! this.simplified )
-        {
-            this.xpath.simplify();
-            this.simplified = true;
-        }
-
         return this.xpath;
     }
 
     public void startXPath()
     {
-        this.simplified = false;
         pushFrame();
     }
     
